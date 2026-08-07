@@ -141,7 +141,8 @@ Respect first, understanding second, participation third.
 | painted-together-after-rain.jpg | Painted | Experiences board + home experiences strip |
 | painted-kite.jpg | Painted | Blog index |
 | photo-open-window.jpg | Photo | About |
-| photo-open-street.jpg | Photo | 404 |
+| painted-misprinted-park.jpg | Painted | 404 (owner-requested: gentle confusion) |
+| photo-open-street.jpg | Photo | Spare (unassigned) |
 
 Law: painting shows the life, photography states the facts; one voice per section;
 covers are used wherever a book is present and are never modified.

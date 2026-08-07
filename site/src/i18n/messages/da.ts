@@ -35,6 +35,7 @@ export const da: DeepPartial<Messages> = {
     requestABook: 'Ønsk en bog',
     experiences: 'Oplevelser',
     blog: 'Noter',
+    privacy: 'Privatliv',
     openSource: 'Åben kildekode',
     navLabel: 'Websted',
     trustLine: 'Gratis for altid · ingen konti, ingen sporing',
@@ -320,11 +321,40 @@ export const da: DeepPartial<Messages> = {
 
   // -- 404 ---------------------------------------------------------------
   notFound: {
-    title: 'Denne side er ikke i biblioteket.',
-    body: 'Den side, du ledte efter, er flyttet eller har aldrig eksisteret. Biblioteket er her stadig.',
-    home: 'Gå til forsiden',
-    browse: 'Se biblioteket',
-    imageAlt: 'En stille, åben gade i blødt morgenlys',
+    para: 'Nå, det her er lidt pinligt. Fordi vi nægter at spore vores besøgende eller bruge cookies, aner vi simpelthen ikke, hvordan du er endt her. Men vi kan bekræfte, at denne side ikke findes.',
+    homeCta: 'Tag mig hjem',
+    imageAlt: 'En solbeskinnet sti gennem en park, der åbner sig forude på en lys, åben dag',
+  },
+
+  // -- Privacy -----------------------------------------------------------
+  privacy: {
+    title: 'Privatliv, forenklet.',
+    lede: 'Ingen sporing, ingen cookies, ingen konti, ingen krumspring. Her er præcis, hvad der sker med dine data, i almindeligt menneskesprog. Den korte version: vi har designet dette websted, så der næsten ingen er.',
+
+    linkedTitle: 'Data knyttet til dig',
+    linkedBody: 'Ingen. Der er ingen konti, ingen tilmeldinger, ingen nyhedsbreve og ingen kontaktformularer, der beder om dit navn. Du kan læse hver bog, hente hvert format og bruge hele webstedet uden at fortælle os, hvem du er.',
+
+    typeTitle: 'Det du skriver',
+    typeBody: 'Finderfeltet virker i din browser. Når du sender os feedback, ønsker en bog eller deler en oplevelse, er de ord, du skriver, alt hvad vi modtager: intet navn, ingen e-mail, ingen adresse, intet vedhæftet. Undlad venligst at skrive personlige oplysninger i selve teksten; hvis vi opdager nogen under gennemsyn, fjerner vi dem, før noget bliver udgivet.',
+
+    countTitle: 'Det vi tæller',
+    countBody: 'Vi tæller hændelser, ikke mennesker: hvor mange gange en side blev åbnet, en bog blev hentet, en søgning intet fandt. Disse tal indeholder ingen identitet, og vi undlader bevidst at tælle unikke besøgende, for at gøre det ærligt er umuligt uden at spore dig. Det er også derfor, dette websted ikke har noget cookiebanner: der er intet at give samtykke til.',
+
+    deviceTitle: 'Det der bliver på din enhed',
+    deviceBody: 'Dit tema, din læseposition og en note om, at du allerede har stemt. Disse lever i din browser, så webstedet husker dine præferencer; de bliver aldrig sendt til os.',
+
+    thirdPartiesTitle: 'Nul tredjeparter',
+    thirdPartiesBody: 'Ingen annoncører, ingen sporingspixels, ingen analysevirksomheder, intet salg af data. Skrifttyperne leveres fra vores eget websted, ikke fra en tredjepart.',
+
+    controlTitle: 'Dine ord, din kontrol',
+    controlBody: 'Fordi bidrag er anonyme fra bunden, kan vi ikke slå dine data op, og det kan ingen andre heller: der er intet, der forbinder dem med dig. Fortryder du noget, du har indsendt, så skriv til os og beskriv det, så fjerner vi det.',
+
+    formalitiesTitle: 'Formaliteterne',
+    formalitiesControllerLabel: 'Dataansvarlig:',
+    formalitiesControllerValue: 'Belief Changer (virksomhedsoplysninger bekræftes inden lancering).',
+    formalitiesComplaintBefore: 'Er du nogensinde utilfreds med, hvordan vi håndterer data, kan du klage til Datatilsynet på',
+    formalitiesComplaintAfter: '.',
+    formalitiesLinkLabel: 'www.datatilsynet.dk',
   },
 
   // -- Language switcher -------------------------------------------------

@@ -97,13 +97,29 @@ Using the reference image strictly as the painting-style anchor: fine detailed c
 Avoid: people, birds confused with the kite, melancholy gray gloom, saturated neon colors, AI-purple, golden-yellow haze over everything, any text or lettering, borders or frames.
 ```
 
+### No. 08 · The misprinted park — Voice 1, the 404 painting
+
+- Image: `08-misprinted-park.jpg` · Production: `assets/site/painted-misprinted-park.jpg`
+- Metadata: Canon (owner-requested: a confused, gently broken world for the 404) ·
+  edits endpoint, reference = painting-anchor.jpg · 3:2 (1536×1024) · high · gpt-image-2
+- Note: the ONE sanctioned exception to "freedom legible" — its job is warm, funny
+  confusion (a page that does not exist). The wrongness stays gentle and dignified;
+  never horror, never glitch aesthetics.
+
+```text
+Using the reference image strictly as the painting-style anchor: fine detailed classical oil brushwork, lush deep greens, dappled natural light, deep reflective water, soft atmospheric depth, fine-line delicacy in grasses and foliage. Paint an entirely NEW and MODERN scene in that exact style, but the scene itself is gently, impossibly WRONG, like a misprinted painting: a person in modern everyday clothes standing on a city park path, scratching their head in mild amused confusion, because the path ahead splits into three ways and one of them curls softly up into the sky while another simply stops in mid-air; a duck floats calmly a little above the pond instead of on it; the horizon behind the trees is misaligned in two offset steps like pages bound in the wrong order. Everything is painted beautifully and calmly, deep muted greens and blues, warm bone light, and that is what makes the wrongness funny. Contemporary everyday life, recognizably today, gently absurd, warm humor, no menace. No text anywhere.
+
+Avoid: horror or unease, glitch effects, neon, digital pixel artifacts, melting surrealism, scary distorted faces, period clothing, saturated colors, AI-purple, any text or lettering, borders or frames.
+```
+
 ## Production assignments (v1 site build)
 
 `assets/site/` holds the production copies. Assignment law: painting for life-moments,
 photography for fact-moments, one voice per section. v1 assignments: riverside-glide →
 how-it-works hero · harbor-flock → home "the belief loses its grip" · morning-overlook
 → home "see the trap clearly" · together-after-rain → experiences · kite → blog ·
-open-window → about · open-street → 404.
+open-window → about · misprinted-park → 404 · open-street → spare (unassigned;
+owner may repaint it into Voice 1 later).
 
 ## Exploration lineage (context for future models)
 

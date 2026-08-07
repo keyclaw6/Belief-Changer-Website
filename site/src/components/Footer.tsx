@@ -49,6 +49,12 @@ export function Footer({ locale, t }: { locale: Locale; t: Messages }) {
           >
             {t.footer.blog}
           </Link>
+          <Link
+            to={localePath(locale, '/privacy')}
+            className="type-ui-sm text-ink"
+          >
+            {t.footer.privacy}
+          </Link>
           {/* Open source: external link to the public repository. */}
           <a
             href="https://github.com/belief-changer"

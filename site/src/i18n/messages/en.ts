@@ -32,6 +32,7 @@ export const en = {
     requestABook: 'Request a book',
     experiences: 'Experiences',
     blog: 'Notes',
+    privacy: 'Privacy',
     openSource: 'Open source',
     // Screen-reader label for the footer's link group.
     navLabel: 'Site',
@@ -380,12 +381,50 @@ export const en = {
 
   // -- 404 ---------------------------------------------------------------
   notFound: {
-    title: 'This page isn’t in the library.', // (copy deck)
-    body: 'The page you were looking for moved or never existed. The library is still here.',
-    home: 'Go to the home page',
-    browse: 'Browse the library',
-    // Photo alt text (photo-open-street, imagery manifest, Quiet Fact voice).
-    imageAlt: 'A quiet open street in soft morning light',
+    // Dry, warm paragraph under the flickering "404". Turns the no-tracking
+    // promise into the reason we genuinely cannot know how the visitor arrived.
+    para: 'Well, this is awkward. Because we refuse to track our visitors or use cookies, we have absolutely no idea how you ended up here. But we can confirm this page doesn’t exist.',
+    // The single primary action back to the locale home page.
+    homeCta: 'Take me home',
+    // Painting alt text (painted-misprinted-park, imagery manifest).
+    imageAlt: 'A sunlit park path opening ahead on a bright, open day',
+  },
+
+  // -- Privacy -----------------------------------------------------------
+  // Typography-led privacy document. Plain, warm, sentence case, no exclamation
+  // marks, zero em-dashes. States the measurement contract in human language:
+  // no tracking, no cookies, no accounts, aggregate event counts only.
+  privacy: {
+    title: 'Privacy, simplified.',
+    lede: 'No tracking, no cookies, no accounts, no nonsense. Here is exactly what happens to your data, in plain human language. The short version: we designed this site so there is almost none.',
+
+    linkedTitle: 'Data linked to you',
+    linkedBody: 'None. There are no accounts, no sign-ups, no newsletters, and no contact forms asking for your name. You can read every book, download every format, and use the whole site without telling us who you are.',
+
+    typeTitle: 'What you type',
+    typeBody: 'The finder box works in your browser. When you send us feedback, request a book, or share an experience, the words you write are all we receive: no name, no email, no address, nothing attached. Please do not put personal details in the text itself; if we spot any during review, we remove them before anything is published.',
+
+    countTitle: 'What we count',
+    countBody: 'We count events, not people: how many times a page was opened, a book was downloaded, a search found nothing. These counts contain no identity, and we deliberately do not count unique visitors, because doing that honestly is impossible without tracking you. That is also why this site has no cookie banner: there is nothing to consent to.',
+
+    deviceTitle: 'What stays on your device',
+    deviceBody: 'Your theme, your reading position, and a note that you already voted. These live in your browser so the site remembers your preferences; they are never sent to us.',
+
+    thirdPartiesTitle: 'Zero third parties',
+    thirdPartiesBody: 'No advertisers, no tracking pixels, no analytics companies, no data sales. The fonts are served from our own site, not from a third party.',
+
+    controlTitle: 'Your words, your control',
+    controlBody: 'Because contributions are anonymous by design, we cannot look up your data, and neither can anyone else: there is nothing connecting it to you. If you regret something you submitted, write to us describing it and we will remove it.',
+
+    // The formalities block (hairline-bordered). The entity line is owner-to-
+    // confirm before launch; the split lets the datatilsynet.dk link render.
+    formalitiesTitle: 'The formalities',
+    formalitiesControllerLabel: 'Data controller:',
+    formalitiesControllerValue: 'Belief Changer (entity details to be confirmed before launch).',
+    formalitiesComplaintBefore: 'If you are ever unhappy with how we handle data, you can complain to the Danish Data Protection Agency (Datatilsynet) at',
+    // Trailing period after the link, kept out of the anchor text.
+    formalitiesComplaintAfter: '.',
+    formalitiesLinkLabel: 'www.datatilsynet.dk',
   },
 
   // -- Language switcher -------------------------------------------------
