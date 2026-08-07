@@ -94,4 +94,10 @@ export interface BlogPost {
   date: string
   /** Voice-1 painting used on the blog index (imagery manifest). */
   image?: string
+  /**
+   * Post body paragraphs. Builder-written SAMPLE prose for v1 (flagged in
+   * blog.ts, never labeled "sample" in the UI). DM Sans body, 65ch measure on
+   * the post page.
+   */
+  body?: string[]
 }

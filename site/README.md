@@ -84,16 +84,23 @@ site/
       $locale/books/index.tsx      Library (M3): URL-driven finder, full grid, no-match state
       $locale/books/$slug.tsx      Book page (M3): masthead, tabs, improve form, experiences
       $locale/books/$slug_.read.$n.tsx  Reader (M3): SSR chapters, comfort modes, position
-      $locale/how-it-works.tsx, requests.tsx, about.tsx  M4 stubs (left standing)
+      $locale/requests.tsx         Request board (M4): ranked one-tap vote list + submit flow
+      $locale/experiences.tsx      Experience board (M4): painting anchor, URL filter, submit
+      $locale/blog/index.tsx       Blog index (M4): kite painting + editorial post list
+      $locale/blog/$slug.tsx       Blog post (M4): 65ch editorial reader, back link
+      $locale/how-it-works.tsx     Method page (M4): the method in plain words, riverside-glide
+      $locale/about.tsx            About (M4): mission, laws, honesty note, open source, open-window
     components/
       Nav, Footer, LocaleShell     layout shell (nav 68px + hairline; footer + mono trust line)
       LanguageSwitcher, ThemeToggle  client leaves (hairline panel; light/dark override)
-      NotFound, DefaultCatchBoundary, PagePlaceholder
+      NotFound (M4: designed 404 + open-street photo), DefaultCatchBoundary, PagePlaceholder
       Reveal.tsx           the single scroll-entry motion primitive (SSR-visible, reduced-motion safe)
       BookCover, BookCard, StatusTag, ShelfStage, HeroAsk  shared book + finder primitives
       home/  Hero, TrustStrip, Reframe, MethodBeats, LivingBooks, NextBook, Experiences
       book/  BookActions, BookTabs (About / Changelog), ImproveForm, BookExperiences
       reader/  Reader (toolbar + reading surface + comfort control + chapter list)
+      requests/  RequestBoard (one-tap vote, localStorage flag), RequestSubmit (ask-for-a-book)
+      experiences/  ExperienceFilter (URL-driven), ExperienceSubmit (anonymous consent flow)
     i18n/
       config.ts          locales (en/da/ar), dir map, native names, BCP-47
       messages/en.ts      complete catalog (copy deck verbatim where canonical)
@@ -192,18 +199,77 @@ site/
 
 ---
 
+### M4 decisions (requests, experiences, blog, about, how-it-works, 404)
+
+13. **Request board voting is optimistic + local-only.** The one-tap vote
+    increments a local delta immediately and records the subject id in a
+    `bc-voted` localStorage array so the UX never offers the same vote twice.
+    The flag is read in a post-mount `useEffect`, so SSR and the first client
+    render agree (no already-voted state), then local flags apply. This is
+    functional storage only (no identity), matching the measurement contract;
+    `vote_cast` carries the subject id and nothing else. Published rows drop the
+    vote button and link to their book instead.
+14. **The experience filter is URL state (`?book=`), not client state.** The
+    full list is the SSR/default render; a `?book=` param filters server-side so
+    every filtered view is shareable and crawlable. Both `validateSearch` and
+    the component resolve the param only to a book that actually exists, so a
+    stale or hand-typed slug always falls back to the full list, never an empty
+    page. The honest empty state ("No experiences of {book} yet") is reserved
+    for a real book that genuinely has none.
+15. **The library no-match seam is now wired.** The library's no-match CTA
+    passes the finder query to `/requests` as a validated `?subject=` param; the
+    board caps it at 120 chars and prefills the submit field as an editable
+    default (TanStack redirects an over-long param to its normalized form).
+16. **Blog bodies live in `src/data/blog.ts`, DM Sans on the post page.** The
+    three post bodies are builder-written sample prose (flagged in code, never
+    labeled "sample" in the UI). The post page reads at a 65ch measure in DM
+    Sans, not Newsreader (Newsreader stays reader-only per DESIGN.md).
+17. **The 404 is the router default and locale-aware.** The designed NotFound
+    (open-street photo, copy-deck title, ink links) is wired as
+    `defaultNotFoundComponent` and the root `notFoundComponent`, so every
+    unmatched path lands there. It defaults to English but stays in-locale when
+    the failing path already carried a valid locale (e.g. `/en/nowhere`).
+18. **Blog + Experiences added to the footer nav.** Neither had a shell entry;
+    the footer is their natural home, so the footer link group now reads About /
+    Request a book / Experiences / Notes / Open source (its aria-label fixed
+    from the stray "About" to a proper "Site" group label).
+
 ## Deferred to later milestones (per the build order)
 
-- M2 Home and M3 Library / Book page / Reader are DONE (this milestone).
-- M4 Request board, Experience board, Blog post bodies, About, styled 404 with
-  the Photo-voice imagery. Route stubs for requests / how-it-works / about are
-  left standing and working. Two seams are ready for M4: the library no-match
-  CTA links to `/requests` (can read the finder query as a subject seed once the
-  board validates a search param), and the reader stores per-book position for a
-  "continue reading" affordance.
-- M5 completing the `da` / `ar` catalogs (new home/library/book/reader keys added
-  to `en.ts` this milestone need translating), generating `docs/MEASUREMENT.md`
-  from the SITE-PLAN measurement section, and the full site-wide gate pass.
+- M2 Home, M3 Library / Book page / Reader, and M4 Requests / Experiences / Blog
+  / About / How-it-works / 404 are all DONE. Every route in the SITE-PLAN
+  sitemap is now built and SSR-complete; no `PagePlaceholder` stubs remain in
+  the route tree (the component stays for future use).
+- M5 completing the `da` / `ar` catalogs (all new M4 keys added to `en.ts` this
+  milestone need translating; see the list in the M4 handoff below), generating
+  `docs/MEASUREMENT.md` from the SITE-PLAN measurement section, and the full
+  site-wide gate pass (both themes on every page, RTL, reduced motion).
+
+### M4 → M5 translator handoff: new `en.ts` keys to translate
+
+- `footer.experiences`, `footer.blog`, `footer.navLabel`
+- `requests.*` new keys: `loopExplainer`, `rankedHeading`, `voted`, `voteAria`,
+  `votedAria`, `voteCountOne`, `readTheBook`, `rankLabel`, `submitBody`,
+  `submitSubjectHelp`, `submitExperienceOptional`, `submitExperiencePlaceholder`,
+  `submitSuccessTitle`, `submitSuccessBody`, `submitAnother` (and the reworded
+  `submitSubjectPlaceholder`, `submitExperienceLabel`).
+- `experiences.*` new keys: `lede`, `filterLabel`, `listHeading`, `countAll`,
+  `countAllOne`, `countForBook`, `countForBookOne`, `emptyFiltered`,
+  `clearFilter`, `aboutBook`, `submitTitle`, `submitBody`, `submitBookLabel`,
+  `submitBookPlaceholder`, `submitTextLabel`, `submitTextPlaceholder`,
+  `submitConsentLabel`, `submitCta`, `submitSuccessTitle`, `submitSuccessBody`,
+  `submitAnother`, `consentRequired`, `bookRequired`.
+- `blog.*` new keys: `readAria`, `backToNotes`, `postedLabel`.
+- `howItWorks.*` (entire new section): `title`, `lede`, and the five
+  principle heading/body pairs, `closingHeading`, `closingBody`, `ctaLibrary`,
+  `ctaRequests`, `heroImageAlt`.
+- `about.*` (entire new section): `missionHeading`, `missionBody1`,
+  `missionBody2`, `lawsHeading`, the five `law*Title`/`law*Body` pairs,
+  `honestyHeading`, `honestyBody`, `openSourceHeading`, `openSourceBody`,
+  `openSourceLink`, `imageAlt`.
+- `notFound.imageAlt` (new).
+- Blog post BODIES in `src/data/blog.ts` are English-only sample prose; if M5
+  localizes post content it should resolve per locale like book content does.
 
 ---
 
@@ -263,3 +329,49 @@ site/
   covers and paintings are never tinted and glow against the dark canvas. (Both
   themes reviewed via the served token CSS and structure; no browser was
   available in the sandbox for a pixel diff.)
+
+## Gate report (Milestone 4 scope: requests, experiences, blog, about, how-it-works, 404)
+
+- **Build + typecheck:** `npm run build` and `npm run typecheck` both pass clean.
+- **SSR (curled):** every new route serves complete server-rendered HTML.
+  `/en/requests` renders all 8 ranked rows (2 published linking to their book,
+  6 with a one-tap vote) with mono ranks + vote counts; `/en/experiences`
+  renders the painting anchor and all 6 cards, `?book=sugar` filters to the 2
+  sugar cards server-side, `?book=porn` shows the honest empty state, an invalid
+  `?book=` falls back to the full 6; `/en/blog` renders the kite painting and the
+  3 post rows; each `/en/blog/{slug}` renders its full body at 65ch (unknown slug
+  404s); `/en/how-it-works` renders the riverside-glide hero and the 5 method
+  beats; `/en/about` renders the open-window photo, the 5 laws, and the honesty
+  note verbatim in spirit; unknown paths (`/en/nowhere`, `/garbage`) render the
+  designed open-street 404. All three locales (`en`/`da`/`ar`) 200 on every new
+  route; `ar` mirrors `dir="rtl"` from the first byte with English fallback copy.
+- **taste-skill §14:** each new page uses ≥3 distinct layout families and zero
+  eyebrows (well under budget). The data surfaces obey the hairline discipline:
+  the request board is ONE bordered container with `divide-y` (never
+  border-t+border-b per row); the blog index, the about laws, and the
+  how-it-works sequence use sparse single dividers (border-t only, first row
+  bare). Exact cell counts (8 / 6 / 3 / 5). No three-equal-cards, no zigzag run
+  (each page has at most one image+text split), no decorative dots, no AI tells,
+  no fake precise numbers (fixture votes are MOCK-flagged).
+- **Copy:** copy-deck strings verbatim (`Which trap should we take apart next?`,
+  the four statuses, the honesty-note phrasing, `This page isn't in the library.`);
+  the method page never names Easyway / Allen Carr / Freedom Model; the three
+  blog bodies are 390-410 words each, in register. Zero em-dashes and en-dashes
+  in source and in every rendered route.
+- **Imagery law:** one voice per section. Experiences / blog / how-it-works carry
+  paintings only (together-after-rain, kite, riverside-glide); about and 404
+  carry the Quiet-Fact photographs only (open-window, open-street). No painting
+  and photo share a viewport; no covers are tinted or cropped.
+- **A11y:** labels above every input, helper text below in secondary ink,
+  `sr-only` list/section headings, ink focus rings from the base layer, `aria-live`
+  on all three form success swaps (request / experience) and the experience
+  count, `role="alert"` on the experience validation error, the vote button
+  carries a descriptive `aria-label` and disables once used, the filter is a
+  labelled nav of keyboard-native links with `aria-current`.
+- **Motion / reduced motion:** the only motion is `Reveal` plus 150-200ms
+  hover/press transitions, all collapsing under `prefers-reduced-motion`.
+- **Console:** zero SSR errors or warnings across every new route in the dev log.
+- **Both themes:** every new surface uses theme tokens only (including the vote
+  button's ink-invert hover and the pastel success/error inks), so light and
+  dark both hold; reviewed via served CSS + structure (no browser for a pixel
+  diff in the sandbox).

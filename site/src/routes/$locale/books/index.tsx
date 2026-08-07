@@ -211,7 +211,7 @@ function LibraryPage() {
           </ul>
         </section>
       ) : (
-        <NoMatch locale={activeLocale} t={t} onClear={clear} />
+        <NoMatch locale={activeLocale} t={t} onClear={clear} query={draft} />
       )}
     </div>
   )
@@ -225,10 +225,13 @@ function NoMatch({
   locale,
   t,
   onClear,
+  query,
 }: {
   locale: Locale
   t: Messages
   onClear: () => void
+  /** The current finder query, passed to the board as a subject seed. */
+  query: string
 }) {
   return (
     <section className="pb-[var(--spacing-section-y)] pt-16">
@@ -253,9 +256,13 @@ function NoMatch({
           {t.library.noMatchBody}
         </p>
         <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3">
-          {/* Links plainly to the board. The M4 request board can read the
-              finder query as a subject seed once it validates a search param. */}
-          <Link to={localePath(locale, '/requests')} className={btnPrimary}>
+          {/* Links to the board, seeding the subject field with the finder
+              query (the board validates and caps the ?subject= param). */}
+          <Link
+            to={localePath(locale, '/requests')}
+            search={query.trim() ? { subject: query.trim() } : {}}
+            className={btnPrimary}
+          >
             {t.library.noMatchCta}
           </Link>
           <button type="button" onClick={onClear} className={inkLink}>

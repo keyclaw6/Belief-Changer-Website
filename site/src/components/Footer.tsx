@@ -22,7 +22,7 @@ export function Footer({ locale, t }: { locale: Locale; t: Messages }) {
         </Link>
 
         <nav
-          aria-label={t.footer.about}
+          aria-label={t.footer.navLabel}
           className="flex flex-wrap items-center gap-x-6 gap-y-2"
         >
           <Link
@@ -37,9 +37,21 @@ export function Footer({ locale, t }: { locale: Locale; t: Messages }) {
           >
             {t.footer.requestABook}
           </Link>
+          <Link
+            to={localePath(locale, '/experiences')}
+            className="type-ui-sm text-ink"
+          >
+            {t.footer.experiences}
+          </Link>
+          <Link
+            to={localePath(locale, '/blog')}
+            className="type-ui-sm text-ink"
+          >
+            {t.footer.blog}
+          </Link>
           {/* Open source: external link to the public repository. */}
           <a
-            href="https://github.com/"
+            href="https://github.com/belief-changer"
             target="_blank"
             rel="noreferrer"
             className="type-ui-sm text-ink"
