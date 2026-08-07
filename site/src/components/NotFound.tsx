@@ -1,4 +1,4 @@
-import { Link } from '@tanstack/react-router'
+import { Link, useRouterState } from '@tanstack/react-router'
 import { getMessages } from '~/i18n'
 import { DEFAULT_LOCALE, type Locale } from '~/i18n/config'
 import { localePath, stripLocale } from '~/i18n/routing'
@@ -16,17 +16,24 @@ import { cn } from '~/lib/utils'
  *
  * Locale awareness: this renders outside the /{locale} layout for garbage paths,
  * so it defaults to English, but if the failing path already carried a valid
- * locale (e.g. /en/nowhere) it stays in that locale so the links keep the
- * visitor in their language.
+ * locale (e.g. /da/nowhere) it stays in that locale so the copy AND the links
+ * are in the visitor's language. The pathname is read from the router state,
+ * which is populated on the server too, so the SSR HTML is already localized
+ * (no English flash before hydration); a window fallback covers any edge.
  */
-function activeLocaleFromPath(): Locale {
-  if (typeof window === 'undefined') return DEFAULT_LOCALE
-  const { locale } = stripLocale(window.location.pathname)
+function useNotFoundLocale(): Locale {
+  const routerPath = useRouterState({
+    select: (s) => s.location.pathname,
+  })
+  const path =
+    routerPath ||
+    (typeof window !== 'undefined' ? window.location.pathname : '')
+  const { locale } = stripLocale(path)
   return locale ?? DEFAULT_LOCALE
 }
 
 export function NotFound() {
-  const locale = activeLocaleFromPath()
+  const locale = useNotFoundLocale()
   const t = getMessages(locale)
 
   return (

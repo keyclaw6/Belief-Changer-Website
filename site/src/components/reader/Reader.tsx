@@ -123,7 +123,7 @@ export function Reader({
             className="inline-flex items-center gap-1.5 no-underline"
             style={{ color: 'var(--rs-ink)', fontSize: 'var(--text-ui-sm)', fontWeight: 500 }}
           >
-            <CaretLeft size={15} weight="bold" aria-hidden="true" />
+            <CaretLeft size={15} weight="bold" aria-hidden="true" className="dir-flip" />
             {t.reader.backToBook}
           </Link>
 
@@ -209,7 +209,7 @@ export function Reader({
               className="inline-flex max-w-[45%] items-center gap-2 no-underline"
               style={{ color: 'var(--rs-ink)', fontSize: 'var(--text-ui-sm)', fontWeight: 500 }}
             >
-              <ArrowLeft size={16} weight="bold" aria-hidden="true" className="shrink-0" />
+              <ArrowLeft size={16} weight="bold" aria-hidden="true" className="dir-flip shrink-0" />
               <span className="truncate">{t.reader.prev}</span>
             </Link>
           ) : (
@@ -222,7 +222,7 @@ export function Reader({
               style={{ color: 'var(--rs-ink)', fontSize: 'var(--text-ui-sm)', fontWeight: 500 }}
             >
               <span className="truncate">{t.reader.next}</span>
-              <ArrowRight size={16} weight="bold" aria-hidden="true" className="shrink-0" />
+              <ArrowRight size={16} weight="bold" aria-hidden="true" className="dir-flip shrink-0" />
             </Link>
           ) : (
             <span />

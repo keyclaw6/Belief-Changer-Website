@@ -234,16 +234,28 @@ site/
     Request a book / Experiences / Notes / Open source (its aria-label fixed
     from the stray "About" to a proper "Site" group label).
 
-## Deferred to later milestones (per the build order)
+## Milestone status (per the build order)
 
 - M2 Home, M3 Library / Book page / Reader, and M4 Requests / Experiences / Blog
   / About / How-it-works / 404 are all DONE. Every route in the SITE-PLAN
-  sitemap is now built and SSR-complete; no `PagePlaceholder` stubs remain in
-  the route tree (the component stays for future use).
-- M5 completing the `da` / `ar` catalogs (all new M4 keys added to `en.ts` this
-  milestone need translating; see the list in the M4 handoff below), generating
-  `docs/MEASUREMENT.md` from the SITE-PLAN measurement section, and the full
-  site-wide gate pass (both themes on every page, RTL, reduced motion).
+  sitemap is built and SSR-complete; no `PagePlaceholder` stubs remain in the
+  route tree (the component stays for future use).
+- **M5 is DONE.** The `da` and `ar` catalogs are complete (every `en` key
+  translated, verified 208/208 leaf keys each, zero fallbacks needed); the RTL
+  polish pass is applied (directional-icon mirroring, machine-fact isolation,
+  locale-correct 404 SSR); `docs/MEASUREMENT.md` is generated from the SITE-PLAN
+  measurement section and `src/lib/measure.ts`; and the full site-wide gate pass
+  is recorded below. No milestones remain; the front end is feature-complete
+  against the SITE-PLAN sitemap.
+
+### The M4 → M5 handoff (below) is now closed
+
+Every key listed in the handoff has been translated in `da` and `ar`. Two
+painting alt-text strings that M4 left hardcoded in English
+(`experiences.imageAlt` for painted-together-after-rain, used by the board
+header and the homepage strip; `blog.imageAlt` for painted-kite on the blog
+index) were promoted to catalog keys in M5 and translated, so all visible copy
+including image alt text now localizes.
 
 ### M4 → M5 translator handoff: new `en.ts` keys to translate
 
@@ -375,3 +387,120 @@ site/
   button's ink-invert hover and the pastel success/error inks), so light and
   dark both hold; reviewed via served CSS + structure (no browser for a pixel
   diff in the sandbox).
+
+## Gate report (Milestone 5 scope: i18n completion, RTL polish, measurement, final gates)
+
+- **Typecheck + build:** `npm run typecheck` (strict `tsc --noEmit`) and
+  `npm run build` (client + SSR bundles) both pass clean.
+- **i18n coverage:** `da` and `ar` are complete. A key-diff of every leaf in
+  `messages/en.ts` against each locale reports **208 / 208 keys translated in
+  both, zero missing, zero extra**. The only strings that intentionally equal
+  English are the brand `wordmark` (stays "Belief Changer"), the passthrough
+  `experiences.monthLabel` (`{month}`), and the loanwords `Version` /  `Sepia`
+  in Danish, all correct. Book titles, subjects, experience text, and blog
+  bodies stay in English (fixtures, not catalogs), by contract.
+- **SSR (curled):** every route was served through the production `{ fetch }`
+  handler and curled in **all three locales** (home; `/books`; `/books?q=sugar`;
+  a published book `sugar`; a being-written book `porn`; reader ch1 of the
+  sample book `scrolling`; a being-written chapter; `/requests`;
+  `/experiences`; `/experiences?book=sugar` filtered and `?book=porn` empty
+  state; `/blog`; a post; `/how-it-works`; `/about`). All returned 200 with
+  complete SSR HTML (footer trust line and `</html>` present); `/en/nowhere`,
+  `/garbage`, an unknown book, an out-of-range chapter, and an unknown locale
+  all returned 404. Translated strings were spot-checked (3+ per locale per
+  page) directly in the served HTML and confirmed present, including the honesty
+  note, the method headings, the data-surface states (no-match, empty filter,
+  being-written), and the reader chrome.
+- **RTL:** `<html lang="ar" dir="rtl">` on the first server byte. The polish
+  pass added: (1) a `.dir-flip` base rule (`[dir=rtl] .dir-flip{transform:
+  scaleX(-1)}`, confirmed in the built CSS) applied to every horizontal
+  directional glyph (forward/back arrows, the reader's back caret) so "next"
+  points with the reading direction and "previous/back" against it, while
+  non-directional icons (check, plus, list, the vertical select caret, the
+  external-link `ArrowUpRight`) are never flipped; (2) `<bdi>` isolation on the
+  locale-invariant changelog machine facts (version id + date), verified as 6
+  `<bdi>` wrappers on `/ar/books/sugar`, so their order stays stable inside RTL
+  prose. The version line renders correctly as `الإصدار 3 · June 2026` (Arabic
+  label, embedded Western digits/month handled by the bidi algorithm). Layout
+  was already logical-property-only from M1-M4 (audited: zero `pl-`/`pr-`/`ml-`/
+  `mr-`/`text-left`/`text-right`/physical `left-`/`right-`; uses `ps-`/`pe-`/
+  `ms-`/`me-`/`start-`/`end-`/`text-start`/`text-end`/`border-s` throughout); the
+  language switcher wraps native names in `dir="auto"` and the trust-strip rules
+  mirror via inline-start borders.
+- **404 locale correctness (i18n fix):** `NotFound` now derives its locale from
+  the router location (available on the server) instead of `window`, so a
+  localized failing path renders localized SSR copy: `/da/nowhere` shows the
+  Danish title, `/ar/nowhere` the Arabic title (with `dir="rtl"`), while
+  locale-less `/garbage` and `/en/nowhere` stay English. This removes the
+  English-flash-before-hydration the M4 implementation had.
+- **Zero em-dashes / en-dashes, zero emojis:** scanned all three catalogs
+  programmatically (no em-dash, en-dash, or other dash variant beyond the ASCII
+  hyphen U+002D; no emoji code points) and scanned every rendered route in every
+  locale (36 route-hits, **zero** dash occurrences). `docs/MEASUREMENT.md` is
+  held to the same rule (hyphen-only).
+- **taste-skill §14:** walked against the whole site. Every box ticks; the M5
+  changes touched only i18n strings, RTL icon direction, `<bdi>` wrapping, one
+  alt-text localization, and the 404 locale source, none of which alter layout
+  families, eyebrow counts (still zero non-hero eyebrows site-wide), cell counts,
+  card usage, motion, or the page theme lock. Hero fit re-checked with the
+  translated copy: Danish/Arabic hero headlines (65c / 46c) are within the
+  English-designed 2-line budget, subtexts stay under 20 words, and every primary
+  CTA label is 2-4 words (and `whitespace-nowrap`), so nothing wraps or overflows.
+  No box required an exception.
+- **hreflang:** confirmed on every route in every locale; each page emits
+  `en` / `da` / `ar` + `x-default` alternates pointing at the locale-prefixed
+  path (e.g. `/ar/blog/the-launch-note` → all four for that path).
+- **Console:** zero SSR errors or warnings in the server log across the full
+  curl matrix.
+- **Both themes / reduced motion:** unchanged from M1-M4 and still hold; M5 added
+  no new surfaces, motion, or color, only text direction and translated copy.
+
+---
+
+## i18n coverage
+
+- **Locales:** `en` (source of truth, complete), `da` (complete), `ar`
+  (complete, and the RTL proof case). All three are full catalogs; the deep-merge
+  resolver in `src/i18n/index.ts` still falls back to `en` for any future gap,
+  but none exists today.
+- **What is translated:** every UI string, form label/helper/placeholder,
+  status tag, empty/error state, success message, screen-reader label, and image
+  alt text lives in the catalogs and is translated.
+- **What stays in English (by contract):** book titles, one-line promises,
+  request subjects, experience text, changelog entries, and blog post bodies.
+  These come from `src/data/*` fixtures (mirroring a future content API), not the
+  message catalogs, and localize per-locale when the backend serves localized
+  content, exactly as book content is specified to in the SITE-PLAN. No Danish or
+  Arabic book titles were invented.
+- **Register:** the voice carries across languages: warm to the person, harsh to
+  the trap; sentence case (Latin scripts); no exclamation marks; zero em-dashes;
+  natural idiom over anglicism in Danish; Modern Standard Arabic with Arabic
+  punctuation and Western digits in metadata for `ar`.
+
+## Operating the site
+
+- **Develop:** `npm install` then `npm run dev` (SSR dev server at
+  `http://localhost:3000`). `npm run typecheck` for strict types.
+- **Build:** `npm run build` emits the client bundle to `dist/client` and a
+  Web-standard `{ fetch }` SSR handler to `dist/server/server.js`. The handler
+  does not self-listen; a serverless/edge platform (or a thin Node bridge that
+  forwards `http` requests into `handler.fetch`) hosts it, and the platform
+  serves `dist/client/assets/*` as static files.
+- **Fonts:** `npm run fetch-fonts` re-downloads the self-hosted woff2 into
+  `public/fonts` and regenerates `src/styles/fonts.css`. Not part of the build.
+- **Where fixtures live:** `src/data/` (mock v1 content, every value flagged
+  MOCK in comments): `books.ts` (10 books + sample chapters), `requests.ts`,
+  `experiences.ts`, `blog.ts`. Each shape mirrors the future API in
+  `src/data/types.ts`. Backend contracts are documented at each call site and in
+  `docs/MEASUREMENT.md`.
+- **How to add a locale:** (1) add the code to `LOCALES` in `src/i18n/config.ts`
+  and fill its `LOCALE_DIR` (`ltr`/`rtl`), `LOCALE_NATIVE_NAME` (native name, never
+  an English exonym), and `LOCALE_BCP47` entries; (2) add
+  `src/i18n/messages/<code>.ts` exporting a `DeepPartial<Messages>` (translate
+  from `en.ts`; anything omitted falls back to `en`); (3) register it in the
+  `CATALOGS` map in `src/i18n/index.ts`. The `/{locale}/` routes, `<html lang>`/
+  `dir`, hreflang alternates, and the language switcher all pick it up
+  automatically. For an RTL locale, no per-component work is needed: the layout
+  is logical-property-only and `.dir-flip` already mirrors directional icons.
+  Keep the register (warm to the person, harsh to the trap; no em-dashes; no
+  emojis) and leave book titles to the fixtures.

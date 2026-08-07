@@ -187,8 +187,11 @@ function ChangelogPanel({ book, t }: { book: Book; t: Messages }) {
             className={cn('py-6', i > 0 && 'border-t border-hairline')}
           >
             <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-              <span className="type-mono-meta text-ink">{entry.version}</span>
-              <span className="type-mono-meta">{entry.date}</span>
+              {/* Version id and date are locale-invariant machine facts (Latin
+                  digits / month names). Isolate each with <bdi> so their order
+                  stays stable inside an RTL (Arabic) paragraph. */}
+              <bdi className="type-mono-meta text-ink">{entry.version}</bdi>
+              <bdi className="type-mono-meta">{entry.date}</bdi>
             </div>
             <p
               className="mt-2 text-ink"

@@ -61,7 +61,7 @@ function BlogPostPage() {
             to={localePath(activeLocale, '/blog')}
             className="inline-flex items-center gap-1.5 type-ui-sm font-medium text-ink-secondary no-underline transition-colors duration-150 hover:text-ink"
           >
-            <ArrowLeft size={15} weight="bold" aria-hidden="true" />
+            <ArrowLeft size={15} weight="bold" aria-hidden="true" className="dir-flip" />
             {t.blog.backToNotes}
           </Link>
         </Reveal>

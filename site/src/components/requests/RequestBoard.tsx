@@ -140,7 +140,7 @@ export function RequestBoard({
                     className="inline-flex items-center gap-1.5 rounded-sm border border-hairline px-4 py-2 type-ui-sm font-medium text-ink no-underline transition-colors duration-150 hover:bg-surface"
                   >
                     {t.requests.readTheBook}
-                    <ArrowRight size={14} weight="bold" aria-hidden="true" />
+                    <ArrowRight size={14} weight="bold" aria-hidden="true" className="dir-flip" />
                   </Link>
                 ) : (
                   <button

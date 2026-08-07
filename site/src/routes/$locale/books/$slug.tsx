@@ -172,7 +172,7 @@ function BookPage() {
             className={cn(inkLink, 'inline-flex items-center gap-1.5')}
           >
             {t.book.howItWorksCrosslink}
-            <ArrowRight size={15} weight="bold" aria-hidden="true" />
+            <ArrowRight size={15} weight="bold" aria-hidden="true" className="dir-flip" />
           </Link>
         </div>
       </section>

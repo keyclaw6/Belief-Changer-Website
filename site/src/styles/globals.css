@@ -284,6 +284,16 @@
     font-family: var(--font-arabic);
   }
 
+  /* RTL icon mirroring. Layout mirrors from logical properties alone, but
+     directional glyphs (forward/back arrows, the "back" caret) carry a fixed
+     handedness the box model cannot flip. The .dir-flip helper is applied to
+     exactly those glyphs so "next" points with the reading direction and
+     "previous / back" points against it under dir="rtl". Non-directional icons
+     (check, plus, list, the vertical caret on selects) are never flipped. */
+  [dir='rtl'] .dir-flip {
+    transform: scaleX(-1);
+  }
+
   /* Ink links with underlines; ink focus rings (DESIGN.md Colors §Ink). */
   a {
     color: var(--color-ink);

@@ -94,7 +94,7 @@ function ExperiencesPage() {
             <div className="mb-11 h-48 w-full overflow-hidden rounded-lg sm:h-60 md:h-72">
               <img
                 src="/site/painted-together-after-rain.jpg"
-                alt="People walking together in fresh light after rain"
+                alt={t.experiences.imageAlt}
                 loading="eager"
                 decoding="async"
                 className="h-full w-full object-cover object-center ring-1 ring-[var(--color-hairline-on-image)]"

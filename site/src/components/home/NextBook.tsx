@@ -104,7 +104,7 @@ export function NextBook({
             className={cn(inkLink, 'inline-flex items-center gap-1.5')}
           >
             {t.home.requestCta}
-            <ArrowRight size={15} weight="bold" aria-hidden="true" />
+            <ArrowRight size={15} weight="bold" aria-hidden="true" className="dir-flip" />
           </Link>
         </Reveal>
       </div>

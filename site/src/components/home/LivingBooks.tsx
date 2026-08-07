@@ -98,7 +98,7 @@ export function LivingBooks({
             className={cn(inkLink, 'inline-flex items-center gap-1.5')}
           >
             {t.home.livingBooksLink}
-            <ArrowRight size={15} weight="bold" aria-hidden="true" />
+            <ArrowRight size={15} weight="bold" aria-hidden="true" className="dir-flip" />
           </Link>
         </Reveal>
       </div>

@@ -288,6 +288,9 @@ export const en = {
     // Validation when consent is required but not given.
     consentRequired: 'Please confirm you want this published anonymously.',
     bookRequired: 'Please choose which book this is about.',
+    // Painting alt text (painted-together-after-rain, imagery manifest); used by
+    // both the board header and the homepage experiences strip.
+    imageAlt: 'People walking together in fresh light after rain',
   },
 
   // -- Blog --------------------------------------------------------------
@@ -300,6 +303,8 @@ export const en = {
     // Post-page back link and a small meta label.
     backToNotes: 'All notes',
     postedLabel: 'Posted {month}',
+    // Painting alt text (painted-kite, imagery manifest) on the blog index.
+    imageAlt: 'A kite high in a clear sky on a bright, open day',
   },
 
   // -- How it works (method page) ---------------------------------------

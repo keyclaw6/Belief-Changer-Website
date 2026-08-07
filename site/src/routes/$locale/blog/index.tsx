@@ -51,7 +51,7 @@ function BlogIndexPage() {
           <div className="mb-11 h-44 w-full overflow-hidden rounded-lg sm:h-56 md:h-64">
             <img
               src="/site/painted-kite.jpg"
-              alt="A kite high in a clear sky on a bright, open day"
+              alt={t.blog.imageAlt}
               loading="eager"
               decoding="async"
               className="h-full w-full object-cover object-center ring-1 ring-[var(--color-hairline-on-image)]"
@@ -133,7 +133,7 @@ function PostRow({
       </p>
       <span className={cn(inkLink, 'mt-4 inline-flex items-center gap-1.5 no-underline')}>
         {t.blog.readMore}
-        <ArrowRight size={15} weight="bold" aria-hidden="true" />
+        <ArrowRight size={15} weight="bold" aria-hidden="true" className="dir-flip" />
       </span>
     </Link>
   )

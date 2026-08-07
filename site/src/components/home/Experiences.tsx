@@ -39,7 +39,7 @@ export function Experiences({
           <div className="mb-12 h-44 w-full overflow-hidden rounded-lg sm:h-56 md:h-64">
             <img
               src="/site/painted-together-after-rain.jpg"
-              alt="People walking together in fresh light after rain"
+              alt={t.experiences.imageAlt}
               loading="lazy"
               decoding="async"
               className="h-full w-full object-cover object-center ring-1 ring-[var(--color-hairline-on-image)]"
@@ -96,7 +96,7 @@ export function Experiences({
             className={cn(inkLink, 'inline-flex items-center gap-1.5')}
           >
             {t.home.experiencesLink}
-            <ArrowRight size={15} weight="bold" aria-hidden="true" />
+            <ArrowRight size={15} weight="bold" aria-hidden="true" className="dir-flip" />
           </Link>
         </Reveal>
       </div>

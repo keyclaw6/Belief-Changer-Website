@@ -210,7 +210,7 @@ function HowItWorksPage() {
                 className={cn(inkLink, 'inline-flex items-center gap-1.5')}
               >
                 {t.howItWorks.ctaRequests}
-                <ArrowRight size={15} weight="bold" aria-hidden="true" />
+                <ArrowRight size={15} weight="bold" aria-hidden="true" className="dir-flip" />
               </Link>
             </div>
           </Reveal>

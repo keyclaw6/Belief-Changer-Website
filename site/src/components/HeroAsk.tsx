@@ -66,7 +66,7 @@ export function HeroAsk({
       />
       <button type="submit" className={cn(btnPrimary, 'sm:shrink-0')}>
         {submitLabel}
-        <ArrowRight size={16} weight="bold" aria-hidden="true" />
+        <ArrowRight size={16} weight="bold" aria-hidden="true" className="dir-flip" />
       </button>
     </form>
   )
