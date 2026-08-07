@@ -112,6 +112,54 @@ Using the reference image strictly as the painting-style anchor: fine detailed c
 Avoid: horror or unease, glitch effects, neon, digital pixel artifacts, melting surrealism, scary distorted faces, period clothing, saturated colors, AI-purple, any text or lettering, borders or frames.
 ```
 
+### No. 09 · The lit window — Voice 1, with a person
+
+- Image: `09-lit-window.jpg` · Production: `assets/site/painted-lit-window.jpg`
+- Metadata: Canon (site v2 story batch, owner ratification on the rendered site) · edits endpoint, reference = painting-anchor.jpg · 3:2 (1536×1024) · high · gpt-image-2
+
+```text
+Using the reference image strictly as the painting-style anchor: fine detailed classical oil brushwork, lush deep greens, dappled natural light, deep reflective water, soft atmospheric depth, fine-line delicacy in grasses and foliage. Paint an entirely NEW and MODERN scene in that exact style: a person in modern everyday clothes paused for a moment on a quiet evening city street, standing at ease and looking down at their phone, the phone a small soft glow cupped warmly in their hand; warm lit windows glowing gently in a modern apartment building above them, a streetlamp casting soft warm light, the sky the deep dusk blues of the end of the day, a few green street trees dark and calm along the pavement. The mood is dignified, tender and kind, not gloomy: the ordinary loop at the end of a day, seen gently and without any judgment. Contemporary everyday life, recognizably today. The feeling: quiet human warmth, being seen kindly, an ordinary evening held with care. No text anywhere.
+
+Avoid: period or vintage clothing or styling, Edwardian dress, melancholy or wistful mood, gloom, rain, misery styling, dark oppressive shadows, sad or defeated body language, saturated neon colors, AI-purple, golden-yellow haze over everything, any text or lettering, borders or frames.
+```
+
+### No. 10 · The bench — Voice 1, being met
+
+- Image: `10-bench.jpg` · Production: `assets/site/painted-bench.jpg`
+- Metadata: Canon (site v2 story batch, owner ratification on the rendered site) · edits endpoint, reference = painting-anchor.jpg · 3:2 (1536×1024) · high · gpt-image-2
+
+```text
+Using the reference image strictly as the painting-style anchor: fine detailed classical oil brushwork, lush deep greens, dappled natural light, deep reflective water, soft atmospheric depth, fine-line delicacy in grasses and foliage. Paint an entirely NEW and MODERN scene in that exact style: two people in modern everyday clothes sitting together on a wooden park bench in soft clear morning light, turned slightly toward each other, one of them listening properly and attentively to the other with a warm open face, unhurried and at ease; lush deep green summer trees arching gently behind them, dappled morning light falling through the leaves onto the path, wild grasses catching the light near the bench, a modern park softly dissolved in the atmospheric distance. The feeling is quiet trust: being met and heard, not judged. Contemporary everyday life, recognizably today. The feeling: being truly listened to, safe warmth, quiet trust between people. No text anywhere.
+
+Avoid: period or vintage clothing or styling, Edwardian dress, melancholy or wistful mood, sadness, therapy-office or clinical interior vibes, clipboard or counseling staging, fashion-editorial glamour, saturated neon colors, AI-purple, golden-yellow haze over everything, any text or lettering, borders or frames.
+```
+
+### No. 11 · The open cage, painted — Voice 1, release resolved
+
+- Image: `11-open-cage-painted.jpg` · Production: `assets/site/painted-open-cage.jpg`
+- Metadata: Canon (site v2 story batch, owner ratification on the rendered site) · edits endpoint, reference = painting-anchor.jpg · 3:2 (1536×1024) · high · gpt-image-2
+- Note: the sanctioned Voice 1 repaint of the symbolic cage. The rejected specimen
+  birdcage read as depressing because the bird was gone and the frame was empty; here
+  the bird is already free on the sill in morning light, which turns the open door into
+  gladness. The symbol is allowed in Voice 1 only when release is legible and warm.
+
+```text
+Using the reference image strictly as the painting-style anchor: fine detailed classical oil brushwork, lush deep greens, dappled natural light, deep reflective water, soft atmospheric depth, fine-line delicacy in grasses and foliage. Paint an entirely NEW and MODERN scene in that exact style: an ornate wire birdcage resting on a broad sunlit windowsill, its little door standing wide open, the cage completely empty, and the bird already free and perched calmly just outside on the same sill, feathers catching the soft clear morning light; a modern window with a glimpse of deep green leaves and gentle daylight beyond, cool fresh light washing across the pale sill, everything painted warmly and beautifully. The mood is resolved and quietly glad: release that has already happened. Contemporary everyday life, recognizably today. The feeling: release, resolved, quietly glad, the door left open for good. No text anywhere.
+
+Avoid: period or vintage styling, Edwardian mood, melancholy or wistful mood, the bird inside or trapped in the cage, gothic or ornate-gloom styling, dark oppressive shadows, cage as a sad symbol, saturated neon colors, AI-purple, golden-yellow haze over everything, any text or lettering, borders or frames.
+```
+
+### No. 12 · The knot, loosening — Voice 1, the mechanism made visible
+
+- Image: `12-knot-loosening.jpg` · Production: `assets/site/painted-knot.jpg`
+- Metadata: Canon (site v2 story batch, owner ratification on the rendered site) · edits endpoint, reference = painting-anchor.jpg · 3:2 (1536×1024) · high · gpt-image-2
+
+```text
+Using the reference image strictly as the painting-style anchor: fine detailed classical oil brushwork, lush deep greens, dappled natural light, deep reflective water, soft atmospheric depth, fine-line delicacy in grasses and foliage. Paint an entirely NEW and MODERN scene in that exact style, with NO people anywhere: a single rope knot resting on a bare wooden workbench in soft clear morning light near a window, the knot half loosened so its structure is plainly visible, one loose end running free across the wood toward the bright window light, the fibers of the rope rendered with fine delicate brushwork; a plain modern window with cool fresh daylight and a hint of deep green leaves beyond, gentle light washing across the wood grain. The mood is calm and clarifying: the mechanism made visible, coming undone. Contemporary everyday life, recognizably today. The feeling: understanding, a tight thing quietly loosening, release beginning. No text anywhere.
+
+Avoid: nautical clutter, many ropes or coils, sailing or maritime props, tools crowding the frame, period or vintage styling, melancholy or wistful mood, gloom, dark oppressive shadows, saturated neon colors, AI-purple, golden-yellow haze over everything, any text or lettering, borders or frames.
+```
+
 ## Production assignments (v1 site build)
 
 `assets/site/` holds the production copies. Assignment law: painting for life-moments,
@@ -119,7 +167,9 @@ photography for fact-moments, one voice per section. v1 assignments: riverside-g
 how-it-works hero · harbor-flock → home "the belief loses its grip" · morning-overlook
 → home "see the trap clearly" · together-after-rain → experiences · kite → blog ·
 open-window → about · misprinted-park → 404 · open-street → spare (unassigned;
-owner may repaint it into Voice 1 later).
+owner may repaint it into Voice 1 later). Site v2 story batch adds: lit-window →
+home beat 1 · bench → home beat 2 + contribute · open-cage → home beat 4 +
+how-it-works ch. 6 · knot → how-it-works ch. 3.
 
 ## Exploration lineage (context for future models)
 
