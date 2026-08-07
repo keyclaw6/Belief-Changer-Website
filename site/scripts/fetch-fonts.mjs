@@ -65,8 +65,15 @@ for (const src of sources) {
     // Keep only latin and latin-ext (Danish diacritics live here).
     if (f.subset !== 'latin' && f.subset !== 'latin-ext') continue
     const styleTag = f.style === 'italic' ? 'italic' : 'normal'
-    const name = `${src.slug}-${f.weight}-${styleTag}-${f.subset}.woff2`
-    downloads.set(f.url, name)
+    // Google serves DM Sans as a single variable woff2 shared across weights
+    // (same URL for 400/500/600 within a subset). Dedupe the physical file by
+    // URL, keeping the first name we assigned, so every @font-face src below
+    // resolves to a file that is actually downloaded. Without this, later
+    // weights would reference woff2 filenames that never get written.
+    if (!downloads.has(f.url)) {
+      downloads.set(f.url, `${src.slug}-${f.weight}-${styleTag}-${f.subset}.woff2`)
+    }
+    const name = downloads.get(f.url)
     out.push({ family: src.family, weight: f.weight, style: styleTag, name, range: f.range })
   }
 }

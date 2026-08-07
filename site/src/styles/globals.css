@@ -360,6 +360,54 @@
    rest with Tailwind utilities + these named text roles).
    ========================================================================== */
 @layer components {
+  /* ── Reader comfort surface ────────────────────────────────────────────
+     The reading surface carries its own light / sepia / dark palette, chosen
+     by the reader's comfort control, INDEPENDENT of the site theme (DESIGN.md
+     Reader: comfort modes restyle the reading surface only; the canvas chrome
+     around it stays). Newsreader appears here and nowhere else. The three
+     palettes keep AA contrast for long-form body text. */
+  .reader-surface {
+    background-color: var(--rs-bg);
+    color: var(--rs-ink);
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  .reader-surface[data-comfort='light'] {
+    --rs-bg: #ffffff;
+    --rs-ink: #1a1a1a;
+    --rs-ink-2: #6b6b68;
+    --rs-rule: #eaeaea;
+  }
+  .reader-surface[data-comfort='sepia'] {
+    --rs-bg: #f4ecd8;
+    --rs-ink: #43371f;
+    --rs-ink-2: #8a795a;
+    --rs-rule: #e0d4b8;
+  }
+  .reader-surface[data-comfort='dark'] {
+    --rs-bg: #17181a;
+    --rs-ink: #e6e3dc;
+    --rs-ink-2: #9a968e;
+    --rs-rule: rgba(255, 255, 255, 0.1);
+  }
+  .reader-prose {
+    font-family: var(--font-reader);
+    font-size: var(--text-reader-body);
+    font-weight: var(--text-reader-body--font-weight);
+    line-height: var(--text-reader-body--line-height);
+  }
+  /* Book-quality paragraph rhythm on the reading surface: a comfortable space
+     between paragraphs (screen reading is clearer with space than with an
+     indent), the first paragraph flush. Optical hanging punctuation and slight
+     letter loosening keep long Newsreader passages easy on the eye. */
+  .reader-body > p {
+    margin-block: 0;
+    max-width: 66ch;
+    text-wrap: pretty;
+  }
+  .reader-body > p + p {
+    margin-top: 1.35em;
+  }
+
   .type-wordmark {
     font-family: var(--font-sans);
     font-size: var(--text-wordmark);

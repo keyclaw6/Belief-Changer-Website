@@ -85,6 +85,24 @@ export const en = {
 
     // (copy deck) experiences
     experiencesHeading: 'What readers walked out of',
+
+    // -- Non-canonical homepage strings (in register) -------------------
+    // Accessible label for the hero finder field (label is visually hidden).
+    askFieldLabel: 'Tell us what you are going through',
+    // Heading + lede for the three method beats section ("how escape works").
+    methodHeading: 'How escape works',
+    methodBody:
+      'No willpower, no counting days. Each book takes one belief apart, and the behavior follows.',
+    // Living-books section: cross-link to the full library.
+    livingBooksLink: 'Browse the library',
+    // Next-book section framing line and link to the board.
+    requestBody:
+      'Vote a book into existence. Enough voices, and the next one gets written.',
+    // Experiences section framing line and link to the board.
+    experiencesBody: 'Anonymous, honest, and shared with permission.',
+    experiencesLink: 'Read more experiences',
+    // How-it-works cross-link used on the homepage and book page.
+    howItWorksLink: 'How belief change works',
   },
 
   // -- Statuses (pastel tags) (copy deck) -------------------------------
@@ -108,6 +126,11 @@ export const en = {
       'Tell us what you are struggling with and enough voices will bring the book into existence.',
     noMatchCta: 'Request this book',
     resultsCount: '{count} books',
+    resultsCountOne: '1 book',
+    clearSearch: 'Clear',
+    // Announced to screen readers when the filtered count changes (aria-live).
+    resultsFor: '{count} books for “{query}”',
+    resultsForOne: '1 book for “{query}”',
   },
 
   // -- Book page ---------------------------------------------------------
@@ -118,6 +141,9 @@ export const en = {
     // (copy deck adjacent) versions and formats
     onlyNewestDownload: 'Only the newest version is available for download.',
     versionLabel: 'Version {version} · {month}',
+    // Compact mono fact for cards/rows: version plus language count, one dot.
+    versionLanguages: 'Version {version} · {count} languages',
+    versionLanguagesOne: 'Version {version} · 1 language',
     languagesCount: '{count} languages',
     notYetInLanguage: 'Not yet in your language', // pastel-blue note
     changelogTab: 'Changelog',
@@ -133,6 +159,25 @@ export const en = {
     improveSubmit: 'Send to the editors',
     experiencesEmpty:
       'No experiences for this book yet. Yours could be the first.',
+
+    // -- Non-canonical book-page strings (in register) -----------------
+    // Section headings on the book page.
+    experiencesHeading: 'What readers walked out of this book',
+    versionHeading: 'A living book',
+    // Small guide above the improve form explaining what feedback helps most.
+    improveGuide:
+      'Specific, personal, belief-level notes shape the next version most. The prompts are optional; answer what fits.',
+    improveOptional: 'Optional',
+    // Improve-form success state (explains the pipeline; no fake numbers).
+    improveSuccessTitle: 'Thank you. The editors read everything.',
+    improveSuccessBody:
+      'The clearest, most personal notes shape the next version, and the changelog records what changed. Nothing here is tied to you.',
+    // Cross-link to the method page.
+    howItWorksCrosslink: 'How belief change works',
+    // Meta line joining version and languages on the book page.
+    languagesCountOne: '1 language',
+    // Fallback promise label for books still gathering voices, etc.
+    notPublishedYet: 'This book is on the way.',
   },
 
   // -- Reader ------------------------------------------------------------
@@ -144,6 +189,16 @@ export const en = {
     comfortSepia: 'Sepia',
     comfortDark: 'Dark',
     chapterOf: 'Chapter {n} of {total}',
+    // Group label for the reading-comfort control (screen readers).
+    comfortLabel: 'Reading comfort',
+    // Chapter-list disclosure on the reading surface.
+    chaptersLabel: 'Chapters',
+    contents: 'Contents',
+    // Dignified state for chapters that are not written yet (non-sample books).
+    beingWrittenTitle: 'This chapter is still being written.',
+    beingWrittenBody:
+      'This book is a living book. The chapters go up as they are finished, and every reader gets the newest version.',
+    beingWrittenCta: 'See what changed',
   },
 
   // -- Requests board ----------------------------------------------------

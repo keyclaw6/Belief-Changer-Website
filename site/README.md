@@ -80,12 +80,20 @@ site/
       __root.tsx         HTML document shell, <head>, <html lang/dir>, theme init script
       index.tsx          "/" -> redirect to /en
       $locale.tsx        locale layout: validates locale, hreflang, renders shell + Outlet
-      $locale/index.tsx  Milestone 1 placeholder home (note + static cover row)
-      $locale/books/index.tsx, $slug.tsx, how-it-works.tsx, requests.tsx, about.tsx  stubs
+      $locale/index.tsx  Home (M2): hero + trust + reframe + method + living + next + experiences
+      $locale/books/index.tsx      Library (M3): URL-driven finder, full grid, no-match state
+      $locale/books/$slug.tsx      Book page (M3): masthead, tabs, improve form, experiences
+      $locale/books/$slug_.read.$n.tsx  Reader (M3): SSR chapters, comfort modes, position
+      $locale/how-it-works.tsx, requests.tsx, about.tsx  M4 stubs (left standing)
     components/
       Nav, Footer, LocaleShell     layout shell (nav 68px + hairline; footer + mono trust line)
       LanguageSwitcher, ThemeToggle  client leaves (hairline panel; light/dark override)
       NotFound, DefaultCatchBoundary, PagePlaceholder
+      Reveal.tsx           the single scroll-entry motion primitive (SSR-visible, reduced-motion safe)
+      BookCover, BookCard, StatusTag, ShelfStage, HeroAsk  shared book + finder primitives
+      home/  Hero, TrustStrip, Reframe, MethodBeats, LivingBooks, NextBook, Experiences
+      book/  BookActions, BookTabs (About / Changelog), ImproveForm, BookExperiences
+      reader/  Reader (toolbar + reading surface + comfort control + chapter list)
     i18n/
       config.ts          locales (en/da/ar), dir map, native names, BCP-47
       messages/en.ts      complete catalog (copy deck verbatim where canonical)
@@ -94,6 +102,7 @@ site/
     lib/
       theme.ts           3-state theme (system/light/dark), no-flash init script
       measure.ts         track() + sanitizeQuery() per the measurement contract
+      ui.ts              shared className recipes (btnPrimary/Secondary, inkLink, inputText)
       utils.ts           cn() for shadcn/ui + Tailwind class merging
     data/
       types.ts           fixture shapes (mirror the future API)
@@ -148,22 +157,53 @@ site/
    generated yet, so no default shadcn pixels exist to leak. Later milestones add
    restyled primitives as needed.
 
+### M2 / M3 decisions (home, library, book page, reader)
+
+7. **Reader route as a de-nested sibling (`$slug_.read.$n`).** The reader must
+   replace the book page, not render inside it, so it uses TanStack's trailing
+   underscore convention to opt out of the `$slug` layout while still matching
+   `/books/{slug}/read/{n}`. This keeps the book page URL free of a trailing
+   slash (a directory-based `$slug/index.tsx` would have forced `/books/{slug}/`).
+8. **`Reveal` renders visible on the server, arms after mount.** The fade-up
+   entry animation would otherwise ship `opacity:0` in the SSR HTML and hide all
+   content without JavaScript. `Reveal` outputs a plain, fully-visible element on
+   the server and the first client render, then swaps to the animated element
+   after mount, so no-JS content is present and there is no flash of hidden text.
+9. **Comfort modes are a reading-surface palette, independent of the site theme.**
+   `.reader-surface[data-comfort=light|sepia|dark]` sets local `--rs-*` variables
+   that restyle only the reading column; the site chrome keeps its own theme
+   (DESIGN.md). The comfort choice and per-book reading position persist in
+   localStorage as functional storage only. On first open the surface mirrors the
+   site theme once, then follows the reader's explicit choice.
+10. **The finder is URL-state (`?q=`), the library owns `finder_no_match`.** The
+    hero ask navigates to `/books?q=...`; the library filters over title +
+    subject + promise + status, renders exactly N cells, and fires
+    `finder_no_match` once per distinct normalized query that returns nothing.
+    Keeping the query in the URL makes it shareable and lets the hero seed it.
+11. **Reading position stored, "continue" left for M4.** The reader writes the
+    current chapter to `bc-reading:{slug}` so a later "continue reading" affordance
+    (e.g. on the book page) can resume without new plumbing; v1 does not surface a
+    resume button yet.
+12. **Font pipeline fix.** DM Sans ships from Google as one variable woff2 shared
+    across weights; the M1 fetch script deduped by URL and left the 400/500
+    `@font-face` `src` files unwritten. Fixed `scripts/fetch-fonts.mjs` to point
+    every weight at the one downloaded file (and the `__root.tsx` preload to
+    match), so 400/500/600 all resolve and body-weight hierarchy renders.
+
 ---
 
 ## Deferred to later milestones (per the build order)
 
-- M2 Home (hero, trust strip, reframe, method beats, living books, next-book
-  votes, experiences) replacing `$locale/index.tsx`.
-- M3 Library finder, Book page (version block, changelog tab, improve form,
-  experiences), Reader (Newsreader surface, comfort modes, reading position).
+- M2 Home and M3 Library / Book page / Reader are DONE (this milestone).
 - M4 Request board, Experience board, Blog post bodies, About, styled 404 with
-  the Photo-voice imagery.
-- M5 completing the `da` / `ar` catalogs, generating `docs/MEASUREMENT.md` from
-  the SITE-PLAN measurement section (deliberately not created in M1 to honor the
-  "work only inside site/" boundary for this milestone), and the full gate pass.
-- `motion` and `@phosphor-icons/react` are installed; Phosphor is already used in
-  the shell. `motion` is unused so far by design (M1 has no motivated motion
-  beyond CSS transitions) and lands with the home/scroll work.
+  the Photo-voice imagery. Route stubs for requests / how-it-works / about are
+  left standing and working. Two seams are ready for M4: the library no-match
+  CTA links to `/requests` (can read the finder query as a subject seed once the
+  board validates a search param), and the reader stores per-book position for a
+  "continue reading" affordance.
+- M5 completing the `da` / `ar` catalogs (new home/library/book/reader keys added
+  to `en.ts` this milestone need translating), generating `docs/MEASUREMENT.md`
+  from the SITE-PLAN measurement section, and the full site-wide gate pass.
 
 ---
 
@@ -184,9 +224,42 @@ site/
   (all `font-display: swap`) present in the served stylesheet; DM Sans preloaded.
 - **Console:** zero SSR errors or warnings in the dev log across all routes.
 
-taste-skill §14 is a page-level gate applied per surface as pages are built; M1
-ships infrastructure + a deliberately minimal placeholder, so page-level boxes
-(hero fit, eyebrow count, zigzag cap, etc.) are enforced from M2 onward. The
-foundation itself honors the applicable laws: zero em-dashes in visible copy, no
-emojis, one hairline weight, ink-only interaction, no pill primary buttons, no
-brand accent, pastels reserved for status semantics, no pure black.
+## Gate report (Milestone 2 / 3 scope: home, library, book page, reader)
+
+- **Build + typecheck:** `npm run build` and `npm run typecheck` both pass clean.
+- **SSR (curled):** `/en` home renders all seven beats with real copy and covers;
+  `/en/books` renders the full 10-cell grid; `/en/books?q=sugar` filters to one
+  cell server-side; `/en/books?q=<nomatch>` renders the no-match state; every
+  book page (`sugar` published, `porn` being-written, `gaming` in-translation)
+  renders its correct actions / version block / tabs / experiences state;
+  `/en/books/scrolling/read/1` renders the full Newsreader reading surface with
+  comfort control and chapter nav; `read/4` renders the dignified being-written
+  chapter; out-of-range and non-numeric chapters 404.
+- **taste-skill §14:** homepage uses seven distinct layout families, zero
+  eyebrows (well under the ceil(7/3)=2 budget), at most two consecutive
+  image+text splits (the third method beat breaks to a full-width stack), exact
+  cell counts everywhere, quotes clamped to a glance, one middle dot per metadata
+  line. No AI tells, no fake precise numbers presented as real (all fixture
+  values are MOCK-flagged), no div-fake screenshots, no decorative dots.
+- **Copy:** canonical copy-deck strings verbatim; all new strings authored in
+  register (warm to the person, harsh to the trap, sentence case, no exclamation
+  marks, no AI clichés) and added to `en.ts`. Zero em-dashes and en-dashes in
+  source and in rendered HTML.
+- **DESIGN.md do's/don'ts:** one hairline weight, ink-only interaction, one ink
+  primary per screen, pill radius only on status tags, pastels only for status
+  semantics, DM Sans everywhere except the reader (Newsreader), sections
+  alternate canvas/band with dividers only where same-color sections would meet.
+- **A11y:** labels above inputs, `sr-only` labels where a field's purpose is
+  visual, ink focus rings inherited from the base layer, aria-live on the finder
+  count and the improve-form success, hand-built tabs with roving arrow-key
+  focus and correct roles, reader comfort as an ARIA radiogroup.
+- **Motion / reduced motion:** the only motion is `Reveal` (fade-up 12px, ~600ms,
+  80ms stagger, in-view once) plus 150-200ms hover/press transitions; all collapse
+  under `prefers-reduced-motion` (Reveal returns a plain element; the global CSS
+  zeroes transition/animation durations). No 3D. The ShelfStage documents the
+  Phase 3 3D mount contract and ships as the static reduced-motion fallback.
+- **Both themes:** all surfaces use theme tokens (bg-canvas / bg-band / text-ink
+  / border-hairline / the `--color-pastel-*` pairs), so light and dark both hold;
+  covers and paintings are never tinted and glow against the dark canvas. (Both
+  themes reviewed via the served token CSS and structure; no browser was
+  available in the sandbox for a pixel diff.)

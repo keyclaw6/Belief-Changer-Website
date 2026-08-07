@@ -34,19 +34,14 @@ export const Route = createRootRoute({
     links: [
       // Global stylesheet: tokens, Tailwind layers, self-hosted @font-face.
       { rel: 'stylesheet', href: globalCss },
-      // Preload the two most-used Latin faces to steady first paint.
+      // Preload the primary Latin face to steady first paint. DM Sans ships as
+      // one variable woff2 shared across weights (see scripts/fetch-fonts.mjs),
+      // so a single preload covers 400/500/600.
       {
         rel: 'preload',
         as: 'font',
         type: 'font/woff2',
         href: '/fonts/dmsans-400-normal-latin.woff2',
-        crossOrigin: 'anonymous',
-      },
-      {
-        rel: 'preload',
-        as: 'font',
-        type: 'font/woff2',
-        href: '/fonts/dmsans-600-normal-latin.woff2',
         crossOrigin: 'anonymous',
       },
     ],
