@@ -1,0 +1,109 @@
+{
+  "series": "The Specimen Series",
+  "system": "../../prompts/COVER-SYSTEM.md",
+  "note": "Textless production textures. Titles and the series mark are overlaid at runtime per language. Spine and back textures are derived from each front cover by scripts/derive-surfaces.py; groundHex is sampled from the artwork; overlayInk is chosen by WCAG contrast ratio.",
+  "anchor": "01-sugar.png",
+  "books": [
+    {
+      "file": "01-sugar.png",
+      "slug": "sugar",
+      "titleKey": "the-sugar-trap",
+      "object": "a single white sugar cube",
+      "ground": "pale dove gray",
+      "groundHex": "#DBD9D8",
+      "overlayInk": "charcoal",
+      "overlayInkComputed": "charcoal"
+    },
+    {
+      "file": "02-smoking.png",
+      "slug": "smoking",
+      "titleKey": "the-smoking-trap",
+      "object": "a single unlit cigarette lying flat",
+      "ground": "muted sage green",
+      "groundHex": "#9AA28D",
+      "overlayInk": "charcoal",
+      "overlayInkComputed": "charcoal"
+    },
+    {
+      "file": "03-scrolling.png",
+      "slug": "scrolling",
+      "titleKey": "the-scrolling-trap",
+      "object": "a single smartphone at rest, screen dark, face up",
+      "ground": "muted slate blue",
+      "groundHex": "#6C8594",
+      "overlayInk": "bone",
+      "overlayInkComputed": "bone"
+    },
+    {
+      "file": "04-porn.png",
+      "slug": "porn",
+      "titleKey": "the-porn-trap",
+      "object": "a single loosely crumpled white paper tissue",
+      "ground": "warm greige",
+      "groundHex": "#CEC7BC",
+      "overlayInk": "charcoal",
+      "overlayInkComputed": "charcoal"
+    },
+    {
+      "file": "05-alcohol.png",
+      "slug": "alcohol",
+      "titleKey": "the-alcohol-trap",
+      "object": "a single empty wine glass standing upright, clean",
+      "ground": "deep muted moss green",
+      "groundHex": "#51533B",
+      "overlayInk": "bone",
+      "overlayInkComputed": "bone"
+    },
+    {
+      "file": "06-gaming.png",
+      "slug": "gaming",
+      "titleKey": "the-gaming-trap",
+      "object": "a single generic matte gray game controller, unlabeled buttons",
+      "ground": "dusty ochre",
+      "groundHex": "#BFA482",
+      "overlayInk": "charcoal",
+      "overlayInkComputed": "charcoal"
+    },
+    {
+      "file": "07-junkfood.png",
+      "slug": "junkfood",
+      "titleKey": "the-junk-food-trap",
+      "object": "a single french fry lying flat",
+      "ground": "muted terracotta",
+      "groundHex": "#D07452",
+      "overlayInk": "charcoal",
+      "overlayInkComputed": "charcoal"
+    },
+    {
+      "file": "08-vaping.png",
+      "slug": "vaping",
+      "titleKey": "the-vaping-trap",
+      "object": "a single generic matte vape pen lying flat",
+      "ground": "soft eucalyptus gray-green",
+      "groundHex": "#A7B0A4",
+      "overlayInk": "charcoal",
+      "overlayInkComputed": "charcoal"
+    },
+    {
+      "file": "09-overthinking.png",
+      "slug": "overthinking",
+      "titleKey": "the-overthinking-trap",
+      "object": "a single tangled knot of soft gray thread, one loose end trailing free",
+      "ground": "muted dusty rose",
+      "groundHex": "#C0A09A",
+      "overlayInk": "charcoal",
+      "overlayInkComputed": "charcoal"
+    },
+    {
+      "file": "10-complaining.png",
+      "slug": "complaining",
+      "titleKey": "the-complaining-trap",
+      "object": "a single chrome water tap with one suspended droplet",
+      "ground": "warm sand beige",
+      "groundHex": "#E1C5A0",
+      "overlayInk": "charcoal",
+      "overlayInkComputed": "charcoal"
+    }
+  ],
+  "derived": "assets/covers/derived/{slug}-spine.png · {slug}-back.png"
+}
