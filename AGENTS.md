@@ -15,6 +15,8 @@ points to. Do not duplicate their content anywhere, including here.
    `output-skill`).
 5. `skills/cover-generation/SKILL.md` + its `references/gallery.md` — the cover
    system. **Sacred: the prompt structure and anchor process are locked.**
+   Then `skills/site-imagery/SKILL.md` + its `references/gallery.md` — the
+   owner-locked two-voice system for all non-cover site imagery.
 6. `assets/covers/` — production covers, `covers-manifest.json` (the interface),
    derived surfaces, with-text proofs.
 7. `prompts/` — standing briefs (book asset in production; handoff orientation).
@@ -37,7 +39,8 @@ defined in DESIGN.md (Overview, Creative Latitude); build within them.
   per-locale URLs and hreflang; no signup, no tracking, no cookies beyond
   theme/locale; RTL and locale catalogs from the first commit.
 - **Assets are immutable:** never regenerate, crop, tint, or re-light the production
-  covers. New covers only via `skills/cover-generation/` — verbatim.
+  covers. New covers only via `skills/cover-generation/` — verbatim. New site imagery
+  only via `skills/site-imagery/` — verbatim.
 - **Quality bar before any surface is "done":** taste-skill's Final Pre-Flight Check
   (§14) + DESIGN.md's Do's and Don'ts, in both themes, plus an RTL and
   reduced-motion pass.

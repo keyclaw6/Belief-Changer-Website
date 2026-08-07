@@ -21,6 +21,16 @@ One grammar for every book: full-bleed museum-restraint still life, one specimen
 object, muted seamless ground, textless (titles overlaid at runtime per language).
 Reproducible via anchor + edit-endpoint consistency protocol.
 
+**Site imagery system — `skills/site-imagery/SKILL.md` ("The Life Outside")**
+Owner-locked 2026-08-07 after three exploration rounds. Two voices under one law —
+"photography states the facts; painting shows the life": The Painted Life (lead,
+fine-line classical oil per the owner's anchor painting, modern scenes, freedom
+legible) and The Quiet Fact (the cover grammar in real hopeful places, no people).
+Feeling contract, templates, slot rules, rejected directions, and QA in the skill;
+anchors + 4 canon references with exact prompts in its `references/gallery.md`.
+DESIGN.md Imagery section updated to match. Production site images will live in
+`assets/site/`.
+
 **Production assets — `assets/covers/`**
 10 covers generated and QA'd (sugar · smoking · scrolling · porn · alcohol · gaming ·
 junk food · vaping · overthinking · complaining), all textless, series-anchored.

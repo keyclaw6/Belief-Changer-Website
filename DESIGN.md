@@ -304,14 +304,33 @@ testimonials. Trust facts stated plainly and often.
 ## Imagery & The Books
 
 The books are the primary imagery and the emotional center — real production cover
-assets exist in `assets/covers/` and are used wherever a book is present. Where a
-section genuinely needs supporting imagery (per taste-skill: pages should not be
-text-only), use high-quality desaturated warm-toned photography blended with a subtle
-warm overlay, or monochrome continuous-line illustration with a single offset pastel
-shape (minimalist-skill's illustration style). Real images only: no div-based fake
-screenshots, no hand-rolled decorative SVGs, no AI-cliché art. UI icons: Phosphor
-family, one strokeWidth globally. In production, no placeholder services; during
-development, picsum seeds are acceptable and must be flagged for replacement.
+assets exist in `assets/covers/` and are used wherever a book is present. All other
+imagery follows the owner-locked two-voice system in `skills/site-imagery/SKILL.md`
+(anchors and accepted prompts in its `references/gallery.md`):
+
+- **The Painted Life** (lead voice, ~4/5 of site imagery): fine-line classical oil
+  painting in the exact craft of the owner's anchor painting; modern everyday scenes,
+  people of all ages in modern clothes welcome; freedom legible (motion, release,
+  fresh air, an open way); deep muted greens and blues with warm bone light. Jobs:
+  the emotional surfaces — home's method beats, how-it-works, experiences, blog.
+- **The Quiet Fact** (structural voice, ~1/5): the covers' own museum-restraint
+  photography in real modern places; no people; one soft light, long quiet shadows;
+  hope arrives through light, air, and openness. Jobs: moments beside covers, the
+  404, quiet structural anchors. (Owner note: may later be repainted into the lead
+  voice.)
+- **The law: photography states the facts; painting shows the life.** One voice per
+  section, never both in the same viewport moment. Palettes may quote
+  `covers-manifest.json` ground hexes so the site rhymes with the library. All
+  imagery is textless — copy is live text.
+- **The feeling every image must produce:** relief, not triumph; lightness, not
+  luxury; the first morning of a freer life in the world the visitor already lives
+  in. Never melancholy, never shame, never glamour, never nostalgia for the trap.
+  The covers show the trap, disarmed; the site's imagery shows the life outside it.
+
+Real images only: no div-based fake screenshots, no hand-rolled decorative SVGs, no
+AI-cliché art. UI icons: Phosphor family, one strokeWidth globally. In production, no
+placeholder services; during development, picsum seeds are acceptable and must be
+flagged for replacement.
 
 ## Creative Latitude
 
