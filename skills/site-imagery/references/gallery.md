@@ -64,6 +64,47 @@ A muted museum-restraint photograph of real modern life, calm and precise like a
 Avoid: traffic, people, readable signage or storefront text, neon, HDR drama, heavy yellow haze, gloom, lens flare, any text or lettering, borders or frames.
 ```
 
+### No. 05 · Together after the rain — Voice 1, three ages
+
+- Image: `05-together-after-rain.jpg` · Production: `assets/site/painted-together-after-rain.jpg`
+- Metadata: Canon (v1 build batch, owner ratification on the rendered site) · edits endpoint, reference = painting-anchor.jpg · 3:2 (1536×1024) · high · gpt-image-2
+
+```text
+Using the reference image strictly as the painting-style anchor: fine detailed classical oil brushwork, lush deep greens, dappled natural light, deep reflective water, soft atmospheric depth, fine-line delicacy in grasses and foliage. Paint an entirely NEW and MODERN scene in that exact style: three people of clearly different ages, a woman in her twenties, a man in his forties, an older woman in her sixties, in modern everyday clothes, walking together along a city park path just after rain has ended, one of them shaking out and closing an umbrella, easy warm laughter shared between them; deep green trees still glistening, a long shallow puddle on the path holding a soft reflection of the clearing sky, modern apartment rooftops dissolved softly beyond the trees. Contemporary everyday life, recognizably today. The feeling: the weather breaking, shared relief, walking out together. No text anywhere.
+
+Avoid: period or vintage clothing, Edwardian dress, open umbrellas in use, melancholy or gray gloom, fashion-editorial glamour, saturated neon colors, AI-purple, golden-yellow haze over everything, any text or lettering, borders or frames.
+```
+
+### No. 06 · The morning overlook — Voice 1, seeing clearly
+
+- Image: `06-morning-overlook.jpg` · Production: `assets/site/painted-morning-overlook.jpg`
+- Metadata: Canon (v1 build batch, owner ratification on the rendered site) · edits endpoint, reference = painting-anchor.jpg · 3:2 (1536×1024) · high · gpt-image-2
+
+```text
+Using the reference image strictly as the painting-style anchor: fine detailed classical oil brushwork, lush deep greens, dappled natural light, deep reflective water, soft atmospheric depth, fine-line delicacy in grasses and foliage. Paint an entirely NEW and MODERN scene in that exact style: a person in modern everyday clothes standing tall and at ease at a city viewpoint railing in early morning, seen from behind at a respectful distance, the whole modern city and its winding river laid out below in clear fresh light, deep green park treetops in the near ground, the sky vast and clean above. Contemporary everyday life, recognizably today. The feeling: seeing the whole picture at last, clarity, calm, quiet confidence. No text anywhere.
+
+Avoid: period or vintage clothing, melancholy or wistful mood, dramatic cliff romanticism, saturated neon colors, AI-purple, golden-yellow haze over everything, any text or lettering, borders or frames.
+```
+
+### No. 07 · The kite — Voice 1, no people
+
+- Image: `07-kite.jpg` · Production: `assets/site/painted-kite.jpg`
+- Metadata: Canon (v1 build batch, owner ratification on the rendered site) · edits endpoint, reference = painting-anchor.jpg · 3:2 (1536×1024) · high · gpt-image-2
+
+```text
+Using the reference image strictly as the painting-style anchor: fine detailed classical oil brushwork, lush deep greens, dappled natural light, deep reflective water, soft atmospheric depth, fine-line delicacy in grasses and foliage. Paint an entirely NEW and MODERN scene in that exact style, with NO people anywhere: a single simple kite flying high in a fresh clear morning sky above a modern city park, its long tail catching the light, deep green treetops and a hint of contemporary rooftops low along the frame's bottom edge, the sky vast, open and softly luminous above. Recognizably today, not a period scene. The feeling: lightness, play, freedom regained. No text anywhere.
+
+Avoid: people, birds confused with the kite, melancholy gray gloom, saturated neon colors, AI-purple, golden-yellow haze over everything, any text or lettering, borders or frames.
+```
+
+## Production assignments (v1 site build)
+
+`assets/site/` holds the production copies. Assignment law: painting for life-moments,
+photography for fact-moments, one voice per section. v1 assignments: riverside-glide →
+how-it-works hero · harbor-flock → home "the belief loses its grip" · morning-overlook
+→ home "see the trap clearly" · together-after-rain → experiences · kite → blog ·
+open-window → about · open-street → 404.
+
 ## Exploration lineage (context for future models)
 
 Three rounds on 2026-08-07 led here. Round 1 (10 explorations): loose watercolor
