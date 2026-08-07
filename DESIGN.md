@@ -268,7 +268,12 @@ system, documented here, applied everywhere; mixed systems are broken design.
 
 ## Motion
 
-Barely there, motivated, or cut. Scroll entries fade-up 12px over ~600ms
+**Owner-locked stillness (2026-08-07): no side-entry animations, no zigzag reveals —
+images and text are simply there, at scale (story images 55-75vw).** The one
+sanctioned moving band is the experience marquee (home only, 60s+ lazy loop, pauses
+on hover, static under reduced motion). The theme switch is the physics pull-cord.
+Otherwise: barely there, motivated, or cut. Scroll entries at most a gentle fade-up
+over ~400ms
 (`cubic-bezier(0.16,1,0.3,1)`, 80ms stagger, IntersectionObserver). Interactive
 transitions 150–200ms. Optional single ambient radial drift (≥ 20s, opacity ≤ 0.04,
 fixed layer). transform/opacity only; `prefers-reduced-motion` collapses everything,
@@ -296,10 +301,21 @@ locale catalogs with ICU messages, per-locale URLs and hreflang.
 
 ## Voice & Content
 
-Warm to the person, harsh to the trap. Never shaming, never moralizing. First-person
+**The register is Scandinavian (owner-locked 2026-08-07): subtle, direct, educational,
+never hyping.** We are not marketing; we describe how beliefs and behavior actually
+work, to intelligent people who were simply never shown. Educate, never persuade:
+facts, not pledges ("shaming never helps", never "we will never shame you"). The
+framing is behavior-and-reasons, not "the trap": people keep fixing the behavior
+instead of understanding its reasons; the reasons live in beliefs; correct the belief
+and the behavior follows. "Trap" stays in book titles and where precise, but is not
+the site's vocabulary. Plain sentences, said once; cut anything that sounds like a
+landing page.
+
+Warm to the person through respect, never shaming, never moralizing. First-person
 subject names ("I can't stop scrolling"). Sentence case; no exclamation marks; no AI
-clichés; zero em-dashes in visible copy (hyphen only); no fake numbers, no invented
-testimonials. Trust facts stated plainly and often.
+clichés; zero em-dashes in visible copy (hyphen only); no fake numbers presented as
+real, no invented testimonials presented as real (dev mocks are code-flagged). Trust
+facts stated plainly and often.
 
 ## Imagery & The Books
 
