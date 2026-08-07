@@ -39,6 +39,15 @@ Every cover rendered anywhere gets its **title as live text over the artwork**
 CHANGER series mark at the foot, in every language. Target look: the with-text
 proofs in `assets/covers/proofs/`. The raw textures never appear unlabeled again.
 
+## Prompt library (owner rule, standing)
+
+Every generated asset's exact prompt is saved the moment it is accepted:
+book covers in `skills/cover-generation/references/gallery.md` (sacred,
+per-book records), site images in `skills/site-imagery/references/gallery.md`.
+The four new paintings below get logged there with their full prompts and
+settings on acceptance, and every future asset follows the same rule. No
+accepted image without its saved prompt, ever.
+
 ## Story-telling rule (why these images and no others)
 
 Each image exists to make one belief-change idea *felt*: the loop (lit window),

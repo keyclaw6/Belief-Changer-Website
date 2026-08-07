@@ -1,145 +1,145 @@
 # How it works — the method, in full
 
-*This page is the site's deep explanation: a long-form, beautifully set essay
-with large images breathing between sections (the zigzag continues here, slower).
-A visitor should be able to arrive desperate and leave understanding exactly why
-these books work when everything else they tried did not. 65ch measure for
-prose; images break out wide between chapters.*
+*The deep page: a long-form essay, plainly set, images still and wide between
+chapters. Scandinavian register: direct, unhyped, educational. A smart person
+arrives skeptical and leaves understanding exactly why this works when what
+they tried did not.*
 
 ---
 
-## Opening (canvas, generous)
+## Opening (canvas)
 
 > # How belief change works
 >
-> Everything on this site rests on one idea. Once you see it, the rest of the
-> method, and the books themselves, follow naturally.
+> Everything on this site rests on one idea. It is simple, it is testable
+> against your own experience, and once you see it, the books explain
+> themselves.
 
 ---
 
 ## Chapter 1 · The happiest option
 
 > In every moment, you choose what you believe is your happiest available
-> option. Everyone does. It is not a flaw; it is the engine of being a person.
-> When you reach for a cigarette, a feed, a drink, a screen, you are not being
-> weak. You are choosing the option that, according to your current beliefs,
-> feels best right now.
+> option. Everyone does. It is not a flaw; it is how choosing works.
+> Reaching for the cigarette, the feed, the drink, the screen is not
+> weakness. It is a choice that, according to your current beliefs, is the
+> best one available right now.
 >
-> Read that again, because it carries the whole method: **your choices follow
-> your beliefs.** Not your willpower. Not your character. Your beliefs about
-> what each option will actually give you and actually cost you.
+> That sentence carries the whole method: **choices follow beliefs.** Not
+> willpower, not character. Beliefs about what each option gives you and
+> what it costs you.
 >
-> Which means a trap is not a behavior problem. It is a belief problem.
+> So a stubborn behavior is not a behavior problem. It is a belief problem.
 
-`[IMAGE — "the morning overlook" · EXISTS · wide breakout]`
+`[IMAGE — "the morning overlook" · EXISTS · wide, still]`
 
-## Chapter 2 · How a trap is built
+## Chapter 2 · Fixing the behavior instead of the reasons
 
-> No one signs up for a trap. It assembles itself quietly, in three moves.
+> Almost everything people try works on the behavior. Stop, cut down, block,
+> avoid, distract, substitute. Sometimes it holds for a while. It rarely
+> holds for good, and the reason is structural: the behavior was never the
+> root. It is the visible end of a belief.
 >
-> First, a moment of relief. You were stressed, bored, lonely, tired, and the
-> thing seemed to help. Second, a belief forms without being examined: this
-> helps me relax, this gets me through the evening, this is one of my few
-> pleasures. Third, the trap begins collecting rent: the discomfort it created
-> gets relieved by the next dose, and the relief gets credited to the thing
-> that caused the discomfort in the first place.
+> The belief usually formed without you noticing. Something once brought
+> relief, and a conclusion quietly wrote itself: this helps me relax, this
+> gets me through the evening, this is one of my few pleasures. From then on
+> the accounting runs wrong in a particular way: **the discomfort the thing
+> creates gets relieved by the next dose, and the relief gets credited to
+> the thing itself.** A smoker's cigarette mostly relieves the previous
+> cigarette. The feed soothes a restlessness the feed installed.
 >
-> That is the heart of the lie. **The trap takes credit for relieving a
-> restlessness it created.** A smoker's cigarette mostly relieves the previous
-> cigarette. The feed soothes an agitation the feed installed. The books call
-> this the miscounted ledger: all the relief is written on one side, all the
-> cost quietly left off the page. As long as the ledger stays miscounted, the
-> trap keeps looking like your happiest option, so you keep choosing it.
+> Wrong numbers in, wrong choice out. As long as the belief miscounts, the
+> behavior keeps being chosen, no matter how sincerely you fight it.
 
 ## Chapter 3 · Why willpower loses
 
-> Willpower accepts the lie and then fights the desire the lie produces. That
-> is why it feels like white-knuckling: you still believe, deep down, that you
-> are giving up something good, so every day of abstinence feels like
-> deprivation. Deprivation exhausts. Eventually a hard day arrives, and the
-> option your beliefs still rate as happiest wins again.
+> Willpower accepts the wrong numbers and fights the desire they produce.
+> That is why it feels like deprivation: some part of you still believes
+> something good is being given up, so every abstinent day costs effort.
+> Effort runs out. A hard day arrives, and the option your beliefs still
+> rate highest wins again.
 >
-> Then comes the worst part: you call it a personal failure. It never was.
-> **You were fighting your own belief system, and the belief system always has
-> more stamina.** The method does not ask you to fight harder. It removes the
-> thing you were fighting.
+> Afterwards people blame themselves. The books will show you, calmly and
+> concretely, why that verdict was never correct: you were fighting your own
+> belief system, and it has more stamina than anyone's willpower. The method
+> does not ask you to fight harder. It removes what you were fighting.
 
-`[IMAGE — "the knot, loosening" · NEW painting · wide breakout]`
-*A single rope knot on a workbench in morning light, half loosened, one end
-running free toward the window. Painted, calm, close.*
+`[IMAGE — "the knot, loosening" · NEW painting · wide, still]`
 
-## Chapter 4 · Why shame makes traps stronger
+## Chapter 4 · Shaming never helps
 
-> Shame feels like it should motivate change. It does the opposite, reliably.
+> Shame feels like it should motivate change. Reliably, it does the
+> opposite.
 >
-> Shame drives the trap underground, and traps grow best in the dark: hidden,
-> unexamined, undiscussed. Shame also hurts, and what does a trapped person do
-> with pain? They reach for the thing that promises relief. The trap punishes
-> you and sells you the painkiller.
+> Shame drives the behavior out of sight, and out of sight it grows:
+> unexamined, undiscussed, compounding. Shame also hurts, and a person in
+> pain reaches for what promises relief, which is the behavior itself. The
+> loop tightens.
 >
-> That is why these books refuse to shame you, not to be gentle, but because
-> shame is structurally on the trap's side. You will find no scare tactics
-> here, no disappointed tone, no "day counter" waiting to reset. You are met
-> with warmth, and the trap is met with the truth.
+> This is why the books contain no scare tactics, no disappointed tone, no
+> day counters waiting to reset. Not as a kindness strategy: because shame
+> is counterproductive, and the method deals in what works.
 
 ## Chapter 5 · What actually changes a belief
 
 > Not affirmations. Not motivation. Not deciding very hard.
 >
 > A belief changes when you understand, completely and concretely, where the
-> pull comes from and what it actually delivers, so clearly that the old story
-> stops making sense. Freedom comes from understanding what holds you, not
-> from heroic attempts to resist it. Head-knowledge is not enough; everyone
-> trapped already "knows" the costs. The books work by walking you through
-> your own experience, moment by moment, until the knowing moves from your
-> head to your heart, until you feel the ledger correct itself.
+> pull comes from and what the thing actually delivers, clearly enough that
+> the old conclusion stops making sense. Freedom comes from understanding
+> where the behavior comes from, not from the conscious attempt to end it.
 >
-> This takes humility, and we say so honestly: you will be asked to question
-> ideas you have carried for years, some of them comfortable. The books ask
-> for nothing else. No tricks, no steps to perform, no program to follow.
-> Reading, and honesty, do all the work.
+> Everyone caught in a behavior already "knows" the costs. Head-knowledge is
+> not the missing piece. The books work by walking through your own
+> experience, moment by moment, until the knowing settles from your head
+> into your heart, until the accounting corrects itself and you can feel it.
+>
+> This asks one thing of you: humility. You will re-examine ideas you have
+> carried for years. Nothing else is required, no steps, no program, no
+> tricks. Reading and honesty do all the work.
 
 ## Chapter 6 · No pressure, starting now
 
-> Here is the strangest instruction, and readers tell us it is the moment they
-> relax: **do not stop anything yet.** Carry on exactly as you are while you
-> read. There is no quit date, no preparation, no willpower warm-up.
+> The strangest instruction in the books, and the one readers say made them
+> relax: **do not stop anything yet.** Carry on as you are while you read.
+> No quit date, no preparation, no working up courage.
 >
-> Pressure belongs to the old way, and the old way loses. If the book does its
-> job, stopping will not feel like a cliff edge you must leap from. It will
-> feel like putting down something you no longer want to carry.
+> Pressure belongs to the willpower approach, and the willpower approach
+> loses. If the book does its work, stopping will not feel like a cliff
+> edge. It will feel like putting down something you no longer want to hold.
 
-`[IMAGE — "the open cage, painted" · NEW (shared with home beat 4) · wide breakout]`
+`[IMAGE — "the open cage, painted" · NEW painting (shared with home) · wide, still]`
 
-## Chapter 7 · The moment it lets go
+## Chapter 7 · When it lets go
 
-> Somewhere in the book, often quietly, the belief gives way. People describe
-> it the same way across every trap: not a surge of strength, but a kind of
-> shrug. *Oh. It was never doing anything for me.*
+> Somewhere in the reading, often quietly, the belief gives way. People
+> describe it the same way across every behavior: not a surge of strength,
+> a shrug. *It was never doing anything for me.*
 >
-> After that, there is nothing to give up, so nothing feels given up. The
-> craving loses its engine because the belief that powered it is gone. What
-> remains is your life, with one lie fewer in it, and the surprising amount of
-> room the trap was occupying: time, money, attention, self-respect.
+> After that there is nothing to give up, so nothing feels given up. The
+> craving loses its engine. What remains is your life with one wrong belief
+> fewer in it, and the room the behavior was occupying: time, money,
+> attention, self-respect.
 >
-> That is the whole method. The truth, told well enough to feel.
+> That is the whole method. How it actually works, described well enough
+> to feel.
 
 ## Chapter 8 · Why books, and why free
 
-> A book is the right instrument for this work. It is private, patient, and
-> completely unembarrassed; it can say everything, in your own time, with no
-> one watching. And it can be given away without limit, which matters, because
-> the people deepest in a trap are often the least able to pay their way out.
+> A book is the right instrument for this. It is private, patient, and
+> unembarrassed; it can say everything, in your own time, with nobody
+> watching. And it can be given away without limit, which matters, because
+> the people who most need one are often least able to pay for it.
 >
 > So the library is free, forever, in every language we can reach, with no
-> account and no tracking. And the books are alive: readers tell us where a
-> chapter lost them, and the next version says it better. The library gets
-> smarter the more people walk out of their traps through it.
+> account and no tracking. The books are living documents: readers write in
+> where a chapter did not land, and the next version says it better. The
+> goal is only to help as many people as possible.
 
-`[IMAGE — "the riverside glide" · EXISTS · wide breakout]`
+`[IMAGE — "the riverside glide" · EXISTS · wide, still]`
 
 ## Closing (band)
 
-> ## Choose your trap. The way out is on the shelf.
+> ## The books are on the shelf.
 
-> *button:* Browse the books    *link:* Request a book we have not written yet
+> *button:* Browse the books    *link:* Ask for one we have not written

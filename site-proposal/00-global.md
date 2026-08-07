@@ -53,19 +53,36 @@ series mark **BELIEF CHANGER** at the foot. Any language, since it is live text.
 The with-text proofs in `assets/covers/proofs/` are the target look. A book on
 this site is never an unlabeled rectangle again.
 
-## Motion language (premium, calm, motivated)
+## The voice (governs every word on every page)
 
-- **The zigzag**: down long pages, large images enter alternately from the left
-  and the right (a 24-40px slide + fade over ~700ms, eased, once), while their
-  paired text rises gently. The page breathes side to side as you descend.
-- **Scale**: story images are big: 55-75% of the viewport width on desktop,
-  full-bleed moments where called out. White space stays generous around them.
-- **Stickiness, sparingly**: at most one sticky moment per page (called out in
-  the page files where used). Everything else scrolls honestly.
-- **Reduced motion**: everything renders in place, fully visible, no entrances.
-- Interactions stay 150-250ms, transform/opacity only. No parallax soup, no
-  scroll hijacking anywhere (the 3D shelf hero, later, is the one sanctioned
-  exception and has its own approved rules).
+Scandinavian: subtle, direct, unhyped. We are not marketing; we are describing
+how beliefs and behavior actually work, to smart people who simply were never
+shown. Concretely:
+
+- **Educate, never persuade.** State how it works; let it land. No superlatives,
+  no urgency, no promises about us ("we will never shame you" is out;
+  "shaming never helps" is in: a fact, not a pledge).
+- **The framing is behavior and reasons, not "the trap".** People keep trying to
+  fix the behavior instead of understanding the reasons for it; the reasons live
+  in beliefs; correct the belief and the behavior follows. The word "trap" stays
+  in book titles (the series is named that) and may appear where precise, but
+  it is not the site's vocabulary.
+- Plain sentences. Say it once. Cut anything that sounds like a landing page.
+- Warm through respect, not through warmth-words. The reader is intelligent.
+
+## Motion language (Scandinavian: almost still)
+
+- **No side entries, no zigzag.** Images and text appear with at most a gentle
+  fade and a few pixels of rise (~400ms, once). Mostly, things are simply there.
+- **Scale carries the feeling**: story images are big (55-75vw, breakout moments
+  where called out) with generous whitespace. Stillness + scale = the premium.
+- **One exception, sanctioned by the owner: the experience marquee.** A single
+  horizontal band that drifts slowly and lazily (60s+ per loop, pausable on
+  hover, static under reduced motion). Max one per page, home only for now.
+- **Reduced motion**: everything renders in place, fully visible.
+- Interactions stay 150-250ms, transform/opacity only. No parallax, no scroll
+  hijacking anywhere (the 3D shelf hero, later, is the one sanctioned exception
+  with its own approved rules).
 
 ## Footer (every page)
 

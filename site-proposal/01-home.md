@@ -1,29 +1,30 @@
-# Home — the story in six beats
+# Home — the story in five beats, told plainly
 
-*The homepage is a story someone in trouble can feel in ninety seconds, told in
-large alternating images and short, certain text. Canvas and warm band sections
-alternate. Every beat earns the next scroll.*
+*Large images, still and generous. Text short and direct. Canvas and warm band
+alternate. No entrances from the sides; things are simply there, at scale.*
 
 ---
 
 ## Beat 0 · Hero (canvas, full viewport height)
 
-*Left: the words. Right: the shelf stage (today: the static cover row with real
-titled covers and hologram hover; later: the 3D shelf per the approved brief).
-A soft warm radial light behind the shelf, barely there. The pull-cord hangs
-top right. At the bottom center, a quiet down-arrow.*
+*Left: the words. Right: the shelf stage (today: the static row of titled
+covers with hologram hover; later: the 3D shelf). The pull-cord hangs top
+right. A quiet down-arrow at the bottom center.*
 
 > ## It's not willpower you're missing. It's the way out of a trap.
 >
 > Free books that change the belief behind the behavior. In your language,
 > free forever, no signup, no catch.
 
-*Under the subtext, the finder: one generous input.*
+*(The hero headline keeps "trap": it is the series' own word and the one place
+it earns its position. Everywhere below, the framing is behavior and reasons.)*
+
+*The finder: one generous input.*
 
 > *placeholder:* Tell us what you're going through...
 > *button:* Find your book
 
-*Under the input, quiet example chips a visitor can tap instead of typing:*
+*Quiet tappable examples under it:*
 
 > scrolling · sugar · smoking · overthinking · alcohol · more...
 
@@ -31,80 +32,69 @@ top right. At the bottom center, a quiet down-arrow.*
 
 > Free forever · No signup · No tracking · Every language
 
-*(Four hairline-separated columns as today, unchanged.)*
+---
+
+## Beat 1 · Fixing the behavior (band)
+
+`[IMAGE — "the lit window" · NEW painting · still, ~60vw]`
+
+> ## You have been trying to fix the behavior.
+>
+> Stopping. Cutting down. Deleting the app, pouring it out, promising
+> yourself. That is working on the behavior. But behavior follows reasons,
+> and the reasons live in what you believe the thing does for you. Leave the
+> belief standing, and the behavior grows back.
 
 ---
 
-## Beat 1 · You never chose this (band section)
+## Beat 2 · Shaming never helps (canvas)
 
-`[IMAGE — "the lit window" · NEW painting · enters from the LEFT · ~60vw]`
-*A person paused on an evening street, phone a soft glow in their hand, warm
-windows above, dusk blues, dignified, not gloomy. The feeling: the loop at the
-end of a day, seen kindly.*
+`[IMAGE — "the bench" · NEW painting · still, ~60vw]`
 
-> ## You never chose this.
+> ## Shaming never helps.
 >
-> Nobody decides to get trapped. You tried something once, it seemed to help,
-> and a belief quietly formed: I need this. From then on the trap made your
-> choices feel like your own.
->
-> It was never weakness. It was a lie about what was helping you.
+> Not from others, not from yourself. Shame pushes the whole thing into the
+> dark, and in the dark it grows. Understanding works in the open. These
+> books assume you are intelligent and simply never got shown how beliefs
+> drive behavior.
 
 ---
 
-## Beat 2 · So we will never shame you (canvas)
+## Beat 3 · The happiest option (band)
 
-`[IMAGE — "the bench" · NEW painting · enters from the RIGHT · ~60vw]`
-*Two people on a park bench, one listening properly, deep greens, morning.
-The feeling: being met, not judged.*
-
-> ## So we will never shame you.
->
-> Shame is the trap's best friend. It keeps the secret, and secrets grow.
-> These books talk to you the way a good friend would: warm to you,
-> harsh to the trap, and honest about everything.
-
----
-
-## Beat 3 · You always choose the happiest path (band)
-
-`[IMAGE — "the morning overlook" · EXISTS (painted-morning-overlook) · enters
-from the LEFT · ~60vw]`
+`[IMAGE — "the morning overlook" · EXISTS · still, ~60vw]`
 
 > ## You always choose what seems happiest.
 >
-> Every person does, every time. That is not the problem. The problem is that
-> a trap lies about the math: it takes credit for relief it never gave, and
-> hides what it costs. While the lie stands, the trap keeps winning the choice.
+> Everyone does, every time. The behavior you want rid of is winning that
+> choice because of what you believe it gives you, and beliefs can be wrong
+> about the math: crediting relief they never provided, hiding what they
+> cost. While the belief stands, it keeps winning.
 
 ---
 
-## Beat 4 · Understanding opens the cage (canvas)
+## Beat 4 · Understanding, not force (canvas)
 
-`[IMAGE — "the open cage, painted" · NEW painting · enters from the RIGHT · ~60vw]`
-*The birdcage returns, but painted in the warm style and already resolved: door
-open, cage empty, the bird perched free on a sunlit windowsill nearby. The
-feeling: it lets go of you.*
+`[IMAGE — "the open cage, painted" · NEW painting · still, ~60vw]`
 
-> ## When you see it clearly, it lets go.
+> ## Understanding does what willpower cannot.
 >
-> No fighting. No counting days. When you understand where the pull actually
-> comes from, and what it actually delivers, the belief that held you simply
-> stops making sense. Escape is not something you force. It is something you see.
+> When you see where the pull comes from and what it actually delivers, the
+> belief corrects itself, and the behavior follows on its own. No fighting,
+> no counting days. That is the entire method: how it works, described well
+> enough to feel.
 
 ---
 
-## Beat 5 · Walking out feels like relief (band)
+## Beat 5 · What it is like after (band)
 
-`[IMAGE — "the riverside glide" · EXISTS (painted-riverside-glide) · enters from
-the LEFT · ~60vw]`
+`[IMAGE — "the riverside glide" · EXISTS · still, ~60vw]`
 
-> ## Walking out feels like relief.
+> ## Afterwards it feels like relief.
 >
-> Not sacrifice. Not deprivation. The morning you stop believing the lie,
-> there is nothing left to give up.
+> Not sacrifice. Once the belief is gone, there is nothing to give up.
 
-*Centered beneath, the section's only button:*
+*Centered beneath, one button:*
 
 > *button:* How it works
 
@@ -112,28 +102,37 @@ the LEFT · ~60vw]`
 
 ## The library (canvas)
 
-> ## Choose your trap.
+> ## The books.
 >
-> Every book takes one trap apart, calmly and completely. Free to read,
-> download, or listen to, in every language we have reached so far.
+> Each one takes a single behavior apart: where the pull comes from, what it
+> actually gives you, what it costs. Free to read, download, or listen to.
 
-*The full cover row/grid: titled covers, hologram hover, status tags where a
-book is being written. Under it:*
+*The grid of titled covers, hologram hover. Under it:*
 
-> *link:* Browse all books
+> *link:* All books
 
-## The living library (band)
+## The marquee (band) — the experience band
 
-*Three quiet columns, mono facts, hairlines:*
+*A single horizontal band drifting slowly and lazily (60s+ loop, pauses on
+hover, static under reduced motion): short reader lines, anonymous, in quiet
+quotes, mock data for now (clearly flagged in code):*
+
+> "Three weeks after reading it, I realized I hadn't thought about it in days." · "The chapter on boredom was the one that did it." · "I did not quit. It quit me." · "I read it twice. The second time was for my brother." · ...
+
+*Beneath the band, one plain line, centered:*
+
+> Everything here is free, in every language we can reach, with no accounts
+> and no tracking. The goal is only to help as many people as possible.
+
+## The living library (canvas, three quiet columns)
 
 > **Living books.** Readers improve every book. Versions are public, and the
 > newest version is always the one you get.
 
-> **The next book is chosen by you.** [top three vote-leaders, live from the
-> request board, each with its count] *button:* Add your voice
+> **The next book is chosen by you.** [top three vote-leaders with counts]
+> *button:* Add your voice
 
-> **What readers walked out of.** [two short anonymous experience excerpts]
-> *link:* Read experiences
+> **Experiences.** [one excerpt] *link:* Read more
 
 ## Footer
 
