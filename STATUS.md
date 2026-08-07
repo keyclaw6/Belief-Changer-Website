@@ -38,6 +38,16 @@ Spine + back textures derived for all 10 (`derived/`), exact ground hexes and
 contrast-correct overlay inks in `covers-manifest.json`. With-text typography proofs
 in `proofs/`.
 
+**Website v1 front end — `site/` (Phase 4, built 2026-08-07)**
+TanStack Start + TS + Tailwind v4 (restyled shadcn), SSR everywhere, en/da/ar with
+full RTL, every SITE-PLAN route: home (locked beat order, static ShelfStage), library
+with finder, book page with changelog tab + anonymous improve form, reader with
+comfort modes, request and experience boards, blog, how-it-works, about, privacy,
+flicker 404 (misprinted-park painting). Self-hosted fonts, DESIGN.md tokens,
+production imagery via `skills/site-imagery/`, measurement stub + `docs/MEASUREMENT.md`.
+Gates: taste-skill §14, both themes, RTL, reduced motion, zero console errors,
+build + typecheck clean. Name locked: **Belief Changer**.
+
 ## In production (separate agent, running now)
 
 **The 3D book asset** — a dedicated agent is building the photoreal hardcover:
@@ -51,19 +61,17 @@ harness + README + ACCEPTANCE.md). Architecture rationale:
 
 ## Next (in order)
 
-1. **QA + integrate the book asset** when its package lands (check against its
-   ACCEPTANCE.md; wire `assets/covers/covers-manifest.json` into its Book API).
-2. **Author `prompts/BOOKSHELF-BRIEF.md`** — the Three.js shelf experience where the
-   books are browsed (continuous shelf, wheel/keys/markers navigation, click into a
-   deterministic detail view, page-turn preview), consuming the book package's API
-   and the covers manifest. Progressive enhancement: static cover row fallback
-   (reduced-motion / no-WebGL).
-3. **Full-site plan** — information architecture and page briefs for the whole site
-   (home, finder, library, book page, reader, audio, request board, about/changelog),
-   multilingual + RTL + SEO (every chapter server-rendered and indexable; no signup,
-   no tracking), plus the image-generation plan: which photographic assets each page
-   needs, produced with gpt-image-2 following `skills/cover-generation/SKILL.md` patterns.
-4. **Build.**
+1. **QA the book asset** when its package lands (check against its ACCEPTANCE.md).
+2. **Fire the shelf agent**: hand a fresh Opus agent the book package + this repo +
+   `prompts/BOOKSHELF-BRIEF.md` (v2, integration-ready). It builds the shelf module
+   and integrates it into the homepage hero by upgrading `<ShelfStage />` in place.
+3. **Owner review + iteration** of the v1 site on rendered evidence, one decision at
+   a time. Open items: final hero composition (with the 3D shelf), logo decision,
+   privacy-page data controller entity + public contact channel, domain acquisition
+   (beliefchanger.com is registered to a third party, GoDaddy, expires 2028-06;
+   beliefchanger.net is unregistered).
+4. **Backend phase** (deliberately later): implement `docs/MEASUREMENT.md` and the
+   POST contracts in `docs/SITE-PLAN.md` (feedback, requests, votes, experiences).
 
 ## Fixed laws (from VISION.md — the site serves these)
 

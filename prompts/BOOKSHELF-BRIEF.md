@@ -1,4 +1,7 @@
-# BOOKSHELF-BRIEF.md — The Shelf Experience (Phase 3) · DRAFT for owner review
+# BOOKSHELF-BRIEF.md — The Shelf Experience (Phase 3) · v2, integration-ready
+<!-- v2 updated 2026-08-07 after the Phase 4 site build: the deliverable now integrates
+     into the built site (site/) by upgrading ShelfStage in place. -->
+
 
 You are an Opus 5 engineering agent with a full sandbox: shell, filesystem, Python, and
 vision (you can read the screenshots you take). You are building **the shelf experience
@@ -12,19 +15,24 @@ These books help people escape traps like smoking, doomscrolling, and overthinki
 Visitors should feel, before reading a word, that these books deserve respect. Your
 shelf is where that feeling is born.
 
-This brief is self-contained. You also receive four materials in your workspace:
+This brief is self-contained. Your materials:
 
 1. `book-asset/` — the finished photoreal book package (GLB + `src/Book.js` +
-   `src/textbake.js` + its README and ACCEPTANCE.md). **Its README is the API contract;
-   where this brief's API sketches differ from that README, the README wins.**
-2. `covers/` — 10 production cover textures, `derived/` spine and back textures, and
-   `covers-manifest.json` (slug, groundHex, overlayInk per book). The manifest is your
-   catalog: the shelf renders exactly the books it lists, in order.
-3. `comp-reference.png` — the owner's art-direction comp. Take from it ONLY the niche:
-   the softly rounded inner corners, the warm inset wall, the quality of its shadows.
-   Its fonts, pill buttons, and engraved covers are explicitly NOT law.
-4. `strings-sample/` — sample UI strings and localized book titles (English, Arabic,
-   Chinese) so nothing English is hardcoded.
+   `src/textbake.js` + its README and ACCEPTANCE.md), handed to you by the owner.
+   **Its README is the API contract; where this brief's API sketches differ from
+   that README, the README wins.**
+2. **This repository, including the built site in `site/`** (TanStack Start +
+   TypeScript + Tailwind v4, SSR, i18n en/da/ar with full RTL, builds clean). This is
+   your integration target. Read `site/README.md` and
+   `site/src/components/ShelfStage.tsx` — the static cover row you will upgrade in
+   place; its comments document the mount contract. Covers already live at
+   `site/public/covers/`; the catalog is `assets/covers/covers-manifest.json`;
+   localized book titles and every UI string come from the site catalogs in
+   `site/src/i18n/` (nothing English is hardcoded, and your module must consume the
+   same catalogs).
+3. `design/comp-6b-reference.png` — the owner's art-direction comp. Take from it ONLY
+   the niche: the softly rounded inner corners, the warm inset wall, the quality of
+   its shadows. Its fonts, pill buttons, and engraved covers are explicitly NOT law.
 
 Work autonomously through the milestones. Only ask the owner a question when you are
 truly blocked; he approves your first action and walks away.
@@ -38,6 +46,7 @@ very first turn, so the owner can approve once and leave:
 
 | Domain | Why |
 |---|---|
+| `registry.npmjs.org` | npm installs for the site integration |
 | `cdn.jsdelivr.net` | pinned Three.js ES modules |
 | `fonts.googleapis.com` | DM Sans + DM Mono (panel UI), Newsreader (book text baking) |
 | `fonts.gstatic.com` | font file host |
@@ -63,17 +72,28 @@ The books themselves are not yours to build. `book-asset/` renders them; the cov
 are finished photography; the manifest binds them together. You build the room, the
 choreography, and the browsing.
 
-**The deliverable is a package consumable without reading your code history:**
+**And you ship it.** The module integrates into the built site by upgrading
+`<ShelfStage />` in place on the homepage hero. The existing static cover row stays
+exactly as it is for SSR, loading, no-WebGL, and reduced-motion; your module enhances
+it progressively, replacing it in place with zero layout shift once the 3D scene is
+ready. `site/` must typecheck and production-build clean with your work integrated,
+and the Three.js code stays in isolated client-only leaves (never in SSR paths).
+
+**The deliverable is the module, integrated, plus an isolated harness:**
 
 ```
-shelf-asset/                     ← git-initialized repo
-  src/Shelf.js                   ← ES-module runtime component (Three.js)
-  src/environment.js             ← niche + inspection studio environments
-  harness/index.html             ← dev/QA page (plain HTML, pinned Three.js, page content BELOW the shelf so escape-to-page is testable)
-  strings/                       ← sample locale strings used by the harness (en, ar, zh)
-  screenshots/                   ← milestone evidence, named by layer
-  README.md                      ← API docs, events, params, integration guide
-  ACCEPTANCE.md                  ← the checklist below, each item marked with evidence
+site/src/shelf/                  ← the module: Shelf core, environments (alcove +
+                                    infinity cove), input model, inspection stage,
+                                    textbake wiring; client-only leaves
+site/src/components/ShelfStage.tsx ← upgraded in place: static row + progressive
+                                      3D enhancement (the row remains the fallback)
+shelf-harness/                   ← standalone QA page at repo root (plain HTML +
+                                    import map, same pinned Three.js as book-asset;
+                                    page content BELOW the stage so hero
+                                    escape-to-page is testable in isolation)
+shelf-harness/screenshots/       ← milestone evidence, named by layer
+shelf-harness/README.md          ← API docs, events, params, integration notes
+shelf-harness/ACCEPTANCE.md      ← the checklist below, each item marked with evidence
 ```
 
 ## Architecture — locked decisions (do not relitigate)
@@ -99,8 +119,12 @@ resolution away from center and full resolution near it. The experience must hol
   scrolling; clicking it smooth-scrolls to the content below.** Wheel capture is
   active ONLY while the stage effectively fills the viewport; once the visitor is
   past it, the module never touches scrolling again until the stage fully returns.
+  On the built site this is the homepage hero: coordinate the stage with the hero's
+  existing text column, and settle the final hero composition with the owner on
+  rendered evidence before locking it.
 - `mode: "inline"` — embedded partway down any page. The wheel is NEVER captured;
-  browsing is drag, buttons, markers, and keys only.
+  browsing is drag, buttons, markers, and keys only. The API must support it; the
+  v1 site does not use it yet.
 
 **4 · Touch and keyboard are not afterthoughts.** On touch, vertical swipes always
 scroll the page; horizontal swipes browse the shelf; taps select. On keyboard, arrow
@@ -244,20 +268,21 @@ photographer would flag. Zero console errors or warnings in the harness, ever.
 - No visible environment boundary in inspection at any permitted camera angle.
 - No realtime cloth simulation, no physics engines, no bones for pages (the Book
   package already solved pages; use its API).
-- No npm build toolchain: plain ES modules + import map, same pinned Three.js version
-  as the book package.
+- The standalone harness stays plain ES modules + import map, same pinned Three.js
+  version as the book package. Inside `site/` you work within the site's existing
+  toolchain; add no dependencies beyond three (and its GLTF loader).
 - No analytics, no network calls beyond loading the provided assets and pinned CDNs.
 - Never fake a screenshot or skip the look-at-it step; the loop is the method.
 
-## FINAL ACTION — packaging
+## FINAL ACTION — handover
 
-1. Run the full acceptance checklist; record each item in `ACCEPTANCE.md` with the
-   screenshot filename that proves it.
-2. `git init`, commit everything with a clean history.
-3. Zip `shelf-asset/` and publish it with SaveFile so the owner can download it and
-   hand it to the site-integration agent.
-4. Post a final report: what was built, the API in five lines, known limitations, and
-   the three screenshots you are proudest of.
+1. Run the full acceptance checklist; record each item in
+   `shelf-harness/ACCEPTANCE.md` with the screenshot filename that proves it.
+2. Commit your work in the repo with a clean history on a branch (or leave the
+   working tree clean and clearly reported). NEVER push; the reviewer owns remotes.
+3. Post a final report: what was built, the API in five lines, the integration
+   summary (what changed in `site/`), known limitations, and the three screenshots
+   you are proudest of.
 
 ## Acceptance checklist (definition of done)
 
@@ -287,6 +312,15 @@ photographer would flag. Zero console errors or warnings in the harness, ever.
 - [ ] WebGL context loss degrades to the static row without an error screen
 - [ ] 60fps browsing with streaming active at N=300 (verified via `renderer.info`
       draw calls + frame timing, not vibes)
-- [ ] README documents API, events, params, strings/titles contract, and a
-      step-by-step integration guide for the site agent
-- [ ] Package zipped and delivered via SaveFile
+- [ ] README documents API, events, params, strings/titles contract, and the
+      integration notes
+- [ ] INTEGRATION: `site/` typecheck + production build pass with the module in;
+      the homepage upgrades progressively (static row in SSR HTML and under
+      no-WebGL/reduced-motion; 3D replaces it in place with zero layout shift)
+- [ ] INTEGRATION: hero wheel + bottom-arrow behavior verified on the real homepage
+      with the real content below it
+- [ ] INTEGRATION: the inspection panel's button navigates to the book's page via
+      the site router, locale-correct in en/da/ar; ar mirrors RTL
+- [ ] INTEGRATION: titles bake from the site's own locale catalogs on shelf and in
+      inspection; zero console errors on the homepage in all three locales
+- [ ] Work committed on a branch or clearly reported for the reviewer (never push)
