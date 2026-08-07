@@ -47,6 +47,22 @@ export function Reader({
   const next = book.chapters.find((c) => c.n === chapter.n + 1)
   const hasBody = Boolean(chapter.body && chapter.body.length > 0)
 
+  // Chapter-end states (05-reader). The next chapter is only a real "next" when
+  // it has a body; a next chapter without a body means the book continues but is
+  // still being written. The highest chapter with a body is the last readable.
+  const nextReadable = next && next.body && next.body.length > 0 ? next : undefined
+  const lastReadableN = Math.max(
+    ...book.chapters.filter((c) => c.body && c.body.length).map((c) => c.n),
+    0,
+  )
+  const isLastReadable = hasBody && chapter.n === lastReadableN
+  const bookFullyWritten = book.chapters.every((c) => c.body && c.body.length > 0)
+  // End of a finished book: the last chapter of a book where every chapter is
+  // written. End of the written part of a living book: the last readable
+  // chapter of a book that still has unwritten chapters after it.
+  const atBookEnd = isLastReadable && chapter.n === total && bookFullyWritten
+  const atWrittenEnd = isLastReadable && !atBookEnd
+
   // Comfort mode. Before mount we render a stable default ('light') to avoid an
   // SSR mismatch, then adopt the saved choice (or fall back to the active site
   // theme so a dark-theme reader opens dark).
@@ -197,7 +213,57 @@ export function Reader({
           <BeingWritten book={book} locale={locale} t={t} />
         )}
 
-        {/* Chapter navigation: ink links, prev / next. */}
+        {/* End-of-book: a calm page of its own for a finished book's last
+            chapter (05-reader). */}
+        {atBookEnd ? (
+          <div className="mt-14 border-t pt-10" style={{ borderColor: 'var(--rs-rule)' }}>
+            <p
+              style={{
+                fontFamily: 'var(--font-reader)',
+                fontSize: 'clamp(22px, 2.6vw, 28px)',
+                lineHeight: 1.3,
+                color: 'var(--rs-ink)',
+              }}
+            >
+              {t.reader.finishedTitle}
+            </p>
+            <p
+              className="mt-4 max-w-[60ch]"
+              style={{ color: 'var(--rs-ink-2)', fontSize: 'var(--text-body-lg)', lineHeight: 1.6 }}
+            >
+              {t.reader.finishedBody}
+            </p>
+            <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3">
+              <Link
+                to={localePath(locale, `/books/${book.slug}`)}
+                className="inline-flex items-center rounded-sm px-5 py-3 type-ui-sm font-semibold no-underline"
+                style={{ backgroundColor: 'var(--rs-ink)', color: 'var(--rs-bg)' }}
+              >
+                {t.reader.finishedBackToBook}
+              </Link>
+              <Link
+                to={localePath(locale, '/experiences')}
+                className="type-ui-sm font-medium underline underline-offset-[3px] decoration-1"
+                style={{ color: 'var(--rs-ink)' }}
+              >
+                {t.reader.finishedShare}
+              </Link>
+            </div>
+          </div>
+        ) : atWrittenEnd ? (
+          // End of the written part of a living book: a quiet note.
+          <div className="mt-14 border-t pt-8" style={{ borderColor: 'var(--rs-rule)' }}>
+            <p
+              className="max-w-[60ch]"
+              style={{ color: 'var(--rs-ink-2)', fontSize: 'var(--text-body-lg)', lineHeight: 1.6 }}
+            >
+              {t.reader.lastAvailable}
+            </p>
+          </div>
+        ) : null}
+
+        {/* Chapter navigation: ink links, prev / next. Next only links to a
+            readable chapter; an unwritten next is covered by the note above. */}
         <nav
           aria-label={t.reader.contents}
           className="mt-16 flex items-center justify-between gap-4 border-t pt-8"
@@ -215,9 +281,9 @@ export function Reader({
           ) : (
             <span />
           )}
-          {next ? (
+          {nextReadable ? (
             <Link
-              to={localePath(locale, `/books/${book.slug}/read/${next.n}`)}
+              to={localePath(locale, `/books/${book.slug}/read/${nextReadable.n}`)}
               className="inline-flex max-w-[45%] items-center gap-2 no-underline"
               style={{ color: 'var(--rs-ink)', fontSize: 'var(--text-ui-sm)', fontWeight: 500 }}
             >

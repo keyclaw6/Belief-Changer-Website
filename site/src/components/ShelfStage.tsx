@@ -3,6 +3,7 @@ import type { Book } from '~/data/types'
 import type { Locale } from '~/i18n/config'
 import { localePath } from '~/i18n/routing'
 import { BookCover } from './BookCover'
+import { Hologram } from './Hologram'
 
 /**
  * ShelfStage: the hero asset (SITE-PLAN §Shelf slot contract, DESIGN.md
@@ -52,16 +53,17 @@ export function ShelfStage({
           key={book.slug}
           to={localePath(locale, `/books/${book.slug}`)}
           aria-label={book.title}
-          className="group block w-[20%] max-w-[152px] shrink-0 no-underline sm:w-[22%]"
+          className="block w-[21%] max-w-[168px] shrink-0 no-underline sm:w-[23%]"
           style={{ height: HEIGHTS[i % HEIGHTS.length] }}
         >
-          <span className="block transition-transform duration-200 group-hover:-translate-y-1 motion-reduce:transform-none">
+          {/* Hologram hover: this is a browsable list of covers. */}
+          <Hologram className="h-full">
             <BookCover
               book={book}
               priority={i < 4}
-              sizes="(max-width: 640px) 22vw, 152px"
+              sizes="(max-width: 640px) 23vw, 168px"
             />
-          </span>
+          </Hologram>
         </Link>
       ))}
     </div>

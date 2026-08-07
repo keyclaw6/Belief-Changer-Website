@@ -1,47 +1,48 @@
 import type { DeepPartial, Messages } from '../types'
 
 /**
- * Danish catalog, COMPLETE (Milestone 5).
+ * Danish catalog, COMPLETE. Every key in messages/en.ts is translated into
+ * natural, warm, idiomatic Danish, in the register: varm mod personen, hard mod
+ * faelden; sentence case; ingen udrabstegn; NUL tankestreger (kun bindestreger);
+ * ingen anglicismer hvor et naturligt dansk ord findes. Reads like a thoughtful
+ * Danish publisher, not machine translation.
  *
- * Every key in messages/en.ts is translated to natural, warm, idiomatic Danish.
- * The register carries over exactly: varm mod personen, hård mod fælden;
- * sentence case; ingen udråbstegn; NUL tankestreger (em-dashes) i synlig tekst,
- * kun bindestreger; ingen anglicismer hvor et naturligt dansk ord findes. The
- * tone should read like a thoughtful Danish publisher, not machine translation.
- *
- * Book TITLES are not translated here: they come from the fixtures, not the
- * catalog, and stay in English for v1 (no invented Danish titles).
- *
- * Any key that were ever to be omitted falls back to English via the resolver
- * in messages/index.ts; this catalog is intended to be complete.
+ * Book TITLES are not translated here (they come from the fixtures, English for
+ * v1). The marquee reader lines stay English mock for now (flagged in
+ * src/data/marquee.ts) until real Danish anonymous lines exist.
  */
 export const da: DeepPartial<Messages> = {
-  // -- Brand -------------------------------------------------------------
   wordmark: 'Belief Changer',
 
-  // -- Navigation --------------------------------------------------------
   nav: {
-    library: 'Bibliotek',
+    books: 'Bøger',
     howItWorks: 'Sådan virker det',
+    experiences: 'Oplevelser',
+    notes: 'Noter',
+    about: 'Om',
     language: 'Sprog',
-    themeToDark: 'Mørk tilstand',
-    themeToLight: 'Lys tilstand',
+    menu: 'Menu',
+    lightsOff: 'Sluk lyset',
+    lightsOn: 'Tænd lyset',
     skipToContent: 'Spring til indhold',
   },
 
-  // -- Footer ------------------------------------------------------------
   footer: {
-    about: 'Om',
+    tagline: 'Gratis bøger, der ændrer troen bag adfærden.',
+    libraryHeading: 'Bibliotek',
+    communityHeading: 'Fællesskab',
+    smallPrintHeading: 'Det med småt',
+    books: 'Bøger',
     requestABook: 'Ønsk en bog',
     experiences: 'Oplevelser',
-    blog: 'Noter',
+    notes: 'Noter',
+    contribute: 'Bidrag',
+    about: 'Om',
     privacy: 'Privatliv',
     openSource: 'Åben kildekode',
-    navLabel: 'Websted',
     trustLine: 'Gratis for altid · ingen konti, ingen sporing',
   },
 
-  // -- Trust strip -------------------------------------------------------
   trust: {
     freeForever: 'Gratis for altid',
     noSignup: 'Ingen tilmelding',
@@ -49,119 +50,138 @@ export const da: DeepPartial<Messages> = {
     everyLanguage: 'Alle sprog',
   },
 
-  // -- Home --------------------------------------------------------------
   home: {
     heroHeadline: 'Det er ikke viljestyrke, du mangler. Det er vejen ud af en fælde.',
     heroSubtext:
-      'Gratis bøger, der ændrer troen bag adfærden. På dit sprog. Ingen tilmelding, ingen udgift, ingen hage.',
-    askPlaceholder: 'Fortæl os, hvad du går igennem...',
+      'Gratis bøger, der ændrer troen bag adfærden. På dit sprog, gratis for altid, ingen tilmelding, ingen hage ved det.',
+    askPlaceholder: 'Fortæl os, hvad du gennemgår...',
     primaryCta: 'Find din bog',
+    askFieldLabel: 'Fortæl os, hvad du gennemgår',
+    exampleScrolling: 'scrolling',
+    exampleSugar: 'sukker',
+    exampleSmoking: 'rygning',
+    exampleOverthinking: 'grublerier',
+    exampleAlcohol: 'alkohol',
+    exampleMore: 'mere',
+    examplesLabel: 'Prøv en af disse',
 
-    reframe: {
-      sentence1: 'Du vælger altid det, du tror er din lykkeligste mulighed.',
-      sentence2:
-        'En fælde er en tro, der lyver om regnestykket, den lover lindring og leverer det modsatte.',
-      sentence3:
-        'Disse bøger retter troen, og adfærden følger med af sig selv.',
-    },
+    beat1Title: 'Du har prøvet at rette adfærden.',
+    beat1Body:
+      'At stoppe. At skære ned. At slette appen, hælde det ud, love dig selv. Det er at arbejde på adfærden. Men adfærd følger grunde, og grundene lever i det, du tror, tingen gør for dig. Lad troen stå, og adfærden vokser frem igen.',
+    beat1ImageAlt:
+      'En person standset på en aftengade, telefonen et blødt skær i hånden, varme vinduer ovenover',
 
-    method: {
-      beat1Title: 'Se fælden tydeligt',
-      beat1Body:
-        'Enhver fælde kører på en tro: at tingen hjælper dig. Hver bog skiller den tro ad, roligt og fuldstændigt.',
-      beat2Title: 'Troen mister sit greb',
-      beat2Body:
-        'Når du ser, hvad fælden faktisk giver, og hvad den faktisk koster, har trangen ikke længere noget at stå på.',
-      beat3Title: 'At gå ud føles som lettelse',
-      beat3Body:
-        'Ingen viljestyrke, ingen optælling af dage. Når troen ændrer sig, holder det op med at være et offer at gå og bliver i stedet en flugt.',
-    },
+    beat2Title: 'Skam hjælper aldrig.',
+    beat2Body:
+      'Ikke fra andre, ikke fra dig selv. Skam skubber det hele ind i mørket, og i mørket vokser det. Forståelse virker i det åbne. Disse bøger går ud fra, at du er intelligent og bare aldrig fik vist, hvordan tro driver adfærd.',
+    beat2ImageAlt:
+      'To personer på en parkbænk i morgenlys, den ene lytter ordentligt',
 
-    livingBooksTitle: 'Levende bøger',
+    beat3Title: 'Du vælger altid det, der virker lykkeligst.',
+    beat3Body:
+      'Det gør alle, hver gang. Den adfærd, du vil af med, vinder det valg på grund af det, du tror, den giver dig, og troen kan tage fejl af regnestykket: den giver en lindring, den aldrig gav, og skjuler, hvad den koster. Så længe troen står, bliver den ved med at vinde.',
+    beat3ImageAlt:
+      'En person, der ser ud over et lyst morgenlandskab, vejen frem er klar',
+
+    beat4Title: 'Forståelse gør det, viljestyrke ikke kan.',
+    beat4Body:
+      'Når du ser, hvor trækket kommer fra, og hvad det faktisk giver, retter troen sig selv, og adfærden følger af sig selv. Ingen kamp, ingen dage at tælle. Det er hele metoden: hvordan det virker, beskrevet godt nok til at kunne mærkes.',
+    beat4ImageAlt:
+      'Et fuglebur i varmt lys, døren åben og buret tomt, fuglen sidder allerede på en solbeskinnet vindueskarm i nærheden',
+
+    beat5Title: 'Bagefter føles det som lettelse.',
+    beat5Body: 'Ikke som et offer. Når troen er væk, er der ikke noget at give afkald på.',
+    beat5ImageAlt: 'En roer, der glider langs en åben flodbred i frisk luft',
+    beat5Cta: 'Sådan virker det',
+
+    libraryTitle: 'Bøgerne.',
+    libraryBody:
+      'Hver enkelt skiller én adfærd ad: hvor trækket kommer fra, hvad den faktisk giver dig, hvad den koster. Gratis at læse, downloade eller lytte til.',
+    libraryLink: 'Alle bøger',
+
+    marqueeMission:
+      'Alt her er gratis, på alle de sprog vi kan nå, uden konti og uden sporing. Målet er kun at hjælpe så mange mennesker som muligt.',
+    marqueeLabel: 'Hvad læsere har sagt',
+
+    livingBooksTitle: 'Levende bøger.',
     livingBooksBody:
-      'Læserne forbedrer hver bog. Versionerne er offentlige. Den nyeste version er altid den, du får.',
-
-    requestHeading: 'Hvilken fælde skal vi skille ad som den næste?',
-    requestCta: 'Læg din stemme til',
-
-    experiencesHeading: 'Det læserne gik ud af',
-
-    askFieldLabel: 'Fortæl os, hvad du går igennem',
-    methodHeading: 'Sådan foregår en flugt',
-    methodBody:
-      'Ingen viljestyrke, ingen optælling af dage. Hver bog skiller én tro ad, og adfærden følger med.',
-    livingBooksLink: 'Se biblioteket',
-    requestBody:
-      'Stem en bog til live. Nok stemmer, og den næste bliver skrevet.',
-    experiencesBody: 'Anonymt, ærligt og delt med tilladelse.',
-    experiencesLink: 'Læs flere oplevelser',
-    howItWorksLink: 'Sådan virker en ændret tro',
+      'Læsere forbedrer hver bog. Versionerne er offentlige, og den nyeste version er altid den, du får.',
+    nextBookTitle: 'Den næste bog vælges af dig.',
+    nextBookCta: 'Føj din stemme til',
+    livingExperiencesTitle: 'Oplevelser.',
+    livingExperiencesLink: 'Læs mere',
   },
 
-  // -- Statuses (pastel tags) -------------------------------------------
   status: {
     gatheringVoices: 'Samler stemmer',
-    beingWritten: 'Bliver skrevet',
+    beingWritten: 'Under skrivning',
     inTranslation: 'Under oversættelse',
     published: 'Udgivet',
     inProduction: 'Under produktion',
   },
 
-  // -- Library -----------------------------------------------------------
   library: {
-    title: 'Bibliotek',
-    intro: 'Hver bog vi har, og hver bog der er på vej.',
-    searchLabel: 'Find en bog',
-    searchPlaceholder: 'Søg efter vane eller følelse...',
-    noMatchTitle: 'Ingen bog passer på det endnu.',
+    title: 'Biblioteket',
+    intro:
+      'Hver bog skiller én fælde ad, indtil den ikke har mere at tilbyde dig. Gratis at læse, downloade og lytte til. Forbedret af læserne før dig.',
+    searchLabel: 'Find din bog',
+    searchPlaceholder: 'Fortæl os, hvad du gennemgår...',
+    chipsLabel: 'Eller start fra en af disse',
+    chipScrolling: 'Jeg kan ikke lade være med at scrolle',
+    chipSugar: 'Sukker har fat i mig',
+    chipSmoking: 'Jeg vil gerne stoppe med at ryge',
+    chipAlcohol: 'Jeg drikker mere, end jeg vil',
+    chipGaming: 'Gaming æder mine aftener',
+    chipOverthinking: 'Jeg overtænker alt',
+    noMatchTitle: 'Den bog har vi ikke skrevet endnu.',
     noMatchBody:
-      'Fortæl os, hvad du kæmper med, så bringer nok stemmer bogen til live.',
+      'Det er præcis sådan, biblioteket vokser. Fortæl os, hvad du kæmper med, og når nok stemmer beder om den, bliver bogen skrevet.',
     noMatchCta: 'Ønsk denne bog',
     resultsCount: '{count} bøger',
     resultsCountOne: '1 bog',
     clearSearch: 'Ryd',
     resultsFor: '{count} bøger for “{query}”',
     resultsForOne: '1 bog for “{query}”',
+    footStrip: 'Biblioteket vælges af sine læsere. Se, hvad der stemmes om som det næste.',
+    footStripLink: 'Ønsketavlen',
+    beingWritten: 'Under skrivning',
   },
 
-  // -- Book page ---------------------------------------------------------
   book: {
     readOnline: 'Læs online',
-    downloadEpub: 'Hent EPUB',
+    continueReading: 'Fortsæt læsningen',
+    downloadEpub: 'Download EPUB',
     listen: 'Lyt',
-    onlyNewestDownload: 'Kun den nyeste version kan hentes.',
+    onlyNewestDownload: 'Kun den nyeste version kan downloades.',
     versionLabel: 'Version {version} · {month}',
     versionLanguages: 'Version {version} · {count} sprog',
     versionLanguagesOne: 'Version {version} · 1 sprog',
     languagesCount: '{count} sprog',
-    notYetInLanguage: 'Ikke på dit sprog endnu',
+    languagesCountOne: '1 sprog',
+    improvedFromContributions: 'Forbedret af læsernes bidrag',
+    notYetInLanguage: 'Endnu ikke på dit sprog',
     changelogTab: 'Ændringslog',
     aboutTab: 'Om denne bog',
-    improvedFromContributions: 'Forbedret ud fra læsernes bidrag',
+    aboutBody:
+      'Som alle bøger her er også denne levende. Læsere fortæller os, hvor den mistede dem, og den næste version siger det bedre. Nedenfor kan du se præcis, hvad der blev ændret og hvornår, og kun den nyeste version tilbydes til download.',
     improveTitle: 'Hjælp den næste version',
-    improvePromptLostYou: 'Hvor mistede den dig?',
-    improvePromptBeliefStanding: 'Hvilken tro stod stadig tilbage?',
-    improvePromptWhatHappened: 'Hvad skete der for dig?',
-    improveFreeText: 'Alt andet, redaktørerne bør vide',
-    improveConsent: 'Du må gerne udgive dette som en anonym læseroplevelse.',
-    improveSubmit: 'Send til redaktørerne',
-    experiencesEmpty:
-      'Ingen oplevelser for denne bog endnu. Din kunne blive den første.',
-
-    experiencesHeading: 'Det læserne gik ud af denne bog',
-    versionHeading: 'En levende bog',
-    improveGuide:
-      'Konkrete, personlige noter på trosniveau former den næste version mest. Spørgsmålene er valgfri, svar på det, der passer.',
-    improveOptional: 'Valgfrit',
-    improveSuccessTitle: 'Tak. Redaktørerne læser alt.',
+    improveBody:
+      'Giv os gerne feedback. Har du en personlig oplevelse, du vil dele? Noget, der ikke føltes beskrevet godt nok til, at troen kunne ændre sig? Skriv det her, præcis som det kommer. Det lander hos redaktørerne, og det bedste af det former den næste version af denne bog.',
+    improvePlaceholder: 'Skriv det her, præcis som det kommer...',
+    improveFieldLabel: 'Din feedback',
+    improveSubmit: 'Send det',
     improveSuccessBody:
-      'De klareste og mest personlige noter former den næste version, og ændringsloggen holder styr på, hvad der blev ændret. Intet her er knyttet til dig.',
-    howItWorksCrosslink: 'Sådan virker en ændret tro',
-    languagesCountOne: '1 sprog',
+      'Tak. Hver version af denne bog findes, fordi nogen skrev i dette felt.',
+    experiencesHeading: 'Oplevelser med denne bog',
+    experiencesReadMore: 'Læs flere oplevelser',
+    experiencesShareYours: 'Del din',
+    experiencesEmpty: 'Ingen oplevelser med denne bog endnu. Din kunne være den første.',
+    crosslinkLead: 'Ny her? Forstå, hvorfor det virker, før du begynder.',
+    howItWorksCrosslink: 'Sådan virker det',
     notPublishedYet: 'Denne bog er på vej.',
+    versionHeading: 'En levende bog',
   },
 
-  // -- Reader ------------------------------------------------------------
   reader: {
     prev: 'Forrige kapitel',
     next: 'Næste kapitel',
@@ -173,191 +193,250 @@ export const da: DeepPartial<Messages> = {
     comfortLabel: 'Læsekomfort',
     chaptersLabel: 'Kapitler',
     contents: 'Indhold',
-    beingWrittenTitle: 'Dette kapitel bliver stadig skrevet.',
+    beingWrittenTitle: 'Dette kapitel skrives stadig.',
     beingWrittenBody:
-      'Denne bog er en levende bog. Kapitlerne lægges op, efterhånden som de bliver færdige, og alle læsere får den nyeste version.',
-    beingWrittenCta: 'Se hvad der blev ændret',
+      'Denne bog er en levende bog. Kapitlerne kommer op, efterhånden som de bliver færdige, og hver læser får den nyeste version.',
+    beingWrittenCta: 'Se, hvad der blev ændret',
+    lastAvailable:
+      'Så langt når bogen i dag. Den bliver skrevet i det åbne, og nye kapitler dukker op her i det øjeblik, de er klar.',
+    finishedTitle: 'Du læste bogen færdig.',
+    finishedBody:
+      'Hvis noget i dig har flyttet sig, ved du det allerede. Vil du hjælpe den næste læser, er to minutter i feedbackfeltet på bogens side mere værd, end du tror.',
+    finishedBackToBook: 'Tilbage til bogen',
+    finishedShare: 'Del en oplevelse',
   },
 
-  // -- Requests board ----------------------------------------------------
   requests: {
     title: 'Hvilken fælde skal vi skille ad som den næste?',
-    intro: 'Stem den næste bog til live. Ingen konto, ingen udgift.',
-    loopExplainer:
-      'Hvert emne nedenfor er en bog, som nogen har bedt om. Når nok stemmer samler sig om ét af dem, bliver bogen skrevet, og alle får den gratis. At stemme tager ét tryk og kræver intet af dig.',
-    rankedHeading: 'Det læserne har bedt om',
-    addYourVoice: 'Læg din stemme til',
-    voted: 'Stemme lagt til',
-    voteAria: 'Læg din stemme til “{subject}”',
-    votedAria: 'Du lagde din stemme til “{subject}”',
-    voteCount: '{count} stemmer',
-    voteCountOne: '1 stemme',
-    readTheBook: 'Læs bogen',
+    intro:
+      'Biblioteket vokser der, hvor der er brug for det. Bed om den bog, du ønskede fandtes, føj din stemme til en, der allerede er bedt om, og når nok stemmer samler sig, bliver bogen skrevet. Når den udgives, dukker den op lige her.',
+    rankedHeading: 'Hvad læsere har bedt om',
+    addYourVoice: 'Føj din stemme til',
+    voted: 'Din stemme tæller med',
+    voteAria: 'Føj din stemme til “{subject}”',
+    votedAria: 'Du føjede din stemme til “{subject}”',
+    voiceCount: '{count} stemmer',
+    voiceCountOne: '1 stemme',
+    readIt: 'Læs den',
     rankLabel: 'Placering',
-    submitTitle: 'Ønsk en bog',
+    submitTitle: 'Bed om en bog, vi ikke har skrevet',
     submitBody:
-      'Sæt ord på fælden med dine egne. Er den ikke allerede på listen, tilføjer vi den, så andre også kan lægge deres stemme til.',
-    submitSubjectLabel: 'Hvad kæmper du med?',
-    submitSubjectHelp: 'En kort linje i første person virker bedst, ligesom dem ovenfor.',
-    submitSubjectPlaceholder: 'Jeg kan ikke lade være med at...',
-    submitExperienceLabel: 'Hvordan det er, med dine egne ord',
-    submitExperienceOptional: 'Valgfrit',
-    submitExperiencePlaceholder:
-      'Alt du har lyst til at sige om, hvordan det føles, eller hvad du har prøvet.',
-    submitCta: 'Send dit ønske',
-    submitSuccessTitle: 'Din stemme tæller med.',
+      'Beskriv fælden med dine egne ord. Vil du, så sig lidt om, hvordan den er indefra, det hjælper bogen med at blive skrevet mere sandt.',
+    submitFieldLabel: 'Beskriv fælden',
+    submitPlaceholder: 'Jeg kan ikke lade være med...',
+    submitCta: 'Bed om den',
     submitSuccessBody:
-      'Når nok stemmer samler sig om et emne, bliver bogen skrevet og lagt op gratis til alle. Intet her er knyttet til dig.',
-    submitAnother: 'Ønsk en bog mere',
+      'Bedt om. I det øjeblik nok stemmer slutter sig til din, går bogen i skrivning, og denne tavle vil vise den.',
+    submitAnother: 'Bed om en til',
   },
 
-  // -- Experiences board -------------------------------------------------
   experiences: {
-    title: 'Det læserne gik ud af',
-    intro: 'Anonymt, ærligt og delt med tilladelse.',
-    lede:
-      'Dette er noter fra folk, der har læst en af bøgerne og gerne ville fortælle, hvad der ændrede sig. Hver eneste er anonym og delt med tilladelse. Ingen navne, ingen tal, ingen datoer finere end en måned.',
+    title: 'Det, læsere gik ud af',
+    intro:
+      'Hver historie her er anonym og virkelig. Ingen bliver betalt, ingen bliver nævnt, og intet er overdrevet, det ville være den gamle verdens måde at sælge på. Det er bare, hvad folk siger, efter en fælde har sluppet dem.',
+    homeStripBody: 'Anonymt, virkeligt og stille delt. Sådan lyder den anden side.',
     filterLabel: 'Vis oplevelser for',
     filterAll: 'Alle bøger',
     listHeading: 'Læseroplevelser',
     countAll: '{count} oplevelser',
     countAllOne: '1 oplevelse',
-    countForBook: '{count} oplevelser af {book}',
-    countForBookOne: '1 oplevelse af {book}',
-    emptyFiltered:
-      'Ingen oplevelser af {book} endnu. Din kunne blive den første.',
-    empty: 'Ingen oplevelser endnu. Din kunne blive den første.',
+    countForBook: '{count} oplevelser med {book}',
+    countForBookOne: '1 oplevelse med {book}',
+    emptyFiltered: 'Ingen oplevelser med denne bog endnu. Din kunne være den første.',
+    empty: 'Ingen oplevelser endnu. Din kunne være den første.',
     clearFilter: 'Vis alle bøger',
     monthLabel: '{month}',
     aboutBook: 'Om {book}',
-    submitTitle: 'Del hvad der skete',
+    submitTitle: 'Del, hvad der ændrede sig',
     submitBody:
-      'Hvis en af bøgerne ændrede noget for dig, kan du fortælle det her. Det udgives anonymt, uden navn og uden nogen måde at spore det tilbage til dig.',
-    submitBookLabel: 'Hvilken bog',
+      'Hvis en af bøgerne hjalp dig ud af noget, er det at fortælle det her det mest gavmilde, du kan gøre for den næste, der stadig sidder fast. Nogle få ærlige linjer er nok. Intet navn, ingen konto, helt anonymt.',
+    submitBookLabel: 'Hvilken bog?',
     submitBookPlaceholder: 'Vælg en bog',
-    submitTextLabel: 'Hvad skete der for dig?',
-    submitTextPlaceholder:
-      'Hvad der flyttede sig, hvad der overraskede dig, hvordan det er nu.',
-    submitConsentLabel:
-      'Udgiv dette anonymt som en læseroplevelse. Uden navn, uden konto, uden nogen måde at spore det til dig.',
-    submitCta: 'Del anonymt',
-    submitSuccessTitle: 'Tak fordi du delte.',
+    submitTextLabel: 'Hvad ændrede sig',
+    submitTextPlaceholder: 'Nogle få ærlige linjer om, hvad der flyttede sig.',
+    submitCta: 'Del det',
     submitSuccessBody:
-      'Hver oplevelse går gennem et stille gennemsyn, før den lægges op, så andre, der læser i et lavt øjeblik, møder noget ærligt. Intet her er knyttet til dig.',
-    submitAnother: 'Del en mere',
-    consentRequired: 'Bekræft venligst, at du ønsker dette udgivet anonymt.',
-    bookRequired: 'Vælg venligst, hvilken bog dette handler om.',
-    imageAlt: 'Mennesker der går sammen i friskt lys efter regn',
+      'Tak. En, der er midt i sin værste aften, læser dette en dag og bliver ved.',
+    submitAnother: 'Del en til',
+    bookRequired: 'Vælg venligst, hvilken bog det handler om.',
+    imageAlt: 'Mennesker, der går sammen i frisk lys efter regn',
   },
 
-  // -- Blog --------------------------------------------------------------
   blog: {
-    title: 'Noter',
-    intro: 'Nyt fra biblioteket, og hvordan bøgerne bliver bedre.',
+    title: 'Noter fra biblioteket',
+    intro:
+      'Hvad vi bygger, hvad der blev ændret, og hvad vi lærer af læserne. Skrevet ligefremt, dateret ærligt.',
     readMore: 'Læs noten',
     readAria: 'Læs: {title}',
     backToNotes: 'Alle noter',
     postedLabel: 'Skrevet {month}',
-    imageAlt: 'En drage højt oppe på en klar himmel på en lys, åben dag',
+    contributeLead: 'Vil du hjælpe med at bygge dette? Vi leder efter nogle få dedikerede mennesker.',
+    contributeLink: 'Bidrag',
+    imageAlt: 'En drage højt på en klar himmel en lys, åben dag',
   },
 
-  // -- How it works (method page) ---------------------------------------
+  contribute: {
+    title: 'Hjælp med at bygge vejen ud',
+    body1:
+      'Målet med dette projekt er pinligt enkelt: at hjælpe så mange mennesker som muligt ud af de fælder, der stille æder deres liv. Biblioteket er gratis, bøgerne forbedres af deres læsere, og næsten alt drives af AI-agenter, så det kan skalere til hver fælde og hvert sprog.',
+    body2:
+      'Men et projekt som dette hviler stadig på nogle få dedikerede mennesker. Ikke mange. Nogle få, der læste noget her og mærkede det, og som vil bruge rigtige timer på at gøre vejen ud bedre.',
+    rolesHeading: 'Sådan ser det ud lige nu:',
+    role1:
+      'Vedligeholdere og udviklere, til at bygge og styrke siden og den pipeline, der skriver, oversætter og udgiver bøgerne.',
+    role2:
+      'Modersmålslæsere, til at gennemgå oversættelser, så en bog på dansk eller arabisk læses, som var den skrevet der, ikke sendt dertil.',
+    role3:
+      'Stille moderatorer, til at læse det, folk sender ind, med omhu og give det sandeste videre til redaktørerne.',
+    body3:
+      'Der er ingen løn endnu, og det vil vi ikke lade som om. Der er meningsfuldt arbejde, gjort i det åbne, som lever længere end ethvert feed, du nogensinde har scrollet.',
+    body4:
+      'Hvis det er dig, så skriv til os eller åbn kodelageret og præsentér dig selv. Dedikation betyder mere end kvalifikationer her.',
+    repoCta: 'Åbn kodelageret',
+    mailtoLink: 'Skriv til os',
+    imageAlt: 'To personer på en parkbænk i morgenlys, den ene lytter ordentligt',
+  },
+
   howItWorks: {
-    title: 'Sådan virker en ændret tro',
+    title: 'Sådan virker forandring af tro',
     lede:
-      'Ingen viljestyrke, ingen skam, ingen optælling af dage. Hver bog her hviler på én enkel tanke, og den er værd at forstå, før du læser et ord.',
-    principleHeading: 'Du vælger altid din lykkeligste mulighed',
-    principleBody:
-      'I ethvert øjeblik gør du det, du tror vil stille dig bedst. Ikke det sundeste, ikke det du ville forsvare højlydt, men det der føles som den mindst dårlige mulighed lige nu. Det er ikke en fejl. Sådan fungerer alle mennesker. Og det betyder, at adfærden aldrig rigtig er problemet. Det er troen under den.',
-    trapHeading: 'En fælde er en tro, der lyver om regnestykket',
-    trapBody:
-      'En fælde får fat, når en tro i stilhed tæller forkert på, hvad noget giver dig, og hvad det koster. Drinken lover ro og leverer en værre morgen. Skærmen lover noget godt lige om lidt og leverer den samme rastløshed igen. Så længe troen holder, er det virkelig din lykkeligste mulighed at række ud efter den, så du rækker ud. Problemet var aldrig din styrke. Det var det regnestykke, du fik stukket i hånden.',
-    knownHeading: 'Det skal mærkes i hjertet, ikke kun forstås i hovedet',
-    knownBody:
-      'Næsten alle ved allerede, i det abstrakte, at vanen koster mere, end den giver. At vide det som en kendsgerning ændrer intet, for trangen lytter ikke til kendsgerninger. Det hver bog gør, er at skille troen ad langsomt nok til, at du mærker sandheden i den, ikke bare er enig i den. Når det at se går dybt nok, har lysten ikke længere noget at stå på.',
-    noWillpowerHeading: 'Dette er ikke en kamp, og du er ikke svag',
-    noWillpowerBody:
-      'Viljestyrke er det, du har brug for, når en del af dig stadig tror, fælden er det værd. Den er udmattende, fordi den er en krig mellem to halvdele af samme menneske. Skift troen, og krigen slutter, for der er ikke længere noget at stå imod. Har du prøvet før, og holdt det ikke, var det aldrig en dom over din karakter. Troen havde bare ikke flyttet sig endnu.',
-    escapeHeading: 'At gå bliver en flugt, ikke et offer',
-    escapeBody:
-      'Når troen endelig flytter sig, holder det at gå op med at føles som at give afkald på noget. Du bider ikke tænderne sammen forbi en nydelse, du stadig vil have. Du træder ud af noget, du nu kan se kun nogensinde tog fra dig. Derfor er følelsen på den anden side lettelse, og ofte en lille undren over, hvor stille der er.',
-    closingHeading: 'Find bogen til din fælde',
-    closingBody:
-      'Hver bog er én fælde, skilt ad på denne måde. Er din ikke her endnu, så læg din stemme til og hjælp med at bringe den til live.',
-    ctaLibrary: 'Se biblioteket',
-    ctaRequests: 'Ønsk en bog',
-    heroImageAlt:
-      'En rolig flod, der åbner sig forude gennem friskt grønt lys, vejen ud er tydelig',
+      'Alt på denne side hviler på én idé. Den er enkel, den kan efterprøves mod din egen erfaring, og når du først ser den, forklarer bøgerne sig selv.',
+
+    ch1Heading: 'Det lykkeligste valg',
+    ch1Body1:
+      'I ethvert øjeblik vælger du det, du tror, er dit lykkeligste tilgængelige valg. Det gør alle. Det er ikke en fejl; det er sådan, valg fungerer. At række ud efter cigaretten, feedet, drinken, skærmen er ikke svaghed. Det er et valg, der ifølge din nuværende tro er det bedste, der er lige nu.',
+    ch1Body2:
+      'Den sætning bærer hele metoden: valg følger tro. Ikke viljestyrke, ikke karakter. Tro om, hvad hver mulighed giver dig, og hvad den koster dig.',
+    ch1Body3: 'Så en stædig adfærd er ikke et adfærdsproblem. Det er et trosproblem.',
+    ch1ImageAlt: 'En person, der ser ud over et lyst morgenlandskab, vejen frem er klar',
+
+    ch2Heading: 'At rette adfærden i stedet for grundene',
+    ch2Body1:
+      'Næsten alt, folk prøver, arbejder på adfærden. Stop, skær ned, blokér, undgå, aflæd, erstat. Nogle gange holder det et stykke tid. Det holder sjældent for altid, og grunden er strukturel: adfærden var aldrig roden. Den er den synlige ende af en tro.',
+    ch2Body2:
+      'Troen blev som regel dannet, uden at du bemærkede det. Noget bragte engang lindring, og en slutning skrev sig selv i stilhed: dette hjælper mig med at slappe af, dette får mig gennem aftenen, dette er en af mine få fornøjelser. Fra da af løber regnskabet skævt på en bestemt måde: det ubehag, tingen skaber, bliver lindret af den næste dosis, og lindringen bliver tilskrevet tingen selv. En rygers cigaret lindrer mest den forrige cigaret. Feedet dæmper en rastløshed, feedet selv installerede.',
+    ch2Body3:
+      'Forkerte tal ind, forkert valg ud. Så længe troen regner forkert, bliver adfærden ved med at blive valgt, uanset hvor oprigtigt du kæmper imod.',
+
+    ch3Heading: 'Hvorfor viljestyrke taber',
+    ch3Body1:
+      'Viljestyrke accepterer de forkerte tal og kæmper mod den lyst, de skaber. Derfor føles det som afsavn: en del af dig tror stadig, at noget godt gives op, så hver afholdende dag koster kræfter. Kræfter slipper op. En hård dag kommer, og den mulighed, din tro stadig rangerer højest, vinder igen.',
+    ch3Body2:
+      'Bagefter bebrejder folk sig selv. Bøgerne vil vise dig, roligt og konkret, hvorfor den dom aldrig var rigtig: du kæmpede mod dit eget trossystem, og det har mere udholdenhed end nogens viljestyrke. Metoden beder dig ikke om at kæmpe hårdere. Den fjerner det, du kæmpede imod.',
+    ch3ImageAlt: 'En enkelt knude af reb på en høvlebænk i morgenlys, halvt løsnet, den ene ende løber fri mod vinduet',
+
+    ch4Heading: 'Skam hjælper aldrig',
+    ch4Body1: 'Skam føles, som om den burde motivere forandring. Pålideligt gør den det modsatte.',
+    ch4Body2:
+      'Skam driver adfærden ud af syne, og ude af syne vokser den: uundersøgt, uomtalt, forstærket. Skam gør også ondt, og en person med smerte rækker ud efter det, der lover lindring, hvilket er adfærden selv. Sløjfen strammer til.',
+    ch4Body3:
+      'Derfor indeholder bøgerne ingen skræmmetaktik, ingen skuffet tone, ingen dagstællere, der venter på at nulstille. Ikke som en venlig strategi: fordi skam er kontraproduktiv, og metoden handler om det, der virker.',
+
+    ch5Heading: 'Hvad der faktisk ændrer en tro',
+    ch5Body1: 'Ikke bekræftelser. Ikke motivation. Ikke at beslutte meget hårdt.',
+    ch5Body2:
+      'En tro ændrer sig, når du forstår, fuldstændigt og konkret, hvor trækket kommer fra, og hvad tingen faktisk giver, klart nok til at den gamle slutning holder op med at give mening. Frihed kommer fra at forstå, hvor adfærden kommer fra, ikke fra det bevidste forsøg på at afslutte den.',
+    ch5Body3:
+      'Alle, der er fanget i en adfærd, kender allerede omkostningerne. Hovedviden er ikke den manglende brik. Bøgerne virker ved at gå gennem din egen erfaring, øjeblik for øjeblik, indtil forståelsen sætter sig fra dit hoved ind i dit hjerte, indtil regnskabet retter sig selv, og du kan mærke det.',
+    ch5Body4:
+      'Det beder om én ting af dig: ydmyghed. Du vil se på idéer, du har båret i årevis, igen. Intet andet kræves, ingen trin, intet program, ingen tricks. Læsning og ærlighed gør hele arbejdet.',
+
+    ch6Heading: 'Intet pres, lige nu',
+    ch6Body1:
+      'Den mærkeligste anvisning i bøgerne, og den læsere siger fik dem til at slappe af: stop ikke noget endnu. Fortsæt, som du er, mens du læser. Ingen stopdato, ingen forberedelse, intet mod at samle.',
+    ch6Body2:
+      'Pres hører til viljestyrke-tilgangen, og viljestyrke-tilgangen taber. Hvis bogen gør sit arbejde, vil det at stoppe ikke føles som en afgrundskant. Det vil føles som at lægge noget fra sig, du ikke længere vil holde på.',
+    ch6ImageAlt: 'Et fuglebur i varmt lys, døren åben og buret tomt, fuglen sidder allerede på en solbeskinnet vindueskarm i nærheden',
+
+    ch7Heading: 'Når den slipper',
+    ch7Body1:
+      'Et sted i læsningen, ofte stille, giver troen efter. Folk beskriver det på samme måde på tværs af hver adfærd: ikke et sus af styrke, et skuldertræk. Den gjorde aldrig noget for mig.',
+    ch7Body2:
+      'Derefter er der intet at give op, så intet føles givet op. Trangen mister sin motor. Tilbage er dit liv med én forkert tro færre i det, og den plads, adfærden optog: tid, penge, opmærksomhed, selvrespekt.',
+    ch7Body3: 'Det er hele metoden. Hvordan den faktisk virker, beskrevet godt nok til at kunne mærkes.',
+
+    ch8Heading: 'Hvorfor bøger, og hvorfor gratis',
+    ch8Body1:
+      'En bog er det rette redskab til dette. Den er privat, tålmodig og uden forlegenhed; den kan sige alt, i dit eget tempo, uden at nogen ser på. Og den kan gives væk uden grænse, hvilket betyder noget, for de, der har mest brug for en, er ofte de, der mindst har råd til den.',
+    ch8Body2:
+      'Så biblioteket er gratis, for altid, på alle de sprog vi kan nå, uden konto og uden sporing. Bøgerne er levende dokumenter: læsere skriver ind, hvor et kapitel ikke ramte, og den næste version siger det bedre. Målet er kun at hjælpe så mange mennesker som muligt.',
+    ch8ImageAlt: 'En roer, der glider langs en åben flodbred i frisk luft',
+
+    closingHeading: 'Bøgerne står på hylden.',
+    ctaLibrary: 'Se bøgerne',
+    ctaRequests: 'Bed om en, vi ikke har skrevet',
   },
 
-  // -- About -------------------------------------------------------------
   about: {
     title: 'Om Belief Changer',
-    missionHeading: 'Hvad dette er til for',
+    headerBody:
+      'Et gratis bibliotek af bøger, der hjælper folk ud af fælder: rygning, scrolling, sukker, alkohol og enhver anden adfærd, der kører på en løgn. Bygget på én overbevisning:',
+    headerConviction:
+      'folk har ikke brug for mere viljestyrke, de har brug for sandheden fortalt godt nok til at kunne mærkes.',
+    missionHeading: 'Historien',
     missionBody1:
-      'Der findes en måde at ende en vane på, som virker ved at ændre troen under den, ikke ved at bekæmpe adfærden ovenpå. Den har i stilhed befriet rigtig mange mennesker fra nogle få bestemte fælder. Dette bibliotek findes for at tage den samme tilgang og tilbyde den for enhver fælde, til hvem som helst, på deres eget sprog, uden udgift.',
+      'Gennemprøvede metoder til at ændre tro har eksisteret i årtier, og hvor en bog findes, virker den. Men bøgerne dækker en håndfuld fælder, og folk er fanget i hundreder. Det hul er grunden til, at dette bibliotek findes: at bringe den samme ærlige, skamfrie vej ud til hver fælde, folk beder os om, på alle sprog, til prisen af ingenting.',
     missionBody2:
-      'Et menneske, der leder efter vejen ud, bør aldrig skulle forbi en betalingsmur, en konto eller en sporing for at nå den. Så det er der ikke noget af her. Bøgerne bygges og passes af et hold agenter, der arbejder efter én fælles målestok for kvalitet, og hele projektet er skabt til at give sig selv væk.',
-    lawsHeading: 'Hvad der altid vil gælde her',
-    lawFreeTitle: 'Gratis for altid',
-    lawFreeBody: 'Hver bog, gratis at læse, hente og beholde. Intet niveau holdes tilbage.',
-    lawNoSignupTitle: 'Ingen tilmelding',
-    lawNoSignupBody: 'Ingen konto, ingen e-mail, ingen mur mellem dig og første side.',
-    lawNoTrackingTitle: 'Ingen sporing',
-    lawNoTrackingBody: 'Ingen cookies, ingen profiler, intet på din enhed som vi læser for at følge dig.',
-    lawEveryLanguageTitle: 'Alle sprog',
-    lawEveryLanguageBody: 'Oversat så bredt, vi kan nå, for vejen ud bør ikke afhænge af dit sprog.',
-    lawLivingTitle: 'Levende bøger',
-    lawLivingBody: 'Læserne forbedrer hver bog, versionerne er offentlige, og den nyeste er altid den, du får.',
+      'Biblioteket drives af et lille hold og deres AI-agenter, hvilket er det, der gør "gratis for altid, på alle sprog" muligt frem for en frase. Mennesker sætter retningen og holder kvalitetsniveauet; agenterne gør det endeløse arbejde: skriver, oversætter, indlæser, reviderer. Hver bog er underskrevet af metoden, ikke af en forfatters ego.',
+    lawsHeading: 'Det, vi står for',
+    lawFreeTitle: 'Gratis for altid.',
+    lawFreeBody: 'Ingen betalingsmur mellem et menneske og vejen ud.',
+    lawNoSignupTitle: 'Ingen tilmelding, ingen sporing.',
+    lawNoSignupBody:
+      'Vi tæller hændelser, aldrig mennesker. Ingen cookiebanner, for der er intet at give samtykke til.',
+    lawEveryLanguageTitle: 'Alle sprog.',
+    lawEveryLanguageBody: 'En fælde tjekker ikke dit pas.',
+    lawWarmTitle: 'Varm mod personen, hård mod fælden.',
+    lawWarmBody: 'Altid, i hver sætning.',
+    lawLivingTitle: 'Levende bøger.',
+    lawLivingBody:
+      'Versionerne er offentlige, læsere forbedrer dem, og kun den nyeste version tilbydes nogensinde.',
     honestyHeading: 'Hvordan vi tæller, ærligt',
     honestyBody:
-      'Vi tæller sidevisninger og søgninger samlet, så vi kan se, hvilke fælder folk har brug for bøger til. Vi identificerer dig aldrig. Ingen cookies, ingen konti, ingen sporing. Det eneste, der gemmes på din enhed, er det, der får siden til at virke for dig: dit tema, dit sprog, hvor du er i en bog, og hvilke emner du har stemt på.',
-    openSourceHeading: 'Åben kildekode',
-    openSourceBody:
-      'Det websted, der leverer disse bøger, er åben kildekode. Alle kan læse, hvordan det virker, tjekke at det gør, hvad det siger om privatliv, og bygge videre på det. Intet om, hvordan du bliver behandlet her, er skjult.',
-    openSourceLink: 'Læs kildekoden',
+      'Vi tæller sidevisninger og søgninger samlet, så vi kan se, hvilke bøger der er brug for, og hvor et kapitel mister folk. Vi identificerer dig aldrig. Der er ingen konti, ingen cookies, ingen tredjeparter.',
+    footLead: 'Bygget i det åbne. Koden og bøgerne er offentlige.',
+    openSourceLink: 'Åben kildekode',
+    contributeLink: 'Bidrag',
+    privacyLink: 'Privatliv',
     imageAlt: 'Et åbent vindue i et stille rum, morgenlys der falder ind',
   },
 
-  // -- 404 ---------------------------------------------------------------
   notFound: {
-    para: 'Nå, det her er lidt pinligt. Fordi vi nægter at spore vores besøgende eller bruge cookies, aner vi simpelthen ikke, hvordan du er endt her. Men vi kan bekræfte, at denne side ikke findes.',
+    para: 'Nå, det er lidt akavet. Fordi vi nægter at spore vores besøgende eller bruge cookies, aner vi absolut ikke, hvordan du endte her. Men vi kan bekræfte, at denne side ikke findes.',
     homeCta: 'Tag mig hjem',
-    imageAlt: 'En solbeskinnet sti gennem en park, der åbner sig forude på en lys, åben dag',
+    imageAlt: 'En solbeskinnet parksti, der åbner sig frem en lys, åben dag',
   },
 
-  // -- Privacy -----------------------------------------------------------
   privacy: {
     title: 'Privatliv, forenklet.',
-    lede: 'Ingen sporing, ingen cookies, ingen konti, ingen krumspring. Her er præcis, hvad der sker med dine data, i almindeligt menneskesprog. Den korte version: vi har designet dette websted, så der næsten ingen er.',
+    lede: 'Ingen sporing, ingen cookies, ingen konti, ingen bøvl. Her er præcis, hvad der sker med dine data, i almindeligt menneskeligt sprog. Den korte version: vi har designet denne side, så der næsten ingen er.',
 
     linkedTitle: 'Data knyttet til dig',
-    linkedBody: 'Ingen. Der er ingen konti, ingen tilmeldinger, ingen nyhedsbreve og ingen kontaktformularer, der beder om dit navn. Du kan læse hver bog, hente hvert format og bruge hele webstedet uden at fortælle os, hvem du er.',
+    linkedBody: 'Ingen. Der er ingen konti, ingen tilmeldinger, ingen nyhedsbreve og ingen kontaktformularer, der beder om dit navn. Du kan læse hver bog, downloade hvert format og bruge hele siden uden at fortælle os, hvem du er.',
 
-    typeTitle: 'Det du skriver',
-    typeBody: 'Finderfeltet virker i din browser. Når du sender os feedback, ønsker en bog eller deler en oplevelse, er de ord, du skriver, alt hvad vi modtager: intet navn, ingen e-mail, ingen adresse, intet vedhæftet. Undlad venligst at skrive personlige oplysninger i selve teksten; hvis vi opdager nogen under gennemsyn, fjerner vi dem, før noget bliver udgivet.',
+    typeTitle: 'Det, du skriver',
+    typeBody: 'Søgefeltet virker i din browser. Når du sender os feedback, ønsker en bog eller deler en oplevelse, er de ord, du skriver, alt, hvad vi modtager: intet navn, ingen e-mail, ingen adresse, intet vedhæftet. Skriv venligst ikke personlige oplysninger i selve teksten; hvis vi opdager nogen under gennemgang, fjerner vi dem, før noget udgives.',
 
-    countTitle: 'Det vi tæller',
-    countBody: 'Vi tæller hændelser, ikke mennesker: hvor mange gange en side blev åbnet, en bog blev hentet, en søgning intet fandt. Disse tal indeholder ingen identitet, og vi undlader bevidst at tælle unikke besøgende, for at gøre det ærligt er umuligt uden at spore dig. Det er også derfor, dette websted ikke har noget cookiebanner: der er intet at give samtykke til.',
+    countTitle: 'Det, vi tæller',
+    countBody: 'Vi tæller hændelser, ikke mennesker: hvor mange gange en side blev åbnet, en bog blev downloadet, en søgning ikke fandt noget. Disse tal indeholder ingen identitet, og vi tæller bevidst ikke unikke besøgende, fordi det er umuligt at gøre ærligt uden at spore dig. Det er også derfor, denne side ikke har noget cookiebanner: der er intet at give samtykke til.',
 
-    deviceTitle: 'Det der bliver på din enhed',
-    deviceBody: 'Dit tema, din læseposition og en note om, at du allerede har stemt. Disse lever i din browser, så webstedet husker dine præferencer; de bliver aldrig sendt til os.',
+    deviceTitle: 'Det, der bliver på din enhed',
+    deviceBody: 'Dit tema, dit sprog, din placering i hver bog, dine indstillinger for læsekomfort og en note om, at du allerede har stemt. Disse lever i din browser, så siden husker dine præferencer; de sendes aldrig til os.',
 
     thirdPartiesTitle: 'Nul tredjeparter',
-    thirdPartiesBody: 'Ingen annoncører, ingen sporingspixels, ingen analysevirksomheder, intet salg af data. Skrifttyperne leveres fra vores eget websted, ikke fra en tredjepart.',
+    thirdPartiesBody: 'Ingen annoncører, ingen sporingspixels, ingen analysefirmaer, intet salg af data. Skrifttyperne serveres fra vores egen side, ikke fra en tredjepart.',
 
     controlTitle: 'Dine ord, din kontrol',
-    controlBody: 'Fordi bidrag er anonyme fra bunden, kan vi ikke slå dine data op, og det kan ingen andre heller: der er intet, der forbinder dem med dig. Fortryder du noget, du har indsendt, så skriv til os og beskriv det, så fjerner vi det.',
+    controlBody: 'Fordi bidrag er anonyme af design, kan vi ikke slå dine data op, og det kan ingen andre heller: der er intet, der forbinder det med dig. Fortryder du noget, du sendte ind, så skriv til os og beskriv det, og vi fjerner det.',
 
     formalitiesTitle: 'Formaliteterne',
     formalitiesControllerLabel: 'Dataansvarlig:',
-    formalitiesControllerValue: 'Belief Changer (virksomhedsoplysninger bekræftes inden lancering).',
+    formalitiesControllerValue: 'Belief Changer (enhedsoplysninger bekræftes før lancering).',
     formalitiesComplaintBefore: 'Er du nogensinde utilfreds med, hvordan vi håndterer data, kan du klage til Datatilsynet på',
     formalitiesComplaintAfter: '.',
     formalitiesLinkLabel: 'www.datatilsynet.dk',
   },
 
-  // -- Language switcher -------------------------------------------------
   langSwitcher: {
     label: 'Skift sprog',
     heading: 'Sprog',

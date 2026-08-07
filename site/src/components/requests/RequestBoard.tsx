@@ -99,7 +99,7 @@ export function RequestBoard({
         {ranked.map((row, i) => {
           const count = row.votes + (deltas[row.id] ?? 0)
           const countLabel = format(
-            count === 1 ? t.requests.voteCountOne : t.requests.voteCount,
+            count === 1 ? t.requests.voiceCountOne : t.requests.voiceCount,
             { count: count.toLocaleString() },
           )
           const hasVoted = voted.has(row.id)
@@ -139,7 +139,7 @@ export function RequestBoard({
                     to={localePath(locale, `/books/${row.bookSlug}`)}
                     className="inline-flex items-center gap-1.5 rounded-sm border border-hairline px-4 py-2 type-ui-sm font-medium text-ink no-underline transition-colors duration-150 hover:bg-surface"
                   >
-                    {t.requests.readTheBook}
+                    {t.requests.readIt}
                     <ArrowRight size={14} weight="bold" aria-hidden="true" className="dir-flip" />
                   </Link>
                 ) : (

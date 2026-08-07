@@ -7,21 +7,19 @@ import { btnPrimary, inkLink } from '~/lib/ui'
 import { cn } from '~/lib/utils'
 
 /**
- * ExperienceSubmit: the share-your-experience flow on /experiences (SITE-PLAN
- * §Community mechanics; conceptually the same consent path as the book page's
- * improve form). A book picker, a "what happened" textarea, and an explicit
- * "publish anonymously" confirmation whose language makes the framing plain:
- * no name, no account, no way to trace it back. Labels above; helper below.
+ * ExperienceSubmit: "Share what changed" (copy deck 06-experiences). One
+ * textarea, one book select, one button, exactly the proposal's copy. No
+ * consent checkbox and no extra fields: sharing here is anonymous by design
+ * (editorial review happens before publishing, not shown on the page). On
+ * submit it swaps to the exact success line, announced via aria-live.
  *
- * Contract (mocked in v1): POST /api/experiences { slug, whatHappened,
- * mayPublish }. Nothing leaves the device; measurement fires
- * experience_submitted with the slug only, no free text. Success is announced
- * via aria-live and explains that public text passes a quiet review first.
+ * Contract (mocked in v1): POST /api/experiences { slug, text }. Nothing leaves
+ * the device; measurement fires experience_submitted with the slug only.
  */
 
 const textarea =
-  'w-full rounded-md border border-hairline bg-canvas px-4 py-3 text-ink ' +
-  'placeholder:text-ink-secondary resize-y min-h-[120px]'
+  'w-full rounded-md border border-hairline bg-canvas px-4 py-3.5 text-ink ' +
+  'placeholder:text-ink-secondary resize-y min-h-[140px]'
 
 export function ExperienceSubmit({
   books,
@@ -32,7 +30,6 @@ export function ExperienceSubmit({
 }) {
   const [slug, setSlug] = useState('')
   const [text, setText] = useState('')
-  const [consent, setConsent] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [sent, setSent] = useState(false)
 
@@ -43,13 +40,9 @@ export function ExperienceSubmit({
       return
     }
     if (!text.trim()) return
-    if (!consent) {
-      setError(t.experiences.consentRequired)
-      return
-    }
     setError(null)
-    // Mock POST /api/experiences. Nothing leaves the device in v1; measurement
-    // carries the slug only, never the free text.
+    // Mock POST /api/experiences { slug, text }. Nothing leaves the device in
+    // v1; measurement carries the slug only, never the free text.
     track('experience_submitted', { slug })
     setSent(true)
   }
@@ -57,7 +50,6 @@ export function ExperienceSubmit({
   function reset() {
     setSlug('')
     setText('')
-    setConsent(false)
     setError(null)
     setSent(false)
   }
@@ -78,7 +70,7 @@ export function ExperienceSubmit({
       {/* aria-live region announces the success swap to assistive tech. */}
       <div aria-live="polite">
         {sent ? (
-          <div className="mt-5 flex items-start gap-3 rounded-lg border border-hairline bg-surface p-6 md:p-7">
+          <div className="mt-5 flex items-start gap-3 rounded-lg border border-hairline bg-canvas p-6 md:p-7">
             <CheckCircle
               size={22}
               weight="regular"
@@ -86,12 +78,9 @@ export function ExperienceSubmit({
               className="mt-0.5 shrink-0 text-[var(--color-pastel-green-ink)]"
             />
             <div>
-              <p className="text-ink" style={{ fontSize: 'var(--text-body-lg)', fontWeight: 500 }}>
-                {t.experiences.submitSuccessTitle}
-              </p>
               <p
-                className="mt-2 max-w-[54ch] text-ink-secondary"
-                style={{ fontSize: 'var(--text-body-md)', lineHeight: 'var(--text-body-md--line-height)' }}
+                className="max-w-[52ch] text-ink"
+                style={{ fontSize: 'var(--text-body-lg)', lineHeight: 'var(--text-body-lg--line-height)' }}
               >
                 {t.experiences.submitSuccessBody}
               </p>
@@ -106,13 +95,33 @@ export function ExperienceSubmit({
       {!sent ? (
         <>
           <p
-            className="mt-3 max-w-[54ch] text-ink-secondary"
-            style={{ fontSize: 'var(--text-body-md)', lineHeight: 'var(--text-body-md--line-height)' }}
+            className="mt-3 max-w-[56ch] text-ink-secondary"
+            style={{ fontSize: 'var(--text-body-lg)', lineHeight: 'var(--text-body-lg--line-height)' }}
           >
             {t.experiences.submitBody}
           </p>
 
           <form onSubmit={onSubmit} className="mt-7 space-y-6">
+            <div>
+              <label
+                htmlFor="exp-text"
+                className="mb-2 block text-ink"
+                style={{ fontSize: 'var(--text-ui-sm)', fontWeight: 500 }}
+              >
+                {t.experiences.submitTextLabel}
+              </label>
+              <textarea
+                id="exp-text"
+                name="text"
+                required
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+                placeholder={t.experiences.submitTextPlaceholder}
+                className={textarea}
+                style={{ fontSize: 'var(--text-body-md)', lineHeight: 'var(--text-body-md--line-height)' }}
+              />
+            </div>
+
             <div>
               <label
                 htmlFor="exp-book"
@@ -121,7 +130,7 @@ export function ExperienceSubmit({
               >
                 {t.experiences.submitBookLabel}
               </label>
-              <div className="relative">
+              <div className="relative max-w-[24rem]">
                 <select
                   id="exp-book"
                   name="slug"
@@ -144,41 +153,6 @@ export function ExperienceSubmit({
                 />
               </div>
             </div>
-
-            <div>
-              <label
-                htmlFor="exp-text"
-                className="mb-2 block text-ink"
-                style={{ fontSize: 'var(--text-ui-sm)', fontWeight: 500 }}
-              >
-                {t.experiences.submitTextLabel}
-              </label>
-              <textarea
-                id="exp-text"
-                name="whatHappened"
-                required
-                value={text}
-                onChange={(e) => setText(e.target.value)}
-                placeholder={t.experiences.submitTextPlaceholder}
-                className={textarea}
-                style={{ fontSize: 'var(--text-body-md)', lineHeight: 'var(--text-body-md--line-height)' }}
-              />
-            </div>
-
-            <label className="flex cursor-pointer items-start gap-3">
-              <input
-                type="checkbox"
-                checked={consent}
-                onChange={(e) => setConsent(e.target.checked)}
-                className="mt-1 h-4 w-4 shrink-0 accent-[var(--color-ink)]"
-              />
-              <span
-                className="text-ink-secondary"
-                style={{ fontSize: 'var(--text-body-md)', lineHeight: 'var(--text-body-md--line-height)' }}
-              >
-                {t.experiences.submitConsentLabel}
-              </span>
-            </label>
 
             {/* Inline error in plain prose, pastel-red ink (DESIGN.md Forms). */}
             {error ? (

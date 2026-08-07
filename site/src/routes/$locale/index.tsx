@@ -7,30 +7,26 @@ import { books, requests, experiences } from '~/data'
 import { track } from '~/lib/measure'
 import { Hero } from '~/components/home/Hero'
 import { TrustStrip } from '~/components/home/TrustStrip'
-import { Reframe } from '~/components/home/Reframe'
-import { MethodBeats } from '~/components/home/MethodBeats'
-import { LivingBooks } from '~/components/home/LivingBooks'
-import { NextBook } from '~/components/home/NextBook'
-import { Experiences } from '~/components/home/Experiences'
+import { HomeBeats } from '~/components/home/HomeBeats'
+import { LibrarySection } from '~/components/home/LibrarySection'
+import { Marquee } from '~/components/home/Marquee'
+import { LivingLibrary } from '~/components/home/LivingLibrary'
 
 /**
- * Homepage (M2). The beats run in SITE-PLAN's locked order:
- *   1. Hero (asymmetric split + ShelfStage + ask finder seed)
- *   2. Trust strip (4 hairline columns)
- *   3. The reframe (3 canonical sentences, band)
- *   4. How escape works (3 method beats + Voice-1 paintings)
- *   5. Living books (mono facts, hairline structure, band)
- *   6. The next book (top-3 vote leaders + vote CTA)
- *   7. Reader experiences (anonymous excerpts + board link, band)
- *   8. Footer (from the shell)
+ * Homepage (v2). The story in five beats, plainly told (proposal 01-home):
+ *   0. Hero (words + shelf stage + finder + examples), full viewport
+ *   Trust strip (four hairline columns)
+ *   1-5. The five story beats: large still paintings, canvas/band alternating
+ *   The library grid (titled covers, hologram hover)
+ *   The marquee (the single sanctioned motion) + the mission line
+ *   The living library (three quiet columns)
+ *   Footer (from the shell)
  *
- * Section zoning alternates canvas and band; because each adjacent pair differs
- * in color, no hairline dividers are needed between sections (DESIGN.md: rules
- * separate sections only where two same-color sections meet). Layout families
- * used, all distinct: asymmetric-split hero, hairline-column strip, stacked
- * editorial statement, image+text beats (capped at two consecutive splits, the
- * third breaks to a full-width stack), a bordered cover-row of living books, a
- * ranked board list, and a quote grid. Eyebrow count: zero.
+ * Section zoning alternates canvas and band, so adjacent sections differ and no
+ * hairline dividers are needed between them. Layout families are distinct:
+ * asymmetric hero, hairline-column strip, image+text story beats (broken by a
+ * full-width breakout so no three splits run consecutively), a cover grid, a
+ * drifting marquee, and a three-column living-library. Eyebrow count: zero.
  */
 export const Route = createFileRoute('/$locale/')({
   head: () => ({
@@ -61,19 +57,19 @@ function HomePage() {
     books.find((b) => b.slug === 'alcohol'),
   ].filter((b): b is NonNullable<typeof b> => Boolean(b))
 
-  // Living books: only titles that actually have a version (published or in
-  // translation), so every mono fact on this row is real.
-  const livingBooks = books.filter((b) => b.version > 0)
-
   return (
     <>
       <Hero locale={activeLocale} t={t} shelfBooks={shelfBooks} />
       <TrustStrip t={t} />
-      <Reframe t={t} />
-      <MethodBeats t={t} />
-      <LivingBooks locale={activeLocale} t={t} books={livingBooks} />
-      <NextBook locale={activeLocale} t={t} requests={requests} />
-      <Experiences locale={activeLocale} t={t} experiences={experiences} />
+      <HomeBeats locale={activeLocale} t={t} />
+      <LibrarySection locale={activeLocale} t={t} books={books} />
+      <Marquee t={t} />
+      <LivingLibrary
+        locale={activeLocale}
+        t={t}
+        requests={requests}
+        experiences={experiences}
+      />
     </>
   )
 }

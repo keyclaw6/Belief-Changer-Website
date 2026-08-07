@@ -5,6 +5,7 @@ import type { Messages } from '~/i18n'
 import { localePath } from '~/i18n/routing'
 import { format } from '~/i18n'
 import { BookCover } from './BookCover'
+import { Hologram } from './Hologram'
 import { StatusTag } from './StatusTag'
 
 /**
@@ -43,9 +44,9 @@ export function BookCard({
       className="group block no-underline"
       aria-label={book.title}
     >
-      <span className="block transition-transform duration-200 group-hover:-translate-y-1 motion-reduce:transform-none">
+      <Hologram className="block">
         <BookCover book={book} sizes="(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 300px" />
-      </span>
+      </Hologram>
 
       <span className="mt-4 flex items-center gap-2">
         <StatusTag status={book.status} t={t} />

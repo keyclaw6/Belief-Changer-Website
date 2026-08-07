@@ -8,6 +8,7 @@ import type { Experience } from '~/data/types'
 import type { Messages } from '~/i18n'
 import { track } from '~/lib/measure'
 import { Reveal } from '~/components/Reveal'
+import { Painting } from '~/components/Painting'
 import { ExperienceFilter, type FilterBook } from '~/components/experiences/ExperienceFilter'
 import { ExperienceSubmit } from '~/components/experiences/ExperienceSubmit'
 
@@ -91,15 +92,13 @@ function ExperiencesPage() {
       <section className="mx-auto w-full max-w-[var(--page-max)] px-[5vw]">
         <div className="pb-12 pt-14 md:pt-[88px]">
           <Reveal>
-            <div className="mb-11 h-48 w-full overflow-hidden rounded-lg sm:h-60 md:h-72">
-              <img
-                src="/site/painted-together-after-rain.jpg"
-                alt={t.experiences.imageAlt}
-                loading="eager"
-                decoding="async"
-                className="h-full w-full object-cover object-center ring-1 ring-[var(--color-hairline-on-image)]"
-              />
-            </div>
+            <Painting
+              src="/site/painted-together-after-rain.jpg"
+              alt={t.experiences.imageAlt}
+              priority
+              sizes="(max-width: 1400px) 90vw, 1260px"
+              className="mb-11 max-w-[72rem]"
+            />
           </Reveal>
           <Reveal>
             <h1
@@ -117,7 +116,7 @@ function ExperiencesPage() {
               className="mt-4 max-w-[58ch] text-ink-secondary"
               style={{ fontSize: 'var(--text-body-lg)', lineHeight: 'var(--text-body-lg--line-height)' }}
             >
-              {t.experiences.lede}
+              {t.experiences.intro}
             </p>
           </Reveal>
         </div>

@@ -44,6 +44,13 @@ export interface Book {
   back: string
   /** Ground hex sampled from the artwork (from covers-manifest.json). */
   groundHex: string
+  /**
+   * Ink for the live-text title + series mark overlaid on the cover art
+   * (covers-manifest.json `overlayInk`, chosen by WCAG contrast against the
+   * ground): 'charcoal' on light grounds, 'bone' on dark ones. Resolved to a
+   * hex by inkHex() in BookCover.
+   */
+  overlayInk: 'charcoal' | 'bone'
   /** English title (localized titles arrive with the locale catalogs). */
   title: string
   /** One-line promise, in register. */

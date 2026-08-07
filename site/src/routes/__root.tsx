@@ -9,6 +9,7 @@ import {
 import type { ReactNode } from 'react'
 import globalCss from '~/styles/globals.css?url'
 import { themeInitScript } from '~/lib/theme'
+import { ThemeProvider, useTheme } from '~/lib/theme-context'
 import { DEFAULT_LOCALE, LOCALE_DIR, isLocale, type Locale } from '~/i18n/config'
 import { NotFound } from '~/components/NotFound'
 
@@ -17,6 +18,11 @@ import { NotFound } from '~/components/NotFound'
  * stylesheet, the no-flash theme init script), and the <html lang>/<dir>
  * attributes. lang and dir are derived from the active locale segment so the
  * document mirrors correctly under RTL from the very first server render.
+ *
+ * Theme: React owns it. ThemeProvider holds the choice; <html data-theme> is
+ * rendered by React from that state (with suppressHydrationWarning, since the
+ * init script sets the real value before hydration). This is the proper fix for
+ * the v1 bug where React and a toggle button fought over the same attribute.
  */
 export const Route = createRootRoute({
   head: () => ({
@@ -27,7 +33,7 @@ export const Route = createRootRoute({
       {
         name: 'description',
         content:
-          'Free books that change the belief behind the behavior. In your language. No signup, no cost, no catch.',
+          'Free books that change the belief behind the behavior. In your language, free forever, no signup, no catch.',
       },
       { name: 'color-scheme', content: 'light dark' },
     ],
@@ -61,7 +67,31 @@ function RootDocument({ children }: { children: ReactNode }) {
   const dir = LOCALE_DIR[locale]
 
   return (
-    <html lang={locale} dir={dir}>
+    <ThemeProvider>
+      <HtmlShell locale={locale} dir={dir}>
+        {children}
+      </HtmlShell>
+    </ThemeProvider>
+  )
+}
+
+/**
+ * HtmlShell consumes the theme context so React renders data-theme on <html>.
+ * suppressHydrationWarning tolerates the difference between the server render
+ * ("system") and whatever the init script painted before hydration.
+ */
+function HtmlShell({
+  locale,
+  dir,
+  children,
+}: {
+  locale: Locale
+  dir: 'ltr' | 'rtl'
+  children: ReactNode
+}) {
+  const { attr } = useTheme()
+  return (
+    <html lang={locale} dir={dir} data-theme={attr} suppressHydrationWarning>
       <head>
         {/* No-flash theme: set data-theme before first paint. */}
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />

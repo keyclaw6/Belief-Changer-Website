@@ -76,7 +76,7 @@ function RequestsPage() {
               className="mt-4 max-w-[56ch] text-ink-secondary"
               style={{ fontSize: 'var(--text-body-lg)', lineHeight: 'var(--text-body-lg--line-height)' }}
             >
-              {t.requests.loopExplainer}
+              {t.requests.intro}
             </p>
           </Reveal>
 

@@ -1,5 +1,7 @@
 @import 'tailwindcss';
 @import './fonts.css';
+/* FeralUI PullCord: colours, entrance, focus ring. Geometry lives in the JS. */
+@import 'pullcord/pullcord.css';
 
 /* ============================================================================
    Belief Changer, Quiet Editorial design tokens
@@ -43,6 +45,15 @@
   --shadow-cover: 0 1px 3px rgba(17, 17, 17, 0.14), 0 10px 24px rgba(17, 17, 17, 0.12);
   /* Faint warm radial light spot for non-empty sections (opacity <= 0.03). */
   --ambient-spot: rgba(190, 165, 120, 0.03);
+
+  /* -- PullCord (the light switch) ------------------------------------- */
+  /* Rope ink: a hairline gray in light. It hangs from the very top, near the
+     right edge, in front of the nav. --pullcord-right places the knob just
+     inside the page gutter; --pullcord-z sits above the nav's hairline bar. */
+  --pullcord-ink: rgba(17, 17, 17, 0.28);
+  --pullcord-top: 0px;
+  --pullcord-right: clamp(1.5rem, 5vw, 3.25rem);
+  --pullcord-z: 60;
 }
 
 [data-theme='dark'] {
@@ -76,6 +87,9 @@
   --shadow-hover: 0 2px 8px rgba(0, 0, 0, 0.3);
   --shadow-cover: 0 2px 5px rgba(0, 0, 0, 0.45), 0 14px 30px rgba(0, 0, 0, 0.5);
   --ambient-spot: rgba(210, 185, 140, 0.04);
+
+  /* Rope ink: bone at night, so the cord reads against the dark canvas. */
+  --pullcord-ink: rgba(242, 240, 236, 0.4);
 }
 
 /* ============================================================================
@@ -362,6 +376,8 @@
     --shadow-hover: 0 2px 8px rgba(0, 0, 0, 0.3);
     --shadow-cover: 0 2px 5px rgba(0, 0, 0, 0.45), 0 14px 30px rgba(0, 0, 0, 0.5);
     --ambient-spot: rgba(210, 185, 140, 0.04);
+
+    --pullcord-ink: rgba(242, 240, 236, 0.4);
   }
 }
 
@@ -445,5 +461,94 @@
     font-size: var(--text-ui-sm);
     font-weight: var(--text-ui-sm--font-weight);
     line-height: var(--text-ui-sm--line-height);
+  }
+
+  /* ── Hologram hover (covers in browsable lists) ────────────────────────
+     Transient interaction light per 00-global.md: a small pointer-tracked
+     tilt, a ~5px lift toward the viewer, and one soft specular sweep. The
+     Hologram component writes the custom properties from pointer events; the
+     transform is composited (transform/opacity only). 150ms in, 250ms out. */
+  .holo {
+    --holo-lift: 0px;
+    --holo-rx: 0deg;
+    --holo-ry: 0deg;
+    --holo-sweep-x: 50%;
+    --holo-sweep-o: 0;
+    position: relative;
+    transform: perspective(900px) rotateX(var(--holo-rx)) rotateY(var(--holo-ry))
+      translateY(var(--holo-lift));
+    transform-style: preserve-3d;
+    transition:
+      transform 250ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+  }
+  .holo:hover {
+    transition-duration: 150ms;
+  }
+  /* The specular sweep: a faint diagonal band of light that tracks the
+     pointer. It is a sibling overlay on the cover, never a repaint of the art.
+     It only appears while the sweep opacity is lifted (on pointer enter). */
+  .holo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 2px;
+    pointer-events: none;
+    background: linear-gradient(
+      105deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.14) calc(var(--holo-sweep-x) - 14%),
+      rgba(255, 255, 255, 0.42) var(--holo-sweep-x),
+      rgba(255, 255, 255, 0.14) calc(var(--holo-sweep-x) + 14%),
+      transparent 100%
+    );
+    mix-blend-mode: soft-light;
+    opacity: var(--holo-sweep-o);
+    transition: opacity 250ms ease;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .holo {
+      transform: translateY(var(--holo-lift));
+      transition: transform 150ms ease;
+    }
+    .holo::after {
+      display: none;
+    }
+  }
+
+  /* ── Experience marquee (home only) ────────────────────────────────────
+     The single sanctioned motion exception (00-global.md): a horizontal band
+     drifting slowly and lazily. 72s per loop, pauses on hover, and is fully
+     static under reduced motion. The track holds the quotes twice so the drift
+     is seamless; translating by -50% lands exactly on the duplicate. */
+  .marquee {
+    overflow: hidden;
+  }
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee-drift 72s linear infinite;
+  }
+  .marquee:hover .marquee-track,
+  .marquee:focus-within .marquee-track {
+    animation-play-state: paused;
+  }
+  @keyframes marquee-drift {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+      animation: none;
+      /* Show the first copy at rest; allow the reader to scroll it if needed. */
+      transform: none;
+    }
+    .marquee {
+      overflow-x: auto;
+    }
   }
 }

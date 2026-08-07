@@ -46,11 +46,9 @@ export function HeroAsk({
   }
 
   return (
-    <form
-      onSubmit={onSubmit}
-      className="flex flex-col gap-3 sm:flex-row sm:items-stretch"
-      role="search"
-    >
+    <form onSubmit={onSubmit} className="flex flex-col gap-3" role="search">
+      {/* One generous input (00-global / 01-home), full width so the long
+          placeholder never clips; the primary action sits beneath it. */}
       <label htmlFor="hero-ask" className="sr-only">
         {fieldLabel}
       </label>
@@ -62,9 +60,9 @@ export function HeroAsk({
         onChange={(e) => setValue(e.target.value)}
         placeholder={placeholder}
         autoComplete="off"
-        className={cn(inputText, 'sm:flex-1')}
+        className={cn(inputText, 'w-full')}
       />
-      <button type="submit" className={cn(btnPrimary, 'sm:shrink-0')}>
+      <button type="submit" className={cn(btnPrimary, 'self-start')}>
         {submitLabel}
         <ArrowRight size={16} weight="bold" aria-hidden="true" className="dir-flip" />
       </button>

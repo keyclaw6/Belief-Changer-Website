@@ -4,6 +4,7 @@ import { DEFAULT_LOCALE, type Locale } from '~/i18n/config'
 import { localePath, stripLocale } from '~/i18n/routing'
 import { btnPrimary } from '~/lib/ui'
 import { FlickerText } from '~/components/FlickerText'
+import { Painting } from '~/components/Painting'
 
 /**
  * NotFound: the designed 404, wired as the router's default not-found component
@@ -43,15 +44,15 @@ export function NotFound() {
 
   return (
     <main className="mx-auto w-full max-w-[var(--page-max)] px-[5vw]">
-      <div className="mx-auto flex max-w-[46rem] flex-col items-center py-16 text-center md:py-24">
-        {/* The misprinted-park painting, presented like other page images. */}
-        <div className="w-full max-w-[34rem] overflow-hidden rounded-lg">
-          <img
+      <div className="mx-auto flex max-w-[60rem] flex-col items-center py-16 text-center md:py-20">
+        {/* The misprinted-park painting, LARGE (breakout width, 04-book-page /
+            12-404: it earns it), at true 3:2 so nothing is cropped. */}
+        <div className="w-full max-w-[56rem]">
+          <Painting
             src="/site/painted-misprinted-park.jpg"
             alt={t.notFound.imageAlt}
-            loading="eager"
-            decoding="async"
-            className="h-56 w-full object-cover object-center ring-1 ring-[var(--color-hairline-on-image)] sm:h-64 md:h-72"
+            priority
+            sizes="(max-width: 900px) 90vw, 900px"
           />
         </div>
 

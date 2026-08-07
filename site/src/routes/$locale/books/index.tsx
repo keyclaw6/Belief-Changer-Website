@@ -6,7 +6,7 @@ import {
   useParams,
   useSearch,
 } from '@tanstack/react-router'
-import { MagnifyingGlass, X } from '@phosphor-icons/react'
+import { ArrowRight, MagnifyingGlass, X } from '@phosphor-icons/react'
 import { getMessages, format } from '~/i18n'
 import { type Locale } from '~/i18n/config'
 import { hreflangAlternates, localePath } from '~/i18n/routing'
@@ -36,6 +36,22 @@ import type { Messages } from '~/i18n'
 interface LibrarySearch {
   q?: string
 }
+
+/**
+ * The first-person subject chips (copy deck 03-books). Each carries the catalog
+ * key for its localized first-person label and a lowercase query that matches
+ * the relevant book's haystack (title/slug/promise), so tapping a chip filters
+ * the grid to that book. They are conveniences over the same finder, so a chip
+ * always resolves to a real match.
+ */
+const SUBJECT_CHIPS = [
+  { key: 'chipScrolling', q: 'scrolling' },
+  { key: 'chipSugar', q: 'sugar' },
+  { key: 'chipSmoking', q: 'smoking' },
+  { key: 'chipAlcohol', q: 'alcohol' },
+  { key: 'chipGaming', q: 'gaming' },
+  { key: 'chipOverthinking', q: 'overthinking' },
+] as const
 
 export const Route = createFileRoute('/$locale/books/')({
   validateSearch: (search: Record<string, unknown>): LibrarySearch => {
@@ -135,7 +151,8 @@ function LibraryPage() {
       })
 
   return (
-    <div className="mx-auto w-full max-w-[var(--page-max)] px-[5vw]">
+    <>
+      <div className="mx-auto w-full max-w-[var(--page-max)] px-[5vw]">
       {/* Header + finder */}
       <section className="pt-14 md:pt-[88px]">
         <h1
@@ -159,7 +176,7 @@ function LibraryPage() {
           {t.library.intro}
         </p>
 
-        <form onSubmit={onSubmit} role="search" className="mt-8 max-w-[36rem]">
+        <form onSubmit={onSubmit} role="search" className="mt-8 max-w-[40rem]">
           <label htmlFor="library-finder" className="type-label-caps mb-2 block text-ink-secondary">
             {t.library.searchLabel}
           </label>
@@ -193,8 +210,41 @@ function LibraryPage() {
           </div>
         </form>
 
+        {/* Tappable first-person subject chips (copy deck): they filter instantly
+            by seeding the finder. Sentence case, hairline-bordered, ink on hover
+            and when active (a subject is not a status, so no pastel). */}
+        <div className="mt-5">
+          <p className="type-label-caps mb-3 text-ink-secondary">{t.library.chipsLabel}</p>
+          <ul className="flex flex-wrap gap-2">
+            {SUBJECT_CHIPS.map((chip) => {
+              const label = t.library[chip.key]
+              const selected = draft.trim().toLowerCase() === chip.q
+              return (
+                <li key={chip.key}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setDraft(chip.q)
+                      commit(chip.q)
+                    }}
+                    aria-pressed={selected}
+                    className={cn(
+                      'inline-flex items-center rounded-md border px-3.5 py-2 type-ui-sm transition-colors duration-150',
+                      selected
+                        ? 'border-ink bg-ink text-on-action'
+                        : 'border-hairline text-ink-secondary hover:border-ink hover:text-ink',
+                    )}
+                  >
+                    {label}
+                  </button>
+                </li>
+              )
+            })}
+          </ul>
+        </div>
+
         {/* Live result count for screen readers and as a quiet visible fact. */}
-        <p className="type-mono-meta mt-5" aria-live="polite">
+        <p className="type-mono-meta mt-6" aria-live="polite">
           {resultsLabel}
         </p>
       </section>
@@ -213,7 +263,27 @@ function LibraryPage() {
       ) : (
         <NoMatch locale={activeLocale} t={t} onClear={clear} query={draft} />
       )}
-    </div>
+      </div>
+
+      {/* Foot strip (band, copy deck): the library is chosen by its readers. */}
+      <section className="bg-band">
+        <div className="mx-auto w-full max-w-[var(--page-max)] px-[5vw] py-[var(--spacing-section-y)]">
+          <p
+            className="max-w-[52ch] text-ink"
+            style={{ fontSize: 'var(--text-body-lg)', lineHeight: 'var(--text-body-lg--line-height)' }}
+          >
+            {t.library.footStrip}
+          </p>
+          <Link
+            to={localePath(activeLocale, '/requests')}
+            className={cn(inkLink, 'mt-3 inline-flex items-center gap-1.5')}
+          >
+            {t.library.footStripLink}
+            <ArrowRight size={15} weight="bold" aria-hidden="true" className="dir-flip" />
+          </Link>
+        </div>
+      </section>
+    </>
   )
 }
 

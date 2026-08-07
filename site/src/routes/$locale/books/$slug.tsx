@@ -7,6 +7,7 @@ import { hreflangAlternates, localePath } from '~/i18n/routing'
 import { getBook, experiences as allExperiences } from '~/data'
 import { track } from '~/lib/measure'
 import { BookCover } from '~/components/BookCover'
+import { Hologram } from '~/components/Hologram'
 import { StatusTag } from '~/components/StatusTag'
 import { BookActions } from '~/components/book/BookActions'
 import { BookTabs } from '~/components/book/BookTabs'
@@ -70,10 +71,13 @@ function BookPage() {
     <>
       {/* Masthead */}
       <section className="mx-auto w-full max-w-[var(--page-max)] px-[5vw]">
-        <div className="grid gap-10 pb-16 pt-12 md:grid-cols-[minmax(0,300px)_1fr] md:gap-14 md:pt-[72px]">
-          {/* Cover: its ground is the identity; hairline added on light grounds. */}
-          <Reveal className="mx-auto w-full max-w-[260px] md:mx-0 md:max-w-none">
-            <BookCover book={book} priority sizes="(max-width: 768px) 60vw, 300px" />
+        <div className="grid gap-10 pb-16 pt-12 md:grid-cols-[minmax(0,340px)_1fr] md:gap-16 md:pt-[72px]">
+          {/* Cover: LARGE, titled, hologram hover (this slot later hosts the 3D
+              book you can turn). Its ground is the identity. */}
+          <Reveal className="mx-auto w-full max-w-[300px] md:mx-0 md:max-w-none">
+            <Hologram>
+              <BookCover book={book} priority sizes="(max-width: 768px) 70vw, 340px" />
+            </Hologram>
           </Reveal>
 
           <Reveal className="max-w-[46ch]">
@@ -101,34 +105,29 @@ function BookPage() {
               {book.promise}
             </p>
 
-            {/* Living-book version block: functional mono facts. Version and
-                date share a line (one middle dot); the language count sits on
-                its own line so no line ever carries two dots. */}
+            <div className="mt-6">
+              <BookActions book={book} locale={activeLocale} t={t} />
+            </div>
+
+            {/* Living-book version block: functional mono facts (copy deck:
+                "Version 3 · 12 languages · Improved from reader contributions").
+                Split across two mono lines so no line ever carries two dots. */}
             <div className="mt-7 space-y-1">
               {hasVersion ? (
                 <>
                   <p className="type-mono-meta text-ink">
-                    {format(t.book.versionLabel, {
-                      version: book.version,
-                      month: book.versionDate,
-                    })}
-                  </p>
-                  <p className="type-mono-meta">
                     {format(
                       book.languages === 1
-                        ? t.book.languagesCountOne
-                        : t.book.languagesCount,
-                      { count: book.languages },
+                        ? t.book.versionLanguagesOne
+                        : t.book.versionLanguages,
+                      { version: book.version, count: book.languages },
                     )}
                   </p>
+                  <p className="type-mono-meta">{t.book.improvedFromContributions}</p>
                 </>
               ) : (
                 <p className="type-mono-meta">{t.book.notPublishedYet}</p>
               )}
-            </div>
-
-            <div className="mt-6">
-              <BookActions book={book} locale={activeLocale} t={t} />
             </div>
           </Reveal>
         </div>
@@ -159,17 +158,24 @@ function BookPage() {
       <section className="bg-band">
         <div className="mx-auto w-full max-w-[var(--page-max)] px-[5vw] py-[var(--spacing-section-y)]">
           <Reveal className="max-w-[68rem]">
-            <BookExperiences experiences={bookExperiences} t={t} />
+            <BookExperiences experiences={bookExperiences} locale={activeLocale} t={t} />
           </Reveal>
         </div>
       </section>
 
-      {/* Quiet how-it-works cross-link. */}
+      {/* Cross-link foot: a lead line + the how-it-works link. Canvas, so it
+          alternates with the band experiences section above it. */}
       <section className="bg-canvas">
-        <div className="mx-auto w-full max-w-[var(--page-max)] px-[5vw] pb-[var(--spacing-section-y)]">
+        <div className="mx-auto w-full max-w-[var(--page-max)] px-[5vw] py-[var(--spacing-section-y)]">
+          <p
+            className="text-ink"
+            style={{ fontSize: 'var(--text-body-lg)', lineHeight: 'var(--text-body-lg--line-height)' }}
+          >
+            {t.book.crosslinkLead}
+          </p>
           <Link
             to={localePath(activeLocale, '/how-it-works')}
-            className={cn(inkLink, 'inline-flex items-center gap-1.5')}
+            className={cn(inkLink, 'mt-3 inline-flex items-center gap-1.5')}
           >
             {t.book.howItWorksCrosslink}
             <ArrowRight size={15} weight="bold" aria-hidden="true" className="dir-flip" />

@@ -1,6 +1,12 @@
 /**
- * Theme handling. Three data-theme states live on <html>:
- *   - "system": follow prefers-color-scheme (the default, no manual choice yet)
+ * Theme handling. The theme is owned by React (see ThemeProvider): a context
+ * holds the choice, React renders `data-theme` on <html>, and an init script in
+ * <head> sets the attribute before first paint so there is no flash. This is
+ * the proper fix for the v1 bug where React owned <html data-theme> while a
+ * toggle button mutated the same attribute out from under it.
+ *
+ * Three data-theme states live on <html>:
+ *   - "system": follow prefers-color-scheme (the default before any choice)
  *   - "light" / "dark": an explicit manual choice, persisted in localStorage
  *
  * The palette for each state is defined in styles/globals.css. Device storage
@@ -12,10 +18,11 @@ export type ThemeChoice = 'system' | 'light' | 'dark'
 export const THEME_STORAGE_KEY = 'bc-theme'
 
 /**
- * Inline, dependency-free script string injected into <head> before paint so
- * the correct data-theme is set with no flash of the wrong theme on first load.
- * It reads the saved choice (if any) and otherwise leaves data-theme="system",
- * which the CSS resolves against the OS preference.
+ * Inline, dependency-free script injected into <head> before paint. It reads the
+ * saved choice (if any) and writes data-theme so the correct palette is on the
+ * <html> element on the very first paint, before React hydrates. React then
+ * renders the same attribute from context (with suppressHydrationWarning on
+ * <html> so the pre-hydration value the script wrote is never fought over).
  */
 export const themeInitScript = `(function(){try{var k='${THEME_STORAGE_KEY}';var c=localStorage.getItem(k);var t=(c==='light'||c==='dark')?c:'system';document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','system');}})();`
 
@@ -26,23 +33,23 @@ export function getStoredTheme(): ThemeChoice {
   return v === 'light' || v === 'dark' ? v : 'system'
 }
 
-/** Whether the document is currently showing the dark palette. */
-export function isDarkActive(): boolean {
-  if (typeof document === 'undefined') return false
-  const attr = document.documentElement.getAttribute('data-theme')
-  if (attr === 'dark') return true
-  if (attr === 'light') return false
-  // system: consult the media query
+/** Whether the OS currently prefers dark (client only). */
+export function systemPrefersDark(): boolean {
   return (
     typeof matchMedia !== 'undefined' &&
     matchMedia('(prefers-color-scheme: dark)').matches
   )
 }
 
-/** Apply and persist an explicit choice (or clear to system). */
-export function setTheme(choice: ThemeChoice): void {
-  if (typeof document === 'undefined') return
-  document.documentElement.setAttribute('data-theme', choice)
+/** Resolve a choice to the concrete palette in effect. */
+export function isDarkFor(choice: ThemeChoice): boolean {
+  if (choice === 'dark') return true
+  if (choice === 'light') return false
+  return systemPrefersDark()
+}
+
+/** Persist an explicit choice (or clear to system). */
+export function persistTheme(choice: ThemeChoice): void {
   try {
     if (choice === 'system') localStorage.removeItem(THEME_STORAGE_KEY)
     else localStorage.setItem(THEME_STORAGE_KEY, choice)

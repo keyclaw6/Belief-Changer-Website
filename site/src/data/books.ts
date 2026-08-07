@@ -35,6 +35,7 @@ export const books: Book[] = [
     spine: '/covers/derived/sugar-spine.png',
     back: '/covers/derived/sugar-back.png',
     groundHex: '#DBD9D8', // from covers-manifest.json
+    overlayInk: 'charcoal', // from covers-manifest.json overlayInk
     title: 'The Sugar Trap',
     promise: 'The craving is withdrawal wearing the mask of hunger. See it once and it loosens.',
     status: 'published',
@@ -78,6 +79,7 @@ export const books: Book[] = [
     spine: '/covers/derived/smoking-spine.png',
     back: '/covers/derived/smoking-back.png',
     groundHex: '#9AA28D',
+    overlayInk: 'charcoal', // from covers-manifest.json overlayInk
     title: 'The Smoking Trap',
     promise: 'It never relaxed you. It created the tension it then relieved.',
     status: 'published',
@@ -114,30 +116,40 @@ export const books: Book[] = [
     spine: '/covers/derived/scrolling-spine.png',
     back: '/covers/derived/scrolling-back.png',
     groundHex: '#6C8594',
+    overlayInk: 'bone', // from covers-manifest.json overlayInk
     title: 'The Scrolling Trap',
-    promise: 'The good thing is always one screen ahead, which is exactly why it never arrives.',
+    promise:
+      'For when the feed owns your evenings and your attention feels rented. This book takes the scrolling trap apart piece by piece: where the pull comes from, what it actually delivers, and why stopping will feel like relief rather than loss.',
     status: 'published',
-    version: 2, // MOCK
-    versionDate: 'July 2026', // MOCK
-    languages: 6, // MOCK
+    version: 3, // MOCK
+    versionDate: 'June 2026', // MOCK
+    languages: 12, // MOCK
     formats: { read: 'available', epub: 'available', audio: 'in-production' },
     chapters: [
       { n: 1, title: 'The reach', body: scrollingChapter1 }, // sample
       { n: 2, title: 'What it gives and what it takes', body: scrollingChapter2 }, // sample
       { n: 3, title: 'You were never the problem', body: scrollingChapter3 }, // sample
-      { n: 4, title: 'The empty moments, returned' },
+      { n: 4, title: 'Boredom scrolling' },
+      { n: 5, title: 'The empty moments, returned' },
     ],
+    // Sample changelog copy from the proposal (04-book-page). No attribution.
     changelog: [
       {
-        version: 'v2.0',
-        date: 'July 2026',
-        what: 'Added the chapter on unpredictable rewards.',
-        why: 'Readers wanted the pull explained mechanically, not just described.',
+        version: 'v3',
+        date: 'June 2026',
+        what: 'Rewrote chapter 4 on "boredom scrolling".',
+        why: 'Readers kept reporting the belief survived chapter 3.',
       },
       {
-        version: 'v1.0',
-        date: 'April 2026',
-        what: 'First published edition.',
+        version: 'v2',
+        date: 'March 2026',
+        what: 'Added the morning-phone chapter.',
+        why: 'The most requested gap.',
+      },
+      {
+        version: 'v1',
+        date: 'January 2026',
+        what: 'First edition.',
         why: 'Initial release.',
       },
     ],
@@ -150,6 +162,7 @@ export const books: Book[] = [
     spine: '/covers/derived/porn-spine.png',
     back: '/covers/derived/porn-back.png',
     groundHex: '#CEC7BC',
+    overlayInk: 'charcoal', // from covers-manifest.json overlayInk
     title: 'The Porn Trap',
     promise: 'A promise of intimacy that quietly trains you away from the real thing.',
     status: 'being-written',
@@ -172,6 +185,7 @@ export const books: Book[] = [
     spine: '/covers/derived/alcohol-spine.png',
     back: '/covers/derived/alcohol-back.png',
     groundHex: '#51533B',
+    overlayInk: 'bone', // from covers-manifest.json overlayInk
     title: 'The Alcohol Trap',
     promise: 'It borrows tomorrow’s calm and charges interest tonight.',
     status: 'being-written',
@@ -194,6 +208,7 @@ export const books: Book[] = [
     spine: '/covers/derived/gaming-spine.png',
     back: '/covers/derived/gaming-back.png',
     groundHex: '#BFA482',
+    overlayInk: 'charcoal', // from covers-manifest.json overlayInk
     title: 'The Gaming Trap',
     promise: 'Endless progress that leaves you exactly where you started.',
     status: 'in-translation',
@@ -223,6 +238,7 @@ export const books: Book[] = [
     spine: '/covers/derived/junkfood-spine.png',
     back: '/covers/derived/junkfood-back.png',
     groundHex: '#D07452',
+    overlayInk: 'charcoal', // from covers-manifest.json overlayInk
     title: 'The Junk Food Trap',
     promise: 'Engineered to override the signal that says you have had enough.',
     status: 'being-written',
@@ -245,6 +261,7 @@ export const books: Book[] = [
     spine: '/covers/derived/vaping-spine.png',
     back: '/covers/derived/vaping-back.png',
     groundHex: '#A7B0A4',
+    overlayInk: 'charcoal', // from covers-manifest.json overlayInk
     title: 'The Vaping Trap',
     promise: 'The same old trap in a cleaner-looking package.',
     status: 'being-written',
@@ -267,6 +284,7 @@ export const books: Book[] = [
     spine: '/covers/derived/overthinking-spine.png',
     back: '/covers/derived/overthinking-back.png',
     groundHex: '#C0A09A',
+    overlayInk: 'charcoal', // from covers-manifest.json overlayInk
     title: 'The Overthinking Trap',
     promise: 'The mind promises that one more loop will finally make you safe.',
     status: 'gathering-voices',
@@ -289,6 +307,7 @@ export const books: Book[] = [
     spine: '/covers/derived/complaining-spine.png',
     back: '/covers/derived/complaining-back.png',
     groundHex: '#E1C5A0',
+    overlayInk: 'charcoal', // from covers-manifest.json overlayInk
     title: 'The Complaining Trap',
     promise: 'Each complaint feels like release and quietly deepens the groove.',
     status: 'gathering-voices',

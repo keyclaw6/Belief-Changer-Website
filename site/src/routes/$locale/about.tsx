@@ -1,25 +1,25 @@
 import { useEffect } from 'react'
-import { createFileRoute, useParams } from '@tanstack/react-router'
+import { Link, createFileRoute, useParams } from '@tanstack/react-router'
 import { ArrowUpRight } from '@phosphor-icons/react'
 import { getMessages } from '~/i18n'
 import { type Locale } from '~/i18n/config'
-import { hreflangAlternates } from '~/i18n/routing'
+import { hreflangAlternates, localePath } from '~/i18n/routing'
 import type { Messages } from '~/i18n'
 import { track } from '~/lib/measure'
+import { Painting } from '~/components/Painting'
 import { Reveal } from '~/components/Reveal'
+import { inkLink } from '~/lib/ui'
+import { cn } from '~/lib/utils'
 
 /**
- * About (M4): mission, the laws, the honesty note, the open-source note
- * (SITE-PLAN sitemap + measurement contract). This is a Quiet Fact page: the
- * open-window PHOTOGRAPH is the structural image and no paintings appear (one
- * voice per section, imagery law). The honesty note states the aggregate
- * counting approach in plain words, verbatim in spirit with the measurement
- * contract.
+ * About (copy deck 09-about): who is behind this and what it stands for. A Quiet
+ * Fact page: the open-window PHOTOGRAPH is the structural image and no paintings
+ * appear (one voice per section). The header carries the conviction as a lead
+ * line; then the story, the five laws as a hairline-divided list, the honesty
+ * note as a bordered block, and a foot with the three cross-links.
  *
- * Layout families, all distinct: an image-anchored mission header, a
- * hairline-divided definition list for the laws (not five equal cards), a
- * single quiet statement block for the honesty note, and an open-source note
- * with an outbound link. Eyebrow count: zero.
+ * Layout families, all distinct: an image-anchored header, a prose block, a
+ * definition list, a bordered statement, and a foot link row. Eyebrow count: 0.
  */
 export const Route = createFileRoute('/$locale/about')({
   head: () => ({
@@ -44,61 +44,93 @@ function AboutPage() {
   const laws: Array<{ term: string; gloss: string }> = [
     { term: t.about.lawFreeTitle, gloss: t.about.lawFreeBody },
     { term: t.about.lawNoSignupTitle, gloss: t.about.lawNoSignupBody },
-    { term: t.about.lawNoTrackingTitle, gloss: t.about.lawNoTrackingBody },
     { term: t.about.lawEveryLanguageTitle, gloss: t.about.lawEveryLanguageBody },
+    { term: t.about.lawWarmTitle, gloss: t.about.lawWarmBody },
     { term: t.about.lawLivingTitle, gloss: t.about.lawLivingBody },
   ]
 
   return (
     <>
-      {/* Mission, anchored by the open-window photograph (Quiet Fact voice). */}
+      {/* Header, anchored by the open-window photograph (Quiet Fact voice). */}
       <section className="mx-auto w-full max-w-[var(--page-max)] px-[5vw]">
-        <div className="grid gap-10 pb-16 pt-14 md:grid-cols-[1fr_minmax(0,420px)] md:items-center md:gap-16 md:pt-[88px]">
-          <Reveal className="max-w-[54ch] md:order-1">
-            <h1
-              className="text-ink"
-              style={{
-                fontSize: 'var(--text-headline-lg)',
-                fontWeight: 'var(--text-headline-lg--font-weight)',
-                lineHeight: 'var(--text-headline-lg--line-height)',
-                letterSpacing: 'var(--text-headline-lg--letter-spacing)',
-              }}
-            >
-              {t.about.missionHeading}
-            </h1>
-            <p
-              className="mt-5 text-ink-secondary"
-              style={{ fontSize: 'var(--text-body-lg)', lineHeight: 'var(--text-body-lg--line-height)' }}
-            >
-              {t.about.missionBody1}
-            </p>
-            <p
-              className="mt-4 text-ink-secondary"
-              style={{ fontSize: 'var(--text-body-lg)', lineHeight: 'var(--text-body-lg--line-height)' }}
-            >
-              {t.about.missionBody2}
-            </p>
+        <div className="pb-12 pt-14 md:pt-[88px]">
+          <Reveal>
+            <Painting
+              src="/site/photo-open-window.jpg"
+              alt={t.about.imageAlt}
+              priority
+              sizes="(max-width: 1400px) 90vw, 1260px"
+              className="max-w-[72rem]"
+            />
           </Reveal>
-          <Reveal className="md:order-2">
-            <div className="h-64 w-full overflow-hidden rounded-lg sm:h-80 md:h-[26rem]">
-              <img
-                src="/site/photo-open-window.jpg"
-                alt={t.about.imageAlt}
-                loading="eager"
-                decoding="async"
-                className="h-full w-full object-cover object-center ring-1 ring-[var(--color-hairline-on-image)]"
-              />
+          <Reveal className="mt-11 max-w-[54ch]">
+            <div>
+              <h1
+                className="text-ink"
+                style={{
+                  fontSize: 'var(--text-headline-lg)',
+                  fontWeight: 'var(--text-headline-lg--font-weight)',
+                  lineHeight: 'var(--text-headline-lg--line-height)',
+                  letterSpacing: 'var(--text-headline-lg--letter-spacing)',
+                }}
+              >
+                {t.about.title}
+              </h1>
+              <p
+                className="mt-5 text-ink-secondary"
+                style={{ fontSize: 'var(--text-body-lg)', lineHeight: 'var(--text-body-lg--line-height)' }}
+              >
+                {t.about.headerBody}
+              </p>
+              <p
+                className="mt-3 text-ink"
+                style={{ fontSize: 'var(--text-body-lg)', fontWeight: 500, lineHeight: 'var(--text-body-lg--line-height)' }}
+              >
+                {t.about.headerConviction}
+              </p>
             </div>
           </Reveal>
         </div>
       </section>
 
-      {/* The laws, as a quiet hairline-divided list on a band. */}
+      {/* The story (band), a reading column. */}
       <section className="bg-band">
+        <div className="mx-auto w-full max-w-[var(--page-max)] px-[5vw] py-[var(--spacing-section-y)]">
+          <Reveal className="max-w-[65ch]">
+            <div>
+              <h2
+                className="text-ink"
+                style={{
+                  fontSize: 'var(--text-headline-md)',
+                  fontWeight: 'var(--text-headline-md--font-weight)',
+                  lineHeight: 'var(--text-headline-md--line-height)',
+                }}
+              >
+                {t.about.missionHeading}
+              </h2>
+              <p
+                className="mt-5 text-ink-secondary"
+                style={{ fontSize: 'var(--text-body-lg)', lineHeight: 'var(--text-body-lg--line-height)' }}
+              >
+                {t.about.missionBody1}
+              </p>
+              <p
+                className="mt-4 text-ink-secondary"
+                style={{ fontSize: 'var(--text-body-lg)', lineHeight: 'var(--text-body-lg--line-height)' }}
+              >
+                {t.about.missionBody2}
+              </p>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* The laws (canvas), a quiet hairline-divided list. */}
+      <section className="bg-canvas">
         <div className="mx-auto w-full max-w-[var(--page-max)] px-[5vw] py-[var(--spacing-section-y)]">
           <Reveal>
             <h2
-              className="max-w-[22ch] text-ink"
+              className="text-ink"
               style={{
                 fontSize: 'var(--text-headline-md)',
                 fontWeight: 'var(--text-headline-md--font-weight)',
@@ -114,7 +146,7 @@ function AboutPage() {
                 <div
                   key={law.term}
                   className={
-                    'grid gap-1 py-6 md:grid-cols-[minmax(0,16rem)_1fr] md:gap-8' +
+                    'grid gap-1 py-6 md:grid-cols-[minmax(0,18rem)_1fr] md:gap-8' +
                     (i > 0 ? ' border-t border-hairline' : '')
                   }
                 >
@@ -134,51 +166,53 @@ function AboutPage() {
         </div>
       </section>
 
-      {/* The honesty note: one quiet statement block on canvas. */}
-      <section className="bg-canvas">
+      {/* The honesty note (band), one bordered statement block. */}
+      <section className="bg-band">
         <div className="mx-auto w-full max-w-[var(--page-max)] px-[5vw] py-[var(--spacing-section-y)]">
-          <Reveal className="max-w-[46rem] rounded-lg border border-hairline bg-surface p-9 md:p-11">
-            <h2
-              className="text-ink"
-              style={{
-                fontSize: 'var(--text-headline-md)',
-                fontWeight: 'var(--text-headline-md--font-weight)',
-                lineHeight: 'var(--text-headline-md--line-height)',
-              }}
-            >
-              {t.about.honestyHeading}
-            </h2>
-            <p
-              className="mt-4 text-ink-secondary"
-              style={{ fontSize: 'var(--text-body-lg)', lineHeight: 'var(--text-body-lg--line-height)' }}
-            >
-              {t.about.honestyBody}
-            </p>
+          <Reveal className="max-w-[46rem] rounded-lg border border-hairline bg-canvas p-9 md:p-11">
+            <div>
+              <h2
+                className="text-ink"
+                style={{
+                  fontSize: 'var(--text-headline-md)',
+                  fontWeight: 'var(--text-headline-md--font-weight)',
+                  lineHeight: 'var(--text-headline-md--line-height)',
+                }}
+              >
+                {t.about.honestyHeading}
+              </h2>
+              <p
+                className="mt-4 text-ink-secondary"
+                style={{ fontSize: 'var(--text-body-lg)', lineHeight: 'var(--text-body-lg--line-height)' }}
+              >
+                {t.about.honestyBody}
+              </p>
+            </div>
           </Reveal>
         </div>
       </section>
 
-      {/* Open-source note on a band, with an outbound link. */}
-      <section className="bg-band">
+      {/* Foot (canvas): built in the open, three cross-links. */}
+      <section className="bg-canvas">
         <div className="mx-auto w-full max-w-[var(--page-max)] px-[5vw] py-[var(--spacing-section-y)]">
           <Reveal className="max-w-[54ch]">
-            <h2
-              className="text-ink"
-              style={{
-                fontSize: 'var(--text-headline-md)',
-                fontWeight: 'var(--text-headline-md--font-weight)',
-                lineHeight: 'var(--text-headline-md--line-height)',
-              }}
-            >
-              {t.about.openSourceHeading}
-            </h2>
-            <p
-              className="mt-4 text-ink-secondary"
-              style={{ fontSize: 'var(--text-body-lg)', lineHeight: 'var(--text-body-lg--line-height)' }}
-            >
-              {t.about.openSourceBody}
-            </p>
-            <OpenSourceLink t={t} />
+            <div>
+              <p
+                className="text-ink"
+                style={{ fontSize: 'var(--text-body-lg)', lineHeight: 'var(--text-body-lg--line-height)' }}
+              >
+                {t.about.footLead}
+              </p>
+              <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3">
+                <FootLink external t={t} label={t.about.openSourceLink} />
+                <Link to={localePath(activeLocale, '/contribute')} className={inkLink}>
+                  {t.about.contributeLink}
+                </Link>
+                <Link to={localePath(activeLocale, '/privacy')} className={inkLink}>
+                  {t.about.privacyLink}
+                </Link>
+              </div>
+            </div>
           </Reveal>
         </div>
       </section>
@@ -186,15 +220,16 @@ function AboutPage() {
   )
 }
 
-function OpenSourceLink({ t }: { t: Messages }) {
+function FootLink({ label, external }: { label: string; external?: boolean; t: Messages }) {
+  if (!external) return null
   return (
     <a
       href="https://github.com/belief-changer"
       target="_blank"
-      rel="noreferrer"
-      className="mt-5 inline-flex items-center gap-1.5 type-ui-sm font-medium text-ink underline underline-offset-[3px] decoration-1 transition-opacity duration-150 hover:opacity-70"
+      rel="noopener noreferrer"
+      className={cn(inkLink, 'inline-flex items-center gap-1.5')}
     >
-      {t.about.openSourceLink}
+      {label}
       <ArrowUpRight size={15} weight="bold" aria-hidden="true" />
     </a>
   )

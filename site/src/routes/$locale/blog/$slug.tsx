@@ -1,12 +1,14 @@
 import { useEffect } from 'react'
 import { Link, createFileRoute, notFound, useParams } from '@tanstack/react-router'
-import { ArrowLeft } from '@phosphor-icons/react'
+import { ArrowLeft, ArrowRight } from '@phosphor-icons/react'
 import { getMessages, format } from '~/i18n'
 import { type Locale } from '~/i18n/config'
 import { hreflangAlternates, localePath } from '~/i18n/routing'
 import { getBlogPost } from '~/data'
 import { track } from '~/lib/measure'
 import { Reveal } from '~/components/Reveal'
+import { inkLink } from '~/lib/ui'
+import { cn } from '~/lib/utils'
 
 /**
  * Blog post page (M4): a clean editorial reading layout at a 65ch measure. The
@@ -101,13 +103,32 @@ function BlogPostPage() {
           </div>
         </Reveal>
 
+        {/* Contribute card at the foot of the post (copy deck 08-blog). */}
         <Reveal>
-          <div className="mt-12 border-t border-hairline pt-8">
+          <div className="mt-12 rounded-lg border border-hairline bg-surface p-7 md:p-8">
+            <p
+              className="max-w-[52ch] text-ink"
+              style={{ fontSize: 'var(--text-body-lg)', lineHeight: 'var(--text-body-lg--line-height)' }}
+            >
+              {t.blog.contributeLead}
+            </p>
+            <Link
+              to={localePath(activeLocale, '/contribute')}
+              className={cn(inkLink, 'mt-3 inline-flex items-center gap-1.5')}
+            >
+              {t.blog.contributeLink}
+              <ArrowRight size={15} weight="bold" aria-hidden="true" className="dir-flip" />
+            </Link>
+          </div>
+        </Reveal>
+
+        <Reveal>
+          <div className="mt-10 border-t border-hairline pt-8">
             <Link
               to={localePath(activeLocale, '/blog')}
               className="inline-flex items-center gap-1.5 type-ui-sm font-medium text-ink-secondary no-underline transition-colors duration-150 hover:text-ink"
             >
-              <ArrowLeft size={15} weight="bold" aria-hidden="true" />
+              <ArrowLeft size={15} weight="bold" aria-hidden="true" className="dir-flip" />
               {t.blog.backToNotes}
             </Link>
           </div>

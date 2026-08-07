@@ -9,6 +9,7 @@ import type { BlogPost } from '~/data/types'
 import type { Messages } from '~/i18n'
 import { track } from '~/lib/measure'
 import { Reveal } from '~/components/Reveal'
+import { Painting } from '~/components/Painting'
 import { inkLink } from '~/lib/ui'
 import { cn } from '~/lib/utils'
 
@@ -48,15 +49,13 @@ function BlogIndexPage() {
       {/* Image-anchored header: the painting is the section's single voice. */}
       <section className="pt-14 md:pt-[88px]">
         <Reveal>
-          <div className="mb-11 h-44 w-full overflow-hidden rounded-lg sm:h-56 md:h-64">
-            <img
-              src="/site/painted-kite.jpg"
-              alt={t.blog.imageAlt}
-              loading="eager"
-              decoding="async"
-              className="h-full w-full object-cover object-center ring-1 ring-[var(--color-hairline-on-image)]"
-            />
-          </div>
+          <Painting
+            src="/site/painted-kite.jpg"
+            alt={t.blog.imageAlt}
+            priority
+            sizes="(max-width: 1400px) 90vw, 1260px"
+            className="mb-11 max-w-[72rem]"
+          />
         </Reveal>
         <Reveal>
           <h1

@@ -118,10 +118,10 @@ function AboutPanel({
   return (
     <div className="max-w-[62ch]">
       <p
-        className="text-ink-secondary"
+        className="max-w-[62ch] text-ink-secondary"
         style={{ fontSize: 'var(--text-body-lg)', lineHeight: 'var(--text-body-lg--line-height)' }}
       >
-        {t.home.livingBooksBody}
+        {t.book.aboutBody}
       </p>
 
       {/* Table of contents: real function, distinct from the masthead. When the

@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { Link } from '@tanstack/react-router'
 import { BookOpen, DownloadSimple, Headphones } from '@phosphor-icons/react'
 import type { Book } from '~/data/types'
@@ -11,15 +12,16 @@ import { cn } from '~/lib/utils'
 
 /**
  * BookActions: Read online (the single ink primary), Download EPUB (secondary),
- * and Listen (SITE-PLAN §Versions and formats). Books without audio show a
- * small "In production" yellow tag instead of a dead button; the same honesty
- * applies to EPUB. When nothing is readable yet, the primary is omitted rather
- * than faked; the status tag and version block carry that meaning.
+ * and Listen. Books without audio show a small "In production" tag instead of a
+ * dead button. When nothing is readable yet, the primary is omitted.
  *
- * Read online is a link into the reader, where read_start fires (reading starts
- * there, so the event lives in one place). Download EPUB fires download(slug,
- * 'epub'); the file itself is a documented v1 stub.
+ * Reader upgrade (05-reader): when a reading position for this book exists on
+ * the device, "Read online" becomes "Continue reading" and links to the
+ * remembered chapter. The position is read after mount (functional storage
+ * only), so SSR and the first client render agree, then the label settles.
  */
+const positionKey = (slug: string) => `bc-reading:${slug}`
+
 export function BookActions({
   book,
   locale,
@@ -33,15 +35,29 @@ export function BookActions({
   const canDownload = book.formats.epub === 'available'
   const audio = book.formats.audio
 
+  // Remembered reading position (client only). null until read after mount.
+  const [resumeChapter, setResumeChapter] = useState<number | null>(null)
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(positionKey(book.slug))
+      const n = raw ? Number(raw) : NaN
+      if (Number.isInteger(n) && book.chapters.some((c) => c.n === n && c.body?.length)) {
+        setResumeChapter(n)
+      }
+    } catch {
+      /* ignore */
+    }
+  }, [book.slug, book.chapters])
+
+  const readTo = resumeChapter ?? 1
+  const readLabel = resumeChapter ? t.book.continueReading : t.book.readOnline
+
   return (
     <div className="flex flex-wrap items-center gap-3">
       {canRead ? (
-        <Link
-          to={localePath(locale, `/books/${book.slug}/read/1`)}
-          className={btnPrimary}
-        >
+        <Link to={localePath(locale, `/books/${book.slug}/read/${readTo}`)} className={btnPrimary}>
           <BookOpen size={17} weight="regular" aria-hidden="true" />
-          {t.book.readOnline}
+          {readLabel}
         </Link>
       ) : null}
 
@@ -49,8 +65,7 @@ export function BookActions({
         <a
           href="#"
           onClick={(e) => {
-            // v1 stub: no real EPUB endpoint yet. Prevent the dead navigation
-            // and record the intent; the real download URL wires in later.
+            // v1 stub: no real EPUB endpoint yet. Record the intent.
             e.preventDefault()
             track('download', { slug: book.slug, format: 'epub' })
           }}
@@ -63,11 +78,7 @@ export function BookActions({
 
       {/* Audio: a live Listen link, an "In production" tag, or nothing. */}
       {audio === 'available' ? (
-        <a
-          href="#"
-          onClick={(e) => e.preventDefault()}
-          className={btnSecondary}
-        >
+        <a href="#" onClick={(e) => e.preventDefault()} className={btnSecondary}>
           <Headphones size={17} weight="regular" aria-hidden="true" />
           {t.book.listen}
         </a>
