@@ -1,94 +1,74 @@
-# HANDOFF — Belief Changer Website, next build agent
+# HANDOFF — Belief Changer Website
 
-You are the lead design-and-build agent for the Belief Changer website. Everything you
-need exists in one private GitHub repo; your first job is to load it, your second is to
-plan, and from then on you drive the work with the owner (KB) decision by decision.
+Hello. You are picking up the design and build of the Belief Changer website, working
+directly with the owner (KB). This note is orientation, not a cage: we are in the
+design stage, the owner steers, and anything can change when he says it should. Bring
+your own taste and judgment; that is why you are here.
 
-## 1 · Get the repo (first action)
+## What we are creating
 
-Use the **GITHUB PAT** skill (FetchSkillScripts, then RunWithCredentials) to clone:
+Belief Changer is a free, multilingual library of belief-change books - books that
+help people escape traps like smoking, doomscrolling, sugar, porn, overthinking. Free
+forever, every language, no signup, no tracking. The full vision, method, and laws
+are in `VISION.md`; they are the soul of the project and worth reading first.
+
+The website is where those books meet the world. Its centerpiece is a photorealistic
+3D bookshelf (Three.js) where visitors browse real-feeling hardcovers, and around it
+a calm, precise, quietly beautiful site: a finder that takes someone from "I can't
+stop scrolling" to the right book in seconds, a reading experience with book-quality
+typography, audio, a request board where the library grows from what people ask for.
+
+## Where everything lives
+
+One private repo. Clone it with the GITHUB PAT skill (FetchSkillScripts, then
+RunWithCredentials):
 
 ```
 https://github.com/keyclaw6/Belief-Changer-Website.git
 ```
 
-Clone it into your workspace and keep it as your working directory. You will commit
-and push your outputs back to it (briefs, plans, generated assets) via the same skill.
+`AGENTS.md` at the root is the map and the reading order - it points you through the
+vision, the current status, the design contract with its rendered references, the
+adopted craft skills, the cover-generation system, and the production assets. Follow
+it and you will have the whole picture in one sitting. Commit and push your work back
+to the repo as you go, so it stays the single source of truth.
 
-## 2 · Read, in this order
+Two things deserve special respect once you are oriented: the 10 production cover
+images are finished assets, and the cover-generation system that made them
+(`skills/cover-generation/`) is sacred - future covers reuse its exact process so the
+series never drifts.
 
-1. `VISION.md` — the mission and the laws the site must honor. Non-negotiable.
-2. `STATUS.md` — what is done, what is running right now, what comes next.
-3. `DESIGN.md` — the locked design contract ("Quiet Editorial"). Open
-   `design/reference-homepage.html` in a browser and study both themes; it is the
-   rendered ground truth.
-4. `AGENTS.md` — how you work: precedence, pinned dials, mechanical bans, quality
-   gates. Treat it as always-read.
-5. `prompts/COVER-SYSTEM.md` and `assets/covers/` — the cover language and the 10
-   production covers with manifest, derived spines/backs, and with-text proofs.
-6. `prompts/BOOK-ASSET-BRIEF.md` + `docs/book-asset-pipeline-proposal.md` — what the
-   book-asset agent is building and how its package will look.
+## Where things stand
 
-## 3 · Context you need
+Phase 1 is complete: the design language, the cover system, and all 10 covers with
+derived spine/back textures and a manifest of exact colors. Right now, a separate
+agent is building the 3D book asset itself - a deeply realistic hardcover (Blender
+geometry, Three.js page-turning, runtime text baking so titles render in any
+language). Its brief is `prompts/BOOK-ASSET-BRIEF.md`; the owner will hand you its
+finished package when it lands.
 
-- **A separate agent is building the 3D book right now** (photoreal hardcover:
-  Blender-authored GLB, Three.js-animated page turns, runtime text baking for any
-  language). The owner will hand you its zipped `book-asset/` package when it lands.
-  You do not build the book; you consume its API.
-- The 10 book covers are final production assets. Never regenerate, crop, tint, or
-  re-light them. New covers, when needed, follow `prompts/COVER-SYSTEM.md` exactly.
-- The site's register is locked by DESIGN.md. Do not re-infer a design direction, do
-  not propose alternative registers. Your creativity lives where DESIGN.md's
-  Creative Latitude section says it does.
+## What comes next (the shape of it, not a script)
 
-## 4 · Your mission, three workstreams
+- **The bookshelf.** When the book asset arrives, look it over, then write the brief
+  for the shelf experience: a Three.js space where the books are shown and browsed,
+  built on the book package's API and the covers manifest. The complete-shelf project
+  (whose ideas the book pipeline builds on - see `docs/`) is good inspiration for how
+  browsing, selecting, and inspecting can feel.
+- **The whole site.** Design and brainstorm, with the owner, how the entire page
+  should be built: the pages, the flows, how someone in distress reaches the right
+  book in under a minute, how it works in a hundred languages, and which images need
+  to be generated so every page looks finished and beautiful - the cover-generation
+  skill's prompt patterns extend naturally to other photographic assets.
+- **Then build it.**
 
-**A. Book asset QA + integration (when the owner delivers the package).**
-Verify it against its own `ACCEPTANCE.md`, run its harness, and wire
-`assets/covers/covers-manifest.json` into its Book API (cover texture, `groundHex`,
-`overlayInk`, titles per language). Report gaps precisely; do not fork its internals.
+## How the owner likes to work
 
-**B. Author `prompts/BOOKSHELF-BRIEF.md`.**
-The master brief for the Three.js bookshelf experience: a continuous shelf where the
-library is browsed (wheel / arrow keys / position markers), one book clearly selected,
-single click into a deterministic detail view beside an editorial info panel,
-hover-crack-open, drag-to-turn preview pages, exact-endpoint transitions, zero
-console errors — consuming the book package's API and the covers manifest. Include
-progressive enhancement (static cover row under `prefers-reduced-motion` / no-WebGL),
-performance budgets, and the same layered build-and-verify loop the book brief uses.
-Write it so a fresh agent with no other context can execute it.
+Decisions get made on rendered evidence: when a visual question is open, build it
+for real (HTML with the actual tokens and fonts) and show variants side by side with
+a short, honest recommendation. One clear decision at a time. He will tell you
+directly what he likes; iterate quickly and lock what he approves into the repo.
+The books and the people reading them are what matter - warm to the person, harsh to
+the trap, in the site's every word.
 
-**C. Plan the entire site, then drive it with the owner.**
-Produce `SITE-PLAN.md`: information architecture and per-page briefs for the whole
-site — home (split hero + shelf), the finder (first-person subject grid, two or three
-steps max), library/browse, the book page (read / download EPUB / listen actions,
-language row, living-book version + changelog block, chapter list), the reader (the
-product: Newsreader at 65-70ch, chapter nav, position memory, comfort modes), audio
-player, request board (the loops that make the library self-evolving), about /
-how-it-works, changelog. Multilingual and RTL from day one; every chapter
-server-rendered and indexable; no signup, no tracking, ever. Include the
-**image-generation plan**: exactly which photographic assets each page needs to look
-finished (OG/social templates per book, subject motifs if any, about-page imagery),
-each speccable with gpt-image-2 using `prompts/COVER-SYSTEM.md` prompt patterns.
-
-## 5 · How to work with the owner
-
-- **Decisions are made on rendered evidence.** For any visual decision, build real
-  HTML with the actual tokens and fonts (never AI-generated UI mockups) and present
-  variants side by side. One focused decision per round. Offer a short, honest
-  recommendation with each.
-- Ask one question at a time when direction is genuinely ambiguous; otherwise act.
-- Lock decisions in writing: update DESIGN.md / STATUS.md / the relevant brief, then
-  commit and push so the repo is always the single source of truth.
-- Keep every visible string inside the tone law: warm to the person, harsh to the
-  trap; sentence case; no exclamation marks; zero em-dashes; no AI clichés.
-- Run AGENTS.md §5 quality gates before calling any surface done.
-
-## 6 · Begin
-
-After cloning and reading, post three things, briefly:
-1. Your understanding of the project in ten lines or fewer.
-2. Your proposed plan for the three workstreams, with what you will do first.
-3. The single first decision you need from the owner.
-
-Then start.
+Start by cloning and reading, then share how you see the project and what you would
+do first.

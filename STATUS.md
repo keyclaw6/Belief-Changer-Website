@@ -16,7 +16,7 @@ taste-skill v2 and minimalist-skill adopted; `AGENTS.md` fixes precedence
 (DESIGN.md > AGENTS.md > skills > defaults), pins the design read and dials, and
 carries the mechanical bans and quality gates.
 
-**Cover system — `prompts/COVER-SYSTEM.md` ("The Specimen Series")**
+**Cover system — `skills/cover-generation/SKILL.md` ("The Specimen Series")**
 One grammar for every book: full-bleed museum-restraint still life, one specimen
 object, muted seamless ground, textless (titles overlaid at runtime per language).
 Reproducible via anchor + edit-endpoint consistency protocol.
@@ -52,7 +52,7 @@ harness + README + ACCEPTANCE.md). Architecture rationale:
    (home, finder, library, book page, reader, audio, request board, about/changelog),
    multilingual + RTL + SEO (every chapter server-rendered and indexable; no signup,
    no tracking), plus the image-generation plan: which photographic assets each page
-   needs, produced with gpt-image-2 following `prompts/COVER-SYSTEM.md` patterns.
+   needs, produced with gpt-image-2 following `skills/cover-generation/SKILL.md` patterns.
 4. **Build.**
 
 ## Fixed laws (from VISION.md — the site serves these)

@@ -149,7 +149,10 @@ product. Not a wellness brand, not a SaaS pitch, not a charity appeal.
 The photorealistic books remain the emotional core and the richest color on any page;
 the chrome around them is white, exact, and quiet. Ground truth is this document plus
 the rendered reference `design/reference-homepage.html` (open it in a browser; both themes
-via the toggle) plus the skills it adopts (`skills/taste-skill`,
+via the toggle) plus the skills it adopts. A second art-direction reference,
+`design/comp-6b-reference.png`, captures the intended warmth and calm of the whole
+site; it is fully compatible in spirit, and where its details differ from the tokens
+here, this document and the rendered reference win. It sits alongside (`skills/taste-skill`,
 `skills/minimalist-skill`); where the two skills disagree with each other, this
 document names the winner.
 

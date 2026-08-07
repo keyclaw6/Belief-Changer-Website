@@ -6,8 +6,15 @@ compatibility: "Any GPT Image 2 access path: gpt-image CLI, OpenAI API, or a hos
 
 # Belief Changer — Cover System ("The Specimen Series")
 
+> **SACRED — DO NOT MODIFY.** The prompt structure in this file and the anchor process
+> in `references/gallery.md` are locked. They are how every cover in the library stays
+> part of one series. Changes happen only on the owner's explicit instruction. New
+> covers follow this system verbatim; they never improvise on it.
+
 Agent runbook for producing cover artwork, in the GPT-Image2-Skill operating-loop
 format so any current or future model can replicate the series exactly.
+Every accepted cover's exact prompt, endpoint, and settings are recorded in
+`references/gallery.md` — read it before generating anything.
 
 ## The locked design language
 
@@ -43,7 +50,7 @@ One grammar for every book in the library:
 1. **Slot the template** (below): object clause, ground color, title (calibration
    only) or textless (production).
 2. **Series consistency protocol:** the first accepted cover of a batch is the ANCHOR
-   (for the existing library: `assets/covers/01-sugar.png`). Generate every other
+   (for the existing library: `assets/covers/01-sugar.png` — see `references/gallery.md` for its exact prompt and every edit made from it). Generate every other
    cover with the edits endpoint, passing the anchor as reference image, with
    invariant language: "same composition system, same lighting direction, same object
    scale and placement in the lower third, same photographic character; change ONLY
