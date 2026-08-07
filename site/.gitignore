@@ -1,0 +1,30 @@
+# dependencies
+node_modules
+
+# build output
+.output
+.vinxi
+.nitro
+.tanstack
+dist
+build
+
+# TanStack Router generated route tree
+src/routeTree.gen.ts
+
+# caches
+.vite
+.cache
+*.tsbuildinfo
+
+# logs
+*.log
+npm-debug.log*
+
+# env
+.env
+.env.*
+!.env.example
+
+# os
+.DS_Store

@@ -1,0 +1,34 @@
+{
+  "name": "belief-changer-site",
+  "private": true,
+  "type": "module",
+  "version": "0.1.0",
+  "description": "Belief Changer website front end (Quiet Editorial).",
+  "scripts": {
+    "dev": "vite dev --port 3000",
+    "build": "vite build",
+    "serve": "vite preview --port 3000",
+    "typecheck": "tsc --noEmit",
+    "fetch-fonts": "node scripts/fetch-fonts.mjs"
+  },
+  "dependencies": {
+    "@phosphor-icons/react": "2.1.10",
+    "@tanstack/react-router": "1.170.22",
+    "@tanstack/react-start": "1.168.39",
+    "class-variance-authority": "0.7.1",
+    "clsx": "2.1.1",
+    "motion": "13.0.0",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "tailwind-merge": "3.6.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "4.3.3",
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.4",
+    "@vitejs/plugin-react": "6.0.5",
+    "tailwindcss": "4.3.3",
+    "typescript": "5.9.3",
+    "vite": "8.2.1"
+  }
+}
