@@ -5,19 +5,17 @@ import { cn } from '~/lib/utils'
 /**
  * Hologram: the transient interaction light on covers in browsable lists
  * (library grid, homepage library row, related books). Hovering lifts the book
- * slightly toward the pointer with a gentle pointer-tracked tilt and one soft
- * specular sweep across the cover. FeralUI ships a `hologram` package name but
- * it is an empty stub on npm, so this is the equivalent per 00-global.md:
+ * slightly toward the pointer with a gentle pointer-tracked tilt. FeralUI ships
+ * a `hologram` package name but it is an empty stub on npm, so this is the
+ * equivalent per 00-global.md:
  *
  *   - 3D tilt toward the cursor (small, calm), 5px lift, 150ms in / 250ms out.
- *   - One soft specular sweep (a faint light band tracking the pointer), never a
- *     re-lighting of the artwork; the cover file itself is untouched.
  *   - Touch (coarse pointer): a subtle press lift, no tilt.
- *   - Reduced motion: a plain 2px lift, no tilt, no sweep.
+ *   - Reduced motion: a plain 2px lift, no tilt.
  *
  * Pointer position is written straight to CSS custom properties on the element
  * (no React state per frame, per taste-skill §3.B), so it stays cheap and never
- * re-renders the tree. The whole effect lives on `transform`/`opacity` only.
+ * re-renders the tree. The whole effect lives on `transform` only.
  */
 export function Hologram({
   children,
@@ -40,17 +38,12 @@ export function Hologram({
     // Calm tilt: a maximum of ~5deg either way. Y drives X-rotation.
     el.style.setProperty('--holo-ry', `${(px * 9).toFixed(2)}deg`)
     el.style.setProperty('--holo-rx', `${(-py * 9).toFixed(2)}deg`)
-    // Sweep position tracks the pointer across the cover (0..100%).
-    el.style.setProperty('--holo-sweep-x', `${((px + 0.5) * 100).toFixed(1)}%`)
   }
 
-  function onPointerEnter(e: React.PointerEvent<HTMLDivElement>) {
+  function onPointerEnter() {
     const el = ref.current
     if (!el) return
     el.style.setProperty('--holo-lift', reduce ? '-2px' : '-5px')
-    if (!reduce && e.pointerType !== 'touch') {
-      el.style.setProperty('--holo-sweep-o', '1')
-    }
   }
 
   function onPointerLeave() {
@@ -59,7 +52,6 @@ export function Hologram({
     el.style.setProperty('--holo-lift', '0px')
     el.style.setProperty('--holo-rx', '0deg')
     el.style.setProperty('--holo-ry', '0deg')
-    el.style.setProperty('--holo-sweep-o', '0')
   }
 
   function onPointerDown() {

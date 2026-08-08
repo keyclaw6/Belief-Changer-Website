@@ -1,7 +1,6 @@
 @import 'tailwindcss';
 @import './fonts.css';
-/* FeralUI PullCord: colours, entrance, focus ring. Geometry lives in the JS. */
-@import 'pullcord/pullcord.css';
+@import './pullcord.css';
 
 /* ============================================================================
    Belief Changer, Quiet Editorial design tokens
@@ -48,8 +47,8 @@
 
   /* -- PullCord (the light switch) ------------------------------------- */
   /* Rope ink: a hairline gray in light. It hangs from the very top, near the
-     right edge, in front of the nav. --pullcord-right places the knob just
-     inside the page gutter; --pullcord-z sits above the nav's hairline bar. */
+     right edge. --pullcord-right places the knob just inside the page gutter;
+     the nav's stacking layer covers the cord across the top bar. */
   --pullcord-ink: rgba(17, 17, 17, 0.28);
   --pullcord-top: 0px;
   --pullcord-right: clamp(1.5rem, 5vw, 3.25rem);
@@ -464,16 +463,13 @@
   }
 
   /* ── Hologram hover (covers in browsable lists) ────────────────────────
-     Transient interaction light per 00-global.md: a small pointer-tracked
-     tilt, a ~5px lift toward the viewer, and one soft specular sweep. The
-     Hologram component writes the custom properties from pointer events; the
-     transform is composited (transform/opacity only). 150ms in, 250ms out. */
+     A small pointer-tracked tilt and ~5px lift toward the viewer. The Hologram
+     component writes the custom properties from pointer events; the transform
+     is composited. 150ms in, 250ms out. */
   .holo {
     --holo-lift: 0px;
     --holo-rx: 0deg;
     --holo-ry: 0deg;
-    --holo-sweep-x: 50%;
-    --holo-sweep-o: 0;
     position: relative;
     transform: perspective(900px) rotateX(var(--holo-rx)) rotateY(var(--holo-ry))
       translateY(var(--holo-lift));
@@ -485,34 +481,10 @@
   .holo:hover {
     transition-duration: 150ms;
   }
-  /* The specular sweep: a faint diagonal band of light that tracks the
-     pointer. It is a sibling overlay on the cover, never a repaint of the art.
-     It only appears while the sweep opacity is lifted (on pointer enter). */
-  .holo::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 2px;
-    pointer-events: none;
-    background: linear-gradient(
-      105deg,
-      transparent 0%,
-      rgba(255, 255, 255, 0.14) calc(var(--holo-sweep-x) - 14%),
-      rgba(255, 255, 255, 0.42) var(--holo-sweep-x),
-      rgba(255, 255, 255, 0.14) calc(var(--holo-sweep-x) + 14%),
-      transparent 100%
-    );
-    mix-blend-mode: soft-light;
-    opacity: var(--holo-sweep-o);
-    transition: opacity 250ms ease;
-  }
   @media (prefers-reduced-motion: reduce) {
     .holo {
       transform: translateY(var(--holo-lift));
       transition: transform 150ms ease;
-    }
-    .holo::after {
-      display: none;
     }
   }
 

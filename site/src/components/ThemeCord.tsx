@@ -1,6 +1,6 @@
-import { PullCord } from 'pullcord'
 import { useReducedMotion } from 'motion/react'
 import { useTheme } from '~/lib/theme-context'
+import { PullCord } from './PullCord'
 
 /**
  * ThemeCord: the light switch. A real, physics-simulated ceiling pull-cord

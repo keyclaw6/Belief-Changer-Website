@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import { Link } from '@tanstack/react-router'
+import { Link, useRouterState } from '@tanstack/react-router'
 import { List, X } from '@phosphor-icons/react'
 import type { Locale } from '~/i18n/config'
 import type { Messages } from '~/i18n'
-import { localePath } from '~/i18n/routing'
+import { localePath, stripLocale } from '~/i18n/routing'
 import { LanguageSwitcher } from './LanguageSwitcher'
 import { cn } from '~/lib/utils'
 
@@ -17,6 +17,9 @@ import { cn } from '~/lib/utils'
  */
 export function Nav({ locale, t }: { locale: Locale; t: Messages }) {
   const [open, setOpen] = useState(false)
+  const restPath = stripLocale(
+    useRouterState({ select: (s) => s.location.pathname }),
+  ).rest
 
   const links: Array<{ to: string; label: string }> = [
     { to: '/books', label: t.nav.books },
@@ -27,7 +30,7 @@ export function Nav({ locale, t }: { locale: Locale; t: Messages }) {
   ]
 
   return (
-    <header className="relative border-b border-hairline bg-canvas">
+    <header className="relative z-[70] border-b border-hairline bg-canvas">
       <nav
         aria-label={t.wordmark}
         className={cn(
@@ -58,7 +61,7 @@ export function Nav({ locale, t }: { locale: Locale; t: Messages }) {
           ))}
           <LanguageSwitcher
             locale={locale}
-            restPath="/"
+            restPath={restPath}
             heading={t.langSwitcher.heading}
             label={t.langSwitcher.label}
           />
@@ -68,7 +71,7 @@ export function Nav({ locale, t }: { locale: Locale; t: Messages }) {
         <div className="flex items-center gap-4 md:hidden">
           <LanguageSwitcher
             locale={locale}
-            restPath="/"
+            restPath={restPath}
             heading={t.langSwitcher.heading}
             label={t.langSwitcher.label}
           />

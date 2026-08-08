@@ -28,9 +28,12 @@ export const themeInitScript = `(function(){try{var k='${THEME_STORAGE_KEY}';var
 
 /** Read the persisted choice (client only). */
 export function getStoredTheme(): ThemeChoice {
-  if (typeof localStorage === 'undefined') return 'system'
-  const v = localStorage.getItem(THEME_STORAGE_KEY)
-  return v === 'light' || v === 'dark' ? v : 'system'
+  try {
+    const v = localStorage.getItem(THEME_STORAGE_KEY)
+    return v === 'light' || v === 'dark' ? v : 'system'
+  } catch {
+    return 'system'
+  }
 }
 
 /** Whether the OS currently prefers dark (client only). */

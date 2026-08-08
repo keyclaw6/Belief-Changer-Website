@@ -42,7 +42,7 @@ export const books: Book[] = [
     version: 3, // MOCK
     versionDate: 'June 2026', // MOCK
     languages: 7, // MOCK
-    formats: { read: 'available', epub: 'available', audio: 'in-production' },
+    formats: { read: 'available', epub: 'none', audio: 'in-production' },
     chapters: [
       { n: 1, title: 'The afternoon walk to the kitchen', body: sugarChapter1 }, // sample
       { n: 2, title: 'What the sweetness actually buys' },
@@ -86,7 +86,7 @@ export const books: Book[] = [
     version: 4, // MOCK
     versionDate: 'May 2026', // MOCK
     languages: 9, // MOCK
-    formats: { read: 'available', epub: 'available', audio: 'available' },
+    formats: { read: 'available', epub: 'none', audio: 'none' },
     chapters: titleChapters([
       'The cigarette that fixes nothing',
       'The tension it built for you',
@@ -124,7 +124,7 @@ export const books: Book[] = [
     version: 3, // MOCK
     versionDate: 'June 2026', // MOCK
     languages: 12, // MOCK
-    formats: { read: 'available', epub: 'available', audio: 'in-production' },
+    formats: { read: 'available', epub: 'none', audio: 'in-production' },
     chapters: [
       { n: 1, title: 'The reach', body: scrollingChapter1 }, // sample
       { n: 2, title: 'What it gives and what it takes', body: scrollingChapter2 }, // sample
@@ -215,7 +215,7 @@ export const books: Book[] = [
     version: 1, // MOCK
     versionDate: 'April 2026', // MOCK
     languages: 3, // MOCK
-    formats: { read: 'available', epub: 'available', audio: 'none' },
+    formats: { read: 'available', epub: 'none', audio: 'none' },
     chapters: titleChapters([
       'The progress that goes nowhere',
       'The loop and the life outside it',
