@@ -19,8 +19,8 @@ import { cn } from '~/lib/utils'
  * name-dropped (no "Easyway", "Allen Carr", "Freedom Model").
  *
  * Structure: an opening, then eight chapters set as a reading column, with four
- * wide still paintings breaking the essay between chapters (overlook, the knot,
- * the open cage, the riverside). Canvas and warm band alternate so the long read
+ * wide still paintings breaking the essay between chapters (clear choices, the
+ * knot, the first morning, free books). Canvas and warm band alternate so the long read
  * has a quiet two-tone rhythm; the images run wide and still (never cropped).
  * A closing band carries the two cross-links. Eyebrow count: zero.
  */
@@ -132,12 +132,12 @@ function HowItWorksPage() {
         </div>
       </section>
 
-      {/* Chapter 1 + the overlook (band). */}
+      {/* Chapter 1 + clear choices (band). */}
       <section className="bg-band">
         <div className="mx-auto w-full max-w-[var(--page-max)] px-[5vw] py-[var(--spacing-section-y)]">
           <Chapter heading={h.ch1Heading} paras={[h.ch1Body1, h.ch1Body2, h.ch1Body3]} />
           <div className="mt-12">
-            <EssayImage src="/site/painted-morning-overlook.jpg" alt={h.ch1ImageAlt} />
+            <EssayImage src="/site/painted-clear-choices.png" alt={h.ch1ImageAlt} />
           </div>
         </div>
       </section>
@@ -173,12 +173,12 @@ function HowItWorksPage() {
         </div>
       </section>
 
-      {/* Chapter 6 + the open cage (canvas). */}
+      {/* Chapter 6 + the first morning (canvas). */}
       <section className="bg-canvas">
         <div className="mx-auto w-full max-w-[var(--page-max)] px-[5vw] py-[var(--spacing-section-y)]">
           <Chapter heading={h.ch6Heading} paras={[h.ch6Body1, h.ch6Body2]} />
           <div className="mt-12">
-            <EssayImage src="/site/painted-open-cage.jpg" alt={h.ch6ImageAlt} />
+            <EssayImage src="/site/painted-first-morning.png" alt={h.ch6ImageAlt} />
           </div>
         </div>
       </section>
@@ -190,12 +190,12 @@ function HowItWorksPage() {
         </div>
       </section>
 
-      {/* Chapter 8 + the riverside (canvas). */}
+      {/* Chapter 8 + free books (canvas). */}
       <section className="bg-canvas">
         <div className="mx-auto w-full max-w-[var(--page-max)] px-[5vw] py-[var(--spacing-section-y)]">
           <Chapter heading={h.ch8Heading} paras={[h.ch8Body1, h.ch8Body2]} />
           <div className="mt-12">
-            <EssayImage src="/site/painted-riverside-glide.jpg" alt={h.ch8ImageAlt} />
+            <EssayImage src="/site/painted-free-book-cabinet.png" alt={h.ch8ImageAlt} />
           </div>
         </div>
       </section>

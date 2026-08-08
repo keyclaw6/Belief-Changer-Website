@@ -38,19 +38,21 @@ One grammar for every book in the library:
 - **Text:** production artwork is generated TEXTLESS. Titles, subtitle lines, and the
   series mark are overlaid at runtime (live text on flat pages; canvas-composited into
   textures for the 3D shelf) so one artwork serves every language. With-text
-  generations exist only as calibration proofs (see `assets/covers/proofs/`).
+  generations exist only as calibration proofs (see `../../assets/covers/proofs/`).
 - **Typography for overlays** (validated in the with-text proofs): title in an elegant
   classical serif, charcoal `#2F3437` on light grounds / warm bone `#F5F1E8` on deep
   grounds, centered in the upper negative space; series mark "BELIEF CHANGER" in small
   letterspaced serif capitals at the foot. Per-book ink lives in
-  `assets/covers/covers-manifest.json` (`overlayInk`, chosen by WCAG contrast ratio).
+  `../../assets/covers/covers-manifest.json` (`overlayInk`, chosen by WCAG contrast
+  ratio).
 
 ## Operating loop
 
 1. **Slot the template** (below): object clause, ground color, title (calibration
    only) or textless (production).
 2. **Series consistency protocol:** the first accepted cover of a batch is the ANCHOR
-   (for the existing library: `assets/covers/01-sugar.png` — see `references/gallery.md` for its exact prompt and every edit made from it). Generate every other
+   (for the existing library: `../../assets/covers/01-sugar.png` — see
+   `references/gallery.md` for its exact prompt and every edit made from it). Generate every other
    cover with the edits endpoint, passing the anchor as reference image, with
    invariant language: "same composition system, same lighting direction, same object
    scale and placement in the lower third, same photographic character; change ONLY
@@ -60,7 +62,7 @@ One grammar for every book in the library:
 4. **QA every output**: object reads as specimen (not ad, not shame); shadow soft and
    single-sourced; ground even and seamless; for production assets, ZERO text or
    lettering anywhere; upper two-fifths effectively empty (reserved for overlay).
-5. **Run `scripts/derive-surfaces.py`** after accepting new covers: it produces
+5. **Run `../../scripts/derive-surfaces.py`** after accepting new covers: it produces
    matching spine and back textures and fills `groundHex` + `overlayInk` in the
    manifest.
 6. **Log accepted covers** in the manifest so the series stays reproducible.
@@ -127,16 +129,16 @@ tissue — a mundane object until the title lands.)
 
 - Production artwork = FLAT texture: no book render, no book shadow, no outer
   background. The still life's own internal shadow IS part of the artwork and stays.
-- Spine and back textures are NOT generated: `scripts/derive-surfaces.py` extracts each
+- Spine and back textures are NOT generated: `../../scripts/derive-surfaces.py` extracts each
   front's ground gradient and grain and renders seamless `{slug}-spine.png` /
-  `{slug}-back.png` (in `assets/covers/derived/`), plus exact `groundHex` values.
+  `{slug}-back.png` (in `../../assets/covers/derived/`), plus exact `groundHex` values.
 - The engine (Three.js PBR) supplies book geometry, material response, scene lighting,
   and contact shadows. Never bake those into artwork.
-- The with-text calibration renders in `assets/covers/proofs/` are the art-direction
+- The with-text calibration renders in `../../assets/covers/proofs/` are the art-direction
   references for how finished books (front and spine typography) must look.
 
 ## The current library (10 production covers)
 
-See `assets/covers/covers-manifest.json` for the authoritative list: slug, object
+See `../../assets/covers/covers-manifest.json` for the authoritative list: slug, object
 clause, ground description, sampled `groundHex`, and `overlayInk` per book. The
 manifest is the interface consumed by the site and the 3D book component.

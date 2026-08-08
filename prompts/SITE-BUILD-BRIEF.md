@@ -22,7 +22,7 @@ leaves to you.
    fixtures, measurement contract, imagery manifest, shelf slot contract
 5. `skills/taste-skill/SKILL.md` — craft law; §14 is your final gate, every box
 6. `skills/minimalist-skill/SKILL.md` — craft law where DESIGN.md is silent
-7. `skills/site-imagery/SKILL.md` — context for the imagery you are placing
+7. `image-generation/site-imagery/SKILL.md` — context for the imagery you are placing
 8. `assets/covers/covers-manifest.json` — the book catalog (10 books)
 9. `design/reference-homepage.html` — rendered ground truth for the homepage feel
    (open it, study both themes; your homepage supersedes it only where SITE-PLAN says)

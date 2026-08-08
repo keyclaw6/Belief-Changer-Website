@@ -35,7 +35,7 @@ to the repo as you go, so it stays the single source of truth.
 
 Two things deserve special respect once you are oriented: the 10 production cover
 images are finished assets, and the cover-generation system that made them
-(`skills/cover-generation/`) is sacred - future covers reuse its exact process so the
+(`image-generation/covers/`) is sacred - future covers reuse its exact process so the
 series never drifts.
 
 ## Where things stand

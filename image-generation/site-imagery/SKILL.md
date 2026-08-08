@@ -1,6 +1,6 @@
 ---
 name: belief-changer-site-imagery
-description: "Reproducible two-voice prompt system for generating Belief Changer WEBSITE imagery with GPT Image 2 (gpt-image-2): The Painted Life (fine-line classical oil painting of modern freedom) and The Quiet Fact (museum-restraint photography of real, hopeful places). Use whenever any site surface needs supporting imagery. The book-cover system is separate and sacred: skills/cover-generation/SKILL.md — never use this file for covers."
+description: "Reproducible two-voice prompt system for generating Belief Changer WEBSITE imagery with GPT Image 2 (gpt-image-2): The Painted Life (fine-line classical oil painting of modern freedom) and The Quiet Fact (museum-restraint photography of real, hopeful places). Use whenever any site surface needs supporting imagery. The book-cover system is separate and sacred: ../covers/SKILL.md — never use this file for covers."
 compatibility: "Any GPT Image 2 access path: gpt-image CLI, OpenAI API, or a host platform's native gpt-image-2 tool. quality=high for all final assets."
 ---
 
@@ -36,7 +36,8 @@ image answers: **the way out exists, it is ordinary, and it feels like morning.*
 section — the two never share a viewport moment.
 
 - **Voice 1 — The Painted Life** (lead voice, roughly 4/5 of site imagery).
-  Fine-line classical oil painting in the exact craft of `references/painting-anchor.jpg`:
+  Fine-line classical oil painting in the exact craft of
+  `../../assets/references/site-imagery/painting-anchor.jpg`:
   fine detailed brushwork, lush deep greens, dappled natural light, deep reflective
   water, soft atmospheric depth. Modern scenes, modern clothes, people of all ages
   welcome (and gender-balanced across the set). Jobs: the emotional surfaces — the
@@ -53,7 +54,7 @@ Shared rules, both voices:
 - **Textless, always.** Site copy is live HTML text; artwork never contains lettering.
 - **Palette:** muted and harmonious; deep muted greens and blues lead; warm bone
   light; never a golden-yellow haze over everything; never neon, never AI-purple.
-  Where natural, quote the series palette from `assets/covers/covers-manifest.json`
+  Where natural, quote the series palette from `../../assets/covers/covers-manifest.json`
   ground hexes so the site rhymes with the library.
 - **Dignity law (inherited from the cover system):** no shame styling, no glamour
   styling, brand-sterile, passes the "reading it on a train" test.
@@ -66,7 +67,8 @@ Shared rules, both voices:
 2. **Slot the template** (below): scene clause, people clause (Voice 1 only,
    optional), freedom note, palette note, targeted avoids.
 3. **Series consistency protocol:**
-   - Voice 1: ALWAYS pass `references/painting-anchor.jpg` as the reference image
+   - Voice 1: ALWAYS pass `../../assets/references/site-imagery/painting-anchor.jpg` as the
+     reference image
      (edits endpoint / image input), with the invariant style language of the
      template. The anchor supplies craft only — the scene must be entirely new and
      modern.
@@ -76,7 +78,7 @@ Shared rules, both voices:
    (default), 16:9 for full-bleed bands, 1:1 for tiles.
 5. **QA every output** (checklist below) — look at the image with your own vision.
 6. **Log accepted images** in `references/gallery.md` with the exact prompt and
-   settings; production files live under `assets/site/`.
+   settings; production files live under `../../assets/site/`.
 
 ## Voice 1 template — The Painted Life
 
@@ -144,5 +146,5 @@ Tested with the owner on 2026-08-07 and rejected for site imagery:
 
 ## The current references
 
-See `references/gallery.md`: the owner-provided painting anchor plus four accepted
-canon images (2 per voice), each with its exact prompt and settings.
+See `references/gallery.md`: the owner-provided painting anchor plus the accepted canon
+images, each with its exact prompt and settings.

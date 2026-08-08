@@ -14,7 +14,7 @@ import { cn } from '~/lib/utils'
  * Contribute (NEW route, copy deck 10-contribute): the invitation. Not a
  * careers page, not a community-platform pitch: the founder asking, plainly,
  * for a few dedicated people. It reads like a letter, at a 65ch measure, with
- * the painted-bench above it (shared with home beat 2).
+ * the way-out painting above it.
  *
  * The email address and repository link are the two owner decisions this page
  * waits on; both are one-line swaps, marked clearly as placeholders in code.
@@ -51,10 +51,10 @@ function ContributePage() {
   return (
     <section className="mx-auto w-full max-w-[var(--page-max)] px-[5vw]">
       <div className="pb-[var(--spacing-section-y)] pt-14 md:pt-[88px]">
-        {/* The bench painting above the letter (wide, still, never cropped). */}
+        {/* The open way above the letter (wide, still, never cropped). */}
         <Reveal>
           <Painting
-            src="/site/painted-bench.jpg"
+            src="/site/painted-way-out.png"
             alt={c.imageAlt}
             priority
             sizes="(max-width: 1400px) 90vw, 1260px"

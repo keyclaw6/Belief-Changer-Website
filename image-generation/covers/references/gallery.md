@@ -7,7 +7,7 @@
 
 ## The process (how every future cover is made)
 
-1. **The anchor is `assets/covers/01-sugar.png`** (entry No. 01 below). It defines the
+1. **The anchor is `../../../assets/covers/01-sugar.png`** (entry No. 01 below). It defines the
    series: composition, lighting direction, shadow character, object placement,
    photographic register.
 2. Every other cover is generated through the **edits endpoint** with the anchor
@@ -15,13 +15,13 @@
    keep everything identical, change ONLY the object and the ground color.
 3. Settings, always: model `gpt-image-2` · size `1024x1536` (2:3 portrait) ·
    `quality=high` · production covers are TEXTLESS.
-4. After acceptance: run `scripts/derive-surfaces.py` (spine/back textures + manifest
+4. After acceptance: run `../../../scripts/derive-surfaces.py` (spine/back textures + manifest
    hexes) and add the new cover's entry to this gallery with its exact prompt.
 5. Slot rules, dignity law, and QA checklist: see `../SKILL.md`.
 
 ---
 
-## Production covers (textless assets in `assets/covers/`)
+## Production covers (textless assets in `../../../assets/covers/`)
 
 ### No. 01 · The Sugar Trap — THE SERIES ANCHOR
 
@@ -135,7 +135,7 @@ Avoid: sink, bathroom scene, pipes, splashing or running water, any text or typo
 
 ---
 
-## With-text calibration proofs (`assets/covers/proofs/`)
+## With-text calibration proofs (`../../../assets/covers/proofs/`)
 
 Not assets — ground truth for how overlay typography must look on finished books
 (title serif placement, series mark, spine typography). Generated with the

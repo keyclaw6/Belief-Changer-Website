@@ -321,7 +321,7 @@ facts stated plainly and often.
 
 The books are the primary imagery and the emotional center — real production cover
 assets exist in `assets/covers/` and are used wherever a book is present. All other
-imagery follows the owner-locked two-voice system in `skills/site-imagery/SKILL.md`
+imagery follows the owner-locked two-voice system in `image-generation/site-imagery/SKILL.md`
 (anchors and accepted prompts in its `references/gallery.md`):
 
 - **The Painted Life** (lead voice, ~4/5 of site imagery): fine-line classical oil

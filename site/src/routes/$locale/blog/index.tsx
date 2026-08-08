@@ -15,7 +15,7 @@ import { cn } from '~/lib/utils'
 
 /**
  * Blog index (M4): updates and stories, the source for social posts (SITE-PLAN
- * sitemap). The kite painting anchors the header as the section's single voice
+ * sitemap). The living-pages painting anchors the header as the section's single voice
  * (imagery manifest). The posts then run as an editorial list with sparse
  * hairline dividers rather than three equal cards (a banned pattern): each row
  * is a title, a month in mono, and a one-line standfirst, the whole row a link
@@ -50,7 +50,7 @@ function BlogIndexPage() {
       <section className="pt-14 md:pt-[88px]">
         <Reveal>
           <Painting
-            src="/site/painted-kite.jpg"
+            src="/site/painted-living-pages.png"
             alt={t.blog.imageAlt}
             priority
             sizes="(max-width: 1400px) 90vw, 1260px"

@@ -13,12 +13,9 @@ Five skills vendored from [Leonxlnx/taste-skill](https://github.com/Leonxlnx/tas
 - **output-skill/** — full-output enforcement: no half-finished work, no placeholder
   comments.
 
-Plus one project-native skill:
-
-- **cover-generation/** — the Specimen Series cover system (SACRED: prompt structure
-  and anchor process are locked; every accepted cover's exact prompt lives in
-  `cover-generation/references/gallery.md`). Runbook format follows
-  [wuyoscar/GPT-Image2-Skill](https://github.com/wuyoscar/gpt_image_2_skill).
+Project-native image skills are progressively disclosed through
+`../image-generation/README.md`; they do not live in this always-available craft-skill
+directory.
 
 Precedence when anything conflicts: `../DESIGN.md` > `../AGENTS.md` > these skills >
 model defaults.

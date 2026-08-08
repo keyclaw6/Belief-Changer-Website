@@ -3,13 +3,13 @@
 > Owner-locked reproduction record for the two-voice site imagery system. Every
 > accepted image's prompt, endpoint, and settings are recorded verbatim. New images
 > follow `../SKILL.md` and get logged here. The book covers have their own sacred
-> gallery: `../../cover-generation/references/gallery.md`.
+> gallery: `../../covers/references/gallery.md`.
 
 ## The anchor
 
 ### No. 00 · The painting anchor — OWNER-PROVIDED, THE VOICE 1 STYLE SOURCE
 
-- Image: `painting-anchor.jpg`
+- Image: `../../../assets/references/site-imagery/painting-anchor.jpg`
 - Origin: uploaded by the owner (2026-08-07) as the definitive craft reference for
   The Painted Life: fine detailed classical oil brushwork, lush deep greens, dappled
   light, deep reflective water, soft atmospheric depth.
@@ -21,7 +21,7 @@
 
 ### No. 01 · The riverside glide — Voice 1, with a person
 
-- Image: `01-riverside-glide.jpg`
+- Image: `../../../assets/site/painted-riverside-glide.jpg`
 - Metadata: Canon · edits endpoint, reference = painting-anchor.jpg · 3:2 (1536×1024) · high · gpt-image-2
 
 ```text
@@ -32,7 +32,7 @@ Avoid: period or vintage clothing, Edwardian dress, straw hats, melancholy or wi
 
 ### No. 02 · The flock over the harbor — Voice 1, no people
 
-- Image: `02-harbor-flock.jpg`
+- Image: `../../../assets/site/painted-harbor-flock.jpg`
 - Metadata: Canon · edits endpoint, reference = painting-anchor.jpg · 3:2 (1536×1024) · high · gpt-image-2
 
 ```text
@@ -43,7 +43,7 @@ Avoid: people, boats with figures, sailing ships, period architecture only (incl
 
 ### No. 03 · The open window — Voice 2
 
-- Image: `03-open-window.jpg`
+- Image: `../../../assets/site/photo-open-window.jpg`
 - Metadata: Canon · text-to-image (generations endpoint) · 3:2 (1536×1024) · high · gpt-image-2
 
 ```text
@@ -54,7 +54,7 @@ Avoid: clutter, furniture crowding the frame, props, lens flare, HDR drama, heav
 
 ### No. 04 · The open street — Voice 2 (provisional)
 
-- Image: `04-open-street.jpg`
+- Image: `../../../assets/site/photo-open-street.jpg`
 - Metadata: Canon (provisional — owner may have it repainted into Voice 1) ·
   text-to-image · 3:2 (1536×1024) · high · gpt-image-2
 
@@ -66,7 +66,7 @@ Avoid: traffic, people, readable signage or storefront text, neon, HDR drama, he
 
 ### No. 05 · Together after the rain — Voice 1, three ages
 
-- Image: `05-together-after-rain.jpg` · Production: `assets/site/painted-together-after-rain.jpg`
+- Image: `../../../assets/site/painted-together-after-rain.jpg` · Production: `../../../assets/site/painted-together-after-rain.jpg`
 - Metadata: Canon (v1 build batch, owner ratification on the rendered site) · edits endpoint, reference = painting-anchor.jpg · 3:2 (1536×1024) · high · gpt-image-2
 
 ```text
@@ -77,7 +77,7 @@ Avoid: period or vintage clothing, Edwardian dress, open umbrellas in use, melan
 
 ### No. 06 · The morning overlook — Voice 1, seeing clearly
 
-- Image: `06-morning-overlook.jpg` · Production: `assets/site/painted-morning-overlook.jpg`
+- Image: `../../../assets/site/painted-morning-overlook.jpg` · Production: `../../../assets/site/painted-morning-overlook.jpg`
 - Metadata: Canon (v1 build batch, owner ratification on the rendered site) · edits endpoint, reference = painting-anchor.jpg · 3:2 (1536×1024) · high · gpt-image-2
 
 ```text
@@ -88,7 +88,7 @@ Avoid: period or vintage clothing, melancholy or wistful mood, dramatic cliff ro
 
 ### No. 07 · The kite — Voice 1, no people
 
-- Image: `07-kite.jpg` · Production: `assets/site/painted-kite.jpg`
+- Image: `../../../assets/site/painted-kite.jpg` · Production: `../../../assets/site/painted-kite.jpg`
 - Metadata: Canon (v1 build batch, owner ratification on the rendered site) · edits endpoint, reference = painting-anchor.jpg · 3:2 (1536×1024) · high · gpt-image-2
 
 ```text
@@ -99,7 +99,7 @@ Avoid: people, birds confused with the kite, melancholy gray gloom, saturated ne
 
 ### No. 08 · The misprinted park — Voice 1, the 404 painting
 
-- Image: `08-misprinted-park.jpg` · Production: `assets/site/painted-misprinted-park.jpg`
+- Image: `../../../assets/site/painted-misprinted-park.jpg` · Production: `../../../assets/site/painted-misprinted-park.jpg`
 - Metadata: Canon (owner-requested: a confused, gently broken world for the 404) ·
   edits endpoint, reference = painting-anchor.jpg · 3:2 (1536×1024) · high · gpt-image-2
 - Note: the ONE sanctioned exception to "freedom legible" — its job is warm, funny
@@ -114,7 +114,7 @@ Avoid: horror or unease, glitch effects, neon, digital pixel artifacts, melting 
 
 ### No. 09 · The lit window — Voice 1, with a person
 
-- Image: `09-lit-window.jpg` · Production: `assets/site/painted-lit-window.jpg`
+- Image: `../../../assets/site/painted-lit-window.jpg` · Production: `../../../assets/site/painted-lit-window.jpg`
 - Metadata: Canon (site v2 story batch, owner ratification on the rendered site) · edits endpoint, reference = painting-anchor.jpg · 3:2 (1536×1024) · high · gpt-image-2
 
 ```text
@@ -125,7 +125,7 @@ Avoid: period or vintage clothing or styling, Edwardian dress, melancholy or wis
 
 ### No. 10 · The bench — Voice 1, being met
 
-- Image: `10-bench.jpg` · Production: `assets/site/painted-bench.jpg`
+- Image: `../../../assets/site/painted-bench.jpg` · Production: `../../../assets/site/painted-bench.jpg`
 - Metadata: Canon (site v2 story batch, owner ratification on the rendered site) · edits endpoint, reference = painting-anchor.jpg · 3:2 (1536×1024) · high · gpt-image-2
 
 ```text
@@ -136,7 +136,7 @@ Avoid: period or vintage clothing or styling, Edwardian dress, melancholy or wis
 
 ### No. 11 · The open cage, painted — Voice 1, release resolved
 
-- Image: `11-open-cage-painted.jpg` · Production: `assets/site/painted-open-cage.jpg`
+- Image: `../../../assets/site/painted-open-cage.jpg` · Production: `../../../assets/site/painted-open-cage.jpg`
 - Metadata: Canon (site v2 story batch, owner ratification on the rendered site) · edits endpoint, reference = painting-anchor.jpg · 3:2 (1536×1024) · high · gpt-image-2
 - Note: the sanctioned Voice 1 repaint of the symbolic cage. The rejected specimen
   birdcage read as depressing because the bird was gone and the frame was empty; here
@@ -151,7 +151,7 @@ Avoid: period or vintage styling, Edwardian mood, melancholy or wistful mood, th
 
 ### No. 12 · The knot, loosening — Voice 1, the mechanism made visible
 
-- Image: `12-knot-loosening.jpg` · Production: `assets/site/painted-knot.jpg`
+- Image: `../../../assets/site/painted-knot.jpg` · Production: `../../../assets/site/painted-knot.jpg`
 - Metadata: Canon (site v2 story batch, owner ratification on the rendered site) · edits endpoint, reference = painting-anchor.jpg · 3:2 (1536×1024) · high · gpt-image-2
 
 ```text
@@ -162,7 +162,7 @@ Avoid: nautical clutter, many ropes or coils, sailing or maritime props, tools c
 
 ## Production assignments (v1 site build)
 
-`assets/site/` holds the production copies. Assignment law: painting for life-moments,
+`../../../assets/site/` holds the production copies. Assignment law: painting for life-moments,
 photography for fact-moments, one voice per section. v1 assignments: riverside-glide →
 how-it-works hero · harbor-flock → home "the belief loses its grip" · morning-overlook
 → home "see the trap clearly" · together-after-rain → experiences · kite → blog ·
@@ -170,6 +170,12 @@ open-window → about · misprinted-park → 404 · open-street → spare (unass
 owner may repaint it into Voice 1 later). Site v2 story batch adds: lit-window →
 home beat 1 · bench → home beat 2 + contribute · open-cage → home beat 4 +
 how-it-works ch. 6 · knot → how-it-works ch. 3.
+
+## Candidate expansion batches
+
+- `candidates-2026-08-08.md` — 14 new site-image candidates, including six unpeopled
+  scenes centered explicitly on release and escape. Five are placed on the local site
+  for owner review; none are canon until the owner accepts them.
 
 ## Exploration lineage (context for future models)
 

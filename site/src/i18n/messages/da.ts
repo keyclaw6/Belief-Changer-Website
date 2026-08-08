@@ -272,7 +272,7 @@ export const da: DeepPartial<Messages> = {
     postedLabel: 'Skrevet {month}',
     contributeLead: 'Vil du hjælpe med at bygge dette? Vi leder efter nogle få dedikerede mennesker.',
     contributeLink: 'Bidrag',
-    imageAlt: 'En drage højt på en klar himmel en lys, åben dag',
+    imageAlt: 'En åben umærket bog ved et åbent vindue, mens en blank side løfter sig i den friske morgenluft',
   },
 
   contribute: {
@@ -294,7 +294,7 @@ export const da: DeepPartial<Messages> = {
       'Hvis det er dig, så skriv til os eller åbn kodelageret og præsentér dig selv. Dedikation betyder mere end kvalifikationer her.',
     repoCta: 'Åbn kodelageret',
     mailtoLink: 'Skriv til os',
-    imageAlt: 'To personer på en parkbænk i morgenlys, den ene lytter ordentligt',
+    imageAlt: 'Udsigt fra en bytunnel til en åben grøn park med flod, himmel og flere klare stier',
   },
 
   howItWorks: {
@@ -308,7 +308,7 @@ export const da: DeepPartial<Messages> = {
     ch1Body2:
       'Den sætning bærer hele metoden: valg følger tro. Ikke viljestyrke, ikke karakter. Tro om, hvad hver mulighed giver dig, og hvad den koster dig.',
     ch1Body3: 'Så en stædig adfærd er ikke et adfærdsproblem. Det er et trosproblem.',
-    ch1ImageAlt: 'En person, der ser ud over et lyst morgenlandskab, vejen frem er klar',
+    ch1ImageAlt: 'En person på en gangbro ser ud over flere åbne stier gennem en lys bypark',
 
     ch2Heading: 'At rette adfærden i stedet for grundene',
     ch2Body1:
@@ -346,7 +346,7 @@ export const da: DeepPartial<Messages> = {
       'Den mærkeligste anvisning i bøgerne, og den læsere siger fik dem til at slappe af: stop ikke noget endnu. Fortsæt, som du er, mens du læser. Ingen stopdato, ingen forberedelse, intet mod at samle.',
     ch6Body2:
       'Pres hører til viljestyrke-tilgangen, og viljestyrke-tilgangen taber. Hvis bogen gør sit arbejde, vil det at stoppe ikke føles som en afgrundskant. Det vil føles som at lægge noget fra sig, du ikke længere vil holde på.',
-    ch6ImageAlt: 'Et fuglebur i varmt lys, døren åben og buret tomt, fuglen sidder allerede på en solbeskinnet vindueskarm i nærheden',
+    ch6ImageAlt: 'Altandøre står åbne mod klar morgenluft i et stille soveværelse',
 
     ch7Heading: 'Når den slipper',
     ch7Body1:
@@ -360,7 +360,7 @@ export const da: DeepPartial<Messages> = {
       'En bog er det rette redskab til dette. Den er privat, tålmodig og uden forlegenhed; den kan sige alt, i dit eget tempo, uden at nogen ser på. Og den kan gives væk uden grænse, hvilket betyder noget, for de, der har mest brug for en, er ofte de, der mindst har råd til den.',
     ch8Body2:
       'Så biblioteket er gratis, for altid, på alle de sprog vi kan nå, uden konto og uden sporing. Bøgerne er levende dokumenter: læsere skriver ind, hvor et kapitel ikke ramte, og den næste version siger det bedre. Målet er kun at hjælpe så mange mennesker som muligt.',
-    ch8ImageAlt: 'En roer, der glider langs en åben flodbred i frisk luft',
+    ch8ImageAlt: 'To mennesker deler umærkede bøger ved et åbent bogskab i nabolaget',
 
     closingHeading: 'Bøgerne står på hylden.',
     ctaLibrary: 'Se bøgerne',

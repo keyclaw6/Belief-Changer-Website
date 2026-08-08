@@ -1,6 +1,6 @@
 {
   "series": "The Specimen Series",
-  "system": "../../skills/cover-generation/SKILL.md",
+  "system": "../../image-generation/covers/SKILL.md",
   "note": "Textless production textures. Titles and the series mark are overlaid at runtime per language. Spine and back textures are derived from each front cover by scripts/derive-surfaces.py; groundHex is sampled from the artwork; overlayInk is chosen by WCAG contrast ratio.",
   "anchor": "01-sugar.png",
   "books": [

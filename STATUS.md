@@ -16,20 +16,21 @@ taste-skill v2 and minimalist-skill adopted; `AGENTS.md` fixes precedence
 (DESIGN.md > AGENTS.md > skills > defaults), pins the design read and dials, and
 carries the mechanical bans and quality gates.
 
-**Cover system — `skills/cover-generation/SKILL.md` ("The Specimen Series")**
+**Cover system — `image-generation/covers/SKILL.md` ("The Specimen Series")**
 One grammar for every book: full-bleed museum-restraint still life, one specimen
 object, muted seamless ground, textless (titles overlaid at runtime per language).
 Reproducible via anchor + edit-endpoint consistency protocol.
 
-**Site imagery system — `skills/site-imagery/SKILL.md` ("The Life Outside")**
+**Site imagery system — `image-generation/site-imagery/SKILL.md` ("The Life Outside")**
 Owner-locked 2026-08-07 after three exploration rounds. Two voices under one law —
 "photography states the facts; painting shows the life": The Painted Life (lead,
 fine-line classical oil per the owner's anchor painting, modern scenes, freedom
 legible) and The Quiet Fact (the cover grammar in real hopeful places, no people).
 Feeling contract, templates, slot rules, rejected directions, and QA in the skill;
-anchors + 4 canon references with exact prompts in its `references/gallery.md`.
-DESIGN.md Imagery section updated to match. Production site images will live in
-`assets/site/`.
+the anchor + 12 canon images have exact prompts in `references/gallery.md`. A
+2026-08-08 expansion adds 14 owner-review candidates (six unpeopled) with exact prompts,
+hashes, and QA in `references/candidates-2026-08-08.md`. Production and candidate site
+assets live in `assets/site/`.
 
 **Production assets — `assets/covers/`**
 10 covers generated and QA'd (sugar · smoking · scrolling · porn · alcohol · gaming ·
@@ -44,7 +45,7 @@ full RTL, every SITE-PLAN route: home (locked beat order, static ShelfStage), li
 with finder, book page with changelog tab + anonymous improve form, reader with
 comfort modes, request and experience boards, blog, how-it-works, about, privacy,
 flicker 404 (misprinted-park painting). Self-hosted fonts, DESIGN.md tokens,
-production imagery via `skills/site-imagery/`, measurement stub + `docs/MEASUREMENT.md`.
+production imagery via `image-generation/site-imagery/`, measurement stub + `docs/MEASUREMENT.md`.
 Gates: taste-skill §14, both themes, RTL, reduced motion, zero console errors,
 build + typecheck clean. Name locked: **Belief Changer**.
 

@@ -13,7 +13,8 @@ import type { BlogPost } from './types'
  * project. They demonstrate the register and the reading layout; they are
  * flagged here in code only and never labeled "sample" in the UI.
  *
- * The blog index uses the Voice-1 painting painted-kite.jpg (imagery manifest).
+ * The blog index uses painted-living-pages.png. Per-post image fields are
+ * reserved for article imagery when that surface adopts it.
  */
 export const blogPosts: BlogPost[] = [
   {
@@ -22,7 +23,7 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       'A person in a trap should not have to reach past a paywall to find the way out. Here is how that stays true.',
     date: 'July 2026', // MOCK
-    image: '/site/painted-kite.jpg',
+    image: '/site/painted-open-garden-gate.png',
     // SAMPLE BODY (builder-written, ~410 words) --------------------------------
     body: [
       'The people who need these books most are often the people with the least to spare. Someone lying awake at two in the morning, ashamed of a habit they cannot explain to anyone, is not in a position to compare subscription tiers. They need the way out, and they need it now, and they need it without a form standing between them and the first page.',

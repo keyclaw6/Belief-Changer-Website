@@ -347,8 +347,8 @@ export const en = {
     // The contribute card at the foot of a post (copy deck).
     contributeLead: 'Want to help build this? We are looking for a few dedicated people.',
     contributeLink: 'Contribute',
-    // Painting alt text (painted-kite, imagery manifest) on the blog index.
-    imageAlt: 'A kite high in a clear sky on a bright, open day',
+    // Painting alt text for the blog index.
+    imageAlt: 'An open unmarked book by an open window, one blank page lifting in fresh morning air',
   },
 
   // -- Contribute (copy deck 10-contribute) ------------------------------
@@ -371,7 +371,7 @@ export const en = {
       'If that is you, write to us or open the repository and introduce yourself. Dedication matters more than credentials here.',
     repoCta: 'Open the repository',
     mailtoLink: 'Write to us',
-    imageAlt: 'Two people on a park bench in morning light, one listening properly',
+    imageAlt: 'A view from a city underpass into an open green park, river, sky, and several clear paths',
   },
 
   // -- How it works (the full essay, copy deck 02-how-it-works) ----------
@@ -388,7 +388,7 @@ export const en = {
     ch1Body2:
       'That sentence carries the whole method: choices follow beliefs. Not willpower, not character. Beliefs about what each option gives you and what it costs you.',
     ch1Body3: 'So a stubborn behavior is not a behavior problem. It is a belief problem.',
-    ch1ImageAlt: 'A person looking out over a bright morning landscape, the way ahead clear',
+    ch1ImageAlt: 'A person on a footbridge looking across several open paths through a bright city park',
 
     // Chapter 2 (copy deck).
     ch2Heading: 'Fixing the behavior instead of the reasons',
@@ -431,7 +431,7 @@ export const en = {
       'The strangest instruction in the books, and the one readers say made them relax: do not stop anything yet. Carry on as you are while you read. No quit date, no preparation, no working up courage.',
     ch6Body2:
       'Pressure belongs to the willpower approach, and the willpower approach loses. If the book does its work, stopping will not feel like a cliff edge. It will feel like putting down something you no longer want to hold.',
-    ch6ImageAlt: 'A birdcage in warm light, its door open and empty, the bird already perched on a sunlit windowsill nearby',
+    ch6ImageAlt: 'Balcony doors standing open to clear morning air in a quiet bedroom',
 
     // Chapter 7 (copy deck).
     ch7Heading: 'When it lets go',
@@ -447,7 +447,7 @@ export const en = {
       'A book is the right instrument for this. It is private, patient, and unembarrassed; it can say everything, in your own time, with nobody watching. And it can be given away without limit, which matters, because the people who most need one are often least able to pay for it.',
     ch8Body2:
       'So the library is free, forever, in every language we can reach, with no account and no tracking. The books are living documents: readers write in where a chapter did not land, and the next version says it better. The goal is only to help as many people as possible.',
-    ch8ImageAlt: 'A rower gliding along an open riverside in fresh air',
+    ch8ImageAlt: 'Two people sharing unmarked books at an open neighborhood book cabinet',
 
     // Closing (copy deck).
     closingHeading: 'The books are on the shelf.',
@@ -550,4 +550,3 @@ export const en = {
     heading: 'Language',
   },
 } as const
-
