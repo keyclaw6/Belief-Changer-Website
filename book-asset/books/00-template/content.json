@@ -1,0 +1,161 @@
+{
+  "meta": {
+    "title": "The Craft of Attention",
+    "subtitle": "A field guide to seeing what matters",
+    "author": "Mara Ellison",
+    "imprint": "North Window Press"
+  },
+  "pages": [
+    {
+      "type": "title",
+      "title": "The Craft of Attention",
+      "subtitle": "A field guide to seeing what matters",
+      "author": "Mara Ellison",
+      "imprint": "North Window Press",
+      "logo": "logo.png"
+    },
+    {
+      "type": "copyright",
+      "lines": [
+        "The Craft of Attention",
+        "Mara Ellison",
+        "First field edition, 2024",
+        "© 2024 Mara Ellison. All rights reserved.",
+        "No part of this book may be reproduced without written permission.",
+        "Set in Newsreader and DM Sans.",
+        "Printed and bound in Copenhagen.",
+        "North Window Press · northwindow.example"
+      ]
+    },
+    {
+      "type": "toc",
+      "title": "Contents",
+      "toc": [
+        {
+          "title": "The First Deliberate Look",
+          "page": 5
+        },
+        {
+          "title": "Attention Is a Choice",
+          "page": 6
+        },
+        {
+          "title": "The Cost of Diffusion",
+          "page": 7
+        },
+        {
+          "title": "A Smaller Field",
+          "page": 8
+        },
+        {
+          "title": "The Practice of Return",
+          "page": 9
+        },
+        {
+          "title": "What the Eye Keeps",
+          "page": 10
+        },
+        {
+          "title": "Colophon",
+          "page": 11
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "kicker": "Part One",
+      "title": "Orientation",
+      "subtitle": "On learning to look before leaping"
+    },
+    {
+      "kicker": "I · ORIENTATION",
+      "title": "The First Deliberate Look",
+      "layout": {
+        "body": {
+          "size": 0.018,
+          "lineHeight": 1.45
+        }
+      },
+      "paragraphs": [
+        "Attention begins before understanding. It is the quiet decision to stay with a thing long enough for its real shape to appear. Most mistakes of judgment are not failures of intelligence. They are failures of duration: we looked, but not for long enough.",
+        "A deliberate look does not strain. It removes the small exits through which the mind escapes. Put the object in front of you, name what is actually there, and postpone interpretation for one more breath than feels necessary.",
+        "That extra breath is modest, but it changes the quality of the evidence. Edges become clearer. Assumptions separate from observations. The world stops being a backdrop and becomes specific again, and what was generic a moment ago now has a grain you can read.",
+        "This is the whole method in miniature: stay, name, postpone. Everything that follows is an elaboration of those three moves, practised at different scales and under different pressures."
+      ]
+    },
+    {
+      "kicker": "I · ORIENTATION",
+      "title": "Attention Is a Choice",
+      "paragraphs": [
+        "What receives attention gains weight. This is true in a room, in a relationship, and in a working day. Repeated notice tells the nervous system what matters, even when our stated priorities say something else.",
+        "Choice does not mean perfect control. Noise, fatigue, and urgency all compete for the same narrow channel. The practical question is smaller: when you notice that the channel has been taken, what do you return it to?",
+        "A useful practice is to choose the next object of attention in plain language. Not ‘work on the project,’ but ‘read the first paragraph and mark the claim.’ Precision lowers the cost of returning.",
+        "Over a day the returns compound. Each deliberate choice makes the next one slightly easier, because the mind learns that the channel is not a commons to be grazed but an instrument to be aimed."
+      ]
+    },
+    {
+      "kicker": "II · FRICTION",
+      "title": "The Cost of Diffusion",
+      "paragraphs": [
+        "A divided hour often feels busy because it contains many beginnings. Beginnings create motion, but they do not guarantee distance. Each switch leaves a residue: a half-formed sentence, an unresolved comparison, a question still held in working memory.",
+        "The residue is easy to underestimate because it is invisible. You see the new window, not the old thought that remains open behind it. By afternoon, the mind is carrying a stack of unfinished contexts and calling the weight tiredness.",
+        "The remedy is not severity. It is closure at a smaller scale. Before switching, write the next physical step. Give the interrupted thought somewhere to wait besides your head.",
+        "None of this requires more discipline than you already have. It requires a shorter distance between the moment of interruption and the moment of return."
+      ]
+    },
+    {
+      "kicker": "II · FRICTION",
+      "title": "A Smaller Field",
+      "paragraphs": [
+        "Concentration improves when the field becomes smaller than the ambition. A whole book is too large to attend to. One argument, one page, or one sentence is small enough to become concrete.",
+        "The smaller field is not a retreat from scope but a condition of it. Depth and breadth are not enemies; depth is how breadth becomes worth having. Ten pages read closely teach more than a hundred skimmed.",
+        "Choose the unit of work before you begin, and let it be smaller than your appetite. You can always continue from a place of satisfaction. You cannot easily recover from a place of scatter."
+      ]
+    },
+    {
+      "kicker": "III · PRACTICE",
+      "title": "The Practice of Return",
+      "paragraphs": [
+        "The skill is not never wandering. The skill is the return. Every practice of attention is, at bottom, a practice of beginning again without ceremony or self-reproach.",
+        "Notice that the mind has left, and come back. That is the entire motion. The temptation is to add a judgement between the noticing and the returning, but the judgement is only another departure.",
+        "Make the return cheap and you will make it often. Make it costly and you will avoid it. Design the environment so that the next right action is the easiest one to take."
+      ]
+    },
+    {
+      "kicker": "III · PRACTICE",
+      "title": "What the Eye Keeps",
+      "paragraphs": [
+        "What you attend to repeatedly, you begin to carry. The eye trained on detail starts to keep detail. The mind returned again and again to a question begins to work on it in the background.",
+        "This is why the object of attention matters more than the effort of attention. Effort is finite and exhaustible; the carried image works while you sleep.",
+        "Choose objects worth carrying. A problem you love, a craft you respect, a person you want to understand — these repay the noticing long after the noticing itself has ended."
+      ]
+    },
+    {
+      "type": "section",
+      "kicker": "End of Part One",
+      "title": "Colophon",
+      "subtitle": "A note on the making of this book"
+    }
+  ],
+  "frontCover": {
+    "eyebrow": "NORTH WINDOW FIELD NOTES",
+    "title": "The Craft of Attention",
+    "subtitle": "A field guide to seeing what matters",
+    "author": "Mara Ellison",
+    "edition": "First field edition"
+  },
+  "backCover": {
+    "headline": "Attention is not a mood. It is a practice.",
+    "paragraphs": [
+      "A field guide to seeing what matters, one deliberate look at a time.",
+      "For readers who would rather go deep than go fast."
+    ],
+    "quote": "Continue from the nearest true thing.",
+    "imprint": "NORTH WINDOW PRESS · COPENHAGEN"
+  },
+  "spine": {
+    "title": "THE CRAFT OF ATTENTION",
+    "author": "MARA ELLISON",
+    "mark": "NWP"
+  }
+}

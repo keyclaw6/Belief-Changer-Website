@@ -49,21 +49,19 @@ production imagery via `image-generation/site-imagery/`, measurement stub + `doc
 Gates: taste-skill §14, both themes, RTL, reduced motion, zero console errors,
 build + typecheck clean. Name locked: **Belief Changer**.
 
-## In production (separate agent, running now)
-
-**The 3D book asset** — a dedicated agent is building the photoreal hardcover:
-Blender (headless bpy) authors the static master geometry -> GLB; Three.js animates
-(procedural page deformation, page-block thickness trick, deterministic state
-machine); runtime canvas text baking for any language; `spineColor: "auto"` sampled
-from any cover. Its standing brief: `prompts/BOOK-ASSET-BRIEF.md`. Deliverable: a
-zipped `book-asset/` package (models/book.glb + src/Book.js + src/textbake.js +
-harness + README + ACCEPTANCE.md). Architecture rationale:
-`docs/book-asset-pipeline-proposal.md`.
+**3D book runtime — `book-asset/` (landed 2026-08-14)**
+The photoreal hardcover is a self-contained HTML runtime (procedural geometry,
+troika/MSDF type, reader + shelf variants), not the GLB + `Book.js` package the
+Phase 2 brief originally specified. Gold source: `book-asset/books/00-template`
+(`The Craft of Attention`). Operating loop for new titles: `book-asset/SKILL.md`.
+Compile with `book-asset/scripts/build_book.py`. Do not restart the Blender pipeline.
 
 ## Next (in order)
 
-1. **QA the book asset** when its package lands (check against its ACCEPTANCE.md).
-2. **Fire the shelf agent**: hand a fresh Opus agent the book package + this repo +
+1. **Mint library titles** from accepted covers via `book-asset/SKILL.md` when a
+   3D instance of a catalog book is needed.
+2. **Fire the shelf agent**: hand a fresh agent this repo + `book-asset/`
+   (consume `products/<slug>-shelf.html` / reader, do not rebuild the hardcover) +
    `prompts/BOOKSHELF-BRIEF.md` (v2, integration-ready). It builds the shelf module
    and integrates it into the homepage hero by upgrading `<ShelfStage />` in place.
 3. **Owner review + iteration** of the v1 site on rendered evidence, one decision at
@@ -80,4 +78,6 @@ harness + README + ACCEPTANCE.md). Architecture rationale:
 - Warm to the person, harsh to the trap. Never shaming. First-person subject names.
 - Books are living: versioned, publicly changelogged, improved by reader feedback.
 - The library self-evolves: feedback loop, request loop, splitting loop.
+- Must feel complete at 3 books and scale to 3,000.
+op.
 - Must feel complete at 3 books and scale to 3,000.

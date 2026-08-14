@@ -1,0 +1,13 @@
+{
+  "slug": "00-template",
+  "title": "The Craft of Attention",
+  "cover": "cover.webp",
+  "caseColor": "#2b2927",
+  "caseLuminance": 0.0225,
+  "layout": null,
+  "quality": null,
+  "logos": {
+    "logo.png": "logos/logo.png"
+  },
+  "notes": "Canonical template book. caseColor/caseLuminance were sampled from the cover border ring at compile time. Leave them null on a new book and build_book.py will sample them."
+}

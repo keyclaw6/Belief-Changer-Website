@@ -17,10 +17,12 @@ shelf is where that feeling is born.
 
 This brief is self-contained. Your materials:
 
-1. `book-asset/` — the finished photoreal book package (GLB + `src/Book.js` +
-   `src/textbake.js` + its README and ACCEPTANCE.md), handed to you by the owner.
-   **Its README is the API contract; where this brief's API sketches differ from
-   that README, the README wins.**
+1. `book-asset/` — the finished photoreal book package. It is a compiled HTML
+   runtime (`products/<slug>-shelf.html` closed, `products/<slug>-reader.html`
+   openable), not a GLB. Read `book-asset/SKILL.md` first. **That skill and the
+   gold `00-template` products are the API contract; where this brief's older
+   `new Book({ model: "book.glb" })` sketches differ, the landed package wins.
+   Do not rebuild the hardcover.**
 2. **This repository, including the built site in `site/`** (TanStack Start +
    TypeScript + Tailwind v4, SSR, i18n en/da/ar with full RTL, builds clean). This is
    your integration target. Read `site/README.md` and

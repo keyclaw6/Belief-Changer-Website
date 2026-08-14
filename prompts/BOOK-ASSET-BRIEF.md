@@ -1,5 +1,9 @@
 # BOOK-ASSET-BRIEF.md — The Photoreal Book (Phase 2)
 
+> **HISTORICAL.** The hardcover landed as a compiled HTML runtime in
+> `book-asset/`, not the GLB + `Book.js` package this brief specified. Do not
+> restart this pipeline. New titles: `book-asset/SKILL.md`.
+
 You are an Opus 5 engineering agent with a full sandbox: shell, filesystem, Python, and
 vision (you can read the screenshots you take). You are building **one reusable, deeply
 realistic 3D book asset for the web** — a hardcover that opens, closes, and turns pages

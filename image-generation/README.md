@@ -40,5 +40,6 @@ generation and is promoted only after review.
 
 The image model produces a flat, textless front-cover asset only. Spine and back
 textures are derived by `../scripts/derive-surfaces.py`; localized title typography is
-added by code; book geometry, materials, light, and physical presentation belong to the
-3D book renderer. Never ask an image model to reinterpret an accepted cover as a book.
+added by code; book geometry, materials, light, and physical presentation belong to
+`../book-asset/` (see `../book-asset/SKILL.md`). Never ask an image model to
+reinterpret an accepted cover as a book.

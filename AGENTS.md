@@ -15,7 +15,9 @@ points to. Do not duplicate their content anywhere, including here.
    `output-skill`).
 5. `assets/covers/` — production covers, `covers-manifest.json` (the interface),
    derived surfaces, with-text proofs.
-6. `prompts/` — standing briefs (book asset in production; handoff orientation).
+6. `book-asset/SKILL.md` — finished 3D hardcover. New titles are minted from a
+   cover plus books/<slug>/content.json; do not reopen the Blender brief.
+7. `prompts/` — standing briefs (shelf and hero still ahead; book asset has landed).
 
 ## Progressive disclosure
 
@@ -23,6 +25,8 @@ Only when generating or reviewing imagery, enter through `image-generation/READM
 It routes front-cover work to `image-generation/covers/` and other site imagery to
 `image-generation/site-imagery/`. **Sacred: the cover prompt structure and anchor
 process are locked.**
+
+Only when minting or rebuilding a 3D hardcover, enter through `book-asset/SKILL.md`.
 
 ## Precedence
 
@@ -43,7 +47,8 @@ defined in DESIGN.md (Overview, Creative Latitude); build within them.
   theme/locale; RTL and locale catalogs from the first commit.
 - **Assets are immutable:** never regenerate, crop, tint, or re-light the production
   covers. New covers only via `image-generation/covers/` — verbatim. New site imagery
-  only via `image-generation/site-imagery/` — verbatim.
+  only via `image-generation/site-imagery/` — verbatim. New 3D books only via
+  `book-asset/SKILL.md` — copy `00-template`, swap cover and words, compile.
 - **Quality bar before any surface is "done":** taste-skill's Final Pre-Flight Check
   (§14) + DESIGN.md's Do's and Don'ts, in both themes, plus an RTL and
   reduced-motion pass.

@@ -33,27 +33,27 @@ adopted craft skills, the cover-generation system, and the production assets. Fo
 it and you will have the whole picture in one sitting. Commit and push your work back
 to the repo as you go, so it stays the single source of truth.
 
-Two things deserve special respect once you are oriented: the 10 production cover
-images are finished assets, and the cover-generation system that made them
-(`image-generation/covers/`) is sacred - future covers reuse its exact process so the
-series never drifts.
+Three things deserve special respect once you are oriented: the 10 production cover
+images are finished assets; the cover-generation system that made them
+(`image-generation/covers/`) is sacred; and the 3D hardcover in `book-asset/` is
+finished — new titles reuse `book-asset/SKILL.md`, they do not remodel the book.
 
 ## Where things stand
 
 Phase 1 is complete: the design language, the cover system, and all 10 covers with
-derived spine/back textures and a manifest of exact colors. Right now, a separate
-agent is building the 3D book asset itself - a deeply realistic hardcover (Blender
-geometry, Three.js page-turning, runtime text baking so titles render in any
-language). Its brief is `prompts/BOOK-ASSET-BRIEF.md`; the owner will hand you its
-finished package when it lands.
+derived spine/back textures and a manifest of exact colors. The 3D book asset has
+landed in `book-asset/` as a compiled HTML runtime (reader + shelf), not a GLB.
+New titles are minted from a cover + headlines + writing via `book-asset/SKILL.md`.
+The original modelling brief in `prompts/BOOK-ASSET-BRIEF.md` is historical.
 
 ## What comes next (the shape of it, not a script)
 
-- **The bookshelf.** When the book asset arrives, look it over, then write the brief
-  for the shelf experience: a Three.js space where the books are shown and browsed,
-  built on the book package's API and the covers manifest. The complete-shelf project
-  (whose ideas the book pipeline builds on - see `docs/`) is good inspiration for how
-  browsing, selecting, and inspecting can feel.
+- **The bookshelf.** The book package is in `book-asset/`. Look over
+  `book-asset/SKILL.md` and the gold `00-template` products, then follow
+  `prompts/BOOKSHELF-BRIEF.md`: a Three.js space where the books are shown and
+  browsed. Consume the compiled shelf/reader products; do not rebuild the hardcover.
+  The complete-shelf project (see `docs/`) is good inspiration for how browsing,
+  selecting, and inspecting can feel.
 - **The whole site.** Design and brainstorm, with the owner, how the entire page
   should be built: the pages, the flows, how someone in distress reaches the right
   book in under a minute, how it works in a hundred languages, and which images need

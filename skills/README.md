@@ -15,7 +15,8 @@ Five skills vendored from [Leonxlnx/taste-skill](https://github.com/Leonxlnx/tas
 
 Project-native image skills are progressively disclosed through
 `../image-generation/README.md`; they do not live in this always-available craft-skill
-directory.
+directory. The 3D hardcover skill lives at `../book-asset/SKILL.md` (also linked from
+`.agents/skills/book-asset/`).
 
 Precedence when anything conflicts: `../DESIGN.md` > `../AGENTS.md` > these skills >
 model defaults.
