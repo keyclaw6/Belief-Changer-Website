@@ -1,6 +1,6 @@
 # STATUS — Belief Changer Website
 
-Last updated: 2026-08-18
+Last updated: 2026-08-07
 
 ## Done and locked
 
@@ -60,13 +60,10 @@ Compile with `book-asset/scripts/build_book.py`. Do not restart the Blender pipe
 
 1. **Mint library titles** from accepted covers via `book-asset/SKILL.md` when a
    3D instance of a catalog book is needed.
-2. **Fire the hero agent**: hand a fresh agent this repo +
-   `prompts/HERO-CAROUSEL-BRIEF.md` (v3, 2026-08-18 — the hero concept is now "The
-   Orbit", a floating carousel of books; it supersedes the v2 alcove-shelf brief,
-   which lives in git history). v3 builds a STANDALONE prototype
-   (`hero-carousel/index.html`); site integration (upgrading `<ShelfStage />` in
-   place) is a later phase after owner approval of the prototype. Art direction
-   anchor: `design/hero-carousel-reference.jpg`.
+2. **Fire the shelf agent**: hand a fresh agent this repo + `book-asset/`
+   (consume `products/<slug>-shelf.html` / reader, do not rebuild the hardcover) +
+   `prompts/BOOKSHELF-BRIEF.md` (v2, integration-ready). It builds the shelf module
+   and integrates it into the homepage hero by upgrading `<ShelfStage />` in place.
 3. **Owner review + iteration** of the v1 site on rendered evidence, one decision at
    a time. Open items: final hero composition (with the 3D shelf), logo decision,
    privacy-page data controller entity + public contact channel, domain acquisition
