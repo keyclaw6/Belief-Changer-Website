@@ -80,6 +80,42 @@ export function ShelfStage({
 
   useEffect(() => {
     if (!useOrbit) return
+    // Theme passthrough: the site owns light/dark on <html data-theme>; the
+    // iframe does not inherit it. Post the resolved dark flag on mount, on
+    // iframe load, on OS scheme change, and when ThemeProvider rewrites
+    // data-theme (MutationObserver).
+    const el = iframeRef.current
+    if (!el) return
+    const post = () => {
+      if (!el.contentWindow) return
+      const attr = document.documentElement.getAttribute('data-theme')
+      const dark =
+        attr === 'dark' ||
+        ((attr === 'system' || attr == null) &&
+          window.matchMedia('(prefers-color-scheme: dark)').matches)
+      el.contentWindow.postMessage(
+        { type: 'orbit-theme', dark },
+        window.location.origin,
+      )
+    }
+    post()
+    el.addEventListener('load', post, { once: true })
+    const mq = window.matchMedia('(prefers-color-scheme: dark)')
+    mq.addEventListener('change', post)
+    const obs = new MutationObserver(post)
+    obs.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme'],
+    })
+    return () => {
+      el.removeEventListener('load', post)
+      mq.removeEventListener('change', post)
+      obs.disconnect()
+    }
+  }, [useOrbit])
+
+  useEffect(() => {
+    if (!useOrbit) return
     // Wheel-trap fix: report how much of the hero iframe is on screen so The
     // Orbit releases the wheel (page scrolls past) and pauses idle spin when
     // the hero is mostly out of view.

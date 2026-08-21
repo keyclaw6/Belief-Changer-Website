@@ -286,6 +286,23 @@
     transition: opacity 420ms ease;
   }
   #boot.is-done { opacity: 0; }
+
+  /* Scene-driven dark mode (html.scene-dark is toggled by applyTheme) */
+  html.scene-dark body { background: #0e0d0c; }
+  html.scene-dark #stage { background: #0e0d0c; }
+  html.scene-dark #wordmark { color: #b5b0a6; }
+  html.scene-dark #boot { background: #0e0d0c; color: #8f8a80; }
+  html.scene-dark .orbit-nav { background: rgba(24,22,20,0.72); border-color: #32302b; color: #e8e4da; }
+  html.scene-dark .orbit-nav:hover { background: #201e1b; border-color: #4a463f; }
+  html.scene-dark #scroll-down { color: #8f8a80; }
+  html.scene-dark #panel { background: #171512; border-color: #32302b; }
+  html.scene-dark #panel h2 { color: #f0ece2; }
+  html.scene-dark #panel .promise { color: #d9d4c9; }
+  html.scene-dark #panel .meta { color: #938e84; }
+  html.scene-dark #panel .back { color: #938e84; }
+  html.scene-dark #content { background: #121110; border-top-color: #26231f; }
+  html.scene-dark .section h2 { color: #f0ece2; }
+  html.scene-dark .section p { color: #cfcabf; }
 </style>
 </head>
 <body>
@@ -547,7 +564,7 @@ camera.position.copy(CAM_ORBIT.pos);
 camera.lookAt(camLook);
 
 const ringCenter = new THREE.Vector3(0, RING_Y_ORBIT, 0);
-createStudioLights(THREE, scene, ringCenter, renderer);
+const studio = createStudioLights(THREE, scene, ringCenter, renderer);
 
 const ringGroup = new THREE.Group();
 ringGroup.position.set(0, RING_Y_ORBIT, 0);
@@ -653,6 +670,97 @@ addEventListener('resize', () => {
   if (state === 'orbit' || state === 'presenting') orbitCameraNow();
   invalidate();
 });
+
+resize();
+addEventListener('resize', () => {
+  resize();
+  if (state === 'orbit' || state === 'presenting') orbitCameraNow();
+  invalidate();
+});
+
+/* ------------------------------------------------------------------ theme */
+
+/* Dark mode = gallery night: a warm lamp above the ring is the only key, the
+   void goes near-black, and a faint warm pool grounds the books. The parent
+   (ShelfStage) posts `orbit-theme`; standalone follows prefers-color-scheme. */
+const DARK_BG = 0x0e0d0c;
+let sceneDark = matchMedia('(prefers-color-scheme: dark)').matches;
+
+// Warm museum spotlight, above-front of the ring. Kept in the scene from boot
+// at intensity 0 so the shader compiles once and toggling never hitches.
+const lamp = new THREE.SpotLight(0xffe6c0, 0, 0, 0.46, 0.62, 0);
+lamp.position.set(0, 120, 190);
+lamp.target.position.set(0, RING_Y_ORBIT, 0);
+scene.add(lamp, lamp.target);
+
+// Dark-mode counterpart of the contact shadow: a faint warm light pool.
+const glowPool = (() => {
+  const c = document.createElement('canvas');
+  c.width = c.height = 256;
+  const g = c.getContext('2d');
+  const grad = g.createRadialGradient(128, 128, 20, 128, 128, 128);
+  grad.addColorStop(0, 'rgba(255,205,150,0.30)');
+  grad.addColorStop(0.55, 'rgba(255,190,130,0.15)');
+  grad.addColorStop(1, 'rgba(255,180,120,0)');
+  g.fillStyle = grad;
+  g.fillRect(0, 0, 256, 256);
+  const mesh = new THREE.Mesh(
+    new THREE.PlaneGeometry(RING_R * 3.0, RING_R * 3.0),
+    new THREE.MeshBasicMaterial({
+      map: new THREE.CanvasTexture(c),
+      transparent: true,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending,
+      opacity: 0.55,
+      fog: false,
+    }),
+  );
+  mesh.rotation.x = -Math.PI / 2;
+  mesh.position.y = -BOOK_SCALE * 11.34;
+  mesh.renderOrder = -1;
+  mesh.visible = false;
+  return mesh;
+})();
+ringGroup.add(glowPool);
+
+function applyTheme() {
+  const dark = sceneDark;
+  const bg = new THREE.Color(dark ? DARK_BG : 0xffffff);
+  scene.background = bg;
+  renderer.setClearColor(bg, 1);
+  if (scene.fog) {
+    scene.fog.color.copy(bg);
+    scene.fog.near = dark ? 170 : 330;
+    scene.fog.far = dark ? 430 : 940;
+  }
+  studio.sun.intensity = dark ? 0.35 : 2.3;
+  studio.fill.intensity = dark ? 0.12 : 0.82;
+  studio.rim.intensity = dark ? 0.22 : 0.52;
+  studio.hemi.intensity = dark ? 0.10 : 0.88;
+  studio.hemi.groundColor.set(dark ? 0x16130f : 0x707070);
+  scene.environmentIntensity = dark ? 0.14 : 0.68;
+  lamp.intensity = dark ? 3.0 : 0;
+  contactShadow.visible = !dark;
+  glowPool.visible = dark;
+  document.documentElement.classList.toggle('scene-dark', dark);
+}
+
+window.addEventListener('message', (event) => {
+  if (event.origin !== location.origin) return;
+  const d = event.data;
+  if (d && typeof d === 'object' && d.type === 'orbit-theme') {
+    sceneDark = !!d.dark;
+    applyTheme();
+    invalidate();
+  }
+});
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+  sceneDark = e.matches;
+  applyTheme();
+  invalidate();
+});
+applyTheme();
+
 let detailSpinVel = new THREE.Vector3();
 let detailDragging = false;
 let coverDragging = false;
@@ -1673,6 +1781,7 @@ async function boot() {
     get queue() { return stepQueue.slice(); },
     get pendingBurst() { return pendingBurst; },
     get N() { return N; },
+    get sceneDark() { return sceneDark; },
     advance: (d = 1) => advance(d),
     openFront,
     returnHome,
