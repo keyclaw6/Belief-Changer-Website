@@ -537,6 +537,9 @@ renderer.setClearColor(0xffffff, 1);
 
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0xffffff);
+// Depth cue, themed by applyTheme(): in light mode it stays beyond the ring
+// (the void reads pure white); in dark mode it pulls the far side into night.
+scene.fog = new THREE.Fog(0xffffff, 330, 940);
 
 const camera = new THREE.PerspectiveCamera(CAM_ORBIT.fov, 1, 2, 800);
 const camLook = CAM_ORBIT.look.clone();
@@ -559,8 +562,8 @@ const contactShadow = (() => {
   c.width = c.height = 256;
   const g = c.getContext('2d');
   const grad = g.createRadialGradient(128, 128, 24, 128, 128, 128);
-  grad.addColorStop(0, 'rgba(0,0,0,0.16)');
-  grad.addColorStop(0.55, 'rgba(0,0,0,0.10)');
+  grad.addColorStop(0, 'rgba(0,0,0,0.19)');
+  grad.addColorStop(0.55, 'rgba(0,0,0,0.12)');
   grad.addColorStop(1, 'rgba(0,0,0,0)');
   g.fillStyle = grad;
   g.fillRect(0, 0, 256, 256);
@@ -570,7 +573,7 @@ const contactShadow = (() => {
       map: new THREE.CanvasTexture(c),
       transparent: true,
       depthWrite: false,
-      opacity: 0.55,
+      opacity: 0.68,
     }),
   );
   mesh.rotation.x = -Math.PI / 2;

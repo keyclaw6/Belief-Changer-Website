@@ -969,7 +969,7 @@ function makeCaseMaterials(THREE, shared, caseColor) {
     color: caseColor || '#e8e6e5',
     roughness: BOOK_LOOK.cover.roughness,
     metalness: 0,
-    envMapIntensity: 0.48,
+    envMapIntensity: 0.52,
   });
   const matCaseSpine = matCase.clone();
   return { matCase, matCaseSpine };
@@ -990,7 +990,7 @@ function makeFrontArtMaterial(THREE, shared, coverTex) {
     color: 0xffffff,
     roughness: BOOK_LOOK.cover.roughness,
     metalness: 0,
-    envMapIntensity: 0.42,
+    envMapIntensity: 0.46,
     normalMap: artNormal,
     normalScale: new THREE.Vector2(BOOK_LOOK.cover.normalScale, BOOK_LOOK.cover.normalScale),
     polygonOffset: true,
