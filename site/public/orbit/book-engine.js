@@ -165,7 +165,7 @@ export function configureRenderer(renderer, THREE) {
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   renderer.shadowMap.autoUpdate = false;
   renderer.shadowMap.needsUpdate = true;
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.1));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
   return renderer;
 }
 
