@@ -337,8 +337,7 @@
 <script type="importmap">
 {
   "imports": {
-    "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
-    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"
+    "three": "./vendor/three.module.js"
   }
 }
 </script>
@@ -356,10 +355,10 @@ import {
 
 /* ------------------------------------------------------------------ const */
 
-const N = 40;
-const RING_R = 68;
+const N = 48;
+const RING_R = 56;
 const RING_TILT = THREE.MathUtils.degToRad(14);
-const PRESENT_OUT = 10.5;
+const PRESENT_OUT = 12;
 const BOOK_SCALE = 0.92;
 const SPIN_DUR = 260;
 const FLIP_DUR = 300;
@@ -375,25 +374,45 @@ const QUEUE_MAX = 1;           // never stack flip animations from scroll
 const BOOT_BATCH = 4;
 const BOOT_REVEAL_AT = 10;
 
+/* Orbit framing is computed, not hand-placed: the whole ring stays in frame at
+   any aspect, with the presented cover lower-center facing the viewer. */
+const CAM_ELEV = THREE.MathUtils.degToRad(22);  // camera elevation above the ring plane
+const CAM_FILL = 0.86;                          // fraction of each frustum axis the ring may fill
 const CAM_ORBIT = {
   pos: new THREE.Vector3(0, 36, 148),
-  look: new THREE.Vector3(0, 8, 16),
+  look: new THREE.Vector3(0, 4, 0),
   fov: 32,
 };
 const CAM_INSPECT = {
-  pos: new THREE.Vector3(8, 48, 230),
-  look: new THREE.Vector3(-6, 6, 18),
+  pos: new THREE.Vector3(0, 26, 201),
+  look: new THREE.Vector3(-5.2, 18, 97.7),
   fov: 34,
 };
 const CAM_INSPECT_CLOSE = {
-  pos: new THREE.Vector3(3, 40, 155),
-  look: new THREE.Vector3(-8, 8, 42),
+  pos: new THREE.Vector3(0, 24, 181),
+  look: new THREE.Vector3(-11.6, 18, 98.5),
   fov: 30,
 };
 const RING_Y_ORBIT = 6;
 const RING_Y_INSPECT = 10;
-const RING_SCALE_INSPECT = 0.62;
-const RING_Z_INSPECT = -48;
+const RING_SCALE_INSPECT = 0.56;
+const RING_Z_INSPECT = -70;
+
+/* Inspect rig: the pulled-out book sits left of center at desktop aspects;
+   NDC x scales with 1/aspect, so on narrow frames it would clip the frustum
+   edge. Past ~1.25 aspect the book glides onto the camera axis (centered) and
+   the camera re-aims at it (applied in resize()). */
+const INSPECT_BOOK_X = -21;
+const INSPECT_BOOK_X_NARROW = -5;
+let inspectBookX = INSPECT_BOOK_X;
+function applyInspectShift() {
+  const t = clamp01((1.25 - camera.aspect) / 0.45);
+  inspectBookX = lerp(INSPECT_BOOK_X, INSPECT_BOOK_X_NARROW, t);
+  CAM_INSPECT.pos.x = lerp(0, inspectBookX, t);
+  CAM_INSPECT.look.x = lerp(-5.2, inspectBookX, t);
+  CAM_INSPECT_CLOSE.pos.x = lerp(0, inspectBookX, t);
+  CAM_INSPECT_CLOSE.look.x = lerp(-11.6, inspectBookX, t);
+}
 
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -401,6 +420,22 @@ const params = new URLSearchParams(location.search);
 const EMBED = params.get('embed') === '1';
 const LOCALE = (params.get('locale') || 'en').replace(/[^a-z-]/gi, '') || 'en';
 if (EMBED) document.documentElement.classList.add('embed');
+
+/* Embed wheel-trap fix: the parent (ShelfStage) reports how much of the hero
+   iframe is on screen. Mostly out of view → release the wheel so the page
+   scrolls, and pause idle auto-advance. */
+let heroVisible = true;
+window.addEventListener('message', (event) => {
+  if (event.origin !== location.origin) return;
+  const d = event.data;
+  if (d && typeof d === 'object' && d.type === 'orbit-hero-visibility') {
+    const v = !!d.visible;
+    if (v !== heroVisible) {
+      heroVisible = v;
+      invalidate();
+    }
+  }
+});
 
 
 const stage = document.getElementById('stage');
@@ -523,15 +558,33 @@ const raycaster = new THREE.Raycaster();
 const ndc = new THREE.Vector2();
 const _v = new THREE.Vector3();
 
+function fitOrbitCamera() {
+  const vfov = THREE.MathUtils.degToRad(CAM_ORBIT.fov);
+  const hfov = 2 * Math.atan(Math.tan(vfov / 2) * camera.aspect);
+  // Projected ring extents about its center: full width; height squashed by
+  // elevation + tilt, plus the books standing on the rim.
+  const semiMajor = RING_R + BOOK_SCALE * 15 + 2;
+  const semiMinor = RING_R * Math.sin(RING_TILT + CAM_ELEV) + BOOK_SCALE * 21 / 2 + 2;
+  const distH = semiMajor / Math.tan((hfov / 2) * CAM_FILL);
+  const distV = semiMinor / Math.tan((vfov / 2) * CAM_FILL);
+  const d = Math.max(distH, distV);
+  CAM_ORBIT.pos.set(
+    0,
+    CAM_ORBIT.look.y + d * Math.sin(CAM_ELEV),
+    d * Math.cos(CAM_ELEV),
+  );
+}
+
 function resize() {
   const w = stage.clientWidth;
   const h = stage.clientHeight;
   renderer.setSize(w, h, false);
   camera.aspect = w / Math.max(1, h);
   camera.updateProjectionMatrix();
+  fitOrbitCamera();
+  applyInspectShift();
+  invalidate();
 }
-resize();
-addEventListener('resize', resize);
 
 /* ------------------------------------------------------------------ state */
 
@@ -557,6 +610,15 @@ let tabHidden = document.hidden;
 
 let reader = null;
 let readerReady = null;
+let sceneDirty = true; // render-on-demand: set on any state/pose/camera change
+function invalidate() { sceneDirty = true; }
+
+resize();
+addEventListener('resize', () => {
+  resize();
+  if (state === 'orbit' || state === 'presenting') orbitCameraNow();
+  invalidate();
+});
 let detailSpinVel = new THREE.Vector3();
 let detailDragging = false;
 let coverDragging = false;
@@ -575,6 +637,7 @@ function currentMeta() {
 
 function setState(next) {
   state = next;
+  invalidate();
   syncChrome();
 }
 
@@ -615,6 +678,7 @@ function applyCameraPose(pos, look, fov) {
     camera.fov = fov;
     camera.updateProjectionMatrix();
   }
+  invalidate();
 }
 
 function orbitCameraNow() {
@@ -636,10 +700,11 @@ function applyRingFraming(tInspect) {
   const s = lerp(1, RING_SCALE_INSPECT, t);
   ringGroup.scale.setScalar(s);
   ringGroup.rotation.x = lerp(RING_TILT, RING_TILT * 0.55, t);
+  invalidate();
 }
 
 function stageFillsViewport() {
-  if (EMBED) return true;
+  if (EMBED) return heroVisible;
   const r = stage.getBoundingClientRect();
   const vh = window.innerHeight || 1;
   return r.top < vh * 0.55 && r.bottom > vh * 0.35;
@@ -667,6 +732,7 @@ function applySlotPose(slot, i, angle, present, lift = 0) {
   slot.host.rotation.set(0, yawAt(phi, present), 0);
   slot.host.scale.setScalar(BOOK_SCALE);
   slot.present = present;
+  invalidate();
   const order = present > 0.35 ? 2 : 0;
   if (slot._order !== order) {
     slot._order = order;
@@ -683,6 +749,7 @@ function syncTitles() {
     const on = i === frontIndex && s.visible && frontPresent > 0.55 && (state === 'orbit' || state === 'presenting');
     s.closed.setTitleVisible(on);
   }
+  invalidate();
 }
 
 /** Apply ring poses. presentMap: optional { [index]: 0..1 }; default front uses frontPresent. */
@@ -866,12 +933,13 @@ function slotWorldPose(i, present = 1) {
 }
 
 function detailTargetPose() {
-  // Centered-left, large, fully in frame; ring reads small behind
-  const pos = new THREE.Vector3(-22, 14, 95);
+  // Centered-left, large, fully in frame; ring reads small behind.
+  // X pairs with applyInspectShift() so narrow aspects stay in frame.
+  const pos = new THREE.Vector3(inspectBookX, 18, 101);
   const quat = new THREE.Quaternion().setFromEuler(
     new THREE.Euler(-0.12, 0.18, 0, 'YXZ'),
   );
-  return { pos, quat, scale: BOOK_SCALE * 1.55 };
+  return { pos, quat, scale: BOOK_SCALE * 1.9 };
 }
 
 async function ensureReader(meta) {
@@ -959,11 +1027,12 @@ async function openFront() {
   await ensureReader(meta);
   reader.setCover(0);
   reader.group.visible = true;
-  reader.group.scale.setScalar(to.scale);
+  reader.group.scale.setScalar(BOOK_SCALE);
   detailSpin.rotation.set(0, 0, 0);
   detailSpinVel.set(0, 0, 0);
   detailRoot.position.copy(from.pos);
   detailRoot.quaternion.copy(from.quat);
+  invalidate();
 
   const fromCamPos = camera.position.clone();
   const fromCamLook = camLook.clone();
@@ -976,6 +1045,7 @@ async function openFront() {
   if (reducedMotion) {
     detailRoot.position.copy(to.pos);
     detailRoot.quaternion.copy(to.quat);
+    reader.group.scale.setScalar(to.scale);
     inspectCameraNow(0);
     applyRingFraming(1);
     setState('inspecting');
@@ -992,6 +1062,8 @@ async function openFront() {
     toPos: to.pos.clone(),
     fromQuat: from.quat.clone(),
     toQuat: to.quat.clone(),
+    fromScale: BOOK_SCALE,
+    toScale: to.scale,
     fromCamPos,
     toCamPos: CAM_INSPECT.pos.clone(),
     fromCamLook,
@@ -1013,6 +1085,7 @@ async function settleReaderClosed() {
   detailSpin.rotation.set(0, 0, 0);
   detailSpin.quaternion.identity();
   detailSpinVel.set(0, 0, 0);
+  invalidate();
 }
 
 async function returnHome() {
@@ -1058,6 +1131,8 @@ async function returnHome() {
     toQuat: to.quat.clone(),
     fromSpin,
     toSpin,
+    fromScale: reader ? reader.group.scale.x : BOOK_SCALE,
+    toScale: BOOK_SCALE,
     fromCamPos,
     toCamPos: CAM_ORBIT.pos.clone(),
     fromCamLook,
@@ -1084,6 +1159,7 @@ function finishReturn() {
   setState('orbit');
   announce(`${slots[frontIndex].meta.title}. Back in the orbit.`);
   anim = null;
+  invalidate();
 }
 
 /* ------------------------------------------------------------------ pointer / input */
@@ -1114,24 +1190,30 @@ function slotIndexFromObject(obj) {
 
 function updateHover(e) {
   if (state !== 'orbit' || reducedMotion) {
-    hoverFront = false;
+    if (hoverFront) {
+      hoverFront = false;
+      invalidate();
+    }
     return;
   }
   setNdc(e);
   raycaster.setFromCamera(ndc, camera);
   const hits = raycaster.intersectObjects(hitsForBrowse(), false);
   if (!hits.length) {
+    if (hoverFront) invalidate();
     hoverFront = false;
     canvas.style.cursor = 'default';
     return;
   }
   const idx = slotIndexFromObject(hits[0].object);
+  if (hoverFront !== (idx === frontIndex)) invalidate();
   hoverFront = idx === frontIndex;
   canvas.style.cursor = idx >= 0 ? 'pointer' : 'default';
 }
 
 function startPageDrag(e, leaf) {
   if (!leaf || !reader.beginDrag(leaf)) return false;
+  invalidate();
   pagePending = null;
   pageDragging = true;
   const rect = canvas.getBoundingClientRect();
@@ -1154,7 +1236,10 @@ canvas.addEventListener('pointermove', (e) => {
 });
 
 canvas.addEventListener('pointerleave', () => {
-  hoverFront = false;
+  if (hoverFront) {
+    hoverFront = false;
+    invalidate();
+  }
 });
 
 canvas.addEventListener('pointerdown', async (e) => {
@@ -1254,6 +1339,7 @@ canvas.addEventListener('pointermove', (e) => {
         const d = (dx * pageDragAxis.x) / pageDragAxis.span;
         const t = clamp01(pageDragAxis.dir > 0 ? d : 1 - d);
         reader.updateDrag(t);
+        invalidate();
       } else {
         pagePending = null;
       }
@@ -1266,12 +1352,14 @@ canvas.addEventListener('pointermove', (e) => {
     const d = (dx * pageDragAxis.x + dy * pageDragAxis.y) / pageDragAxis.span;
     const t = clamp01(pageDragAxis.dir > 0 ? d : 1 - d);
     reader.updateDrag(t);
+    invalidate();
     return;
   }
   if (coverDragging && reader) {
     const dx = e.clientX - coverDragStartX;
     const next = clamp01(coverDragStart + dx / 220);
     reader.setCover(next);
+    invalidate();
     setState(next > 0.08 ? 'reading' : 'inspecting');
     return;
   }
@@ -1314,6 +1402,7 @@ function endPointer(e, cancelled) {
     detailDragging = false;
     rotateDrag = null;
     if (canvas.hasPointerCapture?.(e.pointerId)) canvas.releasePointerCapture(e.pointerId);
+    invalidate();
   }
 }
 canvas.addEventListener('pointerup', (e) => endPointer(e, false));
@@ -1325,6 +1414,7 @@ function commitWheelGesture() {
   const acc = gestureAcc;
   gestureAcc = 0;
   if (!acc) return;
+  invalidate();
   if (!(state === 'orbit' || state === 'presenting') || !bootReady) return;
 
   const dir = acc > 0 ? 1 : -1;
@@ -1436,6 +1526,7 @@ canvas.addEventListener('touchend', (e) => {
 
 document.addEventListener('visibilitychange', () => {
   tabHidden = document.hidden;
+  if (!tabHidden) invalidate();
 });
 
 const io = new IntersectionObserver((entries) => {
@@ -1461,6 +1552,7 @@ function mountSlot(j, meta, closed) {
   slots[j] = { meta, closed, host, present: 0, visible: true };
   const p = j === frontIndex ? frontPresent : 0;
   applySlotPose(slots[j], j, ringAngle, p, 0);
+  invalidate();
 }
 
 function revealBoot() {
@@ -1469,6 +1561,7 @@ function revealBoot() {
   bootEl.classList.add('is-done');
   setTimeout(() => bootEl.remove(), 420);
   syncChrome();
+  invalidate();
   if (!frameStarted) {
     frameStarted = true;
     requestAnimationFrame(frame);
@@ -1590,10 +1683,23 @@ function frame(now) {
   const dt = Math.min(0.05, (now - lastT) / 1000);
   lastT = now;
 
+  // Render-on-demand: `active` = something moved this frame; sceneDirty =
+  // a one-off change landed since the last render. Idle + clean → skip GPU.
+  let active = false;
+
+  // Hover lift spring — run only while unsettled, then rest exactly.
   const wantLift = hoverFront && state === 'orbit' && !reducedMotion ? HOVER_LIFT : 0;
-  hoverLift = lerp(hoverLift, wantLift, 1 - Math.exp(-10 * dt));
+  const liftGap = wantLift - hoverLift;
+  if (Math.abs(liftGap) > 0.001) {
+    hoverLift += liftGap * (1 - Math.exp(-10 * dt));
+    active = true;
+  } else if (hoverLift !== wantLift) {
+    hoverLift = wantLift;
+    active = true;
+  }
 
   if (anim) {
+    active = true;
     const u = clamp01((now - anim.t0) / anim.dur);
     const e = settle(u);
 
@@ -1636,6 +1742,7 @@ function frame(now) {
     } else if (anim.kind === 'pull') {
       detailRoot.position.lerpVectors(anim.fromPos, anim.toPos, e);
       detailRoot.quaternion.slerpQuaternions(anim.fromQuat, anim.toQuat, e);
+      reader.group.scale.setScalar(lerp(anim.fromScale, anim.toScale, e));
       const camPos = new THREE.Vector3().lerpVectors(anim.fromCamPos, anim.toCamPos, e);
       const camL = new THREE.Vector3().lerpVectors(anim.fromCamLook, anim.toCamLook, e);
       applyCameraPose(camPos, camL, lerp(anim.fromCamFov, anim.toCamFov, e));
@@ -1659,6 +1766,7 @@ function frame(now) {
       detailRoot.position.lerpVectors(anim.fromPos, anim.toPos, e);
       detailRoot.quaternion.slerpQuaternions(anim.fromQuat, anim.toQuat, e);
       detailSpin.quaternion.slerpQuaternions(anim.fromSpin, anim.toSpin, e);
+      if (reader) reader.group.scale.setScalar(lerp(anim.fromScale, anim.toScale, e));
       const camPos = new THREE.Vector3().lerpVectors(anim.fromCamPos, anim.toCamPos, e);
       const camL = new THREE.Vector3().lerpVectors(anim.fromCamLook, anim.toCamLook, e);
       applyCameraPose(camPos, camL, lerp(anim.fromCamFov, anim.toCamFov, e));
@@ -1673,20 +1781,23 @@ function frame(now) {
         finishReturn();
       }
     }
-  } else if (state === 'orbit' || state === 'presenting') {
-    updateAllPoses({});
+  } else if (active || sceneDirty) {
+    if (state === 'orbit' || state === 'presenting') updateAllPoses({});
   }
 
-  if ((state === 'inspecting' || state === 'reading') && !anim) {
+  if ((state === 'inspecting' || state === 'reading') && !anim && detailSpinVel.lengthSq() > 0) {
     detailSpin.rotation.x += detailSpinVel.x;
     detailSpin.rotation.y += detailSpinVel.y;
     detailSpin.rotation.x = THREE.MathUtils.clamp(detailSpin.rotation.x, -0.85, 0.85);
     const damp = Math.exp(-5 * dt);
     detailSpinVel.multiplyScalar(damp);
-    if (!detailDragging && detailSpinVel.lengthSq() < 1e-6) detailSpinVel.set(0, 0, 0);
+    if (detailSpinVel.lengthSq() < 1e-6) detailSpinVel.set(0, 0, 0);
+    active = true;
   }
 
-  if (reader && reader.group.visible) reader.update(dt);
+  if (reader && reader.group.visible) {
+    if (reader.update(dt)) active = true;
+  }
 
   if (
     !reducedMotion &&
@@ -1704,7 +1815,10 @@ function frame(now) {
     advance(1);
   }
 
-  renderer.render(scene, camera);
+  if (active || sceneDirty) {
+    renderer.render(scene, camera);
+    sceneDirty = false;
+  }
 }
 
 boot().catch((err) => {

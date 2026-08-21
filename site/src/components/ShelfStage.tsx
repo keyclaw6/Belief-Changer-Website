@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from '@tanstack/react-router'
 import { useReducedMotion } from 'motion/react'
 import type { Book } from '~/data/types'
@@ -68,6 +68,7 @@ export function ShelfStage({
   // SSR + first paint: static row. Upgrade to Orbit only after mount when
   // motion is allowed and WebGL is available (avoids hydration mismatch).
   const [useOrbit, setUseOrbit] = useState(false)
+  const iframeRef = useRef<HTMLIFrameElement>(null)
 
   useEffect(() => {
     if (reduce) {
@@ -76,6 +77,35 @@ export function ShelfStage({
     }
     setUseOrbit(hasWebGL())
   }, [reduce])
+
+  useEffect(() => {
+    if (!useOrbit) return
+    // Wheel-trap fix: report how much of the hero iframe is on screen so The
+    // Orbit releases the wheel (page scrolls past) and pauses idle spin when
+    // the hero is mostly out of view.
+    const el = iframeRef.current
+    if (!el) return
+    const post = () => {
+      if (!el.contentWindow) return
+      const rect = el.getBoundingClientRect()
+      const vh = window.innerHeight || 1
+      const frac = (Math.min(rect.bottom, vh) - Math.max(rect.top, 0)) / vh
+      const visible = Math.max(0, Math.min(1, frac)) > 0.5
+      el.contentWindow.postMessage(
+        { type: 'orbit-hero-visibility', visible },
+        window.location.origin,
+      )
+    }
+    post()
+    el.addEventListener('load', post, { once: true })
+    window.addEventListener('scroll', post, { passive: true })
+    window.addEventListener('resize', post)
+    return () => {
+      el.removeEventListener('load', post)
+      window.removeEventListener('scroll', post)
+      window.removeEventListener('resize', post)
+    }
+  }, [useOrbit])
 
   useEffect(() => {
     if (!useOrbit) return
@@ -103,6 +133,7 @@ export function ShelfStage({
 
   return (
     <iframe
+      ref={iframeRef}
       title="The Orbit — Belief Changer library"
       src={src}
       className="h-full w-full border-0 bg-canvas"
