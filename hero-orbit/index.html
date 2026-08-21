@@ -1286,35 +1286,14 @@ canvas.addEventListener('pointerdown', async (e) => {
     const hits = raycaster.intersectObjects(reader.hitMeshes, false);
     const st = reader.getState();
 
-    // Cover open: page pick before cover drag / book rotate
+    // Cover open: page drag before cover drag / book rotate. Leaf meshes are
+    // morph-driven, so raycast picks are unreliable; the drag itself decides
+    // the direction (drag left = forward turn, drag right = turn back).
     if (st.cover >= 0.99) {
-      const leaf = reader.pickLeaf ? reader.pickLeaf(raycaster) : null;
-      if (leaf && startPageDrag(e, leaf)) {
-        e.preventDefault();
-        return;
-      }
-      // Prefer page-turning over cover-close or orbit when the volume is open.
-      // Cover close: only if the open front board/art is the first hit.
-      const top = hits[0]?.object;
-      const openCoverHit =
-        top &&
-        (top === reader.hitMeshes[0] ||
-          top === reader.hitMeshes[3] ||
-          top.userData?.kind === 'cover' ||
-          top.userData?.coverArtwork === 'front');
-      if (!openCoverHit || reader.isPageHit?.(top) || top?.userData?.leafIndex != null) {
-        e.preventDefault();
-        pagePending = { x0: e.clientX, y0: e.clientY, pointerId: e.pointerId };
-        canvas.setPointerCapture(e.pointerId);
-        setState('reading');
-        return;
-      }
-      // Explicit grab on the open cover flap → close drag
       e.preventDefault();
-      coverDragging = true;
-      coverDragStartX = e.clientX;
-      coverDragStart = st.cover;
+      pagePending = { x0: e.clientX, y0: e.clientY, pointerId: e.pointerId };
       canvas.setPointerCapture(e.pointerId);
+      setState('reading');
       return;
     }
 
