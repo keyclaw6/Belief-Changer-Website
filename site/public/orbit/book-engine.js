@@ -810,7 +810,56 @@ function applyComOffset(book) {
   book.position.set(BOOK_COM_OFFSET.x, BOOK_COM_OFFSET.y, BOOK_COM_OFFSET.z);
 }
 
-export async function createSharedResources(THREE) {
+/* ---- Troika SDF text (gold parity): titles are polygon meshes, crisp at any
+   zoom. Loaded lazily from ./vendor/; falls back to the legacy canvas bake if
+   the module or font is unavailable. ---- */
+async function buildCoverTitleGroup(THREE, shared, { title, subtitle, author, ink }) {
+  if (!shared.troikaReady || !shared.titleFontUrl) return null;
+  let troika;
+  try {
+    troika = await shared.troikaReady;
+  } catch {
+    return null;
+  }
+  const Text = troika && (troika.Text || (troika.default && troika.default.Text));
+  if (!Text) return null;
+  const D = BOOK_DIMS;
+  const pw = D.boardW - ART_BORDER_FRONT * 2;
+  const ph = D.boardH - ART_BORDER_FRONT * 2;
+  const s = pw / 768; // legacy bakeFrontTitle canvas was 768×1152
+  const g = new THREE.Group();
+  g.name = 'troikaTitle';
+  const mk = (str, pxSize, yCanvas, opts = {}) => {
+    if (!str) return null;
+    const t = new Text();
+    t.text = opts.upper ? String(str).toUpperCase() : String(str);
+    t.font = shared.titleFontUrl;
+    t.fontSize = Math.max(0.14, pxSize * s);
+    t.color = ink;
+    t.anchorX = 'center';
+    t.anchorY = opts.top ? 'top' : 'middle';
+    t.maxWidth = pw * 0.84;
+    t.lineHeight = opts.lineHeight || 1.08;
+    t.letterSpacing = opts.tracking != null ? opts.tracking : 0.01;
+    t.sdfGlyphSize = 64;
+    t.renderOrder = 6;
+    t.userData.isSDFText = true;
+    t.material.depthTest = false;
+    // Group-local +Y points toward the cover top; canvas y grows downward.
+    t.position.z = 0.012;
+    t.position.y = yCanvas * s - ph / 2;
+    g.add(t);
+    return t;
+  };
+  mk(title, 108, 1152 * 0.2 + 40, { top: true, lineHeight: 1.06 });
+  if (subtitle) mk(subtitle, 30, 1152 * (0.2 + 0.115) + 60, { lineHeight: 1.3 });
+  if (author) mk(String(author).toUpperCase(), 24, 1152 * 0.862);
+  mk('BELIEF CHANGER', 19, 1152 * 0.932, { tracking: 0.18 });
+  g.userData.isTroikaTitle = true;
+  return g;
+}
+
+export async function createSharedResources(THREE, opts = {}) {
   const G = requireBK();
   const D = BOOK_DIMS;
   const loader = new THREE.TextureLoader();
@@ -922,7 +971,7 @@ export async function createSharedResources(THREE) {
     side: THREE.DoubleSide,
   });
 
-  return {
+  const shared = {
     textures: {
       coverNormal,
       paperColor,
@@ -946,6 +995,15 @@ export async function createSharedResources(THREE) {
     D,
     G,
   };
+
+  // Troika SDF text (gold parity). Null on any failure → canvas fallback.
+  const troikaUrl = opts.troikaUrl || './vendor/troika-three-text.module.js';
+  shared.troikaReady = import(/* @vite-ignore */ troikaUrl)
+    .then((m) => (m && m.Text ? m : m && m.default && m.default.Text ? m.default : null))
+    .catch(() => null);
+  shared.titleFontUrl = opts.fontUrl || null;
+
+  return shared;
 }
 
 async function loadCoverTexture(THREE, url, aniso = 6) {
@@ -1081,14 +1139,26 @@ export async function createClosedBook(THREE, shared, opts) {
   const matFrontArt = makeFrontArtMaterial(THREE, shared, coverTex);
 
   const ink = inkForLuminance(caseLuminance, overlayInk);
-  const titleTex = bakeFrontTitle(THREE, {
-    title,
-    subtitle,
-    author,
-    ink,
-    caseLum: caseLuminance,
-  });
-  const matTitle = makeTitleMaterial(THREE, titleTex);
+  // Title: troika SDF polygon text (gold parity); canvas bake only as fallback.
+  const titleGroup = await buildCoverTitleGroup(THREE, shared, { title, subtitle, author, ink });
+  let matTitle = null;
+  let titleTex = null;
+  let titleOverlay;
+  if (titleGroup) {
+    titleGroup.rotation.x = Math.PI / 2;
+    titleGroup.position.set(D.boardW / 2, -0.028, 0);
+    titleOverlay = titleGroup;
+  } else {
+    titleTex = bakeFrontTitle(THREE, {
+      title,
+      subtitle,
+      author,
+      ink,
+      caseLum: caseLuminance,
+    });
+    matTitle = makeTitleMaterial(THREE, titleTex);
+    titleOverlay = titleOverlayMesh(THREE, matTitle, D);
+  }
   const spineTitleTex = bakeSpineTitle(THREE, { title, ink, caseLum: caseLuminance });
   const matSpineArt = makeSpineArtMaterial(THREE, spineTitleTex, shared);
 
@@ -1113,7 +1183,6 @@ export async function createClosedBook(THREE, shared, opts) {
 
   // Cover artwork — unique material, shared plane layout via helper
   const frontArt = coverArtworkMesh(THREE, matFrontArt, true, D);
-  const titleOverlay = titleOverlayMesh(THREE, matTitle, D);
   frontFlip.add(frontArt, titleOverlay);
 
   const stack = new THREE.Mesh(shared.stackGeo, [
@@ -1326,14 +1395,30 @@ export async function createReaderBook(THREE, shared, options = {}) {
   let matFrontArt = makeFrontArtMaterial(THREE, shared, coverTex);
 
   const ink = inkForLuminance(meta.caseLuminance, meta.overlayInk);
-  let titleTex = bakeFrontTitle(THREE, {
+  // Title: troika SDF polygon text (gold parity); canvas bake only as fallback.
+  let matTitle = null;
+  let titleTex = null;
+  let troikaTitleTexts = null;
+  let titleOverlay = await buildCoverTitleGroup(THREE, shared, {
     title: meta.title,
     subtitle: meta.subtitle,
     author: meta.author,
     ink,
-    caseLum: meta.caseLuminance,
   });
-  let matTitle = makeTitleMaterial(THREE, titleTex);
+  if (titleOverlay) {
+    troikaTitleTexts = titleOverlay.children.slice();
+  }
+  if (!titleOverlay) {
+    titleTex = bakeFrontTitle(THREE, {
+      title: meta.title,
+      subtitle: meta.subtitle,
+      author: meta.author,
+      ink,
+      caseLum: meta.caseLuminance,
+    });
+    matTitle = makeTitleMaterial(THREE, titleTex);
+    titleOverlay = titleOverlayMesh(THREE, matTitle, D);
+  }
   let spineTitleTex = bakeSpineTitle(THREE, {
     title: meta.title,
     ink,
@@ -1411,7 +1496,6 @@ export async function createReaderBook(THREE, shared, options = {}) {
   book.add(backPaste);
 
   const frontArt = coverArtworkMesh(THREE, matFrontArt, true, D);
-  const titleOverlay = titleOverlayMesh(THREE, matTitle, D);
   frontFlip.add(frontArt, titleOverlay);
 
   const backMat = new THREE.MeshStandardMaterial({
@@ -2064,18 +2148,29 @@ export async function createReaderBook(THREE, shared, options = {}) {
       coverTex = tex;
     }
     const ink2 = inkForLuminance(meta.caseLuminance, meta.overlayInk);
-    const nt = bakeFrontTitle(THREE, {
-      title: meta.title,
-      subtitle: meta.subtitle,
-      author: meta.author,
-      ink: ink2,
-      caseLum: meta.caseLuminance,
-    });
-    const oldT = matTitle.map;
-    matTitle.map = nt;
-    matTitle.needsUpdate = true;
-    if (oldT) oldT.dispose();
-    titleTex = nt;
+    if (troikaTitleTexts) {
+      // Troika titles are live polygon meshes — just re-set their strings.
+      const seq = [[meta.title, false]];
+      if (meta.subtitle) seq.push([meta.subtitle, false]);
+      if (meta.author) seq.push([String(meta.author).toUpperCase(), false]);
+      seq.push(['BELIEF CHANGER', false]);
+      troikaTitleTexts.forEach((t, i) => {
+        if (seq[i]) { t.text = seq[i][0]; t.color = ink2; }
+      });
+    } else if (matTitle) {
+      const nt = bakeFrontTitle(THREE, {
+        title: meta.title,
+        subtitle: meta.subtitle,
+        author: meta.author,
+        ink: ink2,
+        caseLum: meta.caseLuminance,
+      });
+      const oldT = matTitle.map;
+      matTitle.map = nt;
+      matTitle.needsUpdate = true;
+      if (oldT) oldT.dispose();
+      titleTex = nt;
+    }
 
     const st = bakeSpineTitle(THREE, {
       title: meta.title,

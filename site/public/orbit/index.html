@@ -354,7 +354,11 @@
 <script type="importmap">
 {
   "imports": {
-    "three": "./vendor/three.module.js"
+    "three": "./vendor/three.module.js",
+    "troika-three-utils": "./vendor/troika/troika-three-utils.mjs",
+    "troika-worker-utils": "./vendor/troika/troika-worker-utils.mjs",
+    "webgl-sdf-generator": "./vendor/troika/webgl-sdf-generator.mjs",
+    "bidi-js": "./vendor/troika/bidi.mjs"
   }
 }
 </script>
@@ -1694,7 +1698,9 @@ async function boot() {
   await document.fonts.load('600 48px "DM Sans"');
   await document.fonts.ready;
 
-  shared = await createSharedResources(THREE);
+  shared = await createSharedResources(THREE, {
+    fontUrl: '/orbit/vendor/fonts/dm-sans-latin-500-normal.woff',
+  });
   const catalog = await fetch('./_extract/books-meta.json').then((r) => r.json());
   const order = buildRingOrder(catalog, N);
 
