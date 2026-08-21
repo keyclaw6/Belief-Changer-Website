@@ -7,15 +7,13 @@ import { ShelfStage } from '~/components/ShelfStage'
 import { HeroAsk } from '~/components/HeroAsk'
 
 /**
- * Hero (beat 0): the words on the left, the shelf stage on the right, on the
- * white canvas at full viewport height. The pull-cord hangs top-right (rendered
- * by the shell). Below the finder, quiet tappable examples; a down-arrow rests
- * near the bottom center. Copy is the deck verbatim; the hero keeps the word
- * "trap" (its one earned place).
+ * Hero (beat 0): stacked Quiet Editorial composition —
+ *   1. Full-bleed Orbit stage (below the site nav)
+ *   2. Headline + finder band on the white canvas
  *
- * The shelf is today a static row of titled covers with hologram hover; later
- * the 3D shelf. Copy stays first in the DOM so the CTA is never buried under the
- * asset on mobile. Still, at scale: no side entries, generous whitespace.
+ * The shelf is The Orbit (iframe) when motion/WebGL allow; otherwise the static
+ * cover row. Copy stays below the stage so the CTA is never buried under the
+ * 3D asset on mobile. Trust strip and later beats follow unchanged.
  */
 export function Hero({
   locale,
@@ -26,8 +24,6 @@ export function Hero({
   t: Messages
   shelfBooks: Book[]
 }) {
-  // The tappable examples: each seeds the library finder with the word. "more"
-  // simply opens the full library.
   const examples: Array<{ label: string; q?: string }> = [
     { label: t.home.exampleScrolling, q: 'scrolling' },
     { label: t.home.exampleSugar, q: 'sugar' },
@@ -38,15 +34,21 @@ export function Hero({
   ]
 
   return (
-    <header className="mx-auto w-full max-w-[var(--page-max)] px-[5vw]">
-      <div className="grid min-h-[calc(100dvh-var(--nav-height))] items-center gap-11 pb-16 pt-10 md:grid-cols-[1.05fr_0.95fr] md:gap-14">
-        {/* Text column */}
-        <div className="max-w-[30ch]">
+    <header className="w-full">
+      {/* Full-viewport-width Orbit stage: real space for the ring. */}
+      <div className="h-[70dvh] min-h-[280px] w-full bg-canvas md:h-[calc(100dvh-var(--nav-height))]">
+        <ShelfStage books={shelfBooks} locale={locale} />
+      </div>
+
+      {/* Finder band below the stage */}
+      <div
+        id="hero-finder"
+        className="mx-auto w-full max-w-[var(--page-max)] scroll-mt-[calc(var(--nav-height)+12px)] px-[5vw] pb-16 pt-12 md:pt-16"
+      >
+        <div className="max-w-[36ch]">
           <h1
             className="text-ink"
             style={{
-              // Scaled so the long editorial headline settles to ~3 lines at
-              // desktop rather than towering; still large and calm.
               fontSize: 'clamp(32px, 3.4vw, 46px)',
               fontWeight: 'var(--text-display-xl--font-weight)',
               lineHeight: 1.12,
@@ -73,8 +75,6 @@ export function Hero({
             />
           </div>
 
-          {/* Quiet tappable examples. Middle dots are metadata-only, so these
-              are laid out as wrapping links with whitespace, not a dot chain. */}
           <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2">
             <span className="sr-only">{t.home.examplesLabel}</span>
             {examples.map((ex) => (
@@ -88,11 +88,6 @@ export function Hero({
               </Link>
             ))}
           </div>
-        </div>
-
-        {/* Asset column: the shelf. Reserves height so first paint is steady. */}
-        <div className="h-[280px] sm:h-[340px] md:h-[400px]">
-          <ShelfStage books={shelfBooks} locale={locale} />
         </div>
       </div>
     </header>

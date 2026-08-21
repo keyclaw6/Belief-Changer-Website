@@ -1,4 +1,6 @@
+import { useEffect, useState } from 'react'
 import { Link } from '@tanstack/react-router'
+import { useReducedMotion } from 'motion/react'
 import type { Book } from '~/data/types'
 import type { Locale } from '~/i18n/config'
 import { localePath } from '~/i18n/routing'
@@ -7,47 +9,33 @@ import { Hologram } from './Hologram'
 
 /**
  * ShelfStage: the hero asset (SITE-PLAN §Shelf slot contract, DESIGN.md
- * §The shelf). It sits on the white canvas with real cover contact shadows and
- * the books' own grounds supplying the color.
+ * §The shelf). Progressive enhancement:
+ *   - SSR + reduced-motion + no-WebGL: static BookCover row (same as v1).
+ *   - Motion allowed + WebGL: The Orbit iframe fills this footprint.
  *
- * v1 renders a STATIC, server-rendered cover row from the books fixture: true
- * corners, cover shadows per the rendered reference, each cover a link to its
- * book page. Covers are staggered in height to read as a shelf rather than a
- * grid, and the row is baseline-aligned so the spines meet an implied shelf.
- *
- * ── Phase 3 mount contract (do not implement here) ───────────────────────────
- * A later phase replaces this static row IN PLACE with an interactive 3D shelf
- * module. The contract that phase must honor:
- *   - Same data source: the `books` fixture (later the real catalog), same
- *     order, same slugs; each spine/cover still links to /books/{slug}.
- *   - Same footprint: the 3D canvas mounts into this component's box; nothing
- *     else on the site may assume 3D exists, and the hero copy/layout around it
- *     does not change.
- *   - Progressive enhancement: this static row is the reduced-motion and
- *     no-JS fallback. The 3D module renders only when motion is allowed and the
- *     canvas hydrates; on `prefers-reduced-motion` it collapses back to exactly
- *     this row.
- *   - Wheel-and-arrow hero behavior (spinning the shelf) arrives WITH the 3D
- *     module, never before it; v1 ships no shelf choreography.
- * ─────────────────────────────────────────────────────────────────────────────
+ * Panel "Read the book" links are owned by `/orbit/index.html` (locale query →
+ * `/{locale}/books/{slug}`, target=_top when embed=1).
  */
 
-// A calm, deterministic height rhythm so the row reads as a shelf, not a grid.
-// Four covers: the two tallest in the middle, shorter at the ends.
 const HEIGHTS = ['82%', '100%', '94%', '86%']
 
-export function ShelfStage({
-  books,
-  locale,
-}: {
-  books: Book[]
-  locale: Locale
-}) {
+function hasWebGL(): boolean {
+  if (typeof document === 'undefined') return false
+  try {
+    const canvas = document.createElement('canvas')
+    return Boolean(
+      canvas.getContext('webgl2') ||
+        canvas.getContext('webgl') ||
+        canvas.getContext('experimental-webgl'),
+    )
+  } catch {
+    return false
+  }
+}
+
+function StaticShelf({ books, locale }: { books: Book[]; locale: Locale }) {
   return (
-    <div
-      // The shelf's own box. The Phase 3 3D canvas mounts here in place.
-      className="flex items-end justify-center gap-3 sm:gap-4 md:justify-end"
-    >
+    <div className="flex h-full items-end justify-center gap-3 sm:gap-4">
       {books.map((book, i) => (
         <Link
           key={book.slug}
@@ -56,7 +44,6 @@ export function ShelfStage({
           className="block w-[21%] max-w-[168px] shrink-0 no-underline sm:w-[23%]"
           style={{ height: HEIGHTS[i % HEIGHTS.length] }}
         >
-          {/* Hologram hover: this is a browsable list of covers. */}
           <Hologram className="h-full">
             <BookCover
               book={book}
@@ -67,5 +54,61 @@ export function ShelfStage({
         </Link>
       ))}
     </div>
+  )
+}
+
+export function ShelfStage({
+  books,
+  locale,
+}: {
+  books: Book[]
+  locale: Locale
+}) {
+  const reduce = useReducedMotion()
+  // SSR + first paint: static row. Upgrade to Orbit only after mount when
+  // motion is allowed and WebGL is available (avoids hydration mismatch).
+  const [useOrbit, setUseOrbit] = useState(false)
+
+  useEffect(() => {
+    if (reduce) {
+      setUseOrbit(false)
+      return
+    }
+    setUseOrbit(hasWebGL())
+  }, [reduce])
+
+  useEffect(() => {
+    if (!useOrbit) return
+    const onMessage = (event: MessageEvent) => {
+      if (event.origin !== window.location.origin) return
+      if (
+        event.data &&
+        typeof event.data === 'object' &&
+        event.data.type === 'orbit-scroll-down'
+      ) {
+        document
+          .getElementById('hero-finder')
+          ?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
+    }
+    window.addEventListener('message', onMessage)
+    return () => window.removeEventListener('message', onMessage)
+  }, [useOrbit])
+
+  if (!useOrbit) {
+    return <StaticShelf books={books} locale={locale} />
+  }
+
+  const src = `/orbit/index.html?embed=1&locale=${encodeURIComponent(locale)}`
+
+  return (
+    <iframe
+      title="The Orbit — Belief Changer library"
+      src={src}
+      className="h-full w-full border-0 bg-canvas"
+      // Orbit owns its own keyboard/wheel; allow autoplay-free WebGL.
+      allow="fullscreen"
+      loading="eager"
+    />
   )
 }

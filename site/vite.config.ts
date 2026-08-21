@@ -11,6 +11,8 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineConfig({
   server: {
     port: 3000,
+    // Quick Tunnel hostnames rotate; allow them for private previews.
+    allowedHosts: ['.trycloudflare.com', 'localhost', '127.0.0.1'],
   },
   resolve: {
     tsconfigPaths: true,

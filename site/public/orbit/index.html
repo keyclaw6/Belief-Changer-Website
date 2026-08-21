@@ -1,0 +1,1716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Belief Changer — The Orbit</title>
+<style>
+  @font-face {
+    font-family: "DM Sans";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("/fonts/dmsans-400-normal-latin.woff2") format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  @font-face {
+    font-family: "DM Sans";
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url("/fonts/dmsans-600-normal-latin.woff2") format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+
+  :root {
+    --canvas: #ffffff;
+    --band: #ebe7df;
+    --hairline: #eaeaea;
+    --ink: #111111;
+    --ink-secondary: #787774;
+    --action: #111111;
+    --action-hover: #333333;
+    --on-action: #ffffff;
+    --focus: #111111;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+
+  body {
+    margin: 0;
+    background: var(--canvas);
+    color: var(--ink);
+    font-family: "DM Sans", system-ui, sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  #wordmark {
+    position: fixed;
+    top: 22px;
+    left: 28px;
+    z-index: 20;
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+    color: var(--ink);
+    opacity: 0.55;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  #stage {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    margin: 0;
+    background: #fff;
+    overflow: hidden;
+    touch-action: pan-y;
+  }
+
+
+  /* embed=1: sit inside the site hero iframe — no standalone chrome */
+  html.embed #wordmark,
+  html.embed #content { display: none !important; }
+  html.embed #stage {
+    height: 100%;
+    height: 100dvh;
+  }
+  html.embed body { overflow: hidden; }
+
+  #stage canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+  }
+
+  #live {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .orbit-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 8;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 1px solid var(--hairline);
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.72);
+    color: var(--ink);
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    transition: border-color 160ms ease, background 160ms ease;
+  }
+  .orbit-nav:hover { border-color: rgba(17, 17, 17, 0.35); background: #fff; }
+  .orbit-nav:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+  .orbit-nav svg { width: 18px; height: 18px; display: block; }
+  .orbit-nav[hidden] { display: none !important; }
+  #nav-prev { left: 18px; }
+  #nav-next { right: 18px; }
+
+  #scroll-down {
+    position: absolute;
+    left: 50%;
+    bottom: 22px;
+    transform: translateX(-50%);
+    z-index: 8;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: var(--ink-secondary);
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    opacity: 0.55;
+    transition: opacity 180ms ease, color 180ms ease;
+  }
+  #scroll-down:hover,
+  #scroll-down:focus-visible {
+    opacity: 1;
+    color: var(--ink);
+  }
+  #scroll-down:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+  #scroll-down[hidden] { display: none !important; }
+  #scroll-down svg { width: 22px; height: 22px; display: block; }
+
+  #panel {
+    position: absolute;
+    top: 50%;
+    right: clamp(16px, 4vw, 48px);
+    transform: translateY(-50%);
+    z-index: 12;
+    width: min(320px, calc(100% - 48px));
+    padding: 28px 28px 24px;
+    background: #fff;
+    border: 1px solid var(--hairline);
+    border-radius: 8px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 280ms ease, visibility 280ms ease;
+  }
+  #panel.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+  #panel h2 {
+    margin: 0 0 10px;
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+  }
+  #panel .promise {
+    margin: 0 0 14px;
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--ink);
+  }
+  #panel .meta {
+    margin: 0 0 22px;
+    font-size: 12.5px;
+    line-height: 1.4;
+    color: var(--ink-secondary);
+  }
+  #panel .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 14px 16px;
+    border: none;
+    border-radius: 6px;
+    background: var(--action);
+    color: var(--on-action);
+    font: 500 14px/1.4 "DM Sans", system-ui, sans-serif;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 140ms ease, transform 100ms ease;
+  }
+  #panel .btn-primary:hover { background: var(--action-hover); }
+  #panel .btn-primary:active { transform: scale(0.98); }
+  #panel .btn-primary:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+  #panel .back {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 0;
+    border: none;
+    background: none;
+    color: var(--ink-secondary);
+    font: 500 14px/1.4 "DM Sans", system-ui, sans-serif;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+  }
+  #panel .back:hover { color: var(--ink); }
+  #panel .back:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+  @media (max-width: 720px) {
+    #panel {
+      top: auto;
+      bottom: 72px;
+      right: 16px;
+      left: 16px;
+      width: auto;
+      transform: none;
+      padding: 20px;
+    }
+    #panel h2 { font-size: 22px; }
+    #nav-prev, #nav-next { display: none; }
+    #wordmark { left: 16px; top: 16px; font-size: 16px; }
+  }
+
+  #content {
+    background: var(--band);
+    border-top: 1px solid var(--hairline);
+  }
+  .section {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 96px 24px;
+  }
+  .section + .section {
+    border-top: 1px solid rgba(17, 17, 17, 0.08);
+  }
+  .section h2 {
+    margin: 0 0 12px;
+    font-size: 38px;
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+  }
+  .section p {
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.65;
+    color: var(--ink);
+  }
+  .section p + p { margin-top: 16px; }
+
+  #boot {
+    position: absolute;
+    inset: 0;
+    z-index: 6;
+    display: grid;
+    place-items: center;
+    background: #fff;
+    color: var(--ink-secondary);
+    font: 500 13px/1.4 "DM Sans", system-ui, sans-serif;
+    letter-spacing: 0.04em;
+    pointer-events: none;
+    transition: opacity 420ms ease;
+  }
+  #boot.is-done { opacity: 0; }
+</style>
+</head>
+<body>
+  <p id="wordmark">Belief Changer</p>
+
+  <section id="stage" aria-label="The Orbit book ring">
+    <div id="boot">Composing the library…</div>
+    <div id="live" role="status" aria-live="polite" aria-atomic="true"></div>
+
+    <button type="button" class="orbit-nav" id="nav-prev" aria-label="Previous book">
+      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5 L8 12 L15 19"/></svg>
+    </button>
+    <button type="button" class="orbit-nav" id="nav-next" aria-label="Next book">
+      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5 L16 12 L9 19"/></svg>
+    </button>
+    <button type="button" id="scroll-down" aria-label="Scroll to content below">
+      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9 L12 15 L18 9"/></svg>
+    </button>
+
+    <aside id="panel" aria-hidden="true">
+      <h2 id="panel-title"></h2>
+      <p class="promise" id="panel-promise"></p>
+      <p class="meta" id="panel-meta"></p>
+      <a class="btn-primary" id="panel-read" href="#">Read the book</a>
+      <button type="button" class="back" id="panel-back">Back to the orbit</button>
+    </aside>
+  </section>
+
+  <main id="content">
+    <section class="section" aria-labelledby="intro-h">
+      <h2 id="intro-h">Library introduction</h2>
+      <p>Belief Changer is a quiet shelf of free books that help people leave traps behind — smoking, sugar, scrolling, and the rest — by seeing how the trap works.</p>
+      <p>The Orbit above is the front door: turn the ring, meet a cover, open a volume. Nothing to join. Nothing tracking you.</p>
+    </section>
+    <section class="section" aria-labelledby="how-h">
+      <h2 id="how-h">How it works</h2>
+      <p>Each book is a short, careful argument. You read at your own pace. When a belief loosens, the behaviour that depended on it often follows without force.</p>
+    </section>
+    <section class="section" aria-labelledby="free-h">
+      <h2 id="free-h">Free to read</h2>
+      <p>Every finished title is free forever. Drafts stay on the shelf as they are written. Scroll back up when you want another book from the ring.</p>
+    </section>
+  </main>
+
+<script src="./_extract/01-noise.js"></script>
+<script src="./_extract/02-geometry.js"></script>
+<script src="./_extract/03-pageturn.js"></script>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"
+  }
+}
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import {
+  configureRenderer,
+  createStudioLights,
+  createSharedResources,
+  createClosedBook,
+  createReaderBook,
+  settle,
+} from './book-engine.js';
+
+/* ------------------------------------------------------------------ const */
+
+const N = 40;
+const RING_R = 68;
+const RING_TILT = THREE.MathUtils.degToRad(14);
+const PRESENT_OUT = 10.5;
+const BOOK_SCALE = 0.92;
+const SPIN_DUR = 260;
+const FLIP_DUR = 300;
+const PULL_DUR = 700;
+const RETURN_DUR = 480;
+const HOVER_LIFT = 2.2;
+const IDLE_MS = 10000;
+/* Wheel: idle gesture → exactly 1 book. Scroll while busy → ring-only multi. */
+const GESTURE_MS = 100;        // coalesce one trackpad flick into one commit
+const BURST_SLOT_DIV = 200;    // deltaY per extra ring slot while mid-browse
+const BURST_MAX = 8;
+const QUEUE_MAX = 1;           // never stack flip animations from scroll
+const BOOT_BATCH = 4;
+const BOOT_REVEAL_AT = 10;
+
+const CAM_ORBIT = {
+  pos: new THREE.Vector3(0, 36, 148),
+  look: new THREE.Vector3(0, 8, 16),
+  fov: 32,
+};
+const CAM_INSPECT = {
+  pos: new THREE.Vector3(8, 48, 230),
+  look: new THREE.Vector3(-6, 6, 18),
+  fov: 34,
+};
+const CAM_INSPECT_CLOSE = {
+  pos: new THREE.Vector3(3, 40, 155),
+  look: new THREE.Vector3(-8, 8, 42),
+  fov: 30,
+};
+const RING_Y_ORBIT = 6;
+const RING_Y_INSPECT = 10;
+const RING_SCALE_INSPECT = 0.62;
+const RING_Z_INSPECT = -48;
+
+const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+const params = new URLSearchParams(location.search);
+const EMBED = params.get('embed') === '1';
+const LOCALE = (params.get('locale') || 'en').replace(/[^a-z-]/gi, '') || 'en';
+if (EMBED) document.documentElement.classList.add('embed');
+
+
+const stage = document.getElementById('stage');
+const bootEl = document.getElementById('boot');
+const liveEl = document.getElementById('live');
+const panelEl = document.getElementById('panel');
+const panelTitle = document.getElementById('panel-title');
+const panelPromise = document.getElementById('panel-promise');
+const panelMeta = document.getElementById('panel-meta');
+const panelRead = document.getElementById('panel-read');
+const panelBack = document.getElementById('panel-back');
+const navPrev = document.getElementById('nav-prev');
+const navNext = document.getElementById('nav-next');
+const scrollDown = document.getElementById('scroll-down');
+
+function announce(msg) {
+  liveEl.textContent = '';
+  requestAnimationFrame(() => { liveEl.textContent = msg; });
+}
+
+function clamp01(x) { return Math.max(0, Math.min(1, x)); }
+function lerp(a, b, t) { return a + (b - a) * t; }
+function shortestDelta(from, to, n) {
+  let d = ((to - from) % n + n) % n;
+  if (d > n / 2) d -= n;
+  return d;
+}
+function mod(i, n) { return ((i % n) + n) % n; }
+
+/** Adjacent-safe ring fill from a 10-book catalog. */
+function buildRingOrder(catalog, count) {
+  const m = catalog.length;
+  const counts = Array(m).fill(Math.floor(count / m));
+  for (let i = 0; i < count % m; i++) counts[i]++;
+  const bag = [];
+  for (let i = 0; i < m; i++) for (let k = 0; k < counts[i]; k++) bag.push(i);
+
+  for (let i = bag.length - 1; i > 0; i--) {
+    const j = (Math.random() * (i + 1)) | 0;
+    [bag[i], bag[j]] = [bag[j], bag[i]];
+  }
+
+  const out = [];
+  const rem = bag.slice();
+  while (rem.length) {
+    let pick = -1;
+    const prev = out.length ? out[out.length - 1] : -1;
+    const first = out.length === count - 1 ? out[0] : -1;
+    for (let t = 0; t < rem.length; t++) {
+      const c = rem[t];
+      if (c === prev) continue;
+      if (out.length === count - 1 && c === first) continue;
+      pick = t;
+      break;
+    }
+    if (pick < 0) pick = 0;
+    out.push(rem.splice(pick, 1)[0]);
+  }
+
+  // Prefer no duplicate among near-front slots (0 and ±1..3)
+  const frontBand = [0, 1, N - 1, 2, N - 2, 3, N - 3];
+  for (let pass = 0; pass < 40; pass++) {
+    const seen = new Set();
+    let clash = -1;
+    for (const i of frontBand) {
+      if (seen.has(out[i])) { clash = i; break; }
+      seen.add(out[i]);
+    }
+    if (clash < 0) break;
+    for (let j = 8; j < N; j++) {
+      if (out[j] !== out[clash] && !frontBand.some((i) => out[i] === out[j] && i !== clash)) {
+        const okPrev = out[mod(clash - 1, N)] !== out[j];
+        const okNext = out[mod(clash + 1, N)] !== out[j];
+        const okJPrev = out[mod(j - 1, N)] !== out[clash];
+        const okJNext = out[mod(j + 1, N)] !== out[clash];
+        if (okPrev && okNext && okJPrev && okJNext) {
+          [out[clash], out[j]] = [out[j], out[clash]];
+          break;
+        }
+      }
+    }
+  }
+
+  return out.map((i) => catalog[i]);
+}
+
+/* ------------------------------------------------------------------ renderer */
+
+const canvas = document.createElement('canvas');
+canvas.setAttribute('aria-label', 'Interactive ring of hardcover books. Use arrow keys to browse, Enter to open the front book, Escape to return.');
+canvas.setAttribute('role', 'img');
+stage.insertBefore(canvas, bootEl.nextSibling);
+
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance', alpha: false });
+configureRenderer(renderer, THREE);
+renderer.setClearColor(0xffffff, 1);
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0xffffff);
+
+const camera = new THREE.PerspectiveCamera(CAM_ORBIT.fov, 1, 2, 800);
+const camLook = CAM_ORBIT.look.clone();
+camera.position.copy(CAM_ORBIT.pos);
+camera.lookAt(camLook);
+
+const ringCenter = new THREE.Vector3(0, RING_Y_ORBIT, 0);
+createStudioLights(THREE, scene, ringCenter, renderer);
+
+const ringGroup = new THREE.Group();
+ringGroup.position.set(0, RING_Y_ORBIT, 0);
+ringGroup.rotation.x = RING_TILT;
+scene.add(ringGroup);
+
+const detailRoot = new THREE.Group();
+scene.add(detailRoot);
+const detailSpin = new THREE.Group();
+detailRoot.add(detailSpin);
+
+const raycaster = new THREE.Raycaster();
+const ndc = new THREE.Vector2();
+const _v = new THREE.Vector3();
+
+function resize() {
+  const w = stage.clientWidth;
+  const h = stage.clientHeight;
+  renderer.setSize(w, h, false);
+  camera.aspect = w / Math.max(1, h);
+  camera.updateProjectionMatrix();
+}
+resize();
+addEventListener('resize', resize);
+
+/* ------------------------------------------------------------------ state */
+
+let state = 'orbit';
+let ringAngle = 0;
+let frontIndex = 0;
+let targetFront = 0;
+let anim = null; // { kind, t0, dur, ... }
+let stepQueue = []; // signed slot deltas (may be multi-slot)
+let frontPresent = 1; // 0..1 presentation of logical front (orbit idle = 1)
+let bootReady = false;
+let inspectZoom = 0; // 0 default inspect framing → 1 closer
+
+let hoverFront = false;
+let hoverLift = 0;
+let gestureAcc = 0;
+let gestureTimer = null;
+let pendingBurst = 0; // signed multi-slot coalesce awaiting flush
+let wheelRelease = false;
+let stageFullyInView = true;
+let lastInteract = performance.now();
+let tabHidden = document.hidden;
+
+let reader = null;
+let readerReady = null;
+let detailSpinVel = new THREE.Vector3();
+let detailDragging = false;
+let coverDragging = false;
+let pageDragging = false;
+let pagePending = null; // ambiguous page-area down; commit after >8px horizontal
+let coverDragStartX = 0;
+let coverDragStart = 0;
+let pageDragAxis = null;
+let rotateDrag = null;
+
+const slots = []; // { meta, closed, host, present, visible }
+
+function currentMeta() {
+  return slots[frontIndex]?.meta;
+}
+
+function setState(next) {
+  state = next;
+  syncChrome();
+}
+
+function syncChrome() {
+  const browsing = state === 'orbit' || state === 'presenting';
+  navPrev.hidden = !browsing;
+  navNext.hidden = !browsing;
+  navPrev.disabled = !browsing || !canBrowse();
+  navNext.disabled = !browsing || !canBrowse();
+  scrollDown.hidden = !browsing;
+}
+
+function canBrowse() {
+  return (state === 'orbit' || state === 'presenting') && bootReady && stepQueue.length < QUEUE_MAX;
+}
+
+function noteInteract() {
+  lastInteract = performance.now();
+}
+
+function queueDepthAhead() {
+  return stepQueue.length;
+}
+
+function durationScale() {
+  const q = queueDepthAhead();
+  if (q >= 4) return 0.35;
+  if (q >= 2) return 0.48;
+  if (q >= 1) return 0.65;
+  return 1;
+}
+
+function applyCameraPose(pos, look, fov) {
+  camera.position.copy(pos);
+  camLook.copy(look);
+  camera.lookAt(camLook);
+  if (fov != null && Math.abs(camera.fov - fov) > 1e-4) {
+    camera.fov = fov;
+    camera.updateProjectionMatrix();
+  }
+}
+
+function orbitCameraNow() {
+  applyCameraPose(CAM_ORBIT.pos, CAM_ORBIT.look, CAM_ORBIT.fov);
+}
+
+function inspectCameraNow(zoom = inspectZoom) {
+  const z = clamp01(zoom);
+  const pos = new THREE.Vector3().lerpVectors(CAM_INSPECT.pos, CAM_INSPECT_CLOSE.pos, z);
+  const look = new THREE.Vector3().lerpVectors(CAM_INSPECT.look, CAM_INSPECT_CLOSE.look, z);
+  const fov = lerp(CAM_INSPECT.fov, CAM_INSPECT_CLOSE.fov, z);
+  applyCameraPose(pos, look, fov);
+}
+
+function applyRingFraming(tInspect) {
+  const t = clamp01(tInspect);
+  ringGroup.position.y = lerp(RING_Y_ORBIT, RING_Y_INSPECT, t);
+  ringGroup.position.z = lerp(0, RING_Z_INSPECT, t);
+  const s = lerp(1, RING_SCALE_INSPECT, t);
+  ringGroup.scale.setScalar(s);
+  ringGroup.rotation.x = lerp(RING_TILT, RING_TILT * 0.55, t);
+}
+
+function stageFillsViewport() {
+  if (EMBED) return true;
+  const r = stage.getBoundingClientRect();
+  const vh = window.innerHeight || 1;
+  return r.top < vh * 0.55 && r.bottom > vh * 0.35;
+}
+
+function phiOf(i, angle = ringAngle) {
+  return angle + (i / N) * Math.PI * 2;
+}
+
+function edgeYaw(phi) {
+  // −X (spine) → ring center: Ry(phi − π/2) maps local −X inward at slot phi
+  return phi - Math.PI / 2;
+}
+
+function yawAt(phi, present) {
+  // present=1 → +π/2: cover +Z outward, spine −X on the left when facing camera
+  return edgeYaw(phi) + present * (Math.PI / 2);
+}
+
+function applySlotPose(slot, i, angle, present, lift = 0) {
+  if (!slot?.host) return;
+  const phi = phiOf(i, angle);
+  const radial = RING_R + present * PRESENT_OUT + lift;
+  slot.host.position.set(radial * Math.sin(phi), 0, radial * Math.cos(phi));
+  slot.host.rotation.set(0, yawAt(phi, present), 0);
+  slot.host.scale.setScalar(BOOK_SCALE);
+  slot.present = present;
+  const order = present > 0.35 ? 2 : 0;
+  if (slot._order !== order) {
+    slot._order = order;
+    slot.closed.group.traverse((o) => {
+      if (o.isMesh) o.renderOrder = order;
+    });
+  }
+}
+
+function syncTitles() {
+  for (let i = 0; i < N; i++) {
+    const s = slots[i];
+    if (!s) continue;
+    const on = i === frontIndex && s.visible && frontPresent > 0.55 && (state === 'orbit' || state === 'presenting');
+    s.closed.setTitleVisible(on);
+  }
+}
+
+/** Apply ring poses. presentMap: optional { [index]: 0..1 }; default front uses frontPresent. */
+function updateAllPoses(presentMap) {
+  for (let i = 0; i < N; i++) {
+    const s = slots[i];
+    if (!s?.visible) continue;
+    let p = 0;
+    if (presentMap && presentMap[i] != null) p = presentMap[i];
+    else if (i === frontIndex) p = frontPresent;
+    const lift = (i === frontIndex && hoverFront && state === 'orbit' && frontPresent > 0.8) ? hoverLift : 0;
+    applySlotPose(s, i, ringAngle, p, lift);
+  }
+}
+
+/* ------------------------------------------------------------------ browse — two-phase + queue */
+
+function projectedFront() {
+  let idx = frontIndex;
+  if (anim && (anim.kind === 'ringSpin' || anim.kind === 'bookFlip')) idx = anim.toFront;
+  else if (state === 'presenting') idx = targetFront;
+  for (const d of stepQueue) idx = mod(idx + d, N);
+  if (pendingBurst) idx = mod(idx + pendingBurst, N);
+  return idx;
+}
+
+function enqueueSteps(delta) {
+  if (!delta || !canBrowse()) return false;
+  const d = delta | 0;
+  if (!d) return false;
+  if (stepQueue.length >= QUEUE_MAX) return false;
+  stepQueue.push(d);
+  noteInteract();
+  pumpBrowse();
+  return true;
+}
+
+/** One queue entry = one ringSpin (any slot count) + one flip. Never drain loops. */
+function enqueueBurst(delta) {
+  const d = delta | 0;
+  if (!d) return false;
+  if (!(state === 'orbit' || state === 'presenting') || !bootReady) return false;
+  // Merge any pending single steps into this one multi-slot move
+  while (stepQueue.length) pendingBurst += stepQueue.shift();
+  pendingBurst += d;
+  const maxBurst = BURST_MAX;
+  if (Math.abs(pendingBurst) > maxBurst) {
+    pendingBurst = Math.sign(pendingBurst) * maxBurst;
+  }
+  return flushBurst();
+}
+
+function flushBurst() {
+  if (!pendingBurst) return false;
+  if (anim || stepQueue.length) return false; // retry when current move finishes
+  if (!(state === 'orbit' || state === 'presenting') || !bootReady) return false;
+  const delta = pendingBurst;
+  pendingBurst = 0;
+  stepQueue.push(delta);
+  noteInteract();
+  pumpBrowse();
+  return true;
+}
+
+function pumpBrowse() {
+  if (anim) return;
+  if (state !== 'orbit' && state !== 'presenting') return;
+  if (!stepQueue.length) {
+    if (pendingBurst) {
+      flushBurst();
+      return;
+    }
+    if (state === 'presenting') setState('orbit');
+    syncChrome();
+    return;
+  }
+  const delta = stepQueue.shift();
+  beginRingSpin(delta);
+  syncChrome();
+}
+
+function beginRingSpin(delta) {
+  const fromFront = frontIndex;
+  const toFront = mod(frontIndex + delta, N);
+  const step = (Math.PI * 2) / N;
+  const fromAngle = ringAngle;
+  const toAngle = ringAngle - delta * step;
+  targetFront = toFront;
+
+  // Phase 1: edge-on ring — force every slot to present=0, then only ringAngle moves.
+  // Departing fold is the snap into this phase; bookFlip only opens the arriver.
+  frontPresent = 0;
+  updateAllPoses({});
+  syncTitles();
+
+  if (reducedMotion) {
+    ringAngle = toAngle;
+    frontIndex = toFront;
+    frontPresent = 1;
+    updateAllPoses({});
+    syncTitles();
+    announce(slots[frontIndex]?.meta?.title ?? '');
+    setState('orbit');
+    anim = null;
+    pumpBrowse();
+    return;
+  }
+
+  setState('presenting');
+  const slotSpan = Math.max(1, Math.abs(delta));
+  const spinScale = slotSpan > 1 ? Math.min(2.4, 0.65 + 0.22 * slotSpan) : 1;
+  anim = {
+    kind: 'ringSpin',
+    t0: performance.now(),
+    dur: SPIN_DUR * durationScale() * spinScale,
+    fromAngle,
+    toAngle,
+    fromFront,
+    toFront,
+  };
+}
+
+function beginBookFlip(fromFront, toFront) {
+  frontIndex = toFront;
+  targetFront = toFront;
+  frontPresent = 0;
+
+  if (reducedMotion) {
+    frontPresent = 1;
+    updateAllPoses({});
+    syncTitles();
+    announce(slots[frontIndex]?.meta?.title ?? '');
+    anim = null;
+    setState('orbit');
+    pumpBrowse();
+    return;
+  }
+
+  anim = {
+    kind: 'bookFlip',
+    t0: performance.now(),
+    dur: FLIP_DUR * durationScale(),
+    fromFront,
+    toFront,
+  };
+}
+
+function advance(delta = 1) {
+  const d = Math.sign(delta);
+  if (!d) return false;
+  return enqueueSteps(d);
+}
+
+function goToIndex(index) {
+  if (!canBrowse()) return false;
+  const d = shortestDelta(projectedFront(), mod(index, N), N);
+  if (!d) {
+    if (!anim && !stepQueue.length) openFront();
+    return true;
+  }
+  return enqueueSteps(d);
+}
+
+/* ------------------------------------------------------------------ detail */
+
+function slotWorldPose(i, present = 1) {
+  const phi = phiOf(i, ringAngle);
+  const radial = RING_R + present * PRESENT_OUT;
+  const local = new THREE.Object3D();
+  local.position.set(radial * Math.sin(phi), 0, radial * Math.cos(phi));
+  local.rotation.set(0, yawAt(phi, present), 0);
+  local.scale.setScalar(BOOK_SCALE);
+  ringGroup.updateMatrixWorld(true);
+  const pos = new THREE.Vector3();
+  const quat = new THREE.Quaternion();
+  const scl = new THREE.Vector3();
+  local.updateMatrix();
+  const m = new THREE.Matrix4().multiplyMatrices(ringGroup.matrixWorld, local.matrix);
+  m.decompose(pos, quat, scl);
+  return { pos, quat, scale: scl };
+}
+
+function detailTargetPose() {
+  // Centered-left, large, fully in frame; ring reads small behind
+  const pos = new THREE.Vector3(-22, 14, 95);
+  const quat = new THREE.Quaternion().setFromEuler(
+    new THREE.Euler(-0.12, 0.18, 0, 'YXZ'),
+  );
+  return { pos, quat, scale: BOOK_SCALE * 1.55 };
+}
+
+async function ensureReader(meta) {
+  if (reader) {
+    await reader.rebind({
+      coverUrl: meta.coverUrl,
+      caseColor: meta.caseColor,
+      caseLuminance: meta.caseLuminance,
+      title: meta.title,
+      author: 'Belief Changer',
+      slug: meta.slug,
+      overlayInk: meta.overlayInk,
+      promise: meta.promise,
+    });
+    return reader;
+  }
+  if (!readerReady) {
+    readerReady = (async () => {
+      const r = await createReaderBook(THREE, shared, {
+        coverUrl: meta.coverUrl,
+        caseColor: meta.caseColor,
+        caseLuminance: meta.caseLuminance,
+        title: meta.title,
+        author: 'Belief Changer',
+        slug: meta.slug,
+        overlayInk: meta.overlayInk,
+        promise: meta.promise,
+      });
+      r.group.visible = false;
+      detailSpin.add(r.group);
+      reader = r;
+      return r;
+    })();
+  }
+  await readerReady;
+  await reader.rebind({
+    coverUrl: meta.coverUrl,
+    caseColor: meta.caseColor,
+    caseLuminance: meta.caseLuminance,
+    title: meta.title,
+    author: 'Belief Changer',
+    slug: meta.slug,
+    overlayInk: meta.overlayInk,
+    promise: meta.promise,
+  });
+  return reader;
+}
+
+function showPanel(meta) {
+  panelTitle.textContent = meta.title;
+  panelPromise.textContent = meta.promise;
+  panelMeta.textContent = meta.meta;
+  // Prefer site book page: /{locale}/books/{slug}
+  const href = EMBED
+    ? `/${LOCALE}/books/${meta.slug}`
+    : (meta.href || `/${LOCALE}/books/${meta.slug}`);
+  panelRead.href = href;
+  if (EMBED) panelRead.setAttribute('target', '_top');
+  else panelRead.removeAttribute('target');
+  panelEl.classList.add('is-open');
+  panelEl.setAttribute('aria-hidden', 'false');
+}
+
+function hidePanel() {
+  panelEl.classList.remove('is-open');
+  panelEl.setAttribute('aria-hidden', 'true');
+}
+
+async function openFront() {
+  if (state !== 'orbit' || anim || stepQueue.length || pendingBurst || !bootReady) return;
+  const meta = currentMeta();
+  if (!meta || !slots[frontIndex]) return;
+  noteInteract();
+  setState('pullingOut');
+  hoverFront = false;
+  inspectZoom = 0;
+
+  const from = slotWorldPose(frontIndex, 1);
+  const to = detailTargetPose();
+
+  slots[frontIndex].visible = false;
+  slots[frontIndex].closed.group.visible = false;
+  syncTitles();
+
+  await ensureReader(meta);
+  reader.setCover(0);
+  reader.group.visible = true;
+  reader.group.scale.setScalar(to.scale);
+  detailSpin.rotation.set(0, 0, 0);
+  detailSpinVel.set(0, 0, 0);
+  detailRoot.position.copy(from.pos);
+  detailRoot.quaternion.copy(from.quat);
+
+  const fromCamPos = camera.position.clone();
+  const fromCamLook = camLook.clone();
+  const fromCamFov = camera.fov;
+  const fromRingY = ringGroup.position.y;
+  const fromRingZ = ringGroup.position.z;
+  const fromRingS = ringGroup.scale.x;
+  const fromRingTilt = ringGroup.rotation.x;
+
+  if (reducedMotion) {
+    detailRoot.position.copy(to.pos);
+    detailRoot.quaternion.copy(to.quat);
+    inspectCameraNow(0);
+    applyRingFraming(1);
+    setState('inspecting');
+    showPanel(meta);
+    announce(`${meta.title}. Inspection open.`);
+    return;
+  }
+
+  anim = {
+    kind: 'pull',
+    t0: performance.now(),
+    dur: PULL_DUR,
+    fromPos: from.pos.clone(),
+    toPos: to.pos.clone(),
+    fromQuat: from.quat.clone(),
+    toQuat: to.quat.clone(),
+    fromCamPos,
+    toCamPos: CAM_INSPECT.pos.clone(),
+    fromCamLook,
+    toCamLook: CAM_INSPECT.look.clone(),
+    fromCamFov,
+    toCamFov: CAM_INSPECT.fov,
+    fromRingY,
+    fromRingZ,
+    fromRingS,
+    fromRingTilt,
+    meta,
+  };
+}
+
+async function settleReaderClosed() {
+  if (!reader) return;
+  // Snap shut — no multi-second page/cover unwind on the way home
+  reader.setCover(0);
+  detailSpin.rotation.set(0, 0, 0);
+  detailSpin.quaternion.identity();
+  detailSpinVel.set(0, 0, 0);
+}
+
+async function returnHome() {
+  if (state !== 'inspecting' && state !== 'reading' && state !== 'pullingOut') return;
+  if (anim?.kind === 'return') return;
+  noteInteract();
+  hidePanel();
+
+  setState('returning');
+  await settleReaderClosed();
+
+  const to = slotWorldPose(frontIndex, 1);
+  const fromPos = detailRoot.position.clone();
+  const fromQuat = detailRoot.quaternion.clone();
+  const fromSpin = detailSpin.quaternion.clone();
+  const toSpin = new THREE.Quaternion();
+
+  const fromCamPos = camera.position.clone();
+  const fromCamLook = camLook.clone();
+  const fromCamFov = camera.fov;
+  const fromRingY = ringGroup.position.y;
+  const fromRingZ = ringGroup.position.z;
+  const fromRingS = ringGroup.scale.x;
+  const fromRingTilt = ringGroup.rotation.x;
+
+  if (reducedMotion) {
+    detailRoot.position.copy(to.pos);
+    detailRoot.quaternion.copy(to.quat);
+    detailSpin.quaternion.identity();
+    orbitCameraNow();
+    applyRingFraming(0);
+    finishReturn();
+    return;
+  }
+
+  anim = {
+    kind: 'return',
+    t0: performance.now(),
+    dur: RETURN_DUR,
+    fromPos,
+    toPos: to.pos.clone(),
+    fromQuat,
+    toQuat: to.quat.clone(),
+    fromSpin,
+    toSpin,
+    fromCamPos,
+    toCamPos: CAM_ORBIT.pos.clone(),
+    fromCamLook,
+    toCamLook: CAM_ORBIT.look.clone(),
+    fromCamFov,
+    toCamFov: CAM_ORBIT.fov,
+    fromRingY,
+    fromRingZ,
+    fromRingS,
+    fromRingTilt,
+  };
+}
+
+function finishReturn() {
+  if (reader) reader.group.visible = false;
+  slots[frontIndex].visible = true;
+  slots[frontIndex].closed.group.visible = true;
+  frontPresent = 1;
+  applySlotPose(slots[frontIndex], frontIndex, ringAngle, 1, 0);
+  orbitCameraNow();
+  applyRingFraming(0);
+  inspectZoom = 0;
+  syncTitles();
+  setState('orbit');
+  announce(`${slots[frontIndex].meta.title}. Back in the orbit.`);
+  anim = null;
+}
+
+/* ------------------------------------------------------------------ pointer / input */
+
+function setNdc(e) {
+  const rect = canvas.getBoundingClientRect();
+  ndc.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+  ndc.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+}
+
+function hitsForBrowse() {
+  const meshes = [];
+  for (const s of slots) {
+    if (!s?.visible) continue;
+    for (const m of s.closed.hitMeshes) meshes.push(m);
+  }
+  return meshes;
+}
+
+function slotIndexFromObject(obj) {
+  let o = obj;
+  while (o) {
+    if (o.userData && o.userData.slotIndex != null) return o.userData.slotIndex;
+    o = o.parent;
+  }
+  return -1;
+}
+
+function updateHover(e) {
+  if (state !== 'orbit' || reducedMotion) {
+    hoverFront = false;
+    return;
+  }
+  setNdc(e);
+  raycaster.setFromCamera(ndc, camera);
+  const hits = raycaster.intersectObjects(hitsForBrowse(), false);
+  if (!hits.length) {
+    hoverFront = false;
+    canvas.style.cursor = 'default';
+    return;
+  }
+  const idx = slotIndexFromObject(hits[0].object);
+  hoverFront = idx === frontIndex;
+  canvas.style.cursor = idx >= 0 ? 'pointer' : 'default';
+}
+
+function startPageDrag(e, leaf) {
+  if (!leaf || !reader.beginDrag(leaf)) return false;
+  pagePending = null;
+  pageDragging = true;
+  const rect = canvas.getBoundingClientRect();
+  pageDragAxis = {
+    x: leaf.dir > 0 ? -1 : 1,
+    y: 0,
+    span: Math.max(280, rect.width * 0.44),
+    x0: e.clientX,
+    y0: e.clientY,
+    dir: leaf.dir,
+  };
+  canvas.setPointerCapture(e.pointerId);
+  setState('reading');
+  return true;
+}
+
+canvas.addEventListener('pointermove', (e) => {
+  if (detailDragging || coverDragging || pageDragging || pagePending) return;
+  if (state === 'orbit' || state === 'presenting') updateHover(e);
+});
+
+canvas.addEventListener('pointerleave', () => {
+  hoverFront = false;
+});
+
+canvas.addEventListener('pointerdown', async (e) => {
+  if (e.button != null && e.button !== 0) return;
+  noteInteract();
+  setNdc(e);
+  raycaster.setFromCamera(ndc, camera);
+
+  if (state === 'inspecting' || state === 'reading') {
+    if (!reader || !reader.group.visible) return;
+    reader.group.updateMatrixWorld(true);
+    const hits = raycaster.intersectObjects(reader.hitMeshes, false);
+    const st = reader.getState();
+
+    // Cover open: page pick before cover drag / book rotate
+    if (st.cover >= 0.99) {
+      const leaf = reader.pickLeaf ? reader.pickLeaf(raycaster) : null;
+      if (leaf && startPageDrag(e, leaf)) {
+        e.preventDefault();
+        return;
+      }
+      // Prefer page-turning over cover-close or orbit when the volume is open.
+      // Cover close: only if the open front board/art is the first hit.
+      const top = hits[0]?.object;
+      const openCoverHit =
+        top &&
+        (top === reader.hitMeshes[0] ||
+          top === reader.hitMeshes[3] ||
+          top.userData?.kind === 'cover' ||
+          top.userData?.coverArtwork === 'front');
+      if (!openCoverHit || reader.isPageHit?.(top) || top?.userData?.leafIndex != null) {
+        e.preventDefault();
+        pagePending = { x0: e.clientX, y0: e.clientY, pointerId: e.pointerId };
+        canvas.setPointerCapture(e.pointerId);
+        setState('reading');
+        return;
+      }
+      // Explicit grab on the open cover flap → close drag
+      e.preventDefault();
+      coverDragging = true;
+      coverDragStartX = e.clientX;
+      coverDragStart = st.cover;
+      canvas.setPointerCapture(e.pointerId);
+      return;
+    }
+
+    if (hits.length) {
+      const hit = hits[0];
+      // Cover still closed/opening — drag to open
+      e.preventDefault();
+      coverDragging = true;
+      coverDragStartX = e.clientX;
+      coverDragStart = st.cover;
+      canvas.setPointerCapture(e.pointerId);
+      return;
+    }
+
+    // Drag-rotate the detail book (weighty)
+    e.preventDefault();
+    detailDragging = true;
+    rotateDrag = { x: e.clientX, y: e.clientY };
+    canvas.setPointerCapture(e.pointerId);
+    return;
+  }
+
+  if (state !== 'orbit' && state !== 'presenting') return;
+
+  const hits = raycaster.intersectObjects(hitsForBrowse(), false);
+  if (!hits.length) return;
+  const idx = slotIndexFromObject(hits[0].object);
+  if (idx < 0) return;
+  e.preventDefault();
+  if (idx === frontIndex && state === 'orbit' && !anim && !stepQueue.length && !pendingBurst) openFront();
+  else goToIndex(idx);
+});
+
+canvas.addEventListener('pointermove', (e) => {
+  if (pagePending && reader && !pageDragging) {
+    const dx = e.clientX - pagePending.x0;
+    if (Math.abs(dx) > 8) {
+      // Drag left → forward turn; drag right → back
+      const dir = dx < 0 ? 1 : -1;
+      const leaf = reader.synthesizeLeaf ? reader.synthesizeLeaf(dir) : null;
+      if (leaf && reader.beginDrag(leaf)) {
+        const rect = canvas.getBoundingClientRect();
+        pageDragging = true;
+        pageDragAxis = {
+          x: leaf.dir > 0 ? -1 : 1,
+          y: 0,
+          span: Math.max(280, rect.width * 0.44),
+          x0: pagePending.x0,
+          y0: pagePending.y0,
+          dir: leaf.dir,
+        };
+        pagePending = null;
+        setState('reading');
+        const d = (dx * pageDragAxis.x) / pageDragAxis.span;
+        const t = clamp01(pageDragAxis.dir > 0 ? d : 1 - d);
+        reader.updateDrag(t);
+      } else {
+        pagePending = null;
+      }
+    }
+    return;
+  }
+  if (pageDragging && reader && pageDragAxis) {
+    const dx = e.clientX - pageDragAxis.x0;
+    const dy = e.clientY - pageDragAxis.y0;
+    const d = (dx * pageDragAxis.x + dy * pageDragAxis.y) / pageDragAxis.span;
+    const t = clamp01(pageDragAxis.dir > 0 ? d : 1 - d);
+    reader.updateDrag(t);
+    return;
+  }
+  if (coverDragging && reader) {
+    const dx = e.clientX - coverDragStartX;
+    const next = clamp01(coverDragStart + dx / 220);
+    reader.setCover(next);
+    setState(next > 0.08 ? 'reading' : 'inspecting');
+    return;
+  }
+  if (detailDragging && rotateDrag) {
+    const dx = e.clientX - rotateDrag.x;
+    const dy = e.clientY - rotateDrag.y;
+    rotateDrag.x = e.clientX;
+    rotateDrag.y = e.clientY;
+    detailSpinVel.y += dx * 0.0035;
+    detailSpinVel.x += dy * 0.0025;
+  }
+});
+
+function endPointer(e, cancelled) {
+  if (pagePending) {
+    pagePending = null;
+    if (canvas.hasPointerCapture?.(e.pointerId)) canvas.releasePointerCapture(e.pointerId);
+    const st = reader?.getState();
+    setState(st && (st.cover > 0.08 || st.turned > 0) ? 'reading' : 'inspecting');
+    return;
+  }
+  if (pageDragging && reader) {
+    pageDragging = false;
+    reader.endDrag(!cancelled);
+    if (canvas.hasPointerCapture?.(e.pointerId)) canvas.releasePointerCapture(e.pointerId);
+    const st = reader.getState();
+    setState(st.cover > 0.08 || st.turned > 0 ? 'reading' : 'inspecting');
+    return;
+  }
+  if (coverDragging && reader) {
+    coverDragging = false;
+    const st = reader.getState();
+    if (st.cover > 0.55) reader.openCover(true);
+    else reader.openCover(false);
+    if (canvas.hasPointerCapture?.(e.pointerId)) canvas.releasePointerCapture(e.pointerId);
+    setState(st.cover > 0.08 ? 'reading' : 'inspecting');
+    return;
+  }
+  if (detailDragging) {
+    detailDragging = false;
+    rotateDrag = null;
+    if (canvas.hasPointerCapture?.(e.pointerId)) canvas.releasePointerCapture(e.pointerId);
+  }
+}
+canvas.addEventListener('pointerup', (e) => endPointer(e, false));
+canvas.addEventListener('pointercancel', (e) => endPointer(e, true));
+
+/* wheel — gesture-end debounce; never while-loop advances per event */
+function commitWheelGesture() {
+  gestureTimer = null;
+  const acc = gestureAcc;
+  gestureAcc = 0;
+  if (!acc) return;
+  if (!(state === 'orbit' || state === 'presenting') || !bootReady) return;
+
+  const dir = acc > 0 ? 1 : -1;
+  const abs = Math.abs(acc);
+  const busy = !!anim || stepQueue.length > 0 || pendingBurst !== 0;
+
+  // Idle: always exactly one book — magnitude must not jump the ring.
+  // Trackpad flicks dump huge deltaY; that used to look like 2–4 book hops.
+  if (!busy) {
+    enqueueSteps(dir);
+    return;
+  }
+
+  // Already browsing: coalesce into one multi-slot ringSpin + one final flip
+  // (no intermediate book flips while the user keeps scrolling).
+  const slots = Math.min(BURST_MAX, Math.max(1, Math.round(abs / BURST_SLOT_DIV)));
+  enqueueBurst(dir * slots);
+}
+
+stage.addEventListener('wheel', (e) => {
+  if (reducedMotion) return;
+  if (wheelRelease) return;
+  if (!stageFillsViewport()) return;
+
+  // Detail: dolly / zoom the inspection framing — do not browse the ring
+  if (state === 'inspecting' || state === 'reading') {
+    e.preventDefault();
+    noteInteract();
+    inspectZoom = clamp01(inspectZoom + e.deltaY * 0.0015);
+    inspectCameraNow(inspectZoom);
+    return;
+  }
+  if (state === 'pullingOut' || state === 'returning') {
+    e.preventDefault();
+    return;
+  }
+  if (state !== 'orbit' && state !== 'presenting') {
+    e.preventDefault();
+    return;
+  }
+  if (!bootReady) {
+    e.preventDefault();
+    return;
+  }
+  e.preventDefault();
+  noteInteract();
+  gestureAcc += e.deltaY;
+  if (gestureTimer != null) clearTimeout(gestureTimer);
+  gestureTimer = setTimeout(commitWheelGesture, GESTURE_MS);
+}, { passive: false });
+
+scrollDown.addEventListener('pointerenter', () => { wheelRelease = true; });
+scrollDown.addEventListener('pointerleave', () => { wheelRelease = false; });
+scrollDown.addEventListener('click', () => {
+  noteInteract();
+  if (EMBED) {
+    parent.postMessage({ type: 'orbit-scroll-down' }, location.origin);
+    return;
+  }
+  document.getElementById('content').scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth' });
+});
+
+navPrev.addEventListener('click', () => { noteInteract(); advance(-1); });
+navNext.addEventListener('click', () => { noteInteract(); advance(1); });
+panelBack.addEventListener('click', () => { returnHome(); });
+
+addEventListener('keydown', (e) => {
+  if (e.target && /input|textarea|select/i.test(e.target.tagName)) return;
+  if (e.key === 'ArrowLeft') {
+    e.preventDefault();
+    noteInteract();
+    if (canBrowse()) advance(-1);
+  } else if (e.key === 'ArrowRight') {
+    e.preventDefault();
+    noteInteract();
+    if (canBrowse()) advance(1);
+  } else if (e.key === 'Enter') {
+    if (state === 'orbit' && !anim && !stepQueue.length && !pendingBurst) {
+      e.preventDefault();
+      openFront();
+    }
+  } else if (e.key === 'Escape') {
+    if (state === 'inspecting' || state === 'reading' || state === 'pullingOut') {
+      e.preventDefault();
+      returnHome();
+    }
+  }
+});
+
+/* touch: horizontal browse, vertical scroll */
+let touch0 = null;
+canvas.addEventListener('touchstart', (e) => {
+  if (e.touches.length !== 1) return;
+  const t = e.touches[0];
+  touch0 = { x: t.clientX, y: t.clientY, t: performance.now() };
+}, { passive: true });
+
+canvas.addEventListener('touchend', (e) => {
+  if (!touch0) return;
+  const t = e.changedTouches[0];
+  const dx = t.clientX - touch0.x;
+  const dy = t.clientY - touch0.y;
+  touch0 = null;
+  if (state !== 'orbit' && state !== 'presenting') return;
+  if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy) * 1.25) return;
+  noteInteract();
+  advance(dx < 0 ? 1 : -1);
+}, { passive: true });
+
+document.addEventListener('visibilitychange', () => {
+  tabHidden = document.hidden;
+});
+
+const io = new IntersectionObserver((entries) => {
+  for (const en of entries) {
+    if (en.target === stage) stageFullyInView = en.intersectionRatio >= 0.98;
+  }
+}, { threshold: [0, 0.5, 0.98, 1] });
+io.observe(stage);
+
+/* ------------------------------------------------------------------ boot books */
+
+let shared;
+let frameStarted = false;
+
+function mountSlot(j, meta, closed) {
+  const host = new THREE.Group();
+  host.userData.slotIndex = j;
+  closed.group.userData.slotIndex = j;
+  for (const m of closed.hitMeshes) m.userData.slotIndex = j;
+  host.add(closed.group);
+  ringGroup.add(host);
+  closed.setTitleVisible(false);
+  slots[j] = { meta, closed, host, present: 0, visible: true };
+  const p = j === frontIndex ? frontPresent : 0;
+  applySlotPose(slots[j], j, ringAngle, p, 0);
+}
+
+function revealBoot() {
+  if (bootReady) return;
+  bootReady = true;
+  bootEl.classList.add('is-done');
+  setTimeout(() => bootEl.remove(), 420);
+  syncChrome();
+  if (!frameStarted) {
+    frameStarted = true;
+    requestAnimationFrame(frame);
+  }
+}
+
+async function boot() {
+  await document.fonts.load('400 16px "DM Sans"');
+  await document.fonts.load('600 48px "DM Sans"');
+  await document.fonts.ready;
+
+  shared = await createSharedResources(THREE);
+  const catalog = await fetch('./_extract/books-meta.json').then((r) => r.json());
+  const order = buildRingOrder(catalog, N);
+
+  frontIndex = 0;
+  targetFront = 0;
+  ringAngle = 0;
+  frontPresent = 0;
+  orbitCameraNow();
+  applyRingFraming(0);
+
+  let madeCount = 0;
+
+  async function makeOne(j) {
+    const meta = order[j];
+    const closed = await createClosedBook(THREE, shared, {
+      coverUrl: meta.coverUrl,
+      caseColor: meta.caseColor,
+      caseLuminance: meta.caseLuminance,
+      title: meta.title,
+      author: 'Belief Changer',
+      slug: meta.slug,
+      overlayInk: meta.overlayInk,
+      promise: meta.promise,
+    });
+    mountSlot(j, meta, closed);
+    madeCount++;
+    if (madeCount === BOOT_REVEAL_AT) {
+      syncTitles();
+      announce(slots[0]?.meta?.title ?? '');
+      revealBoot();
+      // Entrance: short spin settle then flip front to face camera
+      if (!reducedMotion) {
+        setState('presenting');
+        anim = {
+          kind: 'ringSpin',
+          t0: performance.now(),
+          dur: 520,
+          fromAngle: ringAngle + ((Math.PI * 2) / N) * 0.4,
+          toAngle: ringAngle,
+          fromFront: 0,
+          toFront: 0,
+          entrance: true,
+        };
+      } else {
+        frontPresent = 1;
+        updateAllPoses({});
+        syncTitles();
+        setState('orbit');
+      }
+    }
+  }
+
+  for (let i = 0; i < N; i += BOOT_BATCH) {
+    const batch = [];
+    for (let j = i; j < Math.min(N, i + BOOT_BATCH); j++) batch.push(makeOne(j));
+    await Promise.all(batch);
+  }
+
+  // Ensure reveal even if N < BOOT_REVEAL_AT
+  if (!bootReady) {
+    frontPresent = reducedMotion ? 1 : frontPresent;
+    updateAllPoses({});
+    syncTitles();
+    announce(slots[0]?.meta?.title ?? '');
+    revealBoot();
+    if (!reducedMotion && !anim) {
+      setState('presenting');
+      anim = {
+        kind: 'bookFlip',
+        t0: performance.now(),
+        dur: FLIP_DUR,
+        fromFront: 0,
+        toFront: 0,
+        entrance: true,
+      };
+    } else if (reducedMotion) setState('orbit');
+  }
+
+  window.__ORBIT = {
+    get state() { return state; },
+    get frontIndex() { return frontIndex; },
+    get ringAngle() { return ringAngle; },
+    get reader() { return reader; },
+    get queue() { return stepQueue.slice(); },
+    get pendingBurst() { return pendingBurst; },
+    get N() { return N; },
+    advance: (d = 1) => advance(d),
+    openFront,
+    returnHome,
+    goToIndex,
+    books: () => slots.map((s) => s && ({ title: s.meta.title, slug: s.meta.slug, meta: s.meta })),
+    slots,
+    scene,
+    camera,
+    ringGroup,
+  };
+}
+
+/* ------------------------------------------------------------------ frame */
+
+let lastT = performance.now();
+
+function frame(now) {
+  requestAnimationFrame(frame);
+  if (tabHidden) return;
+
+  const dt = Math.min(0.05, (now - lastT) / 1000);
+  lastT = now;
+
+  const wantLift = hoverFront && state === 'orbit' && !reducedMotion ? HOVER_LIFT : 0;
+  hoverLift = lerp(hoverLift, wantLift, 1 - Math.exp(-10 * dt));
+
+  if (anim) {
+    const u = clamp01((now - anim.t0) / anim.dur);
+    const e = settle(u);
+
+    if (anim.kind === 'ringSpin') {
+      ringAngle = lerp(anim.fromAngle, anim.toAngle, e);
+      frontPresent = 0;
+      updateAllPoses({});
+      syncTitles();
+      if (u >= 1) {
+        ringAngle = anim.toAngle;
+        const { fromFront, toFront, entrance } = anim;
+        anim = null;
+        beginBookFlip(fromFront, toFront);
+        if (entrance && anim) anim.entrance = true;
+      }
+    } else if (anim.kind === 'bookFlip') {
+      const arriveP = e;
+      // Departing already edge-on from ringSpin — only open the arriver.
+      // (Entrance: fromFront === toFront; same path.)
+      const map = { [anim.toFront]: arriveP };
+      frontIndex = anim.toFront;
+      frontPresent = arriveP;
+      updateAllPoses(map);
+      for (let i = 0; i < N; i++) {
+        const s = slots[i];
+        if (!s) continue;
+        s.closed.setTitleVisible(i === anim.toFront && arriveP >= 0.55 && s.visible);
+      }
+      if (u >= 1) {
+        frontIndex = anim.toFront;
+        targetFront = anim.toFront;
+        frontPresent = 1;
+        anim = null;
+        updateAllPoses({});
+        syncTitles();
+        if (slots[frontIndex]) announce(slots[frontIndex].meta.title);
+        if (stepQueue.length || pendingBurst) pumpBrowse();
+        else setState('orbit');
+      }
+    } else if (anim.kind === 'pull') {
+      detailRoot.position.lerpVectors(anim.fromPos, anim.toPos, e);
+      detailRoot.quaternion.slerpQuaternions(anim.fromQuat, anim.toQuat, e);
+      const camPos = new THREE.Vector3().lerpVectors(anim.fromCamPos, anim.toCamPos, e);
+      const camL = new THREE.Vector3().lerpVectors(anim.fromCamLook, anim.toCamLook, e);
+      applyCameraPose(camPos, camL, lerp(anim.fromCamFov, anim.toCamFov, e));
+      ringGroup.position.y = lerp(anim.fromRingY, RING_Y_INSPECT, e);
+      ringGroup.position.z = lerp(anim.fromRingZ, RING_Z_INSPECT, e);
+      ringGroup.scale.setScalar(lerp(anim.fromRingS, RING_SCALE_INSPECT, e));
+      ringGroup.rotation.x = lerp(anim.fromRingTilt, RING_TILT * 0.55, e);
+      if (u >= 1) {
+        detailRoot.position.copy(anim.toPos);
+        detailRoot.quaternion.copy(anim.toQuat);
+        inspectZoom = 0;
+        inspectCameraNow(0);
+        applyRingFraming(1);
+        const meta = anim.meta;
+        anim = null;
+        setState('inspecting');
+        showPanel(meta);
+        announce(`${meta.title}. Inspection open.`);
+      }
+    } else if (anim.kind === 'return') {
+      detailRoot.position.lerpVectors(anim.fromPos, anim.toPos, e);
+      detailRoot.quaternion.slerpQuaternions(anim.fromQuat, anim.toQuat, e);
+      detailSpin.quaternion.slerpQuaternions(anim.fromSpin, anim.toSpin, e);
+      const camPos = new THREE.Vector3().lerpVectors(anim.fromCamPos, anim.toCamPos, e);
+      const camL = new THREE.Vector3().lerpVectors(anim.fromCamLook, anim.toCamLook, e);
+      applyCameraPose(camPos, camL, lerp(anim.fromCamFov, anim.toCamFov, e));
+      ringGroup.position.y = lerp(anim.fromRingY, RING_Y_ORBIT, e);
+      ringGroup.position.z = lerp(anim.fromRingZ, 0, e);
+      ringGroup.scale.setScalar(lerp(anim.fromRingS, 1, e));
+      ringGroup.rotation.x = lerp(anim.fromRingTilt, RING_TILT, e);
+      if (u >= 1) {
+        detailRoot.position.copy(anim.toPos);
+        detailRoot.quaternion.copy(anim.toQuat);
+        detailSpin.quaternion.copy(anim.toSpin);
+        finishReturn();
+      }
+    }
+  } else if (state === 'orbit' || state === 'presenting') {
+    updateAllPoses({});
+  }
+
+  if ((state === 'inspecting' || state === 'reading') && !anim) {
+    detailSpin.rotation.x += detailSpinVel.x;
+    detailSpin.rotation.y += detailSpinVel.y;
+    detailSpin.rotation.x = THREE.MathUtils.clamp(detailSpin.rotation.x, -0.85, 0.85);
+    const damp = Math.exp(-5 * dt);
+    detailSpinVel.multiplyScalar(damp);
+    if (!detailDragging && detailSpinVel.lengthSq() < 1e-6) detailSpinVel.set(0, 0, 0);
+  }
+
+  if (reader && reader.group.visible) reader.update(dt);
+
+  if (
+    !reducedMotion &&
+    state === 'orbit' &&
+    !anim &&
+    !stepQueue.length &&
+    !pendingBurst &&
+    bootReady &&
+    stageFullyInView &&
+    stageFillsViewport() &&
+    !tabHidden &&
+    now - lastInteract >= IDLE_MS
+  ) {
+    lastInteract = now;
+    advance(1);
+  }
+
+  renderer.render(scene, camera);
+}
+
+boot().catch((err) => {
+  console.error(err);
+  bootEl.textContent = 'Could not compose the library.';
+});
+</script>
+</body>
+</html>
