@@ -79,7 +79,7 @@ export const BOOK_COM_OFFSET = Object.freeze({
 });
 
 const BOOK_LOOK = {
-  cover: { roughness: 0.82, normalScale: 0.115, normalRepeat: [1.55, 1.90] },
+  cover: { roughness: 0.78, normalScale: 0.115, normalRepeat: [1.55, 1.90] },
   paper: { color: 0xf7f1e5, roughness: 0.97, normalScale: 0.045 },
   stack: { color: 0xf7f1e5, roughness: 0.97 },
   endpaper: { color: 0xffffff, roughness: 0.95 },
