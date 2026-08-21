@@ -549,6 +549,35 @@ ringGroup.position.set(0, RING_Y_ORBIT, 0);
 ringGroup.rotation.x = RING_TILT;
 scene.add(ringGroup);
 
+/* Grounding: a faint radial-shadow pool just below the standing books' bases.
+   One textured plane, no shadow-map cost; parented to ringGroup so the inspect
+   framing (scale/lift/recede) carries it along automatically. */
+const contactShadow = (() => {
+  const c = document.createElement('canvas');
+  c.width = c.height = 256;
+  const g = c.getContext('2d');
+  const grad = g.createRadialGradient(128, 128, 24, 128, 128, 128);
+  grad.addColorStop(0, 'rgba(0,0,0,0.16)');
+  grad.addColorStop(0.55, 'rgba(0,0,0,0.10)');
+  grad.addColorStop(1, 'rgba(0,0,0,0)');
+  g.fillStyle = grad;
+  g.fillRect(0, 0, 256, 256);
+  const mesh = new THREE.Mesh(
+    new THREE.PlaneGeometry(RING_R * 3.1, RING_R * 3.1),
+    new THREE.MeshBasicMaterial({
+      map: new THREE.CanvasTexture(c),
+      transparent: true,
+      depthWrite: false,
+      opacity: 0.55,
+    }),
+  );
+  mesh.rotation.x = -Math.PI / 2;
+  mesh.position.y = -BOOK_SCALE * 11.3;
+  mesh.renderOrder = -1;
+  return mesh;
+})();
+ringGroup.add(contactShadow);
+
 const detailRoot = new THREE.Group();
 scene.add(detailRoot);
 const detailSpin = new THREE.Group();
