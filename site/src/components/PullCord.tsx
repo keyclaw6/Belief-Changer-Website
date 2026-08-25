@@ -58,7 +58,12 @@ const SVG_H = 340
 const SEGMENTS = 16
 const REST_SEG = REST_Y / SEGMENTS
 const KNOB_R = 6.5
-const HIT = 46
+/* Grab area: a tall strip covering the rope around the bead, not just the
+   bead itself — the cord must be grabbable anywhere near the knob (the old
+   46px square felt dead whenever the pointer landed on the rope). */
+const HIT_W = W
+const HIT_TOP = REST_Y - 84
+const HIT_H = 168
 
 interface Node {
   x: number
@@ -375,10 +380,10 @@ export function PullCord({
           onKeyDown={onKeyDown}
           style={{
             position: 'absolute',
-            left: ANCHOR_X - HIT / 2,
-            top: REST_Y - HIT / 2,
-            width: HIT,
-            height: HIT,
+            left: 0,
+            top: HIT_TOP,
+            width: HIT_W,
+            height: HIT_H,
             padding: 0,
             border: 'none',
             background: 'transparent',

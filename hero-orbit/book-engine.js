@@ -32,7 +32,7 @@
  * ---------------------------------------------------------------------------
  */
 
-const MAT_BASE = '/orbit-materials/';
+const MAT_BASE = '../site/public/orbit-materials/';
 
 /** centimetres — identical to gold D */
 export const BOOK_DIMS = (() => {
@@ -430,7 +430,7 @@ function bakeSpineTitle(THREE, { title, ink, caseLum }) {
   return tex;
 }
 
-function makePageAtlas(THREE, pages, paperColor) {
+function makePageAtlas(THREE, pages, paperColor, paperOnly = false) {
   const COLS = 4;
   const ROWS = 3;
   // Gold high cell is 768×1104; bump past the old 384×552 placeholders and
@@ -465,6 +465,12 @@ function makePageAtlas(THREE, pages, paperColor) {
       ctx.globalAlpha = 0.5;
       ctx.drawImage(paperColor.image, 0, 0, PAGE_DESIGN_W, PAGE_DESIGN_H);
       ctx.globalAlpha = 1;
+    }
+    // With the gold ink pipeline live the atlas carries paper only: drawing the
+    // text here as well would double it (04-text prints the glyphs as geometry).
+    if (paperOnly) {
+      ctx.restore();
+      continue;
     }
     const page = pages[i] || { title: `Page ${i + 1}`, paragraphs: [] };
     const right = i % 2 === 0;
@@ -844,10 +850,11 @@ async function buildCoverTitleGroup(THREE, shared, { title, subtitle, author, in
     t.sdfGlyphSize = 64;
     t.renderOrder = 6;
     t.userData.isSDFText = true;
-    t.material.depthTest = false;
+    t.depthOffset = -6;
+    t.material.depthTest = true;
     // Group-local +Y points toward the cover top; canvas y grows downward.
     t.position.z = 0.012;
-    t.position.y = yCanvas * s - ph / 2;
+    t.position.y = ph / 2 - yCanvas * s;
     g.add(t);
     return t;
   };
@@ -1006,17 +1013,29 @@ export async function createSharedResources(THREE, opts = {}) {
   return shared;
 }
 
+/* Cover textures are shared across slots (the ring repeats the catalog), so
+   cache by URL: one network fetch + decode + GPU upload per unique cover.
+   Cached textures are never disposed — the set is bounded by the catalog. */
+const coverTexCache = new Map();
+
 async function loadCoverTexture(THREE, url, aniso = 6) {
-  const loader = new THREE.TextureLoader();
-  const tex = await loader.loadAsync(url);
-  tex.colorSpace = THREE.SRGBColorSpace;
-  tex.wrapS = tex.wrapT = THREE.ClampToEdgeWrapping;
-  tex.minFilter = THREE.LinearMipmapLinearFilter;
-  tex.magFilter = THREE.LinearFilter;
-  tex.generateMipmaps = true;
-  tex.anisotropy = aniso;
-  tex.needsUpdate = true;
-  return tex;
+  let p = coverTexCache.get(url);
+  if (!p) {
+    p = (async () => {
+      const loader = new THREE.TextureLoader();
+      const tex = await loader.loadAsync(url);
+      tex.colorSpace = THREE.SRGBColorSpace;
+      tex.wrapS = tex.wrapT = THREE.ClampToEdgeWrapping;
+      tex.minFilter = THREE.LinearMipmapLinearFilter;
+      tex.magFilter = THREE.LinearFilter;
+      tex.generateMipmaps = true;
+      tex.anisotropy = aniso;
+      tex.needsUpdate = true;
+      return tex;
+    })();
+    coverTexCache.set(url, p);
+  }
+  return p;
 }
 
 function makeCaseMaterials(THREE, shared, caseColor) {
@@ -1406,6 +1425,8 @@ export async function createReaderBook(THREE, shared, options = {}) {
     ink,
   });
   if (titleOverlay) {
+    titleOverlay.rotation.x = Math.PI / 2;
+    titleOverlay.position.set(D.boardW / 2, -0.028, 0);
     troikaTitleTexts = titleOverlay.children.slice();
   }
   if (!titleOverlay) {
@@ -1426,8 +1447,40 @@ export async function createReaderBook(THREE, shared, options = {}) {
   });
   let matSpineArt = makeSpineArtMaterial(THREE, spineTitleTex, shared);
 
+  /* Gold printed-page pipeline (04-text): page ink as real SDF geometry riding
+     the deforming leaf surfaces — no see-through doubling on the curl, and
+     page 11 prints on the stack cap. The canvas atlas degrades to paper-only
+     and stays as the no-troika fallback. */
+  const FONT_BASE = MAT_BASE.indexOf('/orbit-materials/') === 0
+    ? '/fonts/'
+    : '../site/public/fonts/';
+  let textLayer = null;
+  {
+    const troikaMod = await shared.troikaReady.catch(() => null);
+    const troikaApi = troikaMod && (troikaMod.Text ? troikaMod : troikaMod.default || troikaMod);
+    if (troikaApi && typeof window !== 'undefined' && window.BK && window.BK.text) {
+      try {
+        textLayer = window.BK.text.create(THREE, troikaApi, {
+          D,
+          fonts: {
+            body: { url: FONT_BASE + 'dmsans-400-normal-latin.woff2' },
+            bodyMedium: { url: FONT_BASE + 'dmsans-600-normal-latin.woff2' },
+            display: { url: FONT_BASE + 'newsreader-400-normal-latin.woff2' },
+            displayItalic: { url: FONT_BASE + 'newsreader-400-italic-latin.woff2' },
+          },
+          printColor: ink,
+          envMap: null,
+          quality: { sdfGlyphSize: 64, textAniso: 8 },
+          layout: null,
+        });
+      } catch (e) {
+        textLayer = null;
+      }
+    }
+  }
+
   const pages = meta.pages || placeholderPages(meta.title, meta.promise);
-  let pageSys = makePageAtlas(THREE, pages, shared.textures.paperColor);
+  let pageSys = makePageAtlas(THREE, pages, shared.textures.paperColor, !!textLayer);
   const matPageText = new THREE.MeshStandardMaterial({
     map: pageSys.texture,
     color: 0xffffff,
@@ -1593,6 +1646,14 @@ export async function createReaderBook(THREE, shared, options = {}) {
     lf.geo.attributes.uv.needsUpdate = true;
   }
 
+  const BOOK_BOUNDS = new THREE.Sphere(new THREE.Vector3(5, 5, 0), 40);
+  function pinDynamicBounds(g) {
+    g.boundingSphere = BOOK_BOUNDS.clone();
+    g.computeBoundingSphere = function () { this.boundingSphere = BOOK_BOUNDS.clone(); };
+    g.boundingBox = null;
+    return g;
+  }
+
   for (let i = 0; i < NLEAF; i++) {
     const lf = new PG.Leaf(THREE, {
       nu: NU,
@@ -1602,6 +1663,7 @@ export async function createReaderBook(THREE, shared, options = {}) {
       thick: D.paper,
     });
     mapLeafShellToAtlas(lf, i * 2 + 1, i * 2);
+    pinDynamicBounds(lf.geo);
     const m = new THREE.Mesh(lf.geo, matPageText);
     m.castShadow = false;
     m.receiveShadow = true;
@@ -1610,6 +1672,151 @@ export async function createReaderBook(THREE, shared, options = {}) {
     lf.mesh = m;
     book.add(m);
     leaves.push(lf);
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* GOLD PRINTED-PAGE PIPELINE (04-text)                                */
+  /* Ink is real SDF geometry that rides the deforming leaf surfaces, so a */
+  /* turning leaf shows no doubled/stretched shell text. Without troika/   */
+  /* BK.text the atlas (paper + text) is used as the fallback.            */
+  /* ------------------------------------------------------------------ */
+  const PAGE11_U = 56, PAGE11_V = 1;
+  let page11 = null, page11Geo = null, page11Base = null, capSurface = null;
+  let page11LastRelax = Number.NaN;
+  {
+    page11Geo = new THREE.PlaneGeometry(D.pageW, D.pageH, PAGE11_U, PAGE11_V);
+    page11Geo.rotateX(-Math.PI / 2);
+    page11Geo.translate(D.pageW / 2, D.yTop, 0);
+    page11Base = new Float32Array(page11Geo.attributes.position.array);
+    const page11UV = page11Geo.attributes.uv.array;
+    for (let i = 0; i < page11Geo.attributes.uv.count; i++) {
+      const mapped = pageSys.mapUV(10, page11UV[i * 2], page11UV[i * 2 + 1]);
+      page11UV[i * 2] = mapped[0];
+      page11UV[i * 2 + 1] = mapped[1];
+    }
+    page11Geo.attributes.uv.needsUpdate = true;
+    page11Geo.attributes.position.setUsage(THREE.DynamicDrawUsage);
+    pinDynamicBounds(page11Geo);
+    page11 = new THREE.Mesh(page11Geo, matPageText);
+    page11.castShadow = true;
+    page11.receiveShadow = true;
+    book.add(page11);
+  }
+
+  function updatePage11(relax) {
+    if (!page11) return;
+    const e = clamp01(relax);
+    if (Math.abs(e - page11LastRelax) < 1e-5) return;
+    page11LastRelax = e;
+    const p = page11Geo.attributes.position.array;
+    for (let i = 0; i < page11Geo.attributes.position.count; i++) {
+      const o = i * 3;
+      const x0 = page11Base[o];
+      const u = clamp01(x0 / D.pageW);
+      const d = stackDeformAt(1, u, e, 0);
+      p[o] = x0 + d.dx;
+      p[o + 1] = page11Base[o + 1] + d.dy;
+      p[o + 2] = page11Base[o + 2];
+    }
+    page11Geo.attributes.position.needsUpdate = true;
+    page11Geo.computeVertexNormals();
+    if (capSurface) capSurface.deform((u) => stackDeformAt(1, u, e, 0));
+  }
+
+  const pageSurfaces = [];
+  let pageRecords = [];
+  let facingCamera = null;
+
+  function clearPageInk() {
+    for (const rec of pageRecords) {
+      for (const key of ['shell0', 'shell1']) {
+        const b = rec[key];
+        if (b && b.group) {
+          b.group.removeFromParent();
+          b.group.traverse((o) => { if (o.geometry) o.geometry.dispose(); });
+        }
+      }
+    }
+    pageRecords.length = 0;
+    pageSurfaces.length = 0;
+    capSurface = null;
+  }
+
+  function buildPageInk(pages) {
+    if (!textLayer) return;
+    clearPageInk();
+    const runHead = meta.title || '';
+    for (let i = 0; i < NLEAF; i++) {
+      const lf = leaves[i];
+      const surface = textLayer.pageSurface(lf);
+      pageSurfaces[i] = surface;
+      const common = {
+        W: D.leafW, H: D.pageH, surface,
+        halfThickness: D.paper * 0.5,
+        inkLift: 0.0025,
+        runningHead: runHead,
+        logoTexture: null,
+      };
+      const evenPage = i * 2, oddPage = i * 2 + 1;
+      const rec = { shell0: null, shell1: null };
+      if (pages[evenPage]) rec.shell1 = textLayer.buildPage(lf.mesh, surface,
+        { ...common, content: pages[evenPage], pageNumber: evenPage + 1, shell: 1, mirror: false });
+      if (pages[oddPage]) rec.shell0 = textLayer.buildPage(lf.mesh, surface,
+        { ...common, content: pages[oddPage], pageNumber: oddPage + 1, shell: 0, mirror: true });
+      pageRecords.push(rec);
+    }
+    if (pages[10]) {
+      const root0 = { x: -D.spineBulge * 0.55, y: D.yTop - 0.032 };
+      capSurface = textLayer.flatSurface(D.pageW, D.pageH, root0.x, D.yTop, Math.max(PAGE11_U, 1), Math.max(PAGE11_V, 1));
+      textLayer.buildPage(page11, capSurface, {
+        W: D.pageW, H: D.pageH, content: pages[10], pageNumber: 11,
+        shell: 0, mirror: false, gutterRight: false,
+        halfThickness: 0, inkLift: 0.0025,
+        runningHead: runHead,
+        logoTexture: null,
+      });
+      page11LastRelax = Number.NaN;
+      updatePage11(KIN ? KIN.relax : 0);
+    }
+    for (let i = 0; i < NLEAF; i++) updatePageFacing(i);
+  }
+
+  function leafInPlay(i) {
+    const s = S;
+    if (s.turning === i) return true;
+    if (s.turned <= 0) return i === 0;
+    if (s.turned >= NLEAF) return false;
+    return i === s.turned || i + 1 === s.turned;
+  }
+
+  function updatePageFacing(i) {
+    if (!textLayer) return;
+    const cam = facingCamera;
+    const rec = pageRecords[i];
+    if (!rec) return;
+    const lf = leaves[i];
+    const mesh = lf.mesh;
+    const m = mesh.matrixWorld.elements;
+    const viewX = cam ? (cam.position.x - m[12]) * (m[0] * m[5] - m[1] * m[4])
+      + (cam.position.y - m[13]) * (m[1] * m[15] - m[11] * m[4])
+      + (cam.position.z - m[14]) * (m[11] * m[5] - m[15] * m[1]) : 0;
+    const pos = viewX > 0;
+    if (rec.shell1) rec.shell1.group.visible = pos && !leafInPlay(i);
+    if (rec.shell0) rec.shell0.group.visible = !pos && !leafInPlay(i);
+  }
+
+  function refreshLeafText(i) {
+    if (!textLayer) return;
+    const rec = pageRecords[i];
+    if (!rec) return;
+    const lf = leaves[i];
+    if (rec.shell0 && rec.shell0.group.parent === lf.mesh) rec.shell0.group.visible = lf.pos !== null;
+    if (rec.shell1 && rec.shell1.group.parent === lf.mesh) rec.shell1.group.visible = lf.pos !== null;
+  }
+
+  function setFacingCamera(cam) {
+    facingCamera = cam;
+    for (let i = 0; i < NLEAF; i++) updatePageFacing(i);
   }
 
   let KIN = null;
@@ -1858,6 +2065,9 @@ export async function createReaderBook(THREE, shared, options = {}) {
       q.fastLeverage = leverage;
       q.fastRightAngles = pair.rightAngles;
       q.fastLeftAngles = pair.leftAngles;
+      q.rippleP = idx * 2.1 + tt * 5.0;
+      q.rootX = r.x;
+      q.rootY = r.y;
       q.supports = tt < 0.55 ? null : sups;
       q.iters = LOQ ? 8 : 14;
       q.constraintPasses = 2;
@@ -1879,6 +2089,7 @@ export async function createReaderBook(THREE, shared, options = {}) {
     KIN = kin;
     updateStack(kin.relax);
     updateHeadbands(kin.relax);
+    updatePage11(kin.relax);
 
     if (caseChanged) {
       frontBoardPivot.position.set(kin.frontBoard.x, kin.frontBoard.y, 0);
@@ -1921,6 +2132,7 @@ export async function createReaderBook(THREE, shared, options = {}) {
           const rank = i - Math.max(S.turned, S.turning + 1);
           leaves[i].update(restRight(rootFor(i), i, rank));
         }
+        refreshLeafText(i);
       }
     }
     if (S.turning >= 0) {
@@ -1931,11 +2143,13 @@ export async function createReaderBook(THREE, shared, options = {}) {
           active: S.grabActive,
         }),
       );
+      refreshLeafText(S.turning);
     }
   }
 
   // Initial closed pose
   updateBook();
+  buildPageInk(pages);
 
   function setCover(t) {
     anim = null;
@@ -2122,11 +2336,12 @@ export async function createReaderBook(THREE, shared, options = {}) {
     if (next.pages) meta.pages = next.pages;
     const pages2 = meta.pages || placeholderPages(meta.title, meta.promise);
     const oldTex = pageSys.texture;
-    pageSys = makePageAtlas(THREE, pages2, shared.textures.paperColor);
+    pageSys = makePageAtlas(THREE, pages2, shared.textures.paperColor, !!textLayer);
     matPageText.map = pageSys.texture;
     matPageText.needsUpdate = true;
     oldTex.dispose();
     for (let i = 0; i < NLEAF; i++) mapLeafShellToAtlas(leaves[i], i * 2 + 1, i * 2);
+    buildPageInk(pages2);
   }
 
   async function rebind(next) {
@@ -2199,6 +2414,8 @@ export async function createReaderBook(THREE, shared, options = {}) {
     backArt.geometry.dispose();
     for (const lf of leaves) lf.geo.dispose();
     for (const m of headbandMeshes) m.geometry.dispose();
+    if (page11Geo) page11Geo.dispose();
+    clearPageInk();
     matCase.dispose();
     matCaseSpine.dispose();
     matFrontArt.dispose();
@@ -2293,6 +2510,15 @@ export async function createReaderBook(THREE, shared, options = {}) {
     return false;
   }
 
+  // The reader lives outside the ring's baked shadow frustum; sampling that
+  // map from here only adds stale streaks, never real shading.
+  root.traverse((o) => {
+    if (o.isMesh) {
+      o.castShadow = false;
+      o.receiveShadow = false;
+    }
+  });
+
   return {
     group: root,
     hitMeshes,
@@ -2312,5 +2538,6 @@ export async function createReaderBook(THREE, shared, options = {}) {
     pickLeaf,
     synthesizeLeaf,
     isPageHit,
+    updateFacing: setFacingCamera,
   };
 }

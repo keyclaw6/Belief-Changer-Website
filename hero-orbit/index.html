@@ -350,6 +350,7 @@
 <script src="./_extract/01-noise.js"></script>
 <script src="./_extract/02-geometry.js"></script>
 <script src="./_extract/03-pageturn.js"></script>
+<script src="./_extract/04-text.js"></script>
 
 <script type="importmap">
 {
@@ -378,10 +379,11 @@ import {
 /* ------------------------------------------------------------------ const */
 
 const N = 48;
-const RING_R = 56;
-const RING_TILT = THREE.MathUtils.degToRad(14);
-const PRESENT_OUT = 12;
-const BOOK_SCALE = 0.92;
+const RING_R = 62;
+const RING_TILT = THREE.MathUtils.degToRad(10);
+const PRESENT_OUT = 11;
+const PRESENT_LIFT = 4; // presented slot hovers slightly above the ring plane
+const BOOK_SCALE = 1.0;
 const SPIN_DUR = 260;
 const FLIP_DUR = 300;
 const PULL_DUR = 700;
@@ -396,10 +398,12 @@ const QUEUE_MAX = 1;           // never stack flip animations from scroll
 const BOOT_BATCH = 4;
 const BOOT_REVEAL_AT = 10;
 
-/* Orbit framing is computed, not hand-placed: the whole ring stays in frame at
-   any aspect, with the presented cover lower-center facing the viewer. */
-const CAM_ELEV = THREE.MathUtils.degToRad(22);  // camera elevation above the ring plane
+/* Orbit framing is computed, not hand-placed: the FAR arc of the ring stays in
+   frame at any aspect while the near arc sweeps past the frame edges — the
+   circle reads large and the presented cover sits close, lower-center. */
+const CAM_ELEV = THREE.MathUtils.degToRad(7);   // camera elevation above the ring plane
 const CAM_FILL = 0.86;                          // fraction of each frustum axis the ring may fill
+const BOUND_FAR_COS = 0.15;                     // slots with cos(phi) <= this bound the fit
 const CAM_ORBIT = {
   pos: new THREE.Vector3(0, 36, 148),
   /* look.y sits below the ring center: the near rim dips RING_TILT·RING_R
@@ -409,12 +413,12 @@ const CAM_ORBIT = {
 };
 const CAM_INSPECT = {
   pos: new THREE.Vector3(0, 26, 201),
-  look: new THREE.Vector3(-5.2, 18, 97.7),
+  look: new THREE.Vector3(0, 18, 100),
   fov: 34,
 };
 const CAM_INSPECT_CLOSE = {
   pos: new THREE.Vector3(0, 24, 181),
-  look: new THREE.Vector3(-11.6, 18, 98.5),
+  look: new THREE.Vector3(0, 18, 101),
   fov: 30,
 };
 const RING_Y_ORBIT = 6;
@@ -422,23 +426,30 @@ const RING_Y_INSPECT = 10;
 const RING_SCALE_INSPECT = 0.56;
 const RING_Z_INSPECT = -70;
 
-/* Inspect rig: the pulled-out book sits left of center at desktop aspects;
-   NDC x scales with 1/aspect, so on narrow frames it would clip the frustum
-   edge. Past ~1.25 aspect the book glides onto the camera axis (centered) and
-   the camera re-aims at it (applied in resize()). */
-const INSPECT_BOOK_X = -21;
-const INSPECT_BOOK_X_NARROW = -5;
+/* Inspect rig: the pulled-out book sits centered on the camera axis at every
+   aspect (owner: "the book I selected more in center of the screen"). The
+   shift rig stays so narrow aspects could re-aim if ever needed. */
+const INSPECT_BOOK_X = 0;
+const INSPECT_BOOK_X_NARROW = 0;
+/* The open cover swings left of the spine, so an open spread reads left-heavy.
+   Glide the held book right in proportion to cover-open so the OPEN spread is
+   centered too (closed book stays dead center). */
+const INSPECT_OPEN_SHIFT = 12;
 let inspectBookX = INSPECT_BOOK_X;
 function applyInspectShift() {
   const t = clamp01((1.25 - camera.aspect) / 0.45);
   inspectBookX = lerp(INSPECT_BOOK_X, INSPECT_BOOK_X_NARROW, t);
   CAM_INSPECT.pos.x = lerp(0, inspectBookX, t);
-  CAM_INSPECT.look.x = lerp(-5.2, inspectBookX, t);
+  CAM_INSPECT.look.x = lerp(0, inspectBookX, t);
   CAM_INSPECT_CLOSE.pos.x = lerp(0, inspectBookX, t);
-  CAM_INSPECT_CLOSE.look.x = lerp(-11.6, inspectBookX, t);
+  CAM_INSPECT_CLOSE.look.x = lerp(0, inspectBookX, t);
 }
 
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* Boot instrumentation (QA): phase timestamps from module start. */
+const BOOT_T0 = performance.now();
+window.__orbitPerf = { t0: BOOT_T0, books: [] };
 
 const params = new URLSearchParams(location.search);
 const EMBED = params.get('embed') === '1';
@@ -614,22 +625,121 @@ const raycaster = new THREE.Raycaster();
 const ndc = new THREE.Vector2();
 const _v = new THREE.Vector3();
 
+/* Canonical world bounds of the composition: the FAR arc of the ring (slots
+   with cos(phi) <= BOUND_FAR_COS) plus the front slot presented (present=1).
+   The near arc intentionally overflows the frame edges — the circle reads
+   large and the camera sits close to the presented book. Derived analytically
+   from the first mounted book's real host-local bbox, so the camera fit is
+   exact before every slot exists — the presented book must never clip. */
+let orbitBounds = null;
+let bookLocalBox = null; // Box3 of a closed book in its host's local space
+
+function measureBookLocalBox(slot) {
+  if (bookLocalBox || !slot?.host) return;
+  slot.host.updateMatrixWorld(true);
+  const world = new THREE.Box3().setFromObject(slot.closed.group);
+  if (world.isEmpty()) return;
+  const inv = slot.host.matrixWorld.clone().invert();
+  bookLocalBox = world.clone().applyMatrix4(inv);
+}
+
+let orbitFitCorners = null; // real per-slot world corners (an AABB would invent phantom corners)
+
+function analyticOrbitBounds() {
+  if (!bookLocalBox) return null;
+  const box = new THREE.Box3();
+  const corners = [];
+  const mRing = new THREE.Matrix4().compose(
+    new THREE.Vector3(0, RING_Y_ORBIT, 0),
+    new THREE.Quaternion().setFromEuler(new THREE.Euler(RING_TILT, 0, 0)),
+    new THREE.Vector3(1, 1, 1),
+  );
+  const mLocal = new THREE.Matrix4();
+  const q = new THREE.Quaternion();
+  const e = new THREE.Euler();
+  const s = new THREE.Vector3(BOOK_SCALE, BOOK_SCALE, BOOK_SCALE);
+  const pos = new THREE.Vector3();
+  const corner = new THREE.Vector3();
+  for (let i = 0; i < N; i++) {
+    const present = i === 0 ? 1 : 0;
+    const phi = (i / N) * Math.PI * 2;
+    if (present === 0 && Math.cos(phi) > BOUND_FAR_COS) continue; // near arc overflows on purpose
+    const radial = RING_R + present * PRESENT_OUT;
+    pos.set(radial * Math.sin(phi), present * PRESENT_LIFT, radial * Math.cos(phi));
+    e.set(0, yawAt(phi, present), 0);
+    q.setFromEuler(e);
+    mLocal.compose(pos, q, s);
+    const mWorld = _abM.multiplyMatrices(mRing, mLocal);
+    for (const x of [bookLocalBox.min.x, bookLocalBox.max.x])
+      for (const y of [bookLocalBox.min.y, bookLocalBox.max.y])
+        for (const z of [bookLocalBox.min.z, bookLocalBox.max.z]) {
+          corner.set(x, y, z).applyMatrix4(mWorld);
+          box.expandByPoint(corner);
+          corners.push(corner.clone());
+        }
+  }
+  if (box.isEmpty()) return null;
+  orbitFitCorners = corners;
+  return box;
+}
+const _abM = new THREE.Matrix4();
+
 function fitOrbitCamera() {
   const vfov = THREE.MathUtils.degToRad(CAM_ORBIT.fov);
   const hfov = 2 * Math.atan(Math.tan(vfov / 2) * camera.aspect);
-  // Projected ring extents about its center: full width; height squashed by
-  // elevation + tilt, plus the books standing on the rim.
-  const semiMajor = RING_R + BOOK_SCALE * 15 + 2;
-  const semiMinor = RING_R * Math.sin(RING_TILT + CAM_ELEV) + BOOK_SCALE * 21 / 2 + 2;
-  const distH = semiMajor / Math.tan((hfov / 2) * CAM_FILL);
-  const distV = semiMinor / Math.tan((vfov / 2) * CAM_FILL);
-  const d = Math.max(distH, distV);
-  CAM_ORBIT.pos.set(
-    0,
-    CAM_ORBIT.look.y + d * Math.sin(CAM_ELEV),
-    d * Math.cos(CAM_ELEV),
-  );
+  const b = orbitBounds;
+  if (!b) {
+    // Pre-boot analytic estimate (only seen behind the boot overlay). Far-arc
+    // half-width: the widest far slots sit at x ≈ ±RING_R.
+    const semiMajor = RING_R + BOOK_SCALE * 8 + 2;
+    const semiMinor = RING_R * Math.sin(RING_TILT + CAM_ELEV) + BOOK_SCALE * 21 / 2 + 2;
+    const distH = semiMajor / Math.tan((hfov / 2) * CAM_FILL);
+    const distV = semiMinor / Math.tan((vfov / 2) * CAM_FILL);
+    const d = Math.max(distH, distV);
+    CAM_ORBIT.pos.set(
+      0,
+      CAM_ORBIT.look.y + d * Math.sin(CAM_ELEV),
+      d * Math.cos(CAM_ELEV),
+    );
+    return;
+  }
+  // Exact fit: aim below the bounds' center (the presented book sits low and
+  // close — it is the binding constraint, the far arc has headroom), then walk
+  // the camera back along the elevation ray until every corner sits inside
+  // CAM_FILL of the frustum (perspective-true via repeated projection).
+  const look = _fitLook.set(0, lerp(b.min.y, b.max.y, 0.35), 0);
+  let corners;
+  if (orbitFitCorners && orbitFitCorners.length) {
+    corners = orbitFitCorners;
+  } else {
+    corners = _fitCorners;
+    corners.length = 0;
+    for (const x of [b.min.x, b.max.x])
+      for (const y of [b.min.y, b.max.y])
+        for (const z of [b.min.z, b.max.z]) corners.push(new THREE.Vector3(x, y, z));
+  }
+  let d = camera.position.distanceTo(look) || 220;
+  for (let k = 0; k < 14; k++) {
+    camera.position.set(look.x, look.y + d * Math.sin(CAM_ELEV), look.z + d * Math.cos(CAM_ELEV));
+    camera.lookAt(look);
+    camera.updateMatrixWorld(true);
+    let worst = 1;
+    for (const c of corners) {
+      const p = _fitV.copy(c).project(camera);
+      worst = Math.max(worst, Math.abs(p.x) / CAM_FILL, Math.abs(p.y) / CAM_FILL);
+    }
+    if (Math.abs(worst - 1) < 0.004) break;
+    d *= worst;
+  }
+  CAM_ORBIT.pos.set(look.x, look.y + d * Math.sin(CAM_ELEV), look.z + d * Math.cos(CAM_ELEV));
+  CAM_ORBIT.look.copy(look);
+  camera.position.copy(CAM_ORBIT.pos);
+  camLook.copy(CAM_ORBIT.look);
+  camera.lookAt(camLook);
 }
+const _fitLook = new THREE.Vector3();
+const _fitV = new THREE.Vector3();
+const _fitCorners = [];
 
 function resize() {
   const w = stage.clientWidth;
@@ -691,14 +801,18 @@ addEventListener('resize', () => {
 const DARK_BG = 0x0e0d0c;
 let sceneDark = matchMedia('(prefers-color-scheme: dark)').matches;
 
-// Warm museum spotlight, above-front of the ring. Kept in the scene from boot
-// at intensity 0 so the shader compiles once and toggling never hitches.
-const lamp = new THREE.SpotLight(0xffe6c0, 0, 0, 0.46, 0.62, 0);
+// Warm museum spotlight. Kept in the scene from boot at intensity 0 so the
+// shader compiles once and toggling never hitches. In dark mode it hangs
+// above the *selected* book (updateLamp) and is the ONLY light source: real
+// distance falloff (decay 2, intensity in candela) so books fade darker the
+// farther they sit from the pool of light.
+const lamp = new THREE.SpotLight(0xffe6c0, 0, 0, 0.3, 0.62, 2);
 lamp.position.set(0, 120, 190);
 lamp.target.position.set(0, RING_Y_ORBIT, 0);
 scene.add(lamp, lamp.target);
 
-// Dark-mode counterpart of the contact shadow: a faint warm light pool.
+// Dark-mode counterpart of the contact shadow: a faint warm light pool that
+// sits under the selected book (positioned by updateLamp).
 const glowPool = (() => {
   const c = document.createElement('canvas');
   c.width = c.height = 256;
@@ -710,7 +824,7 @@ const glowPool = (() => {
   g.fillStyle = grad;
   g.fillRect(0, 0, 256, 256);
   const mesh = new THREE.Mesh(
-    new THREE.PlaneGeometry(RING_R * 3.0, RING_R * 3.0),
+    new THREE.PlaneGeometry(70, 70),
     new THREE.MeshBasicMaterial({
       map: new THREE.CanvasTexture(c),
       transparent: true,
@@ -738,16 +852,47 @@ function applyTheme() {
     scene.fog.near = dark ? 170 : 330;
     scene.fog.far = dark ? 430 : 940;
   }
-  studio.sun.intensity = dark ? 0.35 : 2.3;
-  studio.fill.intensity = dark ? 0.12 : 0.82;
-  studio.rim.intensity = dark ? 0.22 : 0.52;
-  studio.hemi.intensity = dark ? 0.10 : 0.88;
+  // Dark = night gallery: the lamp is the only key. The studio rig drops to a
+  // whisper (rim/hemi just enough that the ring reads as faint silhouettes).
+  studio.sun.intensity = dark ? 0.02 : 2.3;
+  studio.fill.intensity = dark ? 0.0 : 0.82;
+  studio.rim.intensity = dark ? 0.025 : 0.52;
+  studio.hemi.intensity = dark ? 0.012 : 0.88;
   studio.hemi.groundColor.set(dark ? 0x16130f : 0x707070);
-  scene.environmentIntensity = dark ? 0.14 : 0.68;
-  lamp.intensity = dark ? 3.0 : 0;
+  scene.environmentIntensity = dark ? 0.02 : 0.68;
+  lamp.intensity = dark ? 26000 : 0;
   contactShadow.visible = !dark;
   glowPool.visible = dark;
   document.documentElement.classList.toggle('scene-dark', dark);
+}
+
+/* The dark-mode lamp hangs above the selected book: the presented slot while
+   browsing, the held volume while inspecting. Called from the frame loop so
+   it tracks spins, pulls and returns. While a book is held the light pool on
+   the ring behind goes out — the lamp follows the held volume alone. */
+const _lampAim = new THREE.Vector3();
+function updateLamp() {
+  const held =
+    (state === 'inspecting' || state === 'reading' || state === 'pullingOut') &&
+    reader && reader.group.visible;
+  if (held) {
+    _lampAim.copy(detailRoot.position);
+    glowPool.visible = false;
+  } else if (slots[frontIndex]) {
+    _lampAim.copy(slotWorldPose(frontIndex, 1).pos);
+    glowPool.visible = true;
+    const phi = phiOf(frontIndex);
+    const radial = RING_R + PRESENT_OUT;
+    glowPool.position.set(
+      radial * Math.sin(phi),
+      -BOOK_SCALE * 11.34,
+      radial * Math.cos(phi),
+    );
+  } else {
+    return;
+  }
+  lamp.target.position.copy(_lampAim);
+  lamp.position.set(_lampAim.x * 0.3, _lampAim.y + 95, _lampAim.z + 50);
 }
 
 window.addEventListener('message', (event) => {
@@ -770,11 +915,12 @@ let detailSpinVel = new THREE.Vector3();
 let detailDragging = false;
 let coverDragging = false;
 let pageDragging = false;
-let pagePending = null; // ambiguous page-area down; commit after >8px horizontal
 let coverDragStartX = 0;
 let coverDragStart = 0;
+let coverClick = null; // { x, y, t } — a quick tap on the book toggles the cover
 let pageDragAxis = null;
-let rotateDrag = null;
+let rotateDrag = null; // { x, y, vx, vy } — smoothed per-event deltas → release inertia
+let spinReset = null;  // { x0, y0, t0 } — double-click glide back to neutral pose
 
 const slots = []; // { meta, closed, host, present, visible }
 
@@ -875,7 +1021,7 @@ function applySlotPose(slot, i, angle, present, lift = 0) {
   if (!slot?.host) return;
   const phi = phiOf(i, angle);
   const radial = RING_R + present * PRESENT_OUT + lift;
-  slot.host.position.set(radial * Math.sin(phi), 0, radial * Math.cos(phi));
+  slot.host.position.set(radial * Math.sin(phi), present * PRESENT_LIFT, radial * Math.cos(phi));
   slot.host.rotation.set(0, yawAt(phi, present), 0);
   slot.host.scale.setScalar(BOOK_SCALE);
   slot.present = present;
@@ -1066,7 +1212,7 @@ function slotWorldPose(i, present = 1) {
   const phi = phiOf(i, ringAngle);
   const radial = RING_R + present * PRESENT_OUT;
   const local = new THREE.Object3D();
-  local.position.set(radial * Math.sin(phi), 0, radial * Math.cos(phi));
+  local.position.set(radial * Math.sin(phi), present * PRESENT_LIFT, radial * Math.cos(phi));
   local.rotation.set(0, yawAt(phi, present), 0);
   local.scale.setScalar(BOOK_SCALE);
   ringGroup.updateMatrixWorld(true);
@@ -1086,7 +1232,7 @@ function detailTargetPose() {
   const quat = new THREE.Quaternion().setFromEuler(
     new THREE.Euler(-0.12, 0.18, 0, 'YXZ'),
   );
-  return { pos, quat, scale: BOOK_SCALE * 1.9 };
+  return { pos, quat, scale: BOOK_SCALE * 1.55 };
 }
 
 async function ensureReader(meta) {
@@ -1177,6 +1323,7 @@ async function openFront() {
   reader.group.scale.setScalar(BOOK_SCALE);
   detailSpin.rotation.set(0, 0, 0);
   detailSpinVel.set(0, 0, 0);
+  spinReset = null;
   detailRoot.position.copy(from.pos);
   detailRoot.quaternion.copy(from.quat);
   invalidate();
@@ -1232,6 +1379,7 @@ async function settleReaderClosed() {
   detailSpin.rotation.set(0, 0, 0);
   detailSpin.quaternion.identity();
   detailSpinVel.set(0, 0, 0);
+  spinReset = null;
   invalidate();
 }
 
@@ -1361,8 +1509,8 @@ function updateHover(e) {
 function startPageDrag(e, leaf) {
   if (!leaf || !reader.beginDrag(leaf)) return false;
   invalidate();
-  pagePending = null;
   pageDragging = true;
+  spinReset = null;
   const rect = canvas.getBoundingClientRect();
   pageDragAxis = {
     x: leaf.dir > 0 ? -1 : 1,
@@ -1373,14 +1521,28 @@ function startPageDrag(e, leaf) {
     dir: leaf.dir,
   };
   canvas.setPointerCapture(e.pointerId);
+  canvas.style.cursor = 'grabbing';
   setState('reading');
   return true;
 }
 
-canvas.addEventListener('pointermove', (e) => {
-  if (detailDragging || coverDragging || pageDragging || pagePending) return;
-  if (state === 'orbit' || state === 'presenting') updateHover(e);
-});
+/* Drag-rotate the held book: direct 1:1 while the pointer is down (no
+   inertia-lag between hand and book), smoothed velocity handed to the
+   inertia integrator on release. Rotation is ALWAYS available — on empty
+   space, and on the open book's boards/spine — so no pose is a dead end. */
+function startRotate(e) {
+  detailDragging = true;
+  rotateDrag = { x: e.clientX, y: e.clientY, vx: 0, vy: 0 };
+  detailSpinVel.set(0, 0, 0);
+  spinReset = null;
+  canvas.setPointerCapture(e.pointerId);
+  canvas.style.cursor = 'grabbing';
+}
+
+function setInspectCursor() {
+  canvas.style.cursor =
+    state === 'inspecting' || state === 'reading' ? 'grab' : 'default';
+}
 
 canvas.addEventListener('pointerleave', () => {
   if (hoverFront) {
@@ -1398,36 +1560,39 @@ canvas.addEventListener('pointerdown', async (e) => {
   if (state === 'inspecting' || state === 'reading') {
     if (!reader || !reader.group.visible) return;
     reader.group.updateMatrixWorld(true);
-    const hits = raycaster.intersectObjects(reader.hitMeshes, false);
     const st = reader.getState();
 
-    // Cover open: page drag before cover drag / book rotate. Leaf meshes are
-    // morph-driven, so raycast picks are unreliable; the drag itself decides
-    // the direction (drag left = forward turn, drag right = turn back).
+    // Cover fully open → three predictable zones:
+    //  1. pages (leaf meshes + open page block): drag turns the page —
+    //     gold-style pick resolves the leaf and direction from the hit point;
+    //  2. boards / spine / fore-edge: drag rotates the book;
+    //  3. empty space: drag rotates the book.
     if (st.cover >= 0.99) {
+      const leaf = reader.pickLeaf ? reader.pickLeaf(raycaster) : null;
+      if (leaf && startPageDrag(e, leaf)) return;
       e.preventDefault();
-      pagePending = { x0: e.clientX, y0: e.clientY, pointerId: e.pointerId };
-      canvas.setPointerCapture(e.pointerId);
-      setState('reading');
+      startRotate(e);
       return;
     }
 
+    // Cover closed / half-open on the book: drag scrubs the cover open-shut;
+    // a quick tap toggles it (fixes "sometimes opens, sometimes doesn't").
+    const hits = raycaster.intersectObjects(reader.hitMeshes, false);
     if (hits.length) {
-      const hit = hits[0];
-      // Cover still closed/opening — drag to open
       e.preventDefault();
       coverDragging = true;
       coverDragStartX = e.clientX;
       coverDragStart = st.cover;
+      coverClick = { x: e.clientX, y: e.clientY, t: performance.now() };
+      spinReset = null;
       canvas.setPointerCapture(e.pointerId);
+      canvas.style.cursor = 'grabbing';
       return;
     }
 
-    // Drag-rotate the detail book (weighty)
+    // Empty space rotates the held book
     e.preventDefault();
-    detailDragging = true;
-    rotateDrag = { x: e.clientX, y: e.clientY };
-    canvas.setPointerCapture(e.pointerId);
+    startRotate(e);
     return;
   }
 
@@ -1443,35 +1608,6 @@ canvas.addEventListener('pointerdown', async (e) => {
 });
 
 canvas.addEventListener('pointermove', (e) => {
-  if (pagePending && reader && !pageDragging) {
-    const dx = e.clientX - pagePending.x0;
-    if (Math.abs(dx) > 8) {
-      // Drag left → forward turn; drag right → back
-      const dir = dx < 0 ? 1 : -1;
-      const leaf = reader.synthesizeLeaf ? reader.synthesizeLeaf(dir) : null;
-      if (leaf && reader.beginDrag(leaf)) {
-        const rect = canvas.getBoundingClientRect();
-        pageDragging = true;
-        pageDragAxis = {
-          x: leaf.dir > 0 ? -1 : 1,
-          y: 0,
-          span: Math.max(280, rect.width * 0.44),
-          x0: pagePending.x0,
-          y0: pagePending.y0,
-          dir: leaf.dir,
-        };
-        pagePending = null;
-        setState('reading');
-        const d = (dx * pageDragAxis.x) / pageDragAxis.span;
-        const t = clamp01(pageDragAxis.dir > 0 ? d : 1 - d);
-        reader.updateDrag(t);
-        invalidate();
-      } else {
-        pagePending = null;
-      }
-    }
-    return;
-  }
   if (pageDragging && reader && pageDragAxis) {
     const dx = e.clientX - pageDragAxis.x0;
     const dy = e.clientY - pageDragAxis.y0;
@@ -1490,22 +1626,49 @@ canvas.addEventListener('pointermove', (e) => {
     return;
   }
   if (detailDragging && rotateDrag) {
+    // Direct 1:1 rotation while held — the book never lags the hand.
     const dx = e.clientX - rotateDrag.x;
     const dy = e.clientY - rotateDrag.y;
     rotateDrag.x = e.clientX;
     rotateDrag.y = e.clientY;
-    detailSpinVel.y += dx * 0.0035;
-    detailSpinVel.x += dy * 0.0025;
+    detailSpin.rotation.y += dx * 0.0062;
+    detailSpin.rotation.x = THREE.MathUtils.clamp(
+      detailSpin.rotation.x + dy * 0.0046,
+      -0.85,
+      0.85,
+    );
+    rotateDrag.vx = rotateDrag.vx * 0.7 + dx * 0.3;
+    rotateDrag.vy = rotateDrag.vy * 0.7 + dy * 0.3;
+    invalidate();
+    return;
+  }
+  if (state === 'orbit' || state === 'presenting') {
+    updateHover(e);
+    return;
+  }
+  if ((state === 'inspecting' || state === 'reading') && reader && reader.group.visible) {
+    // Cursor affordance: grab over the held book, default over the void.
+    setNdc(e);
+    raycaster.setFromCamera(ndc, camera);
+    reader.group.updateMatrixWorld(true);
+    const over = raycaster.intersectObjects(reader.hitMeshes, false);
+    canvas.style.cursor = over.length ? 'grab' : 'default';
   }
 });
 
 function endPointer(e, cancelled) {
-  if (pagePending) {
-    pagePending = null;
-    if (canvas.hasPointerCapture?.(e.pointerId)) canvas.releasePointerCapture(e.pointerId);
-    const st = reader?.getState();
-    setState(st && (st.cover > 0.08 || st.turned > 0) ? 'reading' : 'inspecting');
-    return;
+  // Manual double-tap: two quick releases near each other reset the pose.
+  const nowT = performance.now();
+  if (
+    !cancelled &&
+    lastTapUp &&
+    nowT - lastTapUp.t < 500 &&
+    Math.abs(e.clientX - lastTapUp.x) + Math.abs(e.clientY - lastTapUp.y) < 14
+  ) {
+    lastTapUp = null;
+    resetSpinPose();
+  } else {
+    lastTapUp = { x: e.clientX, y: e.clientY, t: nowT };
   }
   if (pageDragging && reader) {
     pageDragging = false;
@@ -1513,26 +1676,61 @@ function endPointer(e, cancelled) {
     if (canvas.hasPointerCapture?.(e.pointerId)) canvas.releasePointerCapture(e.pointerId);
     const st = reader.getState();
     setState(st.cover > 0.08 || st.turned > 0 ? 'reading' : 'inspecting');
+    setInspectCursor();
     return;
   }
   if (coverDragging && reader) {
     coverDragging = false;
     const st = reader.getState();
-    if (st.cover > 0.55) reader.openCover(true);
-    else reader.openCover(false);
+    const tap =
+      !cancelled &&
+      coverClick &&
+      Math.abs(e.clientX - coverClick.x) + Math.abs(e.clientY - coverClick.y) < 8 &&
+      performance.now() - coverClick.t < 400;
+    coverClick = null;
+    // Tap toggles; a drag commits by where it was released.
+    reader.openCover(tap ? st.cover < 0.5 : st.cover > 0.5);
     if (canvas.hasPointerCapture?.(e.pointerId)) canvas.releasePointerCapture(e.pointerId);
     setState(st.cover > 0.08 ? 'reading' : 'inspecting');
+    setInspectCursor();
     return;
   }
   if (detailDragging) {
     detailDragging = false;
+    if (rotateDrag) {
+      // Hand the smoothed drag velocity to the inertia integrator.
+      detailSpinVel.set(rotateDrag.vy * 0.0046, rotateDrag.vx * 0.0062, 0);
+    }
     rotateDrag = null;
     if (canvas.hasPointerCapture?.(e.pointerId)) canvas.releasePointerCapture(e.pointerId);
+    setInspectCursor();
     invalidate();
   }
 }
 canvas.addEventListener('pointerup', (e) => endPointer(e, false));
 canvas.addEventListener('pointercancel', (e) => endPointer(e, true));
+
+/* Double-tap / double-click: glide the held book back to its neutral pose —
+   the guaranteed way home from any rotation the user dragged themselves into.
+   Detected manually: preventDefault on pointerdown suppresses native dblclick. */
+let lastTapUp = null;
+function resetSpinPose() {
+  if (state !== 'inspecting' && state !== 'reading') return;
+  if (!reader || !reader.group.visible) return;
+  noteInteract();
+  detailSpinVel.set(0, 0, 0);
+  const y = detailSpin.rotation.y;
+  spinReset = {
+    x0: detailSpin.rotation.x,
+    y0: ((y + Math.PI) % (Math.PI * 2) + Math.PI * 2) % (Math.PI * 2) - Math.PI,
+    t0: performance.now(),
+  };
+  invalidate();
+}
+canvas.addEventListener('dblclick', (e) => {
+  e.preventDefault();
+  resetSpinPose();
+});
 
 /* wheel — gesture-end debounce; never while-loop advances per event */
 function commitWheelGesture() {
@@ -1678,12 +1876,18 @@ function mountSlot(j, meta, closed) {
   slots[j] = { meta, closed, host, present: 0, visible: true };
   const p = j === frontIndex ? frontPresent : 0;
   applySlotPose(slots[j], j, ringAngle, p, 0);
+  measureBookLocalBox(slots[j]);
   invalidate();
 }
 
 function revealBoot() {
   if (bootReady) return;
   bootReady = true;
+  // Precise framing before the first visible frame: fit the real composition
+  // (ring + presented front book) so nothing clips at any aspect.
+  orbitBounds = analyticOrbitBounds() || orbitBounds;
+  fitOrbitCamera();
+  orbitCameraNow();
   bootEl.classList.add('is-done');
   setTimeout(() => bootEl.remove(), 420);
   syncChrome();
@@ -1700,7 +1904,7 @@ async function boot() {
   await document.fonts.ready;
 
   shared = await createSharedResources(THREE, {
-    fontUrl: 'vendor/fonts/dm-sans-latin-500-normal.woff',
+    fontUrl: '/orbit/vendor/fonts/dm-sans-latin-500-normal.woff',
   });
   const catalog = await fetch('./_extract/books-meta.json').then((r) => r.json());
   const order = buildRingOrder(catalog, N);
@@ -1798,6 +2002,13 @@ async function boot() {
     scene,
     camera,
     ringGroup,
+    get orbitBounds() {
+      const b = orbitBounds;
+      return b && { min: b.min.toArray().map((v) => +v.toFixed(1)), max: b.max.toArray().map((v) => +v.toFixed(1)) };
+    },
+    get spinReset() { return spinReset; },
+    get lastTapUp() { return lastTapUp; },
+    get detailSpin() { return detailSpin; },
   };
 }
 
@@ -1914,18 +2125,39 @@ function frame(now) {
     if (state === 'orbit' || state === 'presenting') updateAllPoses({});
   }
 
-  if ((state === 'inspecting' || state === 'reading') && !anim && detailSpinVel.lengthSq() > 0) {
-    detailSpin.rotation.x += detailSpinVel.x;
-    detailSpin.rotation.y += detailSpinVel.y;
-    detailSpin.rotation.x = THREE.MathUtils.clamp(detailSpin.rotation.x, -0.85, 0.85);
-    const damp = Math.exp(-5 * dt);
-    detailSpinVel.multiplyScalar(damp);
-    if (detailSpinVel.lengthSq() < 1e-6) detailSpinVel.set(0, 0, 0);
-    active = true;
+  if ((state === 'inspecting' || state === 'reading') && !anim) {
+    if (spinReset) {
+      const u = clamp01((now - spinReset.t0) / 420);
+      const k = settle(u);
+      detailSpin.rotation.x = spinReset.x0 * (1 - k);
+      detailSpin.rotation.y = spinReset.y0 * (1 - k);
+      if (u >= 1) {
+        spinReset = null;
+        detailSpin.rotation.set(0, 0, 0);
+      }
+      active = true;
+    } else if (!detailDragging && detailSpinVel.lengthSq() > 0) {
+      detailSpin.rotation.x += detailSpinVel.x;
+      detailSpin.rotation.y += detailSpinVel.y;
+      detailSpin.rotation.x = THREE.MathUtils.clamp(detailSpin.rotation.x, -0.85, 0.85);
+      const damp = Math.exp(-5 * dt);
+      detailSpinVel.multiplyScalar(damp);
+      if (detailSpinVel.lengthSq() < 1e-6) detailSpinVel.set(0, 0, 0);
+      active = true;
+    }
   }
 
   if (reader && reader.group.visible) {
     if (reader.update(dt)) active = true;
+    reader.updateFacing(camera);
+    if ((state === 'inspecting' || state === 'reading') && !anim) {
+      active = true;
+      const cov = reader.getState().cover;
+      const wantX = inspectBookX + cov * INSPECT_OPEN_SHIFT;
+      if (Math.abs(detailRoot.position.x - wantX) > 0.001) {
+        detailRoot.position.x = wantX;
+      }
+    }
   }
 
   if (
@@ -1943,6 +2175,8 @@ function frame(now) {
     lastInteract = now;
     advance(1);
   }
+
+  if (sceneDark) updateLamp();
 
   if (active || sceneDirty) {
     renderer.render(scene, camera);

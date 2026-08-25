@@ -28,7 +28,7 @@
 
 .pullcord-knob {
   -webkit-tap-highlight-color: transparent;
-  border-radius: 50%;
+  border-radius: 10px;
 }
 
 .pullcord-knob:active {
