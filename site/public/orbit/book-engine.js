@@ -1450,24 +1450,19 @@ export async function createReaderBook(THREE, shared, options = {}) {
   /* Gold printed-page pipeline (04-text): page ink as real SDF geometry riding
      the deforming leaf surfaces — no see-through doubling on the curl, and
      page 11 prints on the stack cap. The canvas atlas degrades to paper-only
-     and stays as the no-troika fallback. */
-  const FONT_BASE = MAT_BASE.indexOf('/orbit-materials/') === 0
-    ? '/fonts/'
-    : '../site/public/fonts/';
+     and stays as the no-troika fallback.
+     Fonts are base64-embedded as in gold (00-fonts.js) so SDF typesetting
+     never waits on a network font fetch. */
   let textLayer = null;
   {
     const troikaMod = await shared.troikaReady.catch(() => null);
     const troikaApi = troikaMod && (troikaMod.Text ? troikaMod : troikaMod.default || troikaMod);
-    if (troikaApi && typeof window !== 'undefined' && window.BK && window.BK.text) {
+    const fonts = (typeof window !== 'undefined' && window.BK && window.BK.fonts) || null;
+    if (troikaApi && typeof window !== 'undefined' && window.BK && window.BK.text && fonts) {
       try {
         textLayer = window.BK.text.create(THREE, troikaApi, {
           D,
-          fonts: {
-            body: { url: FONT_BASE + 'dmsans-400-normal-latin.woff2' },
-            bodyMedium: { url: FONT_BASE + 'dmsans-600-normal-latin.woff2' },
-            display: { url: FONT_BASE + 'newsreader-400-normal-latin.woff2' },
-            displayItalic: { url: FONT_BASE + 'newsreader-400-italic-latin.woff2' },
-          },
+          fonts,
           printColor: ink,
           envMap: null,
           quality: { sdfGlyphSize: 64, textAniso: 8 },
@@ -1781,37 +1776,36 @@ export async function createReaderBook(THREE, shared, options = {}) {
     for (let i = 0; i < NLEAF; i++) updatePageFacing(i);
   }
 
+  const _pn = new THREE.Vector3(), _pp = new THREE.Vector3(), _pv = new THREE.Vector3();
   function leafInPlay(i) {
-    const s = S;
-    if (s.turning === i) return true;
-    if (s.turned <= 0) return i === 0;
-    if (s.turned >= NLEAF) return false;
-    return i === s.turned || i + 1 === s.turned;
+    if (S.turning >= 0) return i === S.turning || i === S.turning + 1 || i === S.turning - 1;
+    return i === S.turned || i === S.turned - 1;
   }
 
   function updatePageFacing(i) {
-    if (!textLayer) return;
-    const cam = facingCamera;
     const rec = pageRecords[i];
-    if (!rec) return;
+    if (!rec || (!rec.shell0 && !rec.shell1)) return;
+    if (!textLayer) return;
+    const inPlay = leafInPlay(i);
     const lf = leaves[i];
-    const mesh = lf.mesh;
-    const m = mesh.matrixWorld.elements;
-    const viewX = cam ? (cam.position.x - m[12]) * (m[0] * m[5] - m[1] * m[4])
-      + (cam.position.y - m[13]) * (m[1] * m[15] - m[11] * m[4])
-      + (cam.position.z - m[14]) * (m[11] * m[5] - m[15] * m[1]) : 0;
-    const pos = viewX > 0;
-    if (rec.shell1) rec.shell1.group.visible = pos && !leafInPlay(i);
-    if (rec.shell0) rec.shell0.group.visible = !pos && !leafInPlay(i);
+    const k = (Math.floor(lf.nv / 2) * (lf.nu + 1) + Math.floor(lf.nu / 2)) * 3;
+    _pn.set(lf.nrm[k], lf.nrm[k + 1], lf.nrm[k + 2]);
+    _pp.set(lf.pos[k], lf.pos[k + 1], lf.pos[k + 2]);
+    book.localToWorld(_pp);
+    if (!facingCamera) {
+      if (rec.shell0) rec.shell0.group.visible = inPlay;
+      if (rec.shell1) rec.shell1.group.visible = inPlay;
+      return;
+    }
+    _pv.copy(facingCamera.position).sub(_pp);
+    const shell0Faces = _pn.dot(_pv) > 0;
+    if (rec.shell0) rec.shell0.group.visible = inPlay && shell0Faces;
+    if (rec.shell1) rec.shell1.group.visible = inPlay && !shell0Faces;
   }
 
   function refreshLeafText(i) {
-    if (!textLayer) return;
-    const rec = pageRecords[i];
-    if (!rec) return;
-    const lf = leaves[i];
-    if (rec.shell0 && rec.shell0.group.parent === lf.mesh) rec.shell0.group.visible = lf.pos !== null;
-    if (rec.shell1 && rec.shell1.group.parent === lf.mesh) rec.shell1.group.visible = lf.pos !== null;
+    if (pageSurfaces[i]) pageSurfaces[i].refresh();
+    updatePageFacing(i);
   }
 
   function setFacingCamera(cam) {
