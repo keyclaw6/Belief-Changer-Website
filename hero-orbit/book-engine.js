@@ -94,8 +94,8 @@ const PAGE_BUMP = 0.14;
 const ART_BORDER_FRONT = 0.15;
 const ART_BORDER_BACK = 0.52;
 const NLEAF = 5;
-const NU = 96;
-const NV = 36;
+const NU = 132;
+const NV = 52;
 
 /** Verbatim gold settle / pageEase */
 export const settle = (x) => {
