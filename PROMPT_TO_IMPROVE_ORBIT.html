@@ -1,0 +1,2129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Belief Changer — Hero Orbit Overhaul Prompt &amp; Code</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f1115;
+      --card-bg: #161922;
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text: #e6e8ec;
+      --text-muted: #8b92a2;
+      --accent: #3b82f6;
+      --accent-hover: #2563eb;
+      --success: #10b981;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      line-height: 1.6;
+      padding: 32px 20px;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    header {
+      margin-bottom: 28px;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 20px;
+    }
+    .badge {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      background: rgba(59, 130, 246, 0.15);
+      color: #60a5fa;
+      margin-bottom: 12px;
+    }
+    h1 {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 32px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    p.lead {
+      color: var(--text-muted);
+      font-size: 16px;
+    }
+    .action-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 16px;
+      margin: 20px 0 32px 0;
+      position: sticky;
+      top: 16px;
+      z-index: 100;
+      background: rgba(15, 17, 21, 0.95);
+      backdrop-filter: blur(12px);
+      padding: 14px 20px;
+      border-radius: 12px;
+      border: 1px solid var(--card-border);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    button.btn-primary {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      font-size: 15px;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+    button.btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+    }
+    a.btn-secondary {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      text-decoration: none;
+      padding: 12px 20px;
+      font-size: 15px;
+      font-weight: 500;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s;
+    }
+    a.btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.14);
+    }
+    .copy-alert {
+      margin-left: auto;
+      color: var(--success);
+      font-weight: 600;
+      font-size: 14px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    .card h2 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 14px;
+      color: #fff;
+    }
+    .preview-box {
+      width: 100%;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--card-border);
+      background: #000;
+    }
+    .preview-box img {
+      width: 100%;
+      display: block;
+      height: auto;
+    }
+    .prompt-box {
+      background: #0a0c10;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 8px;
+      padding: 20px;
+      font-size: 14px;
+      white-space: pre-wrap;
+      color: #cfd4dc;
+      line-height: 1.7;
+    }
+    pre.code-box {
+      background: #08090c;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 8px;
+      padding: 20px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      overflow-x: auto;
+      max-height: 520px;
+      color: #a5b4fc;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <div class="badge">Master Fable 5.1 Package</div>
+      <h1>Hero Orbit Overhaul &amp; Redesign</h1>
+      <p class="lead">All-in-one file: the strategic prompt, the current 3D visual preview, and the full standalone Three.js code.</p>
+    </header>
+
+    <div class="action-bar">
+      <button class="btn-primary" onclick="copyAll()">
+        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+        Copy Entire Prompt &amp; Code to Clipboard
+      </button>
+      <a class="btn-secondary" href="https://arena.ai/direct?model_a=claude-fable-5.1-high" target="_blank" rel="noopener noreferrer">
+        Open Claude Fable in Arena ↗
+      </a>
+      <span class="copy-alert" id="copyAlert">✓ Copied entire prompt &amp; code to clipboard!</span>
+    </div>
+
+    <div class="card">
+      <h2>1. Current 3D Render (What Fable Will Improve)</h2>
+      <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 12px;">
+        This is the actual component running live. You can also drag-and-drop this image into Fable on Arena if you want it to see the visual flaws directly.
+      </p>
+      <div class="preview-box">
+        <img src="orbit-current-preview.png" alt="Current Render of Hero Orbit">
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>2. Strategic Master Prompt</h2>
+      <div class="prompt-box">You are a world-class Principal Creative Technologist, WebGL graphics engineer, and interaction designer of the caliber seen at Apple design studios and Active Theory.
+
+Below is the standalone HTML code for &quot;The Orbit&quot;, the flagship 3D hero experience of Belief Changer (a quiet, museum-restrained library helping people dismantle habits like smoking, sugar, and compulsive scrolling).
+
+### Current Problems
+1. The 3D books feel somewhat boxy and lack the tangible micro-tactility of real fine-bound cloth and paper hardcovers.
+2. The lighting and contact shadows under the ring feel static rather than physically grounded.
+3. Ring motion and wheel navigation can feel rigid, lacking realistic physical inertia, spring-damped settle, and weight.
+4. The transition between browsing the ring and examining a book up-close needs to feel completely seamless and magical.
+
+### Your Objective
+Analyze and radically elevate this entire experience. You have complete creative and architectural freedom to redesign the scene, rewrite the physics, upgrade shaders and procedural textures, and streamline the interaction model. Take all the time and tokens you need to make it truly impressive and improve this all around.
+
+### Non-Negotiable Boundaries &amp; Requirements
+1. **Self-Contained Executable**: Deliver the entire solution in a single, complete HTML file (incorporating CSS, Three.js from CDN, procedural canvas textures or real cover images if available, and JS). It must run flawlessly out of the box with zero broken asset paths.
+2. **Catalog Fidelity**: Keep the 10 catalog book titles, ground hex colors, and promises intact (The Sugar Trap, The Smoking Trap, The Scrolling Trap, etc.).
+3. **Aesthetic Law**: &quot;Quiet Editorial&quot; — pure, warm, serene, museum-grade restraint. No tacky neon, no jarring particle effects, no gamified UI. The books are physical objects of contemplation.
+4. **Performance**: Rock-solid 60+ FPS on laptops and mobile devices. Minimal draw calls and efficient texture/geometry management.
+5. **Fluid UX**: Natural mouse drag, touch swipes with realistic friction and momentum, mouse wheel navigation that snaps cleanly without trapping page scroll, and smooth click-to-center transitions.
+
+Think deeply through the mathematics, lighting models, and physics before generating the complete, production-ready code.</div>
+    </div>
+
+    <div class="card">
+      <h2>3. Full Standalone HTML / Three.js Code (28,816 characters)</h2>
+      <pre class="code-box"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+  &lt;title&gt;Belief Changer — The Orbit (Standalone)&lt;/title&gt;
+  &lt;style&gt;
+    :root {
+      --canvas: #ffffff;
+      --band: #ebe7df;
+      --hairline: rgba(0, 0, 0, 0.08);
+      --ink: #111111;
+      --ink-secondary: #787774;
+      --action: #111111;
+      --action-hover: #333333;
+      --on-action: #ffffff;
+      --panel-bg: rgba(255, 255, 255, 0.94);
+      --panel-border: rgba(0, 0, 0, 0.08);
+      --shadow-soft: 0 20px 40px -15px rgba(0,0,0,0.07), 0 0 1px rgba(0,0,0,0.1);
+    }
+
+    [data-theme=&quot;dark&quot;] {
+      --canvas: #0e0d0c;
+      --band: #161513;
+      --hairline: rgba(255, 255, 255, 0.08);
+      --ink: #f0ece2;
+      --ink-secondary: #8f8a80;
+      --action: #f0ece2;
+      --action-hover: #ffffff;
+      --on-action: #0e0d0c;
+      --panel-bg: rgba(23, 21, 18, 0.94);
+      --panel-border: rgba(255, 255, 255, 0.09);
+      --shadow-soft: 0 20px 40px -15px rgba(0,0,0,0.5), 0 0 1px rgba(255,255,255,0.1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: var(--canvas);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      user-select: none;
+    }
+
+    #stage {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      cursor: grab;
+      touch-action: none;
+    }
+
+    canvas:active {
+      cursor: grabbing;
+    }
+
+    /* Top Brand Bar */
+    header {
+      position: absolute;
+      top: 28px;
+      left: 36px;
+      right: 36px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .brand {
+      font-size: 19px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      opacity: 0.85;
+    }
+
+    .theme-toggle {
+      pointer-events: auto;
+      background: none;
+      border: 1px solid var(--hairline);
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--ink);
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      background: var(--panel-bg);
+      transition: all 0.2s ease;
+    }
+
+    .theme-toggle:hover {
+      border-color: var(--ink-secondary);
+    }
+
+    /* Floating Navigation Controls */
+    .orbit-controls {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      z-index: 10;
+    }
+
+    .nav-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--hairline);
+      background: var(--panel-bg);
+      backdrop-filter: blur(10px);
+      color: var(--ink);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      box-shadow: var(--shadow-soft);
+      transition: transform 0.15s ease, background 0.2s ease;
+    }
+
+    .nav-btn:hover {
+      transform: scale(1.06);
+    }
+
+    .nav-btn:active {
+      transform: scale(0.95);
+    }
+
+    .nav-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .hint {
+      font-size: 12px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--ink-secondary);
+      pointer-events: none;
+    }
+
+    /* Editorial Presentation Card */
+    #panel {
+      position: absolute;
+      top: 50%;
+      right: clamp(24px, 6vw, 72px);
+      transform: translateY(-50%) translateX(20px);
+      width: min(340px, calc(100vw - 48px));
+      padding: 32px 28px;
+      background: var(--panel-bg);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--panel-border);
+      border-radius: 12px;
+      box-shadow: var(--shadow-soft);
+      z-index: 20;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    #panel.active {
+      opacity: 1;
+      transform: translateY(-50%) translateX(0);
+      pointer-events: auto;
+    }
+
+    #panel .tag {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ink-secondary);
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    #panel h2 {
+      margin: 0 0 12px;
+      font-size: 26px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    #panel .promise {
+      margin: 0 0 24px;
+      font-size: 15px;
+      line-height: 1.55;
+      color: var(--ink);
+      opacity: 0.85;
+    }
+
+    #panel .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    #panel .btn-primary {
+      padding: 13px 18px;
+      background: var(--action);
+      color: var(--on-action);
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      text-align: center;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.2s ease, transform 0.1s ease;
+    }
+
+    #panel .btn-primary:hover {
+      opacity: 0.9;
+    }
+
+    #panel .btn-secondary {
+      padding: 10px 18px;
+      background: transparent;
+      color: var(--ink-secondary);
+      border: 1px solid var(--hairline);
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      text-align: center;
+      cursor: pointer;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    #panel .btn-secondary:hover {
+      color: var(--ink);
+      border-color: var(--ink-secondary);
+    }
+
+    /* Mobile Adaptations */
+    @media (max-width: 768px) {
+      #panel {
+        top: auto;
+        bottom: 96px;
+        right: 20px;
+        left: 20px;
+        width: auto;
+        transform: translateY(20px);
+        padding: 24px 20px;
+      }
+      #panel.active {
+        transform: translateY(0);
+      }
+      .hint { display: none; }
+    }
+  &lt;/style&gt;
+
+  &lt;!-- Three.js from CDN --&gt;
+  &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;div id=&quot;stage&quot;&gt;
+    &lt;header&gt;
+      &lt;div class=&quot;brand&quot;&gt;Belief Changer&lt;/div&gt;
+      &lt;button class=&quot;theme-toggle&quot; id=&quot;themeBtn&quot;&gt;Switch to Dark&lt;/button&gt;
+    &lt;/header&gt;
+
+    &lt;div class=&quot;orbit-controls&quot;&gt;
+      &lt;button class=&quot;nav-btn&quot; id=&quot;prevBtn&quot; aria-label=&quot;Previous book&quot;&gt;
+        &lt;svg viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot;&gt;&lt;polyline points=&quot;15 18 9 12 15 6&quot;&gt;&lt;/polyline&gt;&lt;/svg&gt;
+      &lt;/button&gt;
+      &lt;span class=&quot;hint&quot;&gt;Scroll or Drag Ring&lt;/span&gt;
+      &lt;button class=&quot;nav-btn&quot; id=&quot;nextBtn&quot; aria-label=&quot;Next book&quot;&gt;
+        &lt;svg viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot;&gt;&lt;polyline points=&quot;9 18 15 12 9 6&quot;&gt;&lt;/polyline&gt;&lt;/svg&gt;
+      &lt;/button&gt;
+    &lt;/div&gt;
+
+    &lt;aside id=&quot;panel&quot;&gt;
+      &lt;span class=&quot;tag&quot; id=&quot;panelTag&quot;&gt;Belief Changer · Series 1&lt;/span&gt;
+      &lt;h2 id=&quot;panelTitle&quot;&gt;The Sugar Trap&lt;/h2&gt;
+      &lt;p class=&quot;promise&quot; id=&quot;panelPromise&quot;&gt;The craving is withdrawal wearing the mask of hunger. See it once and it loosens.&lt;/p&gt;
+      &lt;div class=&quot;actions&quot;&gt;
+        &lt;button class=&quot;btn-primary&quot; id=&quot;inspectBtn&quot;&gt;Hold &amp; Examine Book&lt;/button&gt;
+        &lt;button class=&quot;btn-secondary&quot; id=&quot;returnBtn&quot; style=&quot;display: none;&quot;&gt;Return to Orbit&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/aside&gt;
+  &lt;/div&gt;
+
+  &lt;script&gt;
+    /* ==========================================================================
+       CATALOG DEFINITION &amp; SPECIMEN COVER GENERATOR
+       ========================================================================== */
+    const CATALOG = [
+      {
+        slug: &quot;sugar&quot;,
+        title: &quot;The Sugar Trap&quot;,
+        promise: &quot;The craving is withdrawal wearing the mask of hunger. See it once and it loosens.&quot;,
+        caseColor: &quot;#DBD9D8&quot;,
+        ink: &quot;#222222&quot;,
+        objectIcon: &quot;sugar&quot;
+      },
+      {
+        slug: &quot;smoking&quot;,
+        title: &quot;The Smoking Trap&quot;,
+        promise: &quot;It never relaxed you. It created the tension it then relieved.&quot;,
+        caseColor: &quot;#9AA28D&quot;,
+        ink: &quot;#1b211a&quot;,
+        objectIcon: &quot;smoking&quot;
+      },
+      {
+        slug: &quot;scrolling&quot;,
+        title: &quot;The Scrolling Trap&quot;,
+        promise: &quot;When the feed owns your evenings and your attention feels rented. Seeing the loop is the exit.&quot;,
+        caseColor: &quot;#6C8594&quot;,
+        ink: &quot;#f4f3ef&quot;,
+        objectIcon: &quot;phone&quot;
+      },
+      {
+        slug: &quot;porn&quot;,
+        title: &quot;The Porn Trap&quot;,
+        promise: &quot;A promise of intimacy that quietly trains you away from the real thing.&quot;,
+        caseColor: &quot;#CEC7BC&quot;,
+        ink: &quot;#24201c&quot;,
+        objectIcon: &quot;tissue&quot;
+      },
+      {
+        slug: &quot;alcohol&quot;,
+        title: &quot;The Alcohol Trap&quot;,
+        promise: &quot;It borrows tomorrow&#x27;s calm and charges interest tonight.&quot;,
+        caseColor: &quot;#51533B&quot;,
+        ink: &quot;#f4f3ef&quot;,
+        objectIcon: &quot;glass&quot;
+      },
+      {
+        slug: &quot;gaming&quot;,
+        title: &quot;The Gaming Trap&quot;,
+        promise: &quot;Endless progress in a world that leaves you exactly where you started.&quot;,
+        caseColor: &quot;#BFA482&quot;,
+        ink: &quot;#251d14&quot;,
+        objectIcon: &quot;game&quot;
+      },
+      {
+        slug: &quot;junkfood&quot;,
+        title: &quot;The Junk Food Trap&quot;,
+        promise: &quot;Engineered to override the biological signal that says you have had enough.&quot;,
+        caseColor: &quot;#D07452&quot;,
+        ink: &quot;#22130e&quot;,
+        objectIcon: &quot;fry&quot;
+      },
+      {
+        slug: &quot;vaping&quot;,
+        title: &quot;The Vaping Trap&quot;,
+        promise: &quot;The same old chemical hook wrapped in a clean, high-tech package.&quot;,
+        caseColor: &quot;#A7B0A4&quot;,
+        ink: &quot;#18201a&quot;,
+        objectIcon: &quot;vape&quot;
+      },
+      {
+        slug: &quot;overthinking&quot;,
+        title: &quot;The Overthinking Trap&quot;,
+        promise: &quot;The mind promises that just one more mental loop will finally make you safe.&quot;,
+        caseColor: &quot;#C0A09A&quot;,
+        ink: &quot;#221715&quot;,
+        objectIcon: &quot;knot&quot;
+      },
+      {
+        slug: &quot;complaining&quot;,
+        title: &quot;The Complaining Trap&quot;,
+        promise: &quot;Each complaint feels like relief, but quietly deepens the groove of helplessness.&quot;,
+        caseColor: &quot;#E1C5A0&quot;,
+        ink: &quot;#271e13&quot;,
+        objectIcon: &quot;groove&quot;
+      }
+    ];
+
+    /** Generates high-fidelity procedural hardcover canvas textures (Front, Spine, Back) */
+    function generateCoverTexture(item) {
+      const W = 1024;
+      const H = 1480;
+      const canvas = document.createElement(&#x27;canvas&#x27;);
+      canvas.width = W;
+      canvas.height = H;
+      const ctx = canvas.getContext(&#x27;2d&#x27;);
+
+      // Base cloth / matte paper tone
+      ctx.fillStyle = item.caseColor;
+      ctx.fillRect(0, 0, W, H);
+
+      // Micro cloth grain simulation
+      const imgData = ctx.getImageData(0, 0, W, H);
+      const d = imgData.data;
+      for (let i = 0; i &lt; d.length; i += 4) {
+        const noise = (Math.random() - 0.5) * 9;
+        d[i] = Math.min(255, Math.max(0, d[i] + noise));
+        d[i+1] = Math.min(255, Math.max(0, d[i+1] + noise));
+        d[i+2] = Math.min(255, Math.max(0, d[i+2] + noise));
+      }
+      ctx.putImageData(imgData, 0, 0);
+
+      // Subtle vignette / lighting falloff
+      const grad = ctx.createRadialGradient(W * 0.5, H * 0.45, 120, W * 0.5, H * 0.5, W * 0.75);
+      grad.addColorStop(0, &#x27;rgba(255,255,255,0.06)&#x27;);
+      grad.addColorStop(1, &#x27;rgba(0,0,0,0.08)&#x27;);
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, W, H);
+
+      // Editorial typography
+      ctx.fillStyle = item.ink;
+      ctx.textAlign = &#x27;center&#x27;;
+      
+      // Series Mark
+      ctx.font = &#x27;600 22px system-ui, -apple-system, sans-serif&#x27;;
+      ctx.letterSpacing = &#x27;0.12em&#x27;;
+      ctx.fillText(&#x27;BELIEF CHANGER&#x27;, W / 2, 180);
+
+      // Minimalist specimen drawing placeholder
+      ctx.save();
+      ctx.strokeStyle = item.ink;
+      ctx.lineWidth = 3.5;
+      ctx.globalAlpha = 0.75;
+      ctx.beginPath();
+      ctx.arc(W / 2, H * 0.46, 90, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(W / 2, H * 0.46, 6, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+
+      // Title
+      ctx.font = &#x27;700 52px system-ui, -apple-system, sans-serif&#x27;;
+      ctx.letterSpacing = &#x27;-0.02em&#x27;;
+      ctx.fillText(item.title, W / 2, H * 0.74);
+
+      // Subtitle
+      ctx.font = &#x27;400 24px Georgia, serif&#x27;;
+      ctx.fontStyle = &#x27;italic&#x27;;
+      ctx.globalAlpha = 0.7;
+      ctx.fillText(&#x27;A short book of clarity&#x27;, W / 2, H * 0.79);
+
+      const texture = new THREE.CanvasTexture(canvas);
+      texture.anisotropy = 8;
+      return texture;
+    }
+
+    /** Procedural book spine texture */
+    function generateSpineTexture(item) {
+      const W = 256;
+      const H = 1480;
+      const canvas = document.createElement(&#x27;canvas&#x27;);
+      canvas.width = W;
+      canvas.height = H;
+      const ctx = canvas.getContext(&#x27;2d&#x27;);
+
+      ctx.fillStyle = item.caseColor;
+      ctx.fillRect(0, 0, W, H);
+
+      // Spine edge shadow grooves
+      const shadowGrad = ctx.createLinearGradient(0, 0, W, 0);
+      shadowGrad.addColorStop(0, &#x27;rgba(0,0,0,0.22)&#x27;);
+      shadowGrad.addColorStop(0.18, &#x27;rgba(0,0,0,0.03)&#x27;);
+      shadowGrad.addColorStop(0.5, &#x27;rgba(255,255,255,0.08)&#x27;);
+      shadowGrad.addColorStop(0.82, &#x27;rgba(0,0,0,0.03)&#x27;);
+      shadowGrad.addColorStop(1, &#x27;rgba(0,0,0,0.22)&#x27;);
+      ctx.fillStyle = shadowGrad;
+      ctx.fillRect(0, 0, W, H);
+
+      // Vertical spine typography
+      ctx.save();
+      ctx.translate(W / 2, H / 2);
+      ctx.rotate(Math.PI / 2);
+      ctx.fillStyle = item.ink;
+      ctx.textAlign = &#x27;center&#x27;;
+      ctx.font = &#x27;600 34px system-ui, sans-serif&#x27;;
+      ctx.fillText(item.title, 0, 10);
+      ctx.restore();
+
+      const texture = new THREE.CanvasTexture(canvas);
+      texture.anisotropy = 8;
+      return texture;
+    }
+
+    /** Procedural page edge texture with subtle paper signatures */
+    function generatePageBlockTexture() {
+      const W = 512;
+      const H = 256;
+      const canvas = document.createElement(&#x27;canvas&#x27;);
+      canvas.width = W;
+      canvas.height = H;
+      const ctx = canvas.getContext(&#x27;2d&#x27;);
+
+      ctx.fillStyle = &#x27;#f5f0e6&#x27;;
+      ctx.fillRect(0, 0, W, H);
+
+      // Individual page lines
+      ctx.strokeStyle = &#x27;rgba(70, 60, 45, 0.12)&#x27;;
+      ctx.lineWidth = 1;
+      for (let x = 0; x &lt; W; x += 3) {
+        ctx.beginPath();
+        ctx.moveTo(x + (Math.random() - 0.5), 0);
+        ctx.lineTo(x + (Math.random() - 0.5), H);
+        ctx.stroke();
+      }
+
+      // Deeper signature grouping lines
+      ctx.strokeStyle = &#x27;rgba(50, 40, 30, 0.25)&#x27;;
+      ctx.lineWidth = 1.5;
+      for (let x = 0; x &lt; W; x += 24) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, H);
+        ctx.stroke();
+      }
+
+      const texture = new THREE.CanvasTexture(canvas);
+      texture.wrapS = THREE.RepeatWrapping;
+      texture.wrapT = THREE.RepeatWrapping;
+      return texture;
+    }
+
+    const pageBlockTex = generatePageBlockTexture();
+
+    /* ==========================================================================
+       THREE.JS BOOK BUILDER (Photoreal Geometry)
+       ========================================================================== */
+    const BOOK_W = 14.6;
+    const BOOK_H = 21.0;
+    const BOOK_T = 2.4;
+    const BOARD_T = 0.28;
+
+    function createBookMesh(catalogItem) {
+      const bookGroup = new THREE.Group();
+
+      const frontCoverTex = generateCoverTexture(catalogItem);
+      const spineTex = generateSpineTexture(catalogItem);
+
+      // Book cover materials
+      const clothMat = new THREE.MeshStandardMaterial({
+        color: new THREE.Color(catalogItem.caseColor),
+        roughness: 0.82,
+        metalness: 0.04
+      });
+
+      const frontMat = new THREE.MeshStandardMaterial({
+        map: frontCoverTex,
+        roughness: 0.78,
+        metalness: 0.02
+      });
+
+      const spineMat = new THREE.MeshStandardMaterial({
+        map: spineTex,
+        roughness: 0.8,
+        metalness: 0.02
+      });
+
+      const paperMat = new THREE.MeshStandardMaterial({
+        map: pageBlockTex,
+        color: 0xf5f0e6,
+        roughness: 0.95,
+        metalness: 0.0
+      });
+
+      // 1. Textblock (Pages inside)
+      const blockGeo = new THREE.BoxGeometry(BOOK_W - 0.5, BOOK_H - 0.8, BOOK_T - BOARD_T * 2);
+      const blockMat = [
+        paperMat, // right (fore-edge)
+        clothMat, // left (spine back)
+        paperMat, // top
+        paperMat, // bottom
+        clothMat, // front
+        clothMat  // back
+      ];
+      const textblock = new THREE.Mesh(blockGeo, blockMat);
+      textblock.position.set(0.15, 0, 0);
+      textblock.castShadow = true;
+      textblock.receiveShadow = true;
+      bookGroup.add(textblock);
+
+      // 2. Front Board
+      const boardGeo = new THREE.BoxGeometry(BOOK_W, BOOK_H, BOARD_T);
+      const frontBoardMaterials = [
+        clothMat, clothMat, clothMat, clothMat,
+        frontMat, // Front Face
+        clothMat  // Inside Flyleaf
+      ];
+      const frontBoard = new THREE.Mesh(boardGeo, frontBoardMaterials);
+      frontBoard.position.set(0, 0, (BOOK_T - BOARD_T) / 2);
+      frontBoard.castShadow = true;
+      frontBoard.receiveShadow = true;
+      bookGroup.add(frontBoard);
+
+      // 3. Back Board
+      const backBoardMaterials = [
+        clothMat, clothMat, clothMat, clothMat,
+        clothMat, // Inside Flyleaf
+        clothMat  // Back Face
+      ];
+      const backBoard = new THREE.Mesh(boardGeo, backBoardMaterials);
+      backBoard.position.set(0, 0, -(BOOK_T - BOARD_T) / 2);
+      backBoard.castShadow = true;
+      backBoard.receiveShadow = true;
+      bookGroup.add(backBoard);
+
+      // 4. Spine Cover
+      const spineGeo = new THREE.BoxGeometry(BOARD_T, BOOK_H, BOOK_T);
+      const spineMaterials = [
+        clothMat, spineMat, clothMat, clothMat, clothMat, clothMat
+      ];
+      const spine = new THREE.Mesh(spineGeo, spineMaterials);
+      spine.position.set(-BOOK_W / 2, 0, 0);
+      spine.castShadow = true;
+      spine.receiveShadow = true;
+      bookGroup.add(spine);
+
+      bookGroup.userData = { catalog: catalogItem };
+      return bookGroup;
+    }
+
+    /* ==========================================================================
+       SCENE SETUP, STUDIO LIGHTING &amp; ORBIT CHOREOGRAPHY
+       ========================================================================== */
+    const stage = document.getElementById(&#x27;stage&#x27;);
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0xffffff);
+
+    const camera = new THREE.PerspectiveCamera(34, window.innerWidth / window.innerHeight, 1, 1000);
+    camera.position.set(0, 38, 145);
+    camera.lookAt(0, 0, 0);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, powerPreference: &quot;high-performance&quot; });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.1;
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    stage.appendChild(renderer.domElement);
+
+    // Studio Three-Point Lighting
+    const keyLight = new THREE.DirectionalLight(0xffffff, 1.8);
+    keyLight.position.set(-50, 70, 50);
+    keyLight.castShadow = true;
+    keyLight.shadow.mapSize.width = 2048;
+    keyLight.shadow.mapSize.height = 2048;
+    keyLight.shadow.camera.near = 10;
+    keyLight.shadow.camera.far = 250;
+    keyLight.shadow.camera.left = -80;
+    keyLight.shadow.camera.right = 80;
+    keyLight.shadow.camera.top = 80;
+    keyLight.shadow.camera.bottom = -80;
+    keyLight.shadow.bias = -0.0005;
+    scene.add(keyLight);
+
+    const fillLight = new THREE.DirectionalLight(0xffffff, 0.7);
+    fillLight.position.set(60, 40, 40);
+    scene.add(fillLight);
+
+    const rimLight = new THREE.DirectionalLight(0xffffff, 0.5);
+    rimLight.position.set(0, 30, -70);
+    scene.add(rimLight);
+
+    const hemiLight = new THREE.HemisphereLight(0xffffff, 0x555555, 0.85);
+    scene.add(hemiLight);
+
+    // Ground Contact Shadow Plane
+    const shadowCanvas = document.createElement(&#x27;canvas&#x27;);
+    shadowCanvas.width = shadowCanvas.height = 512;
+    const sCtx = shadowCanvas.getContext(&#x27;2d&#x27;);
+    const sGrad = sCtx.createRadialGradient(256, 256, 40, 256, 256, 256);
+    sGrad.addColorStop(0, &#x27;rgba(0,0,0,0.18)&#x27;);
+    sGrad.addColorStop(0.5, &#x27;rgba(0,0,0,0.08)&#x27;);
+    sGrad.addColorStop(1, &#x27;rgba(0,0,0,0)&#x27;);
+    sCtx.fillStyle = sGrad;
+    sCtx.fillRect(0, 0, 512, 512);
+
+    const groundMesh = new THREE.Mesh(
+      new THREE.PlaneGeometry(240, 240),
+      new THREE.MeshBasicMaterial({
+        map: new THREE.CanvasTexture(shadowCanvas),
+        transparent: true,
+        depthWrite: false,
+        opacity: 0.8
+      })
+    );
+    groundMesh.rotation.x = -Math.PI / 2;
+    groundMesh.position.y = -11.5;
+    scene.add(groundMesh);
+
+    /* ==========================================================================
+       THE RING SYSTEM
+       ========================================================================== */
+    const N_SLOTS = 24; // 24 slots across the ring filled cyclically from 10 catalog books
+    const RING_RADIUS = 60;
+    const RING_TILT = THREE.MathUtils.degToRad(9);
+
+    const ringGroup = new THREE.Group();
+    ringGroup.rotation.x = RING_TILT;
+    scene.add(ringGroup);
+
+    const bookSlots = [];
+
+    for (let i = 0; i &lt; N_SLOTS; i++) {
+      const catalogItem = CATALOG[i % CATALOG.length];
+      const bookMesh = createBookMesh(catalogItem);
+      
+      const angle = (i / N_SLOTS) * Math.PI * 2;
+      const x = Math.sin(angle) * RING_RADIUS;
+      const z = Math.cos(angle) * RING_RADIUS;
+
+      const slotHost = new THREE.Group();
+      slotHost.position.set(x, 0, z);
+      // Tangential alignment to ring radius
+      slotHost.rotation.y = angle + Math.PI / 2;
+
+      slotHost.add(bookMesh);
+      ringGroup.add(slotHost);
+
+      bookSlots.push({
+        index: i,
+        catalog: catalogItem,
+        host: slotHost,
+        mesh: bookMesh,
+        angle: angle
+      });
+    }
+
+    /* ==========================================================================
+       INTERACTION, ROTATION &amp; UX PHYSICS
+       ========================================================================== */
+    let ringAngle = 0;
+    let targetAngle = 0;
+    let isDragging = false;
+    let lastPointerX = 0;
+    let pointerVelocity = 0;
+    let currentBookIndex = 0;
+    let inspectMode = false;
+
+    const panel = document.getElementById(&#x27;panel&#x27;);
+    const panelTitle = document.getElementById(&#x27;panelTitle&#x27;);
+    const panelPromise = document.getElementById(&#x27;panelPromise&#x27;);
+    const inspectBtn = document.getElementById(&#x27;inspectBtn&#x27;);
+    const returnBtn = document.getElementById(&#x27;returnBtn&#x27;);
+
+    function updatePresentationCard(index) {
+      const item = CATALOG[((index % CATALOG.length) + CATALOG.length) % CATALOG.length];
+      panelTitle.textContent = item.title;
+      panelPromise.textContent = item.promise;
+      panel.classList.add(&#x27;active&#x27;);
+    }
+
+    function commitNearestSlot() {
+      const step = (Math.PI * 2) / N_SLOTS;
+      const nearestSlot = Math.round(targetAngle / step);
+      targetAngle = nearestSlot * step;
+      currentBookIndex = ((-nearestSlot % N_SLOTS) + N_SLOTS) % N_SLOTS;
+      updatePresentationCard(currentBookIndex);
+    }
+
+    // Pointer / Touch Events
+    window.addEventListener(&#x27;pointerdown&#x27;, (e) =&gt; {
+      if (e.target.closest(&#x27;#panel&#x27;) || e.target.closest(&#x27;header&#x27;) || e.target.closest(&#x27;.orbit-controls&#x27;)) return;
+      isDragging = true;
+      lastPointerX = e.clientX;
+      pointerVelocity = 0;
+    });
+
+    window.addEventListener(&#x27;pointermove&#x27;, (e) =&gt; {
+      if (!isDragging) return;
+      const deltaX = e.clientX - lastPointerX;
+      lastPointerX = e.clientX;
+      const rotDelta = (deltaX / window.innerWidth) * 4.5;
+      targetAngle += rotDelta;
+      pointerVelocity = rotDelta;
+    });
+
+    window.addEventListener(&#x27;pointerup&#x27;, () =&gt; {
+      if (!isDragging) return;
+      isDragging = false;
+      // Add subtle momentum fling
+      targetAngle += pointerVelocity * 3;
+      commitNearestSlot();
+    });
+
+    // Mouse Wheel Navigation
+    let wheelTimeout;
+    window.addEventListener(&#x27;wheel&#x27;, (e) =&gt; {
+      if (inspectMode) return;
+      const step = (Math.PI * 2) / N_SLOTS;
+      targetAngle += Math.sign(e.deltaY) * step;
+      clearTimeout(wheelTimeout);
+      wheelTimeout = setTimeout(commitNearestSlot, 120);
+    }, { passive: true });
+
+    // UI Buttons
+    document.getElementById(&#x27;prevBtn&#x27;).addEventListener(&#x27;click&#x27;, () =&gt; {
+      const step = (Math.PI * 2) / N_SLOTS;
+      targetAngle += step;
+      commitNearestSlot();
+    });
+
+    document.getElementById(&#x27;nextBtn&#x27;).addEventListener(&#x27;click&#x27;, () =&gt; {
+      const step = (Math.PI * 2) / N_SLOTS;
+      targetAngle -= step;
+      commitNearestSlot();
+    });
+
+    // Inspect / Hold Book Mode
+    let inspectedMesh = null;
+    inspectBtn.addEventListener(&#x27;click&#x27;, () =&gt; {
+      inspectMode = true;
+      inspectBtn.style.display = &#x27;none&#x27;;
+      returnBtn.style.display = &#x27;block&#x27;;
+    });
+
+    returnBtn.addEventListener(&#x27;click&#x27;, () =&gt; {
+      inspectMode = false;
+      inspectBtn.style.display = &#x27;block&#x27;;
+      returnBtn.style.display = &#x27;none&#x27;;
+    });
+
+    // Theme Switcher
+    const themeBtn = document.getElementById(&#x27;themeBtn&#x27;);
+    let isDark = false;
+    themeBtn.addEventListener(&#x27;click&#x27;, () =&gt; {
+      isDark = !isDark;
+      document.documentElement.setAttribute(&#x27;data-theme&#x27;, isDark ? &#x27;dark&#x27; : &#x27;light&#x27;);
+      themeBtn.textContent = isDark ? &#x27;Switch to Light&#x27; : &#x27;Switch to Dark&#x27;;
+      scene.background.set(isDark ? 0x0e0d0c : 0xffffff);
+      hemiLight.groundColor.set(isDark ? 0x111111 : 0x555555);
+    });
+
+    // Raycasting for Click-To-Front
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2();
+
+    window.addEventListener(&#x27;click&#x27;, (e) =&gt; {
+      if (isDragging || Math.abs(pointerVelocity) &gt; 0.005) return;
+      if (e.target.closest(&#x27;#panel&#x27;) || e.target.closest(&#x27;header&#x27;) || e.target.closest(&#x27;.orbit-controls&#x27;)) return;
+
+      mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+      mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+      raycaster.setFromCamera(mouse, camera);
+
+      const intersects = raycaster.intersectObjects(ringGroup.children, true);
+      if (intersects.length &gt; 0) {
+        let hit = intersects[0].object;
+        while (hit.parent &amp;&amp; hit.parent !== ringGroup) {
+          hit = hit.parent;
+        }
+        const hitSlot = bookSlots.find(s =&gt; s.host === hit);
+        if (hitSlot) {
+          const step = (Math.PI * 2) / N_SLOTS;
+          targetAngle = -hitSlot.angle;
+          commitNearestSlot();
+        }
+      }
+    });
+
+    // Initialize Presentation
+    commitNearestSlot();
+
+    /* ==========================================================================
+       ANIMATION &amp; RENDER LOOP
+       ========================================================================== */
+    const clock = new THREE.Clock();
+
+    function animate() {
+      requestAnimationFrame(animate);
+
+      // Smooth damped spring interpolation for ring rotation
+      ringAngle += (targetAngle - ringAngle) * 0.1;
+      ringGroup.rotation.y = ringAngle;
+
+      // Dynamic hover/lift and presentation for the front-most book
+      const step = (Math.PI * 2) / N_SLOTS;
+      for (const slot of bookSlots) {
+        const effectiveAngle = ((slot.angle + ringAngle) % (Math.PI * 2) + Math.PI * 2) % (Math.PI * 2);
+        const distFromFront = Math.min(effectiveAngle, Math.PI * 2 - effectiveAngle);
+
+        if (distFromFront &lt; step * 0.8) {
+          // Front presented book: lift out and turn toward camera
+          const t = 1 - (distFromFront / (step * 0.8));
+          slot.mesh.position.y = THREE.MathUtils.lerp(0, 4.5, t);
+          slot.mesh.position.z = THREE.MathUtils.lerp(0, 10, t);
+          slot.mesh.rotation.y = THREE.MathUtils.lerp(0, -Math.PI / 2, t);
+        } else {
+          slot.mesh.position.y = THREE.MathUtils.lerp(slot.mesh.position.y, 0, 0.1);
+          slot.mesh.position.z = THREE.MathUtils.lerp(slot.mesh.position.z, 0, 0.1);
+          slot.mesh.rotation.y = THREE.MathUtils.lerp(slot.mesh.rotation.y, 0, 0.1);
+        }
+      }
+
+      // Inspect camera transition
+      if (inspectMode) {
+        camera.position.lerp(new THREE.Vector3(0, 18, 55), 0.07);
+        camera.lookAt(0, 4, 0);
+      } else {
+        camera.position.lerp(new THREE.Vector3(0, 38, 145), 0.07);
+        camera.lookAt(0, 0, 0);
+      }
+
+      renderer.render(scene, camera);
+    }
+
+    animate();
+
+    // Window Resize
+    window.addEventListener(&#x27;resize&#x27;, () =&gt; {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+    </div>
+  </div>
+
+  <textarea id="rawPayload" style="position: absolute; left: -9999px;">You are a world-class Principal Creative Technologist, WebGL graphics engineer, and interaction designer of the caliber seen at Apple design studios and Active Theory.
+
+Below is the standalone HTML code for &quot;The Orbit&quot;, the flagship 3D hero experience of Belief Changer (a quiet, museum-restrained library helping people dismantle habits like smoking, sugar, and compulsive scrolling).
+
+### Current Problems
+1. The 3D books feel somewhat boxy and lack the tangible micro-tactility of real fine-bound cloth and paper hardcovers.
+2. The lighting and contact shadows under the ring feel static rather than physically grounded.
+3. Ring motion and wheel navigation can feel rigid, lacking realistic physical inertia, spring-damped settle, and weight.
+4. The transition between browsing the ring and examining a book up-close needs to feel completely seamless and magical.
+
+### Your Objective
+Analyze and radically elevate this entire experience. You have complete creative and architectural freedom to redesign the scene, rewrite the physics, upgrade shaders and procedural textures, and streamline the interaction model. Take all the time and tokens you need to make it truly impressive and improve this all around.
+
+### Non-Negotiable Boundaries &amp; Requirements
+1. **Self-Contained Executable**: Deliver the entire solution in a single, complete HTML file (incorporating CSS, Three.js from CDN, procedural canvas textures or real cover images if available, and JS). It must run flawlessly out of the box with zero broken asset paths.
+2. **Catalog Fidelity**: Keep the 10 catalog book titles, ground hex colors, and promises intact (The Sugar Trap, The Smoking Trap, The Scrolling Trap, etc.).
+3. **Aesthetic Law**: &quot;Quiet Editorial&quot; — pure, warm, serene, museum-grade restraint. No tacky neon, no jarring particle effects, no gamified UI. The books are physical objects of contemplation.
+4. **Performance**: Rock-solid 60+ FPS on laptops and mobile devices. Minimal draw calls and efficient texture/geometry management.
+5. **Fluid UX**: Natural mouse drag, touch swipes with realistic friction and momentum, mouse wheel navigation that snaps cleanly without trapping page scroll, and smooth click-to-center transitions.
+
+Think deeply through the mathematics, lighting models, and physics before generating the complete, production-ready code.
+
+CURRENT STANDALONE HTML CODE TO IMPROVE:
+```html
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+  &lt;title&gt;Belief Changer — The Orbit (Standalone)&lt;/title&gt;
+  &lt;style&gt;
+    :root {
+      --canvas: #ffffff;
+      --band: #ebe7df;
+      --hairline: rgba(0, 0, 0, 0.08);
+      --ink: #111111;
+      --ink-secondary: #787774;
+      --action: #111111;
+      --action-hover: #333333;
+      --on-action: #ffffff;
+      --panel-bg: rgba(255, 255, 255, 0.94);
+      --panel-border: rgba(0, 0, 0, 0.08);
+      --shadow-soft: 0 20px 40px -15px rgba(0,0,0,0.07), 0 0 1px rgba(0,0,0,0.1);
+    }
+
+    [data-theme=&quot;dark&quot;] {
+      --canvas: #0e0d0c;
+      --band: #161513;
+      --hairline: rgba(255, 255, 255, 0.08);
+      --ink: #f0ece2;
+      --ink-secondary: #8f8a80;
+      --action: #f0ece2;
+      --action-hover: #ffffff;
+      --on-action: #0e0d0c;
+      --panel-bg: rgba(23, 21, 18, 0.94);
+      --panel-border: rgba(255, 255, 255, 0.09);
+      --shadow-soft: 0 20px 40px -15px rgba(0,0,0,0.5), 0 0 1px rgba(255,255,255,0.1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: var(--canvas);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      user-select: none;
+    }
+
+    #stage {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      cursor: grab;
+      touch-action: none;
+    }
+
+    canvas:active {
+      cursor: grabbing;
+    }
+
+    /* Top Brand Bar */
+    header {
+      position: absolute;
+      top: 28px;
+      left: 36px;
+      right: 36px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .brand {
+      font-size: 19px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      opacity: 0.85;
+    }
+
+    .theme-toggle {
+      pointer-events: auto;
+      background: none;
+      border: 1px solid var(--hairline);
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--ink);
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      background: var(--panel-bg);
+      transition: all 0.2s ease;
+    }
+
+    .theme-toggle:hover {
+      border-color: var(--ink-secondary);
+    }
+
+    /* Floating Navigation Controls */
+    .orbit-controls {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      z-index: 10;
+    }
+
+    .nav-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--hairline);
+      background: var(--panel-bg);
+      backdrop-filter: blur(10px);
+      color: var(--ink);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      box-shadow: var(--shadow-soft);
+      transition: transform 0.15s ease, background 0.2s ease;
+    }
+
+    .nav-btn:hover {
+      transform: scale(1.06);
+    }
+
+    .nav-btn:active {
+      transform: scale(0.95);
+    }
+
+    .nav-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .hint {
+      font-size: 12px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--ink-secondary);
+      pointer-events: none;
+    }
+
+    /* Editorial Presentation Card */
+    #panel {
+      position: absolute;
+      top: 50%;
+      right: clamp(24px, 6vw, 72px);
+      transform: translateY(-50%) translateX(20px);
+      width: min(340px, calc(100vw - 48px));
+      padding: 32px 28px;
+      background: var(--panel-bg);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--panel-border);
+      border-radius: 12px;
+      box-shadow: var(--shadow-soft);
+      z-index: 20;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    #panel.active {
+      opacity: 1;
+      transform: translateY(-50%) translateX(0);
+      pointer-events: auto;
+    }
+
+    #panel .tag {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ink-secondary);
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    #panel h2 {
+      margin: 0 0 12px;
+      font-size: 26px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    #panel .promise {
+      margin: 0 0 24px;
+      font-size: 15px;
+      line-height: 1.55;
+      color: var(--ink);
+      opacity: 0.85;
+    }
+
+    #panel .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    #panel .btn-primary {
+      padding: 13px 18px;
+      background: var(--action);
+      color: var(--on-action);
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      text-align: center;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.2s ease, transform 0.1s ease;
+    }
+
+    #panel .btn-primary:hover {
+      opacity: 0.9;
+    }
+
+    #panel .btn-secondary {
+      padding: 10px 18px;
+      background: transparent;
+      color: var(--ink-secondary);
+      border: 1px solid var(--hairline);
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      text-align: center;
+      cursor: pointer;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    #panel .btn-secondary:hover {
+      color: var(--ink);
+      border-color: var(--ink-secondary);
+    }
+
+    /* Mobile Adaptations */
+    @media (max-width: 768px) {
+      #panel {
+        top: auto;
+        bottom: 96px;
+        right: 20px;
+        left: 20px;
+        width: auto;
+        transform: translateY(20px);
+        padding: 24px 20px;
+      }
+      #panel.active {
+        transform: translateY(0);
+      }
+      .hint { display: none; }
+    }
+  &lt;/style&gt;
+
+  &lt;!-- Three.js from CDN --&gt;
+  &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;div id=&quot;stage&quot;&gt;
+    &lt;header&gt;
+      &lt;div class=&quot;brand&quot;&gt;Belief Changer&lt;/div&gt;
+      &lt;button class=&quot;theme-toggle&quot; id=&quot;themeBtn&quot;&gt;Switch to Dark&lt;/button&gt;
+    &lt;/header&gt;
+
+    &lt;div class=&quot;orbit-controls&quot;&gt;
+      &lt;button class=&quot;nav-btn&quot; id=&quot;prevBtn&quot; aria-label=&quot;Previous book&quot;&gt;
+        &lt;svg viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot;&gt;&lt;polyline points=&quot;15 18 9 12 15 6&quot;&gt;&lt;/polyline&gt;&lt;/svg&gt;
+      &lt;/button&gt;
+      &lt;span class=&quot;hint&quot;&gt;Scroll or Drag Ring&lt;/span&gt;
+      &lt;button class=&quot;nav-btn&quot; id=&quot;nextBtn&quot; aria-label=&quot;Next book&quot;&gt;
+        &lt;svg viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot;&gt;&lt;polyline points=&quot;9 18 15 12 9 6&quot;&gt;&lt;/polyline&gt;&lt;/svg&gt;
+      &lt;/button&gt;
+    &lt;/div&gt;
+
+    &lt;aside id=&quot;panel&quot;&gt;
+      &lt;span class=&quot;tag&quot; id=&quot;panelTag&quot;&gt;Belief Changer · Series 1&lt;/span&gt;
+      &lt;h2 id=&quot;panelTitle&quot;&gt;The Sugar Trap&lt;/h2&gt;
+      &lt;p class=&quot;promise&quot; id=&quot;panelPromise&quot;&gt;The craving is withdrawal wearing the mask of hunger. See it once and it loosens.&lt;/p&gt;
+      &lt;div class=&quot;actions&quot;&gt;
+        &lt;button class=&quot;btn-primary&quot; id=&quot;inspectBtn&quot;&gt;Hold &amp; Examine Book&lt;/button&gt;
+        &lt;button class=&quot;btn-secondary&quot; id=&quot;returnBtn&quot; style=&quot;display: none;&quot;&gt;Return to Orbit&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/aside&gt;
+  &lt;/div&gt;
+
+  &lt;script&gt;
+    /* ==========================================================================
+       CATALOG DEFINITION &amp; SPECIMEN COVER GENERATOR
+       ========================================================================== */
+    const CATALOG = [
+      {
+        slug: &quot;sugar&quot;,
+        title: &quot;The Sugar Trap&quot;,
+        promise: &quot;The craving is withdrawal wearing the mask of hunger. See it once and it loosens.&quot;,
+        caseColor: &quot;#DBD9D8&quot;,
+        ink: &quot;#222222&quot;,
+        objectIcon: &quot;sugar&quot;
+      },
+      {
+        slug: &quot;smoking&quot;,
+        title: &quot;The Smoking Trap&quot;,
+        promise: &quot;It never relaxed you. It created the tension it then relieved.&quot;,
+        caseColor: &quot;#9AA28D&quot;,
+        ink: &quot;#1b211a&quot;,
+        objectIcon: &quot;smoking&quot;
+      },
+      {
+        slug: &quot;scrolling&quot;,
+        title: &quot;The Scrolling Trap&quot;,
+        promise: &quot;When the feed owns your evenings and your attention feels rented. Seeing the loop is the exit.&quot;,
+        caseColor: &quot;#6C8594&quot;,
+        ink: &quot;#f4f3ef&quot;,
+        objectIcon: &quot;phone&quot;
+      },
+      {
+        slug: &quot;porn&quot;,
+        title: &quot;The Porn Trap&quot;,
+        promise: &quot;A promise of intimacy that quietly trains you away from the real thing.&quot;,
+        caseColor: &quot;#CEC7BC&quot;,
+        ink: &quot;#24201c&quot;,
+        objectIcon: &quot;tissue&quot;
+      },
+      {
+        slug: &quot;alcohol&quot;,
+        title: &quot;The Alcohol Trap&quot;,
+        promise: &quot;It borrows tomorrow&#x27;s calm and charges interest tonight.&quot;,
+        caseColor: &quot;#51533B&quot;,
+        ink: &quot;#f4f3ef&quot;,
+        objectIcon: &quot;glass&quot;
+      },
+      {
+        slug: &quot;gaming&quot;,
+        title: &quot;The Gaming Trap&quot;,
+        promise: &quot;Endless progress in a world that leaves you exactly where you started.&quot;,
+        caseColor: &quot;#BFA482&quot;,
+        ink: &quot;#251d14&quot;,
+        objectIcon: &quot;game&quot;
+      },
+      {
+        slug: &quot;junkfood&quot;,
+        title: &quot;The Junk Food Trap&quot;,
+        promise: &quot;Engineered to override the biological signal that says you have had enough.&quot;,
+        caseColor: &quot;#D07452&quot;,
+        ink: &quot;#22130e&quot;,
+        objectIcon: &quot;fry&quot;
+      },
+      {
+        slug: &quot;vaping&quot;,
+        title: &quot;The Vaping Trap&quot;,
+        promise: &quot;The same old chemical hook wrapped in a clean, high-tech package.&quot;,
+        caseColor: &quot;#A7B0A4&quot;,
+        ink: &quot;#18201a&quot;,
+        objectIcon: &quot;vape&quot;
+      },
+      {
+        slug: &quot;overthinking&quot;,
+        title: &quot;The Overthinking Trap&quot;,
+        promise: &quot;The mind promises that just one more mental loop will finally make you safe.&quot;,
+        caseColor: &quot;#C0A09A&quot;,
+        ink: &quot;#221715&quot;,
+        objectIcon: &quot;knot&quot;
+      },
+      {
+        slug: &quot;complaining&quot;,
+        title: &quot;The Complaining Trap&quot;,
+        promise: &quot;Each complaint feels like relief, but quietly deepens the groove of helplessness.&quot;,
+        caseColor: &quot;#E1C5A0&quot;,
+        ink: &quot;#271e13&quot;,
+        objectIcon: &quot;groove&quot;
+      }
+    ];
+
+    /** Generates high-fidelity procedural hardcover canvas textures (Front, Spine, Back) */
+    function generateCoverTexture(item) {
+      const W = 1024;
+      const H = 1480;
+      const canvas = document.createElement(&#x27;canvas&#x27;);
+      canvas.width = W;
+      canvas.height = H;
+      const ctx = canvas.getContext(&#x27;2d&#x27;);
+
+      // Base cloth / matte paper tone
+      ctx.fillStyle = item.caseColor;
+      ctx.fillRect(0, 0, W, H);
+
+      // Micro cloth grain simulation
+      const imgData = ctx.getImageData(0, 0, W, H);
+      const d = imgData.data;
+      for (let i = 0; i &lt; d.length; i += 4) {
+        const noise = (Math.random() - 0.5) * 9;
+        d[i] = Math.min(255, Math.max(0, d[i] + noise));
+        d[i+1] = Math.min(255, Math.max(0, d[i+1] + noise));
+        d[i+2] = Math.min(255, Math.max(0, d[i+2] + noise));
+      }
+      ctx.putImageData(imgData, 0, 0);
+
+      // Subtle vignette / lighting falloff
+      const grad = ctx.createRadialGradient(W * 0.5, H * 0.45, 120, W * 0.5, H * 0.5, W * 0.75);
+      grad.addColorStop(0, &#x27;rgba(255,255,255,0.06)&#x27;);
+      grad.addColorStop(1, &#x27;rgba(0,0,0,0.08)&#x27;);
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, W, H);
+
+      // Editorial typography
+      ctx.fillStyle = item.ink;
+      ctx.textAlign = &#x27;center&#x27;;
+      
+      // Series Mark
+      ctx.font = &#x27;600 22px system-ui, -apple-system, sans-serif&#x27;;
+      ctx.letterSpacing = &#x27;0.12em&#x27;;
+      ctx.fillText(&#x27;BELIEF CHANGER&#x27;, W / 2, 180);
+
+      // Minimalist specimen drawing placeholder
+      ctx.save();
+      ctx.strokeStyle = item.ink;
+      ctx.lineWidth = 3.5;
+      ctx.globalAlpha = 0.75;
+      ctx.beginPath();
+      ctx.arc(W / 2, H * 0.46, 90, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(W / 2, H * 0.46, 6, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+
+      // Title
+      ctx.font = &#x27;700 52px system-ui, -apple-system, sans-serif&#x27;;
+      ctx.letterSpacing = &#x27;-0.02em&#x27;;
+      ctx.fillText(item.title, W / 2, H * 0.74);
+
+      // Subtitle
+      ctx.font = &#x27;400 24px Georgia, serif&#x27;;
+      ctx.fontStyle = &#x27;italic&#x27;;
+      ctx.globalAlpha = 0.7;
+      ctx.fillText(&#x27;A short book of clarity&#x27;, W / 2, H * 0.79);
+
+      const texture = new THREE.CanvasTexture(canvas);
+      texture.anisotropy = 8;
+      return texture;
+    }
+
+    /** Procedural book spine texture */
+    function generateSpineTexture(item) {
+      const W = 256;
+      const H = 1480;
+      const canvas = document.createElement(&#x27;canvas&#x27;);
+      canvas.width = W;
+      canvas.height = H;
+      const ctx = canvas.getContext(&#x27;2d&#x27;);
+
+      ctx.fillStyle = item.caseColor;
+      ctx.fillRect(0, 0, W, H);
+
+      // Spine edge shadow grooves
+      const shadowGrad = ctx.createLinearGradient(0, 0, W, 0);
+      shadowGrad.addColorStop(0, &#x27;rgba(0,0,0,0.22)&#x27;);
+      shadowGrad.addColorStop(0.18, &#x27;rgba(0,0,0,0.03)&#x27;);
+      shadowGrad.addColorStop(0.5, &#x27;rgba(255,255,255,0.08)&#x27;);
+      shadowGrad.addColorStop(0.82, &#x27;rgba(0,0,0,0.03)&#x27;);
+      shadowGrad.addColorStop(1, &#x27;rgba(0,0,0,0.22)&#x27;);
+      ctx.fillStyle = shadowGrad;
+      ctx.fillRect(0, 0, W, H);
+
+      // Vertical spine typography
+      ctx.save();
+      ctx.translate(W / 2, H / 2);
+      ctx.rotate(Math.PI / 2);
+      ctx.fillStyle = item.ink;
+      ctx.textAlign = &#x27;center&#x27;;
+      ctx.font = &#x27;600 34px system-ui, sans-serif&#x27;;
+      ctx.fillText(item.title, 0, 10);
+      ctx.restore();
+
+      const texture = new THREE.CanvasTexture(canvas);
+      texture.anisotropy = 8;
+      return texture;
+    }
+
+    /** Procedural page edge texture with subtle paper signatures */
+    function generatePageBlockTexture() {
+      const W = 512;
+      const H = 256;
+      const canvas = document.createElement(&#x27;canvas&#x27;);
+      canvas.width = W;
+      canvas.height = H;
+      const ctx = canvas.getContext(&#x27;2d&#x27;);
+
+      ctx.fillStyle = &#x27;#f5f0e6&#x27;;
+      ctx.fillRect(0, 0, W, H);
+
+      // Individual page lines
+      ctx.strokeStyle = &#x27;rgba(70, 60, 45, 0.12)&#x27;;
+      ctx.lineWidth = 1;
+      for (let x = 0; x &lt; W; x += 3) {
+        ctx.beginPath();
+        ctx.moveTo(x + (Math.random() - 0.5), 0);
+        ctx.lineTo(x + (Math.random() - 0.5), H);
+        ctx.stroke();
+      }
+
+      // Deeper signature grouping lines
+      ctx.strokeStyle = &#x27;rgba(50, 40, 30, 0.25)&#x27;;
+      ctx.lineWidth = 1.5;
+      for (let x = 0; x &lt; W; x += 24) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, H);
+        ctx.stroke();
+      }
+
+      const texture = new THREE.CanvasTexture(canvas);
+      texture.wrapS = THREE.RepeatWrapping;
+      texture.wrapT = THREE.RepeatWrapping;
+      return texture;
+    }
+
+    const pageBlockTex = generatePageBlockTexture();
+
+    /* ==========================================================================
+       THREE.JS BOOK BUILDER (Photoreal Geometry)
+       ========================================================================== */
+    const BOOK_W = 14.6;
+    const BOOK_H = 21.0;
+    const BOOK_T = 2.4;
+    const BOARD_T = 0.28;
+
+    function createBookMesh(catalogItem) {
+      const bookGroup = new THREE.Group();
+
+      const frontCoverTex = generateCoverTexture(catalogItem);
+      const spineTex = generateSpineTexture(catalogItem);
+
+      // Book cover materials
+      const clothMat = new THREE.MeshStandardMaterial({
+        color: new THREE.Color(catalogItem.caseColor),
+        roughness: 0.82,
+        metalness: 0.04
+      });
+
+      const frontMat = new THREE.MeshStandardMaterial({
+        map: frontCoverTex,
+        roughness: 0.78,
+        metalness: 0.02
+      });
+
+      const spineMat = new THREE.MeshStandardMaterial({
+        map: spineTex,
+        roughness: 0.8,
+        metalness: 0.02
+      });
+
+      const paperMat = new THREE.MeshStandardMaterial({
+        map: pageBlockTex,
+        color: 0xf5f0e6,
+        roughness: 0.95,
+        metalness: 0.0
+      });
+
+      // 1. Textblock (Pages inside)
+      const blockGeo = new THREE.BoxGeometry(BOOK_W - 0.5, BOOK_H - 0.8, BOOK_T - BOARD_T * 2);
+      const blockMat = [
+        paperMat, // right (fore-edge)
+        clothMat, // left (spine back)
+        paperMat, // top
+        paperMat, // bottom
+        clothMat, // front
+        clothMat  // back
+      ];
+      const textblock = new THREE.Mesh(blockGeo, blockMat);
+      textblock.position.set(0.15, 0, 0);
+      textblock.castShadow = true;
+      textblock.receiveShadow = true;
+      bookGroup.add(textblock);
+
+      // 2. Front Board
+      const boardGeo = new THREE.BoxGeometry(BOOK_W, BOOK_H, BOARD_T);
+      const frontBoardMaterials = [
+        clothMat, clothMat, clothMat, clothMat,
+        frontMat, // Front Face
+        clothMat  // Inside Flyleaf
+      ];
+      const frontBoard = new THREE.Mesh(boardGeo, frontBoardMaterials);
+      frontBoard.position.set(0, 0, (BOOK_T - BOARD_T) / 2);
+      frontBoard.castShadow = true;
+      frontBoard.receiveShadow = true;
+      bookGroup.add(frontBoard);
+
+      // 3. Back Board
+      const backBoardMaterials = [
+        clothMat, clothMat, clothMat, clothMat,
+        clothMat, // Inside Flyleaf
+        clothMat  // Back Face
+      ];
+      const backBoard = new THREE.Mesh(boardGeo, backBoardMaterials);
+      backBoard.position.set(0, 0, -(BOOK_T - BOARD_T) / 2);
+      backBoard.castShadow = true;
+      backBoard.receiveShadow = true;
+      bookGroup.add(backBoard);
+
+      // 4. Spine Cover
+      const spineGeo = new THREE.BoxGeometry(BOARD_T, BOOK_H, BOOK_T);
+      const spineMaterials = [
+        clothMat, spineMat, clothMat, clothMat, clothMat, clothMat
+      ];
+      const spine = new THREE.Mesh(spineGeo, spineMaterials);
+      spine.position.set(-BOOK_W / 2, 0, 0);
+      spine.castShadow = true;
+      spine.receiveShadow = true;
+      bookGroup.add(spine);
+
+      bookGroup.userData = { catalog: catalogItem };
+      return bookGroup;
+    }
+
+    /* ==========================================================================
+       SCENE SETUP, STUDIO LIGHTING &amp; ORBIT CHOREOGRAPHY
+       ========================================================================== */
+    const stage = document.getElementById(&#x27;stage&#x27;);
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0xffffff);
+
+    const camera = new THREE.PerspectiveCamera(34, window.innerWidth / window.innerHeight, 1, 1000);
+    camera.position.set(0, 38, 145);
+    camera.lookAt(0, 0, 0);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, powerPreference: &quot;high-performance&quot; });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.1;
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    stage.appendChild(renderer.domElement);
+
+    // Studio Three-Point Lighting
+    const keyLight = new THREE.DirectionalLight(0xffffff, 1.8);
+    keyLight.position.set(-50, 70, 50);
+    keyLight.castShadow = true;
+    keyLight.shadow.mapSize.width = 2048;
+    keyLight.shadow.mapSize.height = 2048;
+    keyLight.shadow.camera.near = 10;
+    keyLight.shadow.camera.far = 250;
+    keyLight.shadow.camera.left = -80;
+    keyLight.shadow.camera.right = 80;
+    keyLight.shadow.camera.top = 80;
+    keyLight.shadow.camera.bottom = -80;
+    keyLight.shadow.bias = -0.0005;
+    scene.add(keyLight);
+
+    const fillLight = new THREE.DirectionalLight(0xffffff, 0.7);
+    fillLight.position.set(60, 40, 40);
+    scene.add(fillLight);
+
+    const rimLight = new THREE.DirectionalLight(0xffffff, 0.5);
+    rimLight.position.set(0, 30, -70);
+    scene.add(rimLight);
+
+    const hemiLight = new THREE.HemisphereLight(0xffffff, 0x555555, 0.85);
+    scene.add(hemiLight);
+
+    // Ground Contact Shadow Plane
+    const shadowCanvas = document.createElement(&#x27;canvas&#x27;);
+    shadowCanvas.width = shadowCanvas.height = 512;
+    const sCtx = shadowCanvas.getContext(&#x27;2d&#x27;);
+    const sGrad = sCtx.createRadialGradient(256, 256, 40, 256, 256, 256);
+    sGrad.addColorStop(0, &#x27;rgba(0,0,0,0.18)&#x27;);
+    sGrad.addColorStop(0.5, &#x27;rgba(0,0,0,0.08)&#x27;);
+    sGrad.addColorStop(1, &#x27;rgba(0,0,0,0)&#x27;);
+    sCtx.fillStyle = sGrad;
+    sCtx.fillRect(0, 0, 512, 512);
+
+    const groundMesh = new THREE.Mesh(
+      new THREE.PlaneGeometry(240, 240),
+      new THREE.MeshBasicMaterial({
+        map: new THREE.CanvasTexture(shadowCanvas),
+        transparent: true,
+        depthWrite: false,
+        opacity: 0.8
+      })
+    );
+    groundMesh.rotation.x = -Math.PI / 2;
+    groundMesh.position.y = -11.5;
+    scene.add(groundMesh);
+
+    /* ==========================================================================
+       THE RING SYSTEM
+       ========================================================================== */
+    const N_SLOTS = 24; // 24 slots across the ring filled cyclically from 10 catalog books
+    const RING_RADIUS = 60;
+    const RING_TILT = THREE.MathUtils.degToRad(9);
+
+    const ringGroup = new THREE.Group();
+    ringGroup.rotation.x = RING_TILT;
+    scene.add(ringGroup);
+
+    const bookSlots = [];
+
+    for (let i = 0; i &lt; N_SLOTS; i++) {
+      const catalogItem = CATALOG[i % CATALOG.length];
+      const bookMesh = createBookMesh(catalogItem);
+      
+      const angle = (i / N_SLOTS) * Math.PI * 2;
+      const x = Math.sin(angle) * RING_RADIUS;
+      const z = Math.cos(angle) * RING_RADIUS;
+
+      const slotHost = new THREE.Group();
+      slotHost.position.set(x, 0, z);
+      // Tangential alignment to ring radius
+      slotHost.rotation.y = angle + Math.PI / 2;
+
+      slotHost.add(bookMesh);
+      ringGroup.add(slotHost);
+
+      bookSlots.push({
+        index: i,
+        catalog: catalogItem,
+        host: slotHost,
+        mesh: bookMesh,
+        angle: angle
+      });
+    }
+
+    /* ==========================================================================
+       INTERACTION, ROTATION &amp; UX PHYSICS
+       ========================================================================== */
+    let ringAngle = 0;
+    let targetAngle = 0;
+    let isDragging = false;
+    let lastPointerX = 0;
+    let pointerVelocity = 0;
+    let currentBookIndex = 0;
+    let inspectMode = false;
+
+    const panel = document.getElementById(&#x27;panel&#x27;);
+    const panelTitle = document.getElementById(&#x27;panelTitle&#x27;);
+    const panelPromise = document.getElementById(&#x27;panelPromise&#x27;);
+    const inspectBtn = document.getElementById(&#x27;inspectBtn&#x27;);
+    const returnBtn = document.getElementById(&#x27;returnBtn&#x27;);
+
+    function updatePresentationCard(index) {
+      const item = CATALOG[((index % CATALOG.length) + CATALOG.length) % CATALOG.length];
+      panelTitle.textContent = item.title;
+      panelPromise.textContent = item.promise;
+      panel.classList.add(&#x27;active&#x27;);
+    }
+
+    function commitNearestSlot() {
+      const step = (Math.PI * 2) / N_SLOTS;
+      const nearestSlot = Math.round(targetAngle / step);
+      targetAngle = nearestSlot * step;
+      currentBookIndex = ((-nearestSlot % N_SLOTS) + N_SLOTS) % N_SLOTS;
+      updatePresentationCard(currentBookIndex);
+    }
+
+    // Pointer / Touch Events
+    window.addEventListener(&#x27;pointerdown&#x27;, (e) =&gt; {
+      if (e.target.closest(&#x27;#panel&#x27;) || e.target.closest(&#x27;header&#x27;) || e.target.closest(&#x27;.orbit-controls&#x27;)) return;
+      isDragging = true;
+      lastPointerX = e.clientX;
+      pointerVelocity = 0;
+    });
+
+    window.addEventListener(&#x27;pointermove&#x27;, (e) =&gt; {
+      if (!isDragging) return;
+      const deltaX = e.clientX - lastPointerX;
+      lastPointerX = e.clientX;
+      const rotDelta = (deltaX / window.innerWidth) * 4.5;
+      targetAngle += rotDelta;
+      pointerVelocity = rotDelta;
+    });
+
+    window.addEventListener(&#x27;pointerup&#x27;, () =&gt; {
+      if (!isDragging) return;
+      isDragging = false;
+      // Add subtle momentum fling
+      targetAngle += pointerVelocity * 3;
+      commitNearestSlot();
+    });
+
+    // Mouse Wheel Navigation
+    let wheelTimeout;
+    window.addEventListener(&#x27;wheel&#x27;, (e) =&gt; {
+      if (inspectMode) return;
+      const step = (Math.PI * 2) / N_SLOTS;
+      targetAngle += Math.sign(e.deltaY) * step;
+      clearTimeout(wheelTimeout);
+      wheelTimeout = setTimeout(commitNearestSlot, 120);
+    }, { passive: true });
+
+    // UI Buttons
+    document.getElementById(&#x27;prevBtn&#x27;).addEventListener(&#x27;click&#x27;, () =&gt; {
+      const step = (Math.PI * 2) / N_SLOTS;
+      targetAngle += step;
+      commitNearestSlot();
+    });
+
+    document.getElementById(&#x27;nextBtn&#x27;).addEventListener(&#x27;click&#x27;, () =&gt; {
+      const step = (Math.PI * 2) / N_SLOTS;
+      targetAngle -= step;
+      commitNearestSlot();
+    });
+
+    // Inspect / Hold Book Mode
+    let inspectedMesh = null;
+    inspectBtn.addEventListener(&#x27;click&#x27;, () =&gt; {
+      inspectMode = true;
+      inspectBtn.style.display = &#x27;none&#x27;;
+      returnBtn.style.display = &#x27;block&#x27;;
+    });
+
+    returnBtn.addEventListener(&#x27;click&#x27;, () =&gt; {
+      inspectMode = false;
+      inspectBtn.style.display = &#x27;block&#x27;;
+      returnBtn.style.display = &#x27;none&#x27;;
+    });
+
+    // Theme Switcher
+    const themeBtn = document.getElementById(&#x27;themeBtn&#x27;);
+    let isDark = false;
+    themeBtn.addEventListener(&#x27;click&#x27;, () =&gt; {
+      isDark = !isDark;
+      document.documentElement.setAttribute(&#x27;data-theme&#x27;, isDark ? &#x27;dark&#x27; : &#x27;light&#x27;);
+      themeBtn.textContent = isDark ? &#x27;Switch to Light&#x27; : &#x27;Switch to Dark&#x27;;
+      scene.background.set(isDark ? 0x0e0d0c : 0xffffff);
+      hemiLight.groundColor.set(isDark ? 0x111111 : 0x555555);
+    });
+
+    // Raycasting for Click-To-Front
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2();
+
+    window.addEventListener(&#x27;click&#x27;, (e) =&gt; {
+      if (isDragging || Math.abs(pointerVelocity) &gt; 0.005) return;
+      if (e.target.closest(&#x27;#panel&#x27;) || e.target.closest(&#x27;header&#x27;) || e.target.closest(&#x27;.orbit-controls&#x27;)) return;
+
+      mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+      mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+      raycaster.setFromCamera(mouse, camera);
+
+      const intersects = raycaster.intersectObjects(ringGroup.children, true);
+      if (intersects.length &gt; 0) {
+        let hit = intersects[0].object;
+        while (hit.parent &amp;&amp; hit.parent !== ringGroup) {
+          hit = hit.parent;
+        }
+        const hitSlot = bookSlots.find(s =&gt; s.host === hit);
+        if (hitSlot) {
+          const step = (Math.PI * 2) / N_SLOTS;
+          targetAngle = -hitSlot.angle;
+          commitNearestSlot();
+        }
+      }
+    });
+
+    // Initialize Presentation
+    commitNearestSlot();
+
+    /* ==========================================================================
+       ANIMATION &amp; RENDER LOOP
+       ========================================================================== */
+    const clock = new THREE.Clock();
+
+    function animate() {
+      requestAnimationFrame(animate);
+
+      // Smooth damped spring interpolation for ring rotation
+      ringAngle += (targetAngle - ringAngle) * 0.1;
+      ringGroup.rotation.y = ringAngle;
+
+      // Dynamic hover/lift and presentation for the front-most book
+      const step = (Math.PI * 2) / N_SLOTS;
+      for (const slot of bookSlots) {
+        const effectiveAngle = ((slot.angle + ringAngle) % (Math.PI * 2) + Math.PI * 2) % (Math.PI * 2);
+        const distFromFront = Math.min(effectiveAngle, Math.PI * 2 - effectiveAngle);
+
+        if (distFromFront &lt; step * 0.8) {
+          // Front presented book: lift out and turn toward camera
+          const t = 1 - (distFromFront / (step * 0.8));
+          slot.mesh.position.y = THREE.MathUtils.lerp(0, 4.5, t);
+          slot.mesh.position.z = THREE.MathUtils.lerp(0, 10, t);
+          slot.mesh.rotation.y = THREE.MathUtils.lerp(0, -Math.PI / 2, t);
+        } else {
+          slot.mesh.position.y = THREE.MathUtils.lerp(slot.mesh.position.y, 0, 0.1);
+          slot.mesh.position.z = THREE.MathUtils.lerp(slot.mesh.position.z, 0, 0.1);
+          slot.mesh.rotation.y = THREE.MathUtils.lerp(slot.mesh.rotation.y, 0, 0.1);
+        }
+      }
+
+      // Inspect camera transition
+      if (inspectMode) {
+        camera.position.lerp(new THREE.Vector3(0, 18, 55), 0.07);
+        camera.lookAt(0, 4, 0);
+      } else {
+        camera.position.lerp(new THREE.Vector3(0, 38, 145), 0.07);
+        camera.lookAt(0, 0, 0);
+      }
+
+      renderer.render(scene, camera);
+    }
+
+    animate();
+
+    // Window Resize
+    window.addEventListener(&#x27;resize&#x27;, () =&gt; {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+```
+</textarea>
+
+  <script>
+    function copyAll() {
+      const text = document.getElementById('rawPayload').value;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(showSuccess).catch(fallback);
+      } else {
+        fallback();
+      }
+    }
+    function fallback() {
+      const textarea = document.getElementById('rawPayload');
+      textarea.select();
+      document.execCommand('copy');
+      showSuccess();
+    }
+    function showSuccess() {
+      const alert = document.getElementById('copyAlert');
+      alert.style.opacity = '1';
+      setTimeout(() => {
+        alert.style.opacity = '0';
+      }, 3500);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Belief Changer — The trap has no lock. You can walk out.</title>
+<meta name="description" content="Free, living books that help people leave smoking, sugar, scrolling and compulsive habits behind — not through willpower, but by seeing the belief that keeps you there." />
+<meta name="theme-color" content="#FFFFFF" />
+
+<!-- Typography -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=DM+Sans:opsz,wght@9..40,300..600&display=swap" rel="stylesheet" />
+
+<!-- Utility foundation -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = { corePlugins: { preflight: true }, theme: { extend: {} } };
+</script>
+
+<!-- Motion -->
+<script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<style>
+/* ──────────────────────────────────────────────────────────────
+   0. TOKENS
+────────────────────────────────────────────────────────────── */
+:root{
+  --canvas:#FFFFFF;
+  --bone:#EBE7DF;
+  --bone-2:#F4F1EB;
+  --ink:#171512;
+  --ink-2:#4B4741;
+  --ink-3:#8B857B;
+  --hair:rgba(0,0,0,0.08);
+  --hair-2:rgba(0,0,0,0.16);
+  --accent:#7A6448;
+  --shadow-book:0 40px 70px -28px rgba(24,18,10,.45), 0 14px 26px -14px rgba(24,18,10,.28), 0 1px 0 rgba(255,255,255,.35) inset;
+  --serif:'Newsreader', 'Iowan Old Style', Georgia, serif;
+  --sans:'DM Sans', 'Inter', system-ui, -apple-system, sans-serif;
+  --gutter:clamp(20px, 5vw, 88px);
+  --section:clamp(120px, 14vw, 220px);
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --img-filter:none;
+  --grain-opacity:.055;
+}
+[data-theme="dark"]{
+  --canvas:#0E0D0C;
+  --bone:#161513;
+  --bone-2:#1B1917;
+  --ink:#ECE7DE;
+  --ink-2:#B9B2A6;
+  --ink-3:#7F786D;
+  --hair:rgba(255,255,255,0.09);
+  --hair-2:rgba(255,255,255,0.18);
+  --accent:#CDB38F;
+  --shadow-book:0 40px 70px -26px rgba(0,0,0,.85), 0 14px 26px -12px rgba(0,0,0,.6);
+  --img-filter:brightness(.86) saturate(.92);
+  --grain-opacity:.09;
+}
+
+/* ──────────────────────────────────────────────────────────────
+   1. BASE
+────────────────────────────────────────────────────────────── */
+html{ scroll-behavior:auto; }
+html.lenis, html.lenis body{ height:auto; }
+.lenis.lenis-smooth{ scroll-behavior:auto !important; }
+.lenis.lenis-stopped{ overflow:hidden; }
+
+body{
+  background:var(--canvas);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-weight:300;
+  font-size:1rem;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+  transition:background-color .6s var(--ease), color .6s var(--ease);
+}
+body.no-cursor, body.no-cursor a, body.no-cursor button{ cursor:none; }
+img{ filter:var(--img-filter); transition:filter .6s var(--ease); }
+::selection{ background:var(--ink); color:var(--canvas); }
+
+.container{ width:100%; max-width:1520px; margin-inline:auto; padding-inline:var(--gutter); }
+.section{ padding-block:var(--section); position:relative; }
+.hair{ border-top:1px solid var(--hair); }
+
+.serif{ font-family:var(--serif); }
+.eyebrow{
+  font-family:var(--sans); font-weight:500; font-size:.7rem; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--ink-3); display:flex; align-items:center; gap:.9rem;
+}
+.eyebrow::before{ content:""; width:28px; height:1px; background:var(--hair-2); }
+.eyebrow.bare::before{ display:none; }
+
+h1,h2,h3,.display{ font-family:var(--serif); font-weight:300; letter-spacing:-.018em; line-height:1.02; color:var(--ink); }
+h1{ font-size:clamp(2.75rem, 7.2vw, 6.6rem); font-optical-sizing:auto; }
+h2{ font-size:clamp(2.2rem, 4.8vw, 4.4rem); }
+h3{ font-size:clamp(1.6rem, 2.6vw, 2.5rem); }
+em{ font-style:italic; font-weight:300; }
+.lede{ font-family:var(--serif); font-size:clamp(1.15rem, 1.5vw, 1.45rem); line-height:1.45; color:var(--ink-2); font-weight:300; }
+.body{ font-size:clamp(.98rem, 1.1vw, 1.1rem); line-height:1.7; color:var(--ink-2); max-width:58ch; }
+.small{ font-size:.78rem; letter-spacing:.02em; color:var(--ink-3); }
+
+.lnk{
+  color:inherit; text-decoration:none;
+  background:linear-gradient(currentColor,currentColor) no-repeat 0 100% / 0 1px;
+  transition:background-size .55s var(--ease-out), color .3s;
+  padding-bottom:2px;
+}
+.lnk:hover{ background-size:100% 1px; }
+.lnk.on{ background-size:100% 1px; }
+
+.btn{
+  display:inline-flex; align-items:center; gap:.7rem;
+  padding:.95rem 1.5rem; border:1px solid var(--hair-2); border-radius:2px;
+  font-family:var(--sans); font-weight:500; font-size:.74rem; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--ink); background:transparent; text-decoration:none; white-space:nowrap;
+  transition:background .45s var(--ease), color .45s var(--ease), border-color .45s var(--ease), transform .45s var(--ease);
+}
+.btn:hover{ background:var(--ink); color:var(--canvas); border-color:var(--ink); }
+.btn--solid{ background:var(--ink); color:var(--canvas); border-color:var(--ink); }
+.btn--solid:hover{ background:var(--accent); border-color:var(--accent); color:#fff; }
+.btn svg{ width:14px; height:14px; }
+
+/* Split text */
+.split .w{ display:inline-block; overflow:hidden; vertical-align:top; padding-bottom:.08em; margin-bottom:-.08em; }
+.split .wi{ display:inline-block; transform:translateY(112%); will-change:transform; }
+.reveal{ opacity:0; transform:translateY(26px); will-change:transform,opacity; }
+.reduced .reveal, .reduced .split .wi{ opacity:1; transform:none; }
+
+/* Paper grain */
+.grain{
+  pointer-events:none; position:fixed; inset:-50%; width:200%; height:200%; z-index:80; opacity:var(--grain-opacity);
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  animation:grain 9s steps(6) infinite;
+}
+@keyframes grain{ 0%{transform:translate(0,0)} 20%{transform:translate(-3%,2%)} 40%{transform:translate(2%,-4%)} 60%{transform:translate(-2%,3%)} 80%{transform:translate(4%,-1%)} 100%{transform:translate(0,0)} }
+
+/* ──────────────────────────────────────────────────────────────
+   2. CURSOR
+────────────────────────────────────────────────────────────── */
+.cursor{ position:fixed; top:0; left:0; z-index:200; pointer-events:none; mix-blend-mode:difference; display:none; }
+.no-cursor .cursor{ display:block; }
+.cursor-dot{ position:absolute; width:6px; height:6px; margin:-3px 0 0 -3px; border-radius:50%; background:#fff; }
+.cursor-ring{
+  position:absolute; width:34px; height:34px; margin:-17px 0 0 -17px; border-radius:50%;
+  border:1px solid rgba(255,255,255,.85); display:grid; place-items:center;
+  transition:width .5s var(--ease-out), height .5s var(--ease-out), margin .5s var(--ease-out), background .4s, border-color .4s;
+}
+.cursor-ring span{ font:500 .58rem/1 var(--sans); letter-spacing:.16em; text-transform:uppercase; color:#000; opacity:0; transition:opacity .3s; }
+.cursor.is-book .cursor-ring{ width:88px; height:88px; margin:-44px 0 0 -44px; background:#fff; border-color:#fff; }
+.cursor.is-book .cursor-ring span{ opacity:1; transition-delay:.15s; }
+.cursor.is-book .cursor-dot{ opacity:0; }
+.cursor.is-link .cursor-ring{ width:48px; height:48px; margin:-24px 0 0 -24px; }
+
+/* ──────────────────────────────────────────────────────────────
+   3. NAV
+────────────────────────────────────────────────────────────── */
+.nav{
+  position:fixed; inset:0 0 auto 0; z-index:100; height:74px;
+  display:flex; align-items:center;
+  transition:background .5s var(--ease), border-color .5s var(--ease), transform .6s var(--ease);
+  border-bottom:1px solid transparent;
+}
+.nav.scrolled{ background:color-mix(in srgb, var(--canvas) 82%, transparent); backdrop-filter:blur(14px) saturate(1.2); -webkit-backdrop-filter:blur(14px) saturate(1.2); border-color:var(--hair); }
+.nav.hidden{ transform:translateY(-100%); }
+.nav-inner{ display:flex; align-items:center; justify-content:space-between; gap:2rem; }
+.wordmark{ font-family:var(--serif); font-size:1.28rem; letter-spacing:-.01em; text-decoration:none; color:var(--ink); display:flex; align-items:baseline; gap:.75rem; }
+.wordmark small{ font-family:var(--sans); font-size:.62rem; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3); font-weight:500; display:none; }
+@media(min-width:900px){ .wordmark small{ display:inline; } }
+.nav-links{ display:none; gap:2.2rem; font-size:.78rem; letter-spacing:.06em; font-weight:400; color:var(--ink-2); }
+@media(min-width:900px){ .nav-links{ display:flex; } }
+.nav-right{ display:flex; align-items:center; gap:1.4rem; }
+.theme-btn{
+  display:inline-flex; align-items:center; gap:.6rem; background:transparent; border:0; color:var(--ink-2);
+  font:500 .68rem/1 var(--sans); letter-spacing:.14em; text-transform:uppercase; padding:.4rem 0;
+}
+.theme-btn .orb{ width:14px; height:14px; border-radius:50%; border:1px solid currentColor; position:relative; overflow:hidden; }
+.theme-btn .orb::after{ content:""; position:absolute; inset:0; width:50%; background:currentColor; transition:width .5s var(--ease), left .5s var(--ease); }
+[data-theme="dark"] .theme-btn .orb::after{ width:100%; }
+
+/* ──────────────────────────────────────────────────────────────
+   4. ACT I — HERO
+────────────────────────────────────────────────────────────── */
+.hero{ position:relative; height:100svh; min-height:640px; overflow:hidden; }
+.hero-bg{ position:absolute; inset:0; overflow:hidden; }
+.hero-bg img{ width:100%; height:100%; object-fit:cover; object-position:center 40%; transform-origin:50% 60%; will-change:transform; }
+.hero-veil{
+  position:absolute; inset:0;
+  background:
+    linear-gradient(90deg, var(--canvas) 0%, color-mix(in srgb, var(--canvas) 92%, transparent) 34%, color-mix(in srgb, var(--canvas) 45%, transparent) 60%, transparent 92%),
+    linear-gradient(180deg, color-mix(in srgb, var(--canvas) 55%, transparent) 0%, transparent 28%, transparent 70%, var(--canvas) 100%);
+  transition:background .6s var(--ease);
+}
+@media(max-width:899px){
+  .hero-veil{ background:linear-gradient(180deg, color-mix(in srgb, var(--canvas) 86%, transparent) 0%, color-mix(in srgb, var(--canvas) 78%, transparent) 55%, var(--canvas) 100%); }
+}
+.hero-inner{ position:relative; z-index:2; height:100%; display:grid; grid-template-columns:1fr; align-items:end; padding-bottom:clamp(40px, 6vh, 80px); padding-top:110px; }
+@media(min-width:1024px){ .hero-inner{ grid-template-columns:minmax(0, 1.15fr) minmax(0, .85fr); align-items:center; gap:4vw; padding-bottom:0; } }
+.hero-copy{ max-width:760px; }
+.hero-copy h1{ margin:1.6rem 0 1.9rem; text-wrap:balance; }
+.hero-copy .lede{ max-width:56ch; }
+
+.finder{ margin-top:2.6rem; max-width:620px; }
+.finder-field{ position:relative; display:flex; align-items:center; border-bottom:1px solid var(--hair-2); transition:border-color .4s; }
+.finder-field:focus-within{ border-color:var(--ink); }
+.finder-field input{
+  width:100%; background:transparent; border:0; outline:0; padding:1rem 3rem 1rem 0;
+  font-family:var(--serif); font-size:clamp(1.1rem, 1.5vw, 1.35rem); color:var(--ink); font-weight:300;
+}
+.finder-field input::placeholder{ color:var(--ink-3); font-style:italic; }
+.finder-field button{ position:absolute; right:0; top:50%; transform:translateY(-50%); background:transparent; border:0; color:var(--ink); padding:.6rem 0 .6rem .6rem; }
+.finder-field button svg{ width:22px; height:22px; transition:transform .5s var(--ease-out); }
+.finder-field button:hover svg{ transform:translateX(6px); }
+.chips{ display:flex; flex-wrap:wrap; gap:.5rem 1.6rem; margin-top:1.1rem; align-items:center; }
+.chips span{ font-size:.68rem; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3); font-weight:500; }
+.chip{ background:transparent; border:0; padding:.2rem 0; font-family:var(--serif); font-style:italic; font-size:1.02rem; color:var(--ink-2); }
+.chip:hover{ color:var(--ink); }
+.finder-msg{ margin-top:.9rem; font-size:.8rem; color:var(--accent); min-height:1.2rem; font-style:italic; font-family:var(--serif); }
+
+.hero-books{ position:relative; height:clamp(220px, 34vw, 520px); display:none; perspective:1400px; }
+@media(min-width:1024px){ .hero-books{ display:block; } }
+.hb{ position:absolute; width:clamp(150px, 15vw, 230px); aspect-ratio:2/3; border-radius:2px; box-shadow:var(--shadow-book); transform-style:preserve-3d; will-change:transform; }
+.hb::before{ content:""; position:absolute; inset:0; border-radius:2px; box-shadow:inset 0 0 0 1px rgba(255,255,255,.22), inset 2px 0 6px -3px rgba(0,0,0,.25); z-index:2; pointer-events:none; }
+.hb img{ width:100%; height:100%; object-fit:cover; border-radius:2px; display:block; }
+.hb::after{ content:""; position:absolute; left:6%; right:6%; bottom:-22px; height:26px; border-radius:50%; background:radial-gradient(ellipse at center, rgba(0,0,0,.28), transparent 70%); filter:blur(6px); z-index:-1; }
+.hb-1{ left:4%; top:14%; transform:rotate(-7deg); z-index:1; }
+.hb-2{ left:34%; top:2%; transform:rotate(-1deg); z-index:2; }
+.hb-3{ left:60%; top:20%; transform:rotate(6deg); z-index:3; }
+.hero-foot{ position:absolute; z-index:3; left:var(--gutter); right:var(--gutter); bottom:26px; display:flex; justify-content:space-between; align-items:flex-end; font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3); font-weight:500; }
+.scroll-cue{ display:flex; align-items:center; gap:.8rem; }
+.scroll-cue i{ display:block; width:1px; height:44px; background:var(--hair-2); position:relative; overflow:hidden; }
+.scroll-cue i::after{ content:""; position:absolute; left:0; top:-100%; width:100%; height:100%; background:var(--ink); animation:cue 2.6s var(--ease) infinite; }
+@keyframes cue{ 0%{top:-100%} 60%{top:100%} 100%{top:100%} }
+
+/* ──────────────────────────────────────────────────────────────
+   5. THESIS
+────────────────────────────────────────────────────────────── */
+.thesis{ text-align:left; }
+.thesis-law{ font-size:clamp(2.4rem, 6.5vw, 6rem); line-height:1.02; max-width:16ch; }
+.thesis-grid{ display:grid; grid-template-columns:1fr; gap:3rem; margin-top:clamp(56px, 7vw, 110px); padding-top:2.4rem; border-top:1px solid var(--hair); }
+@media(min-width:900px){ .thesis-grid{ grid-template-columns:1fr 1fr 1fr; gap:4vw; } }
+.thesis-grid p{ font-size:1.02rem; line-height:1.7; color:var(--ink-2); }
+.thesis-grid p strong{ font-weight:500; color:var(--ink); }
+.thesis-grid .num{ font-family:var(--serif); font-size:.95rem; color:var(--ink-3); display:block; margin-bottom:1rem; font-style:italic; }
+
+/* ──────────────────────────────────────────────────────────────
+   6. ACT II — MECHANISM
+────────────────────────────────────────────────────────────── */
+.mech{ background:var(--bone); transition:background .6s var(--ease); }
+.mech-grid{ display:grid; grid-template-columns:1fr; gap:4rem; }
+@media(min-width:1024px){ .mech-grid{ grid-template-columns:minmax(0, .95fr) minmax(0, 1.05fr); gap:6vw; align-items:start; } }
+.mech-visual{ position:relative; }
+@media(min-width:1024px){ .mech-visual{ position:sticky; top:12vh; } }
+.mech-frame{ position:relative; width:100%; aspect-ratio:3/2; overflow:hidden; border-radius:2px; box-shadow:0 30px 60px -30px rgba(0,0,0,.35); background:var(--bone-2); }
+@media(min-width:1024px){ .mech-frame{ aspect-ratio:auto; height:70vh; } }
+.mech-img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.mech-img--knot{ transform:scale(1.04); }
+.mech-img--gate{ clip-path:inset(100% 0 0 0); will-change:clip-path; }
+.mech-caps{ position:relative; height:2rem; margin-top:1.2rem; }
+.mech-cap{ position:absolute; inset:0; font-family:var(--serif); font-style:italic; font-size:1rem; color:var(--ink-3); transition:opacity .6s var(--ease); }
+.mech-cap.b{ opacity:0; }
+.mech-visual.turned .mech-cap.a{ opacity:0; }
+.mech-visual.turned .mech-cap.b{ opacity:1; }
+
+.mech-text header{ margin-bottom:clamp(60px, 8vw, 120px); }
+.mech-text h2{ margin-top:1.4rem; max-width:14ch; }
+.model{ padding:clamp(48px, 6vw, 96px) 0; border-top:1px solid var(--hair); }
+.model-label{ display:flex; align-items:center; gap:1rem; font-size:.7rem; letter-spacing:.18em; text-transform:uppercase; font-weight:500; color:var(--ink-3); margin-bottom:1.6rem; }
+.model-label b{ font-family:var(--serif); font-weight:300; font-style:italic; font-size:1rem; letter-spacing:0; text-transform:none; color:var(--ink-3); }
+.model blockquote{ font-family:var(--serif); font-size:clamp(1.5rem, 2.5vw, 2.3rem); line-height:1.28; letter-spacing:-.01em; color:var(--ink); text-wrap:pretty; }
+.model--lie blockquote{ color:var(--ink-3); text-decoration:line-through; text-decoration-color:var(--hair-2); text-decoration-thickness:1px; }
+.model p{ margin-top:1.6rem; }
+.steps{ list-style:none; margin:0; padding:0; border-top:1px solid var(--hair); }
+.steps li{ display:grid; grid-template-columns:3rem 1fr; gap:1.5rem; padding:1.6rem 0; border-bottom:1px solid var(--hair); align-items:baseline; }
+.steps .n{ font-family:var(--serif); font-style:italic; color:var(--ink-3); }
+.steps h4{ font-family:var(--serif); font-size:1.35rem; font-weight:300; color:var(--ink); margin-bottom:.35rem; }
+.steps p{ font-size:.95rem; color:var(--ink-2); }
+.mech-close{ margin-top:clamp(40px, 5vw, 72px); font-family:var(--serif); font-size:clamp(1.3rem, 1.8vw, 1.7rem); line-height:1.4; color:var(--ink); max-width:34ch; }
+
+/* ──────────────────────────────────────────────────────────────
+   7. ACT III — SPECIMEN GALLERY
+────────────────────────────────────────────────────────────── */
+.gallery{ position:relative; }
+.gallery-head{ padding-top:var(--section); padding-bottom:clamp(40px, 5vw, 80px); display:grid; grid-template-columns:1fr; gap:2rem; align-items:end; }
+@media(min-width:900px){ .gallery-head{ grid-template-columns:1.2fr .8fr; gap:6vw; } }
+.gallery-head h2{ margin-top:1.4rem; }
+.gallery-head .body{ padding-bottom:.6rem; }
+.track-wrap{ position:relative; }
+.track{ display:flex; flex-direction:column; gap:clamp(80px, 12vw, 160px); padding-bottom:var(--section); }
+.spec{ display:grid; grid-template-columns:1fr; gap:2rem; padding-inline:var(--gutter); }
+.spec-plinth{
+  position:relative; width:100%; aspect-ratio:4/5; border-radius:2px; overflow:hidden;
+  background:color-mix(in srgb, var(--ground) 62%, var(--canvas));
+  display:flex; align-items:flex-end; justify-content:center;
+  transition:background .6s var(--ease);
+}
+.spec-plinth::before{ content:""; position:absolute; inset:0; box-shadow:inset 0 0 0 1px var(--hair); border-radius:2px; pointer-events:none; z-index:2; }
+.spec-plinth::after{ content:""; position:absolute; left:0; right:0; bottom:0; height:38%; background:linear-gradient(180deg, transparent, rgba(0,0,0,.06)); pointer-events:none; }
+.spec-cover{
+  position:relative; width:56%; aspect-ratio:2/3; margin-bottom:-4%; border-radius:2px; box-shadow:var(--shadow-book);
+  transform:translateY(0); transition:transform .8s var(--ease-out), box-shadow .8s var(--ease-out); z-index:1; cursor:pointer; background:transparent; border:0; padding:0;
+}
+.spec-cover::before{ content:""; position:absolute; inset:0; border-radius:2px; box-shadow:inset 0 0 0 1px rgba(255,255,255,.28), inset 3px 0 8px -4px rgba(0,0,0,.28); z-index:2; pointer-events:none; }
+.spec-cover img{ width:100%; height:100%; object-fit:cover; border-radius:2px; display:block; }
+.spec-cover:hover{ transform:translateY(-10px); }
+.spec-meta{ display:flex; flex-direction:column; justify-content:center; }
+.spec-meta .num{ font-family:var(--serif); font-size:clamp(3rem, 5vw, 4.5rem); line-height:1; color:var(--ink-3); font-weight:200; letter-spacing:-.03em; }
+.spec-meta h3{ margin:1rem 0 1.1rem; font-size:clamp(2rem, 3.4vw, 3.4rem); }
+.spec-meta .line{ font-family:var(--serif); font-style:italic; font-size:clamp(1.15rem, 1.5vw, 1.45rem); line-height:1.4; color:var(--ink-2); max-width:32ch; }
+.spec-meta .facts{ display:flex; flex-wrap:wrap; gap:.5rem 1.4rem; margin-top:1.6rem; font-size:.7rem; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3); font-weight:500; }
+.spec-meta .acts{ display:flex; align-items:center; gap:1.6rem; margin-top:2rem; flex-wrap:wrap; }
+.spec-meta .acts .lnk{ font-size:.78rem; letter-spacing:.08em; text-transform:uppercase; font-weight:500; }
+.track-ui{ display:none; }
+
+@media(min-width:1024px){
+  .track-wrap{ height:100vh; overflow:hidden; }
+  .track{ flex-direction:row; height:100%; align-items:center; gap:0; padding:0 0 0 var(--gutter); will-change:transform; }
+  .track::after{ content:""; flex:0 0 var(--gutter); }
+  .spec{ flex:0 0 auto; width:clamp(760px, 66vw, 1140px); height:78vh; grid-template-columns:minmax(0, 1.05fr) minmax(0, .95fr); gap:4vw; padding:0 4vw 0 0; }
+  .spec-plinth{ aspect-ratio:auto; height:100%; }
+  .spec-cover{ width:48%; margin-bottom:-3%; }
+  .track-ui{ display:flex; position:absolute; left:var(--gutter); right:var(--gutter); bottom:32px; align-items:center; gap:2rem; z-index:3; }
+  .track-bar{ flex:1; height:1px; background:var(--hair-2); position:relative; }
+  .track-bar i{ position:absolute; left:0; top:-1px; height:3px; width:10%; background:var(--ink); border-radius:2px; will-change:transform; }
+  .track-count{ font-family:var(--serif); font-size:.95rem; color:var(--ink-3); font-variant-numeric:tabular-nums; min-width:5.5ch; text-align:right; }
+  .track-hint{ font-size:.66rem; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3); font-weight:500; }
+}
+
+/* ──────────────────────────────────────────────────────────────
+   8. SHEET (Reader preview)
+────────────────────────────────────────────────────────────── */
+.sheet-backdrop{ position:fixed; inset:0; z-index:150; background:rgba(10,8,6,.42); opacity:0; pointer-events:none; transition:opacity .6s var(--ease); backdrop-filter:blur(2px); }
+.sheet-backdrop.open{ opacity:1; pointer-events:auto; }
+.sheet{
+  position:fixed; top:0; right:0; bottom:0; z-index:160; width:min(600px, 100vw); background:var(--canvas); color:var(--ink);
+  transform:translateX(102%); transition:transform .85s var(--ease-out), background .6s var(--ease); box-shadow:-40px 0 80px -40px rgba(0,0,0,.4);
+  display:flex; flex-direction:column;
+}
+.sheet.open{ transform:translateX(0); }
+@media(max-width:640px){
+  .sheet{ top:auto; height:92svh; width:100vw; transform:translateY(104%); border-radius:8px 8px 0 0; }
+  .sheet.open{ transform:translateY(0); }
+}
+.sheet-top{ display:flex; align-items:center; justify-content:space-between; padding:1.3rem var(--gutter) 1rem; border-bottom:1px solid var(--hair); flex:0 0 auto; }
+.sheet-top .small{ text-transform:uppercase; letter-spacing:.16em; font-weight:500; font-size:.66rem; }
+.sheet-close{ background:transparent; border:0; color:var(--ink); font:500 .68rem/1 var(--sans); letter-spacing:.16em; text-transform:uppercase; display:flex; align-items:center; gap:.6rem; padding:.4rem 0; }
+.sheet-close svg{ width:16px; height:16px; }
+.sheet-scroll{ overflow-y:auto; overscroll-behavior:contain; flex:1 1 auto; padding:0 var(--gutter) 4rem; -webkit-overflow-scrolling:touch; }
+.sheet-plinth{ margin:2rem 0 2.2rem; aspect-ratio:5/4; border-radius:2px; background:color-mix(in srgb, var(--ground) 62%, var(--canvas)); display:flex; align-items:flex-end; justify-content:center; overflow:hidden; position:relative; transition:background .5s; }
+.sheet-plinth::before{ content:""; position:absolute; inset:0; box-shadow:inset 0 0 0 1px var(--hair); pointer-events:none; }
+.sheet-plinth img{ width:42%; aspect-ratio:2/3; object-fit:cover; border-radius:2px; box-shadow:var(--shadow-book); margin-bottom:-5%; }
+.sheet h3{ font-size:clamp(2rem, 3vw, 2.8rem); margin:.9rem 0 1rem; }
+.sheet .line{ font-family:var(--serif); font-style:italic; font-size:1.25rem; line-height:1.4; color:var(--ink-2); }
+.sheet-belief{ margin:2rem 0; padding:1.4rem 0; border-top:1px solid var(--hair); border-bottom:1px solid var(--hair); }
+.sheet-belief span{ display:block; font-size:.66rem; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3); font-weight:500; margin-bottom:.7rem; }
+.sheet-belief p{ font-family:var(--serif); font-size:1.35rem; line-height:1.35; color:var(--ink); }
+.sheet-actions{ display:flex; flex-wrap:wrap; gap:.7rem; margin:1.6rem 0 2.4rem; }
+.chapters{ list-style:none; padding:0; margin:0; }
+.chapters li{ display:grid; grid-template-columns:2.6rem 1fr auto; gap:1rem; align-items:baseline; padding:1rem 0; border-bottom:1px solid var(--hair); font-family:var(--serif); }
+.chapters li:first-child{ border-top:1px solid var(--hair); }
+.chapters .n{ font-style:italic; color:var(--ink-3); font-size:.95rem; }
+.chapters .t{ font-size:1.12rem; color:var(--ink); }
+.chapters .d{ font-family:var(--sans); font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-3); }
+.chapters li a{ text-decoration:none; color:inherit; }
+.sheet-note{ margin-top:2rem; font-size:.82rem; color:var(--ink-3); line-height:1.6; }
+.sheet-note b{ color:var(--ink-2); font-weight:500; }
+
+/* ──────────────────────────────────────────────────────────────
+   9. ACT IV — THE LIFE OUTSIDE
+────────────────────────────────────────────────────────────── */
+.outside-intro{ padding-block:var(--section) clamp(60px, 8vw, 120px); }
+.outside-intro h2{ margin-top:1.4rem; max-width:18ch; }
+.scene{ position:relative; height:100svh; min-height:560px; overflow:hidden; }
+.scene-img{ position:absolute; inset:-15% 0; will-change:transform; }
+.scene-img img{ width:100%; height:100%; object-fit:cover; }
+.scene-veil{ position:absolute; inset:0; background:linear-gradient(180deg, rgba(8,7,6,.08), rgba(8,7,6,.02) 40%, rgba(8,7,6,.55) 100%); }
+.scene-copy{ position:absolute; left:var(--gutter); right:var(--gutter); bottom:clamp(48px, 8vh, 110px); color:#F5F1EA; max-width:820px; }
+.scene-copy .eyebrow{ color:rgba(245,241,234,.7); }
+.scene-copy .eyebrow::before{ background:rgba(245,241,234,.45); }
+.scene-copy h2{ color:#F7F3EC; margin:1.2rem 0 1.1rem; font-size:clamp(2.4rem, 5.4vw, 5.2rem); text-shadow:0 2px 24px rgba(0,0,0,.25); }
+.scene-copy p{ font-family:var(--serif); font-size:clamp(1.1rem, 1.4vw, 1.4rem); line-height:1.45; color:rgba(247,243,236,.86); max-width:48ch; }
+.scene:nth-child(even) .scene-copy{ left:auto; text-align:right; }
+.scene:nth-child(even) .scene-copy .eyebrow{ justify-content:flex-end; flex-direction:row-reverse; }
+.scene:nth-child(even) .scene-copy p{ margin-left:auto; }
+
+.notes-wrap{ padding-block:var(--section); }
+.notes-head{ max-width:640px; margin-bottom:clamp(60px, 8vw, 120px); }
+.notes-head h2{ margin-top:1.4rem; }
+.notes{ display:grid; grid-template-columns:repeat(12, 1fr); gap:2rem clamp(16px, 2vw, 32px); }
+.note{ grid-column:1 / -1; }
+.note figure{ overflow:hidden; border-radius:2px; box-shadow:0 30px 60px -36px rgba(0,0,0,.4); }
+.note img{ width:100%; aspect-ratio:3/2; object-fit:cover; transform:scale(1.06); will-change:transform; }
+.note figcaption{ margin-top:1.1rem; padding-top:.9rem; border-top:1px solid var(--hair); display:flex; justify-content:space-between; gap:1.5rem; align-items:baseline; }
+.note figcaption q{ font-family:var(--serif); font-style:italic; font-size:1.15rem; color:var(--ink); quotes:none; }
+.note figcaption span{ font-size:.66rem; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3); font-weight:500; white-space:nowrap; }
+@media(min-width:900px){
+  .note:nth-child(1){ grid-column:1 / 7; }
+  .note:nth-child(2){ grid-column:8 / 13; margin-top:22vh; }
+  .note:nth-child(3){ grid-column:3 / 9; margin-top:-8vh; }
+}
+.outside-close{ padding-block:clamp(60px, 8vw, 120px) var(--section); text-align:center; }
+.outside-close p{ font-family:var(--serif); font-size:clamp(2rem, 4.6vw, 4.4rem); line-height:1.1; letter-spacing:-.015em; max-width:22ch; margin-inline:auto; }
+.outside-close p em{ color:var(--ink-3); }
+
+/* ──────────────────────────────────────────────────────────────
+   10. ACT V — LIVING LIBRARY, COVENANT, REQUESTS
+────────────────────────────────────────────────────────────── */
+.living{ background:var(--bone); transition:background .6s var(--ease); }
+.living-grid{ display:grid; grid-template-columns:1fr; gap:4rem; }
+@media(min-width:1024px){ .living-grid{ grid-template-columns:minmax(0, 1fr) minmax(0, 1fr); gap:6vw; align-items:start; } }
+.living-visual{ position:relative; }
+@media(min-width:1024px){ .living-visual{ position:sticky; top:12vh; } }
+.living-visual figure{ overflow:hidden; border-radius:2px; box-shadow:0 40px 80px -40px rgba(0,0,0,.45); }
+.living-visual img{ width:100%; aspect-ratio:3/2; object-fit:cover; transform:scale(1.06); }
+.living-visual figcaption{ margin-top:1rem; font-family:var(--serif); font-style:italic; color:var(--ink-3); }
+.living-text h2{ margin:1.4rem 0 1.6rem; max-width:14ch; }
+.changelog{ list-style:none; padding:0; margin:clamp(40px, 5vw, 72px) 0 0; border-top:1px solid var(--hair); }
+.changelog li{ display:grid; grid-template-columns:5.2rem 1fr; gap:1.2rem; padding:1.4rem 0; border-bottom:1px solid var(--hair); align-items:baseline; }
+.changelog .v{ font-family:var(--serif); font-size:1.1rem; color:var(--ink); }
+.changelog .v small{ display:block; font-family:var(--sans); font-size:.64rem; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3); margin-top:.3rem; font-weight:500; }
+.changelog .t{ font-size:.96rem; color:var(--ink-2); line-height:1.6; }
+.changelog .t b{ font-weight:500; color:var(--ink); display:block; margin-bottom:.15rem; font-family:var(--serif); font-size:1.08rem; }
+.feedback{ margin-top:clamp(40px, 5vw, 72px); }
+.feedback label{ display:block; font-family:var(--serif); font-size:1.35rem; margin-bottom:1rem; color:var(--ink); }
+.feedback textarea{ width:100%; min-height:120px; background:transparent; border:0; border-bottom:1px solid var(--hair-2); outline:0; resize:vertical; padding:.8rem 0; font-family:var(--serif); font-size:1.1rem; color:var(--ink); font-weight:300; transition:border-color .4s; }
+.feedback textarea:focus{ border-color:var(--ink); }
+.feedback textarea::placeholder{ color:var(--ink-3); font-style:italic; }
+.feedback-row{ display:flex; justify-content:space-between; align-items:center; gap:1.5rem; margin-top:1.2rem; flex-wrap:wrap; }
+.feedback-row .small{ font-style:italic; font-family:var(--serif); font-size:.9rem; }
+.feedback-msg{ font-family:var(--serif); font-style:italic; color:var(--accent); margin-top:1rem; min-height:1.4rem; }
+
+.covenant{ padding-block:var(--section); }
+.covenant-head{ display:grid; grid-template-columns:1fr; gap:1.5rem; margin-bottom:clamp(48px, 6vw, 96px); }
+@media(min-width:900px){ .covenant-head{ grid-template-columns:1fr 1fr; align-items:end; } }
+.covenant-head h2{ margin-top:1.4rem; }
+.covenant-list{ list-style:none; margin:0; padding:0; border-top:1px solid var(--hair); }
+.covenant-list li{ display:grid; grid-template-columns:4rem 1fr; gap:1rem; padding:clamp(28px, 3.5vw, 44px) 0; border-bottom:1px solid var(--hair); align-items:baseline; }
+@media(min-width:900px){ .covenant-list li{ grid-template-columns:6rem minmax(0, 1fr) minmax(0, 1.2fr); gap:3vw; } }
+.covenant-list .r{ font-family:var(--serif); font-style:italic; color:var(--ink-3); font-size:1.05rem; }
+.covenant-list h4{ font-family:var(--serif); font-size:clamp(1.5rem, 2.4vw, 2.2rem); font-weight:300; letter-spacing:-.01em; color:var(--ink); }
+.covenant-list p{ font-size:.96rem; color:var(--ink-2); line-height:1.65; grid-column:2; }
+@media(min-width:900px){ .covenant-list p{ grid-column:auto; } }
+
+.request{ background:var(--bone); padding-block:var(--section); transition:background .6s var(--ease); }
+.request-grid{ display:grid; grid-template-columns:1fr; gap:3.5rem; }
+@media(min-width:1024px){ .request-grid{ grid-template-columns:minmax(0, .9fr) minmax(0, 1.1fr); gap:6vw; } }
+.request h2{ margin:1.4rem 0 1.4rem; max-width:14ch; }
+.queue{ list-style:none; margin:0; padding:0; border-top:1px solid var(--hair); }
+.queue li{ display:grid; grid-template-columns:1fr auto; gap:1.5rem; align-items:center; padding:1.15rem 0; border-bottom:1px solid var(--hair); }
+.queue .qt{ font-family:var(--serif); font-size:1.3rem; color:var(--ink); }
+.queue .qs{ font-size:.7rem; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); font-weight:500; margin-top:.25rem; }
+.vote{ display:inline-flex; align-items:center; gap:.7rem; background:transparent; border:1px solid var(--hair-2); border-radius:2px; padding:.6rem .9rem; color:var(--ink); font:500 .72rem/1 var(--sans); letter-spacing:.08em; font-variant-numeric:tabular-nums; transition:background .4s, color .4s, border-color .4s; }
+.vote svg{ width:12px; height:12px; transition:transform .4s var(--ease-out); }
+.vote:hover{ border-color:var(--ink); }
+.vote.voted{ background:var(--ink); color:var(--canvas); border-color:var(--ink); }
+.vote.voted svg{ transform:translateY(-2px); }
+.request-form{ margin-top:2.4rem; }
+.request-form .finder-field input{ font-size:1.15rem; }
+.request-form .small{ margin-top:.8rem; display:block; font-family:var(--serif); font-style:italic; font-size:.9rem; }
+
+/* ──────────────────────────────────────────────────────────────
+   11. FOOTER
+────────────────────────────────────────────────────────────── */
+.footer{ padding:clamp(80px, 9vw, 140px) 0 40px; }
+.footer-grid{ display:grid; grid-template-columns:1fr; gap:3rem; padding-bottom:4rem; border-bottom:1px solid var(--hair); }
+@media(min-width:900px){ .footer-grid{ grid-template-columns:1.4fr 1fr 1fr 1fr; gap:4vw; } }
+.footer .wordmark{ font-size:1.7rem; }
+.footer p.tag{ font-family:var(--serif); font-style:italic; color:var(--ink-2); margin-top:1rem; max-width:34ch; font-size:1.1rem; }
+.footer h5{ font-size:.66rem; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3); font-weight:500; margin-bottom:1.2rem; }
+.footer ul{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:.6rem; font-size:.95rem; color:var(--ink-2); }
+.footer-bottom{ display:flex; justify-content:space-between; gap:1.5rem; flex-wrap:wrap; padding-top:1.6rem; font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-3); font-weight:500; }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .grain, .scroll-cue i::after{ animation:none; }
+  *{ transition-duration:.01ms !important; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Paper grain -->
+<div class="grain" aria-hidden="true"></div>
+
+<!-- Cursor -->
+<div class="cursor" id="cursor" aria-hidden="true">
+  <div class="cursor-dot"></div>
+  <div class="cursor-ring"><span>Open</span></div>
+</div>
+
+<!-- ─────────────────────────── NAV ─────────────────────────── -->
+<header class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="#top" class="wordmark" data-cursor="link">Belief Changer <small>A free living library</small></a>
+    <nav class="nav-links" aria-label="Primary">
+      <a class="lnk" href="#mechanism" data-cursor="link">The Mechanism</a>
+      <a class="lnk" href="#library" data-cursor="link">The Ten Books</a>
+      <a class="lnk" href="#outside" data-cursor="link">Life Outside</a>
+      <a class="lnk" href="#covenant" data-cursor="link">Covenant</a>
+      <a class="lnk" href="#request" data-cursor="link">Request</a>
+    </nav>
+    <div class="nav-right">
+      <button class="theme-btn" id="themeBtn" aria-label="Toggle light and dark mode" data-cursor="link">
+        <i class="orb"></i><span id="themeLabel">Night</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ─────────────────────── ACT I · HERO ─────────────────────── -->
+<section class="hero" id="hero">
+  <div class="hero-bg"><img id="heroImg" src="painted-first-morning.png" alt="Morning light over a quiet river as birds lift from the water" fetchpriority="high" /></div>
+  <div class="hero-veil"></div>
+
+  <div class="container hero-inner">
+    <div class="hero-copy">
+      <p class="eyebrow reveal">Act I · The Unburdening</p>
+      <h1 class="split" id="heroTitle">The trap has no lock. <em>You can walk out.</em></h1>
+      <p class="lede reveal" data-delay=".5">Free, living books that help people leave smoking, sugar, scrolling, and compulsive habits behind — not through willpower, but by seeing the belief that keeps you there.</p>
+
+      <form class="finder reveal" data-delay=".7" id="finder" autocomplete="off">
+        <label class="sr-only" for="finderInput">What belief would you like to dismantle today?</label>
+        <div class="finder-field">
+          <input id="finderInput" type="text" placeholder="What belief would you like to dismantle today?" />
+          <button type="submit" aria-label="Find the book" data-cursor="link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><path d="M3 12h17M14 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+        <div class="chips" id="chips">
+          <span>Try</span>
+          <button type="button" class="chip" data-book="sugar">Sugar</button>
+          <button type="button" class="chip" data-book="smoking">Smoking</button>
+          <button type="button" class="chip" data-book="scrolling">Scrolling</button>
+          <button type="button" class="chip" data-book="overthinking">Overthinking</button>
+          <button type="button" class="chip" data-book="alcohol">Alcohol</button>
+          <button type="button" class="chip" data-book="vaping">Vaping</button>
+        </div>
+        <p class="finder-msg" id="finderMsg" aria-live="polite"></p>
+      </form>
+    </div>
+
+    <div class="hero-books" id="heroBooks" aria-hidden="true">
+      <figure class="hb hb-1" data-depth="10" data-cursor="book" data-book="scrolling"><img src="03-scrolling.png" alt="" /></figure>
+      <figure class="hb hb-2" data-depth="18" data-cursor="book" data-book="smoking"><img src="02-smoking.png" alt="" /></figure>
+      <figure class="hb hb-3" data-depth="28" data-cursor="book" data-book="sugar"><img src="01-sugar.png" alt="" /></figure>
+    </div>
+  </div>
+
+  <div class="hero-foot">
+    <div class="scroll-cue"><i></i><span>Scroll</span></div>
+    <span>Ten titles · Zero cost · No account</span>
+  </div>
+</section>
+
+<!-- ─────────────────────────── THESIS ─────────────────────────── -->
+<section class="section thesis">
+  <div class="container">
+    <p class="eyebrow reveal">The core law</p>
+    <h2 class="thesis-law split" style="margin-top:1.4rem">We act the way we believe.</h2>
+    <div class="thesis-grid">
+      <div class="reveal">
+        <span class="num">i.</span>
+        <p>Nobody stays in a trap because they are weak. In every moment the brain reaches for what it believes is its <strong>happiest available option</strong>. That reaching is not a flaw. It is the design working perfectly on false information.</p>
+      </div>
+      <div class="reveal" data-delay=".12">
+        <span class="num">ii.</span>
+        <p>Willpower asks you to hold a door shut for the rest of your life. Seeing asks something quieter: <strong>look at how the illusion actually works.</strong> Once the mechanism is visible, there is no door, and nothing to hold.</p>
+      </div>
+      <div class="reveal" data-delay=".24">
+        <span class="num">iii.</span>
+        <p>Freedom is not a luxury or a reward for discipline. It is ordinary. It feels like morning air, and it is available <strong>now</strong>, in whatever state you arrived here.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ────────────────────── ACT II · MECHANISM ────────────────────── -->
+<section class="section mech" id="mechanism">
+  <div class="container mech-grid">
+
+    <div class="mech-visual" id="mechVisual">
+      <div class="mech-frame">
+        <img class="mech-img mech-img--knot" id="mechKnot" src="painted-setting-down-weight.png" alt="A rope, already loose, resting on a wooden table beside an open window" loading="lazy" />
+        <img class="mech-img mech-img--gate" id="mechGate" src="painted-open-garden-gate.png" alt="An open garden gate with morning light beyond" loading="lazy" />
+      </div>
+      <div class="mech-caps">
+        <p class="mech-cap a">A knot that was never pulled tight.</p>
+        <p class="mech-cap b">Outside, the gate was open the whole time.</p>
+      </div>
+    </div>
+
+    <div class="mech-text">
+      <header>
+        <p class="eyebrow reveal">Act II · The Mechanism</p>
+        <h2 class="split">Why willpower always fails.</h2>
+      </header>
+
+      <div class="model model--lie">
+        <div class="model-label reveal">The old lie <b>— what you were told</b></div>
+        <blockquote class="reveal">“You are weak. You must fight yourself, grit your teeth, and suffer in deprivation.”</blockquote>
+        <p class="body reveal">Every method built on this premise makes the trap look valuable. If leaving costs a war, the thing you are leaving must be worth having. The struggle itself becomes the proof that you are missing out.</p>
+      </div>
+
+      <div class="model model--fact">
+        <div class="model-label reveal">The biological fact <b>— what is actually happening</b></div>
+        <blockquote class="reveal">You act on what you believe delivers peace. When you see that the cigarette creates the tension it relieves, that the feed steals the evening it promised to fill, the craving has no foundation left to stand on.</blockquote>
+        <p class="body reveal">Nothing is being resisted. A belief is being examined until it fails on its own terms. What remains afterward is not deprivation — it is the absence of a problem you no longer have.</p>
+      </div>
+
+      <ol class="steps">
+        <li class="reveal"><span class="n">01</span><div><h4>The trap manufactures a small discomfort.</h4><p>A dip, an itch, a low hum of unease that was not there before you started.</p></div></li>
+        <li class="reveal" data-delay=".08"><span class="n">02</span><div><h4>It sells you the relief.</h4><p>The next dose returns you, briefly, to how you felt before the first one.</p></div></li>
+        <li class="reveal" data-delay=".16"><span class="n">03</span><div><h4>You credit the seller.</h4><p>The relief feels like pleasure. The debt feels like your personality.</p></div></li>
+      </ol>
+
+      <p class="mech-close reveal">Seen clearly, the transaction collapses. Not because you became stronger — because there was never anything to buy.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─────────────────── ACT III · SPECIMEN GALLERY ─────────────────── -->
+<section class="gallery" id="library">
+  <div class="container gallery-head">
+    <div>
+      <p class="eyebrow reveal">Act III · The Specimen Series</p>
+      <h2 class="split">Ten traps, laid on the table.</h2>
+    </div>
+    <p class="body reveal">Each cover is a physical object photographed on a quiet ground: the trap, disarmed, sitting where it can no longer reach you. Every book is free, in every format, forever. Open one.</p>
+  </div>
+
+  <div class="track-wrap" id="trackWrap">
+    <div class="track" id="track"><!-- rendered by JS --></div>
+    <div class="track-ui" aria-hidden="true">
+      <span class="track-hint">Scroll to browse</span>
+      <div class="track-bar"><i id="trackBar"></i></div>
+      <span class="track-count" id="trackCount">01 — 10</span>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────────────── ACT IV · THE LIFE OUTSIDE ──────────────────── -->
+<section id="outside">
+  <div class="container outside-intro">
+    <p class="eyebrow reveal">Act IV · The Life Outside</p>
+    <h2 class="split">What comes back when the pull is gone.</h2>
+  </div>
+
+  <div class="scenes">
+    <div class="scene">
+      <div class="scene-img"><img src="painted-wide-world.png" alt="A man on a footbridge looking out over a wide morning park toward the city" loading="lazy" /></div>
+      <div class="scene-veil"></div>
+      <div class="scene-copy">
+        <p class="eyebrow reveal">I.</p>
+        <h2 class="split">Mornings, unclouded.</h2>
+        <p class="reveal">You wake and there is nothing to negotiate. No first thing to get to before the day can begin. The first hour belongs to you again.</p>
+      </div>
+    </div>
+
+    <div class="scene">
+      <div class="scene-img"><img src="painted-riverside-glide.jpg" alt="Two friends cycling along a wet riverside path after rain" loading="lazy" /></div>
+      <div class="scene-veil"></div>
+      <div class="scene-copy">
+        <p class="eyebrow reveal">II.</p>
+        <h2 class="split">Evenings, their proper length.</h2>
+        <p class="reveal">The hours you thought were short were only being spent elsewhere. They return slowly, and then all at once — long, ordinary, and yours.</p>
+      </div>
+    </div>
+
+    <div class="scene">
+      <div class="scene-img"><img src="photo-open-street.jpg" alt="Two people walking together across a bridge toward the city in soft light" loading="lazy" /></div>
+      <div class="scene-veil"></div>
+      <div class="scene-copy">
+        <p class="eyebrow reveal">III.</p>
+        <h2 class="split">Company, without the third party in the room.</h2>
+        <p class="reveal">Nothing between you and the person beside you. Presence is not a discipline; it is what remains when the pull is gone.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container notes-wrap">
+    <div class="notes-head">
+      <p class="eyebrow reveal">Field notes</p>
+      <h2 class="split">Small, unborrowed things.</h2>
+    </div>
+    <div class="notes">
+      <div class="note reveal">
+        <figure><img src="painted-bench.jpg" alt="Two women in conversation on a park bench under summer trees" loading="lazy" data-parallax="8" /></figure>
+        <figcaption><q>The conversation you were only half in.</q><span>Attention, returned</span></figcaption>
+      </div>
+      <div class="note reveal" data-delay=".1">
+        <figure><img src="photo-open-window.jpg" alt="A bedroom with balcony doors thrown open to morning sun" loading="lazy" data-parallax="8" /></figure>
+        <figcaption><q>Air, first thing.</q><span>Breath, unassisted</span></figcaption>
+      </div>
+      <div class="note reveal" data-delay=".05">
+        <figure><img src="painted-lit-window.jpg" alt="A kite drifting in a bright sky above the trees and rooftops" loading="lazy" data-parallax="8" /></figure>
+        <figcaption><q>Looking up, for no reason.</q><span>Wonder, unscheduled</span></figcaption>
+      </div>
+    </div>
+  </div>
+
+  <div class="container outside-close">
+    <p class="split">Not a better version of you. <em>The same one, unburdened.</em></p>
+  </div>
+</section>
+
+<!-- ───────────────── ACT V · THE LIVING LIBRARY ───────────────── -->
+<section class="section living" id="living">
+  <div class="container living-grid">
+
+    <div class="living-visual">
+      <figure><img src="painted-free-book-cabinet.png" alt="Two neighbours at a small free book cabinet on a tree-lined path" loading="lazy" data-parallax="6" /></figure>
+      <figcaption>A book left in the open, so that anyone passing can take it, and anyone who has read it can leave a note inside.</figcaption>
+    </div>
+
+    <div class="living-text">
+      <p class="eyebrow reveal">Act V · The Living Library</p>
+      <h2 class="split">A book that keeps being written.</h2>
+      <p class="body reveal">These are not finished objects. Readers leave anonymous notes — where the argument lost them, which chapter finally landed, what a 3 a.m. craving actually sounded like. Those notes revise the text in the open. Each edition is versioned, dated, and free to anyone who finds it.</p>
+
+      <ol class="changelog">
+        <li class="reveal"><div class="v">v1.3<small>May 2025</small></div><div class="t"><b>The Scrolling Trap</b>Added Chapter 4, “The Phantom Buzz”, after 312 readers described checking a phone that had not rung.</div></li>
+        <li class="reveal"><div class="v">v1.2<small>Mar 2025</small></div><div class="t"><b>The Sugar Trap</b>Revised Chapter 3 on late-night cravings. The withdrawal timeline was corrected from reader logs.</div></li>
+        <li class="reveal"><div class="v">v1.1<small>Jan 2025</small></div><div class="t"><b>The Smoking Trap</b>Clarified the “just one” illusion; a new closing letter written from the first week out.</div></li>
+        <li class="reveal"><div class="v">v1.0<small>Nov 2024</small></div><div class="t"><b>The Overthinking Trap</b>First open edition. Fourteen readers asked for it by name.</div></li>
+      </ol>
+
+      <form class="feedback reveal" id="feedbackForm">
+        <label for="feedbackText">Tell the book where it lost you.</label>
+        <textarea id="feedbackText" placeholder="No name, no address, no account. Just the sentence you wish had been there."></textarea>
+        <div class="feedback-row">
+          <span class="small">Read by a human. Folded into the next edition.</span>
+          <button type="submit" class="btn" data-cursor="link">Send anonymously</button>
+        </div>
+        <p class="feedback-msg" id="feedbackMsg" aria-live="polite"></p>
+      </form>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─────────────────────────── COVENANT ─────────────────────────── -->
+<section class="covenant" id="covenant">
+  <div class="container">
+    <div class="covenant-head">
+      <div>
+        <p class="eyebrow reveal">The Immutable Covenant</p>
+        <h2 class="split">Four things that will never change.</h2>
+      </div>
+      <p class="body reveal">A sanctuary cannot have a turnstile. The whole point of this place is that nobody, in their worst hour, should have to pay, sign in, or be followed to get help.</p>
+    </div>
+
+    <ol class="covenant-list">
+      <li class="reveal"><span class="r">i.</span><h4>Free, forever.</h4><p>Open source and non-profit. No premium tier, no “full version”. The books cost nothing today and will cost nothing in fifty years.</p></li>
+      <li class="reveal"><span class="r">ii.</span><h4>Zero tracking, cookies, ads, or sign-ups.</h4><p>We do not know who you are, and we have built the site so that we cannot find out. Nothing here is measured but the quality of the writing.</p></li>
+      <li class="reveal"><span class="r">iii.</span><h4>Every format.</h4><p>Read online in a quiet reader, download the EPUB, or listen. The same living text, wherever you happen to be when you need it.</p></li>
+      <li class="reveal"><span class="r">iv.</span><h4>Every language.</h4><p>Open translations, machine-drafted and human-corrected, kept in step with each new edition — so that no one waits years for freedom in their own tongue.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ────────────────────────── REQUEST QUEUE ────────────────────────── -->
+<section class="request" id="request">
+  <div class="container request-grid">
+    <div>
+      <p class="eyebrow reveal">Request a new book</p>
+      <h2 class="split">Which trap should we lay on the table next?</h2>
+      <p class="body reveal">The catalogue grows in the order people need it. Add your voice to a title below, or name a trap we haven’t written yet. When a request gathers enough weight, the writing begins — in the open, like everything else.</p>
+      <form class="request-form reveal" id="requestForm">
+        <div class="finder-field">
+          <input id="requestInput" type="text" placeholder="Name a trap…" />
+          <button type="submit" aria-label="Add request" data-cursor="link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><path d="M3 12h17M14 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+        <span class="small">One vote per title. Counted locally on your device; nothing about you leaves it.</span>
+      </form>
+    </div>
+    <ol class="queue reveal" id="queue"><!-- rendered by JS --></ol>
+  </div>
+</section>
+
+</main>
+
+<!-- ─────────────────────────── FOOTER ─────────────────────────── -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="#top" class="wordmark" data-cursor="link">Belief Changer</a>
+        <p class="tag">Warm to the person. Harsh to the trap. Made freely, and kept free.</p>
+      </div>
+      <div>
+        <h5>Library</h5>
+        <ul>
+          <li><a class="lnk" href="#library" data-cursor="link">The ten books</a></li>
+          <li><a class="lnk" href="#living" data-cursor="link">Edition history</a></li>
+          <li><a class="lnk" href="#request" data-cursor="link">Request a title</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Formats</h5>
+        <ul>
+          <li><a class="lnk" href="#library" data-cursor="link">Read online</a></li>
+          <li><a class="lnk" href="#library" data-cursor="link">EPUB</a></li>
+          <li><a class="lnk" href="#library" data-cursor="link">Audio</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>The Covenant</h5>
+        <ul>
+          <li><a class="lnk" href="#covenant" data-cursor="link">Free forever</a></li>
+          <li><a class="lnk" href="#covenant" data-cursor="link">No tracking</a></li>
+          <li><a class="lnk" href="#covenant" data-cursor="link">Open source</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>A non-profit living library · No rights reserved</span>
+      <span>If you are in danger tonight, please call your local emergency line. This page will still be here tomorrow.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ─────────────────────────── SHEET ─────────────────────────── -->
+<div class="sheet-backdrop" id="sheetBackdrop"></div>
+<aside class="sheet" id="sheet" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="sheetTitle" data-lenis-prevent>
+  <div class="sheet-top">
+    <span class="small" id="sheetKicker">Specimen 01 · v1.2</span>
+    <button class="sheet-close" id="sheetClose" data-cursor="link">Close <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </div>
+  <div class="sheet-scroll" id="sheetScroll">
+    <div class="sheet-plinth" id="sheetPlinth"><img id="sheetCover" src="" alt="" /></div>
+    <p class="eyebrow bare" id="sheetSeries">The Specimen Series</p>
+    <h3 id="sheetTitle"></h3>
+    <p class="line" id="sheetLine"></p>
+    <div class="sheet-belief">
+      <span>The belief this book dismantles</span>
+      <p id="sheetBelief"></p>
+    </div>
+    <div class="sheet-actions">
+      <a class="btn btn--solid" id="sheetRead" href="#" data-cursor="link">Read online <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
+      <a class="btn" id="sheetEpub" href="#" download data-cursor="link">Download EPUB · Free</a>
+      <a class="btn" id="sheetAudio" href="#" data-cursor="link">Listen</a>
+    </div>
+    <p class="eyebrow bare" style="margin-bottom:.9rem">Chapters</p>
+    <ol class="chapters" id="sheetChapters"></ol>
+    <p class="sheet-note" id="sheetNote"></p>
+  </div>
+</aside>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   DATA
+═══════════════════════════════════════════════════════════════ */
+const BOOKS = [
+  { n:'01', slug:'sugar', title:'The Sugar Trap', file:'01-sugar.png', ground:'#DBD9D8', version:'v1.2', mins:85, langs:41,
+    line:'The craving is withdrawal wearing the mask of hunger. See it once and it loosens.',
+    belief:'“I need something sweet to get through this.”',
+    chapters:['The Hunger That Isn’t','How the Spike Writes the Dip','What the Craving Actually Wants','Late-Night Cravings, Revisited','The Table Without a Fight'] },
+  { n:'02', slug:'smoking', title:'The Smoking Trap', file:'02-smoking.png', ground:'#9AA28D', version:'v1.1', mins:110, langs:44,
+    line:'It never relaxed you. It created the tension it then relieved.',
+    belief:'“A cigarette calms me down.”',
+    chapters:['The First One Never Relaxed You','Tension, Manufactured to Order','The “Just One” Illusion','What Nicotine Promises and Cannot Deliver','The Last Cigarette Is Not a Loss'] },
+  { n:'03', slug:'scrolling', title:'The Scrolling Trap', file:'03-scrolling.png', ground:'#6C8594', version:'v1.3', mins:95, langs:38,
+    line:'When the feed owns your evenings and your attention feels rented.',
+    belief:'“I’m just unwinding for a minute.”',
+    chapters:['An Evening, Rented','The Feed Is Not Boredom’s Cure','Attention as a Commons','The Phantom Buzz','Putting the Phone Face Down, for Good'] },
+  { n:'04', slug:'porn', title:'The Porn Trap', file:'04-porn.png', ground:'#CEC7BC', version:'v1.0', mins:100, langs:29,
+    line:'A promise of intimacy that quietly trains you away from the real thing.',
+    belief:'“It’s harmless. Everyone does it.”',
+    chapters:['The Promise of Intimacy','A Training Programme You Never Enrolled In','Novelty Is Not Desire','What Returns When the Screen Goes Dark','Real Skin, Real Time'] },
+  { n:'05', slug:'alcohol', title:'The Alcohol Trap', file:'05-alcohol.png', ground:'#51533B', version:'v1.1', mins:120, langs:40,
+    line:'It borrows tomorrow’s calm and charges interest tonight.',
+    belief:'“I can’t relax, or be fun, without a drink.”',
+    chapters:['Borrowing Tomorrow’s Calm','The Social Lubricant Myth','Why the Second Drink Exists','Sober Is Not the Absence of Something','An Evening That Ends Where You Meant It To'] },
+  { n:'06', slug:'gaming', title:'The Gaming Trap', file:'06-gaming.png', ground:'#BFA482', version:'v1.0', mins:80, langs:31,
+    line:'Endless progress in a world that leaves you exactly where you started.',
+    belief:'“I’m so close to finishing. Then I’ll stop.”',
+    chapters:['Progress Without Ground','The Loop That Feels Like Purpose','Designed Incompleteness','What a Game Cannot Give You Back','Playing Because You Want To'] },
+  { n:'07', slug:'junkfood', title:'The Junk Food Trap', file:'07-junkfood.png', ground:'#D07452', version:'v1.1', mins:90, langs:36,
+    line:'Engineered to override the biological signal that says you have had enough.',
+    belief:'“I just have no self-control around food.”',
+    chapters:['Engineered Past Enough','The Bliss Point','Hunger, Impersonated','The Signal Returns','Eating Like an Animal, in the Best Sense'] },
+  { n:'08', slug:'vaping', title:'The Vaping Trap', file:'08-vaping.png', ground:'#A7B0A4', version:'v1.0', mins:75, langs:33,
+    line:'The same old chemical hook in a cleaner-looking package.',
+    belief:'“At least it isn’t smoking.”',
+    chapters:['The Cleaner-Looking Hook','Same Chemistry, New Clothes','The Trap Inside Harm Reduction','The Flavour Is Not the Point','Breathing, Unassisted'] },
+  { n:'09', slug:'overthinking', title:'The Overthinking Trap', file:'09-overthinking.png', ground:'#C0A09A', version:'v1.0', mins:95, langs:27,
+    line:'The mind promises that one more loop will finally make you safe.',
+    belief:'“If I think about it enough, I’ll be ready.”',
+    chapters:['One More Loop','Thinking as a Safety Ritual','The Problem That Solves Nothing','Certainty Was Never on Offer','A Quiet Mind Is Not an Empty One'] },
+  { n:'10', slug:'complaining', title:'The Complaining Trap', file:'10-complaining.png', ground:'#E1C5A0', version:'v1.0', mins:70, langs:25,
+    line:'Each complaint feels like release, but quietly deepens the groove.',
+    belief:'“Saying it out loud gets it off my chest.”',
+    chapters:['The Release That Deepens the Groove','Rehearsing Grievance','What the Complaint Is Asking For','Noticing Without Narrating','Speaking When It Changes Something'] },
+];
+
+const REQUEST_SEED = [
+  { id:'procrastination', title:'The Procrastination Trap', votes:2103 },
+  { id:'caffeine',        title:'The Caffeine Trap',        votes:1284 },
+  { id:'shopping',        title:'The Shopping Trap',        votes:972 },
+  { id:'news',            title:'The News Trap',            votes:861 },
+  { id:'betting',         title:'The Sports Betting Trap',  votes:640 },
+];
+
+/* ═══════════════════════════════════════════════════════════════
+   SETUP
+═══════════════════════════════════════════════════════════════ */
+const $ = (s, c=document) => c.querySelector(s);
+const $$ = (s, c=document) => [...c.querySelectorAll(s)];
+const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const finePointer = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+if (reduced) document.documentElement.classList.add('reduced');
+
+gsap.registerPlugin(ScrollTrigger);
+
+/* Theme */
+(function initTheme(){
+  const saved = localStorage.getItem('bc-theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  setTheme(saved || (prefersDark ? 'dark' : 'light'), false);
+  $('#themeBtn').addEventListener('click', () => {
+    const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+    setTheme(next, true);
+  });
+})();
+function setTheme(t, persist){
+  document.documentElement.dataset.theme = t;
+  $('#themeLabel').textContent = t === 'dark' ? 'Day' : 'Night';
+  $('meta[name="theme-color"]').setAttribute('content', t === 'dark' ? '#0E0D0C' : '#FFFFFF');
+  if (persist) localStorage.setItem('bc-theme', t);
+}
+
+/* Lenis */
+let lenis = null;
+if (!reduced && typeof Lenis !== 'undefined'){
+  lenis = new Lenis({ lerp:0.085, smoothWheel:true, wheelMultiplier:0.9, touchMultiplier:1.2 });
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add((time) => lenis.raf(time * 1000));
+  gsap.ticker.lagSmoothing(0);
+}
+function scrollTo(target, offset=-74){
+  if (lenis) lenis.scrollTo(target, { offset, duration:1.6, easing:(t)=>1-Math.pow(1-t,4) });
+  else { const el = typeof target === 'string' ? $(target) : target; el && el.scrollIntoView({ behavior:'smooth' }); }
+}
+$$('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', (e) => {
+    const id = a.getAttribute('href');
+    if (id.length > 1 && $(id)) { e.preventDefault(); scrollTo(id, id === '#top' ? 0 : -74); }
+  });
+});
+
+/* ═══════════════════════════════════════════════════════════════
+   RENDER · GALLERY
+═══════════════════════════════════════════════════════════════ */
+(function renderGallery(){
+  const track = $('#track');
+  track.innerHTML = BOOKS.map((b, i) => `
+    <article class="spec" data-index="${i}" style="--ground:${b.ground}">
+      <div class="spec-plinth">
+        <button class="spec-cover" data-cursor="book" data-book="${b.slug}" aria-label="Open ${b.title}">
+          <img src="${b.file}" alt="${b.title} — cover specimen" loading="lazy" decoding="async" />
+        </button>
+      </div>
+      <div class="spec-meta">
+        <span class="num">${b.n}</span>
+        <h3>${b.title}</h3>
+        <p class="line">${b.line}</p>
+        <div class="facts"><span>${b.version}</span><span>${b.mins} min read</span><span>${b.langs} languages</span></div>
+        <div class="acts">
+          <button class="btn" data-book="${b.slug}" data-cursor="link">Open the book</button>
+          <a class="lnk" href="#" data-book="${b.slug}" data-cursor="link">EPUB · Free</a>
+        </div>
+      </div>
+    </article>`).join('');
+})();
+
+/* ═══════════════════════════════════════════════════════════════
+   SHEET
+═══════════════════════════════════════════════════════════════ */
+const sheet = $('#sheet'), backdrop = $('#sheetBackdrop');
+let sheetOpen = false, lastFocus = null;
+
+function openBook(slug){
+  const b = BOOKS.find(x => x.slug === slug); if (!b) return;
+  $('#sheetKicker').textContent = `Specimen ${b.n} · ${b.version}`;
+  $('#sheetPlinth').style.setProperty('--ground', b.ground);
+  $('#sheetCover').src = b.file; $('#sheetCover').alt = `${b.title} cover`;
+  $('#sheetTitle').textContent = b.title;
+  $('#sheetLine').textContent = b.line;
+  $('#sheetBelief').textContent = b.belief;
+  $('#sheetRead').href = `#read-${b.slug}`;
+  $('#sheetEpub').href = `${b.slug}.epub`;
+  $('#sheetAudio').href = `#listen-${b.slug}`;
+  $('#sheetChapters').innerHTML = b.chapters.map((c,i) => `
+    <li><span class="n">${String(i+1).padStart(2,'0')}</span><a class="t" href="#read-${b.slug}-${i+1}">${c}</a><span class="d">${12 + (i*7)%14} min</span></li>`).join('');
+  $('#sheetNote').innerHTML = `<b>${b.mins} minutes</b> to read, or listen in under two hours. Available in <b>${b.langs} languages</b>. No account, no email, nothing to cancel. If it does not work for you, tell the book where it lost you — the next edition will be better for it.`;
+
+  lastFocus = document.activeElement;
+  sheet.classList.add('open'); backdrop.classList.add('open');
+  sheet.setAttribute('aria-hidden','false'); sheetOpen = true;
+  $('#sheetScroll').scrollTop = 0;
+  lenis && lenis.stop();
+  setTimeout(() => $('#sheetClose').focus(), 400);
+}
+function closeBook(){
+  if (!sheetOpen) return;
+  sheet.classList.remove('open'); backdrop.classList.remove('open');
+  sheet.setAttribute('aria-hidden','true'); sheetOpen = false;
+  lenis && lenis.start();
+  lastFocus && lastFocus.focus();
+}
+$('#sheetClose').addEventListener('click', closeBook);
+backdrop.addEventListener('click', closeBook);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeBook(); });
+document.addEventListener('click', e => {
+  const t = e.target.closest('[data-book]');
+  if (!t || t.classList.contains('chip')) return;
+  e.preventDefault(); openBook(t.dataset.book);
+});
+
+/* ═══════════════════════════════════════════════════════════════
+   FINDER
+═══════════════════════════════════════════════════════════════ */
+(function initFinder(){
+  const form = $('#finder'), input = $('#finderInput'), msg = $('#finderMsg');
+  const findBook = q => {
+    q = q.trim().toLowerCase(); if (!q) return null;
+    return BOOKS.find(b => b.slug.includes(q) || b.title.toLowerCase().includes(q) || q.includes(b.slug)) ||
+           BOOKS.find(b => b.line.toLowerCase().includes(q) || b.belief.toLowerCase().includes(q));
+  };
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const b = findBook(input.value);
+    if (b){ msg.textContent = `Found — ${b.title}.`; openBook(b.slug); }
+    else if (input.value.trim()){
+      msg.textContent = 'Not on the table yet. We have carried your words to the request queue.';
+      $('#requestInput').value = input.value.trim();
+      setTimeout(() => scrollTo('#request'), 900);
+    }
+  });
+  input.addEventListener('input', () => {
+    const b = findBook(input.value);
+    msg.textContent = b ? `Press enter to open ${b.title}.` : '';
+  });
+  $$('.chip').forEach(c => c.addEventListener('click', () => { input.value = c.textContent; openBook(c.dataset.book); }));
+})();
+
+/* ═══════════════════════════════════════════════════════════════
+   REQUEST QUEUE
+═══════════════════════════════════════════════════════════════ */
+(function initQueue(){
+  const KEY = 'bc-requests', VKEY = 'bc-voted';
+  let items = JSON.parse(localStorage.getItem(KEY) || 'null') || REQUEST_SEED.map(x => ({...x}));
+  let voted = new Set(JSON.parse(localStorage.getItem(VKEY) || '[]'));
+  const list = $('#queue');
+  const save = () => { localStorage.setItem(KEY, JSON.stringify(items)); localStorage.setItem(VKEY, JSON.stringify([...voted])); };
+  const render = () => {
+    items.sort((a,b) => b.votes - a.votes);
+    list.innerHTML = items.map((it, i) => `
+      <li>
+        <div><div class="qt">${it.title}</div><div class="qs">Rank ${String(i+1).padStart(2,'0')} · ${it.votes >= 500 ? 'Gathering weight' : 'Newly named'}</div></div>
+        <button class="vote ${voted.has(it.id) ? 'voted' : ''}" data-id="${it.id}" data-cursor="link" aria-pressed="${voted.has(it.id)}">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
+          <span>${it.votes.toLocaleString()}</span>
+        </button>
+      </li>`).join('');
+  };
+  list.addEventListener('click', e => {
+    const btn = e.target.closest('.vote'); if (!btn) return;
+    const it = items.find(x => x.id === btn.dataset.id); if (!it) return;
+    if (voted.has(it.id)){ voted.delete(it.id); it.votes--; } else { voted.add(it.id); it.votes++; }
+    save(); render();
+  });
+  $('#requestForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const inp = $('#requestInput'); let v = inp.value.trim(); if (!v) return;
+    let title = /trap$/i.test(v) ? v : `The ${v.replace(/^the\s+/i,'').replace(/\b\w/g, c => c.toUpperCase())} Trap`;
+    const id = title.toLowerCase().replace(/[^a-z]+/g,'-');
+    const existing = items.find(x => x.id === id);
+    if (existing){ if (!voted.has(id)){ voted.add(id); existing.votes++; } }
+    else { items.push({ id, title, votes:1 }); voted.add(id); }
+    inp.value = ''; save(); render();
+  });
+  render();
+})();
+
+/* Feedback */
+$('#feedbackForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const t = $('#feedbackText');
+  if (!t.value.trim()){ $('#feedbackMsg').textContent = 'Even one sentence helps.'; return; }
+  $('#feedbackMsg').textContent = 'Received, with thanks. It will be read, and folded into the next edition.';
+  t.value = '';
+});
+
+/* ═══════════════════════════════════════════════════════════════
+   CURSOR
+═══════════════════════════════════════════════════════════════ */
+if (finePointer && !reduced){
+  document.body.classList.add('no-cursor');
+  const cur = $('#cursor'), dot = $('.cursor-dot', cur), ring = $('.cursor-ring', cur);
+  const dx = gsap.quickTo(dot, 'x', { duration:.08, ease:'power2' }), dy = gsap.quickTo(dot, 'y', { duration:.08, ease:'power2' });
+  const rx = gsap.quickTo(ring, 'x', { duration:.42, ease:'power3' }), ry = gsap.quickTo(ring, 'y', { duration:.42, ease:'power3' });
+  window.addEventListener('mousemove', e => { dx(e.clientX); dy(e.clientY); rx(e.clientX); ry(e.clientY); }, { passive:true });
+  document.addEventListener('mouseover', e => {
+    const t = e.target.closest('[data-cursor]');
+    cur.classList.toggle('is-book', !!t && t.dataset.cursor === 'book');
+    cur.classList.toggle('is-link', !!t && t.dataset.cursor === 'link');
+  });
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   NAV
+═══════════════════════════════════════════════════════════════ */
+(function initNav(){
+  const nav = $('#nav'); let last = 0;
+  ScrollTrigger.create({
+    start: 0, end: 'max',
+    onUpdate: self => {
+      const y = self.scroll();
+      nav.classList.toggle('scrolled', y > 40);
+      nav.classList.toggle('hidden', y > 600 && y > last && !sheetOpen);
+      last = y;
+    }
+  });
+})();
+
+/* ═══════════════════════════════════════════════════════════════
+   TEXT SPLITTING & REVEALS
+═══════════════════════════════════════════════════════════════ */
+function splitWords(el){
+  const walk = node => {
+    [...node.childNodes].forEach(child => {
+      if (child.nodeType === 3){
+        const frag = document.createDocumentFragment();
+        child.textContent.split(/(\s+)/).forEach(part => {
+          if (!part) return;
+          if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(' ')); return; }
+          const w = document.createElement('span'); w.className = 'w';
+          const wi = document.createElement('span'); wi.className = 'wi'; wi.textContent = part;
+          w.appendChild(wi); frag.appendChild(w);
+        });
+        node.replaceChild(frag, child);
+      } else if (child.nodeType === 1) walk(child);
+    });
+  };
+  walk(el);
+}
+$$('.split').forEach(splitWords);
+
+if (!reduced){
+  $$('.split').forEach(el => {
+    if (el.id === 'heroTitle') return;
+    gsap.to($$('.wi', el), { yPercent:-112, y:0, duration:1.3, ease:'power4.out', stagger:.045,
+      scrollTrigger:{ trigger:el, start:'top 86%', once:true } });
+  });
+  $$('.reveal').forEach(el => {
+    if (el.closest('#hero')) return;
+    gsap.to(el, { opacity:1, y:0, duration:1.3, ease:'power3.out', delay:parseFloat(el.dataset.delay || 0),
+      scrollTrigger:{ trigger:el, start:'top 90%', once:true } });
+  });
+  // Soft image parallax
+  $$('[data-parallax]').forEach(img => {
+    const amt = parseFloat(img.dataset.parallax) || 6;
+    gsap.fromTo(img, { yPercent:amt }, { yPercent:-amt, ease:'none',
+      scrollTrigger:{ trigger:img.closest('figure') || img, start:'top bottom', end:'bottom top', scrub:true } });
+  });
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   ACT I · HERO CHOREOGRAPHY
+═══════════════════════════════════════════════════════════════ */
+(function hero(){
+  const heroWords = $$('#heroTitle .wi');
+  const heroReveals = $$('#hero .reveal');
+  const books = $$('.hb');
+
+  if (reduced){ gsap.set([heroWords, heroReveals], { clearProps:'all', opacity:1, transform:'none' }); return; }
+
+  const intro = gsap.timeline({ defaults:{ ease:'power4.out' }, delay:.2 });
+  intro.fromTo('#heroImg', { scale:1.08, opacity:0 }, { scale:1, opacity:1, duration:2.4, ease:'power2.out' }, 0)
+       .to(heroWords, { yPercent:-112, duration:1.4, stagger:.06 }, .3)
+       .to(heroReveals, { opacity:1, y:0, duration:1.2, stagger:.14 }, .7)
+       .fromTo(books, { y:60, opacity:0 }, { y:0, opacity:1, duration:1.6, stagger:.12, ease:'power3.out' }, .9);
+
+  // Pinned scroll parallax (desktop) / soft parallax (mobile)
+  const mm = gsap.matchMedia();
+  mm.add('(min-width:1024px)', () => {
+    const tl = gsap.timeline({ scrollTrigger:{ trigger:'#hero', start:'top top', end:'+=70%', pin:true, scrub:1.1, anticipatePin:1 } });
+    tl.to('#heroImg', { scale:1.14, yPercent:4, ease:'none' }, 0)
+      .to('.hero-copy', { y:-90, opacity:0, ease:'power1.in' }, 0)
+      .to('.hb-1', { y:-160, opacity:0, ease:'power1.in' }, 0)
+      .to('.hb-2', { y:-240, opacity:0, ease:'power1.in' }, 0)
+      .to('.hb-3', { y:-330, opacity:0, ease:'power1.in' }, 0)
+      .to('.hero-foot', { opacity:0 }, 0);
+  });
+  mm.add('(max-width:1023px)', () => {
+    gsap.to('#heroImg', { scale:1.12, ease:'none', scrollTrigger:{ trigger:'#hero', start:'top top', end:'bottom top', scrub:true } });
+  });
+
+  // Mouse-driven depth on the book stack
+  if (finePointer){
+    const heroEl = $('#hero');
+    const setters = books.map(b => ({ x:gsap.quickTo(b,'x',{duration:1.2,ease:'power3'}), y:gsap.quickTo(b,'y',{duration:1.2,ease:'power3'}), rx:gsap.quickTo(b,'rotationX',{duration:1.2,ease:'power3'}), ry:gsap.quickTo(b,'rotationY',{duration:1.2,ease:'power3'}), d:parseFloat(b.dataset.depth) }));
+    heroEl.addEventListener('mousemove', e => {
+      const r = heroEl.getBoundingClientRect();
+      const px = (e.clientX - r.left) / r.width - .5, py = (e.clientY - r.top) / r.height - .5;
+      setters.forEach(s => { s.x(px * s.d * 1.6); s.y(py * s.d * 1.2); s.ry(px * 8); s.rx(-py * 6); });
+    });
+    heroEl.addEventListener('mouseleave', () => setters.forEach(s => { s.x(0); s.y(0); s.rx(0); s.ry(0); }));
+  }
+})();
+
+/* ═══════════════════════════════════════════════════════════════
+   ACT II · MECHANISM REVEAL
+═══════════════════════════════════════════════════════════════ */
+(function mechanism(){
+  if (reduced){ gsap.set('#mechGate', { clipPath:'inset(0% 0 0 0)' }); $('#mechVisual').classList.add('turned'); return; }
+  const tl = gsap.timeline({ scrollTrigger:{ trigger:'.mech-text', start:'top 60%', end:'bottom 80%', scrub:1.2,
+    onUpdate: self => $('#mechVisual').classList.toggle('turned', self.progress > .55) } });
+  tl.to('#mechKnot', { scale:1.12, ease:'none' }, 0)
+    .fromTo('#mechGate', { clipPath:'inset(100% 0 0 0)', scale:1.08 }, { clipPath:'inset(0% 0 0 0)', scale:1, ease:'none' }, .18);
+})();
+
+/* ═══════════════════════════════════════════════════════════════
+   ACT III · HORIZONTAL SPECIMEN TRACK
+═══════════════════════════════════════════════════════════════ */
+(function gallery(){
+  const mm = gsap.matchMedia();
+  mm.add('(min-width:1024px)', () => {
+    if (reduced) return;
+    const track = $('#track'), wrap = $('#trackWrap'), bar = $('#trackBar'), count = $('#trackCount');
+    const N = BOOKS.length;
+    const distance = () => track.scrollWidth - window.innerWidth;
+    const tween = gsap.to(track, { x: () => -distance(), ease:'none',
+      scrollTrigger:{
+        trigger:wrap, start:'top top', end:() => '+=' + distance() * 1.05, pin:true, scrub:1, anticipatePin:1, invalidateOnRefresh:true,
+        onUpdate: self => {
+          const i = Math.min(N - 1, Math.round(self.progress * (N - 1)));
+          count.textContent = `${String(i + 1).padStart(2,'0')} — ${N}`;
+          gsap.set(bar, { x: self.progress * (bar.parentElement.offsetWidth - bar.offsetWidth) });
+        }
+      } });
+    // Covers drift gently against the track direction
+    $$('.spec').forEach((spec, i) => {
+      gsap.fromTo($('.spec-cover', spec), { x:-24 }, { x:24, ease:'none',
+        scrollTrigger:{ trigger:spec, containerAnimation:tween, start:'left right', end:'right left', scrub:true } });
+      gsap.fromTo($('.spec-meta', spec), { opacity:.25, x:30 }, { opacity:1, x:0, ease:'power1.out',
+        scrollTrigger:{ trigger:spec, containerAnimation:tween, start:'left 85%', end:'left 45%', scrub:true } });
+    });
+    return () => {};
+  });
+  mm.add('(max-width:1023px)', () => {
+    if (reduced) return;
+    $$('.spec').forEach(spec => {
+      gsap.fromTo(spec, { opacity:0, y:40 }, { opacity:1, y:0, duration:1.2, ease:'power3.out',
+        scrollTrigger:{ trigger:spec, start:'top 85%', once:true } });
+    });
+  });
+})();
+
+/* ═══════════════════════════════════════════════════════════════
+   ACT IV · SCENES
+═══════════════════════════════════════════════════════════════ */
+if (!reduced){
+  $$('.scene').forEach(scene => {
+    gsap.fromTo($('.scene-img', scene), { yPercent:-10 }, { yPercent:10, ease:'none',
+      scrollTrigger:{ trigger:scene, start:'top bottom', end:'bottom top', scrub:true } });
+  });
+}
+
+/* Refresh after fonts & images settle */
+window.addEventListener('load', () => { ScrollTrigger.refresh(); setTimeout(() => ScrollTrigger.refresh(), 800); });
+</script>
+</body>
+</html>
