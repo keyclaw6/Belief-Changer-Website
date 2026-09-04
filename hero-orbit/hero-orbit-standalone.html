@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Belief Changer — The Orbit (Standalone)</title>
+  <style>
+    :root {
+      --canvas: #ffffff;
+      --band: #ebe7df;
+      --hairline: rgba(0, 0, 0, 0.08);
+      --ink: #111111;
+      --ink-secondary: #787774;
+      --action: #111111;
+      --action-hover: #333333;
+      --on-action: #ffffff;
+      --panel-bg: rgba(255, 255, 255, 0.94);
+      --panel-border: rgba(0, 0, 0, 0.08);
+      --shadow-soft: 0 20px 40px -15px rgba(0,0,0,0.07), 0 0 1px rgba(0,0,0,0.1);
+    }
+
+    [data-theme="dark"] {
+      --canvas: #0e0d0c;
+      --band: #161513;
+      --hairline: rgba(255, 255, 255, 0.08);
+      --ink: #f0ece2;
+      --ink-secondary: #8f8a80;
+      --action: #f0ece2;
+      --action-hover: #ffffff;
+      --on-action: #0e0d0c;
+      --panel-bg: rgba(23, 21, 18, 0.94);
+      --panel-border: rgba(255, 255, 255, 0.09);
+      --shadow-soft: 0 20px 40px -15px rgba(0,0,0,0.5), 0 0 1px rgba(255,255,255,0.1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: var(--canvas);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      user-select: none;
+    }
+
+    #stage {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      cursor: grab;
+      touch-action: none;
+    }
+
+    canvas:active {
+      cursor: grabbing;
+    }
+
+    /* Top Brand Bar */
+    header {
+      position: absolute;
+      top: 28px;
+      left: 36px;
+      right: 36px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .brand {
+      font-size: 19px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      opacity: 0.85;
+    }
+
+    .theme-toggle {
+      pointer-events: auto;
+      background: none;
+      border: 1px solid var(--hairline);
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--ink);
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      background: var(--panel-bg);
+      transition: all 0.2s ease;
+    }
+
+    .theme-toggle:hover {
+      border-color: var(--ink-secondary);
+    }
+
+    /* Floating Navigation Controls */
+    .orbit-controls {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      z-index: 10;
+    }
+
+    .nav-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--hairline);
+      background: var(--panel-bg);
+      backdrop-filter: blur(10px);
+      color: var(--ink);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      box-shadow: var(--shadow-soft);
+      transition: transform 0.15s ease, background 0.2s ease;
+    }
+
+    .nav-btn:hover {
+      transform: scale(1.06);
+    }
+
+    .nav-btn:active {
+      transform: scale(0.95);
+    }
+
+    .nav-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .hint {
+      font-size: 12px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--ink-secondary);
+      pointer-events: none;
+    }
+
+    /* Editorial Presentation Card */
+    #panel {
+      position: absolute;
+      top: 50%;
+      right: clamp(24px, 6vw, 72px);
+      transform: translateY(-50%) translateX(20px);
+      width: min(340px, calc(100vw - 48px));
+      padding: 32px 28px;
+      background: var(--panel-bg);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--panel-border);
+      border-radius: 12px;
+      box-shadow: var(--shadow-soft);
+      z-index: 20;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    #panel.active {
+      opacity: 1;
+      transform: translateY(-50%) translateX(0);
+      pointer-events: auto;
+    }
+
+    #panel .tag {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ink-secondary);
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    #panel h2 {
+      margin: 0 0 12px;
+      font-size: 26px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    #panel .promise {
+      margin: 0 0 24px;
+      font-size: 15px;
+      line-height: 1.55;
+      color: var(--ink);
+      opacity: 0.85;
+    }
+
+    #panel .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    #panel .btn-primary {
+      padding: 13px 18px;
+      background: var(--action);
+      color: var(--on-action);
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      text-align: center;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.2s ease, transform 0.1s ease;
+    }
+
+    #panel .btn-primary:hover {
+      opacity: 0.9;
+    }
+
+    #panel .btn-secondary {
+      padding: 10px 18px;
+      background: transparent;
+      color: var(--ink-secondary);
+      border: 1px solid var(--hairline);
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      text-align: center;
+      cursor: pointer;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    #panel .btn-secondary:hover {
+      color: var(--ink);
+      border-color: var(--ink-secondary);
+    }
+
+    /* Mobile Adaptations */
+    @media (max-width: 768px) {
+      #panel {
+        top: auto;
+        bottom: 96px;
+        right: 20px;
+        left: 20px;
+        width: auto;
+        transform: translateY(20px);
+        padding: 24px 20px;
+      }
+      #panel.active {
+        transform: translateY(0);
+      }
+      .hint { display: none; }
+    }
+  </style>
+
+  <!-- Three.js from CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+
+  <div id="stage">
+    <header>
+      <div class="brand">Belief Changer</div>
+      <button class="theme-toggle" id="themeBtn">Switch to Dark</button>
+    </header>
+
+    <div class="orbit-controls">
+      <button class="nav-btn" id="prevBtn" aria-label="Previous book">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
+      <span class="hint">Scroll or Drag Ring</span>
+      <button class="nav-btn" id="nextBtn" aria-label="Next book">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
+    </div>
+
+    <aside id="panel">
+      <span class="tag" id="panelTag">Belief Changer · Series 1</span>
+      <h2 id="panelTitle">The Sugar Trap</h2>
+      <p class="promise" id="panelPromise">The craving is withdrawal wearing the mask of hunger. See it once and it loosens.</p>
+      <div class="actions">
+        <button class="btn-primary" id="inspectBtn">Hold & Examine Book</button>
+        <button class="btn-secondary" id="returnBtn" style="display: none;">Return to Orbit</button>
+      </div>
+    </aside>
+  </div>
+
+  <script>
+    /* ==========================================================================
+       CATALOG DEFINITION & SPECIMEN COVER GENERATOR
+       ========================================================================== */
+    const CATALOG = [
+      {
+        slug: "sugar",
+        title: "The Sugar Trap",
+        promise: "The craving is withdrawal wearing the mask of hunger. See it once and it loosens.",
+        caseColor: "#DBD9D8",
+        ink: "#222222",
+        objectIcon: "sugar"
+      },
+      {
+        slug: "smoking",
+        title: "The Smoking Trap",
+        promise: "It never relaxed you. It created the tension it then relieved.",
+        caseColor: "#9AA28D",
+        ink: "#1b211a",
+        objectIcon: "smoking"
+      },
+      {
+        slug: "scrolling",
+        title: "The Scrolling Trap",
+        promise: "When the feed owns your evenings and your attention feels rented. Seeing the loop is the exit.",
+        caseColor: "#6C8594",
+        ink: "#f4f3ef",
+        objectIcon: "phone"
+      },
+      {
+        slug: "porn",
+        title: "The Porn Trap",
+        promise: "A promise of intimacy that quietly trains you away from the real thing.",
+        caseColor: "#CEC7BC",
+        ink: "#24201c",
+        objectIcon: "tissue"
+      },
+      {
+        slug: "alcohol",
+        title: "The Alcohol Trap",
+        promise: "It borrows tomorrow's calm and charges interest tonight.",
+        caseColor: "#51533B",
+        ink: "#f4f3ef",
+        objectIcon: "glass"
+      },
+      {
+        slug: "gaming",
+        title: "The Gaming Trap",
+        promise: "Endless progress in a world that leaves you exactly where you started.",
+        caseColor: "#BFA482",
+        ink: "#251d14",
+        objectIcon: "game"
+      },
+      {
+        slug: "junkfood",
+        title: "The Junk Food Trap",
+        promise: "Engineered to override the biological signal that says you have had enough.",
+        caseColor: "#D07452",
+        ink: "#22130e",
+        objectIcon: "fry"
+      },
+      {
+        slug: "vaping",
+        title: "The Vaping Trap",
+        promise: "The same old chemical hook wrapped in a clean, high-tech package.",
+        caseColor: "#A7B0A4",
+        ink: "#18201a",
+        objectIcon: "vape"
+      },
+      {
+        slug: "overthinking",
+        title: "The Overthinking Trap",
+        promise: "The mind promises that just one more mental loop will finally make you safe.",
+        caseColor: "#C0A09A",
+        ink: "#221715",
+        objectIcon: "knot"
+      },
+      {
+        slug: "complaining",
+        title: "The Complaining Trap",
+        promise: "Each complaint feels like relief, but quietly deepens the groove of helplessness.",
+        caseColor: "#E1C5A0",
+        ink: "#271e13",
+        objectIcon: "groove"
+      }
+    ];
+
+    /** Generates high-fidelity procedural hardcover canvas textures (Front, Spine, Back) */
+    function generateCoverTexture(item) {
+      const W = 1024;
+      const H = 1480;
+      const canvas = document.createElement('canvas');
+      canvas.width = W;
+      canvas.height = H;
+      const ctx = canvas.getContext('2d');
+
+      // Base cloth / matte paper tone
+      ctx.fillStyle = item.caseColor;
+      ctx.fillRect(0, 0, W, H);
+
+      // Micro cloth grain simulation
+      const imgData = ctx.getImageData(0, 0, W, H);
+      const d = imgData.data;
+      for (let i = 0; i < d.length; i += 4) {
+        const noise = (Math.random() - 0.5) * 9;
+        d[i] = Math.min(255, Math.max(0, d[i] + noise));
+        d[i+1] = Math.min(255, Math.max(0, d[i+1] + noise));
+        d[i+2] = Math.min(255, Math.max(0, d[i+2] + noise));
+      }
+      ctx.putImageData(imgData, 0, 0);
+
+      // Subtle vignette / lighting falloff
+      const grad = ctx.createRadialGradient(W * 0.5, H * 0.45, 120, W * 0.5, H * 0.5, W * 0.75);
+      grad.addColorStop(0, 'rgba(255,255,255,0.06)');
+      grad.addColorStop(1, 'rgba(0,0,0,0.08)');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, W, H);
+
+      // Editorial typography
+      ctx.fillStyle = item.ink;
+      ctx.textAlign = 'center';
+      
+      // Series Mark
+      ctx.font = '600 22px system-ui, -apple-system, sans-serif';
+      ctx.letterSpacing = '0.12em';
+      ctx.fillText('BELIEF CHANGER', W / 2, 180);
+
+      // Minimalist specimen drawing placeholder
+      ctx.save();
+      ctx.strokeStyle = item.ink;
+      ctx.lineWidth = 3.5;
+      ctx.globalAlpha = 0.75;
+      ctx.beginPath();
+      ctx.arc(W / 2, H * 0.46, 90, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(W / 2, H * 0.46, 6, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+
+      // Title
+      ctx.font = '700 52px system-ui, -apple-system, sans-serif';
+      ctx.letterSpacing = '-0.02em';
+      ctx.fillText(item.title, W / 2, H * 0.74);
+
+      // Subtitle
+      ctx.font = '400 24px Georgia, serif';
+      ctx.fontStyle = 'italic';
+      ctx.globalAlpha = 0.7;
+      ctx.fillText('A short book of clarity', W / 2, H * 0.79);
+
+      const texture = new THREE.CanvasTexture(canvas);
+      texture.anisotropy = 8;
+      return texture;
+    }
+
+    /** Procedural book spine texture */
+    function generateSpineTexture(item) {
+      const W = 256;
+      const H = 1480;
+      const canvas = document.createElement('canvas');
+      canvas.width = W;
+      canvas.height = H;
+      const ctx = canvas.getContext('2d');
+
+      ctx.fillStyle = item.caseColor;
+      ctx.fillRect(0, 0, W, H);
+
+      // Spine edge shadow grooves
+      const shadowGrad = ctx.createLinearGradient(0, 0, W, 0);
+      shadowGrad.addColorStop(0, 'rgba(0,0,0,0.22)');
+      shadowGrad.addColorStop(0.18, 'rgba(0,0,0,0.03)');
+      shadowGrad.addColorStop(0.5, 'rgba(255,255,255,0.08)');
+      shadowGrad.addColorStop(0.82, 'rgba(0,0,0,0.03)');
+      shadowGrad.addColorStop(1, 'rgba(0,0,0,0.22)');
+      ctx.fillStyle = shadowGrad;
+      ctx.fillRect(0, 0, W, H);
+
+      // Vertical spine typography
+      ctx.save();
+      ctx.translate(W / 2, H / 2);
+      ctx.rotate(Math.PI / 2);
+      ctx.fillStyle = item.ink;
+      ctx.textAlign = 'center';
+      ctx.font = '600 34px system-ui, sans-serif';
+      ctx.fillText(item.title, 0, 10);
+      ctx.restore();
+
+      const texture = new THREE.CanvasTexture(canvas);
+      texture.anisotropy = 8;
+      return texture;
+    }
+
+    /** Procedural page edge texture with subtle paper signatures */
+    function generatePageBlockTexture() {
+      const W = 512;
+      const H = 256;
+      const canvas = document.createElement('canvas');
+      canvas.width = W;
+      canvas.height = H;
+      const ctx = canvas.getContext('2d');
+
+      ctx.fillStyle = '#f5f0e6';
+      ctx.fillRect(0, 0, W, H);
+
+      // Individual page lines
+      ctx.strokeStyle = 'rgba(70, 60, 45, 0.12)';
+      ctx.lineWidth = 1;
+      for (let x = 0; x < W; x += 3) {
+        ctx.beginPath();
+        ctx.moveTo(x + (Math.random() - 0.5), 0);
+        ctx.lineTo(x + (Math.random() - 0.5), H);
+        ctx.stroke();
+      }
+
+      // Deeper signature grouping lines
+      ctx.strokeStyle = 'rgba(50, 40, 30, 0.25)';
+      ctx.lineWidth = 1.5;
+      for (let x = 0; x < W; x += 24) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, H);
+        ctx.stroke();
+      }
+
+      const texture = new THREE.CanvasTexture(canvas);
+      texture.wrapS = THREE.RepeatWrapping;
+      texture.wrapT = THREE.RepeatWrapping;
+      return texture;
+    }
+
+    const pageBlockTex = generatePageBlockTexture();
+
+    /* ==========================================================================
+       THREE.JS BOOK BUILDER (Photoreal Geometry)
+       ========================================================================== */
+    const BOOK_W = 14.6;
+    const BOOK_H = 21.0;
+    const BOOK_T = 2.4;
+    const BOARD_T = 0.28;
+
+    function createBookMesh(catalogItem) {
+      const bookGroup = new THREE.Group();
+
+      const frontCoverTex = generateCoverTexture(catalogItem);
+      const spineTex = generateSpineTexture(catalogItem);
+
+      // Book cover materials
+      const clothMat = new THREE.MeshStandardMaterial({
+        color: new THREE.Color(catalogItem.caseColor),
+        roughness: 0.82,
+        metalness: 0.04
+      });
+
+      const frontMat = new THREE.MeshStandardMaterial({
+        map: frontCoverTex,
+        roughness: 0.78,
+        metalness: 0.02
+      });
+
+      const spineMat = new THREE.MeshStandardMaterial({
+        map: spineTex,
+        roughness: 0.8,
+        metalness: 0.02
+      });
+
+      const paperMat = new THREE.MeshStandardMaterial({
+        map: pageBlockTex,
+        color: 0xf5f0e6,
+        roughness: 0.95,
+        metalness: 0.0
+      });
+
+      // 1. Textblock (Pages inside)
+      const blockGeo = new THREE.BoxGeometry(BOOK_W - 0.5, BOOK_H - 0.8, BOOK_T - BOARD_T * 2);
+      const blockMat = [
+        paperMat, // right (fore-edge)
+        clothMat, // left (spine back)
+        paperMat, // top
+        paperMat, // bottom
+        clothMat, // front
+        clothMat  // back
+      ];
+      const textblock = new THREE.Mesh(blockGeo, blockMat);
+      textblock.position.set(0.15, 0, 0);
+      textblock.castShadow = true;
+      textblock.receiveShadow = true;
+      bookGroup.add(textblock);
+
+      // 2. Front Board
+      const boardGeo = new THREE.BoxGeometry(BOOK_W, BOOK_H, BOARD_T);
+      const frontBoardMaterials = [
+        clothMat, clothMat, clothMat, clothMat,
+        frontMat, // Front Face
+        clothMat  // Inside Flyleaf
+      ];
+      const frontBoard = new THREE.Mesh(boardGeo, frontBoardMaterials);
+      frontBoard.position.set(0, 0, (BOOK_T - BOARD_T) / 2);
+      frontBoard.castShadow = true;
+      frontBoard.receiveShadow = true;
+      bookGroup.add(frontBoard);
+
+      // 3. Back Board
+      const backBoardMaterials = [
+        clothMat, clothMat, clothMat, clothMat,
+        clothMat, // Inside Flyleaf
+        clothMat  // Back Face
+      ];
+      const backBoard = new THREE.Mesh(boardGeo, backBoardMaterials);
+      backBoard.position.set(0, 0, -(BOOK_T - BOARD_T) / 2);
+      backBoard.castShadow = true;
+      backBoard.receiveShadow = true;
+      bookGroup.add(backBoard);
+
+      // 4. Spine Cover
+      const spineGeo = new THREE.BoxGeometry(BOARD_T, BOOK_H, BOOK_T);
+      const spineMaterials = [
+        clothMat, spineMat, clothMat, clothMat, clothMat, clothMat
+      ];
+      const spine = new THREE.Mesh(spineGeo, spineMaterials);
+      spine.position.set(-BOOK_W / 2, 0, 0);
+      spine.castShadow = true;
+      spine.receiveShadow = true;
+      bookGroup.add(spine);
+
+      bookGroup.userData = { catalog: catalogItem };
+      return bookGroup;
+    }
+
+    /* ==========================================================================
+       SCENE SETUP, STUDIO LIGHTING & ORBIT CHOREOGRAPHY
+       ========================================================================== */
+    const stage = document.getElementById('stage');
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0xffffff);
+
+    const camera = new THREE.PerspectiveCamera(34, window.innerWidth / window.innerHeight, 1, 1000);
+    camera.position.set(0, 38, 145);
+    camera.lookAt(0, 0, 0);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, powerPreference: "high-performance" });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.1;
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    stage.appendChild(renderer.domElement);
+
+    // Studio Three-Point Lighting
+    const keyLight = new THREE.DirectionalLight(0xffffff, 1.8);
+    keyLight.position.set(-50, 70, 50);
+    keyLight.castShadow = true;
+    keyLight.shadow.mapSize.width = 2048;
+    keyLight.shadow.mapSize.height = 2048;
+    keyLight.shadow.camera.near = 10;
+    keyLight.shadow.camera.far = 250;
+    keyLight.shadow.camera.left = -80;
+    keyLight.shadow.camera.right = 80;
+    keyLight.shadow.camera.top = 80;
+    keyLight.shadow.camera.bottom = -80;
+    keyLight.shadow.bias = -0.0005;
+    scene.add(keyLight);
+
+    const fillLight = new THREE.DirectionalLight(0xffffff, 0.7);
+    fillLight.position.set(60, 40, 40);
+    scene.add(fillLight);
+
+    const rimLight = new THREE.DirectionalLight(0xffffff, 0.5);
+    rimLight.position.set(0, 30, -70);
+    scene.add(rimLight);
+
+    const hemiLight = new THREE.HemisphereLight(0xffffff, 0x555555, 0.85);
+    scene.add(hemiLight);
+
+    // Ground Contact Shadow Plane
+    const shadowCanvas = document.createElement('canvas');
+    shadowCanvas.width = shadowCanvas.height = 512;
+    const sCtx = shadowCanvas.getContext('2d');
+    const sGrad = sCtx.createRadialGradient(256, 256, 40, 256, 256, 256);
+    sGrad.addColorStop(0, 'rgba(0,0,0,0.18)');
+    sGrad.addColorStop(0.5, 'rgba(0,0,0,0.08)');
+    sGrad.addColorStop(1, 'rgba(0,0,0,0)');
+    sCtx.fillStyle = sGrad;
+    sCtx.fillRect(0, 0, 512, 512);
+
+    const groundMesh = new THREE.Mesh(
+      new THREE.PlaneGeometry(240, 240),
+      new THREE.MeshBasicMaterial({
+        map: new THREE.CanvasTexture(shadowCanvas),
+        transparent: true,
+        depthWrite: false,
+        opacity: 0.8
+      })
+    );
+    groundMesh.rotation.x = -Math.PI / 2;
+    groundMesh.position.y = -11.5;
+    scene.add(groundMesh);
+
+    /* ==========================================================================
+       THE RING SYSTEM
+       ========================================================================== */
+    const N_SLOTS = 24; // 24 slots across the ring filled cyclically from 10 catalog books
+    const RING_RADIUS = 60;
+    const RING_TILT = THREE.MathUtils.degToRad(9);
+
+    const ringGroup = new THREE.Group();
+    ringGroup.rotation.x = RING_TILT;
+    scene.add(ringGroup);
+
+    const bookSlots = [];
+
+    for (let i = 0; i < N_SLOTS; i++) {
+      const catalogItem = CATALOG[i % CATALOG.length];
+      const bookMesh = createBookMesh(catalogItem);
+      
+      const angle = (i / N_SLOTS) * Math.PI * 2;
+      const x = Math.sin(angle) * RING_RADIUS;
+      const z = Math.cos(angle) * RING_RADIUS;
+
+      const slotHost = new THREE.Group();
+      slotHost.position.set(x, 0, z);
+      // Tangential alignment to ring radius
+      slotHost.rotation.y = angle + Math.PI / 2;
+
+      slotHost.add(bookMesh);
+      ringGroup.add(slotHost);
+
+      bookSlots.push({
+        index: i,
+        catalog: catalogItem,
+        host: slotHost,
+        mesh: bookMesh,
+        angle: angle
+      });
+    }
+
+    /* ==========================================================================
+       INTERACTION, ROTATION & UX PHYSICS
+       ========================================================================== */
+    let ringAngle = 0;
+    let targetAngle = 0;
+    let isDragging = false;
+    let lastPointerX = 0;
+    let pointerVelocity = 0;
+    let currentBookIndex = 0;
+    let inspectMode = false;
+
+    const panel = document.getElementById('panel');
+    const panelTitle = document.getElementById('panelTitle');
+    const panelPromise = document.getElementById('panelPromise');
+    const inspectBtn = document.getElementById('inspectBtn');
+    const returnBtn = document.getElementById('returnBtn');
+
+    function updatePresentationCard(index) {
+      const item = CATALOG[((index % CATALOG.length) + CATALOG.length) % CATALOG.length];
+      panelTitle.textContent = item.title;
+      panelPromise.textContent = item.promise;
+      panel.classList.add('active');
+    }
+
+    function commitNearestSlot() {
+      const step = (Math.PI * 2) / N_SLOTS;
+      const nearestSlot = Math.round(targetAngle / step);
+      targetAngle = nearestSlot * step;
+      currentBookIndex = ((-nearestSlot % N_SLOTS) + N_SLOTS) % N_SLOTS;
+      updatePresentationCard(currentBookIndex);
+    }
+
+    // Pointer / Touch Events
+    window.addEventListener('pointerdown', (e) => {
+      if (e.target.closest('#panel') || e.target.closest('header') || e.target.closest('.orbit-controls')) return;
+      isDragging = true;
+      lastPointerX = e.clientX;
+      pointerVelocity = 0;
+    });
+
+    window.addEventListener('pointermove', (e) => {
+      if (!isDragging) return;
+      const deltaX = e.clientX - lastPointerX;
+      lastPointerX = e.clientX;
+      const rotDelta = (deltaX / window.innerWidth) * 4.5;
+      targetAngle += rotDelta;
+      pointerVelocity = rotDelta;
+    });
+
+    window.addEventListener('pointerup', () => {
+      if (!isDragging) return;
+      isDragging = false;
+      // Add subtle momentum fling
+      targetAngle += pointerVelocity * 3;
+      commitNearestSlot();
+    });
+
+    // Mouse Wheel Navigation
+    let wheelTimeout;
+    window.addEventListener('wheel', (e) => {
+      if (inspectMode) return;
+      const step = (Math.PI * 2) / N_SLOTS;
+      targetAngle += Math.sign(e.deltaY) * step;
+      clearTimeout(wheelTimeout);
+      wheelTimeout = setTimeout(commitNearestSlot, 120);
+    }, { passive: true });
+
+    // UI Buttons
+    document.getElementById('prevBtn').addEventListener('click', () => {
+      const step = (Math.PI * 2) / N_SLOTS;
+      targetAngle += step;
+      commitNearestSlot();
+    });
+
+    document.getElementById('nextBtn').addEventListener('click', () => {
+      const step = (Math.PI * 2) / N_SLOTS;
+      targetAngle -= step;
+      commitNearestSlot();
+    });
+
+    // Inspect / Hold Book Mode
+    let inspectedMesh = null;
+    inspectBtn.addEventListener('click', () => {
+      inspectMode = true;
+      inspectBtn.style.display = 'none';
+      returnBtn.style.display = 'block';
+    });
+
+    returnBtn.addEventListener('click', () => {
+      inspectMode = false;
+      inspectBtn.style.display = 'block';
+      returnBtn.style.display = 'none';
+    });
+
+    // Theme Switcher
+    const themeBtn = document.getElementById('themeBtn');
+    let isDark = false;
+    themeBtn.addEventListener('click', () => {
+      isDark = !isDark;
+      document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+      themeBtn.textContent = isDark ? 'Switch to Light' : 'Switch to Dark';
+      scene.background.set(isDark ? 0x0e0d0c : 0xffffff);
+      hemiLight.groundColor.set(isDark ? 0x111111 : 0x555555);
+    });
+
+    // Raycasting for Click-To-Front
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2();
+
+    window.addEventListener('click', (e) => {
+      if (isDragging || Math.abs(pointerVelocity) > 0.005) return;
+      if (e.target.closest('#panel') || e.target.closest('header') || e.target.closest('.orbit-controls')) return;
+
+      mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+      mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+      raycaster.setFromCamera(mouse, camera);
+
+      const intersects = raycaster.intersectObjects(ringGroup.children, true);
+      if (intersects.length > 0) {
+        let hit = intersects[0].object;
+        while (hit.parent && hit.parent !== ringGroup) {
+          hit = hit.parent;
+        }
+        const hitSlot = bookSlots.find(s => s.host === hit);
+        if (hitSlot) {
+          const step = (Math.PI * 2) / N_SLOTS;
+          targetAngle = -hitSlot.angle;
+          commitNearestSlot();
+        }
+      }
+    });
+
+    // Initialize Presentation
+    commitNearestSlot();
+
+    /* ==========================================================================
+       ANIMATION & RENDER LOOP
+       ========================================================================== */
+    const clock = new THREE.Clock();
+
+    function animate() {
+      requestAnimationFrame(animate);
+
+      // Smooth damped spring interpolation for ring rotation
+      ringAngle += (targetAngle - ringAngle) * 0.1;
+      ringGroup.rotation.y = ringAngle;
+
+      // Dynamic hover/lift and presentation for the front-most book
+      const step = (Math.PI * 2) / N_SLOTS;
+      for (const slot of bookSlots) {
+        const effectiveAngle = ((slot.angle + ringAngle) % (Math.PI * 2) + Math.PI * 2) % (Math.PI * 2);
+        const distFromFront = Math.min(effectiveAngle, Math.PI * 2 - effectiveAngle);
+
+        if (distFromFront < step * 0.8) {
+          // Front presented book: lift out and turn toward camera
+          const t = 1 - (distFromFront / (step * 0.8));
+          slot.mesh.position.y = THREE.MathUtils.lerp(0, 4.5, t);
+          slot.mesh.position.z = THREE.MathUtils.lerp(0, 10, t);
+          slot.mesh.rotation.y = THREE.MathUtils.lerp(0, -Math.PI / 2, t);
+        } else {
+          slot.mesh.position.y = THREE.MathUtils.lerp(slot.mesh.position.y, 0, 0.1);
+          slot.mesh.position.z = THREE.MathUtils.lerp(slot.mesh.position.z, 0, 0.1);
+          slot.mesh.rotation.y = THREE.MathUtils.lerp(slot.mesh.rotation.y, 0, 0.1);
+        }
+      }
+
+      // Inspect camera transition
+      if (inspectMode) {
+        camera.position.lerp(new THREE.Vector3(0, 18, 55), 0.07);
+        camera.lookAt(0, 4, 0);
+      } else {
+        camera.position.lerp(new THREE.Vector3(0, 38, 145), 0.07);
+        camera.lookAt(0, 0, 0);
+      }
+
+      renderer.render(scene, camera);
+    }
+
+    animate();
+
+    // Window Resize
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  </script>
+</body>
+</html>
