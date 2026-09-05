@@ -1,0 +1,32 @@
+{
+  "errors": [],
+  "gestures": [
+    {
+      "kind": "cover",
+      "passed": true
+    },
+    {
+      "kind": "leaf",
+      "i": 3,
+      "dir": 1,
+      "mode": "rotated",
+      "passed": true
+    },
+    {
+      "kind": "leaf",
+      "i": 4,
+      "dir": 1,
+      "mode": "rotated",
+      "passed": true
+    }
+  ],
+  "metrics": {
+    "scene": {
+      "calls": 96,
+      "triangles": 600974
+    },
+    "boot": 363.5,
+    "geometry": 81,
+    "textures": 54
+  }
+}

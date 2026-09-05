@@ -1,0 +1,231 @@
+{
+  "baseline": "baseline",
+  "current": "continuous",
+  "samples": [
+    {
+      "leaf": 0,
+      "t": 0.65,
+      "baselineCurrentMax": 8.852191686630249
+    },
+    {
+      "leaf": 0,
+      "t": 0.75,
+      "baselineCurrentMax": 6.551875591278076
+    },
+    {
+      "leaf": 0,
+      "t": 0.85,
+      "baselineCurrentMax": 4.067047119140625
+    },
+    {
+      "leaf": 0,
+      "t": 0.92,
+      "baselineCurrentMax": 2.402423858642578
+    },
+    {
+      "leaf": 0,
+      "t": 0.97,
+      "baselineCurrentMax": 0.9867429733276367
+    },
+    {
+      "leaf": 0,
+      "t": 1,
+      "baselineCurrentMax": 0.1703801155090332
+    },
+    {
+      "leaf": 0,
+      "t": "rest",
+      "baselineCurrentMax": 0
+    },
+    {
+      "leaf": 0,
+      "t": "landingJumpBaseline",
+      "max": 0.1703801155090332
+    },
+    {
+      "leaf": 0,
+      "t": "landingJumpCurrent",
+      "max": 0
+    },
+    {
+      "leaf": 1,
+      "t": 0.65,
+      "baselineCurrentMax": 9.500628471374512
+    },
+    {
+      "leaf": 1,
+      "t": 0.75,
+      "baselineCurrentMax": 6.724169731140137
+    },
+    {
+      "leaf": 1,
+      "t": 0.85,
+      "baselineCurrentMax": 4.096039772033691
+    },
+    {
+      "leaf": 1,
+      "t": 0.92,
+      "baselineCurrentMax": 2.4369544982910156
+    },
+    {
+      "leaf": 1,
+      "t": 0.97,
+      "baselineCurrentMax": 1.0249290466308594
+    },
+    {
+      "leaf": 1,
+      "t": 1,
+      "baselineCurrentMax": 0.20920515060424805
+    },
+    {
+      "leaf": 1,
+      "t": "rest",
+      "baselineCurrentMax": 0
+    },
+    {
+      "leaf": 1,
+      "t": "landingJumpBaseline",
+      "max": 0.20920515060424805
+    },
+    {
+      "leaf": 1,
+      "t": "landingJumpCurrent",
+      "max": 0
+    },
+    {
+      "leaf": 2,
+      "t": 0.65,
+      "baselineCurrentMax": 9.476360559463501
+    },
+    {
+      "leaf": 2,
+      "t": 0.75,
+      "baselineCurrentMax": 6.726569652557373
+    },
+    {
+      "leaf": 2,
+      "t": 0.85,
+      "baselineCurrentMax": 4.09242057800293
+    },
+    {
+      "leaf": 2,
+      "t": 0.92,
+      "baselineCurrentMax": 2.440349578857422
+    },
+    {
+      "leaf": 2,
+      "t": 0.97,
+      "baselineCurrentMax": 1.0329217910766602
+    },
+    {
+      "leaf": 2,
+      "t": 1,
+      "baselineCurrentMax": 0.2227630615234375
+    },
+    {
+      "leaf": 2,
+      "t": "rest",
+      "baselineCurrentMax": 0
+    },
+    {
+      "leaf": 2,
+      "t": "landingJumpBaseline",
+      "max": 0.2227630615234375
+    },
+    {
+      "leaf": 2,
+      "t": "landingJumpCurrent",
+      "max": 0
+    },
+    {
+      "leaf": 3,
+      "t": 0.65,
+      "baselineCurrentMax": 9.481606841087341
+    },
+    {
+      "leaf": 3,
+      "t": 0.75,
+      "baselineCurrentMax": 6.72979211807251
+    },
+    {
+      "leaf": 3,
+      "t": 0.85,
+      "baselineCurrentMax": 4.0888519287109375
+    },
+    {
+      "leaf": 3,
+      "t": 0.92,
+      "baselineCurrentMax": 2.4440650939941406
+    },
+    {
+      "leaf": 3,
+      "t": 0.97,
+      "baselineCurrentMax": 1.0414085388183594
+    },
+    {
+      "leaf": 3,
+      "t": 1,
+      "baselineCurrentMax": 0.23654556274414062
+    },
+    {
+      "leaf": 3,
+      "t": "rest",
+      "baselineCurrentMax": 0
+    },
+    {
+      "leaf": 3,
+      "t": "landingJumpBaseline",
+      "max": 0.23654556274414062
+    },
+    {
+      "leaf": 3,
+      "t": "landingJumpCurrent",
+      "max": 0
+    },
+    {
+      "leaf": 4,
+      "t": 0.65,
+      "baselineCurrentMax": 9.484702587127686
+    },
+    {
+      "leaf": 4,
+      "t": 0.75,
+      "baselineCurrentMax": 6.738160610198975
+    },
+    {
+      "leaf": 4,
+      "t": 0.85,
+      "baselineCurrentMax": 4.081644058227539
+    },
+    {
+      "leaf": 4,
+      "t": 0.92,
+      "baselineCurrentMax": 2.4435129165649414
+    },
+    {
+      "leaf": 4,
+      "t": 0.97,
+      "baselineCurrentMax": 1.045210838317871
+    },
+    {
+      "leaf": 4,
+      "t": 1,
+      "baselineCurrentMax": 0.23162436485290527
+    },
+    {
+      "leaf": 4,
+      "t": "rest",
+      "baselineCurrentMax": 0
+    },
+    {
+      "leaf": 4,
+      "t": "landingJumpBaseline",
+      "max": 0.23162436485290527
+    },
+    {
+      "leaf": 4,
+      "t": "landingJumpCurrent",
+      "max": 0
+    }
+  ]
+}

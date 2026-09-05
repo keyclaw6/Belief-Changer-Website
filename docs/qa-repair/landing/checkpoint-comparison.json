@@ -1,0 +1,231 @@
+{
+  "baseline": "baseline",
+  "current": "checkpoint",
+  "samples": [
+    {
+      "leaf": 0,
+      "t": 0.65,
+      "baselineCurrentMax": 0
+    },
+    {
+      "leaf": 0,
+      "t": 0.75,
+      "baselineCurrentMax": 0
+    },
+    {
+      "leaf": 0,
+      "t": 0.85,
+      "baselineCurrentMax": 0
+    },
+    {
+      "leaf": 0,
+      "t": 0.92,
+      "baselineCurrentMax": 0
+    },
+    {
+      "leaf": 0,
+      "t": 0.97,
+      "baselineCurrentMax": 0
+    },
+    {
+      "leaf": 0,
+      "t": 1,
+      "baselineCurrentMax": 0
+    },
+    {
+      "leaf": 0,
+      "t": "rest",
+      "baselineCurrentMax": 0
+    },
+    {
+      "leaf": 0,
+      "t": "landingJumpBaseline",
+      "max": 0.1703801155090332
+    },
+    {
+      "leaf": 0,
+      "t": "landingJumpCurrent",
+      "max": 0.1703801155090332
+    },
+    {
+      "leaf": 1,
+      "t": 0.65,
+      "baselineCurrentMax": 0
+    },
+    {
+      "leaf": 1,
+      "t": 0.75,
+      "baselineCurrentMax": 0
+    },
+    {
+      "leaf": 1,
+      "t": 0.85,
+      "baselineCurrentMax": 0
+    },
+    {
+      "leaf": 1,
+      "t": 0.92,
+      "baselineCurrentMax": 0
+    },
+    {
+      "leaf": 1,
+      "t": 0.97,
+      "baselineCurrentMax": 0
+    },
+    {
+      "leaf": 1,
+      "t": 1,
+      "baselineCurrentMax": 0
+    },
+    {
+      "leaf": 1,
+      "t": "rest",
+      "baselineCurrentMax": 0
+    },
+    {
+      "leaf": 1,
+      "t": "landingJumpBaseline",
+      "max": 0.20920515060424805
+    },
+    {
+      "leaf": 1,
+      "t": "landingJumpCurrent",
+      "max": 0.20920515060424805
+    },
+    {
+      "leaf": 2,
+      "t": 0.65,
+      "baselineCurrentMax": 0
+    },
+    {
+      "leaf": 2,
+      "t": 0.75,
+      "baselineCurrentMax": 0
+    },
+    {
+      "leaf": 2,
+      "t": 0.85,
+      "baselineCurrentMax": 0
+    },
+    {
+      "leaf": 2,
+      "t": 0.92,
+      "baselineCurrentMax": 0
+    },
+    {
+      "leaf": 2,
+      "t": 0.97,
+      "baselineCurrentMax": 0
+    },
+    {
+      "leaf": 2,
+      "t": 1,
+      "baselineCurrentMax": 0
+    },
+    {
+      "leaf": 2,
+      "t": "rest",
+      "baselineCurrentMax": 0
+    },
+    {
+      "leaf": 2,
+      "t": "landingJumpBaseline",
+      "max": 0.2227630615234375
+    },
+    {
+      "leaf": 2,
+      "t": "landingJumpCurrent",
+      "max": 0.2227630615234375
+    },
+    {
+      "leaf": 3,
+      "t": 0.65,
+      "baselineCurrentMax": 0
+    },
+    {
+      "leaf": 3,
+      "t": 0.75,
+      "baselineCurrentMax": 0
+    },
+    {
+      "leaf": 3,
+      "t": 0.85,
+      "baselineCurrentMax": 0
+    },
+    {
+      "leaf": 3,
+      "t": 0.92,
+      "baselineCurrentMax": 0
+    },
+    {
+      "leaf": 3,
+      "t": 0.97,
+      "baselineCurrentMax": 0
+    },
+    {
+      "leaf": 3,
+      "t": 1,
+      "baselineCurrentMax": 0
+    },
+    {
+      "leaf": 3,
+      "t": "rest",
+      "baselineCurrentMax": 0
+    },
+    {
+      "leaf": 3,
+      "t": "landingJumpBaseline",
+      "max": 0.23654556274414062
+    },
+    {
+      "leaf": 3,
+      "t": "landingJumpCurrent",
+      "max": 0.23654556274414062
+    },
+    {
+      "leaf": 4,
+      "t": 0.65,
+      "baselineCurrentMax": 0
+    },
+    {
+      "leaf": 4,
+      "t": 0.75,
+      "baselineCurrentMax": 0
+    },
+    {
+      "leaf": 4,
+      "t": 0.85,
+      "baselineCurrentMax": 0
+    },
+    {
+      "leaf": 4,
+      "t": 0.92,
+      "baselineCurrentMax": 0
+    },
+    {
+      "leaf": 4,
+      "t": 0.97,
+      "baselineCurrentMax": 0
+    },
+    {
+      "leaf": 4,
+      "t": 1,
+      "baselineCurrentMax": 0
+    },
+    {
+      "leaf": 4,
+      "t": "rest",
+      "baselineCurrentMax": 0
+    },
+    {
+      "leaf": 4,
+      "t": "landingJumpBaseline",
+      "max": 0.23162436485290527
+    },
+    {
+      "leaf": 4,
+      "t": "landingJumpCurrent",
+      "max": 0.23162436485290527
+    }
+  ]
+}

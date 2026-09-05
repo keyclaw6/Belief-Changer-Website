@@ -1,0 +1,19 @@
+import {chromium as playwright} from '@playwright/test';import chromium from '@sparticuz/chromium';import{createServer}from'node:http';import{readFile,mkdir,writeFile}from'node:fs/promises';import path from'node:path';
+const mode=process.argv[2]||'light',site=path.resolve(import.meta.dirname,'..'),out=path.resolve(site,'../docs/qa-repair');await mkdir(out,{recursive:true});
+const mime={'.html':'text/html','.js':'text/javascript','.mjs':'text/javascript','.json':'application/json','.png':'image/png','.webp':'image/webp','.woff':'font/woff','.woff2':'font/woff2','.css':'text/css'};
+const server=createServer(async(req,res)=>{try{let f=path.join(site,'public',decodeURIComponent(req.url.split('?')[0]));res.setHeader('Content-Type',mime[path.extname(f)]||'application/octet-stream');res.end(await readFile(f))}catch{res.writeHead(404);res.end('not found')}});await new Promise(r=>server.listen(3200,'127.0.0.1',r));
+const browser=await playwright.launch({executablePath:await chromium.executablePath(),args:['--no-sandbox','--use-angle=swiftshader','--enable-unsafe-swiftshader','--disable-dev-shm-usage']});const report={mode,errors:[]};
+try{const page=await browser.newPage({viewport:mode.includes('mobile')?{width:390,height:844}:{width:900,height:600},colorScheme:mode.includes('dark')?'dark':'light'});page.on('pageerror',e=>report.errors.push(e.message));
+await page.goto('http://127.0.0.1:3200/orbit/index.html'+(mode.includes('arabic')?'?locale=ar':''));await page.waitForFunction(()=>window.__ORBIT?.state==='orbit',null,{timeout:30000});
+await page.evaluate(async()=>window.T=await import('/orbit/vendor/three.module.js'));
+if(!mode.includes('hero')){if(mode.includes('dark')){await page.evaluate(()=>__ORBIT.goToIndex(2));await page.waitForFunction(()=>__ORBIT.state==='orbit')}
+ await page.getByRole('button',{name:mode.includes('arabic')?'استكشف هذا الكتاب':'Explore this book',exact:true}).click();await page.waitForFunction(()=>__ORBIT.state==='inspecting');
+ await page.emulateMedia({reducedMotion:'reduce'});await page.evaluate(n=>{__ORBIT.reader.turnTo(n);dispatchEvent(new Event('orbit-invalidate'))},mode.includes('end')?5:1);await page.emulateMedia({reducedMotion:'no-preference'});
+ if(mode.includes('oblique'))await page.evaluate(()=>{__ORBIT.detailSpin.rotation.set(.5,.7,0);dispatchEvent(new Event('orbit-invalidate'))});
+ if(mode.includes('zoom')){await page.mouse.move(750,400);await page.mouse.wheel(0,2000)}
+ if(mode.includes('spine')){await page.evaluate(()=>{__ORBIT.reader.setCover(0);__ORBIT.detailSpin.rotation.set(0,Math.PI/2-.18,0);dispatchEvent(new Event('orbit-invalidate'))});await page.mouse.move(100,250);await page.mouse.wheel(0,200)}
+}
+await page.waitForFunction(()=>!__ORBIT.motionDebug.frameScheduled && !(BK.textDiag?.outstanding.length),null,{timeout:25000});
+report.state=await page.evaluate(()=>({state:__ORBIT.state,reader:__ORBIT.reader?.getState(),scene:__orbitPerf.scene,debug:__ORBIT.motionDebug,capEnd:__ORBIT.reader?.userData.pages?.[10],pageCount:__ORBIT.reader?.userData.pages?.length,cta:document.querySelector('#preview-end').outerHTML,ring:{p:__ORBIT.ringGroup.position.toArray(),s:__ORBIT.ringGroup.scale.toArray()},boot:__orbitPerf.reveal}));
+console.log('capture',mode);if(process.env.CANVAS_ONLY){const data=await page.evaluate(()=>{const O=__ORBIT,p=new T.Vector3();if(O.reader?.group.visible)O.reader.group.parent.parent.getWorldPosition(p);else {p.set(0,3.8,130);O.ringGroup.localToWorld(p)}O.atmosphere.render(p,true);return O.renderer.domElement.toDataURL('image/png').split(',')[1]});await writeFile(path.join(out,`${mode}.png`),Buffer.from(data,'base64'));}else await page.screenshot({path:path.join(out,`${mode}.png`),timeout:60000});console.log('captured');
+}catch(e){report.failure=e.message;process.exitCode=1}finally{await writeFile(path.join(out,`${mode}.json`),JSON.stringify(report,null,2));console.log(JSON.stringify(report));await browser.close();server.close()}

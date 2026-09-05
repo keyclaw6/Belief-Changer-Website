@@ -1,0 +1,9 @@
+{
+  "errors": [],
+  "checks": [
+    "Mounted homepage/iframe ready with repair identity",
+    "Next book -> Explore -> book route leaves iframe with base intact",
+    "Real sample chapter and deep reload",
+    "Arabic mounted SSR route and RTL"
+  ]
+}

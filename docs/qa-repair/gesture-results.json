@@ -1,0 +1,39 @@
+{
+  "errors": [],
+  "gestures": [
+    {
+      "kind": "cover",
+      "passed": true
+    },
+    {
+      "kind": "leaf",
+      "i": 0,
+      "dir": 1,
+      "mode": "neutral",
+      "passed": true
+    },
+    {
+      "kind": "leaf",
+      "i": 1,
+      "dir": 1,
+      "mode": "neutral",
+      "passed": true
+    },
+    {
+      "kind": "leaf",
+      "i": 2,
+      "dir": 1,
+      "mode": "neutral",
+      "passed": true
+    },
+    {
+      "kind": "leaf",
+      "i": 3,
+      "dir": 1,
+      "mode": "neutral",
+      "passed": true
+    }
+  ],
+  "metrics": {},
+  "failure": "mouse.move: Target page, context or browser has been closed"
+}
