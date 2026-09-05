@@ -1,0 +1,2995 @@
+{
+  "sugar": {
+    "en": {
+      "pages": [
+        {
+          "type": "title",
+          "title": "The Sugar Trap",
+          "subtitle": "Interactive preview",
+          "imprint": "Belief Changer"
+        },
+        {
+          "type": "chapter",
+          "title": "About this preview",
+          "paragraphs": [
+            "The excerpt is drawn from the English sample text currently available on this site. This is not a complete edition.",
+            "Belief Changer · Free to read · No sign-up",
+            "No EPUB download is available yet."
+          ]
+        },
+        {
+          "type": "toc",
+          "title": "Inside this sample",
+          "toc": [
+            {
+              "title": "About this preview",
+              "page": "2"
+            },
+            {
+              "title": "Before you begin",
+              "page": "4"
+            },
+            {
+              "title": "Opening sample",
+              "page": "5–10"
+            },
+            {
+              "title": "Continue to the book online",
+              "page": "11"
+            }
+          ]
+        },
+        {
+          "type": "chapter",
+          "title": "Before you begin",
+          "paragraphs": [
+            "The craving is withdrawal wearing the mask of hunger. See it once and it loosens.",
+            "The excerpt is drawn from the English sample text currently available on this site. This is not a complete edition."
+          ]
+        },
+        {
+          "type": "chapter",
+          "kicker": "Opening sample · 1/6",
+          "title": "The afternoon walk to the kitchen",
+          "paragraphs": [
+            "Start with the moment itself. It is late afternoon, the part of the day when your attention thins out, and something in you turns toward the kitchen. You are not deciding anything. Your feet are already moving. By the time you notice, the wrapper is open and the first bite is gone, and a small voice says there, that is better.\n\nHold on to that voice, because it is the whole trap in one sentence. It promised you that you were about to feel better. And for a few seconds, you did."
+          ]
+        },
+        {
+          "type": "chapter",
+          "kicker": "Opening sample · 2/6",
+          "title": "",
+          "paragraphs": [
+            "The question this book asks, patiently and completely, is a simple one: better than what.\n\nHere is what actually happened in your body. An hour or two before that walk to the kitchen, your blood sugar had climbed and then fallen, the ordinary aftermath of the last sweet thing you ate. The fall is what you felt as the thinning of attention, the flat restless mood, the vague idea that something was wrong and food would fix it. That feeling was not hunger."
+          ]
+        },
+        {
+          "type": "chapter",
+          "kicker": "Opening sample · 3/6",
+          "title": "",
+          "paragraphs": [
+            "It was the withdrawal from the last hit, wearing the costume of a craving for the next one.\n\nThis is the move the trap makes over and over. It creates a small discomfort, then offers itself as the cure for that discomfort. The relief is real, which is exactly why the lie is so convincing. You are not imagining the better feeling. You are simply crediting it to the wrong thing. The sugar did not lift you above your normal baseline."
+          ]
+        },
+        {
+          "type": "chapter",
+          "kicker": "Opening sample · 4/6",
+          "title": "",
+          "paragraphs": [
+            "It returned you, briefly, to the baseline it had pulled you below in the first place.\n\nPicture someone who puts a small stone in each shoe every morning, and then, every afternoon, sells themselves the beautiful relief of taking the stones out. The relief is genuine. They really do feel better with the stones gone. But they are not ahead. They are back where a person without stones stays all day, for free, without the ritual and without the ache in between."
+          ]
+        },
+        {
+          "type": "chapter",
+          "kicker": "Opening sample · 5/6",
+          "title": "",
+          "paragraphs": [
+            "You have been told the problem is willpower, that if you were a little stronger you would walk past the kitchen. Notice how neatly that story serves the trap. It keeps your attention on you, on your supposed weakness, and away from the mechanism doing the actual work. As long as you believe the pull is a moral failing, you will fight it with guilt, and guilt is a fuel the trap runs on beautifully.\n\nSo we are going to do something different in these pages."
+          ]
+        },
+        {
+          "type": "chapter",
+          "kicker": "Opening sample · 6/6",
+          "title": "",
+          "paragraphs": [
+            "We are not going to build your discipline up like a muscle for a fight. We are going to take the fight apart, because a belief that has been seen clearly cannot be un-seen, and a craving that has lost its story has nothing left to stand on.\n\nFor now, all that is asked of you is to watch. The next time your feet turn toward the kitchen, do not resist and do not obey. Just look."
+          ]
+        },
+        {
+          "type": "chapter",
+          "title": "Your next page is online",
+          "paragraphs": [
+            "This is the end of the five-leaf interactive sample. No more 3D pages turn here.",
+            "The excerpt is drawn from the English sample text currently available on this site. This is not a complete edition.",
+            "Continue to the book online →"
+          ],
+          "previewEnd": true
+        }
+      ],
+      "cta": "Continue to the book online",
+      "end": "This is the end of the five-leaf interactive sample. No more 3D pages turn here.",
+      "hasExcerpt": true,
+      "source": "site/src/data/sample-chapters.ts"
+    },
+    "da": {
+      "pages": [
+        {
+          "type": "title",
+          "title": "The Sugar Trap",
+          "subtitle": "Interaktiv læseprøve",
+          "imprint": "Belief Changer"
+        },
+        {
+          "type": "chapter",
+          "title": "Om læseprøven",
+          "paragraphs": [
+            "Uddraget er fra den engelske prøvetekst på hjemmesiden. Det er ikke en komplet udgave eller en dansk oversættelse.",
+            "Belief Changer · Free to read · No sign-up",
+            "Der er endnu ingen EPUB-fil."
+          ]
+        },
+        {
+          "type": "toc",
+          "title": "I denne læseprøve",
+          "toc": [
+            {
+              "title": "Om læseprøven",
+              "page": "2"
+            },
+            {
+              "title": "Før du begynder",
+              "page": "4"
+            },
+            {
+              "title": "Uddrag",
+              "page": "5–10"
+            },
+            {
+              "title": "Fortsæt til bogen online",
+              "page": "11"
+            }
+          ]
+        },
+        {
+          "type": "chapter",
+          "title": "Før du begynder",
+          "paragraphs": [
+            "The craving is withdrawal wearing the mask of hunger. See it once and it loosens.",
+            "Uddraget er fra den engelske prøvetekst på hjemmesiden. Det er ikke en komplet udgave eller en dansk oversættelse."
+          ]
+        },
+        {
+          "type": "chapter",
+          "kicker": "Uddrag · 1/6",
+          "title": "The afternoon walk to the kitchen",
+          "paragraphs": [
+            "Start with the moment itself. It is late afternoon, the part of the day when your attention thins out, and something in you turns toward the kitchen. You are not deciding anything. Your feet are already moving. By the time you notice, the wrapper is open and the first bite is gone, and a small voice says there, that is better.\n\nHold on to that voice, because it is the whole trap in one sentence. It promised you that you were about to feel better. And for a few seconds, you did."
+          ]
+        },
+        {
+          "type": "chapter",
+          "kicker": "Uddrag · 2/6",
+          "title": "",
+          "paragraphs": [
+            "The question this book asks, patiently and completely, is a simple one: better than what.\n\nHere is what actually happened in your body. An hour or two before that walk to the kitchen, your blood sugar had climbed and then fallen, the ordinary aftermath of the last sweet thing you ate. The fall is what you felt as the thinning of attention, the flat restless mood, the vague idea that something was wrong and food would fix it. That feeling was not hunger."
+          ]
+        },
+        {
+          "type": "chapter",
+          "kicker": "Uddrag · 3/6",
+          "title": "",
+          "paragraphs": [
+            "It was the withdrawal from the last hit, wearing the costume of a craving for the next one.\n\nThis is the move the trap makes over and over. It creates a small discomfort, then offers itself as the cure for that discomfort. The relief is real, which is exactly why the lie is so convincing. You are not imagining the better feeling. You are simply crediting it to the wrong thing. The sugar did not lift you above your normal baseline."
+          ]
+        },
+        {
+          "type": "chapter",
+          "kicker": "Uddrag · 4/6",
+          "title": "",
+          "paragraphs": [
+            "It returned you, briefly, to the baseline it had pulled you below in the first place.\n\nPicture someone who puts a small stone in each shoe every morning, and then, every afternoon, sells themselves the beautiful relief of taking the stones out. The relief is genuine. They really do feel better with the stones gone. But they are not ahead. They are back where a person without stones stays all day, for free, without the ritual and without the ache in between."
+          ]
+        },
+        {
+          "type": "chapter",
+          "kicker": "Uddrag · 5/6",
+          "title": "",
+          "paragraphs": [
+            "You have been told the problem is willpower, that if you were a little stronger you would walk past the kitchen. Notice how neatly that story serves the trap. It keeps your attention on you, on your supposed weakness, and away from the mechanism doing the actual work. As long as you believe the pull is a moral failing, you will fight it with guilt, and guilt is a fuel the trap runs on beautifully.\n\nSo we are going to do something different in these pages."
+          ]
+        },
+        {
+          "type": "chapter",
+          "kicker": "Uddrag · 6/6",
+          "title": "",
+          "paragraphs": [
+            "We are not going to build your discipline up like a muscle for a fight. We are going to take the fight apart, because a belief that has been seen clearly cannot be un-seen, and a craving that has lost its story has nothing left to stand on.\n\nFor now, all that is asked of you is to watch. The next time your feet turn toward the kitchen, do not resist and do not obey. Just look."
+          ]
+        },
+        {
+          "type": "chapter",
+          "title": "Næste side er online",
+          "paragraphs": [
+            "Her slutter den interaktive læseprøve med fem blade. Der er ikke flere 3D-sider at vende.",
+            "Uddraget er fra den engelske prøvetekst på hjemmesiden. Det er ikke en komplet udgave eller en dansk oversættelse.",
+            "Fortsæt til bogen online →"
+          ],
+          "previewEnd": true
+        }
+      ],
+      "cta": "Fortsæt til bogen online",
+      "end": "Her slutter den interaktive læseprøve med fem blade. Der er ikke flere 3D-sider at vende.",
+      "hasExcerpt": true,
+      "source": "site/src/data/sample-chapters.ts"
+    },
+    "ar": {
+      "pages": [
+        {
+          "type": "title",
+          "title": "The Sugar Trap",
+          "subtitle": "معاينة تفاعلية",
+          "imprint": "Belief Changer"
+        },
+        {
+          "type": "chapter",
+          "title": "عن هذه المعاينة",
+          "paragraphs": [
+            "هذا المقتطف من النص التجريبي الإنجليزي المتاح على الموقع، وليس إصداراً كاملاً أو ترجمة عربية.",
+            "Belief Changer · Free to read · No sign-up",
+            "لا يتوفر ملف EPUB بعد."
+          ]
+        },
+        {
+          "type": "toc",
+          "title": "محتويات المعاينة",
+          "toc": [
+            {
+              "title": "عن هذه المعاينة",
+              "page": "2"
+            },
+            {
+              "title": "قبل أن تبدأ",
+              "page": "4"
+            },
+            {
+              "title": "مقتطف افتتاحي",
+              "page": "5–10"
+            },
+            {
+              "title": "متابعة إلى صفحة الكتاب",
+              "page": "11"
+            }
+          ]
+        },
+        {
+          "type": "chapter",
+          "title": "قبل أن تبدأ",
+          "paragraphs": [
+            "The craving is withdrawal wearing the mask of hunger. See it once and it loosens.",
+            "هذا المقتطف من النص التجريبي الإنجليزي المتاح على الموقع، وليس إصداراً كاملاً أو ترجمة عربية."
+          ]
+        },
+        {
+          "type": "chapter",
+          "kicker": "مقتطف افتتاحي · 1/6",
+          "title": "The afternoon walk to the kitchen",
+          "paragraphs": [
+            "Start with the moment itself. It is late afternoon, the part of the day when your attention thins out, and something in you turns toward the kitchen. You are not deciding anything. Your feet are already moving. By the time you notice, the wrapper is open and the first bite is gone, and a small voice says there, that is better.\n\nHold on to that voice, because it is the whole trap in one sentence. It promised you that you were about to feel better. And for a few seconds, you did."
+          ]
+        },
+        {
+          "type": "chapter",
+          "kicker": "مقتطف افتتاحي · 2/6",
+          "title": "",
+          "paragraphs": [
+            "The question this book asks, patiently and completely, is a simple one: better than what.\n\nHere is what actually happened in your body. An hour or two before that walk to the kitchen, your blood sugar had climbed and then fallen, the ordinary aftermath of the last sweet thing you ate. The fall is what you felt as the thinning of attention, the flat restless mood, the vague idea that something was wrong and food would fix it. That feeling was not hunger."
+          ]
+        },
+        {
+          "type": "chapter",
+          "kicker": "مقتطف افتتاحي · 3/6",
+          "title": "",
+          "paragraphs": [
+            "It was the withdrawal from the last hit, wearing the costume of a craving for the next one.\n\nThis is the move the trap makes over and over. It creates a small discomfort, then offers itself as the cure for that discomfort. The relief is real, which is exactly why the lie is so convincing. You are not imagining the better feeling. You are simply crediting it to the wrong thing. The sugar did not lift you above your normal baseline."
+          ]
+        },
+        {
+          "type": "chapter",
+          "kicker": "مقتطف افتتاحي · 4/6",
+          "title": "",
+          "paragraphs": [
+            "It returned you, briefly, to the baseline it had pulled you below in the first place.\n\nPicture someone who puts a small stone in each shoe every morning, and then, every afternoon, sells themselves the beautiful relief of taking the stones out. The relief is genuine. They really do feel better with the stones gone. But they are not ahead. They are back where a person without stones stays all day, for free, without the ritual and without the ache in between."
+          ]
+        },
+        {
+          "type": "chapter",
+          "kicker": "مقتطف افتتاحي · 5/6",
+          "title": "",
+          "paragraphs": [
+            "You have been told the problem is willpower, that if you were a little stronger you would walk past the kitchen. Notice how neatly that story serves the trap. It keeps your attention on you, on your supposed weakness, and away from the mechanism doing the actual work. As long as you believe the pull is a moral failing, you will fight it with guilt, and guilt is a fuel the trap runs on beautifully.\n\nSo we are going to do something different in these pages."
+          ]
+        },
+        {
+          "type": "chapter",
+          "kicker": "مقتطف افتتاحي · 6/6",
+          "title": "",
+          "paragraphs": [
+            "We are not going to build your discipline up like a muscle for a fight. We are going to take the fight apart, because a belief that has been seen clearly cannot be un-seen, and a craving that has lost its story has nothing left to stand on.\n\nFor now, all that is asked of you is to watch. The next time your feet turn toward the kitchen, do not resist and do not obey. Just look."
+          ]
+        },
+        {
+          "type": "chapter",
+          "title": "صفحتك التالية على الموقع",
+          "paragraphs": [
+            "هذه نهاية العينة التفاعلية المكوّنة من خمس أوراق. لا توجد صفحات ثلاثية الأبعاد أخرى هنا.",
+            "هذا المقتطف من النص التجريبي الإنجليزي المتاح على الموقع، وليس إصداراً كاملاً أو ترجمة عربية.",
+            "متابعة إلى صفحة الكتاب →"
+          ],
+          "previewEnd": true
+        }
+      ],
+      "cta": "متابعة إلى صفحة الكتاب",
+      "end": "هذه نهاية العينة التفاعلية المكوّنة من خمس أوراق. لا توجد صفحات ثلاثية الأبعاد أخرى هنا.",
+      "hasExcerpt": true,
+      "source": "site/src/data/sample-chapters.ts"
+    }
+  },
+  "smoking": {
+    "en": {
+      "pages": [
+        {
+          "type": "title",
+          "title": "The Smoking Trap",
+          "subtitle": "Interactive preview",
+          "imprint": "Belief Changer"
+        },
+        {
+          "type": "chapter",
+          "title": "About this preview",
+          "paragraphs": [
+            "No chapter prose is available for this title yet. Its book page shows the current availability.",
+            "Belief Changer · Free to read · No sign-up",
+            "No EPUB download is available yet."
+          ]
+        },
+        {
+          "type": "toc",
+          "title": "Inside this sample",
+          "toc": [
+            {
+              "title": "About this preview",
+              "page": "2"
+            },
+            {
+              "title": "Before you begin",
+              "page": "4"
+            },
+            {
+              "title": "Manuscript outline",
+              "page": "5–10"
+            },
+            {
+              "title": "Continue to the book online",
+              "page": "11"
+            }
+          ]
+        },
+        {
+          "type": "chapter",
+          "title": "Before you begin",
+          "paragraphs": [
+            "It never relaxed you. It created the tension it then relieved.",
+            "This manuscript is being written. The following pages show its planned outline, not finished chapters."
+          ]
+        },
+        {
+          "type": "section",
+          "kicker": "Planned chapter 1",
+          "title": "The cigarette that fixes nothing",
+          "subtitle": "This manuscript is being written. The following pages show its planned outline, not finished chapters."
+        },
+        {
+          "type": "section",
+          "kicker": "Planned chapter 2",
+          "title": "The tension it built for you",
+          "subtitle": "This manuscript is being written. The following pages show its planned outline, not finished chapters."
+        },
+        {
+          "type": "section",
+          "kicker": "Planned chapter 3",
+          "title": "What relaxation really is",
+          "subtitle": "This manuscript is being written. The following pages show its planned outline, not finished chapters."
+        },
+        {
+          "type": "section",
+          "kicker": "Planned chapter 4",
+          "title": "The last one",
+          "subtitle": "This manuscript is being written. The following pages show its planned outline, not finished chapters."
+        },
+        {
+          "type": "section",
+          "title": "Manuscript outline",
+          "subtitle": "This manuscript is being written. The following pages show its planned outline, not finished chapters."
+        },
+        {
+          "type": "section",
+          "title": "Continue to the book online",
+          "subtitle": "No chapter prose is available for this title yet. Its book page shows the current availability."
+        },
+        {
+          "type": "chapter",
+          "title": "Your next page is online",
+          "paragraphs": [
+            "This is the end of the five-leaf interactive sample. No more 3D pages turn here.",
+            "No chapter prose is available for this title yet. Its book page shows the current availability.",
+            "Continue to the book online →"
+          ],
+          "previewEnd": true
+        }
+      ],
+      "cta": "Continue to the book online",
+      "end": "This is the end of the five-leaf interactive sample. No more 3D pages turn here.",
+      "hasExcerpt": false,
+      "source": "site/src/data/books.ts"
+    },
+    "da": {
+      "pages": [
+        {
+          "type": "title",
+          "title": "The Smoking Trap",
+          "subtitle": "Interaktiv læseprøve",
+          "imprint": "Belief Changer"
+        },
+        {
+          "type": "chapter",
+          "title": "Om læseprøven",
+          "paragraphs": [
+            "Der er endnu ingen kapiteltekst til denne titel. Bogens side viser den aktuelle status.",
+            "Belief Changer · Free to read · No sign-up",
+            "Der er endnu ingen EPUB-fil."
+          ]
+        },
+        {
+          "type": "toc",
+          "title": "I denne læseprøve",
+          "toc": [
+            {
+              "title": "Om læseprøven",
+              "page": "2"
+            },
+            {
+              "title": "Før du begynder",
+              "page": "4"
+            },
+            {
+              "title": "Manuskriptets struktur",
+              "page": "5–10"
+            },
+            {
+              "title": "Fortsæt til bogen online",
+              "page": "11"
+            }
+          ]
+        },
+        {
+          "type": "chapter",
+          "title": "Før du begynder",
+          "paragraphs": [
+            "It never relaxed you. It created the tension it then relieved.",
+            "Manuskriptet er under udarbejdelse. De næste sider viser den planlagte struktur, ikke færdige kapitler."
+          ]
+        },
+        {
+          "type": "section",
+          "kicker": "Planlagt kapitel 1",
+          "title": "The cigarette that fixes nothing",
+          "subtitle": "Manuskriptet er under udarbejdelse. De næste sider viser den planlagte struktur, ikke færdige kapitler."
+        },
+        {
+          "type": "section",
+          "kicker": "Planlagt kapitel 2",
+          "title": "The tension it built for you",
+          "subtitle": "Manuskriptet er under udarbejdelse. De næste sider viser den planlagte struktur, ikke færdige kapitler."
+        },
+        {
+          "type": "section",
+          "kicker": "Planlagt kapitel 3",
+          "title": "What relaxation really is",
+          "subtitle": "Manuskriptet er under udarbejdelse. De næste sider viser den planlagte struktur, ikke færdige kapitler."
+        },
+        {
+          "type": "section",
+          "kicker": "Planlagt kapitel 4",
+          "title": "The last one",
+          "subtitle": "Manuskriptet er under udarbejdelse. De næste sider viser den planlagte struktur, ikke færdige kapitler."
+        },
+        {
+          "type": "section",
+          "title": "Manuskriptets struktur",
+          "subtitle": "Manuskriptet er under udarbejdelse. De næste sider viser den planlagte struktur, ikke færdige kapitler."
+        },
+        {
+          "type": "section",
+          "title": "Fortsæt til bogen online",
+          "subtitle": "Der er endnu ingen kapiteltekst til denne titel. Bogens side viser den aktuelle status."
+        },
+        {
+          "type": "chapter",
+          "title": "Næste side er online",
+          "paragraphs": [
+            "Her slutter den interaktive læseprøve med fem blade. Der er ikke flere 3D-sider at vende.",
+            "Der er endnu ingen kapiteltekst til denne titel. Bogens side viser den aktuelle status.",
+            "Fortsæt til bogen online →"
+          ],
+          "previewEnd": true
+        }
+      ],
+      "cta": "Fortsæt til bogen online",
+      "end": "Her slutter den interaktive læseprøve med fem blade. Der er ikke flere 3D-sider at vende.",
+      "hasExcerpt": false,
+      "source": "site/src/data/books.ts"
+    },
+    "ar": {
+      "pages": [
+        {
+          "type": "title",
+          "title": "The Smoking Trap",
+          "subtitle": "معاينة تفاعلية",
+          "imprint": "Belief Changer"
+        },
+        {
+          "type": "chapter",
+          "title": "عن هذه المعاينة",
+          "paragraphs": [
+            "لا يتوفر نص الفصول لهذا العنوان بعد. تعرض صفحة الكتاب حالته الحالية.",
+            "Belief Changer · Free to read · No sign-up",
+            "لا يتوفر ملف EPUB بعد."
+          ]
+        },
+        {
+          "type": "toc",
+          "title": "محتويات المعاينة",
+          "toc": [
+            {
+              "title": "عن هذه المعاينة",
+              "page": "2"
+            },
+            {
+              "title": "قبل أن تبدأ",
+              "page": "4"
+            },
+            {
+              "title": "مخطط الكتاب",
+              "page": "5–10"
+            },
+            {
+              "title": "متابعة إلى صفحة الكتاب",
+              "page": "11"
+            }
+          ]
+        },
+        {
+          "type": "chapter",
+          "title": "قبل أن تبدأ",
+          "paragraphs": [
+            "It never relaxed you. It created the tension it then relieved.",
+            "المخطوط قيد الكتابة. تعرض الصفحات التالية مخططه المقترح، وليست فصولاً مكتملة."
+          ]
+        },
+        {
+          "type": "section",
+          "kicker": "فصل مقترح 1",
+          "title": "The cigarette that fixes nothing",
+          "subtitle": "المخطوط قيد الكتابة. تعرض الصفحات التالية مخططه المقترح، وليست فصولاً مكتملة."
+        },
+        {
+          "type": "section",
+          "kicker": "فصل مقترح 2",
+          "title": "The tension it built for you",
+          "subtitle": "المخطوط قيد الكتابة. تعرض الصفحات التالية مخططه المقترح، وليست فصولاً مكتملة."
+        },
+        {
+          "type": "section",
+          "kicker": "فصل مقترح 3",
+          "title": "What relaxation really is",
+          "subtitle": "المخطوط قيد الكتابة. تعرض الصفحات التالية مخططه المقترح، وليست فصولاً مكتملة."
+        },
+        {
+          "type": "section",
+          "kicker": "فصل مقترح 4",
+          "title": "The last one",
+          "subtitle": "المخطوط قيد الكتابة. تعرض الصفحات التالية مخططه المقترح، وليست فصولاً مكتملة."
+        },
+        {
+          "type": "section",
+          "title": "مخطط الكتاب",
+          "subtitle": "المخطوط قيد الكتابة. تعرض الصفحات التالية مخططه المقترح، وليست فصولاً مكتملة."
+        },
+        {
+          "type": "section",
+          "title": "متابعة إلى صفحة الكتاب",
+          "subtitle": "لا يتوفر نص الفصول لهذا العنوان بعد. تعرض صفحة الكتاب حالته الحالية."
+        },
+        {
+          "type": "chapter",
+          "title": "صفحتك التالية على الموقع",
+          "paragraphs": [
+            "هذه نهاية العينة التفاعلية المكوّنة من خمس أوراق. لا توجد صفحات ثلاثية الأبعاد أخرى هنا.",
+            "لا يتوفر نص الفصول لهذا العنوان بعد. تعرض صفحة الكتاب حالته الحالية.",
+            "متابعة إلى صفحة الكتاب →"
+          ],
+          "previewEnd": true
+        }
+      ],
+      "cta": "متابعة إلى صفحة الكتاب",
+      "end": "هذه نهاية العينة التفاعلية المكوّنة من خمس أوراق. لا توجد صفحات ثلاثية الأبعاد أخرى هنا.",
+      "hasExcerpt": false,
+      "source": "site/src/data/books.ts"
+    }
+  },
+  "scrolling": {
+    "en": {
+      "pages": [
+        {
+          "type": "title",
+          "title": "The Scrolling Trap",
+          "subtitle": "Interactive preview",
+          "imprint": "Belief Changer"
+        },
+        {
+          "type": "chapter",
+          "title": "About this preview",
+          "paragraphs": [
+            "The excerpt is drawn from the English sample text currently available on this site. This is not a complete edition.",
+            "Belief Changer · Free to read · No sign-up",
+            "No EPUB download is available yet."
+          ]
+        },
+        {
+          "type": "toc",
+          "title": "Inside this sample",
+          "toc": [
+            {
+              "title": "About this preview",
+              "page": "2"
+            },
+            {
+              "title": "Before you begin",
+              "page": "4"
+            },
+            {
+              "title": "Opening sample",
+              "page": "5–10"
+            },
+            {
+              "title": "Continue to the book online",
+              "page": "11"
+            }
+          ]
+        },
+        {
+          "type": "chapter",
+          "title": "Before you begin",
+          "paragraphs": [
+            "For when the feed owns your evenings and your attention feels rented. This book takes the scrolling trap apart piece by piece: where the pull comes from, what it actually delivers, and why stopping will feel like relief rather than loss.",
+            "The excerpt is drawn from the English sample text currently available on this site. This is not a complete edition."
+          ]
+        },
+        {
+          "type": "chapter",
+          "kicker": "Opening sample · 1/6",
+          "title": "The reach",
+          "paragraphs": [
+            "You reached for your phone just now, or a few minutes ago, and you could not have said why. There was no message you were waiting for, no fact you needed. Your hand moved on its own, the way it has learned to, into the small bright world that is always one tap away. That reach is where we begin, because it is where the trap lives, not in the phone but in the reaching.\n\nLet us be precise about what you were looking for. It was not information."
+          ]
+        },
+        {
+          "type": "chapter",
+          "kicker": "Opening sample · 2/6",
+          "title": "",
+          "paragraphs": [
+            "If it were information, you would stop when you had it. You were looking for the next thing, and then the next, and the defining feature of the next thing is that it never arrives. The scroll is designed as a horizon: something is always about to appear that is better than what is on the screen right now. You are not consuming content. You are chasing a promise that renews itself faster than you can catch it.\n\nThis is worth sitting with, because it explains the strange emptiness afterward."
+          ]
+        },
+        {
+          "type": "chapter",
+          "kicker": "Opening sample · 3/6",
+          "title": "",
+          "paragraphs": [
+            "When you finish a good meal you feel full. When you finish a good book you feel something completed in you. When you look up from twenty minutes of scrolling, you feel neither full nor complete. You feel slightly worse than before, and vaguely annoyed at yourself, and you could not name one thing you saw. That is not a side effect of the trap. That is the trap working exactly as intended."
+          ]
+        },
+        {
+          "type": "chapter",
+          "kicker": "Opening sample · 4/6",
+          "title": "",
+          "paragraphs": [
+            "The belief holding it all together is quiet and rarely said out loud: that the next screen is where the good thing is. Not this one, the next one. As long as you believe that, you cannot stop, because stopping would mean walking away one screen before the payoff. So you stay, and the payoff stays one screen ahead, and the machine that built this understood your attention better than you have ever been invited to understand it yourself.\n\nYou have probably tried to fix this with force."
+          ]
+        },
+        {
+          "type": "chapter",
+          "kicker": "Opening sample · 5/6",
+          "title": "",
+          "paragraphs": [
+            "App timers, a home screen swept clean, the phone left in another room. These can help for a day or two, the way holding your breath helps against a bad smell. But force treats the reaching as the enemy, and the reaching is not the enemy. It is a symptom of the belief. Change the belief and the reaching quiets on its own. Fight the reaching while the belief stands, and you have signed up for a battle with no end.\n\nNotice, too, how the trap has taught you to describe yourself. Addicted. Weak."
+          ]
+        },
+        {
+          "type": "chapter",
+          "kicker": "Opening sample · 6/6",
+          "title": "",
+          "paragraphs": [
+            "Bad with phones. Every one of those words points the blame inward and leaves the design untouched. You were not weak. You were up against something engineered by large teams of clever people to be exactly this hard to put down, and no one warned you that was the game. Knowing that is not an excuse. It is the first honest map of the ground you are standing on.\n\nOver the next chapters we will take this apart calmly."
+          ]
+        },
+        {
+          "type": "chapter",
+          "title": "Your next page is online",
+          "paragraphs": [
+            "This is the end of the five-leaf interactive sample. No more 3D pages turn here.",
+            "The excerpt is drawn from the English sample text currently available on this site. This is not a complete edition.",
+            "Continue to the book online →"
+          ],
+          "previewEnd": true
+        }
+      ],
+      "cta": "Continue to the book online",
+      "end": "This is the end of the five-leaf interactive sample. No more 3D pages turn here.",
+      "hasExcerpt": true,
+      "source": "site/src/data/sample-chapters.ts"
+    },
+    "da": {
+      "pages": [
+        {
+          "type": "title",
+          "title": "The Scrolling Trap",
+          "subtitle": "Interaktiv læseprøve",
+          "imprint": "Belief Changer"
+        },
+        {
+          "type": "chapter",
+          "title": "Om læseprøven",
+          "paragraphs": [
+            "Uddraget er fra den engelske prøvetekst på hjemmesiden. Det er ikke en komplet udgave eller en dansk oversættelse.",
+            "Belief Changer · Free to read · No sign-up",
+            "Der er endnu ingen EPUB-fil."
+          ]
+        },
+        {
+          "type": "toc",
+          "title": "I denne læseprøve",
+          "toc": [
+            {
+              "title": "Om læseprøven",
+              "page": "2"
+            },
+            {
+              "title": "Før du begynder",
+              "page": "4"
+            },
+            {
+              "title": "Uddrag",
+              "page": "5–10"
+            },
+            {
+              "title": "Fortsæt til bogen online",
+              "page": "11"
+            }
+          ]
+        },
+        {
+          "type": "chapter",
+          "title": "Før du begynder",
+          "paragraphs": [
+            "For when the feed owns your evenings and your attention feels rented. This book takes the scrolling trap apart piece by piece: where the pull comes from, what it actually delivers, and why stopping will feel like relief rather than loss.",
+            "Uddraget er fra den engelske prøvetekst på hjemmesiden. Det er ikke en komplet udgave eller en dansk oversættelse."
+          ]
+        },
+        {
+          "type": "chapter",
+          "kicker": "Uddrag · 1/6",
+          "title": "The reach",
+          "paragraphs": [
+            "You reached for your phone just now, or a few minutes ago, and you could not have said why. There was no message you were waiting for, no fact you needed. Your hand moved on its own, the way it has learned to, into the small bright world that is always one tap away. That reach is where we begin, because it is where the trap lives, not in the phone but in the reaching.\n\nLet us be precise about what you were looking for. It was not information."
+          ]
+        },
+        {
+          "type": "chapter",
+          "kicker": "Uddrag · 2/6",
+          "title": "",
+          "paragraphs": [
+            "If it were information, you would stop when you had it. You were looking for the next thing, and then the next, and the defining feature of the next thing is that it never arrives. The scroll is designed as a horizon: something is always about to appear that is better than what is on the screen right now. You are not consuming content. You are chasing a promise that renews itself faster than you can catch it.\n\nThis is worth sitting with, because it explains the strange emptiness afterward."
+          ]
+        },
+        {
+          "type": "chapter",
+          "kicker": "Uddrag · 3/6",
+          "title": "",
+          "paragraphs": [
+            "When you finish a good meal you feel full. When you finish a good book you feel something completed in you. When you look up from twenty minutes of scrolling, you feel neither full nor complete. You feel slightly worse than before, and vaguely annoyed at yourself, and you could not name one thing you saw. That is not a side effect of the trap. That is the trap working exactly as intended."
+          ]
+        },
+        {
+          "type": "chapter",
+          "kicker": "Uddrag · 4/6",
+          "title": "",
+          "paragraphs": [
+            "The belief holding it all together is quiet and rarely said out loud: that the next screen is where the good thing is. Not this one, the next one. As long as you believe that, you cannot stop, because stopping would mean walking away one screen before the payoff. So you stay, and the payoff stays one screen ahead, and the machine that built this understood your attention better than you have ever been invited to understand it yourself.\n\nYou have probably tried to fix this with force."
+          ]
+        },
+        {
+          "type": "chapter",
+          "kicker": "Uddrag · 5/6",
+          "title": "",
+          "paragraphs": [
+            "App timers, a home screen swept clean, the phone left in another room. These can help for a day or two, the way holding your breath helps against a bad smell. But force treats the reaching as the enemy, and the reaching is not the enemy. It is a symptom of the belief. Change the belief and the reaching quiets on its own. Fight the reaching while the belief stands, and you have signed up for a battle with no end.\n\nNotice, too, how the trap has taught you to describe yourself. Addicted. Weak."
+          ]
+        },
+        {
+          "type": "chapter",
+          "kicker": "Uddrag · 6/6",
+          "title": "",
+          "paragraphs": [
+            "Bad with phones. Every one of those words points the blame inward and leaves the design untouched. You were not weak. You were up against something engineered by large teams of clever people to be exactly this hard to put down, and no one warned you that was the game. Knowing that is not an excuse. It is the first honest map of the ground you are standing on.\n\nOver the next chapters we will take this apart calmly."
+          ]
+        },
+        {
+          "type": "chapter",
+          "title": "Næste side er online",
+          "paragraphs": [
+            "Her slutter den interaktive læseprøve med fem blade. Der er ikke flere 3D-sider at vende.",
+            "Uddraget er fra den engelske prøvetekst på hjemmesiden. Det er ikke en komplet udgave eller en dansk oversættelse.",
+            "Fortsæt til bogen online →"
+          ],
+          "previewEnd": true
+        }
+      ],
+      "cta": "Fortsæt til bogen online",
+      "end": "Her slutter den interaktive læseprøve med fem blade. Der er ikke flere 3D-sider at vende.",
+      "hasExcerpt": true,
+      "source": "site/src/data/sample-chapters.ts"
+    },
+    "ar": {
+      "pages": [
+        {
+          "type": "title",
+          "title": "The Scrolling Trap",
+          "subtitle": "معاينة تفاعلية",
+          "imprint": "Belief Changer"
+        },
+        {
+          "type": "chapter",
+          "title": "عن هذه المعاينة",
+          "paragraphs": [
+            "هذا المقتطف من النص التجريبي الإنجليزي المتاح على الموقع، وليس إصداراً كاملاً أو ترجمة عربية.",
+            "Belief Changer · Free to read · No sign-up",
+            "لا يتوفر ملف EPUB بعد."
+          ]
+        },
+        {
+          "type": "toc",
+          "title": "محتويات المعاينة",
+          "toc": [
+            {
+              "title": "عن هذه المعاينة",
+              "page": "2"
+            },
+            {
+              "title": "قبل أن تبدأ",
+              "page": "4"
+            },
+            {
+              "title": "مقتطف افتتاحي",
+              "page": "5–10"
+            },
+            {
+              "title": "متابعة إلى صفحة الكتاب",
+              "page": "11"
+            }
+          ]
+        },
+        {
+          "type": "chapter",
+          "title": "قبل أن تبدأ",
+          "paragraphs": [
+            "For when the feed owns your evenings and your attention feels rented. This book takes the scrolling trap apart piece by piece: where the pull comes from, what it actually delivers, and why stopping will feel like relief rather than loss.",
+            "هذا المقتطف من النص التجريبي الإنجليزي المتاح على الموقع، وليس إصداراً كاملاً أو ترجمة عربية."
+          ]
+        },
+        {
+          "type": "chapter",
+          "kicker": "مقتطف افتتاحي · 1/6",
+          "title": "The reach",
+          "paragraphs": [
+            "You reached for your phone just now, or a few minutes ago, and you could not have said why. There was no message you were waiting for, no fact you needed. Your hand moved on its own, the way it has learned to, into the small bright world that is always one tap away. That reach is where we begin, because it is where the trap lives, not in the phone but in the reaching.\n\nLet us be precise about what you were looking for. It was not information."
+          ]
+        },
+        {
+          "type": "chapter",
+          "kicker": "مقتطف افتتاحي · 2/6",
+          "title": "",
+          "paragraphs": [
+            "If it were information, you would stop when you had it. You were looking for the next thing, and then the next, and the defining feature of the next thing is that it never arrives. The scroll is designed as a horizon: something is always about to appear that is better than what is on the screen right now. You are not consuming content. You are chasing a promise that renews itself faster than you can catch it.\n\nThis is worth sitting with, because it explains the strange emptiness afterward."
+          ]
+        },
+        {
+          "type": "chapter",
+          "kicker": "مقتطف افتتاحي · 3/6",
+          "title": "",
+          "paragraphs": [
+            "When you finish a good meal you feel full. When you finish a good book you feel something completed in you. When you look up from twenty minutes of scrolling, you feel neither full nor complete. You feel slightly worse than before, and vaguely annoyed at yourself, and you could not name one thing you saw. That is not a side effect of the trap. That is the trap working exactly as intended."
+          ]
+        },
+        {
+          "type": "chapter",
+          "kicker": "مقتطف افتتاحي · 4/6",
+          "title": "",
+          "paragraphs": [
+            "The belief holding it all together is quiet and rarely said out loud: that the next screen is where the good thing is. Not this one, the next one. As long as you believe that, you cannot stop, because stopping would mean walking away one screen before the payoff. So you stay, and the payoff stays one screen ahead, and the machine that built this understood your attention better than you have ever been invited to understand it yourself.\n\nYou have probably tried to fix this with force."
+          ]
+        },
+        {
+          "type": "chapter",
+          "kicker": "مقتطف افتتاحي · 5/6",
+          "title": "",
+          "paragraphs": [
+            "App timers, a home screen swept clean, the phone left in another room. These can help for a day or two, the way holding your breath helps against a bad smell. But force treats the reaching as the enemy, and the reaching is not the enemy. It is a symptom of the belief. Change the belief and the reaching quiets on its own. Fight the reaching while the belief stands, and you have signed up for a battle with no end.\n\nNotice, too, how the trap has taught you to describe yourself. Addicted. Weak."
+          ]
+        },
+        {
+          "type": "chapter",
+          "kicker": "مقتطف افتتاحي · 6/6",
+          "title": "",
+          "paragraphs": [
+            "Bad with phones. Every one of those words points the blame inward and leaves the design untouched. You were not weak. You were up against something engineered by large teams of clever people to be exactly this hard to put down, and no one warned you that was the game. Knowing that is not an excuse. It is the first honest map of the ground you are standing on.\n\nOver the next chapters we will take this apart calmly."
+          ]
+        },
+        {
+          "type": "chapter",
+          "title": "صفحتك التالية على الموقع",
+          "paragraphs": [
+            "هذه نهاية العينة التفاعلية المكوّنة من خمس أوراق. لا توجد صفحات ثلاثية الأبعاد أخرى هنا.",
+            "هذا المقتطف من النص التجريبي الإنجليزي المتاح على الموقع، وليس إصداراً كاملاً أو ترجمة عربية.",
+            "متابعة إلى صفحة الكتاب →"
+          ],
+          "previewEnd": true
+        }
+      ],
+      "cta": "متابعة إلى صفحة الكتاب",
+      "end": "هذه نهاية العينة التفاعلية المكوّنة من خمس أوراق. لا توجد صفحات ثلاثية الأبعاد أخرى هنا.",
+      "hasExcerpt": true,
+      "source": "site/src/data/sample-chapters.ts"
+    }
+  },
+  "porn": {
+    "en": {
+      "pages": [
+        {
+          "type": "title",
+          "title": "The Porn Trap",
+          "subtitle": "Interactive preview",
+          "imprint": "Belief Changer"
+        },
+        {
+          "type": "chapter",
+          "title": "About this preview",
+          "paragraphs": [
+            "No chapter prose is available for this title yet. Its book page shows the current availability.",
+            "Belief Changer · Free to read · No sign-up",
+            "No EPUB download is available yet."
+          ]
+        },
+        {
+          "type": "toc",
+          "title": "Inside this sample",
+          "toc": [
+            {
+              "title": "About this preview",
+              "page": "2"
+            },
+            {
+              "title": "Before you begin",
+              "page": "4"
+            },
+            {
+              "title": "Manuscript outline",
+              "page": "5–10"
+            },
+            {
+              "title": "Continue to the book online",
+              "page": "11"
+            }
+          ]
+        },
+        {
+          "type": "chapter",
+          "title": "Before you begin",
+          "paragraphs": [
+            "A promise of intimacy that quietly trains you away from the real thing.",
+            "This manuscript is being written. The following pages show its planned outline, not finished chapters."
+          ]
+        },
+        {
+          "type": "section",
+          "kicker": "Planned chapter 1",
+          "title": "The counterfeit and the real",
+          "subtitle": "This manuscript is being written. The following pages show its planned outline, not finished chapters."
+        },
+        {
+          "type": "section",
+          "kicker": "Planned chapter 2",
+          "title": "What it trains you toward",
+          "subtitle": "This manuscript is being written. The following pages show its planned outline, not finished chapters."
+        },
+        {
+          "type": "section",
+          "kicker": "Planned chapter 3",
+          "title": "Rebuilding the appetite for the genuine",
+          "subtitle": "This manuscript is being written. The following pages show its planned outline, not finished chapters."
+        },
+        {
+          "type": "section",
+          "title": "Manuscript outline",
+          "subtitle": "This manuscript is being written. The following pages show its planned outline, not finished chapters."
+        },
+        {
+          "type": "section",
+          "title": "Manuscript outline",
+          "subtitle": "This manuscript is being written. The following pages show its planned outline, not finished chapters."
+        },
+        {
+          "type": "section",
+          "title": "Continue to the book online",
+          "subtitle": "No chapter prose is available for this title yet. Its book page shows the current availability."
+        },
+        {
+          "type": "chapter",
+          "title": "Your next page is online",
+          "paragraphs": [
+            "This is the end of the five-leaf interactive sample. No more 3D pages turn here.",
+            "No chapter prose is available for this title yet. Its book page shows the current availability.",
+            "Continue to the book online →"
+          ],
+          "previewEnd": true
+        }
+      ],
+      "cta": "Continue to the book online",
+      "end": "This is the end of the five-leaf interactive sample. No more 3D pages turn here.",
+      "hasExcerpt": false,
+      "source": "site/src/data/books.ts"
+    },
+    "da": {
+      "pages": [
+        {
+          "type": "title",
+          "title": "The Porn Trap",
+          "subtitle": "Interaktiv læseprøve",
+          "imprint": "Belief Changer"
+        },
+        {
+          "type": "chapter",
+          "title": "Om læseprøven",
+          "paragraphs": [
+            "Der er endnu ingen kapiteltekst til denne titel. Bogens side viser den aktuelle status.",
+            "Belief Changer · Free to read · No sign-up",
+            "Der er endnu ingen EPUB-fil."
+          ]
+        },
+        {
+          "type": "toc",
+          "title": "I denne læseprøve",
+          "toc": [
+            {
+              "title": "Om læseprøven",
+              "page": "2"
+            },
+            {
+              "title": "Før du begynder",
+              "page": "4"
+            },
+            {
+              "title": "Manuskriptets struktur",
+              "page": "5–10"
+            },
+            {
+              "title": "Fortsæt til bogen online",
+              "page": "11"
+            }
+          ]
+        },
+        {
+          "type": "chapter",
+          "title": "Før du begynder",
+          "paragraphs": [
+            "A promise of intimacy that quietly trains you away from the real thing.",
+            "Manuskriptet er under udarbejdelse. De næste sider viser den planlagte struktur, ikke færdige kapitler."
+          ]
+        },
+        {
+          "type": "section",
+          "kicker": "Planlagt kapitel 1",
+          "title": "The counterfeit and the real",
+          "subtitle": "Manuskriptet er under udarbejdelse. De næste sider viser den planlagte struktur, ikke færdige kapitler."
+        },
+        {
+          "type": "section",
+          "kicker": "Planlagt kapitel 2",
+          "title": "What it trains you toward",
+          "subtitle": "Manuskriptet er under udarbejdelse. De næste sider viser den planlagte struktur, ikke færdige kapitler."
+        },
+        {
+          "type": "section",
+          "kicker": "Planlagt kapitel 3",
+          "title": "Rebuilding the appetite for the genuine",
+          "subtitle": "Manuskriptet er under udarbejdelse. De næste sider viser den planlagte struktur, ikke færdige kapitler."
+        },
+        {
+          "type": "section",
+          "title": "Manuskriptets struktur",
+          "subtitle": "Manuskriptet er under udarbejdelse. De næste sider viser den planlagte struktur, ikke færdige kapitler."
+        },
+        {
+          "type": "section",
+          "title": "Manuskriptets struktur",
+          "subtitle": "Manuskriptet er under udarbejdelse. De næste sider viser den planlagte struktur, ikke færdige kapitler."
+        },
+        {
+          "type": "section",
+          "title": "Fortsæt til bogen online",
+          "subtitle": "Der er endnu ingen kapiteltekst til denne titel. Bogens side viser den aktuelle status."
+        },
+        {
+          "type": "chapter",
+          "title": "Næste side er online",
+          "paragraphs": [
+            "Her slutter den interaktive læseprøve med fem blade. Der er ikke flere 3D-sider at vende.",
+            "Der er endnu ingen kapiteltekst til denne titel. Bogens side viser den aktuelle status.",
+            "Fortsæt til bogen online →"
+          ],
+          "previewEnd": true
+        }
+      ],
+      "cta": "Fortsæt til bogen online",
+      "end": "Her slutter den interaktive læseprøve med fem blade. Der er ikke flere 3D-sider at vende.",
+      "hasExcerpt": false,
+      "source": "site/src/data/books.ts"
+    },
+    "ar": {
+      "pages": [
+        {
+          "type": "title",
+          "title": "The Porn Trap",
+          "subtitle": "معاينة تفاعلية",
+          "imprint": "Belief Changer"
+        },
+        {
+          "type": "chapter",
+          "title": "عن هذه المعاينة",
+          "paragraphs": [
+            "لا يتوفر نص الفصول لهذا العنوان بعد. تعرض صفحة الكتاب حالته الحالية.",
+            "Belief Changer · Free to read · No sign-up",
+            "لا يتوفر ملف EPUB بعد."
+          ]
+        },
+        {
+          "type": "toc",
+          "title": "محتويات المعاينة",
+          "toc": [
+            {
+              "title": "عن هذه المعاينة",
+              "page": "2"
+            },
+            {
+              "title": "قبل أن تبدأ",
+              "page": "4"
+            },
+            {
+              "title": "مخطط الكتاب",
+              "page": "5–10"
+            },
+            {
+              "title": "متابعة إلى صفحة الكتاب",
+              "page": "11"
+            }
+          ]
+        },
+        {
+          "type": "chapter",
+          "title": "قبل أن تبدأ",
+          "paragraphs": [
+            "A promise of intimacy that quietly trains you away from the real thing.",
+            "المخطوط قيد الكتابة. تعرض الصفحات التالية مخططه المقترح، وليست فصولاً مكتملة."
+          ]
+        },
+        {
+          "type": "section",
+          "kicker": "فصل مقترح 1",
+          "title": "The counterfeit and the real",
+          "subtitle": "المخطوط قيد الكتابة. تعرض الصفحات التالية مخططه المقترح، وليست فصولاً مكتملة."
+        },
+        {
+          "type": "section",
+          "kicker": "فصل مقترح 2",
+          "title": "What it trains you toward",
+          "subtitle": "المخطوط قيد الكتابة. تعرض الصفحات التالية مخططه المقترح، وليست فصولاً مكتملة."
+        },
+        {
+          "type": "section",
+          "kicker": "فصل مقترح 3",
+          "title": "Rebuilding the appetite for the genuine",
+          "subtitle": "المخطوط قيد الكتابة. تعرض الصفحات التالية مخططه المقترح، وليست فصولاً مكتملة."
+        },
+        {
+          "type": "section",
+          "title": "مخطط الكتاب",
+          "subtitle": "المخطوط قيد الكتابة. تعرض الصفحات التالية مخططه المقترح، وليست فصولاً مكتملة."
+        },
+        {
+          "type": "section",
+          "title": "مخطط الكتاب",
+          "subtitle": "المخطوط قيد الكتابة. تعرض الصفحات التالية مخططه المقترح، وليست فصولاً مكتملة."
+        },
+        {
+          "type": "section",
+          "title": "متابعة إلى صفحة الكتاب",
+          "subtitle": "لا يتوفر نص الفصول لهذا العنوان بعد. تعرض صفحة الكتاب حالته الحالية."
+        },
+        {
+          "type": "chapter",
+          "title": "صفحتك التالية على الموقع",
+          "paragraphs": [
+            "هذه نهاية العينة التفاعلية المكوّنة من خمس أوراق. لا توجد صفحات ثلاثية الأبعاد أخرى هنا.",
+            "لا يتوفر نص الفصول لهذا العنوان بعد. تعرض صفحة الكتاب حالته الحالية.",
+            "متابعة إلى صفحة الكتاب →"
+          ],
+          "previewEnd": true
+        }
+      ],
+      "cta": "متابعة إلى صفحة الكتاب",
+      "end": "هذه نهاية العينة التفاعلية المكوّنة من خمس أوراق. لا توجد صفحات ثلاثية الأبعاد أخرى هنا.",
+      "hasExcerpt": false,
+      "source": "site/src/data/books.ts"
+    }
+  },
+  "alcohol": {
+    "en": {
+      "pages": [
+        {
+          "type": "title",
+          "title": "The Alcohol Trap",
+          "subtitle": "Interactive preview",
+          "imprint": "Belief Changer"
+        },
+        {
+          "type": "chapter",
+          "title": "About this preview",
+          "paragraphs": [
+            "No chapter prose is available for this title yet. Its book page shows the current availability.",
+            "Belief Changer · Free to read · No sign-up",
+            "No EPUB download is available yet."
+          ]
+        },
+        {
+          "type": "toc",
+          "title": "Inside this sample",
+          "toc": [
+            {
+              "title": "About this preview",
+              "page": "2"
+            },
+            {
+              "title": "Before you begin",
+              "page": "4"
+            },
+            {
+              "title": "Manuscript outline",
+              "page": "5–10"
+            },
+            {
+              "title": "Continue to the book online",
+              "page": "11"
+            }
+          ]
+        },
+        {
+          "type": "chapter",
+          "title": "Before you begin",
+          "paragraphs": [
+            "It borrows tomorrow’s calm and charges interest tonight.",
+            "This manuscript is being written. The following pages show its planned outline, not finished chapters."
+          ]
+        },
+        {
+          "type": "section",
+          "kicker": "Planned chapter 1",
+          "title": "The drink that unwinds nothing",
+          "subtitle": "This manuscript is being written. The following pages show its planned outline, not finished chapters."
+        },
+        {
+          "type": "section",
+          "kicker": "Planned chapter 2",
+          "title": "The borrowed calm",
+          "subtitle": "This manuscript is being written. The following pages show its planned outline, not finished chapters."
+        },
+        {
+          "type": "section",
+          "kicker": "Planned chapter 3",
+          "title": "The morning after the belief",
+          "subtitle": "This manuscript is being written. The following pages show its planned outline, not finished chapters."
+        },
+        {
+          "type": "section",
+          "title": "Manuscript outline",
+          "subtitle": "This manuscript is being written. The following pages show its planned outline, not finished chapters."
+        },
+        {
+          "type": "section",
+          "title": "Manuscript outline",
+          "subtitle": "This manuscript is being written. The following pages show its planned outline, not finished chapters."
+        },
+        {
+          "type": "section",
+          "title": "Continue to the book online",
+          "subtitle": "No chapter prose is available for this title yet. Its book page shows the current availability."
+        },
+        {
+          "type": "chapter",
+          "title": "Your next page is online",
+          "paragraphs": [
+            "This is the end of the five-leaf interactive sample. No more 3D pages turn here.",
+            "No chapter prose is available for this title yet. Its book page shows the current availability.",
+            "Continue to the book online →"
+          ],
+          "previewEnd": true
+        }
+      ],
+      "cta": "Continue to the book online",
+      "end": "This is the end of the five-leaf interactive sample. No more 3D pages turn here.",
+      "hasExcerpt": false,
+      "source": "site/src/data/books.ts"
+    },
+    "da": {
+      "pages": [
+        {
+          "type": "title",
+          "title": "The Alcohol Trap",
+          "subtitle": "Interaktiv læseprøve",
+          "imprint": "Belief Changer"
+        },
+        {
+          "type": "chapter",
+          "title": "Om læseprøven",
+          "paragraphs": [
+            "Der er endnu ingen kapiteltekst til denne titel. Bogens side viser den aktuelle status.",
+            "Belief Changer · Free to read · No sign-up",
+            "Der er endnu ingen EPUB-fil."
+          ]
+        },
+        {
+          "type": "toc",
+          "title": "I denne læseprøve",
+          "toc": [
+            {
+              "title": "Om læseprøven",
+              "page": "2"
+            },
+            {
+              "title": "Før du begynder",
+              "page": "4"
+            },
+            {
+              "title": "Manuskriptets struktur",
+              "page": "5–10"
+            },
+            {
+              "title": "Fortsæt til bogen online",
+              "page": "11"
+            }
+          ]
+        },
+        {
+          "type": "chapter",
+          "title": "Før du begynder",
+          "paragraphs": [
+            "It borrows tomorrow’s calm and charges interest tonight.",
+            "Manuskriptet er under udarbejdelse. De næste sider viser den planlagte struktur, ikke færdige kapitler."
+          ]
+        },
+        {
+          "type": "section",
+          "kicker": "Planlagt kapitel 1",
+          "title": "The drink that unwinds nothing",
+          "subtitle": "Manuskriptet er under udarbejdelse. De næste sider viser den planlagte struktur, ikke færdige kapitler."
+        },
+        {
+          "type": "section",
+          "kicker": "Planlagt kapitel 2",
+          "title": "The borrowed calm",
+          "subtitle": "Manuskriptet er under udarbejdelse. De næste sider viser den planlagte struktur, ikke færdige kapitler."
+        },
+        {
+          "type": "section",
+          "kicker": "Planlagt kapitel 3",
+          "title": "The morning after the belief",
+          "subtitle": "Manuskriptet er under udarbejdelse. De næste sider viser den planlagte struktur, ikke færdige kapitler."
+        },
+        {
+          "type": "section",
+          "title": "Manuskriptets struktur",
+          "subtitle": "Manuskriptet er under udarbejdelse. De næste sider viser den planlagte struktur, ikke færdige kapitler."
+        },
+        {
+          "type": "section",
+          "title": "Manuskriptets struktur",
+          "subtitle": "Manuskriptet er under udarbejdelse. De næste sider viser den planlagte struktur, ikke færdige kapitler."
+        },
+        {
+          "type": "section",
+          "title": "Fortsæt til bogen online",
+          "subtitle": "Der er endnu ingen kapiteltekst til denne titel. Bogens side viser den aktuelle status."
+        },
+        {
+          "type": "chapter",
+          "title": "Næste side er online",
+          "paragraphs": [
+            "Her slutter den interaktive læseprøve med fem blade. Der er ikke flere 3D-sider at vende.",
+            "Der er endnu ingen kapiteltekst til denne titel. Bogens side viser den aktuelle status.",
+            "Fortsæt til bogen online →"
+          ],
+          "previewEnd": true
+        }
+      ],
+      "cta": "Fortsæt til bogen online",
+      "end": "Her slutter den interaktive læseprøve med fem blade. Der er ikke flere 3D-sider at vende.",
+      "hasExcerpt": false,
+      "source": "site/src/data/books.ts"
+    },
+    "ar": {
+      "pages": [
+        {
+          "type": "title",
+          "title": "The Alcohol Trap",
+          "subtitle": "معاينة تفاعلية",
+          "imprint": "Belief Changer"
+        },
+        {
+          "type": "chapter",
+          "title": "عن هذه المعاينة",
+          "paragraphs": [
+            "لا يتوفر نص الفصول لهذا العنوان بعد. تعرض صفحة الكتاب حالته الحالية.",
+            "Belief Changer · Free to read · No sign-up",
+            "لا يتوفر ملف EPUB بعد."
+          ]
+        },
+        {
+          "type": "toc",
+          "title": "محتويات المعاينة",
+          "toc": [
+            {
+              "title": "عن هذه المعاينة",
+              "page": "2"
+            },
+            {
+              "title": "قبل أن تبدأ",
+              "page": "4"
+            },
+            {
+              "title": "مخطط الكتاب",
+              "page": "5–10"
+            },
+            {
+              "title": "متابعة إلى صفحة الكتاب",
+              "page": "11"
+            }
+          ]
+        },
+        {
+          "type": "chapter",
+          "title": "قبل أن تبدأ",
+          "paragraphs": [
+            "It borrows tomorrow’s calm and charges interest tonight.",
+            "المخطوط قيد الكتابة. تعرض الصفحات التالية مخططه المقترح، وليست فصولاً مكتملة."
+          ]
+        },
+        {
+          "type": "section",
+          "kicker": "فصل مقترح 1",
+          "title": "The drink that unwinds nothing",
+          "subtitle": "المخطوط قيد الكتابة. تعرض الصفحات التالية مخططه المقترح، وليست فصولاً مكتملة."
+        },
+        {
+          "type": "section",
+          "kicker": "فصل مقترح 2",
+          "title": "The borrowed calm",
+          "subtitle": "المخطوط قيد الكتابة. تعرض الصفحات التالية مخططه المقترح، وليست فصولاً مكتملة."
+        },
+        {
+          "type": "section",
+          "kicker": "فصل مقترح 3",
+          "title": "The morning after the belief",
+          "subtitle": "المخطوط قيد الكتابة. تعرض الصفحات التالية مخططه المقترح، وليست فصولاً مكتملة."
+        },
+        {
+          "type": "section",
+          "title": "مخطط الكتاب",
+          "subtitle": "المخطوط قيد الكتابة. تعرض الصفحات التالية مخططه المقترح، وليست فصولاً مكتملة."
+        },
+        {
+          "type": "section",
+          "title": "مخطط الكتاب",
+          "subtitle": "المخطوط قيد الكتابة. تعرض الصفحات التالية مخططه المقترح، وليست فصولاً مكتملة."
+        },
+        {
+          "type": "section",
+          "title": "متابعة إلى صفحة الكتاب",
+          "subtitle": "لا يتوفر نص الفصول لهذا العنوان بعد. تعرض صفحة الكتاب حالته الحالية."
+        },
+        {
+          "type": "chapter",
+          "title": "صفحتك التالية على الموقع",
+          "paragraphs": [
+            "هذه نهاية العينة التفاعلية المكوّنة من خمس أوراق. لا توجد صفحات ثلاثية الأبعاد أخرى هنا.",
+            "لا يتوفر نص الفصول لهذا العنوان بعد. تعرض صفحة الكتاب حالته الحالية.",
+            "متابعة إلى صفحة الكتاب →"
+          ],
+          "previewEnd": true
+        }
+      ],
+      "cta": "متابعة إلى صفحة الكتاب",
+      "end": "هذه نهاية العينة التفاعلية المكوّنة من خمس أوراق. لا توجد صفحات ثلاثية الأبعاد أخرى هنا.",
+      "hasExcerpt": false,
+      "source": "site/src/data/books.ts"
+    }
+  },
+  "gaming": {
+    "en": {
+      "pages": [
+        {
+          "type": "title",
+          "title": "The Gaming Trap",
+          "subtitle": "Interactive preview",
+          "imprint": "Belief Changer"
+        },
+        {
+          "type": "chapter",
+          "title": "About this preview",
+          "paragraphs": [
+            "No chapter prose is available for this title yet. Its book page shows the current availability.",
+            "Belief Changer · Free to read · No sign-up",
+            "No EPUB download is available yet."
+          ]
+        },
+        {
+          "type": "toc",
+          "title": "Inside this sample",
+          "toc": [
+            {
+              "title": "About this preview",
+              "page": "2"
+            },
+            {
+              "title": "Before you begin",
+              "page": "4"
+            },
+            {
+              "title": "Manuscript outline",
+              "page": "5–10"
+            },
+            {
+              "title": "Continue to the book online",
+              "page": "11"
+            }
+          ]
+        },
+        {
+          "type": "chapter",
+          "title": "Before you begin",
+          "paragraphs": [
+            "Endless progress that leaves you exactly where you started.",
+            "This manuscript is being written. The following pages show its planned outline, not finished chapters."
+          ]
+        },
+        {
+          "type": "section",
+          "kicker": "Planned chapter 1",
+          "title": "The progress that goes nowhere",
+          "subtitle": "This manuscript is being written. The following pages show its planned outline, not finished chapters."
+        },
+        {
+          "type": "section",
+          "kicker": "Planned chapter 2",
+          "title": "The loop and the life outside it",
+          "subtitle": "This manuscript is being written. The following pages show its planned outline, not finished chapters."
+        },
+        {
+          "type": "section",
+          "kicker": "Planned chapter 3",
+          "title": "Playing without being played",
+          "subtitle": "This manuscript is being written. The following pages show its planned outline, not finished chapters."
+        },
+        {
+          "type": "section",
+          "title": "Manuscript outline",
+          "subtitle": "This manuscript is being written. The following pages show its planned outline, not finished chapters."
+        },
+        {
+          "type": "section",
+          "title": "Manuscript outline",
+          "subtitle": "This manuscript is being written. The following pages show its planned outline, not finished chapters."
+        },
+        {
+          "type": "section",
+          "title": "Continue to the book online",
+          "subtitle": "No chapter prose is available for this title yet. Its book page shows the current availability."
+        },
+        {
+          "type": "chapter",
+          "title": "Your next page is online",
+          "paragraphs": [
+            "This is the end of the five-leaf interactive sample. No more 3D pages turn here.",
+            "No chapter prose is available for this title yet. Its book page shows the current availability.",
+            "Continue to the book online →"
+          ],
+          "previewEnd": true
+        }
+      ],
+      "cta": "Continue to the book online",
+      "end": "This is the end of the five-leaf interactive sample. No more 3D pages turn here.",
+      "hasExcerpt": false,
+      "source": "site/src/data/books.ts"
+    },
+    "da": {
+      "pages": [
+        {
+          "type": "title",
+          "title": "The Gaming Trap",
+          "subtitle": "Interaktiv læseprøve",
+          "imprint": "Belief Changer"
+        },
+        {
+          "type": "chapter",
+          "title": "Om læseprøven",
+          "paragraphs": [
+            "Der er endnu ingen kapiteltekst til denne titel. Bogens side viser den aktuelle status.",
+            "Belief Changer · Free to read · No sign-up",
+            "Der er endnu ingen EPUB-fil."
+          ]
+        },
+        {
+          "type": "toc",
+          "title": "I denne læseprøve",
+          "toc": [
+            {
+              "title": "Om læseprøven",
+              "page": "2"
+            },
+            {
+              "title": "Før du begynder",
+              "page": "4"
+            },
+            {
+              "title": "Manuskriptets struktur",
+              "page": "5–10"
+            },
+            {
+              "title": "Fortsæt til bogen online",
+              "page": "11"
+            }
+          ]
+        },
+        {
+          "type": "chapter",
+          "title": "Før du begynder",
+          "paragraphs": [
+            "Endless progress that leaves you exactly where you started.",
+            "Manuskriptet er under udarbejdelse. De næste sider viser den planlagte struktur, ikke færdige kapitler."
+          ]
+        },
+        {
+          "type": "section",
+          "kicker": "Planlagt kapitel 1",
+          "title": "The progress that goes nowhere",
+          "subtitle": "Manuskriptet er under udarbejdelse. De næste sider viser den planlagte struktur, ikke færdige kapitler."
+        },
+        {
+          "type": "section",
+          "kicker": "Planlagt kapitel 2",
+          "title": "The loop and the life outside it",
+          "subtitle": "Manuskriptet er under udarbejdelse. De næste sider viser den planlagte struktur, ikke færdige kapitler."
+        },
+        {
+          "type": "section",
+          "kicker": "Planlagt kapitel 3",
+          "title": "Playing without being played",
+          "subtitle": "Manuskriptet er under udarbejdelse. De næste sider viser den planlagte struktur, ikke færdige kapitler."
+        },
+        {
+          "type": "section",
+          "title": "Manuskriptets struktur",
+          "subtitle": "Manuskriptet er under udarbejdelse. De næste sider viser den planlagte struktur, ikke færdige kapitler."
+        },
+        {
+          "type": "section",
+          "title": "Manuskriptets struktur",
+          "subtitle": "Manuskriptet er under udarbejdelse. De næste sider viser den planlagte struktur, ikke færdige kapitler."
+        },
+        {
+          "type": "section",
+          "title": "Fortsæt til bogen online",
+          "subtitle": "Der er endnu ingen kapiteltekst til denne titel. Bogens side viser den aktuelle status."
+        },
+        {
+          "type": "chapter",
+          "title": "Næste side er online",
+          "paragraphs": [
+            "Her slutter den interaktive læseprøve med fem blade. Der er ikke flere 3D-sider at vende.",
+            "Der er endnu ingen kapiteltekst til denne titel. Bogens side viser den aktuelle status.",
+            "Fortsæt til bogen online →"
+          ],
+          "previewEnd": true
+        }
+      ],
+      "cta": "Fortsæt til bogen online",
+      "end": "Her slutter den interaktive læseprøve med fem blade. Der er ikke flere 3D-sider at vende.",
+      "hasExcerpt": false,
+      "source": "site/src/data/books.ts"
+    },
+    "ar": {
+      "pages": [
+        {
+          "type": "title",
+          "title": "The Gaming Trap",
+          "subtitle": "معاينة تفاعلية",
+          "imprint": "Belief Changer"
+        },
+        {
+          "type": "chapter",
+          "title": "عن هذه المعاينة",
+          "paragraphs": [
+            "لا يتوفر نص الفصول لهذا العنوان بعد. تعرض صفحة الكتاب حالته الحالية.",
+            "Belief Changer · Free to read · No sign-up",
+            "لا يتوفر ملف EPUB بعد."
+          ]
+        },
+        {
+          "type": "toc",
+          "title": "محتويات المعاينة",
+          "toc": [
+            {
+              "title": "عن هذه المعاينة",
+              "page": "2"
+            },
+            {
+              "title": "قبل أن تبدأ",
+              "page": "4"
+            },
+            {
+              "title": "مخطط الكتاب",
+              "page": "5–10"
+            },
+            {
+              "title": "متابعة إلى صفحة الكتاب",
+              "page": "11"
+            }
+          ]
+        },
+        {
+          "type": "chapter",
+          "title": "قبل أن تبدأ",
+          "paragraphs": [
+            "Endless progress that leaves you exactly where you started.",
+            "المخطوط قيد الكتابة. تعرض الصفحات التالية مخططه المقترح، وليست فصولاً مكتملة."
+          ]
+        },
+        {
+          "type": "section",
+          "kicker": "فصل مقترح 1",
+          "title": "The progress that goes nowhere",
+          "subtitle": "المخطوط قيد الكتابة. تعرض الصفحات التالية مخططه المقترح، وليست فصولاً مكتملة."
+        },
+        {
+          "type": "section",
+          "kicker": "فصل مقترح 2",
+          "title": "The loop and the life outside it",
+          "subtitle": "المخطوط قيد الكتابة. تعرض الصفحات التالية مخططه المقترح، وليست فصولاً مكتملة."
+        },
+        {
+          "type": "section",
+          "kicker": "فصل مقترح 3",
+          "title": "Playing without being played",
+          "subtitle": "المخطوط قيد الكتابة. تعرض الصفحات التالية مخططه المقترح، وليست فصولاً مكتملة."
+        },
+        {
+          "type": "section",
+          "title": "مخطط الكتاب",
+          "subtitle": "المخطوط قيد الكتابة. تعرض الصفحات التالية مخططه المقترح، وليست فصولاً مكتملة."
+        },
+        {
+          "type": "section",
+          "title": "مخطط الكتاب",
+          "subtitle": "المخطوط قيد الكتابة. تعرض الصفحات التالية مخططه المقترح، وليست فصولاً مكتملة."
+        },
+        {
+          "type": "section",
+          "title": "متابعة إلى صفحة الكتاب",
+          "subtitle": "لا يتوفر نص الفصول لهذا العنوان بعد. تعرض صفحة الكتاب حالته الحالية."
+        },
+        {
+          "type": "chapter",
+          "title": "صفحتك التالية على الموقع",
+          "paragraphs": [
+            "هذه نهاية العينة التفاعلية المكوّنة من خمس أوراق. لا توجد صفحات ثلاثية الأبعاد أخرى هنا.",
+            "لا يتوفر نص الفصول لهذا العنوان بعد. تعرض صفحة الكتاب حالته الحالية.",
+            "متابعة إلى صفحة الكتاب →"
+          ],
+          "previewEnd": true
+        }
+      ],
+      "cta": "متابعة إلى صفحة الكتاب",
+      "end": "هذه نهاية العينة التفاعلية المكوّنة من خمس أوراق. لا توجد صفحات ثلاثية الأبعاد أخرى هنا.",
+      "hasExcerpt": false,
+      "source": "site/src/data/books.ts"
+    }
+  },
+  "junkfood": {
+    "en": {
+      "pages": [
+        {
+          "type": "title",
+          "title": "The Junk Food Trap",
+          "subtitle": "Interactive preview",
+          "imprint": "Belief Changer"
+        },
+        {
+          "type": "chapter",
+          "title": "About this preview",
+          "paragraphs": [
+            "No chapter prose is available for this title yet. Its book page shows the current availability.",
+            "Belief Changer · Free to read · No sign-up",
+            "No EPUB download is available yet."
+          ]
+        },
+        {
+          "type": "toc",
+          "title": "Inside this sample",
+          "toc": [
+            {
+              "title": "About this preview",
+              "page": "2"
+            },
+            {
+              "title": "Before you begin",
+              "page": "4"
+            },
+            {
+              "title": "Manuscript outline",
+              "page": "5–10"
+            },
+            {
+              "title": "Continue to the book online",
+              "page": "11"
+            }
+          ]
+        },
+        {
+          "type": "chapter",
+          "title": "Before you begin",
+          "paragraphs": [
+            "Engineered to override the signal that says you have had enough.",
+            "This manuscript is being written. The following pages show its planned outline, not finished chapters."
+          ]
+        },
+        {
+          "type": "section",
+          "kicker": "Planned chapter 1",
+          "title": "The food that never fills you",
+          "subtitle": "This manuscript is being written. The following pages show its planned outline, not finished chapters."
+        },
+        {
+          "type": "section",
+          "kicker": "Planned chapter 2",
+          "title": "The overridden signal",
+          "subtitle": "This manuscript is being written. The following pages show its planned outline, not finished chapters."
+        },
+        {
+          "type": "section",
+          "kicker": "Planned chapter 3",
+          "title": "Getting the signal back",
+          "subtitle": "This manuscript is being written. The following pages show its planned outline, not finished chapters."
+        },
+        {
+          "type": "section",
+          "title": "Manuscript outline",
+          "subtitle": "This manuscript is being written. The following pages show its planned outline, not finished chapters."
+        },
+        {
+          "type": "section",
+          "title": "Manuscript outline",
+          "subtitle": "This manuscript is being written. The following pages show its planned outline, not finished chapters."
+        },
+        {
+          "type": "section",
+          "title": "Continue to the book online",
+          "subtitle": "No chapter prose is available for this title yet. Its book page shows the current availability."
+        },
+        {
+          "type": "chapter",
+          "title": "Your next page is online",
+          "paragraphs": [
+            "This is the end of the five-leaf interactive sample. No more 3D pages turn here.",
+            "No chapter prose is available for this title yet. Its book page shows the current availability.",
+            "Continue to the book online →"
+          ],
+          "previewEnd": true
+        }
+      ],
+      "cta": "Continue to the book online",
+      "end": "This is the end of the five-leaf interactive sample. No more 3D pages turn here.",
+      "hasExcerpt": false,
+      "source": "site/src/data/books.ts"
+    },
+    "da": {
+      "pages": [
+        {
+          "type": "title",
+          "title": "The Junk Food Trap",
+          "subtitle": "Interaktiv læseprøve",
+          "imprint": "Belief Changer"
+        },
+        {
+          "type": "chapter",
+          "title": "Om læseprøven",
+          "paragraphs": [
+            "Der er endnu ingen kapiteltekst til denne titel. Bogens side viser den aktuelle status.",
+            "Belief Changer · Free to read · No sign-up",
+            "Der er endnu ingen EPUB-fil."
+          ]
+        },
+        {
+          "type": "toc",
+          "title": "I denne læseprøve",
+          "toc": [
+            {
+              "title": "Om læseprøven",
+              "page": "2"
+            },
+            {
+              "title": "Før du begynder",
+              "page": "4"
+            },
+            {
+              "title": "Manuskriptets struktur",
+              "page": "5–10"
+            },
+            {
+              "title": "Fortsæt til bogen online",
+              "page": "11"
+            }
+          ]
+        },
+        {
+          "type": "chapter",
+          "title": "Før du begynder",
+          "paragraphs": [
+            "Engineered to override the signal that says you have had enough.",
+            "Manuskriptet er under udarbejdelse. De næste sider viser den planlagte struktur, ikke færdige kapitler."
+          ]
+        },
+        {
+          "type": "section",
+          "kicker": "Planlagt kapitel 1",
+          "title": "The food that never fills you",
+          "subtitle": "Manuskriptet er under udarbejdelse. De næste sider viser den planlagte struktur, ikke færdige kapitler."
+        },
+        {
+          "type": "section",
+          "kicker": "Planlagt kapitel 2",
+          "title": "The overridden signal",
+          "subtitle": "Manuskriptet er under udarbejdelse. De næste sider viser den planlagte struktur, ikke færdige kapitler."
+        },
+        {
+          "type": "section",
+          "kicker": "Planlagt kapitel 3",
+          "title": "Getting the signal back",
+          "subtitle": "Manuskriptet er under udarbejdelse. De næste sider viser den planlagte struktur, ikke færdige kapitler."
+        },
+        {
+          "type": "section",
+          "title": "Manuskriptets struktur",
+          "subtitle": "Manuskriptet er under udarbejdelse. De næste sider viser den planlagte struktur, ikke færdige kapitler."
+        },
+        {
+          "type": "section",
+          "title": "Manuskriptets struktur",
+          "subtitle": "Manuskriptet er under udarbejdelse. De næste sider viser den planlagte struktur, ikke færdige kapitler."
+        },
+        {
+          "type": "section",
+          "title": "Fortsæt til bogen online",
+          "subtitle": "Der er endnu ingen kapiteltekst til denne titel. Bogens side viser den aktuelle status."
+        },
+        {
+          "type": "chapter",
+          "title": "Næste side er online",
+          "paragraphs": [
+            "Her slutter den interaktive læseprøve med fem blade. Der er ikke flere 3D-sider at vende.",
+            "Der er endnu ingen kapiteltekst til denne titel. Bogens side viser den aktuelle status.",
+            "Fortsæt til bogen online →"
+          ],
+          "previewEnd": true
+        }
+      ],
+      "cta": "Fortsæt til bogen online",
+      "end": "Her slutter den interaktive læseprøve med fem blade. Der er ikke flere 3D-sider at vende.",
+      "hasExcerpt": false,
+      "source": "site/src/data/books.ts"
+    },
+    "ar": {
+      "pages": [
+        {
+          "type": "title",
+          "title": "The Junk Food Trap",
+          "subtitle": "معاينة تفاعلية",
+          "imprint": "Belief Changer"
+        },
+        {
+          "type": "chapter",
+          "title": "عن هذه المعاينة",
+          "paragraphs": [
+            "لا يتوفر نص الفصول لهذا العنوان بعد. تعرض صفحة الكتاب حالته الحالية.",
+            "Belief Changer · Free to read · No sign-up",
+            "لا يتوفر ملف EPUB بعد."
+          ]
+        },
+        {
+          "type": "toc",
+          "title": "محتويات المعاينة",
+          "toc": [
+            {
+              "title": "عن هذه المعاينة",
+              "page": "2"
+            },
+            {
+              "title": "قبل أن تبدأ",
+              "page": "4"
+            },
+            {
+              "title": "مخطط الكتاب",
+              "page": "5–10"
+            },
+            {
+              "title": "متابعة إلى صفحة الكتاب",
+              "page": "11"
+            }
+          ]
+        },
+        {
+          "type": "chapter",
+          "title": "قبل أن تبدأ",
+          "paragraphs": [
+            "Engineered to override the signal that says you have had enough.",
+            "المخطوط قيد الكتابة. تعرض الصفحات التالية مخططه المقترح، وليست فصولاً مكتملة."
+          ]
+        },
+        {
+          "type": "section",
+          "kicker": "فصل مقترح 1",
+          "title": "The food that never fills you",
+          "subtitle": "المخطوط قيد الكتابة. تعرض الصفحات التالية مخططه المقترح، وليست فصولاً مكتملة."
+        },
+        {
+          "type": "section",
+          "kicker": "فصل مقترح 2",
+          "title": "The overridden signal",
+          "subtitle": "المخطوط قيد الكتابة. تعرض الصفحات التالية مخططه المقترح، وليست فصولاً مكتملة."
+        },
+        {
+          "type": "section",
+          "kicker": "فصل مقترح 3",
+          "title": "Getting the signal back",
+          "subtitle": "المخطوط قيد الكتابة. تعرض الصفحات التالية مخططه المقترح، وليست فصولاً مكتملة."
+        },
+        {
+          "type": "section",
+          "title": "مخطط الكتاب",
+          "subtitle": "المخطوط قيد الكتابة. تعرض الصفحات التالية مخططه المقترح، وليست فصولاً مكتملة."
+        },
+        {
+          "type": "section",
+          "title": "مخطط الكتاب",
+          "subtitle": "المخطوط قيد الكتابة. تعرض الصفحات التالية مخططه المقترح، وليست فصولاً مكتملة."
+        },
+        {
+          "type": "section",
+          "title": "متابعة إلى صفحة الكتاب",
+          "subtitle": "لا يتوفر نص الفصول لهذا العنوان بعد. تعرض صفحة الكتاب حالته الحالية."
+        },
+        {
+          "type": "chapter",
+          "title": "صفحتك التالية على الموقع",
+          "paragraphs": [
+            "هذه نهاية العينة التفاعلية المكوّنة من خمس أوراق. لا توجد صفحات ثلاثية الأبعاد أخرى هنا.",
+            "لا يتوفر نص الفصول لهذا العنوان بعد. تعرض صفحة الكتاب حالته الحالية.",
+            "متابعة إلى صفحة الكتاب →"
+          ],
+          "previewEnd": true
+        }
+      ],
+      "cta": "متابعة إلى صفحة الكتاب",
+      "end": "هذه نهاية العينة التفاعلية المكوّنة من خمس أوراق. لا توجد صفحات ثلاثية الأبعاد أخرى هنا.",
+      "hasExcerpt": false,
+      "source": "site/src/data/books.ts"
+    }
+  },
+  "vaping": {
+    "en": {
+      "pages": [
+        {
+          "type": "title",
+          "title": "The Vaping Trap",
+          "subtitle": "Interactive preview",
+          "imprint": "Belief Changer"
+        },
+        {
+          "type": "chapter",
+          "title": "About this preview",
+          "paragraphs": [
+            "No chapter prose is available for this title yet. Its book page shows the current availability.",
+            "Belief Changer · Free to read · No sign-up",
+            "No EPUB download is available yet."
+          ]
+        },
+        {
+          "type": "toc",
+          "title": "Inside this sample",
+          "toc": [
+            {
+              "title": "About this preview",
+              "page": "2"
+            },
+            {
+              "title": "Before you begin",
+              "page": "4"
+            },
+            {
+              "title": "Manuscript outline",
+              "page": "5–10"
+            },
+            {
+              "title": "Continue to the book online",
+              "page": "11"
+            }
+          ]
+        },
+        {
+          "type": "chapter",
+          "title": "Before you begin",
+          "paragraphs": [
+            "The same old trap in a cleaner-looking package.",
+            "This manuscript is being written. The following pages show its planned outline, not finished chapters."
+          ]
+        },
+        {
+          "type": "section",
+          "kicker": "Planned chapter 1",
+          "title": "The clean-looking hook",
+          "subtitle": "This manuscript is being written. The following pages show its planned outline, not finished chapters."
+        },
+        {
+          "type": "section",
+          "kicker": "Planned chapter 2",
+          "title": "The tension underneath",
+          "subtitle": "This manuscript is being written. The following pages show its planned outline, not finished chapters."
+        },
+        {
+          "type": "section",
+          "kicker": "Planned chapter 3",
+          "title": "The last cloud",
+          "subtitle": "This manuscript is being written. The following pages show its planned outline, not finished chapters."
+        },
+        {
+          "type": "section",
+          "title": "Manuscript outline",
+          "subtitle": "This manuscript is being written. The following pages show its planned outline, not finished chapters."
+        },
+        {
+          "type": "section",
+          "title": "Manuscript outline",
+          "subtitle": "This manuscript is being written. The following pages show its planned outline, not finished chapters."
+        },
+        {
+          "type": "section",
+          "title": "Continue to the book online",
+          "subtitle": "No chapter prose is available for this title yet. Its book page shows the current availability."
+        },
+        {
+          "type": "chapter",
+          "title": "Your next page is online",
+          "paragraphs": [
+            "This is the end of the five-leaf interactive sample. No more 3D pages turn here.",
+            "No chapter prose is available for this title yet. Its book page shows the current availability.",
+            "Continue to the book online →"
+          ],
+          "previewEnd": true
+        }
+      ],
+      "cta": "Continue to the book online",
+      "end": "This is the end of the five-leaf interactive sample. No more 3D pages turn here.",
+      "hasExcerpt": false,
+      "source": "site/src/data/books.ts"
+    },
+    "da": {
+      "pages": [
+        {
+          "type": "title",
+          "title": "The Vaping Trap",
+          "subtitle": "Interaktiv læseprøve",
+          "imprint": "Belief Changer"
+        },
+        {
+          "type": "chapter",
+          "title": "Om læseprøven",
+          "paragraphs": [
+            "Der er endnu ingen kapiteltekst til denne titel. Bogens side viser den aktuelle status.",
+            "Belief Changer · Free to read · No sign-up",
+            "Der er endnu ingen EPUB-fil."
+          ]
+        },
+        {
+          "type": "toc",
+          "title": "I denne læseprøve",
+          "toc": [
+            {
+              "title": "Om læseprøven",
+              "page": "2"
+            },
+            {
+              "title": "Før du begynder",
+              "page": "4"
+            },
+            {
+              "title": "Manuskriptets struktur",
+              "page": "5–10"
+            },
+            {
+              "title": "Fortsæt til bogen online",
+              "page": "11"
+            }
+          ]
+        },
+        {
+          "type": "chapter",
+          "title": "Før du begynder",
+          "paragraphs": [
+            "The same old trap in a cleaner-looking package.",
+            "Manuskriptet er under udarbejdelse. De næste sider viser den planlagte struktur, ikke færdige kapitler."
+          ]
+        },
+        {
+          "type": "section",
+          "kicker": "Planlagt kapitel 1",
+          "title": "The clean-looking hook",
+          "subtitle": "Manuskriptet er under udarbejdelse. De næste sider viser den planlagte struktur, ikke færdige kapitler."
+        },
+        {
+          "type": "section",
+          "kicker": "Planlagt kapitel 2",
+          "title": "The tension underneath",
+          "subtitle": "Manuskriptet er under udarbejdelse. De næste sider viser den planlagte struktur, ikke færdige kapitler."
+        },
+        {
+          "type": "section",
+          "kicker": "Planlagt kapitel 3",
+          "title": "The last cloud",
+          "subtitle": "Manuskriptet er under udarbejdelse. De næste sider viser den planlagte struktur, ikke færdige kapitler."
+        },
+        {
+          "type": "section",
+          "title": "Manuskriptets struktur",
+          "subtitle": "Manuskriptet er under udarbejdelse. De næste sider viser den planlagte struktur, ikke færdige kapitler."
+        },
+        {
+          "type": "section",
+          "title": "Manuskriptets struktur",
+          "subtitle": "Manuskriptet er under udarbejdelse. De næste sider viser den planlagte struktur, ikke færdige kapitler."
+        },
+        {
+          "type": "section",
+          "title": "Fortsæt til bogen online",
+          "subtitle": "Der er endnu ingen kapiteltekst til denne titel. Bogens side viser den aktuelle status."
+        },
+        {
+          "type": "chapter",
+          "title": "Næste side er online",
+          "paragraphs": [
+            "Her slutter den interaktive læseprøve med fem blade. Der er ikke flere 3D-sider at vende.",
+            "Der er endnu ingen kapiteltekst til denne titel. Bogens side viser den aktuelle status.",
+            "Fortsæt til bogen online →"
+          ],
+          "previewEnd": true
+        }
+      ],
+      "cta": "Fortsæt til bogen online",
+      "end": "Her slutter den interaktive læseprøve med fem blade. Der er ikke flere 3D-sider at vende.",
+      "hasExcerpt": false,
+      "source": "site/src/data/books.ts"
+    },
+    "ar": {
+      "pages": [
+        {
+          "type": "title",
+          "title": "The Vaping Trap",
+          "subtitle": "معاينة تفاعلية",
+          "imprint": "Belief Changer"
+        },
+        {
+          "type": "chapter",
+          "title": "عن هذه المعاينة",
+          "paragraphs": [
+            "لا يتوفر نص الفصول لهذا العنوان بعد. تعرض صفحة الكتاب حالته الحالية.",
+            "Belief Changer · Free to read · No sign-up",
+            "لا يتوفر ملف EPUB بعد."
+          ]
+        },
+        {
+          "type": "toc",
+          "title": "محتويات المعاينة",
+          "toc": [
+            {
+              "title": "عن هذه المعاينة",
+              "page": "2"
+            },
+            {
+              "title": "قبل أن تبدأ",
+              "page": "4"
+            },
+            {
+              "title": "مخطط الكتاب",
+              "page": "5–10"
+            },
+            {
+              "title": "متابعة إلى صفحة الكتاب",
+              "page": "11"
+            }
+          ]
+        },
+        {
+          "type": "chapter",
+          "title": "قبل أن تبدأ",
+          "paragraphs": [
+            "The same old trap in a cleaner-looking package.",
+            "المخطوط قيد الكتابة. تعرض الصفحات التالية مخططه المقترح، وليست فصولاً مكتملة."
+          ]
+        },
+        {
+          "type": "section",
+          "kicker": "فصل مقترح 1",
+          "title": "The clean-looking hook",
+          "subtitle": "المخطوط قيد الكتابة. تعرض الصفحات التالية مخططه المقترح، وليست فصولاً مكتملة."
+        },
+        {
+          "type": "section",
+          "kicker": "فصل مقترح 2",
+          "title": "The tension underneath",
+          "subtitle": "المخطوط قيد الكتابة. تعرض الصفحات التالية مخططه المقترح، وليست فصولاً مكتملة."
+        },
+        {
+          "type": "section",
+          "kicker": "فصل مقترح 3",
+          "title": "The last cloud",
+          "subtitle": "المخطوط قيد الكتابة. تعرض الصفحات التالية مخططه المقترح، وليست فصولاً مكتملة."
+        },
+        {
+          "type": "section",
+          "title": "مخطط الكتاب",
+          "subtitle": "المخطوط قيد الكتابة. تعرض الصفحات التالية مخططه المقترح، وليست فصولاً مكتملة."
+        },
+        {
+          "type": "section",
+          "title": "مخطط الكتاب",
+          "subtitle": "المخطوط قيد الكتابة. تعرض الصفحات التالية مخططه المقترح، وليست فصولاً مكتملة."
+        },
+        {
+          "type": "section",
+          "title": "متابعة إلى صفحة الكتاب",
+          "subtitle": "لا يتوفر نص الفصول لهذا العنوان بعد. تعرض صفحة الكتاب حالته الحالية."
+        },
+        {
+          "type": "chapter",
+          "title": "صفحتك التالية على الموقع",
+          "paragraphs": [
+            "هذه نهاية العينة التفاعلية المكوّنة من خمس أوراق. لا توجد صفحات ثلاثية الأبعاد أخرى هنا.",
+            "لا يتوفر نص الفصول لهذا العنوان بعد. تعرض صفحة الكتاب حالته الحالية.",
+            "متابعة إلى صفحة الكتاب →"
+          ],
+          "previewEnd": true
+        }
+      ],
+      "cta": "متابعة إلى صفحة الكتاب",
+      "end": "هذه نهاية العينة التفاعلية المكوّنة من خمس أوراق. لا توجد صفحات ثلاثية الأبعاد أخرى هنا.",
+      "hasExcerpt": false,
+      "source": "site/src/data/books.ts"
+    }
+  },
+  "overthinking": {
+    "en": {
+      "pages": [
+        {
+          "type": "title",
+          "title": "The Overthinking Trap",
+          "subtitle": "Interactive preview",
+          "imprint": "Belief Changer"
+        },
+        {
+          "type": "chapter",
+          "title": "About this preview",
+          "paragraphs": [
+            "No chapter prose is available for this title yet. Its book page shows the current availability.",
+            "Belief Changer · Free to read · No sign-up",
+            "No EPUB download is available yet."
+          ]
+        },
+        {
+          "type": "toc",
+          "title": "Inside this sample",
+          "toc": [
+            {
+              "title": "About this preview",
+              "page": "2"
+            },
+            {
+              "title": "Before you begin",
+              "page": "4"
+            },
+            {
+              "title": "Manuscript outline",
+              "page": "5–10"
+            },
+            {
+              "title": "Continue to the book online",
+              "page": "11"
+            }
+          ]
+        },
+        {
+          "type": "chapter",
+          "title": "Before you begin",
+          "paragraphs": [
+            "The mind promises that one more loop will finally make you safe.",
+            "This manuscript is being written. The following pages show its planned outline, not finished chapters."
+          ]
+        },
+        {
+          "type": "section",
+          "kicker": "Planned chapter 1",
+          "title": "The loop that promises safety",
+          "subtitle": "This manuscript is being written. The following pages show its planned outline, not finished chapters."
+        },
+        {
+          "type": "section",
+          "kicker": "Planned chapter 2",
+          "title": "The one loose thread",
+          "subtitle": "This manuscript is being written. The following pages show its planned outline, not finished chapters."
+        },
+        {
+          "type": "section",
+          "kicker": "Planned chapter 3",
+          "title": "Letting the knot fall open",
+          "subtitle": "This manuscript is being written. The following pages show its planned outline, not finished chapters."
+        },
+        {
+          "type": "section",
+          "title": "Manuscript outline",
+          "subtitle": "This manuscript is being written. The following pages show its planned outline, not finished chapters."
+        },
+        {
+          "type": "section",
+          "title": "Manuscript outline",
+          "subtitle": "This manuscript is being written. The following pages show its planned outline, not finished chapters."
+        },
+        {
+          "type": "section",
+          "title": "Continue to the book online",
+          "subtitle": "No chapter prose is available for this title yet. Its book page shows the current availability."
+        },
+        {
+          "type": "chapter",
+          "title": "Your next page is online",
+          "paragraphs": [
+            "This is the end of the five-leaf interactive sample. No more 3D pages turn here.",
+            "No chapter prose is available for this title yet. Its book page shows the current availability.",
+            "Continue to the book online →"
+          ],
+          "previewEnd": true
+        }
+      ],
+      "cta": "Continue to the book online",
+      "end": "This is the end of the five-leaf interactive sample. No more 3D pages turn here.",
+      "hasExcerpt": false,
+      "source": "site/src/data/books.ts"
+    },
+    "da": {
+      "pages": [
+        {
+          "type": "title",
+          "title": "The Overthinking Trap",
+          "subtitle": "Interaktiv læseprøve",
+          "imprint": "Belief Changer"
+        },
+        {
+          "type": "chapter",
+          "title": "Om læseprøven",
+          "paragraphs": [
+            "Der er endnu ingen kapiteltekst til denne titel. Bogens side viser den aktuelle status.",
+            "Belief Changer · Free to read · No sign-up",
+            "Der er endnu ingen EPUB-fil."
+          ]
+        },
+        {
+          "type": "toc",
+          "title": "I denne læseprøve",
+          "toc": [
+            {
+              "title": "Om læseprøven",
+              "page": "2"
+            },
+            {
+              "title": "Før du begynder",
+              "page": "4"
+            },
+            {
+              "title": "Manuskriptets struktur",
+              "page": "5–10"
+            },
+            {
+              "title": "Fortsæt til bogen online",
+              "page": "11"
+            }
+          ]
+        },
+        {
+          "type": "chapter",
+          "title": "Før du begynder",
+          "paragraphs": [
+            "The mind promises that one more loop will finally make you safe.",
+            "Manuskriptet er under udarbejdelse. De næste sider viser den planlagte struktur, ikke færdige kapitler."
+          ]
+        },
+        {
+          "type": "section",
+          "kicker": "Planlagt kapitel 1",
+          "title": "The loop that promises safety",
+          "subtitle": "Manuskriptet er under udarbejdelse. De næste sider viser den planlagte struktur, ikke færdige kapitler."
+        },
+        {
+          "type": "section",
+          "kicker": "Planlagt kapitel 2",
+          "title": "The one loose thread",
+          "subtitle": "Manuskriptet er under udarbejdelse. De næste sider viser den planlagte struktur, ikke færdige kapitler."
+        },
+        {
+          "type": "section",
+          "kicker": "Planlagt kapitel 3",
+          "title": "Letting the knot fall open",
+          "subtitle": "Manuskriptet er under udarbejdelse. De næste sider viser den planlagte struktur, ikke færdige kapitler."
+        },
+        {
+          "type": "section",
+          "title": "Manuskriptets struktur",
+          "subtitle": "Manuskriptet er under udarbejdelse. De næste sider viser den planlagte struktur, ikke færdige kapitler."
+        },
+        {
+          "type": "section",
+          "title": "Manuskriptets struktur",
+          "subtitle": "Manuskriptet er under udarbejdelse. De næste sider viser den planlagte struktur, ikke færdige kapitler."
+        },
+        {
+          "type": "section",
+          "title": "Fortsæt til bogen online",
+          "subtitle": "Der er endnu ingen kapiteltekst til denne titel. Bogens side viser den aktuelle status."
+        },
+        {
+          "type": "chapter",
+          "title": "Næste side er online",
+          "paragraphs": [
+            "Her slutter den interaktive læseprøve med fem blade. Der er ikke flere 3D-sider at vende.",
+            "Der er endnu ingen kapiteltekst til denne titel. Bogens side viser den aktuelle status.",
+            "Fortsæt til bogen online →"
+          ],
+          "previewEnd": true
+        }
+      ],
+      "cta": "Fortsæt til bogen online",
+      "end": "Her slutter den interaktive læseprøve med fem blade. Der er ikke flere 3D-sider at vende.",
+      "hasExcerpt": false,
+      "source": "site/src/data/books.ts"
+    },
+    "ar": {
+      "pages": [
+        {
+          "type": "title",
+          "title": "The Overthinking Trap",
+          "subtitle": "معاينة تفاعلية",
+          "imprint": "Belief Changer"
+        },
+        {
+          "type": "chapter",
+          "title": "عن هذه المعاينة",
+          "paragraphs": [
+            "لا يتوفر نص الفصول لهذا العنوان بعد. تعرض صفحة الكتاب حالته الحالية.",
+            "Belief Changer · Free to read · No sign-up",
+            "لا يتوفر ملف EPUB بعد."
+          ]
+        },
+        {
+          "type": "toc",
+          "title": "محتويات المعاينة",
+          "toc": [
+            {
+              "title": "عن هذه المعاينة",
+              "page": "2"
+            },
+            {
+              "title": "قبل أن تبدأ",
+              "page": "4"
+            },
+            {
+              "title": "مخطط الكتاب",
+              "page": "5–10"
+            },
+            {
+              "title": "متابعة إلى صفحة الكتاب",
+              "page": "11"
+            }
+          ]
+        },
+        {
+          "type": "chapter",
+          "title": "قبل أن تبدأ",
+          "paragraphs": [
+            "The mind promises that one more loop will finally make you safe.",
+            "المخطوط قيد الكتابة. تعرض الصفحات التالية مخططه المقترح، وليست فصولاً مكتملة."
+          ]
+        },
+        {
+          "type": "section",
+          "kicker": "فصل مقترح 1",
+          "title": "The loop that promises safety",
+          "subtitle": "المخطوط قيد الكتابة. تعرض الصفحات التالية مخططه المقترح، وليست فصولاً مكتملة."
+        },
+        {
+          "type": "section",
+          "kicker": "فصل مقترح 2",
+          "title": "The one loose thread",
+          "subtitle": "المخطوط قيد الكتابة. تعرض الصفحات التالية مخططه المقترح، وليست فصولاً مكتملة."
+        },
+        {
+          "type": "section",
+          "kicker": "فصل مقترح 3",
+          "title": "Letting the knot fall open",
+          "subtitle": "المخطوط قيد الكتابة. تعرض الصفحات التالية مخططه المقترح، وليست فصولاً مكتملة."
+        },
+        {
+          "type": "section",
+          "title": "مخطط الكتاب",
+          "subtitle": "المخطوط قيد الكتابة. تعرض الصفحات التالية مخططه المقترح، وليست فصولاً مكتملة."
+        },
+        {
+          "type": "section",
+          "title": "مخطط الكتاب",
+          "subtitle": "المخطوط قيد الكتابة. تعرض الصفحات التالية مخططه المقترح، وليست فصولاً مكتملة."
+        },
+        {
+          "type": "section",
+          "title": "متابعة إلى صفحة الكتاب",
+          "subtitle": "لا يتوفر نص الفصول لهذا العنوان بعد. تعرض صفحة الكتاب حالته الحالية."
+        },
+        {
+          "type": "chapter",
+          "title": "صفحتك التالية على الموقع",
+          "paragraphs": [
+            "هذه نهاية العينة التفاعلية المكوّنة من خمس أوراق. لا توجد صفحات ثلاثية الأبعاد أخرى هنا.",
+            "لا يتوفر نص الفصول لهذا العنوان بعد. تعرض صفحة الكتاب حالته الحالية.",
+            "متابعة إلى صفحة الكتاب →"
+          ],
+          "previewEnd": true
+        }
+      ],
+      "cta": "متابعة إلى صفحة الكتاب",
+      "end": "هذه نهاية العينة التفاعلية المكوّنة من خمس أوراق. لا توجد صفحات ثلاثية الأبعاد أخرى هنا.",
+      "hasExcerpt": false,
+      "source": "site/src/data/books.ts"
+    }
+  },
+  "complaining": {
+    "en": {
+      "pages": [
+        {
+          "type": "title",
+          "title": "The Complaining Trap",
+          "subtitle": "Interactive preview",
+          "imprint": "Belief Changer"
+        },
+        {
+          "type": "chapter",
+          "title": "About this preview",
+          "paragraphs": [
+            "No chapter prose is available for this title yet. Its book page shows the current availability.",
+            "Belief Changer · Free to read · No sign-up",
+            "No EPUB download is available yet."
+          ]
+        },
+        {
+          "type": "toc",
+          "title": "Inside this sample",
+          "toc": [
+            {
+              "title": "About this preview",
+              "page": "2"
+            },
+            {
+              "title": "Before you begin",
+              "page": "4"
+            },
+            {
+              "title": "Manuscript outline",
+              "page": "5–10"
+            },
+            {
+              "title": "Continue to the book online",
+              "page": "11"
+            }
+          ]
+        },
+        {
+          "type": "chapter",
+          "title": "Before you begin",
+          "paragraphs": [
+            "Each complaint feels like release and quietly deepens the groove.",
+            "This manuscript is being written. The following pages show its planned outline, not finished chapters."
+          ]
+        },
+        {
+          "type": "section",
+          "kicker": "Planned chapter 1",
+          "title": "The drip that never drains",
+          "subtitle": "This manuscript is being written. The following pages show its planned outline, not finished chapters."
+        },
+        {
+          "type": "section",
+          "kicker": "Planned chapter 2",
+          "title": "The groove it deepens",
+          "subtitle": "This manuscript is being written. The following pages show its planned outline, not finished chapters."
+        },
+        {
+          "type": "section",
+          "kicker": "Planned chapter 3",
+          "title": "Turning off the tap",
+          "subtitle": "This manuscript is being written. The following pages show its planned outline, not finished chapters."
+        },
+        {
+          "type": "section",
+          "title": "Manuscript outline",
+          "subtitle": "This manuscript is being written. The following pages show its planned outline, not finished chapters."
+        },
+        {
+          "type": "section",
+          "title": "Manuscript outline",
+          "subtitle": "This manuscript is being written. The following pages show its planned outline, not finished chapters."
+        },
+        {
+          "type": "section",
+          "title": "Continue to the book online",
+          "subtitle": "No chapter prose is available for this title yet. Its book page shows the current availability."
+        },
+        {
+          "type": "chapter",
+          "title": "Your next page is online",
+          "paragraphs": [
+            "This is the end of the five-leaf interactive sample. No more 3D pages turn here.",
+            "No chapter prose is available for this title yet. Its book page shows the current availability.",
+            "Continue to the book online →"
+          ],
+          "previewEnd": true
+        }
+      ],
+      "cta": "Continue to the book online",
+      "end": "This is the end of the five-leaf interactive sample. No more 3D pages turn here.",
+      "hasExcerpt": false,
+      "source": "site/src/data/books.ts"
+    },
+    "da": {
+      "pages": [
+        {
+          "type": "title",
+          "title": "The Complaining Trap",
+          "subtitle": "Interaktiv læseprøve",
+          "imprint": "Belief Changer"
+        },
+        {
+          "type": "chapter",
+          "title": "Om læseprøven",
+          "paragraphs": [
+            "Der er endnu ingen kapiteltekst til denne titel. Bogens side viser den aktuelle status.",
+            "Belief Changer · Free to read · No sign-up",
+            "Der er endnu ingen EPUB-fil."
+          ]
+        },
+        {
+          "type": "toc",
+          "title": "I denne læseprøve",
+          "toc": [
+            {
+              "title": "Om læseprøven",
+              "page": "2"
+            },
+            {
+              "title": "Før du begynder",
+              "page": "4"
+            },
+            {
+              "title": "Manuskriptets struktur",
+              "page": "5–10"
+            },
+            {
+              "title": "Fortsæt til bogen online",
+              "page": "11"
+            }
+          ]
+        },
+        {
+          "type": "chapter",
+          "title": "Før du begynder",
+          "paragraphs": [
+            "Each complaint feels like release and quietly deepens the groove.",
+            "Manuskriptet er under udarbejdelse. De næste sider viser den planlagte struktur, ikke færdige kapitler."
+          ]
+        },
+        {
+          "type": "section",
+          "kicker": "Planlagt kapitel 1",
+          "title": "The drip that never drains",
+          "subtitle": "Manuskriptet er under udarbejdelse. De næste sider viser den planlagte struktur, ikke færdige kapitler."
+        },
+        {
+          "type": "section",
+          "kicker": "Planlagt kapitel 2",
+          "title": "The groove it deepens",
+          "subtitle": "Manuskriptet er under udarbejdelse. De næste sider viser den planlagte struktur, ikke færdige kapitler."
+        },
+        {
+          "type": "section",
+          "kicker": "Planlagt kapitel 3",
+          "title": "Turning off the tap",
+          "subtitle": "Manuskriptet er under udarbejdelse. De næste sider viser den planlagte struktur, ikke færdige kapitler."
+        },
+        {
+          "type": "section",
+          "title": "Manuskriptets struktur",
+          "subtitle": "Manuskriptet er under udarbejdelse. De næste sider viser den planlagte struktur, ikke færdige kapitler."
+        },
+        {
+          "type": "section",
+          "title": "Manuskriptets struktur",
+          "subtitle": "Manuskriptet er under udarbejdelse. De næste sider viser den planlagte struktur, ikke færdige kapitler."
+        },
+        {
+          "type": "section",
+          "title": "Fortsæt til bogen online",
+          "subtitle": "Der er endnu ingen kapiteltekst til denne titel. Bogens side viser den aktuelle status."
+        },
+        {
+          "type": "chapter",
+          "title": "Næste side er online",
+          "paragraphs": [
+            "Her slutter den interaktive læseprøve med fem blade. Der er ikke flere 3D-sider at vende.",
+            "Der er endnu ingen kapiteltekst til denne titel. Bogens side viser den aktuelle status.",
+            "Fortsæt til bogen online →"
+          ],
+          "previewEnd": true
+        }
+      ],
+      "cta": "Fortsæt til bogen online",
+      "end": "Her slutter den interaktive læseprøve med fem blade. Der er ikke flere 3D-sider at vende.",
+      "hasExcerpt": false,
+      "source": "site/src/data/books.ts"
+    },
+    "ar": {
+      "pages": [
+        {
+          "type": "title",
+          "title": "The Complaining Trap",
+          "subtitle": "معاينة تفاعلية",
+          "imprint": "Belief Changer"
+        },
+        {
+          "type": "chapter",
+          "title": "عن هذه المعاينة",
+          "paragraphs": [
+            "لا يتوفر نص الفصول لهذا العنوان بعد. تعرض صفحة الكتاب حالته الحالية.",
+            "Belief Changer · Free to read · No sign-up",
+            "لا يتوفر ملف EPUB بعد."
+          ]
+        },
+        {
+          "type": "toc",
+          "title": "محتويات المعاينة",
+          "toc": [
+            {
+              "title": "عن هذه المعاينة",
+              "page": "2"
+            },
+            {
+              "title": "قبل أن تبدأ",
+              "page": "4"
+            },
+            {
+              "title": "مخطط الكتاب",
+              "page": "5–10"
+            },
+            {
+              "title": "متابعة إلى صفحة الكتاب",
+              "page": "11"
+            }
+          ]
+        },
+        {
+          "type": "chapter",
+          "title": "قبل أن تبدأ",
+          "paragraphs": [
+            "Each complaint feels like release and quietly deepens the groove.",
+            "المخطوط قيد الكتابة. تعرض الصفحات التالية مخططه المقترح، وليست فصولاً مكتملة."
+          ]
+        },
+        {
+          "type": "section",
+          "kicker": "فصل مقترح 1",
+          "title": "The drip that never drains",
+          "subtitle": "المخطوط قيد الكتابة. تعرض الصفحات التالية مخططه المقترح، وليست فصولاً مكتملة."
+        },
+        {
+          "type": "section",
+          "kicker": "فصل مقترح 2",
+          "title": "The groove it deepens",
+          "subtitle": "المخطوط قيد الكتابة. تعرض الصفحات التالية مخططه المقترح، وليست فصولاً مكتملة."
+        },
+        {
+          "type": "section",
+          "kicker": "فصل مقترح 3",
+          "title": "Turning off the tap",
+          "subtitle": "المخطوط قيد الكتابة. تعرض الصفحات التالية مخططه المقترح، وليست فصولاً مكتملة."
+        },
+        {
+          "type": "section",
+          "title": "مخطط الكتاب",
+          "subtitle": "المخطوط قيد الكتابة. تعرض الصفحات التالية مخططه المقترح، وليست فصولاً مكتملة."
+        },
+        {
+          "type": "section",
+          "title": "مخطط الكتاب",
+          "subtitle": "المخطوط قيد الكتابة. تعرض الصفحات التالية مخططه المقترح، وليست فصولاً مكتملة."
+        },
+        {
+          "type": "section",
+          "title": "متابعة إلى صفحة الكتاب",
+          "subtitle": "لا يتوفر نص الفصول لهذا العنوان بعد. تعرض صفحة الكتاب حالته الحالية."
+        },
+        {
+          "type": "chapter",
+          "title": "صفحتك التالية على الموقع",
+          "paragraphs": [
+            "هذه نهاية العينة التفاعلية المكوّنة من خمس أوراق. لا توجد صفحات ثلاثية الأبعاد أخرى هنا.",
+            "لا يتوفر نص الفصول لهذا العنوان بعد. تعرض صفحة الكتاب حالته الحالية.",
+            "متابعة إلى صفحة الكتاب →"
+          ],
+          "previewEnd": true
+        }
+      ],
+      "cta": "متابعة إلى صفحة الكتاب",
+      "end": "هذه نهاية العينة التفاعلية المكوّنة من خمس أوراق. لا توجد صفحات ثلاثية الأبعاد أخرى هنا.",
+      "hasExcerpt": false,
+      "source": "site/src/data/books.ts"
+    }
+  }
+}

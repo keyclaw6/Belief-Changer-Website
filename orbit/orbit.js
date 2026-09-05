@@ -24,7 +24,7 @@ const BOOK_SCALE = 1.0;
 const SPIN_DUR = 560;
 const FLIP_DUR = 300;
 const PULL_DUR = 700;
-const RETURN_DUR = 480;
+const RETURN_DUR = 760;
 const HOVER_LIFT = 2.2;
 const IDLE_MS = 10000;
 /* Wheel: idle gesture → exactly 1 book. Scroll while busy → ring-only multi. */
@@ -54,14 +54,18 @@ const CAM_INSPECT = {
   fov: 34,
 };
 const CAM_INSPECT_CLOSE = {
-  pos: new THREE.Vector3(0, 24, 181),
+  pos: new THREE.Vector3(0, 21, 141),
   look: new THREE.Vector3(0, 18, 101),
   fov: 30,
 };
 const RING_Y_ORBIT = 6;
-const RING_Y_INSPECT = 10;
-const RING_SCALE_INSPECT = 0.40;
-const RING_Z_INSPECT = -98;
+const RING_Y_INSPECT = 59;
+const RING_SCALE_INSPECT = 0.72;
+const RING_Z_INSPECT = -50;
+const ringInspectX = () => camera.aspect < .8 ? 24 : 54;
+const RING_TILT_INSPECT = -.42;
+const ringInspectScale = () => camera.aspect < .8 ? .42 : RING_SCALE_INSPECT;
+const ringInspectY = () => camera.aspect < .8 ? 48 : RING_Y_INSPECT;
 
 /* Inspect rig: the pulled-out book sits centered on the camera axis at every
    aspect (owner: "the book I selected more in center of the screen"). The
@@ -82,7 +86,7 @@ function applyInspectShift() {
   CAM_INSPECT_CLOSE.look.x = lerp(0, inspectBookX, t);
   // Reserve the lower portrait region for the compact information panel.
   CAM_INSPECT.pos.z = lerp(201, 230, t);
-  CAM_INSPECT_CLOSE.pos.z = lerp(181, 212, t);
+  CAM_INSPECT_CLOSE.pos.z = lerp(141, 143, t);
   CAM_INSPECT.look.y = lerp(18, 5, t);
   CAM_INSPECT_CLOSE.look.y = lerp(18, 6, t);
 }
@@ -142,6 +146,8 @@ const captionTitle = document.getElementById('caption-title');
 const captionMeta = document.getElementById('caption-meta');
 const openButton = document.getElementById('open-book');
 const readerTools = document.getElementById('reader-tools');
+const previewEnd = document.createElement('a'); previewEnd.id='preview-end'; previewEnd.hidden=true; readerTools.append(previewEnd);
+let previewContent={}; let linkPress=null;
 const coverButton = document.getElementById('toggle-cover');
 const autoButton = document.getElementById('auto-browse');
 
@@ -165,6 +171,7 @@ function updateReaderTools() {
   readerTools.hidden = !held;
   if (!held) { document.documentElement.classList.remove('is-reading'); return; }
   const st = reader.getState();
+  previewEnd.hidden=st.cover<.99 || st.turned!==5 || st.turning>=0;
   const key = `${st.cover > 0.5}|${st.cover >= 0.99}|${st.turned}|${st.turning}`;
   document.documentElement.classList.toggle('is-reading', st.cover > 0.08);
   if (key === readerToolsKey) return;
@@ -424,6 +431,9 @@ let inspectZoom = 0; // 0 default inspect framing → 1 closer
 
 let hoverFront = false;
 let hoverLift = 0;
+let hoverIndex = -1;
+const hoverAmounts = new Float32Array(N);
+const hoverTilt = new THREE.Vector2(), hoverTiltTarget = new THREE.Vector2();
 let gestureAcc = 0;
 let gestureTimer = null;
 let pendingBurst = 0; // signed multi-slot coalesce awaiting flush
@@ -448,7 +458,7 @@ resize();
 addEventListener('resize', () => {
   resize();
   if (state === 'orbit' || state === 'presenting') orbitCameraNow();
-  else if (reader && !anim) { reader.group.scale.setScalar(detailTargetPose().scale); inspectCameraNow(); }
+  else if (reader && !anim) { reader.group.scale.setScalar(detailTargetPose().scale); inspectCameraNow(); applyRingFraming(1); }
   invalidate();
 });
 
@@ -465,7 +475,9 @@ let sceneDark = matchMedia('(prefers-color-scheme: dark)').matches;
 // above the *selected* book (updateLamp) and is the ONLY light source: real
 // distance falloff (decay 2, intensity in candela) so books fade darker the
 // farther they sit from the pool of light.
-const lamp = new THREE.SpotLight(0xffe6c0, 0, 0, 0.3, 0.62, 2);
+const lamp = new THREE.SpotLight(0xffe6c0, 0, 0, 0.62, 0.85, 2);
+const readingFill = new THREE.DirectionalLight(0xf2f5ff,.85);
+scene.add(readingFill,readingFill.target);
 lamp.position.set(0, 120, 190);
 lamp.target.position.set(0, RING_Y_ORBIT, 0);
 scene.add(lamp, lamp.target);
@@ -514,13 +526,14 @@ function applyTheme() {
   }
   // Dark = night gallery: the lamp is the only key. The studio rig drops to a
   // whisper (rim/hemi just enough that the ring reads as faint silhouettes).
-  studio.sun.intensity = dark ? 0.18 : 2.15;
-  studio.fill.intensity = dark ? 0.08 : 0.28;
-  studio.rim.intensity = dark ? 0.22 : 0.55;
-  studio.hemi.intensity = dark ? 0.08 : 0.42;
-  studio.hemi.groundColor.set(dark ? 0x16130f : 0x707070);
-  scene.environmentIntensity = dark ? 0.12 : 0.32;
-  lamp.intensity = dark ? 26000 : 0;
+  studio.sun.intensity = dark ? .95 : 2.15;
+  studio.fill.intensity = dark ? .7 : .85;
+  studio.rim.intensity = dark ? .8 : .65;
+  studio.hemi.intensity = dark ? 1.0 : 1.15;
+  studio.hemi.groundColor.set(dark ? 0x8d887f : 0xa09b90);
+  scene.environmentIntensity = dark ? .30 : .36;
+  readingFill.intensity=dark ? .85 : .65;
+  lamp.intensity = dark ? 7000 : 0;
   contactShadow.visible = !dark;
   grounding.setDark(dark);
   glowPool.visible = dark;
@@ -534,7 +547,7 @@ function applyTheme() {
 const _lampAim = new THREE.Vector3();
 function updateLamp() {
   const held =
-    (state === 'inspecting' || state === 'reading' || state === 'pullingOut') &&
+    (state === 'inspecting' || state === 'reading' || state === 'pullingOut' || state === 'returning') &&
     reader && reader.group.visible;
   if (held) {
     _lampAim.copy(detailRoot.position);
@@ -577,6 +590,11 @@ let detailDragging = false;
 let coverDragging = false;
 let pageDragging = false;
 let coverDragStartX = 0;
+let coverDragStartY = 0, coverDragAxis = null;
+let activePointerId = null, pendingPageT = null;
+const touchPoints = new Map();
+let pinch = null;
+const inspectPan = new THREE.Vector2();
 let coverDragStart = 0;
 let coverClick = null; // { x, y, t } — a quick tap on the book toggles the cover
 let pageDragAxis = null;
@@ -653,13 +671,25 @@ function applyHeroView(amount) {
 }
 
 
-const _inspectPos = new THREE.Vector3(), _inspectLook = new THREE.Vector3();
+const _inspectPos = new THREE.Vector3(), _inspectLook = new THREE.Vector3(), _safeVertex = new THREE.Vector3();
 function inspectCameraNow(zoom = inspectZoom) {
   applyHeroView(0);
   const z = clamp01(zoom);
   const pos = _inspectPos.lerpVectors(CAM_INSPECT.pos, CAM_INSPECT_CLOSE.pos, z);
   const look = _inspectLook.lerpVectors(CAM_INSPECT.look, CAM_INSPECT_CLOSE.look, z);
-  pos.z += readBias * (camera.aspect < 0.8 ? 8 : 18);
+  pos.z += readBias * (camera.aspect < 0.8 ? 8 : 18) * (1-z);
+  pos.x += inspectPan.x; look.x += inspectPan.x;
+  pos.y += inspectPan.y; look.y += inspectPan.y;
+  // Conservative front-depth bound over every physical board/leaf, in world space.
+  // Only test physical geometry; SDF glyph bounds are shader-deformed.
+  if(reader?.group.visible) {
+    reader.group.updateWorldMatrix(true,true);
+    let front=-Infinity;
+    for(const mesh of reader.hitMeshes){const a=mesh.geometry.attributes.position;
+      for(let i=0;i<a.count;i++){_safeVertex.fromBufferAttribute(a,i).applyMatrix4(mesh.matrixWorld);front=Math.max(front,_safeVertex.z);}
+    }
+    pos.z=Math.max(pos.z,front+10);
+  }
   if (camera.aspect < 0.8) look.y += 13 * readBias;
   const fov = lerp(CAM_INSPECT.fov, CAM_INSPECT_CLOSE.fov, z);
   applyCameraPose(pos, look, fov);
@@ -667,11 +697,12 @@ function inspectCameraNow(zoom = inspectZoom) {
 
 function applyRingFraming(tInspect) {
   const t = clamp01(tInspect);
-  ringGroup.position.y = lerp(RING_Y_ORBIT, RING_Y_INSPECT, t);
+  ringGroup.position.x = lerp(0,ringInspectX(),t);
+  ringGroup.position.y = lerp(RING_Y_ORBIT, ringInspectY(), t);
   ringGroup.position.z = lerp(0, RING_Z_INSPECT, t);
-  const s = lerp(1, RING_SCALE_INSPECT, t);
+  const s = lerp(1, ringInspectScale(), t);
   ringGroup.scale.setScalar(s);
-  ringGroup.rotation.x = lerp(RING_TILT, RING_TILT * 0.55, t);
+  ringGroup.rotation.x = lerp(RING_TILT, RING_TILT_INSPECT, t);
   invalidate();
 }
 
@@ -704,7 +735,7 @@ function applySlotPose(slot, i, angle, present, lift = 0) {
   const phi = phiOf(i, angle);
   const radial = RING_R + present * PRESENT_OUT;
   slot.host.position.set(radial * Math.sin(phi), present * PRESENT_LIFT + lift, radial * Math.cos(phi));
-  slot.host.rotation.set(-.30 * present, yawAt(phi, present), 0, 'YXZ');
+  slot.host.rotation.set(-.30 * present + (i === frontIndex ? hoverTilt.y : 0), yawAt(phi, present) + (i === frontIndex ? hoverTilt.x : 0), 0, 'YXZ');
   slot.host.scale.setScalar(BOOK_SCALE * (1 + present * .25));
   grounding.updateSlot(i, slot.host.position.x, slot.host.position.z, yawAt(phi, present), present * PRESENT_LIFT + lift, slot.visible);
   slot.present = present;
@@ -736,7 +767,7 @@ function updateAllPoses(presentMap) {
     let p = 0;
     if (presentMap && presentMap[i] != null) p = presentMap[i];
     else if (i === frontIndex) p = frontPresent;
-    const lift = (i === frontIndex && hoverFront && state === 'orbit' && frontPresent > 0.8) ? hoverLift : 0;
+    const lift = hoverAmounts[i];
     applySlotPose(s, i, ringAngle, p, lift);
   }
 }
@@ -887,7 +918,7 @@ function goToIndex(index) {
 
 /* ------------------------------------------------------------------ detail */
 
-function slotWorldPose(i, present = 1) {
+function slotWorldPose(i, present = 1, canonical = false) {
   const phi = phiOf(i, ringAngle);
   const radial = RING_R + present * PRESENT_OUT;
   const local = new THREE.Object3D();
@@ -899,7 +930,8 @@ function slotWorldPose(i, present = 1) {
   const quat = new THREE.Quaternion();
   const scl = new THREE.Vector3();
   local.updateMatrix();
-  const m = new THREE.Matrix4().multiplyMatrices(ringGroup.matrixWorld, local.matrix);
+  const ringMatrix = canonical ? new THREE.Matrix4().compose(new THREE.Vector3(0,RING_Y_ORBIT,0),new THREE.Quaternion().setFromEuler(new THREE.Euler(RING_TILT,0,0)),new THREE.Vector3(1,1,1)) : ringGroup.matrixWorld;
+  const m = new THREE.Matrix4().multiplyMatrices(ringMatrix, local.matrix);
   m.decompose(pos, quat, scl);
   return { pos, quat, scale: scl };
 }
@@ -920,6 +952,7 @@ function ensureReader(meta) {
     coverUrl: meta.coverUrl, caseColor: meta.caseColor, caseLuminance: meta.caseLuminance,
     title: meta.title, author: 'Belief Changer', slug: meta.slug,
     overlayInk: meta.overlayInk, promise: meta.promise,
+    pages: previewContent[meta.slug]?.[LOCALE]?.pages || previewContent[meta.slug]?.en?.pages,
   };
   const task = readerTask.catch(() => {}).then(async () => {
     if (reader) await reader.rebind(spec);
@@ -940,9 +973,11 @@ function showPanel(meta) {
   panelPromise.textContent = meta.promise;
   panelMeta.textContent = meta.meta;
   // Prefer site book page: /{locale}/books/{slug}
-  const href = EMBED
-    ? `/Belief-Changer-Website/${LOCALE}/books/${meta.slug}`
-    : (meta.href || `/Belief-Changer-Website/${LOCALE}/books/${meta.slug}`);
+  const href = `/Belief-Changer-Website/${LOCALE}/books/${meta.slug}`;
+  const preview=previewContent[meta.slug]?.[LOCALE] || previewContent[meta.slug]?.en;
+  previewEnd.href=href;previewEnd.textContent=preview?.cta || labels.read;
+  previewEnd.setAttribute('aria-label',preview?.cta || labels.read);
+  previewEnd.target=EMBED?'_top':'_self';
   panelRead.href = href;
   if (EMBED) panelRead.setAttribute('target', '_top');
   else panelRead.removeAttribute('target');
@@ -964,9 +999,11 @@ async function openFront() {
   noteInteract();
   setState('pullingOut');
   hoverFront = false;
-  inspectZoom = 0;
+  inspectZoom = 0; inspectPan.set(0,0);
 
-  const from = slotWorldPose(frontIndex, 1);
+  const host=slots[frontIndex].host; host.updateWorldMatrix(true,false);
+  const from={pos:new THREE.Vector3(),quat:new THREE.Quaternion(),scale:new THREE.Vector3()};
+  host.matrixWorld.decompose(from.pos,from.quat,from.scale);
   const to = detailTargetPose();
 
   slots[frontIndex].visible = false;
@@ -996,6 +1033,7 @@ async function openFront() {
   const fromCamPos = camera.position.clone();
   const fromCamLook = camLook.clone();
   const fromCamFov = camera.fov;
+  const fromRingX = ringGroup.position.x;
   const fromRingY = ringGroup.position.y;
   const fromRingZ = ringGroup.position.z;
   const fromRingS = ringGroup.scale.x;
@@ -1029,6 +1067,7 @@ async function openFront() {
     toCamLook: CAM_INSPECT.look.clone(),
     fromCamFov,
     toCamFov: CAM_INSPECT.fov,
+    fromRingX,
     fromRingY,
     fromRingZ,
     fromRingS,
@@ -1037,15 +1076,11 @@ async function openFront() {
   };
 }
 
-async function settleReaderClosed() {
-  if (!reader) return;
-  // Snap shut — no multi-second page/cover unwind on the way home
-  reader.setCover(0);
-  detailSpin.rotation.set(0, 0, 0);
-  detailSpin.quaternion.identity();
-  detailSpinVel.set(0, 0, 0);
-  spinReset = null;
-  invalidate();
+function stopDetailInput() {
+  if(pageDragging) {if(pendingPageT!==null) reader.updateDrag(pendingPageT); reader.endDrag(false);}
+  pendingPageT=null; pageDragging=coverDragging=detailDragging=false; activePointerId=null;
+  touchPoints.clear(); pinch=null; rotateDrag=null;
+  detailSpinVel.set(0,0,0); spinReset=null;
 }
 
 async function returnHome() {
@@ -1055,9 +1090,10 @@ async function returnHome() {
   hidePanel();
 
   setState('returning');
-  await settleReaderClosed();
+  stopDetailInput();
+  const fromCover = reader?.getState().cover || 0;
 
-  const to = slotWorldPose(frontIndex, 1);
+  const to = slotWorldPose(frontIndex, 1, true);
   const fromPos = detailRoot.position.clone();
   const fromQuat = detailRoot.quaternion.clone();
   const fromSpin = detailSpin.quaternion.clone();
@@ -1066,6 +1102,7 @@ async function returnHome() {
   const fromCamPos = camera.position.clone();
   const fromCamLook = camLook.clone();
   const fromCamFov = camera.fov;
+  const fromRingX = ringGroup.position.x;
   const fromRingY = ringGroup.position.y;
   const fromRingZ = ringGroup.position.z;
   const fromRingS = ringGroup.scale.x;
@@ -1083,6 +1120,7 @@ async function returnHome() {
 
   anim = {
     kind: 'return',
+    fromCover,
     t0: performance.now(),
     dur: RETURN_DUR,
     fromPos,
@@ -1099,6 +1137,7 @@ async function returnHome() {
     toCamLook: CAM_ORBIT.look.clone(),
     fromCamFov,
     toCamFov: CAM_ORBIT.fov,
+    fromRingX,
     fromRingY,
     fromRingZ,
     fromRingS,
@@ -1114,7 +1153,8 @@ function finishReturn() {
   applySlotPose(slots[frontIndex], frontIndex, ringAngle, 1, 0);
   orbitCameraNow();
   applyRingFraming(0);
-  inspectZoom = 0;
+  inspectZoom = 0; inspectPan.set(0,0); readBias=0;
+  hoverAmounts.fill(0); hoverTilt.set(0,0); hoverTiltTarget.set(0,0); hoverIndex=-1;
   syncTitles();
   setState('orbit');
   openButton.focus({ preventScroll: true });
@@ -1150,26 +1190,19 @@ function slotIndexFromObject(obj) {
 }
 
 function updateHover(e) {
-  if (state !== 'orbit' || reducedMotion) {
-    if (hoverFront) {
-      hoverFront = false;
-      invalidate();
+  hoverIndex = -1; hoverFront = false; hoverTiltTarget.set(0,0);
+  if (state === 'orbit') {
+    setNdc(e); raycaster.setFromCamera(ndc, camera);
+    const hit = raycaster.intersectObjects(hitsForBrowse(), false)[0];
+    if (hit) hoverIndex = slotIndexFromObject(hit.object);
+    hoverFront = hoverIndex === frontIndex;
+    if (hoverFront && !reducedMotion) {
+      const local = slots[frontIndex].host.worldToLocal(hit.point.clone());
+      hoverTiltTarget.set(THREE.MathUtils.clamp(local.x / 8,-1,1)*.07, THREE.MathUtils.clamp(-local.y/11,-1,1)*.05);
     }
-    return;
   }
-  setNdc(e);
-  raycaster.setFromCamera(ndc, camera);
-  const hits = raycaster.intersectObjects(hitsForBrowse(), false);
-  if (!hits.length) {
-    if (hoverFront) invalidate();
-    hoverFront = false;
-    canvas.style.cursor = 'default';
-    return;
-  }
-  const idx = slotIndexFromObject(hits[0].object);
-  if (hoverFront !== (idx === frontIndex)) invalidate();
-  hoverFront = idx === frontIndex;
-  canvas.style.cursor = idx >= 0 ? 'pointer' : 'default';
+  canvas.style.cursor = hoverIndex >= 0 ? 'pointer' : 'default';
+  invalidate();
 }
 
 function startPageDrag(e, leaf) {
@@ -1178,14 +1211,10 @@ function startPageDrag(e, leaf) {
   pageDragging = true;
   spinReset = null;
   const rect = canvas.getBoundingClientRect();
-  pageDragAxis = {
-    x: leaf.dir > 0 ? -1 : 1,
-    y: 0,
-    span: Math.max(280, rect.width * 0.44),
-    x0: e.clientX,
-    y0: e.clientY,
-    dir: leaf.dir,
-  };
+  const projected = reader.dragProjection(leaf, camera, rect.width, rect.height);
+  pageDragAxis = {...projected, x0:e.clientX, y0:e.clientY, start:leaf.dir > 0 ? 0 : 1, dir:leaf.dir};
+  detailSpinVel.set(0,0,0);
+  activePointerId = e.pointerId;
   canvas.setPointerCapture(e.pointerId);
   canvas.style.cursor = 'grabbing';
   setState('reading');
@@ -1197,6 +1226,7 @@ function startPageDrag(e, leaf) {
    inertia integrator on release. Rotation is ALWAYS available — on empty
    space, and on the open book's boards/spine — so no pose is a dead end. */
 function startRotate(e) {
+  activePointerId = e.pointerId;
   detailDragging = true;
   rotateDrag = { x: e.clientX, y: e.clientY, vx: 0, vy: 0, time: e.timeStamp };
   detailSpinVel.set(0, 0, 0);
@@ -1212,16 +1242,24 @@ function setInspectCursor() {
 
 stage.addEventListener('focusout', () => invalidate());
 canvas.addEventListener('pointerleave', () => {
-  if (hoverFront) {
-    hoverFront = false;
-    invalidate();
-  }
+  pendingHover = null; hoverFront = false; hoverIndex = -1; hoverTiltTarget.set(0,0); invalidate();
 });
 
 let browsePress = null;
 canvas.addEventListener('pointerdown', async (e) => {
   if (e.button != null && e.button !== 0) return;
   noteInteract();
+  if (e.pointerType === 'touch' && ['inspecting','reading'].includes(state)) {
+    touchPoints.set(e.pointerId, {x:e.clientX,y:e.clientY});
+    if (touchPoints.size === 2) {
+      if (pageDragging) { if(pendingPageT !== null) reader.updateDrag(pendingPageT); pendingPageT=null; reader.endDrag(false); }
+      pageDragging=coverDragging=detailDragging=false; activePointerId=null; rotateDrag=null; detailSpinVel.set(0,0,0);
+      const [a,b]=[...touchPoints.values()];
+      pinch={distance:Math.hypot(a.x-b.x,a.y-b.y),zoom:inspectZoom,x:(a.x+b.x)/2,y:(a.y+b.y)/2,pan:inspectPan.clone()};
+      canvas.setPointerCapture(e.pointerId); e.preventDefault(); return;
+    }
+  }
+  if (activePointerId !== null) return;
   setNdc(e);
   raycaster.setFromCamera(ndc, camera);
 
@@ -1229,6 +1267,8 @@ canvas.addEventListener('pointerdown', async (e) => {
     if (!reader || !reader.group.visible) return;
     reader.group.updateMatrixWorld(true);
     const st = reader.getState();
+    if (reader.isBusy()) { e.preventDefault(); return; }
+    if(reader.previewLinkHit(raycaster)){linkPress={id:e.pointerId,x:e.clientX,y:e.clientY};canvas.setPointerCapture(e.pointerId);e.preventDefault();return;}
 
     // Cover fully open → three predictable zones:
     //  1. pages (leaf meshes + open page block): drag turns the page —
@@ -1238,18 +1278,19 @@ canvas.addEventListener('pointerdown', async (e) => {
     if (st.cover >= 0.99) {
       const leaf = reader.pickLeaf ? reader.pickLeaf(raycaster) : null;
       if (leaf && startPageDrag(e, leaf)) return;
-      e.preventDefault();
-      startRotate(e);
-      return;
+      if (!reader.pickCover(raycaster)) { e.preventDefault(); startRotate(e); return; }
     }
 
     // Cover closed / half-open on the book: drag scrubs the cover open-shut;
     // a quick tap toggles it (fixes "sometimes opens, sometimes doesn't").
     const hits = raycaster.intersectObjects(reader.hitMeshes, false);
-    if (hits.length) {
+    if (hits.length && reader.pickCover(raycaster)) {
       e.preventDefault();
+      activePointerId = e.pointerId; detailSpinVel.set(0,0,0);
       coverDragging = true;
-      coverDragStartX = e.clientX;
+      coverDragStartX = e.clientX; coverDragStartY = e.clientY;
+      const rect=canvas.getBoundingClientRect();
+      coverDragAxis=reader.dragProjection(null,camera,rect.width,rect.height);
       coverDragStart = st.cover;
       coverClick = { x: e.clientX, y: e.clientY, t: performance.now() };
       spinReset = null;
@@ -1275,29 +1316,40 @@ canvas.addEventListener('pointerdown', async (e) => {
 });
 
 canvas.addEventListener('pointermove', (e) => {
+  if(touchPoints.has(e.pointerId)) touchPoints.set(e.pointerId,{x:e.clientX,y:e.clientY});
+  if(pinch && touchPoints.size===2) {
+    const [a,b]=[...touchPoints.values()];
+    inspectZoom=clamp01(pinch.zoom+Math.log(Math.max(1,Math.hypot(a.x-b.x,a.y-b.y))/Math.max(1,pinch.distance))*.65);
+    inspectPan.set(pinch.pan.x-((a.x+b.x)/2-pinch.x)*.045,pinch.pan.y+((a.y+b.y)/2-pinch.y)*.045);
+    inspectPan.clamp(new THREE.Vector2(-18,-16),new THREE.Vector2(18,16));
+    inspectCameraNow(); invalidate(); return;
+  }
+  if(activePointerId!==null && activePointerId!==e.pointerId) return;
   if (pageDragging && reader && pageDragAxis) {
     const dx = e.clientX - pageDragAxis.x0;
     const dy = e.clientY - pageDragAxis.y0;
     const d = (dx * pageDragAxis.x + dy * pageDragAxis.y) / pageDragAxis.span;
-    const t = clamp01(pageDragAxis.dir > 0 ? d : 1 - d);
-    reader.updateDrag(t);
+    const t = clamp01(pageDragAxis.start + d);
+    pendingPageT = t;
     invalidate();
     return;
   }
   if (coverDragging && reader) {
     const dx = e.clientX - coverDragStartX;
-    const next = clamp01(coverDragStart + dx / 220);
+    const dy=e.clientY-coverDragStartY;
+    const next = clamp01(coverDragStart + (dx*coverDragAxis.x+dy*coverDragAxis.y)/coverDragAxis.span);
     reader.setCover(next);
     invalidate();
     setState(next > 0.08 ? 'reading' : 'inspecting');
     return;
   }
   if (detailDragging && rotateDrag) {
-    // Direct 1:1 rotation while held — the book never lags the hand.
+    // Direct 1:1 rotation, or Shift-drag to pan the reading surface.
     const dx = e.clientX - rotateDrag.x;
     const dy = e.clientY - rotateDrag.y;
     rotateDrag.x = e.clientX;
     rotateDrag.y = e.clientY;
+    if(e.shiftKey) { inspectPan.x-=dx*.045; inspectPan.y+=dy*.045; inspectPan.clamp(new THREE.Vector2(-18,-16),new THREE.Vector2(18,16)); inspectCameraNow(); rotateDrag.time=e.timeStamp; invalidate(); return; }
     detailSpin.rotation.y += dx * 0.0062;
     detailSpin.rotation.x = THREE.MathUtils.clamp(
       detailSpin.rotation.x + dy * 0.0046,
@@ -1323,11 +1375,12 @@ canvas.addEventListener('pointermove', (e) => {
     raycaster.setFromCamera(ndc, camera);
     reader.group.updateMatrixWorld(true);
     const over = raycaster.intersectObjects(reader.hitMeshes, false);
-    canvas.style.cursor = over.length ? 'grab' : 'default';
+    canvas.style.cursor = reader.previewLinkHit(raycaster) ? 'pointer' : over.length ? 'grab' : 'default';
   }
 });
 
 function endPointer(e, cancelled) {
+  if(linkPress?.id===e.pointerId){const p=linkPress;linkPress=null;if(canvas.hasPointerCapture(e.pointerId))canvas.releasePointerCapture(e.pointerId);if(!cancelled&&Math.hypot(e.clientX-p.x,e.clientY-p.y)<8)previewEnd.click();return;}
   if (browsePress?.id === e.pointerId) {
     const press = browsePress; browsePress = null;
     if (canvas.hasPointerCapture(e.pointerId)) canvas.releasePointerCapture(e.pointerId);
@@ -1340,22 +1393,15 @@ function endPointer(e, cancelled) {
     }
     return;
   }
-  // Manual double-tap: two quick releases near each other reset the pose.
-  const nowT = performance.now();
-  if (
-    !cancelled &&
-    lastTapUp &&
-    nowT - lastTapUp.t < 500 &&
-    Math.abs(e.clientX - lastTapUp.x) + Math.abs(e.clientY - lastTapUp.y) < 14
-  ) {
-    lastTapUp = null;
-    resetSpinPose();
-  } else {
-    lastTapUp = { x: e.clientX, y: e.clientY, t: nowT };
-  }
+  touchPoints.delete(e.pointerId);
+  if(pinch) { pinch=null; activePointerId=null; invalidate(); return; }
+  if(activePointerId!==e.pointerId) return;
+  activePointerId=null;
   if (pageDragging && reader) {
     pageDragging = false;
+    if(pendingPageT!==null) reader.updateDrag(pendingPageT); pendingPageT=null;
     reader.endDrag(!cancelled);
+    invalidate();
     if (canvas.hasPointerCapture?.(e.pointerId)) canvas.releasePointerCapture(e.pointerId);
     const st = reader.getState();
     setState(st.cover > 0.08 || st.turned > 0 ? 'reading' : 'inspecting');
@@ -1372,7 +1418,8 @@ function endPointer(e, cancelled) {
       performance.now() - coverClick.t < 400;
     coverClick = null;
     // Tap toggles; a drag commits by where it was released.
-    reader.openCover(tap ? st.cover < 0.5 : st.cover > 0.5);
+    reader.openCover(cancelled ? coverDragStart : tap ? st.cover < 0.5 : st.cover > 0.5);
+    invalidate();
     if (canvas.hasPointerCapture?.(e.pointerId)) canvas.releasePointerCapture(e.pointerId);
     setState(st.cover > 0.08 ? 'reading' : 'inspecting');
     setInspectCursor();
@@ -1394,6 +1441,7 @@ function endPointer(e, cancelled) {
 }
 canvas.addEventListener('pointerup', (e) => endPointer(e, false));
 canvas.addEventListener('pointercancel', (e) => endPointer(e, true));
+canvas.addEventListener('lostpointercapture', (e) => {if(activePointerId===e.pointerId) endPointer(e,true)});
 
 /* Double-tap / double-click: glide the held book back to its neutral pose —
    the guaranteed way home from any rotation the user dragged themselves into.
@@ -1404,6 +1452,7 @@ function resetSpinPose() {
   if (!reader || !reader.group.visible) return;
   noteInteract();
   detailSpinVel.set(0, 0, 0);
+  inspectZoom = 0; inspectPan.set(0,0); inspectCameraNow();
   const y = detailSpin.rotation.y;
   spinReset = {
     x0: detailSpin.rotation.x,
@@ -1595,7 +1644,8 @@ async function boot() {
   shared = await createSharedResources(THREE, {
     fontUrl: '/Belief-Changer-Website/orbit/vendor/fonts/dm-sans-latin-500-normal.woff',
   });
-  const catalog = await fetch('./_extract/books-meta.json').then((r) => r.json());
+  const [catalog,preview]=await Promise.all([fetch('./_extract/books-meta.json').then(r=>r.json()),fetch('./_extract/preview-content.json').then(r=>r.json())]);
+  previewContent=preview;
   const order = buildRingOrder(catalog, N);
 
   frontIndex = 0;
@@ -1682,7 +1732,8 @@ async function boot() {
     } else window.__orbitPerf.prewarm = 'skipped';
   }, 1500);
   window.__ORBIT = {
-    get motionDebug() { return {state, sceneDirty, frameScheduled:!!frameHandle, readBias, hoverLift, hoverFront, anim:anim?.kind, velocity:detailSpinVel.toArray(), frame:window.__orbitPerf.renders}; },
+    repairVersion: 'orbit-repair-20260905-1',
+    get motionDebug() { return {hoverIndex,hoverAmounts:Array.from(hoverAmounts),hoverTilt:hoverTilt.toArray(),pageDragging,coverDragging,activePointerId,inspectZoom,inspectPan:inspectPan.toArray(),state, sceneDirty, frameScheduled:!!frameHandle, readBias, hoverLift, hoverFront, anim:anim?.kind, velocity:detailSpinVel.toArray(), frame:window.__orbitPerf.renders}; },
     get state() { return state; },
     get frontIndex() { return frontIndex; },
     get ringAngle() { return ringAngle; },
@@ -1730,16 +1781,18 @@ function frame(now) {
   let active = false;
   if (pendingHover) { const point = pendingHover; pendingHover = null; updateHover(point); }
 
-  // Hover lift spring — run only while unsettled, then rest exactly.
-  const wantLift = hoverFront && state === 'orbit' && !reducedMotion ? HOVER_LIFT : 0;
-  const liftGap = wantLift - hoverLift;
-  if (Math.abs(liftGap) > 0.001) {
-    hoverLift += liftGap * (1 - Math.exp(-10 * dt));
-    active = true;
-  } else if (hoverLift !== wantLift) {
-    hoverLift = wantLift;
-    active = true;
+  // Targets change immediately; the actual poses continue easing after leave.
+  for(let i=0;i<N;i++) {
+    const target=state==='orbit' && hoverIndex===i && !reducedMotion ? (i===frontIndex ? HOVER_LIFT : 1.15) : 0;
+    const gap=target-hoverAmounts[i];
+    if(Math.abs(gap)>.001) {hoverAmounts[i]+=gap*(1-Math.exp(-12*dt));active=true;}
+    else if(hoverAmounts[i]!==target){hoverAmounts[i]=target;active=true;}
   }
+  hoverLift=hoverAmounts[frontIndex];
+  if(state!=='orbit') hoverTiltTarget.set(0,0);
+  if(hoverTilt.distanceTo(hoverTiltTarget)>.0001){hoverTilt.lerp(hoverTiltTarget,1-Math.exp(-12*dt));active=true;}
+  else if(!hoverTilt.equals(hoverTiltTarget)){hoverTilt.copy(hoverTiltTarget);active=true;}
+  if(pendingPageT!==null && pageDragging){reader.updateDrag(pendingPageT);pendingPageT=null;active=true;}
 
   if (anim) {
     active = true;
@@ -1795,10 +1848,11 @@ function frame(now) {
       const camPos = new THREE.Vector3().lerpVectors(anim.fromCamPos, anim.toCamPos, e);
       const camL = new THREE.Vector3().lerpVectors(anim.fromCamLook, anim.toCamLook, e);
       applyCameraPose(camPos, camL, lerp(anim.fromCamFov, anim.toCamFov, e));
-      ringGroup.position.y = lerp(anim.fromRingY, RING_Y_INSPECT, e);
+      ringGroup.position.x = lerp(anim.fromRingX, ringInspectX(), e);
+      ringGroup.position.y = lerp(anim.fromRingY, ringInspectY(), e);
       ringGroup.position.z = lerp(anim.fromRingZ, RING_Z_INSPECT, e);
-      ringGroup.scale.setScalar(lerp(anim.fromRingS, RING_SCALE_INSPECT, e));
-      ringGroup.rotation.x = lerp(anim.fromRingTilt, RING_TILT * 0.55, e);
+      ringGroup.scale.setScalar(lerp(anim.fromRingS, ringInspectScale(), e));
+      ringGroup.rotation.x = lerp(anim.fromRingTilt, RING_TILT_INSPECT, e);
       if (u >= 1) {
         detailRoot.position.copy(anim.toPos);
         detailRoot.quaternion.copy(anim.toQuat);
@@ -1813,6 +1867,7 @@ function frame(now) {
       }
     } else if (anim.kind === 'return') {
       applyHeroView(e);
+      reader?.setCover(anim.fromCover * (1-e));
       detailRoot.position.lerpVectors(anim.fromPos, anim.toPos, e);
       detailRoot.quaternion.slerpQuaternions(anim.fromQuat, anim.toQuat, e);
       detailSpin.quaternion.slerpQuaternions(anim.fromSpin, anim.toSpin, e);
@@ -1820,6 +1875,7 @@ function frame(now) {
       const camPos = new THREE.Vector3().lerpVectors(anim.fromCamPos, anim.toCamPos, e);
       const camL = new THREE.Vector3().lerpVectors(anim.fromCamLook, anim.toCamLook, e);
       applyCameraPose(camPos, camL, lerp(anim.fromCamFov, anim.toCamFov, e));
+      ringGroup.position.x = lerp(anim.fromRingX, 0, e);
       ringGroup.position.y = lerp(anim.fromRingY, RING_Y_ORBIT, e);
       ringGroup.position.z = lerp(anim.fromRingZ, 0, e);
       ringGroup.scale.setScalar(lerp(anim.fromRingS, 1, e));
@@ -1893,7 +1949,13 @@ function frame(now) {
     advance(1);
   }
 
-  if (sceneDark && (active || sceneDirty)) updateLamp();
+  if (active || sceneDirty) {
+    if(sceneDark) updateLamp();
+    readingFill.position.copy(camera.position);
+    readingFill.target.position.copy(reader?.group.visible ? detailRoot.position : ringCenter);
+    // Recheck near-surface safety while rotating, not only when zoom changes.
+    if(reader?.group.visible && inspectZoom>0 && !anim && (detailDragging || detailSpinVel.lengthSq()>0 || spinReset)) inspectCameraNow();
+  }
   updateCaption();
   updateReaderTools();
   if (active || sceneDirty) grounding.updateDetail(detailRoot.position, reader?.getState().cover || 0, !!reader?.group.visible, sceneDark);
@@ -1901,8 +1963,8 @@ function frame(now) {
   if (active || sceneDirty) {
     closedBatch?.update();
     if (reader?.group.visible) focusPoint.copy(detailRoot.position);
-    else if (slots[frontIndex]) slots[frontIndex].host.getWorldPosition(focusPoint);
-    window.__orbitPerf.scene = atmosphere.render(focusPoint, !reader?.group.visible);
+    else { focusPoint.set(0,PRESENT_LIFT,RING_R+PRESENT_OUT); ringGroup.localToWorld(focusPoint); }
+    window.__orbitPerf.scene = atmosphere.render(focusPoint, true);
     window.__orbitPerf.renders = (window.__orbitPerf.renders || 0) + 1;
     sceneDirty = false;
   }
