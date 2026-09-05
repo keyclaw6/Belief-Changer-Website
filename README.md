@@ -25,7 +25,7 @@ npm run serve      # review the production build on port 3100
 npm run images     # regenerate responsive variants, preserving originals
 ```
 
-The latest visual direction is documented in [the atmospheric hero revision](docs/ATMOSPHERIC-HERO-2026-09-05.md).
+The current release, measured performance changes and verification commands are in [the Orbit closeout](docs/ORBIT-CLOSEOUT-2026-09-05.md). Earlier repair/refinement reports remain as evidence.
 
 See [the overhaul notes](docs/OVERHAUL-2026-09-04.md) for the implementation, measured results, and remaining release work. Backend submission endpoints and some book content are still prototype fixtures; this work does not claim a completed publishing backend.
 

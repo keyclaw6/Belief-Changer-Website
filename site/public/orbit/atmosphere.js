@@ -4,24 +4,36 @@
  */
 export function createAtmosphere(THREE, renderer, scene, camera) {
   const target = new THREE.WebGLRenderTarget(1, 1, {
-    type: renderer.extensions.has('EXT_color_buffer_float') ? THREE.HalfFloatType : THREE.UnsignedByteType,
+    type: renderer.extensions.has('EXT_color_buffer_float')
+      ? THREE.HalfFloatType
+      : THREE.UnsignedByteType,
     depthBuffer: true,
-    samples: Math.min(matchMedia('(max-width:720px)').matches ? 2 : 4, renderer.capabilities.maxSamples),
+    samples: Math.min(
+      matchMedia('(max-width:720px)').matches ? 2 : 4,
+      renderer.capabilities.maxSamples,
+    ),
   });
   target.depthTexture = new THREE.DepthTexture(1, 1, THREE.UnsignedIntType);
   target.texture.colorSpace = THREE.LinearSRGBColorSpace;
   const uniforms = {
-    image: { value: target.texture }, depth: { value: target.depthTexture },
+    image: { value: target.texture },
+    depth: { value: target.depthTexture },
     resolution: { value: new THREE.Vector2(1, 1) },
-    nearClip: { value: camera.near }, farClip: { value: camera.far },
-    focus: { value: 140 }, blurPixels: { value: 3.2 },
+    nearClip: { value: camera.near },
+    farClip: { value: camera.far },
+    focus: { value: 140 },
+    blurPixels: { value: 3.2 },
     base: { value: new THREE.Color('#e5e1d8') },
     edge: { value: new THREE.Color('#bdc6bd') },
     glow: { value: new THREE.Color('#fff6df') },
-    haze: { value: .23 }, vignette: { value: .075 },
+    haze: { value: 0.23 },
+    vignette: { value: 0.075 },
   };
   const material = new THREE.ShaderMaterial({
-    uniforms, depthTest: false, depthWrite: false, toneMapped: true,
+    uniforms,
+    depthTest: false,
+    depthWrite: false,
+    toneMapped: true,
     vertexShader: `varying vec2 vUv; void main(){ vUv=uv; gl_Position=vec4(position.xy,0.,1.); }`,
     fragmentShader: `
       precision highp float;
@@ -66,38 +78,56 @@ export function createAtmosphere(THREE, renderer, scene, camera) {
   });
   const screen = new THREE.Scene();
   const quad = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), material);
-  quad.frustumCulled = false; screen.add(quad);
+  quad.frustumCulled = false;
+  screen.add(quad);
   const screenCamera = new THREE.Camera();
-  const view = new THREE.Vector3(), size = new THREE.Vector2();
-  let width = 0, height = 0;
-  const stats = { calls:0, triangles:0 };
+  const view = new THREE.Vector3(),
+    size = new THREE.Vector2();
+  let width = 0,
+    height = 0;
+  const stats = { calls: 0, triangles: 0 };
   function resize() {
     renderer.getDrawingBufferSize(size);
     if (size.x === width && size.y === height) return;
-    width = size.x; height = size.y;
-    target.setSize(width, height); uniforms.resolution.value.set(width, height);
+    width = size.x;
+    height = size.y;
+    target.setSize(width, height);
+    uniforms.resolution.value.set(width, height);
   }
   function setTheme(dark) {
     uniforms.base.value.set(dark ? '#151816' : '#e5e1d8');
-    uniforms.edge.value.set(dark ? '#0f1514' : '#bdc6bd');
-    uniforms.glow.value.set(dark ? '#292b24' : '#fff6df');
-    uniforms.haze.value = dark ? .14 : .23;
+    uniforms.edge.value.set(dark ? '#1b211e' : '#bdc6bd');
+    uniforms.glow.value.set(dark ? '#44483f' : '#fff6df');
+    uniforms.haze.value = dark ? 0.14 : 0.23;
   }
   function render(focusPoint, depthOfField = true) {
     resize();
     camera.updateMatrixWorld(true);
     view.copy(focusPoint).applyMatrix4(camera.matrixWorldInverse);
     uniforms.focus.value = Math.max(camera.near, -view.z);
-    uniforms.blurPixels.value = depthOfField ? Math.min(4.5, 3.1 * renderer.getPixelRatio()) : 0;
+    uniforms.blurPixels.value = depthOfField
+      ? Math.min(4.5, 3.1 * renderer.getPixelRatio())
+      : 0;
     const oldTarget = renderer.getRenderTarget();
     renderer.setRenderTarget(target);
     renderer.render(scene, camera);
-    stats.calls = renderer.info.render.calls + 1; stats.triangles = renderer.info.render.triangles + 2;
+    stats.calls = renderer.info.render.calls + 1;
+    stats.triangles = renderer.info.render.triangles + 2;
     renderer.setRenderTarget(oldTarget);
     renderer.render(screen, screenCamera);
     return stats;
   }
-  return { render, resize, setTheme, uniforms, target,
-    dispose(){ target.dispose(); target.depthTexture?.dispose(); quad.geometry.dispose(); material.dispose(); }
+  return {
+    render,
+    resize,
+    setTheme,
+    uniforms,
+    target,
+    dispose() {
+      target.dispose();
+      target.depthTexture?.dispose();
+      quad.geometry.dispose();
+      material.dispose();
+    },
   };
 }

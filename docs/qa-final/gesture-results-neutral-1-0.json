@@ -32,8 +32,22 @@
       "dir": 1,
       "mode": "neutral",
       "passed": true
+    },
+    {
+      "kind": "leaf",
+      "i": 4,
+      "dir": 1,
+      "mode": "neutral",
+      "passed": true
     }
   ],
-  "metrics": {},
-  "failure": "mouse.move: Target page, context or browser has been closed"
+  "metrics": {
+    "scene": {
+      "calls": 96,
+      "triangles": 600964
+    },
+    "boot": 349.7000000011176,
+    "geometry": 115,
+    "textures": 56
+  }
 }

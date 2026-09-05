@@ -1,0 +1,27 @@
+{
+  "name": "baseline-914ce15",
+  "renderer": "SwiftShader software GL",
+  "errors": [],
+  "measurements": {
+    "paperTexture": {
+      "width": 2828,
+      "height": 3048,
+      "rgbaBytes": 34478976
+    },
+    "instanceBufferUpdatesAcross8ReadingFrames": 424,
+    "instanceCount": 54,
+    "pageSolveMedianMs": 2.099999999627471,
+    "pageSolveP95Ms": 7.900000000372529,
+    "bootRevealMs": 388.59999999962747,
+    "scene": {
+      "calls": 111,
+      "triangles": 600834
+    },
+    "memory": {
+      "geometries": 76,
+      "textures": 50
+    },
+    "dpr": 1,
+    "msaa": 4
+  }
+}

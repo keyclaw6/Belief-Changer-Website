@@ -20,7 +20,7 @@ Open `/en` for the website or `/orbit/index.html` for the standalone scene. `pre
 - `book-engine.js`: shared materials, closed books, articulated reader, SDF print.
 - `instance-ring.js`: rigid shelf batching; original meshes remain picking proxies.
 - `motion.js`: tested inertial integration, wheel normalization, and ring ordering.
-- `atmosphere.js`: warm background, camera-depth blur and distance haze; direct reading path.
+- `atmosphere.js`: continuous background, depth blur, distance haze and multisample antialiasing through browsing and reading.
 - `shadows.js`: moving soft contact footprints (analytical approximation, not ray-traced shadows).
 - `surface-textures.js`: deterministic, shared cloth roughness and paper relief.
 - `locale.js`: English, Danish, and Arabic interface labels.
@@ -29,14 +29,14 @@ Open `/en` for the website or `/orbit/index.html` for the standalone scene. `pre
 
 ## Interaction
 
-Arrow buttons/keys or a horizontal drag browse the ring. Click/tap a book or choose **Explore this book** to inspect. Dedicated controls open the cover, turn pages, and reset rotation; drag still works. Escape returns the book. Autoplay is opt-in and pauses during focused interaction. Embedded vertical wheel scrolling belongs to the page; Shift+wheel or horizontal trackpad movement browses the ring. Browser pinch zoom is not intercepted.
+Arrow buttons/keys or a horizontal drag browse the ring. Click/tap a book or choose **Explore this book** to inspect. Dedicated controls open the cover, turn pages, and reset rotation, zoom and pan; drag still works. Wheel/pinch zoom and Shift-drag/two-finger pan frame the reading surface with a geometry-aware safety limit. Escape returns the book. Autoplay is opt-in and pauses during focused interaction. Embedded vertical wheel scrolling belongs to the page; Shift+wheel or horizontal trackpad movement browses the ring. Browser pinch zoom is not intercepted.
 
-An 80-slot desktop ring or 56-slot phone ring repeats the ten-title catalog. Text, cover art, and source book content are unchanged. The 3D pages remain a presentation preview; the **Read the book** link opens the accessible SSR reader.
+An 80-slot desktop ring or 56-slot phone ring repeats the ten-title catalog. Original cover artwork and manuscript sources are preserved. Five physical leaves carry ten printed sides; the page-11 cap ends the sample. On the homepage it projects the actual SSR destination, preloaded at inspection without executing another app. A click/tap cue and accessible link open the localized book page, where available chapters can be read. Standalone mode retains a direct-link fallback.
 
 ## Rendering and ownership
 
-- Closed opaque surfaces are instanced by geometry/material equivalence. Print remains separate. Geometry is not simplified or remeshed.
-- The reader keeps the existing 132 × 52 leaf tessellation. Only exposed leaves render.
+- Rigid surfaces and cached distant printing are instanced. The featured volume uses the same live SDF type as the reader. Each host is composed once per update; unchanged instance matrices are not rebuilt or uploaded.
+- The reader keeps all five physical leaves at 132 × 52 tessellation; facing ink is culled, not the paper. One full-resolution paper texture is shared across all printed sides. Geometry is not simplified or remeshed.
 - Cover image promises and spine textures are shared; a book never disposes a shared cached texture.
 - Page deformation textures, old SDF print, and page-11 print are disposed on rebind.
 - Only the inspected book uses the additional physical sheen/clearcoat shader. The ring uses cheaper standard PBR with the same cloth relief and roughness maps.
@@ -50,7 +50,7 @@ npm run check
 npm run test:e2e
 ```
 
-`window.__ORBIT` and `window.__orbitPerf` expose QA state, memory/draw counters, and readiness. They are not analytics and send nothing. See `docs/OVERHAUL-2026-09-04.md` at the repository root for measured results and release caveats.
+`window.__ORBIT` and `window.__orbitPerf` expose QA state, memory/draw counters, and readiness. They are not analytics and send nothing. See `docs/ORBIT-CLOSEOUT-2026-09-05.md` at the repository root for measured results, current commands and release caveats.
 
 ## Atmospheric direction
 

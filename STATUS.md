@@ -1,6 +1,6 @@
 # STATUS — Belief Changer Website
 
-Last updated: 2026-08-07
+Last updated: 2026-09-05
 
 ## Done and locked
 
@@ -56,21 +56,16 @@ Phase 2 brief originally specified. Gold source: `book-asset/books/00-template`
 (`The Craft of Attention`). Operating loop for new titles: `book-asset/SKILL.md`.
 Compile with `book-asset/scripts/build_book.py`. Do not restart the Blender pipeline.
 
-## Next (in order)
+## Current Orbit release
 
-1. **Mint library titles** from accepted covers via `book-asset/SKILL.md` when a
-   3D instance of a catalog book is needed.
-2. **Fire the shelf agent**: hand a fresh agent this repo + `book-asset/`
-   (consume `products/<slug>-shelf.html` / reader, do not rebuild the hardcover) +
-   `prompts/BOOKSHELF-BRIEF.md` (v2, integration-ready). It builds the shelf module
-   and integrates it into the homepage hero by upgrading `<ShelfStage />` in place.
-3. **Owner review + iteration** of the v1 site on rendered evidence, one decision at
-   a time. Open items: final hero composition (with the 3D shelf), logo decision,
-   privacy-page data controller entity + public contact channel, domain acquisition
-   (beliefchanger.com is registered to a third party, GoDaddy, expires 2028-06;
-   beliefchanger.net is unregistered).
-4. **Backend phase** (deliberately later): implement `docs/MEASUREMENT.md` and the
-   POST contracts in `docs/SITE-PLAN.md` (feedback, requests, votes, experiences).
+The homepage uses the dense procedural Orbit in site/public/orbit, with five physical preview leaves, live SDF type, a reliable theme cord, a cozy single-source dark reading lamp, and a preloaded destination view at page eleven. The SSR library and locale/RTL/reduced-motion fallbacks remain. See docs/ORBIT-CLOSEOUT-2026-09-05.md for verification and measured performance changes.
+
+## Remaining product work
+
+1. Continue manuscript production; current chapter availability is not a promise of complete books or EPUB downloads.
+2. Resolve the privacy-page data-controller entity/contact details and production-domain choice with the owner. Earlier domain-availability notes are historical, not current checks.
+3. Backend contracts for feedback, requests, votes and experiences remain fixtures until explicitly implemented.
+4. Future visual changes should preserve the accepted cover assets and be reviewed on real target devices. The source is site/, not the historical experiments.
 
 ## Fixed laws (from VISION.md — the site serves these)
 
@@ -78,6 +73,4 @@ Compile with `book-asset/scripts/build_book.py`. Do not restart the Blender pipe
 - Warm to the person, harsh to the trap. Never shaming. First-person subject names.
 - Books are living: versioned, publicly changelogged, improved by reader feedback.
 - The library self-evolves: feedback loop, request loop, splitting loop.
-- Must feel complete at 3 books and scale to 3,000.
-op.
 - Must feel complete at 3 books and scale to 3,000.

@@ -25,14 +25,15 @@ test('portrait hero separates headline, featured cover and caption', async ({ pa
   expect(composition.top).toBeGreaterThan(composition.heading + 10);
   expect(composition.bottom).toBeLessThan(composition.caption - 6);
   expect(composition.depthSeparation).toBeGreaterThan(150);
-  expect(composition.draws).toBeLessThan(65);
+  // Dense instanced printing plus one live SDF featured volume, not SDF on every slot.
+  expect(composition.draws).toBeLessThan(90);
 })
 
 test('homepage heading is server-rendered and fades during inspection', async ({ page, request }) => {
   const html = await (await request.get('/en')).text();
   expect(html).toContain('A little clarity.');
   await page.goto('/en');
-  const frame = page.frameLocator('iframe');
+  const frame = page.frameLocator('iframe[data-orbit-frame]');
   await expect(frame.getByRole('button', { name:'Explore this book' })).toBeEnabled({ timeout:30000 });
   await frame.getByRole('button', { name:'Explore this book' }).click();
   await expect(page.locator('.atmospheric-hero')).toHaveAttribute('data-inspecting','true');

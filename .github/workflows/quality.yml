@@ -30,4 +30,7 @@ jobs:
           path: |
             site/test-results
             docs/qa/*.png
+            docs/qa-final
+            docs/qa-refinement
+            docs/qa-repair
           retention-days: 7

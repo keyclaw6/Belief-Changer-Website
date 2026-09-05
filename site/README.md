@@ -1,6 +1,6 @@
 # Belief Changer: website front end
 
-> **2026-09-04 runtime update:** the production Orbit is modular, self-hosted and progressively enhanced. `npm ci && npm run dev` prepares its dependencies automatically. `npm run check` and `npm run test:e2e` are the current quality gates. See [the overhaul report](../docs/OVERHAUL-2026-09-04.md) and [Orbit architecture](public/orbit/README.md). Older review commands below are historical.
+> **2026-09-05 closeout:** canonical source is this application and `public/orbit/`. Use `npm ci`, `npm run check`, and `npm run test:e2e`. See [the release/performance report](../docs/ORBIT-CLOSEOUT-2026-09-05.md) for current verification and deployment commands. Historical design notes below are retained for context.
 
 A free, multilingual library of belief-change books, rendered as a calm,
 document-style editorial product. This is the front end. Every backend
@@ -44,7 +44,7 @@ These override the taste-skill baseline (8 / 6 / 4) because the audience and
 Requires Node 20+ (built and verified on Node 24). From this `site/` directory:
 
 ```bash
-npm install         # install pinned dependencies
+npm ci              # install the locked dependency set
 npm run dev         # dev server with SSR at http://localhost:3000
 npm run build       # production build to dist/ (client + SSR server bundle)
 npm run typecheck   # tsc --noEmit, strict

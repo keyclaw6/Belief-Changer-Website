@@ -40,6 +40,11 @@ export function Reveal({
 }) {
   const reduce = useReducedMotion()
   const [armed, setArmed] = useState(false)
+  const [portalArrival] = useState(
+    () =>
+      typeof document !== 'undefined' &&
+      document.documentElement.hasAttribute('data-orbit-arrival'),
+  )
 
   useEffect(() => {
     setArmed(true)
@@ -49,7 +54,7 @@ export function Reveal({
 
   // Reduced motion, or not yet mounted: render a plain, visible element. This
   // is also the server output, so SSR/no-JS content is always present.
-  if (reduce || !armed) {
+  if (reduce || !armed || portalArrival) {
     const Tag = as
     return <Tag className={className}>{children}</Tag>
   }

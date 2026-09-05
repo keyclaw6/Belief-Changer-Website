@@ -1,0 +1,27 @@
+{
+  "name": "optimized",
+  "renderer": "SwiftShader software GL",
+  "errors": [],
+  "measurements": {
+    "paperTexture": {
+      "width": 707,
+      "height": 1016,
+      "rgbaBytes": 2873248
+    },
+    "instanceBufferUpdatesAcross8ReadingFrames": 0,
+    "instanceCount": 54,
+    "pageSolveMedianMs": 2.099999999627471,
+    "pageSolveP95Ms": 6.5,
+    "bootRevealMs": 373.5,
+    "scene": {
+      "calls": 111,
+      "triangles": 600834
+    },
+    "memory": {
+      "geometries": 76,
+      "textures": 50
+    },
+    "dpr": 1,
+    "msaa": 4
+  }
+}

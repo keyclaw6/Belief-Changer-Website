@@ -34,13 +34,14 @@
 
 import { createSurfaceTextures } from './surface-textures.js';
 const MAT_BASE = '/orbit-materials/';
+let textBuilderConfigured = false;
 
 /** centimetres — identical to gold D */
 export const BOOK_DIMS = (() => {
   const D = {
     pageW: 14.6,
     pageH: 21.0,
-    blockT: 2.40,
+    blockT: 2.4,
     boardT: 0.285,
     square: 0.33,
     spineBulge: 0.34,
@@ -60,7 +61,7 @@ export const BOOK_DIMS = (() => {
     const s = 0.46;
     const R = (s * s + (c / 2) * (c / 2)) / (2 * s);
     D.spineR = R;
-    D.spinePhi = 2 * Math.asin((c / 2) / R);
+    D.spinePhi = 2 * Math.asin(c / 2 / R);
     D.spineArc = R * D.spinePhi;
   }
   return Object.freeze(D);
@@ -80,7 +81,7 @@ export const BOOK_COM_OFFSET = Object.freeze({
 });
 
 const BOOK_LOOK = {
-  cover: { roughness: 0.82, normalScale: 0.24, normalRepeat: [1.55, 1.90] },
+  cover: { roughness: 0.82, normalScale: 0.24, normalRepeat: [1.55, 1.9] },
   paper: { color: 0xf7f1e5, roughness: 0.97, normalScale: 0.045 },
   stack: { color: 0xf7f1e5, roughness: 0.97 },
   endpaper: { color: 0xffffff, roughness: 0.95 },
@@ -102,7 +103,7 @@ const NV = 52;
 export const settle = (x) => {
   if (x >= 1) return 1;
   const e = 1 - Math.pow(1 - x, 2.2);
-  return Math.min(1, e - Math.exp(-7 * x) * Math.sin(11 * x) * 0.040 * (1 - x));
+  return Math.min(1, e - Math.exp(-7 * x) * Math.sin(11 * x) * 0.04 * (1 - x));
 };
 export const pageEase = (x) => x * x * x * (x * (x * 6 - 15) + 10);
 
@@ -185,7 +186,9 @@ function buildStudioEnv(THREE, renderer) {
   const panel = (w, h, x, y, z, rx, ry, i) => {
     const m = new THREE.Mesh(
       new THREE.PlaneGeometry(w, h),
-      new THREE.MeshBasicMaterial({ color: new THREE.Color(0xffffff).multiplyScalar(i) }),
+      new THREE.MeshBasicMaterial({
+        color: new THREE.Color(0xffffff).multiplyScalar(i),
+      }),
     );
     m.position.set(x, y, z);
     m.rotation.set(rx, ry, 0);
@@ -198,7 +201,10 @@ function buildStudioEnv(THREE, renderer) {
   const pm = new THREE.PMREMGenerator(renderer);
   const rt = pm.fromScene(s, 0.04);
   pm.dispose();
-  s.traverse((o) => { o.geometry?.dispose(); o.material?.dispose(); });
+  s.traverse((o) => {
+    o.geometry?.dispose();
+    o.material?.dispose();
+  });
   rt.texture.userData.renderTarget = rt;
   return rt.texture;
 }
@@ -211,7 +217,9 @@ function buildStudioEnv(THREE, renderer) {
  * @param {THREE.WebGLRenderer} [renderer] required for PMREM env
  */
 export function createStudioLights(THREE, scene, aimPoint, renderer) {
-  const AIM = aimPoint.clone ? aimPoint.clone() : new THREE.Vector3().copy(aimPoint);
+  const AIM = aimPoint.clone
+    ? aimPoint.clone()
+    : new THREE.Vector3().copy(aimPoint);
   const KEYDIR = new THREE.Vector3(-34, 46, 30).normalize();
 
   const sun = new THREE.DirectionalLight(0xffffff, 2.3);
@@ -255,7 +263,15 @@ export function createStudioLights(THREE, scene, aimPoint, renderer) {
 
 /* -------------------------------------------------------------- textures */
 
-async function loadMap(THREE, loader, url, color, repeatX = 1, repeatY = 1, aniso = 4) {
+async function loadMap(
+  THREE,
+  loader,
+  url,
+  color,
+  repeatX = 1,
+  repeatY = 1,
+  aniso = 4,
+) {
   const tex = await loader.loadAsync(url);
   tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
   tex.repeat.set(repeatX, repeatY);
@@ -282,7 +298,8 @@ function makePageEdgeTexture(THREE, scanTex, sheetCount, aniso = 4) {
     ctx.fillRect(0, 0, W, H);
   }
   let seed = 0x5f3759df;
-  const rnd = () => ((seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0) / 4294967296);
+  const rnd = () =>
+    (seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0) / 4294967296;
   ctx.lineCap = 'butt';
   for (let i = 1; i < sheetCount; i++) {
     const x = (i / sheetCount) * W + (rnd() - 0.5) * 0.7;
@@ -316,8 +333,13 @@ function makePageBlockAtlas(THREE, paperTex, edgeTex, aniso = 4) {
   c.height = S;
   const ctx = c.getContext('2d', { alpha: false });
   ctx.drawImage(edgeTex.image, 0, 0, S, S / 2);
-  ctx.fillStyle = '#f7f1e5'; ctx.fillRect(0,S/2,S,S/2);
-  if(paperTex?.image){ctx.globalAlpha=.5;ctx.drawImage(paperTex.image,0,S/2,S,S/2);ctx.globalAlpha=1;}
+  ctx.fillStyle = '#f7f1e5';
+  ctx.fillRect(0, S / 2, S, S / 2);
+  if (paperTex?.image) {
+    ctx.globalAlpha = 0.5;
+    ctx.drawImage(paperTex.image, 0, S / 2, S, S / 2);
+    ctx.globalAlpha = 1;
+  }
   const tex = new THREE.CanvasTexture(c);
   tex.wrapS = tex.wrapT = THREE.ClampToEdgeWrapping;
   tex.colorSpace = THREE.SRGBColorSpace;
@@ -345,41 +367,123 @@ export function fitCover(tex, planeAspect) {
   return tex;
 }
 
-const COVER_PRINT = Object.freeze({width:768,height:Math.round(768*(BOOK_DIMS.boardH-ART_BORDER_FRONT*2)/(BOOK_DIMS.boardW-ART_BORDER_FRONT*2)),font:'Orbit Cover Serif',titleSize:119,lineHeight:1.06,top:.2,markSize:26,markY:.92,markTracking:.24});
-function coverTitleLayout(title){
-  const ctx=document.createElement('canvas').getContext('2d');let size=COVER_PRINT.titleSize,lines=[];
-  do{ctx.font=`400 ${size}px "${COVER_PRINT.font}"`;lines=wrapLines(ctx,title,COVER_PRINT.width*.84);if(lines.length<=3)break;size-=2;}while(size>68);
-  return {lines,size};
+const COVER_PRINT = Object.freeze({
+  width: 768,
+  height: Math.round(
+    (768 * (BOOK_DIMS.boardH - ART_BORDER_FRONT * 2)) /
+      (BOOK_DIMS.boardW - ART_BORDER_FRONT * 2),
+  ),
+  font: 'Orbit Cover Serif',
+  titleSize: 119,
+  lineHeight: 1.06,
+  top: 0.2,
+  markSize: 26,
+  markY: 0.92,
+  markTracking: 0.24,
+});
+function coverTitleLayout(title) {
+  const ctx = document.createElement('canvas').getContext('2d');
+  let size = COVER_PRINT.titleSize,
+    lines = [];
+  do {
+    ctx.font = `400 ${size}px "${COVER_PRINT.font}"`;
+    lines = wrapLines(ctx, title, COVER_PRINT.width * 0.84);
+    if (lines.length <= 3) break;
+    size -= 2;
+  } while (size > 68);
+  return { lines, size };
 }
-function spacedLine(ctx,text,x,y,tracking){
-  const width=ctx.measureText(text).width+Math.max(0,text.length-1)*tracking;let left=x-width/2;ctx.textAlign='left';
-  for(const char of text){ctx.fillText(char,left,y);left+=ctx.measureText(char).width+tracking;}
+function spacedLine(ctx, text, x, y, tracking) {
+  const width =
+    ctx.measureText(text).width + Math.max(0, text.length - 1) * tracking;
+  let left = x - width / 2;
+  ctx.textAlign = 'left';
+  for (const char of text) {
+    ctx.fillText(char, left, y);
+    left += ctx.measureText(char).width + tracking;
+  }
 }
 function bakeFrontTitle(THREE, { title, subtitle, author, ink, caseLum }) {
-  const {width:W,height:H}=COVER_PRINT,c=document.createElement('canvas');c.width=W;c.height=H;
-  const ctx=c.getContext('2d');ctx.fillStyle=ink||inkForLuminance(caseLum??.5);ctx.textAlign='center';
-  const layout=coverTitleLayout(title);ctx.font=`400 ${layout.size}px "${COVER_PRINT.font}"`;ctx.textBaseline='top';
-  layout.lines.forEach((line,i)=>ctx.fillText(line,W/2,H*COVER_PRINT.top+i*layout.size*COVER_PRINT.lineHeight));
-  if(subtitle){ctx.font='500 30px "Orbit Cover Sans"';ctx.fillText(subtitle,W/2,H*.315+60,W*.84);}
-  ctx.textBaseline='middle';ctx.font='500 24px "Orbit Cover Sans"';
-  if(author&&String(author).toUpperCase()!=='BELIEF CHANGER')ctx.fillText(String(author).toUpperCase(),W/2,H*.862);
-  ctx.font=`500 ${COVER_PRINT.markSize}px "Orbit Cover Sans"`;spacedLine(ctx,'BELIEF CHANGER',W/2,H*COVER_PRINT.markY,COVER_PRINT.markSize*COVER_PRINT.markTracking);
-  const tex=new THREE.CanvasTexture(c);tex.colorSpace=THREE.SRGBColorSpace;tex.anisotropy=8;return tex;
+  const { width: W, height: H } = COVER_PRINT,
+    c = document.createElement('canvas');
+  c.width = W;
+  c.height = H;
+  const ctx = c.getContext('2d');
+  ctx.fillStyle = ink || inkForLuminance(caseLum ?? 0.5);
+  ctx.textAlign = 'center';
+  const layout = coverTitleLayout(title);
+  ctx.font = `400 ${layout.size}px "${COVER_PRINT.font}"`;
+  ctx.textBaseline = 'top';
+  layout.lines.forEach((line, i) =>
+    ctx.fillText(
+      line,
+      W / 2,
+      H * COVER_PRINT.top + i * layout.size * COVER_PRINT.lineHeight,
+    ),
+  );
+  if (subtitle) {
+    ctx.font = '500 30px "Orbit Cover Sans"';
+    ctx.fillText(subtitle, W / 2, H * 0.315 + 60, W * 0.84);
+  }
+  ctx.textBaseline = 'middle';
+  ctx.font = '500 24px "Orbit Cover Sans"';
+  if (author && String(author).toUpperCase() !== 'BELIEF CHANGER')
+    ctx.fillText(String(author).toUpperCase(), W / 2, H * 0.862);
+  ctx.font = `500 ${COVER_PRINT.markSize}px "Orbit Cover Sans"`;
+  spacedLine(
+    ctx,
+    'BELIEF CHANGER',
+    W / 2,
+    H * COVER_PRINT.markY,
+    COVER_PRINT.markSize * COVER_PRINT.markTracking,
+  );
+  const tex = new THREE.CanvasTexture(c);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  tex.anisotropy = 8;
+  return tex;
 }
 
-const ringPrintCache=new Map();
-function bakeRingPrint(THREE, art, meta, back=false){
-  const key=JSON.stringify([art?.uuid,meta,back]);if(ringPrintCache.has(key))return ringPrintCache.get(key);
-  const c=document.createElement('canvas');c.width=COVER_PRINT.width;c.height=COVER_PRINT.height;const g=c.getContext('2d');
-  g.fillStyle=meta.caseColor;g.fillRect(0,0,c.width,c.height);
-  if(art)g.drawImage(art.image,0,0,c.width,c.height);
-  if(!back){const title=bakeFrontTitle(THREE,meta);g.drawImage(title.image,0,0);title.dispose();}
-  else {g.fillStyle=meta.ink;g.textAlign='left';g.font='500 48px "DM Sans",sans-serif';let y=190;
-    for(const line of wrapLines(g,meta.title,590)){g.fillText(line,89,y);y+=57;}
-    g.font='400 29px "DM Sans",sans-serif';y+=80;for(const line of wrapLines(g,meta.promise||'',590)){g.fillText(line,89,y);y+=44;}
-    g.font='500 24px "DM Sans",sans-serif';g.fillText('Belief Changer',89,1000);g.font='400 20px "DM Sans",sans-serif';g.fillText('Free to read · No sign-up',89,1042);
+const ringPrintCache = new Map();
+function bakeRingPrint(THREE, art, meta, back = false) {
+  const key = JSON.stringify([art?.uuid, meta, back]);
+  if (ringPrintCache.has(key)) return ringPrintCache.get(key);
+  const c = document.createElement('canvas');
+  c.width = COVER_PRINT.width;
+  c.height = COVER_PRINT.height;
+  const g = c.getContext('2d');
+  g.fillStyle = meta.caseColor;
+  g.fillRect(0, 0, c.width, c.height);
+  if (art) g.drawImage(art.image, 0, 0, c.width, c.height);
+  if (!back) {
+    const title = bakeFrontTitle(THREE, meta);
+    g.drawImage(title.image, 0, 0);
+    title.dispose();
+  } else {
+    g.fillStyle = meta.ink;
+    g.textAlign = 'left';
+    g.font = '500 48px "DM Sans",sans-serif';
+    let y = 190;
+    for (const line of wrapLines(g, meta.title, 590)) {
+      g.fillText(line, 89, y);
+      y += 57;
+    }
+    g.font = '400 29px "DM Sans",sans-serif';
+    y += 80;
+    for (const line of wrapLines(g, meta.promise || '', 590)) {
+      g.fillText(line, 89, y);
+      y += 44;
+    }
+    g.font = '500 24px "DM Sans",sans-serif';
+    g.fillText('Belief Changer', 89, 1000);
+    g.font = '400 20px "DM Sans",sans-serif';
+    g.fillText('Free to read · No sign-up', 89, 1042);
   }
-  const tex=new THREE.CanvasTexture(c);tex.colorSpace=THREE.SRGBColorSpace;tex.anisotropy=8;tex.userData.sharedFromCache=true;ringPrintCache.set(key,tex);return tex;
+  const tex = new THREE.CanvasTexture(c);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  tex.anisotropy = 8;
+  tex.userData.sharedFromCache = true;
+  ringPrintCache.set(key, tex);
+  return tex;
 }
 
 const spineTextureCache = new Map();
@@ -398,12 +502,19 @@ function bakeSpineTitle(THREE, { title, ink, caseLum }) {
   ctx.save();
   ctx.translate(W / 2, H / 2);
   ctx.rotate(Math.PI / 2);
-  ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
-  const full=String(title||''); let size=48;
-  do{ctx.font=`500 ${size}px "DM Sans",system-ui,sans-serif`;if(ctx.measureText(full).width<=880)break;size--;}while(size>24);
-  ctx.fillText(full,-H*.43,0,880);
-  ctx.textAlign='right';ctx.font='500 24px "DM Sans",system-ui,sans-serif';
-  ctx.fillText('Belief Changer',H*.43,0,260);
+  ctx.textAlign = 'left';
+  ctx.textBaseline = 'middle';
+  const full = String(title || '');
+  let size = 48;
+  do {
+    ctx.font = `500 ${size}px "DM Sans",system-ui,sans-serif`;
+    if (ctx.measureText(full).width <= 880) break;
+    size--;
+  } while (size > 24);
+  ctx.fillText(full, -H * 0.43, 0, 880);
+  ctx.textAlign = 'right';
+  ctx.font = '500 24px "DM Sans",system-ui,sans-serif';
+  ctx.fillText('Belief Changer', H * 0.43, 0, 260);
   ctx.restore();
   const tex = new THREE.CanvasTexture(c);
   tex.colorSpace = THREE.SRGBColorSpace;
@@ -419,11 +530,15 @@ function bakeSpineTitle(THREE, { title, ink, caseLum }) {
 }
 
 function makePageAtlas(THREE, pages, paperColor, paperOnly = false) {
-  const COLS = 4;
-  const ROWS = 3;
+  // SDF ink is independent: keep one full-resolution paper cell, not twelve identical copies.
+  const COLS = paperOnly ? 1 : 4;
+  const ROWS = paperOnly ? 1 : 3;
   // Gold high cell is 768×1104; bump past the old 384×552 placeholders and
   // scale with DPR (capped) so zoomed reader text stays crisp without troika.
-  const DPR = Math.min(typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1, 1.5);
+  const DPR = Math.min(
+    typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1,
+    1.5,
+  );
   const PAGE_DESIGN_W = 768;
   const PAGE_DESIGN_H = 1104;
   const PAGE_SCALE = Math.max(0.85, Math.min(1, 0.92 * DPR));
@@ -439,7 +554,7 @@ function makePageAtlas(THREE, pages, paperColor, paperOnly = false) {
   const serif = 'Newsreader, Georgia, "Times New Roman", serif';
   const sans = '"DM Sans", system-ui, sans-serif';
 
-  for (let i = 0; i < 11; i++) {
+  for (let i = 0; i < (paperOnly ? 1 : 11); i++) {
     const col = i % COLS;
     const row = Math.floor(i / COLS);
     const ox = col * CW;
@@ -503,7 +618,11 @@ function makePageAtlas(THREE, pages, paperColor, paperOnly = false) {
     ctx.font = `500 16px ${sans}`;
     ctx.fillStyle = 'rgba(45,41,36,.70)';
     ctx.textAlign = right ? 'right' : 'left';
-    ctx.fillText(String(i + 1).padStart(2, '0'), right ? PAGE_DESIGN_W - outer : outer, bottom);
+    ctx.fillText(
+      String(i + 1).padStart(2, '0'),
+      right ? PAGE_DESIGN_W - outer : outer,
+      bottom,
+    );
     ctx.restore();
   }
 
@@ -517,6 +636,7 @@ function makePageAtlas(THREE, pages, paperColor, paperOnly = false) {
   tex.needsUpdate = true;
 
   function mapUV(index, u, v) {
+    if (paperOnly) index = 0;
     const col = index % COLS;
     const row = Math.floor(index / COLS);
     const pad = PAD / c.width;
@@ -528,6 +648,7 @@ function makePageAtlas(THREE, pages, paperColor, paperOnly = false) {
     return [u0 + (u1 - u0) * u, v0 + (v1 - v0) * v];
   }
   function unmapUV(index, u, v) {
+    if (paperOnly) index = 0;
     const col = index % COLS;
     const row = Math.floor(index / COLS);
     const pad = PAD / c.width;
@@ -549,10 +670,18 @@ function placeholderPages(title, promise) {
   const p = promise || 'A short book about a trap that feels like a need.';
   const pages = [
     { title: t, paragraphs: [p, 'Belief Changer · free to read.'] },
-    { title: 'Copyright', paragraphs: [`${t}`, 'Belief Changer. Free forever.'] },
+    {
+      title: 'Copyright',
+      paragraphs: [`${t}`, 'Belief Changer. Free forever.'],
+    },
     {
       title: 'Contents',
-      paragraphs: ['1. The trap', '2. What it costs', '3. Seeing it clearly', '4. Walking out'],
+      paragraphs: [
+        '1. The trap',
+        '2. What it costs',
+        '3. Seeing it clearly',
+        '4. Walking out',
+      ],
     },
   ];
   for (let i = 3; i < 11; i++) {
@@ -642,10 +771,11 @@ function fillSpineClosed(THREE, G, D, spineGeo, spineArtPos, spineArtUV) {
   const th = 0.085;
   const src = kin.pts;
   const ns = src.length;
-  const cum = spineGeo.userData.arcWorkspace ||= new Float64Array(ns);
+  const cum = (spineGeo.userData.arcWorkspace ||= new Float64Array(ns));
   cum[0] = 0;
   for (let k = 1; k < ns; k++) {
-    cum[k] = cum[k - 1] + Math.hypot(src[k].x - src[k - 1].x, src[k].y - src[k - 1].y);
+    cum[k] =
+      cum[k - 1] + Math.hypot(src[k].x - src[k - 1].x, src[k].y - src[k - 1].y);
   }
   const arc = cum[ns - 1] || 1;
   const uScale = 1 / D.boardW;
@@ -707,7 +837,14 @@ function fillSpineClosed(THREE, G, D, spineGeo, spineArtPos, spineArtUV) {
   return kin;
 }
 
-function headbandGeometry(THREE, D, zSign, relax, stackSpineBaseX, stackDeformAt) {
+function headbandGeometry(
+  THREE,
+  D,
+  zSign,
+  relax,
+  stackSpineBaseX,
+  stackDeformAt,
+) {
   const pts = [];
   for (let i = 0; i <= 16; i++) {
     const q = 0.025 + 0.95 * (i / 16);
@@ -721,7 +858,13 @@ function headbandGeometry(THREE, D, zSign, relax, stackSpineBaseX, stackDeformAt
       ),
     );
   }
-  return new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 24, 0.086, 6, false);
+  return new THREE.TubeGeometry(
+    new THREE.CatmullRomCurve3(pts),
+    24,
+    0.086,
+    6,
+    false,
+  );
 }
 
 function stackHelpers(D) {
@@ -747,7 +890,8 @@ function stackHelpers(D) {
     const shear = -e * upper * (0.02 + 0.083 * span);
     const jitterX = e * micro * upper * (0.003 + 0.006 * span);
     const dx = spineDelta + shear + jitterX;
-    const dy = e * upper * (0.004 + 0.02 * span) + e * micro * upper * span * 0.0012;
+    const dy =
+      e * upper * (0.004 + 0.02 * span) + e * micro * upper * span * 0.0012;
     return { dx, dy };
   }
   return { stackSpineBaseX, stackDeformAt };
@@ -761,7 +905,11 @@ function coverArtworkMesh(THREE, material, isFront, D) {
   const g = new THREE.PlaneGeometry(pw, ph, 1, 1);
   // Cover photo on UV0 — default UVs read upright/unmirrored after Rx(+π/2) rest.
   const src = g.attributes.uv;
-  if(!isFront){for(let i=0;i<src.count;i++)src.setXY(i,1-src.getX(i),1-src.getY(i));src.needsUpdate=true;}
+  if (!isFront) {
+    for (let i = 0; i < src.count; i++)
+      src.setXY(i, 1 - src.getX(i), 1 - src.getY(i));
+    src.needsUpdate = true;
+  }
   // Cloth weave for normals uses uv1 at board scale.
   const cloth = src.clone();
   const uv = cloth.array;
@@ -797,7 +945,10 @@ function titleOverlayMesh(THREE, material, D) {
 
 function applyRestOrient(THREE, root) {
   // Rx(+π/2) only: cover +Y → +Z, head +Z → +Y, spine −X stays −X.
-  root.quaternion.setFromAxisAngle(new THREE.Vector3(1, 0, 0), BOOK_REST_EULER.x);
+  root.quaternion.setFromAxisAngle(
+    new THREE.Vector3(1, 0, 0),
+    BOOK_REST_EULER.x,
+  );
   root.scale.set(BOOK_REST_SCALE.x, BOOK_REST_SCALE.y, BOOK_REST_SCALE.z);
 }
 
@@ -808,7 +959,11 @@ function applyComOffset(book) {
 /* ---- Troika SDF text (gold parity): titles are polygon meshes, crisp at any
    zoom. Loaded lazily from ./vendor/; falls back to the legacy canvas bake if
    the module or font is unavailable. ---- */
-async function buildCoverTitleGroup(THREE, shared, { title, subtitle, author, ink }) {
+async function buildCoverTitleGroup(
+  THREE,
+  shared,
+  { title, subtitle, author, ink },
+) {
   if (!shared.troikaReady || !shared.titleFontUrl) return null;
   let troika;
   try {
@@ -816,7 +971,8 @@ async function buildCoverTitleGroup(THREE, shared, { title, subtitle, author, in
   } catch {
     return null;
   }
-  const Text = troika && (troika.Text || (troika.default && troika.default.Text));
+  const Text =
+    troika && (troika.Text || (troika.default && troika.default.Text));
   if (!Text) return null;
   const D = BOOK_DIMS;
   const pw = D.boardW - ART_BORDER_FRONT * 2;
@@ -825,13 +981,20 @@ async function buildCoverTitleGroup(THREE, shared, { title, subtitle, author, in
   const layout = coverTitleLayout(title);
   const g = new THREE.Group();
   g.name = 'troikaTitle';
-  const layoutsReady=[];
+  const layoutsReady = [];
   const mk = (str, pxSize, yCanvas, opts = {}) => {
     if (!str) return null;
     const t = new Text();
     t.text = opts.upper ? String(str).toUpperCase() : String(str);
     t.font = opts.serif ? shared.serifFontUrl : shared.titleFontUrl;
-    t.material = new THREE.MeshStandardMaterial({color:ink,roughness:BOOK_LOOK.cover.roughness,metalness:0,envMapIntensity:.46,transparent:true,depthWrite:false});
+    t.material = new THREE.MeshStandardMaterial({
+      color: ink,
+      roughness: BOOK_LOOK.cover.roughness,
+      metalness: 0,
+      envMapIntensity: 0.46,
+      transparent: true,
+      depthWrite: false,
+    });
     t.textAlign = 'center';
     t.fontSize = Math.max(0.14, pxSize * s);
     t.color = ink;
@@ -850,14 +1013,37 @@ async function buildCoverTitleGroup(THREE, shared, { title, subtitle, author, in
     t.position.z = 0.012;
     t.position.y = ph / 2 - yCanvas * s;
     g.add(t);
-    layoutsReady.push(new Promise(resolve=>t.sync(()=>{window.dispatchEvent(new Event('orbit-invalidate'));resolve();})));
+    layoutsReady.push(
+      new Promise((resolve) =>
+        t.sync(() => {
+          window.dispatchEvent(new Event('orbit-invalidate'));
+          resolve();
+        }),
+      ),
+    );
     return t;
   };
-  mk(layout.lines.join('\n'), layout.size, COVER_PRINT.height*COVER_PRINT.top, { top: true, lineHeight:COVER_PRINT.lineHeight, serif:true });
-  if (subtitle) mk(subtitle, 30, COVER_PRINT.height * .315 + 60, { lineHeight: 1.3 });
-  if (author && String(author).toUpperCase() !== 'BELIEF CHANGER') mk(String(author).toUpperCase(), 24, COVER_PRINT.height * .862);
-  mk('BELIEF CHANGER', COVER_PRINT.markSize, COVER_PRINT.height*COVER_PRINT.markY, { tracking:COVER_PRINT.markTracking });
-  g.userData.printLayout={font:COVER_PRINT.font,lines:layout.lines,size:layout.size};
+  mk(
+    layout.lines.join('\n'),
+    layout.size,
+    COVER_PRINT.height * COVER_PRINT.top,
+    { top: true, lineHeight: COVER_PRINT.lineHeight, serif: true },
+  );
+  if (subtitle)
+    mk(subtitle, 30, COVER_PRINT.height * 0.315 + 60, { lineHeight: 1.3 });
+  if (author && String(author).toUpperCase() !== 'BELIEF CHANGER')
+    mk(String(author).toUpperCase(), 24, COVER_PRINT.height * 0.862);
+  mk(
+    'BELIEF CHANGER',
+    COVER_PRINT.markSize,
+    COVER_PRINT.height * COVER_PRINT.markY,
+    { tracking: COVER_PRINT.markTracking },
+  );
+  g.userData.printLayout = {
+    font: COVER_PRINT.font,
+    lines: layout.lines,
+    size: layout.size,
+  };
   g.userData.isTroikaTitle = true;
   await Promise.all(layoutsReady);
   return g;
@@ -869,23 +1055,89 @@ export async function createSharedResources(THREE, opts = {}) {
   const loader = new THREE.TextureLoader();
   const aniso = 4;
   // The canvas cache and live SDF title use the exact same two font files.
-  const serifUrl=new URL('./vendor/fonts/newsreader-latin-400-normal.woff',import.meta.url).href;
-  const sansUrl=new URL('./vendor/fonts/dm-sans-latin-500-normal.woff',import.meta.url).href;
-  if(![...document.fonts].some(font=>font.family==='Orbit Cover Serif')){
-    const fonts=[new FontFace('Orbit Cover Serif',`url(${serifUrl})`),new FontFace('Orbit Cover Sans',`url(${sansUrl})`,{weight:'500'})];
-    await Promise.all(fonts.map(async font=>{await font.load();document.fonts.add(font)}));
+  const serifUrl = new URL(
+    './vendor/fonts/newsreader-latin-400-normal.woff',
+    import.meta.url,
+  ).href;
+  const sansUrl = new URL(
+    './vendor/fonts/dm-sans-latin-500-normal.woff',
+    import.meta.url,
+  ).href;
+  if (
+    ![...document.fonts].some((font) => font.family === 'Orbit Cover Serif')
+  ) {
+    const fonts = [
+      new FontFace('Orbit Cover Serif', `url(${serifUrl})`),
+      new FontFace('Orbit Cover Sans', `url(${sansUrl})`, { weight: '500' }),
+    ];
+    await Promise.all(
+      fonts.map(async (font) => {
+        await font.load();
+        document.fonts.add(font);
+      }),
+    );
   }
 
-  const [coverNormal, paperColor, endColor, bandColor, pageEdgeScan] = await Promise.all([
-    loadMap(THREE, loader, `${MAT_BASE}cover_normal.webp`, false, ...BOOK_LOOK.cover.normalRepeat, aniso),
-    loadMap(THREE, loader, `${MAT_BASE}paper_color.webp`, true, D.pageW / 10, D.pageH / 10, aniso),
-    loadMap(THREE, loader, `${MAT_BASE}endpaper_color.webp`, true, D.pageW / 10, D.pageH / 10, aniso),
-    loadMap(THREE, loader, `${MAT_BASE}headband_color.webp`, true, 3.2, 1.0, aniso),
-    loadMap(THREE, loader, `${MAT_BASE}page_edge_scan.webp`, true, 1.0, 1.0, aniso),
-  ]);
+  const [coverNormal, paperColor, endColor, bandColor, pageEdgeScan] =
+    await Promise.all([
+      loadMap(
+        THREE,
+        loader,
+        `${MAT_BASE}cover_normal.webp`,
+        false,
+        ...BOOK_LOOK.cover.normalRepeat,
+        aniso,
+      ),
+      loadMap(
+        THREE,
+        loader,
+        `${MAT_BASE}paper_color.webp`,
+        true,
+        D.pageW / 10,
+        D.pageH / 10,
+        aniso,
+      ),
+      loadMap(
+        THREE,
+        loader,
+        `${MAT_BASE}endpaper_color.webp`,
+        true,
+        D.pageW / 10,
+        D.pageH / 10,
+        aniso,
+      ),
+      loadMap(
+        THREE,
+        loader,
+        `${MAT_BASE}headband_color.webp`,
+        true,
+        3.2,
+        1.0,
+        aniso,
+      ),
+      loadMap(
+        THREE,
+        loader,
+        `${MAT_BASE}page_edge_scan.webp`,
+        true,
+        1.0,
+        1.0,
+        aniso,
+      ),
+    ]);
 
-  const pageEdgeColor = makePageEdgeTexture(THREE, pageEdgeScan, D.sheets, aniso);
-  const pageBlockAtlas = makePageBlockAtlas(THREE, paperColor, pageEdgeColor, aniso);
+  const pageEdgeColor = makePageEdgeTexture(
+    THREE,
+    pageEdgeScan,
+    D.sheets,
+    aniso,
+  );
+  const pageBlockAtlas = makePageBlockAtlas(
+    THREE,
+    paperColor,
+    pageEdgeColor,
+    aniso,
+  );
 
   const boardGeo = G.board(THREE, {
     w: D.boardW,
@@ -895,7 +1147,10 @@ export async function createSharedResources(THREE, opts = {}) {
   });
   const stackGeo = buildStackGeo(THREE, G, D);
 
-  const spineGeoClosed = G.spineStrip(THREE, { steps: SP_STEPS, zSpans: SP_ZSPANS });
+  const spineGeoClosed = G.spineStrip(THREE, {
+    steps: SP_STEPS,
+    zSpans: SP_ZSPANS,
+  });
   const spineArtPosClosed = new Float32Array((SP_STEPS + 1) * 2 * 3);
   const spineArtUVClosed = new Float32Array((SP_STEPS + 1) * 2 * 2);
   const spineArtUV1Closed = new Float32Array((SP_STEPS + 1) * 2 * 2);
@@ -914,12 +1169,28 @@ export async function createSharedResources(THREE, opts = {}) {
       }
     }
   }
-  const closedKin = fillSpineClosed(THREE, G, D, spineGeoClosed, spineArtPosClosed, spineArtUVClosed);
+  const closedKin = fillSpineClosed(
+    THREE,
+    G,
+    D,
+    spineGeoClosed,
+    spineArtPosClosed,
+    spineArtUVClosed,
+  );
 
   const spineArtGeoClosed = new THREE.BufferGeometry();
-  spineArtGeoClosed.setAttribute('position', new THREE.BufferAttribute(spineArtPosClosed, 3));
-  spineArtGeoClosed.setAttribute('uv', new THREE.BufferAttribute(spineArtUVClosed, 2));
-  spineArtGeoClosed.setAttribute('uv1', new THREE.BufferAttribute(spineArtUV1Closed, 2));
+  spineArtGeoClosed.setAttribute(
+    'position',
+    new THREE.BufferAttribute(spineArtPosClosed, 3),
+  );
+  spineArtGeoClosed.setAttribute(
+    'uv',
+    new THREE.BufferAttribute(spineArtUVClosed, 2),
+  );
+  spineArtGeoClosed.setAttribute(
+    'uv1',
+    new THREE.BufferAttribute(spineArtUV1Closed, 2),
+  );
   spineArtGeoClosed.setIndex(spineArtIdx);
   spineArtGeoClosed.computeVertexNormals();
 
@@ -927,8 +1198,22 @@ export async function createSharedResources(THREE, opts = {}) {
   const artNormal = coverNormal.clone();
   artNormal.channel = 1;
   const { stackSpineBaseX, stackDeformAt } = stackHelpers(D);
-  const hbGeoP = headbandGeometry(THREE, D, 1, 0, stackSpineBaseX, stackDeformAt);
-  const hbGeoM = headbandGeometry(THREE, D, -1, 0, stackSpineBaseX, stackDeformAt);
+  const hbGeoP = headbandGeometry(
+    THREE,
+    D,
+    1,
+    0,
+    stackSpineBaseX,
+    stackDeformAt,
+  );
+  const hbGeoM = headbandGeometry(
+    THREE,
+    D,
+    -1,
+    0,
+    stackSpineBaseX,
+    stackDeformAt,
+  );
 
   const matStack = new THREE.MeshStandardMaterial({
     map: pageBlockAtlas,
@@ -1002,7 +1287,20 @@ export async function createSharedResources(THREE, opts = {}) {
   // Troika SDF text (gold parity). Null on any failure → canvas fallback.
   const troikaUrl = opts.troikaUrl || './vendor/troika-three-text.module.js';
   shared.troikaReady = import(/* @vite-ignore */ troikaUrl)
-    .then((m) => (m && m.Text ? m : m && m.default && m.default.Text ? m.default : null))
+    .then((m) => {
+      const api =
+        m && m.Text ? m : m && m.default && m.default.Text ? m.default : null;
+      if (api && !textBuilderConfigured) {
+        api.configureTextBuilder({
+          defaultFontURL: new URL(
+            './vendor/fonts/noto-sans-arabic-arabic-400-normal.woff',
+            import.meta.url,
+          ).href,
+        });
+        textBuilderConfigured = true;
+      }
+      return api;
+    })
     .catch(() => null);
   shared.titleFontUrl = opts.fontUrl || null;
   shared.serifFontUrl = './vendor/fonts/newsreader-latin-400-normal.woff';
@@ -1066,12 +1364,23 @@ function disposeCoverTexture(tex) {
 
 function makeCaseMaterials(THREE, shared, caseColor, physical = false) {
   const { coverNormal } = shared.textures;
-  const CaseMaterial = physical ? THREE.MeshPhysicalMaterial : THREE.MeshStandardMaterial;
+  const CaseMaterial = physical
+    ? THREE.MeshPhysicalMaterial
+    : THREE.MeshStandardMaterial;
   const matCase = new CaseMaterial({
-    ...(physical ? { sheen: 0.18, sheenRoughness: 0.85, sheenColor: new THREE.Color(0xf5f0e6) } : {}),
+    ...(physical
+      ? {
+          sheen: 0.18,
+          sheenRoughness: 0.85,
+          sheenColor: new THREE.Color(0xf5f0e6),
+        }
+      : {}),
     roughnessMap: shared.textures.clothRoughness,
     normalMap: coverNormal,
-    normalScale: new THREE.Vector2(BOOK_LOOK.cover.normalScale, BOOK_LOOK.cover.normalScale),
+    normalScale: new THREE.Vector2(
+      BOOK_LOOK.cover.normalScale,
+      BOOK_LOOK.cover.normalScale,
+    ),
     color: caseColor || '#e8e6e5',
     roughness: BOOK_LOOK.cover.roughness,
     metalness: 0,
@@ -1085,16 +1394,20 @@ function makeFrontArtMaterial(THREE, shared, coverTex, physical = false) {
   // Artwork stays untouched on UV0; cloth relief and roughness share UV1.
   if (coverTex) coverTex.channel = 0;
   const artNormal = shared.textures.artNormal;
-  const ArtMaterial = physical ? THREE.MeshPhysicalMaterial : THREE.MeshStandardMaterial;
+  const ArtMaterial = physical
+    ? THREE.MeshPhysicalMaterial
+    : THREE.MeshStandardMaterial;
   return new ArtMaterial({
     roughnessMap: shared.textures.artRoughness,
-    ...(physical ? {
-    clearcoat: 0.06,
-    clearcoatRoughness: 0.8,
-    sheen: 0.12,
-    sheenRoughness: 0.85,
-    sheenColor: new THREE.Color(0xf5f0e6),
-    } : {}),
+    ...(physical
+      ? {
+          clearcoat: 0.06,
+          clearcoatRoughness: 0.8,
+          sheen: 0.12,
+          sheenRoughness: 0.85,
+          sheenColor: new THREE.Color(0xf5f0e6),
+        }
+      : {}),
     map: coverTex,
     side: THREE.FrontSide,
     toneMapped: true,
@@ -1103,7 +1416,10 @@ function makeFrontArtMaterial(THREE, shared, coverTex, physical = false) {
     metalness: 0,
     envMapIntensity: 0.46,
     normalMap: artNormal,
-    normalScale: new THREE.Vector2(BOOK_LOOK.cover.normalScale, BOOK_LOOK.cover.normalScale),
+    normalScale: new THREE.Vector2(
+      BOOK_LOOK.cover.normalScale,
+      BOOK_LOOK.cover.normalScale,
+    ),
     polygonOffset: true,
     polygonOffsetFactor: -4,
     polygonOffsetUnits: -4,
@@ -1117,7 +1433,9 @@ function makeTitleMaterial(THREE, titleTex) {
     transparent: true,
     depthWrite: false,
     depthTest: true,
-    polygonOffset: true, polygonOffsetFactor: -6, polygonOffsetUnits: -6,
+    polygonOffset: true,
+    polygonOffsetFactor: -6,
+    polygonOffsetUnits: -6,
     side: THREE.FrontSide,
     toneMapped: false,
   });
@@ -1143,11 +1461,25 @@ function makeSpineArtMaterial(THREE, spineTex, shared) {
   });
 }
 
-function placeClosedCase(book, D, kin, frontBoardPivot, backBoard, frontPaste, backPaste, backArt) {
+function placeClosedCase(
+  book,
+  D,
+  kin,
+  frontBoardPivot,
+  backBoard,
+  frontPaste,
+  backPaste,
+  backArt,
+) {
   frontBoardPivot.position.set(kin.frontBoard.x, kin.frontBoard.y, 0);
   frontBoardPivot.rotation.z = kin.boardDir;
   if (frontPaste) frontPaste.position.set(D.boardW / 2, D.boardT + 0.003, 0);
-  if (backPaste) backPaste.position.set(D.boardW / 2 + D.jointX + D.grooveW, D.boardT + 0.003, 0);
+  if (backPaste)
+    backPaste.position.set(
+      D.boardW / 2 + D.jointX + D.grooveW,
+      D.boardT + 0.003,
+      0,
+    );
   if (backArt) backArt.position.x = D.boardW / 2 + D.jointX + D.grooveW;
   backBoard.position.set(D.jointX + D.grooveW, 0, 0);
 }
@@ -1189,20 +1521,54 @@ export async function createClosedBook(THREE, shared, opts) {
   root.add(book);
 
   const { matCase, matCaseSpine } = makeCaseMaterials(THREE, shared, caseColor);
-  const coverTex = await loadCoverTexture(THREE, coverUrl, 4, opts.liveTitle ? 0 : 512);
+  const coverTex = await loadCoverTexture(
+    THREE,
+    coverUrl,
+    4,
+    opts.liveTitle ? 0 : 512,
+  );
   const matFrontArt = makeFrontArtMaterial(THREE, shared, coverTex);
 
   const ink = inkForLuminance(caseLuminance, overlayInk);
-  const titleGroup=opts.liveTitle ? await buildCoverTitleGroup(THREE,shared,{title,subtitle,author,ink}) : null;
-  const matTitle=null, titleTex=null;
-  const titleOverlay=titleGroup || new THREE.Group();
-  if(titleGroup){titleGroup.rotation.x=Math.PI/2;titleGroup.position.set(D.boardW/2,-.028,0);}
-  else {titleOverlay.name='baked-ring-print';matFrontArt.map=bakeRingPrint(THREE,coverTex,{title,subtitle,author,ink,caseColor,promise},false);}
-  const spineTitleTex = bakeSpineTitle(THREE, { title, ink, caseLum: caseLuminance });
+  const titleGroup = opts.liveTitle
+    ? await buildCoverTitleGroup(THREE, shared, {
+        title,
+        subtitle,
+        author,
+        ink,
+      })
+    : null;
+  const matTitle = null,
+    titleTex = null;
+  const titleOverlay = titleGroup || new THREE.Group();
+  if (titleGroup) {
+    titleGroup.rotation.x = Math.PI / 2;
+    titleGroup.position.set(D.boardW / 2, -0.028, 0);
+  } else {
+    titleOverlay.name = 'baked-ring-print';
+    matFrontArt.map = bakeRingPrint(
+      THREE,
+      coverTex,
+      { title, subtitle, author, ink, caseColor, promise },
+      false,
+    );
+  }
+  const spineTitleTex = bakeSpineTitle(THREE, {
+    title,
+    ink,
+    caseLum: caseLuminance,
+  });
   const matSpineArt = makeSpineArtMaterial(THREE, spineTitleTex, shared);
-  matSpineArt.transparent=false; matSpineArt.alphaTest=.05; matSpineArt.depthWrite=true;
-  const backMat=makeFrontArtMaterial(THREE,shared,bakeRingPrint(THREE,null,{title,promise,ink,caseColor},true));
-  const backArt=coverArtworkMesh(THREE,backMat,false,D); book.add(backArt);
+  matSpineArt.transparent = false;
+  matSpineArt.alphaTest = 0.05;
+  matSpineArt.depthWrite = true;
+  const backMat = makeFrontArtMaterial(
+    THREE,
+    shared,
+    bakeRingPrint(THREE, null, { title, promise, ink, caseColor }, true),
+  );
+  const backArt = coverArtworkMesh(THREE, backMat, false, D);
+  book.add(backArt);
 
   const backBoard = new THREE.Mesh(shared.boardGeo, matCase);
   backBoard.castShadow = true;
@@ -1254,11 +1620,31 @@ export async function createClosedBook(THREE, shared, opts) {
   hb1.castShadow = false;
   book.add(hb0, hb1);
 
-  placeClosedCase(book, D, shared.closedKin, frontBoardPivot, backBoard, frontPaste, backPaste, backArt);
+  placeClosedCase(
+    book,
+    D,
+    shared.closedKin,
+    frontBoardPivot,
+    backBoard,
+    frontPaste,
+    backPaste,
+    backArt,
+  );
 
   const hitMeshes = [frontBoard, backBoard, spineMesh, frontArt, stack];
 
-  const disposables = [backMat, backArt.geometry, matCase, matCaseSpine, matFrontArt, matTitle, matSpineArt, coverTex, titleTex, spineTitleTex];
+  const disposables = [
+    backMat,
+    backArt.geometry,
+    matCase,
+    matCaseSpine,
+    matFrontArt,
+    matTitle,
+    matSpineArt,
+    coverTex,
+    titleTex,
+    spineTitleTex,
+  ];
   // frontArt / titleOverlay use unique PlaneGeometry from helpers
   disposables.push(frontArt.geometry, titleOverlay.geometry);
 
@@ -1286,8 +1672,11 @@ export async function createClosedBook(THREE, shared, opts) {
 
   function dispose() {
     root.removeFromParent();
-    titleGroup?.traverse((o) => { if (o.isTroikaText) o.dispose(); });
-    frontPaste.geometry.dispose(); backPaste.geometry.dispose();
+    titleGroup?.traverse((o) => {
+      if (o.isTroikaText) o.dispose();
+    });
+    frontPaste.geometry.dispose();
+    backPaste.geometry.dispose();
     for (const d of disposables) {
       if (d && d.dispose && !d.userData?.sharedFromCache) d.dispose();
     }
@@ -1320,7 +1709,16 @@ export async function createClosedBook(THREE, shared, opts) {
 
 /* ----------------------------------------------------------- reader book */
 
-function updateSpineDynamic(THREE, G, D, spineGeo, spineArtGeo, spineArtPos, alpha, maxAlpha) {
+function updateSpineDynamic(
+  THREE,
+  G,
+  D,
+  spineGeo,
+  spineArtGeo,
+  spineArtPos,
+  alpha,
+  maxAlpha,
+) {
   const kin = G.caseKinematics(
     {
       jointX: D.jointX,
@@ -1338,10 +1736,11 @@ function updateSpineDynamic(THREE, G, D, spineGeo, spineArtGeo, spineArtPos, alp
   const th = 0.085;
   const src = kin.pts;
   const ns = src.length;
-  const cum = spineGeo.userData.arcWorkspace ||= new Float64Array(ns);
+  const cum = (spineGeo.userData.arcWorkspace ||= new Float64Array(ns));
   cum[0] = 0;
   for (let k = 1; k < ns; k++) {
-    cum[k] = cum[k - 1] + Math.hypot(src[k].x - src[k - 1].x, src[k].y - src[k - 1].y);
+    cum[k] =
+      cum[k - 1] + Math.hypot(src[k].x - src[k - 1].x, src[k].y - src[k - 1].y);
   }
   const arc = cum[ns - 1] || 1;
   const uScale = 1 / D.boardW;
@@ -1436,8 +1835,15 @@ export async function createReaderBook(THREE, shared, options = {}) {
     pages: options.pages || null,
   };
 
-  const { matCase, matCaseSpine } = makeCaseMaterials(THREE, shared, meta.caseColor, true);
-  let coverTex = meta.coverUrl ? await loadCoverTexture(THREE, meta.coverUrl) : null;
+  const { matCase, matCaseSpine } = makeCaseMaterials(
+    THREE,
+    shared,
+    meta.caseColor,
+    true,
+  );
+  let coverTex = meta.coverUrl
+    ? await loadCoverTexture(THREE, meta.coverUrl)
+    : null;
   let matFrontArt = makeFrontArtMaterial(THREE, shared, coverTex, true);
 
   const ink = inkForLuminance(meta.caseLuminance, meta.overlayInk);
@@ -1483,9 +1889,18 @@ export async function createReaderBook(THREE, shared, options = {}) {
   let textLayer = null;
   {
     const troikaMod = await shared.troikaReady.catch(() => null);
-    const troikaApi = troikaMod && (troikaMod.Text ? troikaMod : troikaMod.default || troikaMod);
-    const fonts = (typeof window !== 'undefined' && window.BK && window.BK.fonts) || null;
-    if (troikaApi && typeof window !== 'undefined' && window.BK && window.BK.text && fonts) {
+    const troikaApi =
+      troikaMod &&
+      (troikaMod.Text ? troikaMod : troikaMod.default || troikaMod);
+    const fonts =
+      (typeof window !== 'undefined' && window.BK && window.BK.fonts) || null;
+    if (
+      troikaApi &&
+      typeof window !== 'undefined' &&
+      window.BK &&
+      window.BK.text &&
+      fonts
+    ) {
       try {
         textLayer = window.BK.text.create(THREE, troikaApi, {
           D,
@@ -1502,29 +1917,48 @@ export async function createReaderBook(THREE, shared, options = {}) {
   }
 
   const pages = meta.pages || placeholderPages(meta.title, meta.promise);
-  let pageSys = makePageAtlas(THREE, pages, shared.textures.paperColor, !!textLayer);
+  let pageSys = makePageAtlas(
+    THREE,
+    pages,
+    shared.textures.paperColor,
+    !!textLayer,
+  );
   const matPageText = new THREE.MeshStandardMaterial({
     map: pageSys.texture,
-    bumpMap: shared.textures.paperHeight, bumpScale: .005,
+    bumpMap: shared.textures.paperHeight,
+    bumpScale: 0.005,
     color: 0xffffff,
     roughness: BOOK_LOOK.paper.roughness,
     metalness: 0,
     envMapIntensity: 0.14,
     side: THREE.FrontSide,
   });
-  if (pageSys.texture) pageSys.texture.anisotropy = Math.max(pageSys.texture.anisotropy || 1, 8);
+  if (pageSys.texture)
+    pageSys.texture.anisotropy = Math.max(pageSys.texture.anisotropy || 1, 8);
 
   // Unique stack clone for deformation
   const stackGeo = shared.stackGeo.clone();
-  const capIndices=[]; const capGroups=[]; const original=stackGeo.attributes.position;
-  for(const group of stackGeo.groups){const start=capIndices.length;
-    for(let i=group.start;i<group.start+group.count;i+=3){
-      const top=[i,i+1,i+2].every(k=>Math.abs(original.getY(k)-D.yTop)<1e-5);
-      if(!top) capIndices.push(i,i+1,i+2);
+  const capIndices = [];
+  const capGroups = [];
+  const original = stackGeo.attributes.position;
+  for (const group of stackGeo.groups) {
+    const start = capIndices.length;
+    for (let i = group.start; i < group.start + group.count; i += 3) {
+      const top = [i, i + 1, i + 2].every(
+        (k) => Math.abs(original.getY(k) - D.yTop) < 1e-5,
+      );
+      if (!top) capIndices.push(i, i + 1, i + 2);
     }
-    capGroups.push({start,count:capIndices.length-start,materialIndex:group.materialIndex});
+    capGroups.push({
+      start,
+      count: capIndices.length - start,
+      materialIndex: group.materialIndex,
+    });
   }
-  stackGeo.setIndex(capIndices);stackGeo.clearGroups();for(const g of capGroups)stackGeo.addGroup(g.start,g.count,g.materialIndex);
+  stackGeo.setIndex(capIndices);
+  stackGeo.clearGroups();
+  for (const g of capGroups)
+    stackGeo.addGroup(g.start, g.count, g.materialIndex);
   const stackBaseArray = new Float32Array(stackGeo.attributes.position.array);
   const shellQ = new Float32Array(stackGeo.attributes.position.count);
   const shellU = new Float32Array(stackGeo.attributes.position.count);
@@ -1539,7 +1973,10 @@ export async function createReaderBook(THREE, shared, options = {}) {
     shellU[i] = Math.max(0, Math.min(1, (x - xS) / Math.max(1e-4, xF - xS)));
   }
   stackGeo.attributes.position.setUsage(THREE.DynamicDrawUsage);
-  const stack = new THREE.Mesh(stackGeo, [shared.materials.matStack, shared.materials.matBoundEdge]);
+  const stack = new THREE.Mesh(stackGeo, [
+    shared.materials.matStack,
+    shared.materials.matBoundEdge,
+  ]);
   stack.castShadow = true;
   stack.receiveShadow = false;
   stack.userData.pageBlock = true;
@@ -1584,13 +2021,26 @@ export async function createReaderBook(THREE, shared, options = {}) {
   frontFlip.add(frontArt, titleOverlay);
 
   const backMat = new THREE.MeshStandardMaterial({
-    map: bakeRingPrint(THREE,null,{title:meta.title,promise:meta.promise,ink,caseColor:meta.caseColor},true),
+    map: bakeRingPrint(
+      THREE,
+      null,
+      {
+        title: meta.title,
+        promise: meta.promise,
+        ink,
+        caseColor: meta.caseColor,
+      },
+      true,
+    ),
     color: 0xffffff,
     roughness: BOOK_LOOK.cover.roughness,
     metalness: 0,
     envMapIntensity: 0.42,
     normalMap: shared.textures.coverNormal,
-    normalScale: new THREE.Vector2(BOOK_LOOK.cover.normalScale, BOOK_LOOK.cover.normalScale),
+    normalScale: new THREE.Vector2(
+      BOOK_LOOK.cover.normalScale,
+      BOOK_LOOK.cover.normalScale,
+    ),
   });
   const backArt = coverArtworkMesh(THREE, backMat, false, D);
   book.add(backArt);
@@ -1620,7 +2070,10 @@ export async function createReaderBook(THREE, shared, options = {}) {
     }
   }
   const spineArtGeo = new THREE.BufferGeometry();
-  spineArtGeo.setAttribute('position', new THREE.BufferAttribute(spineArtPos, 3));
+  spineArtGeo.setAttribute(
+    'position',
+    new THREE.BufferAttribute(spineArtPos, 3),
+  );
   spineArtGeo.setAttribute('uv', new THREE.BufferAttribute(spineArtUV, 2));
   spineArtGeo.setAttribute('uv1', new THREE.BufferAttribute(spineArtUV1, 2));
   spineArtGeo.setIndex(spineArtIdx);
@@ -1692,7 +2145,9 @@ export async function createReaderBook(THREE, shared, options = {}) {
   const BOOK_BOUNDS = new THREE.Sphere(new THREE.Vector3(5, 5, 0), 40);
   function pinDynamicBounds(g) {
     g.boundingSphere = BOOK_BOUNDS.clone();
-    g.computeBoundingSphere = function () { this.boundingSphere = BOOK_BOUNDS.clone(); };
+    g.computeBoundingSphere = function () {
+      this.boundingSphere = BOOK_BOUNDS.clone();
+    };
     g.boundingBox = null;
     return g;
   }
@@ -1723,8 +2178,12 @@ export async function createReaderBook(THREE, shared, options = {}) {
   /* turning leaf shows no doubled/stretched shell text. Without troika/   */
   /* BK.text the atlas (paper + text) is used as the fallback.            */
   /* ------------------------------------------------------------------ */
-  const PAGE11_U = 56, PAGE11_V = 1;
-  let page11 = null, page11Geo = null, page11Base = null, capSurface = null;
+  const PAGE11_U = 56,
+    PAGE11_V = 1;
+  let page11 = null,
+    page11Geo = null,
+    page11Base = null,
+    capSurface = null;
   let page11LastRelax = Number.NaN;
   {
     page11Geo = new THREE.PlaneGeometry(D.pageW, D.pageH, PAGE11_U, PAGE11_V);
@@ -1778,19 +2237,26 @@ export async function createReaderBook(THREE, shared, options = {}) {
         const b = rec[key];
         if (b && b.group) {
           b.group.removeFromParent();
-          b.group.traverse((o) => { if (o.isTroikaText) o.dispose(); else o.geometry?.dispose(); });
+          b.group.traverse((o) => {
+            if (o.isTroikaText) o.dispose();
+            else o.geometry?.dispose();
+          });
           b.materials?.forEach((m) => m.dispose());
         }
       }
     }
     if (capPrint) {
       capPrint.group.removeFromParent();
-      capPrint.group.traverse((o) => { if (o.isTroikaText) o.dispose(); else o.geometry?.dispose(); });
+      capPrint.group.traverse((o) => {
+        if (o.isTroikaText) o.dispose();
+        else o.geometry?.dispose();
+      });
       capPrint.materials?.forEach((m) => m.dispose());
       capPrint = null;
     }
     for (const surface of [...pageSurfaces, capSurface]) {
-      surface?.posTex.dispose(); surface?.nrmTex.dispose();
+      surface?.posTex.dispose();
+      surface?.nrmTex.dispose();
     }
     pageRecords.length = 0;
     pageSurfaces.length = 0;
@@ -1806,27 +2272,55 @@ export async function createReaderBook(THREE, shared, options = {}) {
       const surface = textLayer.pageSurface(lf);
       pageSurfaces[i] = surface;
       const common = {
-        W: D.leafW, H: D.pageH, surface,
+        W: D.leafW,
+        H: D.pageH,
+        surface,
         halfThickness: D.paper * 0.5,
         inkLift: 0.0025,
         runningHead: runHead,
         logoTexture: null,
       };
-      const evenPage = i * 2, oddPage = i * 2 + 1;
+      const evenPage = i * 2,
+        oddPage = i * 2 + 1;
       const rec = { shell0: null, shell1: null };
-      if (pages[evenPage]) rec.shell1 = textLayer.buildPage(lf.mesh, surface,
-        { ...common, content: pages[evenPage], pageNumber: evenPage + 1, shell: 1, mirror: false });
-      if (pages[oddPage]) rec.shell0 = textLayer.buildPage(lf.mesh, surface,
-        { ...common, content: pages[oddPage], pageNumber: oddPage + 1, shell: 0, mirror: true });
+      if (pages[evenPage])
+        rec.shell1 = textLayer.buildPage(lf.mesh, surface, {
+          ...common,
+          content: pages[evenPage],
+          pageNumber: evenPage + 1,
+          shell: 1,
+          mirror: false,
+        });
+      if (pages[oddPage])
+        rec.shell0 = textLayer.buildPage(lf.mesh, surface, {
+          ...common,
+          content: pages[oddPage],
+          pageNumber: oddPage + 1,
+          shell: 0,
+          mirror: true,
+        });
       pageRecords.push(rec);
     }
     if (pages[10]) {
       const root0 = { x: 0, y: D.yTop };
-      capSurface = textLayer.flatSurface(D.pageW, D.pageH, root0.x, D.yTop, Math.max(PAGE11_U, 1), Math.max(PAGE11_V, 1));
+      capSurface = textLayer.flatSurface(
+        D.pageW,
+        D.pageH,
+        root0.x,
+        D.yTop,
+        Math.max(PAGE11_U, 1),
+        Math.max(PAGE11_V, 1),
+      );
       capPrint = textLayer.buildPage(page11, capSurface, {
-        W: D.pageW, H: D.pageH, content: pages[10], pageNumber: 11,
-        shell: 0, mirror: false, gutterRight: false,
-        halfThickness: 0, inkLift: 0.0025,
+        W: D.pageW,
+        H: D.pageH,
+        content: pages[10],
+        pageNumber: 11,
+        shell: 0,
+        mirror: false,
+        gutterRight: false,
+        halfThickness: 0,
+        inkLift: 0.0025,
         runningHead: runHead,
         logoTexture: null,
       });
@@ -1834,12 +2328,17 @@ export async function createReaderBook(THREE, shared, options = {}) {
       updatePage11(KIN ? KIN.relax : 0);
     }
     for (let i = 0; i < NLEAF; i++) updatePageFacing(i);
-    textLayer.ready().then(() => window.dispatchEvent(new Event('orbit-invalidate')));
+    textLayer
+      .ready()
+      .then(() => window.dispatchEvent(new Event('orbit-invalidate')));
   }
 
-  const _pn = new THREE.Vector3(), _pp = new THREE.Vector3(), _pv = new THREE.Vector3();
+  const _pn = new THREE.Vector3(),
+    _pp = new THREE.Vector3(),
+    _pv = new THREE.Vector3();
   function leafInPlay(i) {
-    if (S.turning >= 0) return i === S.turning || i === S.turning + 1 || i === S.turning - 1;
+    if (S.turning >= 0)
+      return i === S.turning || i === S.turning + 1 || i === S.turning - 1;
     return i === S.turned || i === S.turned - 1;
   }
 
@@ -1921,7 +2420,8 @@ export async function createReaderBook(THREE, shared, options = {}) {
     };
     const phi = angle(0);
     const endRaw = angle(1);
-    const end = phi + Math.atan2(Math.sin(endRaw - phi), Math.cos(endRaw - phi));
+    const end =
+      phi + Math.atan2(Math.sin(endRaw - phi), Math.cos(endRaw - phi));
     return { phi, A: end - phi, angle, xy };
   }
 
@@ -1937,7 +2437,10 @@ export async function createReaderBook(THREE, shared, options = {}) {
       const th = i === n - 1 ? k.boardDir : p.th;
       const nx = Math.sin(th);
       const ny = -Math.cos(th);
-      rail.push({ x: p.x + nx * (caseT + clearance), y: p.y + ny * (caseT + clearance) });
+      rail.push({
+        x: p.x + nx * (caseT + clearance),
+        y: p.y + ny * (caseT + clearance),
+      });
     }
     const c = Math.cos(k.boardDir);
     const sn = Math.sin(k.boardDir);
@@ -1960,13 +2463,27 @@ export async function createReaderBook(THREE, shared, options = {}) {
     const startTh = pts[first].th;
     const endTh = pts[join].th;
     const clen = Math.max(0.05, Math.min(0.18, dist * 0.8));
-    const p1 = { x: p0.x + Math.cos(startTh) * clen, y: p0.y + Math.sin(startTh) * clen };
-    const p2 = { x: p3.x - Math.cos(endTh) * clen, y: p3.y - Math.sin(endTh) * clen };
+    const p1 = {
+      x: p0.x + Math.cos(startTh) * clen,
+      y: p0.y + Math.sin(startTh) * clen,
+    };
+    const p2 = {
+      x: p3.x - Math.cos(endTh) * clen,
+      y: p3.y - Math.sin(endTh) * clen,
+    };
     const cubic = (a, b, c0, d, t) => {
       const m = 1 - t;
       return {
-        x: m * m * m * a.x + 3 * m * m * t * b.x + 3 * m * t * t * c0.x + t * t * t * d.x,
-        y: m * m * m * a.y + 3 * m * m * t * b.y + 3 * m * t * t * c0.y + t * t * t * d.y,
+        x:
+          m * m * m * a.x +
+          3 * m * m * t * b.x +
+          3 * m * t * t * c0.x +
+          t * t * t * d.x,
+        y:
+          m * m * m * a.y +
+          3 * m * m * t * b.y +
+          3 * m * t * t * c0.y +
+          t * t * t * d.y,
       };
     };
     for (let j = 0; j < 24; j++) raw.push(cubic(p0, p1, p2, p3, j / 23));
@@ -1975,13 +2492,19 @@ export async function createReaderBook(THREE, shared, options = {}) {
     const q0 = raw[raw.length - 1];
     const q3 = { x: boardStart.x + c * 0.45, y: boardStart.y + sn * 0.45 };
     const rampTh = pts[rampStart].th;
-    const q1 = { x: q0.x + Math.cos(rampTh) * 0.3, y: q0.y + Math.sin(rampTh) * 0.3 };
+    const q1 = {
+      x: q0.x + Math.cos(rampTh) * 0.3,
+      y: q0.y + Math.sin(rampTh) * 0.3,
+    };
     const q2 = { x: q3.x - c * 0.35, y: q3.y - sn * 0.35 };
     for (let j = 1; j < 24; j++) raw.push(cubic(q0, q1, q2, q3, j / 23));
     raw.push({ x: q3.x + c * (D.leafW + 1), y: q3.y + sn * (D.leafW + 1) });
     const cum = [0];
     for (let i = 1; i < raw.length; i++) {
-      cum.push(cum[i - 1] + Math.hypot(raw[i].x - raw[i - 1].x, raw[i].y - raw[i - 1].y));
+      cum.push(
+        cum[i - 1] +
+          Math.hypot(raw[i].x - raw[i - 1].x, raw[i].y - raw[i - 1].y),
+      );
     }
     const pointAt = (s) => {
       if (s <= 0) return raw[0];
@@ -2009,8 +2532,14 @@ export async function createReaderBook(THREE, shared, options = {}) {
     };
     const phi = angle(0);
     const endRaw = angle(1);
-    const end = phi + Math.atan2(Math.sin(endRaw - phi), Math.cos(endRaw - phi));
-    return { phi, A: end - phi, angle, xy: (u) => pointAt(clamp01(u) * D.leafW) };
+    const end =
+      phi + Math.atan2(Math.sin(endRaw - phi), Math.cos(endRaw - phi));
+    return {
+      phi,
+      A: end - phi,
+      angle,
+      xy: (u) => pointAt(clamp01(u) * D.leafW),
+    };
   }
 
   function sampleLandingAngles(landing) {
@@ -2024,7 +2553,8 @@ export async function createReaderBook(THREE, shared, options = {}) {
     const relax = KIN ? KIN.relax : 0;
     const boardDir = KIN ? KIN.boardDir : 0;
     const key = `${idx}|${r.x.toFixed(6)}|${r.y.toFixed(6)}|${relax.toFixed(6)}|${boardDir.toFixed(6)}`;
-    if (turnLandingCache && turnLandingCache.key === key) return turnLandingCache;
+    if (turnLandingCache && turnLandingCache.key === key)
+      return turnLandingCache;
     const right = rightLanding(r, idx);
     const left = leftLanding(r, idx + 1);
     turnLandingCache = {
@@ -2100,28 +2630,43 @@ export async function createReaderBook(THREE, shared, options = {}) {
     if (t <= 0) return restRight(r, idx);
     if (t >= 1) return restLeft(r, idx + 1);
     const pair = turnLandings(r, idx);
-    const gu = clamp01(grab.u ?? .94);
-    const gv = Math.max(-1, Math.min(1, grab.v ?? -.58));
+    const gu = clamp01(grab.u ?? 0.94);
+    const gv = Math.max(-1, Math.min(1, grab.v ?? -0.58));
     const air = Math.sin(Math.PI * t) ** 2;
     const columnState = (w, out = {}) => {
-      const lead = .025 * air * (0.4 + .6 * gu) * Math.exp(-(((w - gv) / .8) ** 2));
+      const lead =
+        0.025 * air * (0.4 + 0.6 * gu) * Math.exp(-(((w - gv) / 0.8) ** 2));
       const progress = clamp01(t + lead);
-      const bend = .55 * Math.sin(Math.PI * progress) ** 2;
+      const bend = 0.55 * Math.sin(Math.PI * progress) ** 2;
       Object.assign(out, {
-        rootX: r.x, rootY: r.y, phi: 0, A: 0, kExp: 1,
-        targetBlend: 1, fastTarget: false,
+        rootX: r.x,
+        rootY: r.y,
+        phi: 0,
+        A: 0,
+        kExp: 1,
+        targetBlend: 1,
+        fastTarget: false,
         targetAngle: (u) => {
-          const i = Math.max(1, Math.min(NU, Math.round(u * NU + .5)));
+          const i = Math.max(1, Math.min(NU, Math.round(u * NU + 0.5)));
           const ra = pair.rightAngles[i];
           // The paper travels above the binding, never through the block.
           let la = pair.leftAngles[i];
-          while (la < ra - .1) la += 2 * Math.PI;
+          while (la < ra - 0.1) la += 2 * Math.PI;
           while (la > ra + 2 * Math.PI) la -= 2 * Math.PI;
           return ra + (la - ra) * progress + bend * (2 * u - 1);
         },
-        cone: 0, twist: 0, skew: 0, phiSkew: 0, ripple: 0,
-        gravity: 0, supports: null, fastNoContact: true,
-        constraintPasses: 0, iters: 1, smooth: 0, lateralStiffness: 0,
+        cone: 0,
+        twist: 0,
+        skew: 0,
+        phiSkew: 0,
+        ripple: 0,
+        gravity: 0,
+        supports: null,
+        fastNoContact: true,
+        constraintPasses: 0,
+        iters: 1,
+        smooth: 0,
+        lateralStiffness: 0,
       });
       return out;
     };
@@ -2132,7 +2677,16 @@ export async function createReaderBook(THREE, shared, options = {}) {
 
   function updateBook() {
     const alpha = S.cover * S.coverOpen;
-    const kin = updateSpineDynamic(THREE, G, D, spineGeo, spineArtGeo, spineArtPos, alpha, S.coverOpen);
+    const kin = updateSpineDynamic(
+      THREE,
+      G,
+      D,
+      spineGeo,
+      spineArtGeo,
+      spineArtPos,
+      alpha,
+      S.coverOpen,
+    );
     const caseChanged = !KIN || Math.abs(kin.boardDir - KIN.boardDir) > 1e-6;
     KIN = kin;
     updateStack(kin.relax);
@@ -2143,7 +2697,11 @@ export async function createReaderBook(THREE, shared, options = {}) {
       frontBoardPivot.position.set(kin.frontBoard.x, kin.frontBoard.y, 0);
       frontBoardPivot.rotation.z = kin.boardDir;
       frontPaste.position.set(D.boardW / 2, D.boardT + 0.003, 0);
-      backPaste.position.set(D.boardW / 2 + D.jointX + D.grooveW, D.boardT + 0.003, 0);
+      backPaste.position.set(
+        D.boardW / 2 + D.jointX + D.grooveW,
+        D.boardT + 0.003,
+        0,
+      );
       backArt.position.x = D.boardW / 2 + D.jointX + D.grooveW;
       backBoard.position.set(D.jointX + D.grooveW, 0, 0);
     }
@@ -2214,7 +2772,10 @@ export async function createReaderBook(THREE, shared, options = {}) {
   function openCover(open) {
     const to = typeof open === 'number' ? clamp01(open) : open ? 1 : 0;
     const from = S.cover;
-    if (Math.abs(from - to) < 1e-4) { setCover(to); return Promise.resolve(S.cover); }
+    if (Math.abs(from - to) < 1e-4) {
+      setCover(to);
+      return Promise.resolve(S.cover);
+    }
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
       setCover(to);
       return Promise.resolve(S.cover);
@@ -2229,7 +2790,11 @@ export async function createReaderBook(THREE, shared, options = {}) {
         },
         onDone: () => {
           S.cover = to;
-          if (to === 0) { S.turned = 0; S.turning = -1; S.t = 0; }
+          if (to === 0) {
+            S.turned = 0;
+            S.turning = -1;
+            S.t = 0;
+          }
           LOQ = false;
           restKey = null;
           updateBook();
@@ -2244,10 +2809,16 @@ export async function createReaderBook(THREE, shared, options = {}) {
     const target = Math.max(0, Math.min(NLEAF, n | 0));
     if (anim || S.turning >= 0) return Promise.resolve(S.turned);
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      S.cover = 1; S.turned = target; S.turning = -1; S.t = 0; restKey = null; updateBook();
+      S.cover = 1;
+      S.turned = target;
+      S.turning = -1;
+      S.t = 0;
+      restKey = null;
+      updateBook();
       return Promise.resolve(S.turned);
     }
-    if (target === S.turned && S.turning < 0 && !anim) return Promise.resolve(S.turned);
+    if (target === S.turned && S.turning < 0 && !anim)
+      return Promise.resolve(S.turned);
 
     const stepOnce = () =>
       new Promise((resolve) => {
@@ -2399,28 +2970,56 @@ export async function createReaderBook(THREE, shared, options = {}) {
       matPageText.map = pageSys.texture;
       matPageText.needsUpdate = true;
       oldTex.dispose();
-      for (let i = 0; i < NLEAF; i++) mapLeafShellToAtlas(leaves[i], i * 2 + 1, i * 2);
+      for (let i = 0; i < NLEAF; i++)
+        mapLeafShellToAtlas(leaves[i], i * 2 + 1, i * 2);
     }
     buildPageInk(pages2);
   }
 
   async function rebind(next) {
     if (!next) return;
-    const unchanged = ['slug', 'title', 'subtitle', 'author', 'promise', 'coverUrl', 'caseColor', 'caseLuminance', 'overlayInk', 'pages']
-      .every((key) => next[key] === undefined || next[key] === meta[key]);
-    if (unchanged) { setCover(0); return; }
+    const unchanged = [
+      'slug',
+      'title',
+      'subtitle',
+      'author',
+      'promise',
+      'coverUrl',
+      'caseColor',
+      'caseLuminance',
+      'overlayInk',
+      'pages',
+    ].every((key) => next[key] === undefined || next[key] === meta[key]);
+    if (unchanged) {
+      setCover(0);
+      return;
+    }
     Object.assign(meta, next);
     if (next.caseColor) {
       matCase.color.set(next.caseColor);
       matCaseSpine.color.set(next.caseColor);
-      backMat.map=bakeRingPrint(THREE,null,{title:meta.title,promise:meta.promise,ink:inkForLuminance(meta.caseLuminance,meta.overlayInk),caseColor:meta.caseColor},true); backMat.needsUpdate=true;
+      backMat.map = bakeRingPrint(
+        THREE,
+        null,
+        {
+          title: meta.title,
+          promise: meta.promise,
+          ink: inkForLuminance(meta.caseLuminance, meta.overlayInk),
+          caseColor: meta.caseColor,
+        },
+        true,
+      );
+      backMat.needsUpdate = true;
     }
     if (next.coverUrl) {
       const tex = await loadCoverTexture(THREE, next.coverUrl);
       const old = matFrontArt.map;
       matFrontArt.map = tex;
       tex.channel = 0;
-      fitCover(tex, (D.boardW - ART_BORDER_FRONT * 2) / (D.boardH - ART_BORDER_FRONT * 2));
+      fitCover(
+        tex,
+        (D.boardW - ART_BORDER_FRONT * 2) / (D.boardH - ART_BORDER_FRONT * 2),
+      );
       matFrontArt.needsUpdate = true;
       if (old && old !== tex) disposeCoverTexture(old);
       coverTex = tex;
@@ -2428,15 +3027,25 @@ export async function createReaderBook(THREE, shared, options = {}) {
     const ink2 = inkForLuminance(meta.caseLuminance, meta.overlayInk);
     if (troikaTitleTexts) {
       // Troika titles are live polygon meshes — just re-set their strings.
-      const nextLayout=coverTitleLayout(meta.title);
+      const nextLayout = coverTitleLayout(meta.title);
       const seq = [[nextLayout.lines.join('\n'), false]];
-      if(troikaTitleTexts[0])troikaTitleTexts[0].fontSize=nextLayout.size*(D.boardW-ART_BORDER_FRONT*2)/COVER_PRINT.width;
-      titleOverlay.userData.printLayout={font:COVER_PRINT.font,lines:nextLayout.lines,size:nextLayout.size};
+      if (troikaTitleTexts[0])
+        troikaTitleTexts[0].fontSize =
+          (nextLayout.size * (D.boardW - ART_BORDER_FRONT * 2)) /
+          COVER_PRINT.width;
+      titleOverlay.userData.printLayout = {
+        font: COVER_PRINT.font,
+        lines: nextLayout.lines,
+        size: nextLayout.size,
+      };
       if (meta.subtitle) seq.push([meta.subtitle, false]);
-      if (meta.author && String(meta.author).toUpperCase() !== 'BELIEF CHANGER') seq.push([String(meta.author).toUpperCase(), false]);
+      if (meta.author && String(meta.author).toUpperCase() !== 'BELIEF CHANGER')
+        seq.push([String(meta.author).toUpperCase(), false]);
       seq.push(['BELIEF CHANGER', false]);
       troikaTitleTexts.forEach((t, i) => {
-        t.text = seq[i]?.[0] || ''; t.color = ink2; t.sync(() => window.dispatchEvent(new Event('orbit-invalidate')));
+        t.text = seq[i]?.[0] || '';
+        t.color = ink2;
+        t.sync(() => window.dispatchEvent(new Event('orbit-invalidate')));
       });
     } else if (matTitle) {
       const nt = bakeFrontTitle(THREE, {
@@ -2483,7 +3092,8 @@ export async function createReaderBook(THREE, shared, options = {}) {
     for (const m of headbandMeshes) m.geometry.dispose();
     if (page11Geo) page11Geo.dispose();
     clearPageInk();
-    if (textLayer) Object.values(textLayer.materials).forEach((m) => m.dispose());
+    if (textLayer)
+      Object.values(textLayer.materials).forEach((m) => m.dispose());
     matCase.dispose();
     matCaseSpine.dispose();
     matFrontArt.dispose();
@@ -2499,7 +3109,14 @@ export async function createReaderBook(THREE, shared, options = {}) {
 
   // Leaves + open page block for page-turn hits; boards/cover for cover drag.
   const leafMeshes = leaves.map((l) => l.mesh);
-  const hitMeshes = [frontBoard, backBoard, spineMesh, frontArt, stack, ...leafMeshes];
+  const hitMeshes = [
+    frontBoard,
+    backBoard,
+    spineMesh,
+    frontArt,
+    stack,
+    ...leafMeshes,
+  ];
 
   function synthesizeLeaf(dir, u = 0.85, w = 0) {
     if (dir > 0) {
@@ -2515,7 +3132,10 @@ export async function createReaderBook(THREE, shared, options = {}) {
     if (!h || !h.object) return null;
     const index = h.object.userData.leafIndex;
     if (index == null) return null;
-    const shell = (h.faceIndex ?? 0) < h.object.userData.frontTriangleCount ? 'front' : 'back';
+    const shell =
+      (h.faceIndex ?? 0) < h.object.userData.frontTriangleCount
+        ? 'front'
+        : 'back';
     const dir = index === S.turned ? 1 : -1;
     if (dir > 0 && (index !== S.turned || index >= NLEAF)) return null;
     if (dir < 0 && index !== S.turned - 1) return null;
@@ -2576,44 +3196,80 @@ export async function createReaderBook(THREE, shared, options = {}) {
   // Input follows the book after yaw/pitch/zoom rather than a fixed screen X.
   function dragProjection(hit, camera, width, height) {
     book.updateWorldMatrix(true, false);
-    const i = hit?.i ?? 0, u = Math.max(.25, hit?.u ?? .94);
-    const r = rootFor(i), right = rightLanding(r, i).xy(u), left = leftLanding(r, i + 1).xy(u);
-    const z = (hit?.w ?? 0) * D.pageH / 2;
-    const project = p => new THREE.Vector3(p.x, p.y, z).applyMatrix4(book.matrixWorld).project(camera);
-    const a = project(right), b = project(left);
-    const dx = (b.x-a.x)*width/2, dy = -(b.y-a.y)*height/2;
-    const span = Math.hypot(dx,dy);
-    return span > 12 ? {x:dx/span,y:dy/span,span:Math.max(90,span)} : {x:-1,y:0,span:Math.max(180,width*.4)};
+    const i = hit?.i ?? 0,
+      u = Math.max(0.25, hit?.u ?? 0.94);
+    const r = rootFor(i),
+      right = rightLanding(r, i).xy(u),
+      left = leftLanding(r, i + 1).xy(u);
+    const z = ((hit?.w ?? 0) * D.pageH) / 2;
+    const project = (p) =>
+      new THREE.Vector3(p.x, p.y, z)
+        .applyMatrix4(book.matrixWorld)
+        .project(camera);
+    const a = project(right),
+      b = project(left);
+    const dx = ((b.x - a.x) * width) / 2,
+      dy = (-(b.y - a.y) * height) / 2;
+    const span = Math.hypot(dx, dy);
+    return span > 12
+      ? { x: dx / span, y: dy / span, span: Math.max(90, span) }
+      : { x: -1, y: 0, span: Math.max(180, width * 0.4) };
   }
   function pickCover(raycaster) {
     const hit = raycaster.intersectObjects(hitMeshes, false)[0];
     return hit && (hit.object === frontBoard || hit.object === frontArt);
   }
-  function destinationQuad(camera,width,height,aspect=width/height){
-    if(S.cover<.99 || S.turned<4) return null;
-    book.updateWorldMatrix(true,false);
-    const pW=Math.min(D.pageW*.86,D.pageH*.78*aspect), pH=pW/aspect,x0=(D.pageW-pW)/2;
-    const corners=[[x0,-pH/2],[x0+pW,-pH/2],[x0+pW,pH/2],[x0,pH/2]].map(([x,z])=>{
-      const d=stackDeformAt(1,x/D.pageW,KIN?.relax||0,0);
-      const p=new THREE.Vector3(x+d.dx,D.yTop+d.dy+.02,z).applyMatrix4(book.matrixWorld).project(camera);
-      return {x:(p.x+1)*width/2,y:(1-p.y)*height/2};
+  function destinationQuad(camera, width, height, aspect = width / height) {
+    if (S.cover < 0.99 || S.turned < 4) return null;
+    book.updateWorldMatrix(true, false);
+    const pW = Math.min(D.pageW * 0.86, D.pageH * 0.78 * aspect),
+      pH = pW / aspect,
+      x0 = (D.pageW - pW) / 2;
+    const corners = [
+      [x0, -pH / 2],
+      [x0 + pW, -pH / 2],
+      [x0 + pW, pH / 2],
+      [x0, pH / 2],
+    ].map(([x, z]) => {
+      const d = stackDeformAt(1, x / D.pageW, KIN?.relax || 0, 0);
+      const p = new THREE.Vector3(x + d.dx, D.yTop + d.dy + 0.02, z)
+        .applyMatrix4(book.matrixWorld)
+        .project(camera);
+      return { x: ((p.x + 1) * width) / 2, y: ((1 - p.y) * height) / 2 };
     });
-    const normal=new THREE.Vector3(0,1,0).transformDirection(book.matrixWorld);
-    const center=new THREE.Vector3(D.pageW/2,D.yTop,0).applyMatrix4(book.matrixWorld);
-    return {corners,visible:S.turned===5 && S.turning<0 && normal.dot(camera.position.clone().sub(center))>0};
+    const normal = new THREE.Vector3(0, 1, 0).transformDirection(
+      book.matrixWorld,
+    );
+    const center = new THREE.Vector3(D.pageW / 2, D.yTop, 0).applyMatrix4(
+      book.matrixWorld,
+    );
+    return {
+      corners,
+      visible:
+        S.turned === 5 &&
+        S.turning < 0 &&
+        normal.dot(camera.position.clone().sub(center)) > 0,
+    };
   }
-  function setDestinationReady(ready){if(capPrint)capPrint.group.visible=!ready;}
+  function setDestinationReady(ready) {
+    if (capPrint) capPrint.group.visible = !ready;
+  }
   function previewLinkHit(raycaster) {
-    if(S.turned!==NLEAF || S.turning>=0 || S.cover<.99 || anim) return false;
-    page11.updateWorldMatrix(true,false);
-    const hit=raycaster.intersectObject(page11,false)[0];
-    if(!hit?.uv) return false;
-    const uv=pageSys.unmapUV(10,hit.uv.x,hit.uv.y);
-    return uv.x>.09 && uv.x<.92 && uv.y>.2 && uv.y<.88;
+    if (S.turned !== NLEAF || S.turning >= 0 || S.cover < 0.99 || anim)
+      return false;
+    page11.updateWorldMatrix(true, false);
+    const hit = raycaster.intersectObject(page11, false)[0];
+    if (!hit?.uv) return false;
+    const uv = pageSys.unmapUV(10, hit.uv.x, hit.uv.y);
+    return uv.x > 0.09 && uv.x < 0.92 && uv.y > 0.2 && uv.y < 0.88;
   }
   function isPageHit(obj) {
     if (!obj) return false;
-    if (obj.userData && (obj.userData.leafIndex != null || obj.userData.pageBlock)) return true;
+    if (
+      obj.userData &&
+      (obj.userData.leafIndex != null || obj.userData.pageBlock)
+    )
+      return true;
     return false;
   }
 

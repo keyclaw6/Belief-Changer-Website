@@ -11,7 +11,7 @@ function watch(page) { const errors = []; page.on('pageerror', e => errors.push(
 
 test('desktop: boot, titles, browse, idle GPU, no external network', async ({ page }) => {
   const errors = watch(page), external = []
-  page.on('request', r => { if (/^https?:/.test(r.url()) && !r.url().includes('127.0.0.1:3100')) external.push(r.url()) })
+  page.on('request', r => { if (/^https?:/.test(r.url()) && new URL(r.url()).hostname !== '127.0.0.1') external.push(r.url()) })
   await page.goto('/orbit/index.html'); await ready(page); await settle(page)
   await expect(page.locator('#caption-title')).toHaveText('The Sugar Trap')
   // The one-time reader warm-up is not idle work; measure after its asynchronous type finishes.
@@ -90,7 +90,7 @@ test('dark: environment and print stay readable', async ({ page }) => {
 
 test('production homepage upgrades only after ready; module failure retains static books', async ({ page }) => {
   const errors = watch(page)
-  await page.goto('/en'); const frame = page.frameLocator('iframe')
+  await page.goto('/en'); const frame = page.frameLocator('iframe[data-orbit-frame]')
   await expect(frame.locator('#caption-title')).toHaveText('The Sugar Trap', { timeout: 30000 })
   await expect(page.locator('iframe')).toHaveAttribute('aria-hidden', 'false')
   await capture(page, 'homepage')

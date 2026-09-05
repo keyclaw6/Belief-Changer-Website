@@ -114,7 +114,13 @@ export function PullCord({
   const didDrag = useRef(false)
   const clicked = useRef(false)
   const buttonRef = useRef<HTMLButtonElement>(null)
-  const press = useRef<{id:number;x:number;y:number;endX:number;endY:number} | null>(null)
+  const press = useRef<{
+    id: number
+    x: number
+    y: number
+    endX: number
+    endY: number
+  } | null>(null)
   const target = useRef({ x: ANCHOR_X, y: REST_Y })
   const wake = useRef(() => {})
   const onPullRef = useRef(onPull)
@@ -135,7 +141,8 @@ export function PullCord({
 
     const render = () => {
       cordRef.current?.setAttribute('d', buildPath(points))
-      if(buttonRef.current) buttonRef.current.style.transform=`translate(${end.x-ANCHOR_X}px,${end.y-REST_Y}px)`
+      if (buttonRef.current)
+        buttonRef.current.style.transform = `translate(${end.x - ANCHOR_X}px,${end.y - REST_Y}px)`
       groupRef.current?.setAttribute(
         'transform',
         `translate(${(end.x - ANCHOR_X).toFixed(2)} ${(end.y - REST_Y).toFixed(2)})`,
@@ -144,68 +151,72 @@ export function PullCord({
 
     const step = (now: number) => {
       const { gravity, damping, iterations, sleepVelocity } = DEFAULT_CONFIG
-      const elapsed=previousTime ? Math.min(.064,Math.max(.001,(now-previousTime)/1000)) : 1/60
-      previousTime=now
-      const steps=Math.max(1,Math.ceil(elapsed/(1/120)))
-      const dt=elapsed/steps
-      for(let substep=0;substep<steps;substep++) {
-      const timeCorrection=previousDelta>0 ? dt/previousDelta : 1
-      const velocity=timeCorrection*Math.pow(damping,dt*60)
-      const acceleration=dt*dt
-      end.fixed = dragging.current
+      const elapsed = previousTime
+        ? Math.min(0.064, Math.max(0.001, (now - previousTime) / 1000))
+        : 1 / 60
+      previousTime = now
+      const steps = Math.max(1, Math.ceil(elapsed / (1 / 120)))
+      const dt = elapsed / steps
+      for (let substep = 0; substep < steps; substep++) {
+        const timeCorrection = previousDelta > 0 ? dt / previousDelta : 1
+        const velocity = timeCorrection * Math.pow(damping, dt * 60)
+        const acceleration = dt * dt
+        end.fixed = dragging.current
 
-      for (let i = 1; i < points.length; i++) {
-        const point = points[i]!
-        if (point.fixed) continue
-        const vx = point.x - point.ox
-        const vy = point.y - point.oy
-        point.ox = point.x
-        point.oy = point.y
-        point.x += vx * velocity
-        point.y += vy * velocity + gravity * acceleration
-      }
+        for (let i = 1; i < points.length; i++) {
+          const point = points[i]!
+          if (point.fixed) continue
+          const vx = point.x - point.ox
+          const vy = point.y - point.oy
+          point.ox = point.x
+          point.oy = point.y
+          point.x += vx * velocity
+          point.y += vy * velocity + gravity * acceleration
+        }
 
-      points[0]!.x = ANCHOR_X
-      points[0]!.y = 0
-      if (dragging.current) {
-        end.ox = end.x
-        end.oy = end.y
-        end.x = target.current.x
-        end.y = target.current.y
-      }
+        points[0]!.x = ANCHOR_X
+        points[0]!.y = 0
+        if (dragging.current) {
+          end.ox = end.x
+          end.oy = end.y
+          end.x = target.current.x
+          end.y = target.current.y
+        }
 
-      for (let pass = 0; pass < iterations; pass++) {
-        for (let i = 0; i < last; i++) {
-          const a = points[i]!
-          const b = points[i + 1]!
-          const dx = b.x - a.x
-          const dy = b.y - a.y
-          const distance = Math.hypot(dx, dy) || 0.0001
-          const difference = ((REST_SEG - distance) / distance) * 0.5
-          const offsetX = dx * difference
-          const offsetY = dy * difference
-          if (!a.fixed) {
-            a.x -= offsetX
-            a.y -= offsetY
-          }
-          if (!b.fixed) {
-            b.x += offsetX
-            b.y += offsetY
+        for (let pass = 0; pass < iterations; pass++) {
+          for (let i = 0; i < last; i++) {
+            const a = points[i]!
+            const b = points[i + 1]!
+            const dx = b.x - a.x
+            const dy = b.y - a.y
+            const distance = Math.hypot(dx, dy) || 0.0001
+            const difference = ((REST_SEG - distance) / distance) * 0.5
+            const offsetX = dx * difference
+            const offsetY = dy * difference
+            if (!a.fixed) {
+              a.x -= offsetX
+              a.y -= offsetY
+            }
+            if (!b.fixed) {
+              b.x += offsetX
+              b.y += offsetY
+            }
           }
         }
-      }
 
-      previousDelta = dt
+        previousDelta = dt
       }
       render()
       let speed = 0
       for (let i = 1; i < points.length; i++) {
         const point = points[i]!
-        speed +=
-          Math.abs(point.x - point.ox) + Math.abs(point.y - point.oy)
+        speed += Math.abs(point.x - point.ox) + Math.abs(point.y - point.oy)
       }
       if (!dragging.current && speed < sleepVelocity * elapsed * 60) {
-        for(const point of points){point.ox=point.x;point.oy=point.y}
+        for (const point of points) {
+          point.ox = point.x
+          point.oy = point.y
+        }
         running = false
         return
       }
@@ -220,7 +231,10 @@ export function PullCord({
       raf = requestAnimationFrame(step)
     }
     render()
-    return () => { cancelAnimationFrame(raf); wake.current=()=>{} }
+    return () => {
+      cancelAnimationFrame(raf)
+      wake.current = () => {}
+    }
   }, [])
 
   const toggle = () => onPullRef.current?.()
@@ -237,48 +251,75 @@ export function PullCord({
     if (!start) return
     press.current = null
     dragging.current = false
-    if (buttonRef.current?.hasPointerCapture(start.id)) buttonRef.current.releasePointerCapture(start.id)
-    const points = nodesRef.current!, point = points[points.length - 1]!
+    if (buttonRef.current?.hasPointerCapture(start.id))
+      buttonRef.current.releasePointerCapture(start.id)
+    const points = nodesRef.current!,
+      point = points[points.length - 1]!
     // Zero stale drag acceleration; the rope's own tension provides the return.
-    point.ox = point.x; point.oy = point.y
+    point.ox = point.x
+    point.oy = point.y
     buttonRef.current?.removeAttribute('data-dragging')
-    if (!cancelled && !didDrag.current && !clicked.current) onPullRef.current?.()
-    didDrag.current = false; clicked.current = false
+    if (!cancelled && !didDrag.current && !clicked.current)
+      onPullRef.current?.()
+    didDrag.current = false
+    clicked.current = false
     wake.current()
   }, [])
 
   useEffect(() => {
     const cancel = () => finishPointer(true)
-    const hidden = () => { if (document.hidden) cancel() }
+    const hidden = () => {
+      if (document.hidden) cancel()
+    }
     window.addEventListener('blur', cancel)
     document.addEventListener('visibilitychange', hidden)
-    return () => { cancel(); window.removeEventListener('blur', cancel); document.removeEventListener('visibilitychange', hidden) }
+    return () => {
+      cancel()
+      window.removeEventListener('blur', cancel)
+      document.removeEventListener('visibilitychange', hidden)
+    }
   }, [finishPointer])
 
   const onPointerDown = (event: ReactPointerEvent<HTMLButtonElement>) => {
     if (event.button !== 0 || press.current) return
     event.preventDefault()
     const point = nodesRef.current!.at(-1)!
-    press.current = {id:event.pointerId,x:event.clientX,y:event.clientY,endX:point.x,endY:point.y}
-    target.current = {x:point.x,y:point.y}
-    didDrag.current=false; clicked.current=false; dragging.current=!reduce
+    press.current = {
+      id: event.pointerId,
+      x: event.clientX,
+      y: event.clientY,
+      endX: point.x,
+      endY: point.y,
+    }
+    target.current = { x: point.x, y: point.y }
+    didDrag.current = false
+    clicked.current = false
+    dragging.current = !reduce
     event.currentTarget.setPointerCapture(event.pointerId)
-    event.currentTarget.setAttribute('data-dragging','true')
+    event.currentTarget.setAttribute('data-dragging', 'true')
     wake.current()
   }
   const onPointerMove = (event: ReactPointerEvent<HTMLButtonElement>) => {
-    const start=press.current
-    if(!start || start.id!==event.pointerId) return
-    if(event.pointerType==='mouse' && event.buttons===0) {finishPointer(true);return}
+    const start = press.current
+    if (!start || start.id !== event.pointerId) return
+    if (event.pointerType === 'mouse' && event.buttons === 0) {
+      finishPointer(true)
+      return
+    }
     event.preventDefault()
-    const dx=event.clientX-start.x, dy=event.clientY-start.y
-    if(Math.hypot(dx,dy)>4) didDrag.current=true
-    if(reduce) return
-    const offsetX=start.endX-ANCHOR_X+dx, offsetY=start.endY+dy
-    const distance=Math.hypot(offsetX,offsetY)||1
-    const scale=Math.min(1,(REST_Y+DEFAULT_CONFIG.stretchMax)/distance)
-    target.current={x:ANCHOR_X+offsetX*scale,y:offsetY*scale}
-    if(!clicked.current && offsetY-REST_Y>=DEFAULT_CONFIG.stretchToggle){clicked.current=true;toggle()}
+    const dx = event.clientX - start.x,
+      dy = event.clientY - start.y
+    if (Math.hypot(dx, dy) > 4) didDrag.current = true
+    if (reduce) return
+    const offsetX = start.endX - ANCHOR_X + dx,
+      offsetY = start.endY + dy
+    const distance = Math.hypot(offsetX, offsetY) || 1
+    const scale = Math.min(1, (REST_Y + DEFAULT_CONFIG.stretchMax) / distance)
+    target.current = { x: ANCHOR_X + offsetX * scale, y: offsetY * scale }
+    if (!clicked.current && offsetY - REST_Y >= DEFAULT_CONFIG.stretchToggle) {
+      clicked.current = true
+      toggle()
+    }
     wake.current()
   }
 
@@ -318,7 +359,9 @@ export function PullCord({
       }}
     >
       <div
-        className={drop ? 'pullcord-inner pullcord-inner--drop' : 'pullcord-inner'}
+        className={
+          drop ? 'pullcord-inner pullcord-inner--drop' : 'pullcord-inner'
+        }
         onAnimationEnd={onDropEnd}
       >
         <svg
@@ -333,7 +376,13 @@ export function PullCord({
               <stop offset="0%" stopColor="#ffffff" />
               <stop offset="100%" stopColor="#e7e7ec" />
             </linearGradient>
-            <filter id="pc-knob-sh" x="-70%" y="-70%" width="240%" height="240%">
+            <filter
+              id="pc-knob-sh"
+              x="-70%"
+              y="-70%"
+              width="240%"
+              height="240%"
+            >
               <feDropShadow
                 dx="0"
                 dy="1.4"
@@ -374,14 +423,21 @@ export function PullCord({
           ref={buttonRef}
           onPointerDown={onPointerDown}
           onPointerMove={onPointerMove}
-          onPointerUp={event => {if(press.current?.id===event.pointerId)finishPointer(false)}}
-          onPointerCancel={event => {if(press.current?.id===event.pointerId)finishPointer(true)}}
-          onLostPointerCapture={event => {if(press.current?.id===event.pointerId)finishPointer(true)}}
-          onClick={(event) => { if(event.detail===0) scriptedPull() }}
-
+          onPointerUp={(event) => {
+            if (press.current?.id === event.pointerId) finishPointer(false)
+          }}
+          onPointerCancel={(event) => {
+            if (press.current?.id === event.pointerId) finishPointer(true)
+          }}
+          onLostPointerCapture={(event) => {
+            if (press.current?.id === event.pointerId) finishPointer(true)
+          }}
+          onClick={(event) => {
+            if (event.detail === 0) scriptedPull()
+          }}
           style={{
             position: 'absolute',
-            left: (W-HIT_W)/2,
+            left: (W - HIT_W) / 2,
             top: HIT_TOP,
             width: HIT_W,
             height: HIT_H,
