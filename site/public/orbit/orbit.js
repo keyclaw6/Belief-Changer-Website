@@ -1954,7 +1954,7 @@ function frame(now) {
     readingFill.position.copy(camera.position);
     readingFill.target.position.copy(reader?.group.visible ? detailRoot.position : ringCenter);
     // Recheck near-surface safety while rotating, not only when zoom changes.
-    if(reader?.group.visible && inspectZoom>0 && !anim && (detailDragging || detailSpinVel.lengthSq()>0 || spinReset)) inspectCameraNow();
+    if(reader?.group.visible && inspectZoom>0 && !anim && (active || sceneDirty)) inspectCameraNow();
   }
   updateCaption();
   updateReaderTools();
