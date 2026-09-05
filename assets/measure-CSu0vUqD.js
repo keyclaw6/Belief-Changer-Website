@@ -1,0 +1,1 @@
+function e(e){return e.replace(/\S+@\S+\.\S+/g,``).replace(/\d{4,}/g,``).replace(/\s+/g,` `).trim().slice(0,80)}function t(e,t={}){try{let e={};for(let[n,r]of Object.entries(t))r!==void 0&&(e[n]=r)}catch{}}export{t as n,e as t};

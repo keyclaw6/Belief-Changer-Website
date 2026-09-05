@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Belief Changer — The Orbit</title>
+<style>
+  @font-face {
+    font-family: "DM Sans";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("/Belief-Changer-Website/fonts/dmsans-400-normal-latin.woff2") format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  @font-face {
+    font-family: "DM Sans";
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url("/Belief-Changer-Website/fonts/dmsans-600-normal-latin.woff2") format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+
+  :root {
+    --canvas: #ffffff;
+    --band: #ebe7df;
+    --hairline: #eaeaea;
+    --ink: #111111;
+    --ink-secondary: #787774;
+    --action: #111111;
+    --action-hover: #333333;
+    --on-action: #ffffff;
+    --focus: #111111;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+
+  body {
+    margin: 0;
+    background: var(--canvas);
+    color: var(--ink);
+    font-family: "DM Sans", system-ui, sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  #wordmark {
+    position: fixed;
+    top: 22px;
+    left: 28px;
+    z-index: 20;
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+    color: var(--ink);
+    opacity: 0.55;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  #stage {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    margin: 0;
+    background: #fff;
+    overflow: hidden;
+    touch-action: pan-y;
+  }
+
+
+  /* embed=1: sit inside the site hero iframe — no standalone chrome */
+  html.embed #wordmark,
+  html.embed #content { display: none !important; }
+  html.embed #stage {
+    height: 100%;
+    height: 100dvh;
+  }
+  html.embed body { overflow: hidden; }
+
+  #stage canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+  }
+
+  #live {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .orbit-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 8;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 1px solid var(--hairline);
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.72);
+    color: var(--ink);
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    transition: border-color 160ms ease, background 160ms ease;
+  }
+  .orbit-nav:hover { border-color: rgba(17, 17, 17, 0.35); background: #fff; }
+  .orbit-nav:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+  .orbit-nav svg { width: 18px; height: 18px; display: block; }
+  .orbit-nav[hidden] { display: none !important; }
+  #nav-prev { left: 18px; }
+  #nav-next { right: 18px; }
+
+  #scroll-down {
+    position: absolute;
+    left: 50%;
+    bottom: 22px;
+    transform: translateX(-50%);
+    z-index: 8;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: var(--ink-secondary);
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    opacity: 0.55;
+    transition: opacity 180ms ease, color 180ms ease;
+  }
+  #scroll-down:hover,
+  #scroll-down:focus-visible {
+    opacity: 1;
+    color: var(--ink);
+  }
+  #scroll-down:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+  #scroll-down[hidden] { display: none !important; }
+  #scroll-down svg { width: 22px; height: 22px; display: block; }
+
+  #panel {
+    position: absolute;
+    top: 50%;
+    right: clamp(16px, 4vw, 48px);
+    transform: translateY(-50%);
+    z-index: 12;
+    width: min(320px, calc(100% - 48px));
+    padding: 28px 28px 24px;
+    background: #fff;
+    border: 1px solid var(--hairline);
+    border-radius: 8px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 280ms ease, visibility 280ms ease;
+  }
+  #panel.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+  #panel h2 {
+    margin: 0 0 10px;
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+  }
+  #panel .promise {
+    margin: 0 0 14px;
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--ink);
+  }
+  #panel .meta {
+    margin: 0 0 22px;
+    font-size: 12.5px;
+    line-height: 1.4;
+    color: var(--ink-secondary);
+  }
+  #panel .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 14px 16px;
+    border: none;
+    border-radius: 6px;
+    background: var(--action);
+    color: var(--on-action);
+    font: 500 14px/1.4 "DM Sans", system-ui, sans-serif;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 140ms ease, transform 100ms ease;
+  }
+  #panel .btn-primary:hover { background: var(--action-hover); }
+  #panel .btn-primary:active { transform: scale(0.98); }
+  #panel .btn-primary:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+  #panel .back {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 0;
+    border: none;
+    background: none;
+    color: var(--ink-secondary);
+    font: 500 14px/1.4 "DM Sans", system-ui, sans-serif;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+  }
+  #panel .back:hover { color: var(--ink); }
+  #panel .back:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+  @media (max-width: 720px) {
+    #panel {
+      top: auto;
+      bottom: 72px;
+      right: 16px;
+      left: 16px;
+      width: auto;
+      transform: none;
+      padding: 20px;
+    }
+    #panel h2 { font-size: 22px; }
+    #nav-prev, #nav-next { display: none; }
+    #wordmark { left: 16px; top: 16px; font-size: 16px; }
+  }
+
+  #content {
+    background: var(--band);
+    border-top: 1px solid var(--hairline);
+  }
+  .section {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 96px 24px;
+  }
+  .section + .section {
+    border-top: 1px solid rgba(17, 17, 17, 0.08);
+  }
+  .section h2 {
+    margin: 0 0 12px;
+    font-size: 38px;
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+  }
+  .section p {
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.65;
+    color: var(--ink);
+  }
+  .section p + p { margin-top: 16px; }
+
+  #boot {
+    position: absolute;
+    inset: 0;
+    z-index: 6;
+    display: grid;
+    place-items: center;
+    background: #fff;
+    color: var(--ink-secondary);
+    font: 500 13px/1.4 "DM Sans", system-ui, sans-serif;
+    letter-spacing: 0.04em;
+    pointer-events: none;
+    transition: opacity 420ms ease;
+  }
+  #boot.is-done { opacity: 0; }
+
+  /* Scene-driven dark mode (html.scene-dark is toggled by applyTheme) */
+  html.scene-dark body { background: #0e0d0c; }
+  html.scene-dark #stage { background: #0e0d0c; }
+  html.scene-dark #wordmark { color: #b5b0a6; }
+  html.scene-dark #boot { background: #0e0d0c; color: #8f8a80; }
+  html.scene-dark .orbit-nav { background: rgba(24,22,20,0.72); border-color: #32302b; color: #e8e4da; }
+  html.scene-dark .orbit-nav:hover { background: #201e1b; border-color: #4a463f; }
+  html.scene-dark #scroll-down { color: #8f8a80; }
+  html.scene-dark #panel { background: #171512; border-color: #32302b; }
+  html.scene-dark #panel h2 { color: #f0ece2; }
+  html.scene-dark #panel .promise { color: #d9d4c9; }
+  html.scene-dark #panel .meta { color: #938e84; }
+  html.scene-dark #panel .back { color: #938e84; }
+  html.scene-dark #content { background: #121110; border-top-color: #26231f; }
+  html.scene-dark .section h2 { color: #f0ece2; }
+  html.scene-dark .section p { color: #cfcabf; }
+
+  #caption { position: absolute; inset-inline-start: clamp(24px,4vw,56px); bottom: 32px; z-index: 10; max-width: 330px; }
+  #caption h2 { font-size: 22px; font-weight: 500; letter-spacing: -.035em; line-height: 1.15; margin: 8px 0 18px; }
+  #caption-meta { font-size: 11px; letter-spacing: .04em; color: var(--ink-secondary); margin: 0; }
+  .caption-actions { display: flex; gap: 16px; align-items: center; }
+  #caption button { border: 0; background: none; color: inherit; padding: 8px 0; font: inherit; font-size: 12px; font-weight: 500; text-decoration: underline; text-underline-offset: 4px; cursor: pointer; }
+  #auto-browse { opacity: .65; }
+  #reader-tools { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); z-index: 15; display: flex; gap: 4px; padding: 5px; border: 1px solid var(--hairline); border-radius: 9px; background: var(--canvas); white-space: nowrap; }
+  #reader-tools button { min-width: 44px; min-height: 40px; padding: 8px 12px; border: 0; border-radius: 5px; background: transparent; color: var(--ink); font: inherit; font-size: 12px; cursor: pointer; }
+  #reader-tools button:hover { background: var(--band); }
+  button:disabled { opacity: .35; cursor: default !important; }
+  button:focus-visible, canvas:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+  [hidden] { display: none !important; }
+  html.scene-dark { --canvas:#161615; --ink:#f2f0ec; --ink-secondary:#aaa69e; --hairline:#37342f; --band:#292621; }
+  @media(max-width:720px) {
+    #caption { top: 35px; bottom: auto; inset-inline:24px; text-align: center; max-width: none; }
+    #caption h2 { font-size: 23px; margin-bottom: 8px; }
+    .caption-actions { justify-content: center; }
+    #nav-prev, #nav-next { display: grid; top: auto; bottom: 20px; transform: none; }
+    #panel { bottom: 92px; padding: 14px 18px; }
+    #panel h2 { font-size:18px; margin-bottom:6px; }
+    #panel .promise { font-size:13px; line-height:1.4; max-height:55px; overflow:auto; margin-bottom:8px; }
+    #panel .meta { display:none; }
+    #panel .btn-primary { padding:10px; }
+    #panel .back { font-size:12px; margin-top:10px; }
+    #reader-tools { bottom:24px; }
+    #wordmark { display:none; }
+  }
+  @media(prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto !important; transition:none !important; } #auto-browse { display:none; } }
+
+  html.is-reading #panel { inset:24px 24px auto auto; transform:none; width:auto; max-width:calc(100% - 48px); padding:0; display:flex; align-items:center; gap:18px; border:0; background:none; }
+  html.is-reading #panel h2, html.is-reading #panel .promise, html.is-reading #panel .meta { display:none; }
+  html.is-reading #panel .btn-primary { width:auto; padding:10px 16px; font-size:12px; }
+  html.is-reading #panel .back { margin:0; font-size:12px; }
+  @media(max-height:500px) { #panel { width:220px; padding:16px; } #panel .promise { font-size:13px; } #panel .meta { display:none; } #reader-tools { bottom:14px; } }
+
+  :root { --canvas:#e5e1d8; --ink:#292d29; --ink-secondary:#74766d; --hairline:rgba(59,62,53,.16); }
+  body, #stage, #boot { background:#e5e1d8; }
+  #hero-heading { position:absolute; top:44px; inset-inline:24px; z-index:7; text-align:center; pointer-events:none; transition:opacity 250ms ease; }
+  #hero-heading .eyebrow { font-size:10px; letter-spacing:.22em; font-weight:500; margin:0 0 17px; color:#70756b; }
+  #hero-heading h1 { margin:0; font-size:clamp(32px,4.5vw,62px); font-weight:400; line-height:1.06; letter-spacing:-.055em; color:#303b34; text-wrap:balance; }
+  #hero-heading .second { color:#81877a; }
+  #hero-subtitle { font-size:14px; letter-spacing:-.01em; color:#777b70; margin:18px 0 0; }
+  html.embed #hero-heading { visibility:hidden; }
+  html.is-inspecting #hero-heading { opacity:0; }
+  #caption { bottom:34px; inset-inline-start:40px; }
+  #scroll-down { left:auto; right:32px; transform:none; }
+  @media(max-width:720px) { #scroll-down { left:50%; right:auto; transform:translateX(-50%); } }
+  #caption h2 { font-size:19px; margin:7px 0 12px; color:var(--ink); }
+  #caption-meta { font-size:10px; }
+  .orbit-nav { width:40px; height:40px; top:61%; background:rgba(249,247,239,.40); border-color:rgba(60,64,54,.13); border-radius:50%; backdrop-filter:blur(8px); }
+  .orbit-nav:hover { background:rgba(249,247,239,.72); }
+  #panel { background:rgba(248,246,239,.82); backdrop-filter:blur(16px); border-color:rgba(67,70,60,.15); }
+  #reader-tools { background:rgba(248,246,239,.85); backdrop-filter:blur(12px); }
+  html.scene-dark #hero-heading h1 { color:#e7e7d9; }
+  html.scene-dark #hero-heading .second { color:#89948a; }
+  html.scene-dark #hero-subtitle, html.scene-dark #hero-heading .eyebrow { color:#a0a79a; }
+  html.scene-dark #stage, html.scene-dark body, html.scene-dark #boot { background:#151816; }
+  @media(max-width:720px) {
+    #hero-heading { top:40px; inset-inline:20px; }
+    #hero-heading h1 { font-size:34px; }
+    #hero-heading h1 span { display:block; }
+    #hero-heading .eyebrow { font-size:8px; margin-bottom:18px; }
+    #hero-subtitle { font-size:12px; max-width:27ch; margin:14px auto 0; }
+    #caption { top:auto; bottom:30px; inset-inline:55px; text-align:center; }
+    #caption h2 { font-size:19px; }
+    #caption-meta { display:none; }
+    #auto-browse { display:none; }
+    .orbit-nav { top:auto; bottom:52px; }
+    #scroll-down { bottom:8px; }
+  }
+  @media(max-height:550px) and (min-width:721px) { #hero-heading { top:20px; } #hero-heading h1 { font-size:34px; } #hero-heading .eyebrow { display:none; } #hero-subtitle { margin-top:9px; font-size:12px; } #caption { bottom:15px; } }
+  #stage { background:radial-gradient(ellipse at 32% 72%,#e7e4d9 0%,#d9dcd3 52%,#cbd1c8 100%); }
+  html.scene-dark #stage { background:radial-gradient(ellipse at 32% 72%,#292b24,#141b18 80%); }
+</style>
+</head>
+<body>
+  <p id="wordmark">Belief Changer</p>
+
+  <section id="stage" aria-label="The Orbit book ring">
+    <div id="boot">Composing the library…</div>
+    <header id="hero-heading">
+      <p class="eyebrow">THE BELIEF CHANGER LIBRARY</p>
+      <h1><span class="first">A little clarity.</span> <span class="second">A different life.</span></h1>
+      <p id="hero-subtitle">Free books for the beliefs that hold you back.</p>
+    </header>
+    <div id="live" role="status" aria-live="polite" aria-atomic="true"></div>
+
+    <button type="button" class="orbit-nav" id="nav-prev" aria-label="Previous book">
+      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5 L8 12 L15 19"/></svg>
+    </button>
+    <button type="button" class="orbit-nav" id="nav-next" aria-label="Next book">
+      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5 L16 12 L9 19"/></svg>
+    </button>
+    <button type="button" id="scroll-down" aria-label="Scroll to content below">
+      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9 L12 15 L18 9"/></svg>
+    </button>
+
+    <aside id="panel" aria-hidden="true" inert>
+      <h2 id="panel-title"></h2>
+      <p class="promise" id="panel-promise"></p>
+      <p class="meta" id="panel-meta"></p>
+      <a class="btn-primary" id="panel-read" href="#">Read the book</a>
+      <button type="button" class="back" id="panel-back">Back to the orbit</button>
+    </aside>
+    <div id="caption" hidden>
+      <p id="caption-meta"></p><h2 id="caption-title"></h2>
+      <div class="caption-actions"><button id="open-book" type="button">Explore this book</button><button id="auto-browse" type="button" aria-pressed="false">Auto browse</button></div>
+    </div>
+    <div id="reader-tools" hidden aria-label="Book controls">
+      <button id="toggle-cover" type="button">Open cover</button>
+      <button id="page-prev" type="button" aria-label="Previous page">←</button>
+      <button id="page-next" type="button" aria-label="Next page">→</button>
+      <button id="reset-book" type="button">Reset view</button>
+    </div>
+  </section>
+
+  <main id="content">
+    <section class="section" aria-labelledby="intro-h">
+      <h2 id="intro-h">Library introduction</h2>
+      <p>Belief Changer is a quiet shelf of free books that help people leave traps behind — smoking, sugar, scrolling, and the rest — by seeing how the trap works.</p>
+      <p>The Orbit above is the front door: turn the ring, meet a cover, open a volume. Nothing to join. Nothing tracking you.</p>
+    </section>
+    <section class="section" aria-labelledby="how-h">
+      <h2 id="how-h">How it works</h2>
+      <p>Each book is a short, careful argument. You read at your own pace. When a belief loosens, the behaviour that depended on it often follows without force.</p>
+    </section>
+    <section class="section" aria-labelledby="free-h">
+      <h2 id="free-h">Free to read</h2>
+      <p>Every finished title is free forever. Drafts stay on the shelf as they are written. Scroll back up when you want another book from the ring.</p>
+    </section>
+  </main>
+
+<script src="./_extract/00-fonts.js"></script>
+<script src="./_extract/01-noise.js"></script>
+<script src="./_extract/02-geometry.js"></script>
+<script src="./_extract/03-pageturn.js"></script>
+<script src="./_extract/04-text.js"></script>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "./vendor/three.module.js",
+    "troika-three-utils": "./vendor/troika/troika-three-utils.mjs",
+    "troika-worker-utils": "./vendor/troika/troika-worker-utils.mjs",
+    "webgl-sdf-generator": "./vendor/troika/webgl-sdf-generator.mjs",
+    "bidi-js": "./vendor/troika/bidi.mjs"
+  }
+}
+</script>
+
+<script type="module">
+import('./orbit.js').catch(() => {
+  document.getElementById('boot').textContent = 'The 3D preview is unavailable. You can still browse the library.';
+  parent.postMessage({ type: 'orbit-error' }, location.origin);
+});
+</script>
+</body>
+</html>
