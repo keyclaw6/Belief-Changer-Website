@@ -84,12 +84,6 @@ export function createAtmosphere(THREE, renderer, scene, camera) {
     uniforms.haze.value = dark ? .14 : .23;
   }
   function render(focusPoint, depthOfField = true) {
-    // Reading favors low latency over distant blur; CSS retains the same warm backdrop.
-    if (!depthOfField) {
-      renderer.setRenderTarget(null); renderer.render(scene, camera);
-      stats.calls = renderer.info.render.calls; stats.triangles = renderer.info.render.triangles;
-      return stats;
-    }
     resize();
     camera.updateMatrixWorld(true);
     view.copy(focusPoint).applyMatrix4(camera.matrixWorldInverse);

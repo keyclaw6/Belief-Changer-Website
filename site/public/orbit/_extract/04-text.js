@@ -468,7 +468,10 @@ BK.text = (() => {
             posData[k] = x0 + W * (i / nu) + (d ? d.dx : 0);
             posData[k + 1] = y0 + (d ? d.dy : 0);
             posData[k + 2] = ((j / nv) - 0.5) * H;
-            nrmData[k + 1] = 1;
+            const u=i/nu, lo=Math.max(0,u-.001), hi=Math.min(1,u+.001);
+            const a=fn?fn(lo):{dx:0,dy:0}, b=fn?fn(hi):{dx:0,dy:0};
+            const dx=W*(hi-lo)+b.dx-a.dx, dy=b.dy-a.dy, length=Math.hypot(dx,dy)||1;
+            nrmData[k]=-dy/length; nrmData[k+1]=dx/length; nrmData[k+2]=0;
           }
         }
         posTex.needsUpdate = true;
