@@ -102,18 +102,21 @@ BK.text = (() => {
     /* Typesetting is tracked per block and never allowed to block the load
        forever: a font that fails to parse should cost one missing line, not the
        whole book. `BK.text.diag` names anything still outstanding. */
-    const pending = [];
+    const pending = new Set();
     const diag = (BK.text && BK.text.diag) || (BK.textDiag = { outstanding: [], done: [] });
     function track(label, promise) {
       const entry = { label, t0: performance.now() };
-      pending.push(promise.then(() => {
+      diag.outstanding.push(entry);
+      const tracked = Promise.resolve(promise).finally(() => {
         entry.ms = Math.round(performance.now() - entry.t0);
         diag.done.push(entry);
+        if (diag.done.length > 100) diag.done.shift();
         const i = diag.outstanding.indexOf(entry);
         if (i >= 0) diag.outstanding.splice(i, 1);
-      }));
-      diag.outstanding.push(entry);
-      return promise;
+        pending.delete(tracked);
+      });
+      pending.add(tracked);
+      return tracked;
     }
 
     const SDF = (quality && quality.sdfGlyphSize) || 64;
@@ -944,7 +947,7 @@ BK.text = (() => {
       layout: L,
       diag,
       ready: (timeoutMs = 9000) => Promise.race([
-        (async () => { for (let i = 0; i < 4 && pending.length; i++) await Promise.all(pending.slice()); })(),
+        (async () => { for (let i = 0; i < 4 && pending.size; i++) await Promise.all([...pending]); })(),
         new Promise((r) => setTimeout(() => {
           if (diag.outstanding.length) {
             console.warn('[text] typesetting still outstanding:',

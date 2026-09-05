@@ -1,0 +1,16 @@
+{
+  "stats": {
+    "books": 56,
+    "scene": {
+      "calls": 45,
+      "triangles": 311766
+    },
+    "focus": 114.12176629901299,
+    "resources": {
+      "geometries": 21,
+      "textures": 22
+    },
+    "frameScheduled": false
+  },
+  "errors": []
+}

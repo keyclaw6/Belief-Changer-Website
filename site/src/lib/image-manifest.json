@@ -1,0 +1,758 @@
+{
+  "/covers/01-sugar.png": {
+    "width": 1024,
+    "height": 1536,
+    "variants": [
+      {
+        "width": 320,
+        "src": "/responsive/covers/01-sugar-320.webp",
+        "bytes": 2346
+      },
+      {
+        "width": 640,
+        "src": "/responsive/covers/01-sugar-640.webp",
+        "bytes": 9096
+      },
+      {
+        "width": 1024,
+        "src": "/responsive/covers/01-sugar-1024.webp",
+        "bytes": 21274
+      }
+    ]
+  },
+  "/covers/02-smoking.png": {
+    "width": 1024,
+    "height": 1536,
+    "variants": [
+      {
+        "width": 320,
+        "src": "/responsive/covers/02-smoking-320.webp",
+        "bytes": 5784
+      },
+      {
+        "width": 640,
+        "src": "/responsive/covers/02-smoking-640.webp",
+        "bytes": 22628
+      },
+      {
+        "width": 1024,
+        "src": "/responsive/covers/02-smoking-1024.webp",
+        "bytes": 65756
+      }
+    ]
+  },
+  "/covers/03-scrolling.png": {
+    "width": 1024,
+    "height": 1536,
+    "variants": [
+      {
+        "width": 320,
+        "src": "/responsive/covers/03-scrolling-320.webp",
+        "bytes": 3484
+      },
+      {
+        "width": 640,
+        "src": "/responsive/covers/03-scrolling-640.webp",
+        "bytes": 10126
+      },
+      {
+        "width": 1024,
+        "src": "/responsive/covers/03-scrolling-1024.webp",
+        "bytes": 23832
+      }
+    ]
+  },
+  "/covers/04-porn.png": {
+    "width": 1024,
+    "height": 1536,
+    "variants": [
+      {
+        "width": 320,
+        "src": "/responsive/covers/04-porn-320.webp",
+        "bytes": 3508
+      },
+      {
+        "width": 640,
+        "src": "/responsive/covers/04-porn-640.webp",
+        "bytes": 11502
+      },
+      {
+        "width": 1024,
+        "src": "/responsive/covers/04-porn-1024.webp",
+        "bytes": 29730
+      }
+    ]
+  },
+  "/covers/05-alcohol.png": {
+    "width": 1024,
+    "height": 1536,
+    "variants": [
+      {
+        "width": 320,
+        "src": "/responsive/covers/05-alcohol-320.webp",
+        "bytes": 4520
+      },
+      {
+        "width": 640,
+        "src": "/responsive/covers/05-alcohol-640.webp",
+        "bytes": 13694
+      },
+      {
+        "width": 1024,
+        "src": "/responsive/covers/05-alcohol-1024.webp",
+        "bytes": 34032
+      }
+    ]
+  },
+  "/covers/06-gaming.png": {
+    "width": 1024,
+    "height": 1536,
+    "variants": [
+      {
+        "width": 320,
+        "src": "/responsive/covers/06-gaming-320.webp",
+        "bytes": 5660
+      },
+      {
+        "width": 640,
+        "src": "/responsive/covers/06-gaming-640.webp",
+        "bytes": 19346
+      },
+      {
+        "width": 1024,
+        "src": "/responsive/covers/06-gaming-1024.webp",
+        "bytes": 56334
+      }
+    ]
+  },
+  "/covers/07-junkfood.png": {
+    "width": 1024,
+    "height": 1536,
+    "variants": [
+      {
+        "width": 320,
+        "src": "/responsive/covers/07-junkfood-320.webp",
+        "bytes": 3884
+      },
+      {
+        "width": 640,
+        "src": "/responsive/covers/07-junkfood-640.webp",
+        "bytes": 13442
+      },
+      {
+        "width": 1024,
+        "src": "/responsive/covers/07-junkfood-1024.webp",
+        "bytes": 48258
+      }
+    ]
+  },
+  "/covers/08-vaping.png": {
+    "width": 1024,
+    "height": 1536,
+    "variants": [
+      {
+        "width": 320,
+        "src": "/responsive/covers/08-vaping-320.webp",
+        "bytes": 4082
+      },
+      {
+        "width": 640,
+        "src": "/responsive/covers/08-vaping-640.webp",
+        "bytes": 14872
+      },
+      {
+        "width": 1024,
+        "src": "/responsive/covers/08-vaping-1024.webp",
+        "bytes": 40008
+      }
+    ]
+  },
+  "/covers/09-overthinking.png": {
+    "width": 1024,
+    "height": 1536,
+    "variants": [
+      {
+        "width": 320,
+        "src": "/responsive/covers/09-overthinking-320.webp",
+        "bytes": 4948
+      },
+      {
+        "width": 640,
+        "src": "/responsive/covers/09-overthinking-640.webp",
+        "bytes": 16792
+      },
+      {
+        "width": 1024,
+        "src": "/responsive/covers/09-overthinking-1024.webp",
+        "bytes": 41802
+      }
+    ]
+  },
+  "/covers/10-complaining.png": {
+    "width": 1024,
+    "height": 1536,
+    "variants": [
+      {
+        "width": 320,
+        "src": "/responsive/covers/10-complaining-320.webp",
+        "bytes": 5074
+      },
+      {
+        "width": 640,
+        "src": "/responsive/covers/10-complaining-640.webp",
+        "bytes": 14422
+      },
+      {
+        "width": 1024,
+        "src": "/responsive/covers/10-complaining-1024.webp",
+        "bytes": 34778
+      }
+    ]
+  },
+  "/site/painted-bench.jpg": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      {
+        "width": 640,
+        "src": "/responsive/site/painted-bench-640.webp",
+        "bytes": 89782
+      },
+      {
+        "width": 1280,
+        "src": "/responsive/site/painted-bench-1280.webp",
+        "bytes": 364660
+      },
+      {
+        "width": 1536,
+        "src": "/responsive/site/painted-bench-1536.webp",
+        "bytes": 529894
+      }
+    ]
+  },
+  "/site/painted-bicycles-after-rain.png": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      {
+        "width": 640,
+        "src": "/responsive/site/painted-bicycles-after-rain-640.webp",
+        "bytes": 93806
+      },
+      {
+        "width": 1280,
+        "src": "/responsive/site/painted-bicycles-after-rain-1280.webp",
+        "bytes": 333528
+      },
+      {
+        "width": 1536,
+        "src": "/responsive/site/painted-bicycles-after-rain-1536.webp",
+        "bytes": 464486
+      }
+    ]
+  },
+  "/site/painted-clear-choices.png": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      {
+        "width": 640,
+        "src": "/responsive/site/painted-clear-choices-640.webp",
+        "bytes": 80430
+      },
+      {
+        "width": 1280,
+        "src": "/responsive/site/painted-clear-choices-1280.webp",
+        "bytes": 289024
+      },
+      {
+        "width": 1536,
+        "src": "/responsive/site/painted-clear-choices-1536.webp",
+        "bytes": 408432
+      }
+    ]
+  },
+  "/site/painted-crossing-together.png": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      {
+        "width": 640,
+        "src": "/responsive/site/painted-crossing-together-640.webp",
+        "bytes": 69726
+      },
+      {
+        "width": 1280,
+        "src": "/responsive/site/painted-crossing-together-1280.webp",
+        "bytes": 249010
+      },
+      {
+        "width": 1536,
+        "src": "/responsive/site/painted-crossing-together-1536.webp",
+        "bytes": 365018
+      }
+    ]
+  },
+  "/site/painted-first-morning.png": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      {
+        "width": 640,
+        "src": "/responsive/site/painted-first-morning-640.webp",
+        "bytes": 53802
+      },
+      {
+        "width": 1280,
+        "src": "/responsive/site/painted-first-morning-1280.webp",
+        "bytes": 170348
+      },
+      {
+        "width": 1536,
+        "src": "/responsive/site/painted-first-morning-1536.webp",
+        "bytes": 236688
+      }
+    ]
+  },
+  "/site/painted-free-book-cabinet.png": {
+    "width": 1535,
+    "height": 1024,
+    "variants": [
+      {
+        "width": 640,
+        "src": "/responsive/site/painted-free-book-cabinet-640.webp",
+        "bytes": 94688
+      },
+      {
+        "width": 1280,
+        "src": "/responsive/site/painted-free-book-cabinet-1280.webp",
+        "bytes": 353536
+      },
+      {
+        "width": 1535,
+        "src": "/responsive/site/painted-free-book-cabinet-1535.webp",
+        "bytes": 490122
+      }
+    ]
+  },
+  "/site/painted-harbor-flock.jpg": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      {
+        "width": 640,
+        "src": "/responsive/site/painted-harbor-flock-640.webp",
+        "bytes": 75172
+      },
+      {
+        "width": 1280,
+        "src": "/responsive/site/painted-harbor-flock-1280.webp",
+        "bytes": 307938
+      },
+      {
+        "width": 1536,
+        "src": "/responsive/site/painted-harbor-flock-1536.webp",
+        "bytes": 451152
+      }
+    ]
+  },
+  "/site/painted-kite.jpg": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      {
+        "width": 640,
+        "src": "/responsive/site/painted-kite-640.webp",
+        "bytes": 60050
+      },
+      {
+        "width": 1280,
+        "src": "/responsive/site/painted-kite-1280.webp",
+        "bytes": 286052
+      },
+      {
+        "width": 1536,
+        "src": "/responsive/site/painted-kite-1536.webp",
+        "bytes": 429506
+      }
+    ]
+  },
+  "/site/painted-knot.jpg": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      {
+        "width": 640,
+        "src": "/responsive/site/painted-knot-640.webp",
+        "bytes": 52694
+      },
+      {
+        "width": 1280,
+        "src": "/responsive/site/painted-knot-1280.webp",
+        "bytes": 264748
+      },
+      {
+        "width": 1536,
+        "src": "/responsive/site/painted-knot-1536.webp",
+        "bytes": 408378
+      }
+    ]
+  },
+  "/site/painted-life-returning.png": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      {
+        "width": 640,
+        "src": "/responsive/site/painted-life-returning-640.webp",
+        "bytes": 93024
+      },
+      {
+        "width": 1280,
+        "src": "/responsive/site/painted-life-returning-1280.webp",
+        "bytes": 306588
+      },
+      {
+        "width": 1536,
+        "src": "/responsive/site/painted-life-returning-1536.webp",
+        "bytes": 436620
+      }
+    ]
+  },
+  "/site/painted-lit-window.jpg": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      {
+        "width": 640,
+        "src": "/responsive/site/painted-lit-window-640.webp",
+        "bytes": 73628
+      },
+      {
+        "width": 1280,
+        "src": "/responsive/site/painted-lit-window-1280.webp",
+        "bytes": 307342
+      },
+      {
+        "width": 1536,
+        "src": "/responsive/site/painted-lit-window-1536.webp",
+        "bytes": 455104
+      }
+    ]
+  },
+  "/site/painted-living-pages.png": {
+    "width": 1537,
+    "height": 1023,
+    "variants": [
+      {
+        "width": 640,
+        "src": "/responsive/site/painted-living-pages-640.webp",
+        "bytes": 53474
+      },
+      {
+        "width": 1280,
+        "src": "/responsive/site/painted-living-pages-1280.webp",
+        "bytes": 187238
+      },
+      {
+        "width": 1537,
+        "src": "/responsive/site/painted-living-pages-1537.webp",
+        "bytes": 251708
+      }
+    ]
+  },
+  "/site/painted-misprinted-park.jpg": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      {
+        "width": 640,
+        "src": "/responsive/site/painted-misprinted-park-640.webp",
+        "bytes": 76426
+      },
+      {
+        "width": 1280,
+        "src": "/responsive/site/painted-misprinted-park-1280.webp",
+        "bytes": 292810
+      },
+      {
+        "width": 1536,
+        "src": "/responsive/site/painted-misprinted-park-1536.webp",
+        "bytes": 417208
+      }
+    ]
+  },
+  "/site/painted-morning-overlook.jpg": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      {
+        "width": 640,
+        "src": "/responsive/site/painted-morning-overlook-640.webp",
+        "bytes": 73472
+      },
+      {
+        "width": 1280,
+        "src": "/responsive/site/painted-morning-overlook-1280.webp",
+        "bytes": 290874
+      },
+      {
+        "width": 1536,
+        "src": "/responsive/site/painted-morning-overlook-1536.webp",
+        "bytes": 402570
+      }
+    ]
+  },
+  "/site/painted-notes-open-window.png": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      {
+        "width": 640,
+        "src": "/responsive/site/painted-notes-open-window-640.webp",
+        "bytes": 60138
+      },
+      {
+        "width": 1280,
+        "src": "/responsive/site/painted-notes-open-window-1280.webp",
+        "bytes": 207902
+      },
+      {
+        "width": 1536,
+        "src": "/responsive/site/painted-notes-open-window-1536.webp",
+        "bytes": 287240
+      }
+    ]
+  },
+  "/site/painted-open-cage.jpg": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      {
+        "width": 640,
+        "src": "/responsive/site/painted-open-cage-640.webp",
+        "bytes": 58554
+      },
+      {
+        "width": 1280,
+        "src": "/responsive/site/painted-open-cage-1280.webp",
+        "bytes": 252416
+      },
+      {
+        "width": 1536,
+        "src": "/responsive/site/painted-open-cage-1536.webp",
+        "bytes": 383716
+      }
+    ]
+  },
+  "/site/painted-open-coast.png": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      {
+        "width": 640,
+        "src": "/responsive/site/painted-open-coast-640.webp",
+        "bytes": 57772
+      },
+      {
+        "width": 1280,
+        "src": "/responsive/site/painted-open-coast-1280.webp",
+        "bytes": 213196
+      },
+      {
+        "width": 1536,
+        "src": "/responsive/site/painted-open-coast-1536.webp",
+        "bytes": 312112
+      }
+    ]
+  },
+  "/site/painted-open-garden-gate.png": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      {
+        "width": 640,
+        "src": "/responsive/site/painted-open-garden-gate-640.webp",
+        "bytes": 93230
+      },
+      {
+        "width": 1280,
+        "src": "/responsive/site/painted-open-garden-gate-1280.webp",
+        "bytes": 295292
+      },
+      {
+        "width": 1536,
+        "src": "/responsive/site/painted-open-garden-gate-1536.webp",
+        "bytes": 410218
+      }
+    ]
+  },
+  "/site/painted-riverside-glide.jpg": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      {
+        "width": 640,
+        "src": "/responsive/site/painted-riverside-glide-640.webp",
+        "bytes": 102612
+      },
+      {
+        "width": 1280,
+        "src": "/responsive/site/painted-riverside-glide-1280.webp",
+        "bytes": 388364
+      },
+      {
+        "width": 1536,
+        "src": "/responsive/site/painted-riverside-glide-1536.webp",
+        "bytes": 546354
+      }
+    ]
+  },
+  "/site/painted-setting-down-weight.png": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      {
+        "width": 640,
+        "src": "/responsive/site/painted-setting-down-weight-640.webp",
+        "bytes": 99094
+      },
+      {
+        "width": 1280,
+        "src": "/responsive/site/painted-setting-down-weight-1280.webp",
+        "bytes": 314796
+      },
+      {
+        "width": 1536,
+        "src": "/responsive/site/painted-setting-down-weight-1536.webp",
+        "bytes": 435196
+      }
+    ]
+  },
+  "/site/painted-shared-worktable.png": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      {
+        "width": 640,
+        "src": "/responsive/site/painted-shared-worktable-640.webp",
+        "bytes": 89144
+      },
+      {
+        "width": 1280,
+        "src": "/responsive/site/painted-shared-worktable-1280.webp",
+        "bytes": 340776
+      },
+      {
+        "width": 1536,
+        "src": "/responsive/site/painted-shared-worktable-1536.webp",
+        "bytes": 490776
+      }
+    ]
+  },
+  "/site/painted-together-after-rain.jpg": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      {
+        "width": 640,
+        "src": "/responsive/site/painted-together-after-rain-640.webp",
+        "bytes": 87882
+      },
+      {
+        "width": 1280,
+        "src": "/responsive/site/painted-together-after-rain-1280.webp",
+        "bytes": 365130
+      },
+      {
+        "width": 1536,
+        "src": "/responsive/site/painted-together-after-rain-1536.webp",
+        "bytes": 526954
+      }
+    ]
+  },
+  "/site/painted-way-out.png": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      {
+        "width": 640,
+        "src": "/responsive/site/painted-way-out-640.webp",
+        "bytes": 68058
+      },
+      {
+        "width": 1280,
+        "src": "/responsive/site/painted-way-out-1280.webp",
+        "bytes": 262846
+      },
+      {
+        "width": 1536,
+        "src": "/responsive/site/painted-way-out-1536.webp",
+        "bytes": 397676
+      }
+    ]
+  },
+  "/site/painted-wide-world.png": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      {
+        "width": 640,
+        "src": "/responsive/site/painted-wide-world-640.webp",
+        "bytes": 90918
+      },
+      {
+        "width": 1280,
+        "src": "/responsive/site/painted-wide-world-1280.webp",
+        "bytes": 303488
+      },
+      {
+        "width": 1536,
+        "src": "/responsive/site/painted-wide-world-1536.webp",
+        "bytes": 434372
+      }
+    ]
+  },
+  "/site/photo-open-street.jpg": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      {
+        "width": 640,
+        "src": "/responsive/site/photo-open-street-640.webp",
+        "bytes": 86200
+      },
+      {
+        "width": 1280,
+        "src": "/responsive/site/photo-open-street-1280.webp",
+        "bytes": 354090
+      },
+      {
+        "width": 1536,
+        "src": "/responsive/site/photo-open-street-1536.webp",
+        "bytes": 501288
+      }
+    ]
+  },
+  "/site/photo-open-window.jpg": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      {
+        "width": 640,
+        "src": "/responsive/site/photo-open-window-640.webp",
+        "bytes": 29068
+      },
+      {
+        "width": 1280,
+        "src": "/responsive/site/photo-open-window-1280.webp",
+        "bytes": 82632
+      },
+      {
+        "width": 1536,
+        "src": "/responsive/site/photo-open-window-1536.webp",
+        "bytes": 109486
+      }
+    ]
+  }
+}

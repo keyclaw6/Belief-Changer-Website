@@ -1,3 +1,5 @@
+import { assetPath } from '~/lib/deployment'
+import { responsiveImage } from '~/lib/responsive-image'
 import type { Book } from '~/data/types'
 import { cn } from '~/lib/utils'
 
@@ -56,6 +58,7 @@ export function BookCover({
   /** Render the live-text title + series mark. On by default (site-wide rule). */
   showTitle?: boolean
 }) {
+  const image = responsiveImage(book.cover)
   const needsHairline = isLightGround(book.groundHex)
   const ink = inkHex(book.overlayInk)
 
@@ -66,8 +69,10 @@ export function BookCover({
       // cover's own width at any render size.
       style={{ containerType: 'inline-size', aspectRatio: '2 / 3' }}
     >
+      <picture>
+        {image.srcSet ? <source type="image/webp" srcSet={image.srcSet} sizes={sizes || '(max-width: 640px) 45vw, 320px'} /> : null}
       <img
-        src={book.cover}
+        src={assetPath(book.cover)}
         alt=""
         aria-hidden="true"
         loading={priority ? 'eager' : 'lazy'}
@@ -76,9 +81,13 @@ export function BookCover({
           needsHairline && 'ring-1 ring-[var(--color-hairline-on-image)]',
         )}
         style={{ boxShadow: 'var(--shadow-cover)' }}
-        sizes={sizes}
+        sizes={sizes || '(max-width: 640px) 45vw, 320px'}
+        width={image.width}
+        height={image.height}
+        fetchPriority={priority ? 'high' : undefined}
         decoding="async"
       />
+      </picture>
 
       {showTitle ? (
         <div

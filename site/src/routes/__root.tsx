@@ -7,6 +7,7 @@ import {
   useMatches,
 } from '@tanstack/react-router'
 import type { ReactNode } from 'react'
+import { assetPath } from '~/lib/deployment'
 import globalCss from '~/styles/globals.css?url'
 import { themeInitScript } from '~/lib/theme'
 import { ThemeProvider, useTheme } from '~/lib/theme-context'
@@ -36,6 +37,7 @@ export const Route = createRootRoute({
           'Free books that change the belief behind the behavior. In your language, free forever, no signup, no catch.',
       },
       { name: 'color-scheme', content: 'light dark' },
+      ...(import.meta.env.PREVIEW_STATIC ? [{ name: 'robots', content: 'noindex,nofollow' }] : []),
     ],
     links: [
       // Global stylesheet: tokens, Tailwind layers, self-hosted @font-face.
@@ -47,7 +49,7 @@ export const Route = createRootRoute({
         rel: 'preload',
         as: 'font',
         type: 'font/woff2',
-        href: '/fonts/dmsans-400-normal-latin.woff2',
+        href: assetPath('/fonts/dmsans-400-normal-latin.woff2'),
         crossOrigin: 'anonymous',
       },
     ],

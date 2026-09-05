@@ -1,3 +1,4 @@
+import { deploymentBase } from '~/lib/deployment'
 import { LOCALES, LOCALE_BCP47, DEFAULT_LOCALE, type Locale } from './config'
 
 /**
@@ -18,6 +19,7 @@ export function localePath(locale: Locale, path: string): string {
  * the visitor on the same page when they change language.
  */
 export function stripLocale(pathname: string): { locale: Locale | null; rest: string } {
+  if (deploymentBase && (pathname === deploymentBase || pathname.startsWith(deploymentBase + '/'))) pathname = pathname.slice(deploymentBase.length) || '/'
   const segments = pathname.split('/').filter(Boolean)
   const first = segments[0]
   if (first && (LOCALES as readonly string[]).includes(first)) {
@@ -44,11 +46,11 @@ export function hreflangAlternates(
 ): HreflangAlternate[] {
   const alternates: HreflangAlternate[] = LOCALES.map((loc) => ({
     hrefLang: LOCALE_BCP47[loc],
-    href: `${origin}${localePath(loc, restPath)}`,
+    href: `${origin}${deploymentBase}${localePath(loc, restPath)}`,
   }))
   alternates.push({
     hrefLang: 'x-default',
-    href: `${origin}${localePath(DEFAULT_LOCALE, restPath)}`,
+    href: `${origin}${deploymentBase}${localePath(DEFAULT_LOCALE, restPath)}`,
   })
   return alternates
 }

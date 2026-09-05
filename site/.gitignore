@@ -28,3 +28,9 @@ npm-debug.log*
 
 # os
 .DS_Store
+
+# Generated self-hosted dependencies (recreated by prebuild/predev)
+public/orbit/vendor/
+# Browser evidence remains local unless deliberately saved
+playwright-report/
+test-results/

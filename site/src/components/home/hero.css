@@ -1,0 +1,15 @@
+.atmospheric-hero{position:relative;width:100%;height:calc(100svh - var(--nav-height));min-height:680px;overflow:hidden;background:#e5e1d8}
+.atmospheric-hero__heading{position:absolute;z-index:10;inset-inline:24px;top:44px;text-align:center;pointer-events:none;transition:opacity .25s ease}
+.atmospheric-hero__eyebrow{margin:0 0 17px;font-size:10px;font-weight:500;letter-spacing:.22em;color:#70756b}
+.atmospheric-hero__heading h1{margin:0;font-size:clamp(32px,4.5vw,62px);font-weight:400;line-height:1.06;letter-spacing:-.055em;color:#303b34;text-wrap:balance}
+.atmospheric-hero__heading h1 span+span{color:#81877a}
+.atmospheric-hero__subtitle{font-size:14px;letter-spacing:-.01em;color:#777b70;margin:18px 0 0}
+.atmospheric-hero[data-inspecting=true] .atmospheric-hero__heading{opacity:0}
+[data-theme=dark] .atmospheric-hero{background:#151816}
+[data-theme=dark] .atmospheric-hero__heading h1{color:#e7e7d9}
+[data-theme=dark] .atmospheric-hero__heading h1 span+span{color:#89948a}
+[data-theme=dark] .atmospheric-hero__subtitle,[data-theme=dark] .atmospheric-hero__eyebrow{color:#a0a79a}
+@media(prefers-color-scheme:dark){[data-theme=system] .atmospheric-hero{background:#151816}[data-theme=system] .atmospheric-hero__heading h1{color:#e7e7d9}[data-theme=system] .atmospheric-hero__heading h1 span+span{color:#89948a}[data-theme=system] .atmospheric-hero__subtitle,[data-theme=system] .atmospheric-hero__eyebrow{color:#a0a79a}}
+@media(max-width:720px){.atmospheric-hero{min-height:650px}.atmospheric-hero__heading{top:40px;inset-inline:20px}.atmospheric-hero__heading h1{font-size:34px}.atmospheric-hero__heading h1 span{display:block}.atmospheric-hero__eyebrow{font-size:8px;margin-bottom:18px}.atmospheric-hero__subtitle{font-size:12px;max-width:27ch;margin:14px auto 0}}
+@media(max-height:550px) and (min-width:721px){.atmospheric-hero{min-height:480px}.atmospheric-hero__heading{top:20px}.atmospheric-hero__heading h1{font-size:34px}.atmospheric-hero__eyebrow{display:none}.atmospheric-hero__subtitle{margin-top:9px;font-size:12px}}
+@media(prefers-reduced-motion:reduce){.atmospheric-hero__heading{transition:none}}

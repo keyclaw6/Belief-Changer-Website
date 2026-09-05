@@ -1,4 +1,8 @@
-# The Orbit
+# The Orbit — historical prototype
+
+> The current implementation is now `site/public/orbit/`. Run `npm ci && npm run dev` from `site/`, then open `/orbit/index.html`. This older CDN-backed prototype is retained as design history; it is not the homepage runtime. See [the current architecture](../site/public/orbit/README.md).
+
+## Original prototype notes
 
 Hero experience for Belief Changer: a calm ring of photoreal hardcovers in a
 pure white void. Browse with the wheel, arrows, or a click; open the front book

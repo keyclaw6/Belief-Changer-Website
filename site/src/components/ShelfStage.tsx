@@ -1,3 +1,4 @@
+import { assetPath } from '~/lib/deployment'
 import { useEffect, useRef, useState } from 'react'
 import { Link } from '@tanstack/react-router'
 import { useReducedMotion } from 'motion/react'
@@ -23,11 +24,9 @@ function hasWebGL(): boolean {
   if (typeof document === 'undefined') return false
   try {
     const canvas = document.createElement('canvas')
-    return Boolean(
-      canvas.getContext('webgl2') ||
-        canvas.getContext('webgl') ||
-        canvas.getContext('experimental-webgl'),
-    )
+    const gl = canvas.getContext('webgl2')
+    gl?.getExtension('WEBGL_lose_context')?.loseContext()
+    return Boolean(gl)
   } catch {
     return false
   }
@@ -57,125 +56,82 @@ function StaticShelf({ books, locale }: { books: Book[]; locale: Locale }) {
   )
 }
 
-export function ShelfStage({
-  books,
-  locale,
-}: {
-  books: Book[]
-  locale: Locale
-}) {
+export function ShelfStage({ books, locale, onInspectChange }: { books: Book[]; locale: Locale; onInspectChange?: (value: boolean) => void }) {
   const reduce = useReducedMotion()
-  // SSR + first paint: static row. Upgrade to Orbit only after mount when
-  // motion is allowed and WebGL is available (avoids hydration mismatch).
   const [useOrbit, setUseOrbit] = useState(false)
+  const [ready, setReady] = useState(false)
   const iframeRef = useRef<HTMLIFrameElement>(null)
 
   useEffect(() => {
-    if (reduce) {
-      setUseOrbit(false)
-      return
-    }
-    setUseOrbit(hasWebGL())
+    const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection
+    setReady(false)
+    setUseOrbit(!reduce && !connection?.saveData && hasWebGL())
   }, [reduce])
 
   useEffect(() => {
     if (!useOrbit) return
-    // Theme passthrough: the site owns light/dark on <html data-theme>; the
-    // iframe does not inherit it. Post the resolved dark flag on mount, on
-    // iframe load, on OS scheme change, and when ThemeProvider rewrites
-    // data-theme (MutationObserver).
-    const el = iframeRef.current
-    if (!el) return
-    const post = () => {
-      if (!el.contentWindow) return
-      const attr = document.documentElement.getAttribute('data-theme')
-      const dark =
-        attr === 'dark' ||
-        ((attr === 'system' || attr == null) &&
-          window.matchMedia('(prefers-color-scheme: dark)').matches)
-      el.contentWindow.postMessage(
-        { type: 'orbit-theme', dark },
-        window.location.origin,
-      )
+    const frame = iframeRef.current
+    if (!frame) return
+    let timeout: ReturnType<typeof setTimeout> | undefined
+    const fail = () => { setReady(false); setUseOrbit(false); onInspectChange?.(false) }
+    const armTimeout = () => { clearTimeout(timeout); timeout = setTimeout(fail, 20000) }
+    const postEnvironment = () => {
+      const theme = document.documentElement.getAttribute('data-theme')
+      const dark = theme === 'dark' || ((theme == null || theme === 'system') && matchMedia('(prefers-color-scheme: dark)').matches)
+      const rect = frame.getBoundingClientRect()
+      const visibleHeight = Math.max(0, Math.min(rect.bottom, innerHeight) - Math.max(rect.top, 0))
+      const visible = visibleHeight / Math.max(1, Math.min(rect.height, innerHeight)) > 0.1
+      frame.contentWindow?.postMessage({ type: 'orbit-theme', dark }, location.origin)
+      frame.contentWindow?.postMessage({ type: 'orbit-hero-visibility', visible }, location.origin)
     }
-    post()
-    el.addEventListener('load', post, { once: true })
-    const mq = window.matchMedia('(prefers-color-scheme: dark)')
-    mq.addEventListener('change', post)
-    const obs = new MutationObserver(post)
-    obs.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['data-theme'],
-    })
-    return () => {
-      el.removeEventListener('load', post)
-      mq.removeEventListener('change', post)
-      obs.disconnect()
-    }
-  }, [useOrbit])
-
-  useEffect(() => {
-    if (!useOrbit) return
-    // Wheel-trap fix: report how much of the hero iframe is on screen so The
-    // Orbit releases the wheel (page scrolls past) and pauses idle spin when
-    // the hero is mostly out of view.
-    const el = iframeRef.current
-    if (!el) return
-    const post = () => {
-      if (!el.contentWindow) return
-      const rect = el.getBoundingClientRect()
-      const vh = window.innerHeight || 1
-      const frac = (Math.min(rect.bottom, vh) - Math.max(rect.top, 0)) / vh
-      const visible = Math.max(0, Math.min(1, frac)) > 0.5
-      el.contentWindow.postMessage(
-        { type: 'orbit-hero-visibility', visible },
-        window.location.origin,
-      )
-    }
-    post()
-    el.addEventListener('load', post, { once: true })
-    window.addEventListener('scroll', post, { passive: true })
-    window.addEventListener('resize', post)
-    return () => {
-      el.removeEventListener('load', post)
-      window.removeEventListener('scroll', post)
-      window.removeEventListener('resize', post)
-    }
-  }, [useOrbit])
-
-  useEffect(() => {
-    if (!useOrbit) return
-    const onMessage = (event: MessageEvent) => {
-      if (event.origin !== window.location.origin) return
-      if (
-        event.data &&
-        typeof event.data === 'object' &&
-        event.data.type === 'orbit-scroll-down'
-      ) {
-        document
-          .getElementById('hero-finder')
-          ?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    const receive = (event: MessageEvent) => {
+      if (event.origin !== location.origin || event.source !== frame.contentWindow || !event.data) return
+      switch (event.data.type) {
+        case 'orbit-ready': clearTimeout(timeout); setReady(true); postEnvironment(); break
+        case 'orbit-error': fail(); break
+        case 'orbit-state': onInspectChange?.(!['orbit', 'presenting'].includes(event.data.state)); break
+        case 'orbit-context-lost': setReady(false); armTimeout(); break
+        case 'orbit-scroll-down':
+          document.getElementById('hero-finder')?.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' })
+          break
       }
     }
-    window.addEventListener('message', onMessage)
-    return () => window.removeEventListener('message', onMessage)
-  }, [useOrbit])
-
-  if (!useOrbit) {
-    return <StaticShelf books={books} locale={locale} />
-  }
-
-  const src = `/orbit/index.html?embed=1&locale=${encodeURIComponent(locale)}`
+    const themeObserver = new MutationObserver(postEnvironment)
+    themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] })
+    const visibility = new IntersectionObserver(postEnvironment, { threshold: [0, .1, .5, 1] })
+    visibility.observe(frame)
+    const scheme = matchMedia('(prefers-color-scheme: dark)')
+    scheme.addEventListener('change', postEnvironment)
+    window.addEventListener('message', receive)
+    frame.addEventListener('load', postEnvironment)
+    armTimeout()
+    postEnvironment()
+    return () => {
+      clearTimeout(timeout)
+      themeObserver.disconnect(); visibility.disconnect()
+      scheme.removeEventListener('change', postEnvironment)
+      window.removeEventListener('message', receive)
+      frame.removeEventListener('load', postEnvironment)
+    }
+  }, [useOrbit, locale, reduce, onInspectChange])
 
   return (
-    <iframe
-      ref={iframeRef}
-      title="The Orbit — Belief Changer library"
-      src={src}
-      className="h-full w-full border-0 bg-canvas"
-      // Orbit owns its own keyboard/wheel; allow autoplay-free WebGL.
-      allow="fullscreen"
-      loading="eager"
-    />
+    <div className="relative h-full w-full">
+      {!ready ? <div className="absolute inset-0 flex items-center justify-center px-6 py-24"><div className="h-[min(55vh,360px)] w-full"><StaticShelf books={books} locale={locale} /></div></div> : null}
+      {useOrbit ? (
+        <iframe
+          key={locale}
+          ref={iframeRef}
+          title={locale === 'ar' ? 'مكتبة الكتب التفاعلية' : locale === 'da' ? 'Det interaktive bibliotek' : 'The Orbit — interactive book library'}
+          src={assetPath(`/orbit/index.html?embed=1&locale=${encodeURIComponent(locale)}`)}
+          className="absolute inset-0 h-full w-full border-0 bg-canvas"
+          style={{ opacity: ready ? 1 : 0, pointerEvents: ready ? 'auto' : 'none' }}
+          aria-hidden={!ready}
+          tabIndex={ready ? 0 : -1}
+          loading="eager"
+          onError={() => { setUseOrbit(false); setReady(false) }}
+        />
+      ) : null}
+    </div>
   )
 }

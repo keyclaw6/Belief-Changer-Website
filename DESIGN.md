@@ -380,3 +380,8 @@ home on a template marketplace, stop.
 - Do respect `prefers-reduced-motion` with full static fallbacks including the shelf.
 - Do treat the adopted skills as law where this document is silent; where the two
   skills disagree, this document's word wins.
+
+
+## Hero art-direction revision — owner request, 2026-09-05
+
+For the homepage Orbit only, the supplied reference supersedes the earlier pure-white void/sparse composition: warm mineral-toned atmosphere, a much denser ring with larger diameter, an isolated sharp featured book, softly receding distant books, and a headline above the composition. Preserve existing cover artwork and manuscript text. Other site surfaces retain the established editorial tokens. The current implementation and measured tradeoffs are documented in `docs/ATMOSPHERIC-HERO-2026-09-05.md`.

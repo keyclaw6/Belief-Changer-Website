@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useId, useRef, useState } from 'react'
 import { CaretDown, Check } from '@phosphor-icons/react'
 import { Link } from '@tanstack/react-router'
 import {
@@ -31,6 +31,12 @@ export function LanguageSwitcher({
 }) {
   const [open, setOpen] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
+  const trigger = useRef<HTMLButtonElement>(null)
+  const menuId = useId()
+  const [activeIndex, setActiveIndex] = useState(LOCALES.indexOf(locale))
+  useEffect(() => {
+    if (open) ref.current?.querySelectorAll<HTMLElement>('[role="menuitemradio"]')[activeIndex]?.focus()
+  }, [open, activeIndex])
 
   useEffect(() => {
     if (!open) return
@@ -38,7 +44,7 @@ export function LanguageSwitcher({
       if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false)
     }
     function onKey(e: KeyboardEvent) {
-      if (e.key === 'Escape') setOpen(false)
+      if (e.key === 'Escape') { setOpen(false); trigger.current?.focus() }
     }
     document.addEventListener('mousedown', onDown)
     document.addEventListener('keydown', onKey)
@@ -52,6 +58,13 @@ export function LanguageSwitcher({
     <div ref={ref} className="relative">
       <button
         type="button"
+        ref={trigger}
+        aria-controls={menuId}
+        onKeyDown={(event) => {
+          if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+            event.preventDefault(); setActiveIndex(event.key === 'ArrowDown' ? 0 : LOCALES.length - 1); setOpen(true)
+          }
+        }}
         aria-haspopup="menu"
         aria-expanded={open}
         aria-label={label}
@@ -72,7 +85,15 @@ export function LanguageSwitcher({
 
       {open ? (
         <div
+          id={menuId}
           role="menu"
+          onKeyDown={(event) => {
+            const { key } = event
+            if (['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(key)) {
+              event.preventDefault()
+              setActiveIndex(i => key === 'Home' ? 0 : key === 'End' ? LOCALES.length - 1 : (i + (key === 'ArrowDown' ? 1 : -1) + LOCALES.length) % LOCALES.length)
+            } else if (key === 'Tab') setOpen(false)
+          }}
           aria-label={heading}
           className={cn(
             'absolute end-0 z-50 mt-2 min-w-44 overflow-hidden rounded-md',
@@ -83,13 +104,15 @@ export function LanguageSwitcher({
             {heading}
           </p>
           <ul className="pb-1">
-            {LOCALES.map((loc) => {
+            {LOCALES.map((loc, index) => {
               const active = loc === locale
               return (
                 <li key={loc}>
                   <Link
                     to={localePath(loc, restPath)}
                     role="menuitemradio"
+                    tabIndex={index === activeIndex ? 0 : -1}
+                    onFocus={() => setActiveIndex(index)}
                     aria-checked={active}
                     onClick={() => setOpen(false)}
                     className={cn(

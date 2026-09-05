@@ -1,3 +1,5 @@
+import { assetPath } from '~/lib/deployment'
+import { responsiveImage } from '~/lib/responsive-image'
 import { cn } from '~/lib/utils'
 
 /**
@@ -5,7 +7,7 @@ import { cn } from '~/lib/utils'
  * STILL and LARGE, at its true 3:2 ratio. Every site image asset in
  * public/site/ is landscape 3:2, so the frame reserves a 3:2 box and the image
  * fills it exactly. Because the box ratio equals the image ratio, nothing is
- * ever cropped: no more object-cover beheadings of the people the paintings
+ * ever cropped: no more object-contain beheadings of the people the paintings
  * were composed around (the v1 bug this rebuild fixes).
  *
  * A 1px hairline-on-image ring defines the edge where the art meets the canvas;
@@ -27,24 +29,31 @@ export function Painting({
   sizes?: string
   rounded?: boolean
 }) {
+  const image = responsiveImage(src)
   return (
     <div
       className={cn('relative w-full overflow-hidden', rounded && 'rounded-lg', className)}
       // True 3:2, so the image fills the box with zero cropping and CLS is zero.
       style={{ aspectRatio: '3 / 2' }}
     >
+      <picture>
+        {image.srcSet ? <source type="image/webp" srcSet={image.srcSet} sizes={sizes || '(max-width: 768px) 100vw, 50vw'} /> : null}
       <img
-        src={src}
+        src={assetPath(src)}
         alt={alt}
         loading={priority ? 'eager' : 'lazy'}
         decoding="async"
-        sizes={sizes}
+        sizes={sizes || '(max-width: 768px) 100vw, 50vw'}
+        width={image.width}
+        height={image.height}
+        fetchPriority={priority ? 'high' : undefined}
         className={cn(
-          'absolute inset-0 h-full w-full object-cover',
+          'absolute inset-0 h-full w-full object-contain',
           rounded && 'rounded-lg',
           'ring-1 ring-[var(--color-hairline-on-image)]',
         )}
       />
+      </picture>
     </div>
   )
 }

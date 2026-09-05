@@ -1,5 +1,7 @@
 # Belief Changer: website front end
 
+> **2026-09-04 runtime update:** the production Orbit is modular, self-hosted and progressively enhanced. `npm ci && npm run dev` prepares its dependencies automatically. `npm run check` and `npm run test:e2e` are the current quality gates. See [the overhaul report](../docs/OVERHAUL-2026-09-04.md) and [Orbit architecture](public/orbit/README.md). Older review commands below are historical.
+
 A free, multilingual library of belief-change books, rendered as a calm,
 document-style editorial product. This is the front end. Every backend
 touchpoint is a documented contract and mocked in v1.

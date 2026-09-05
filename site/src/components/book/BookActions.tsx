@@ -5,7 +5,6 @@ import type { Book } from '~/data/types'
 import type { Locale } from '~/i18n/config'
 import type { Messages } from '~/i18n'
 import { localePath } from '~/i18n/routing'
-import { track } from '~/lib/measure'
 import { ToneTag } from '~/components/StatusTag'
 import { btnPrimary, btnSecondary } from '~/lib/ui'
 import { cn } from '~/lib/utils'
@@ -38,6 +37,7 @@ export function BookActions({
   // Remembered reading position (client only). null until read after mount.
   const [resumeChapter, setResumeChapter] = useState<number | null>(null)
   useEffect(() => {
+    setResumeChapter(null)
     try {
       const raw = localStorage.getItem(positionKey(book.slug))
       const n = raw ? Number(raw) : NaN
@@ -62,27 +62,17 @@ export function BookActions({
       ) : null}
 
       {canDownload ? (
-        <a
-          href="#"
-          onClick={(e) => {
-            // v1 stub: no real EPUB endpoint yet. Record the intent.
-            e.preventDefault()
-            track('download', { slug: book.slug, format: 'epub' })
-          }}
-          className={btnSecondary}
-        >
-          <DownloadSimple size={17} weight="regular" aria-hidden="true" />
-          {t.book.downloadEpub}
-        </a>
+        <span className="inline-flex flex-wrap items-center gap-2">
+          <button type="button" disabled className={cn(btnSecondary, 'cursor-not-allowed opacity-50')}>
+            <DownloadSimple size={17} weight="regular" aria-hidden="true" />
+            {t.book.downloadEpub}
+          </button>
+          <ToneTag tone="yellow">{t.status.inProduction}</ToneTag>
+        </span>
       ) : null}
 
       {/* Audio: a live Listen link, an "In production" tag, or nothing. */}
-      {audio === 'available' ? (
-        <a href="#" onClick={(e) => e.preventDefault()} className={btnSecondary}>
-          <Headphones size={17} weight="regular" aria-hidden="true" />
-          {t.book.listen}
-        </a>
-      ) : audio === 'in-production' ? (
+      {audio === 'available' || audio === 'in-production' ? (
         <span className={cn('inline-flex items-center gap-2 py-3.5')}>
           <span className="type-ui-sm inline-flex items-center gap-1.5 text-ink-secondary">
             <Headphones size={16} weight="regular" aria-hidden="true" />

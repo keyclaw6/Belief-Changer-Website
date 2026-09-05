@@ -7,9 +7,16 @@
   "scripts": {
     "dev": "vite dev --port 3000",
     "build": "vite build",
-    "serve": "vite preview --port 3000",
-    "typecheck": "tsc --noEmit",
-    "fetch-fonts": "node scripts/fetch-fonts.mjs"
+    "serve": "node scripts/serve-prod.mjs 3100",
+    "typecheck": "node scripts/generate-routes.mjs && tsc --noEmit",
+    "fetch-fonts": "node scripts/fetch-fonts.mjs",
+    "predev": "node scripts/vendor-orbit.mjs",
+    "prebuild": "node scripts/vendor-orbit.mjs",
+    "images": "node scripts/generate-images.mjs",
+    "vendor:orbit": "node scripts/vendor-orbit.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "test:e2e": "playwright test",
+    "check": "npm run test && npm run typecheck && npm run build"
   },
   "dependencies": {
     "@phosphor-icons/react": "2.1.10",
@@ -23,11 +30,20 @@
     "tailwind-merge": "3.6.0"
   },
   "devDependencies": {
+    "@fontsource/dm-sans": "5.3.0",
+    "@fontsource/newsreader": "5.3.0",
+    "@playwright/test": "1.62.1",
+    "@sparticuz/chromium": "149.0.0",
     "@tailwindcss/vite": "4.3.3",
+    "@tanstack/router-generator": "1.167.25",
+    "@types/node": "24.13.3",
     "@types/react": "19.2.18",
     "@types/react-dom": "19.2.4",
     "@vitejs/plugin-react": "6.0.5",
+    "sharp": "0.35.4",
     "tailwindcss": "4.3.3",
+    "three": "0.180.0",
+    "troika-three-text": "0.52.4",
     "typescript": "5.9.3",
     "vite": "8.2.1"
   }

@@ -1,0 +1,39 @@
+{
+  "stats": {
+    "state": "orbit",
+    "N": 80,
+    "camera": [
+      0,
+      36.13841660773211,
+      278.2243753996172
+    ],
+    "look": [
+      -0.20943951023931953,
+      0,
+      0,
+      "XYZ"
+    ],
+    "scene": {
+      "calls": 45,
+      "triangles": 445302
+    },
+    "focus": 157.26022518120433,
+    "render": {
+      "frame": 46,
+      "calls": 1,
+      "triangles": 2,
+      "points": 0,
+      "lines": 0
+    },
+    "mem": {
+      "geometries": 23,
+      "textures": 22
+    },
+    "viewport": {
+      "w": 1440,
+      "h": 1000
+    },
+    "frame": false
+  },
+  "errors": []
+}

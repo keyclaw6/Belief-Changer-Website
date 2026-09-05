@@ -9,10 +9,10 @@
  */
 import { createServer } from 'node:http'
 import { readFile, stat } from 'node:fs/promises'
-import { join, extname } from 'node:path'
+import { join, extname, sep } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-const SITE = fileURLToPath(new URL('../site', import.meta.url))
+const SITE = fileURLToPath(new URL('../', import.meta.url))
 const CLIENT = join(SITE, 'dist/client')
 const PORT = Number(process.argv[2] || 3100)
 
@@ -23,6 +23,10 @@ const MIME = {
   '.mjs': 'text/javascript',
   '.css': 'text/css',
   '.woff2': 'font/woff2',
+  '.woff': 'font/woff',
+  '.ttf': 'font/ttf',
+  '.webp': 'image/webp',
+  '.html': 'text/html',
   '.png': 'image/png',
   '.jpg': 'image/jpeg',
   '.jpeg': 'image/jpeg',
@@ -34,10 +38,10 @@ const MIME = {
 
 async function tryStatic(pathname) {
   // Only serve real files under dist/client (assets, fonts, covers, site).
-  const rel = pathname.replace(/^\/+/, '')
+  const rel = decodeURIComponent(pathname).replace(/^\/+/, '')
   if (!rel) return null
   const fp = join(CLIENT, rel)
-  if (!fp.startsWith(CLIENT)) return null
+  if (!fp.startsWith(CLIENT + sep)) return null
   try {
     const s = await stat(fp)
     if (!s.isFile()) return null
@@ -58,7 +62,7 @@ const server = createServer(async (req, res) => {
       return
     }
     // Forward to the SSR fetch handler.
-    const request = new Request(url, { method: req.method, headers: req.headers })
+    const request = new Request(url, { method: req.method, headers: req.headers, ...(!['GET', 'HEAD'].includes(req.method) ? { body: req, duplex: 'half' } : {}) })
     const response = await handler.fetch(request)
     const headers = {}
     response.headers.forEach((v, k) => (headers[k] = v))

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link, useRouterState } from '@tanstack/react-router'
 import { List, X } from '@phosphor-icons/react'
 import type { Locale } from '~/i18n/config'
@@ -17,6 +17,15 @@ import { cn } from '~/lib/utils'
  */
 export function Nav({ locale, t }: { locale: Locale; t: Messages }) {
   const [open, setOpen] = useState(false)
+  const menuButton = useRef<HTMLButtonElement>(null)
+  useEffect(() => {
+    if (!open) return
+    const close = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') { setOpen(false); menuButton.current?.focus() }
+    }
+    document.addEventListener('keydown', close)
+    return () => document.removeEventListener('keydown', close)
+  }, [open])
   const restPath = stripLocale(
     useRouterState({ select: (s) => s.location.pathname }),
   ).rest
@@ -79,6 +88,7 @@ export function Nav({ locale, t }: { locale: Locale; t: Messages }) {
             type="button"
             aria-expanded={open}
             aria-controls="mobile-nav"
+            ref={menuButton}
             aria-label={t.nav.menu}
             onClick={() => setOpen((v) => !v)}
             className="inline-flex items-center justify-center rounded-sm p-1.5 text-ink transition-colors hover:bg-surface"

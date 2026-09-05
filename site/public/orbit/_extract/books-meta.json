@@ -7,9 +7,10 @@
     "overlayInk": "charcoal",
     "caseColor": "#DBD9D8",
     "caseLuminance": 0.6964,
-    "coverUrl": "/covers/01-sugar.png",
+    "coverUrl": "/responsive/covers/01-sugar-1024.webp",
     "href": "/en/books/sugar",
-    "meta": "Belief Changer \u00b7 published"
+    "meta": "Belief Changer · published",
+    "ringCoverUrl": "/responsive/covers/01-sugar-640.webp"
   },
   {
     "slug": "smoking",
@@ -19,21 +20,23 @@
     "overlayInk": "charcoal",
     "caseColor": "#9AA28D",
     "caseLuminance": 0.3463,
-    "coverUrl": "/covers/02-smoking.png",
+    "coverUrl": "/responsive/covers/02-smoking-1024.webp",
     "href": "/en/books/smoking",
-    "meta": "Belief Changer \u00b7 published"
+    "meta": "Belief Changer · published",
+    "ringCoverUrl": "/responsive/covers/02-smoking-640.webp"
   },
   {
     "slug": "scrolling",
     "file": "03-scrolling.png",
     "title": "The Scrolling Trap",
-    "promise": "For when the feed owns your evenings and your attention feels rented. This book takes the scrolling trap apart piece by piece: where the pull comes from, what it actually delivers, and why stopping will feel like reli\u2026",
+    "promise": "For when the feed owns your evenings and your attention feels rented. This book takes the scrolling trap apart piece by piece: where the pull comes from, what it actually delivers, and why stopping will feel like reli…",
     "overlayInk": "bone",
     "caseColor": "#6C8594",
     "caseLuminance": 0.221,
-    "coverUrl": "/covers/03-scrolling.png",
+    "coverUrl": "/responsive/covers/03-scrolling-1024.webp",
     "href": "/en/books/scrolling",
-    "meta": "Belief Changer \u00b7 published"
+    "meta": "Belief Changer · published",
+    "ringCoverUrl": "/responsive/covers/03-scrolling-640.webp"
   },
   {
     "slug": "porn",
@@ -43,21 +46,23 @@
     "overlayInk": "charcoal",
     "caseColor": "#CEC7BC",
     "caseLuminance": 0.576,
-    "coverUrl": "/covers/04-porn.png",
+    "coverUrl": "/responsive/covers/04-porn-1024.webp",
     "href": "/en/books/porn",
-    "meta": "Belief Changer \u00b7 free to read"
+    "meta": "Belief Changer · free to read",
+    "ringCoverUrl": "/responsive/covers/04-porn-640.webp"
   },
   {
     "slug": "alcohol",
     "file": "05-alcohol.png",
     "title": "The Alcohol Trap",
-    "promise": "It borrows tomorrow\u2019s calm and charges interest tonight.",
+    "promise": "It borrows tomorrow’s calm and charges interest tonight.",
     "overlayInk": "bone",
     "caseColor": "#51533B",
     "caseLuminance": 0.0825,
-    "coverUrl": "/covers/05-alcohol.png",
+    "coverUrl": "/responsive/covers/05-alcohol-1024.webp",
     "href": "/en/books/alcohol",
-    "meta": "Belief Changer \u00b7 free to read"
+    "meta": "Belief Changer · free to read",
+    "ringCoverUrl": "/responsive/covers/05-alcohol-640.webp"
   },
   {
     "slug": "gaming",
@@ -67,9 +72,10 @@
     "overlayInk": "charcoal",
     "caseColor": "#BFA482",
     "caseLuminance": 0.3924,
-    "coverUrl": "/covers/06-gaming.png",
+    "coverUrl": "/responsive/covers/06-gaming-1024.webp",
     "href": "/en/books/gaming",
-    "meta": "Belief Changer \u00b7 free to read"
+    "meta": "Belief Changer · free to read",
+    "ringCoverUrl": "/responsive/covers/06-gaming-640.webp"
   },
   {
     "slug": "junkfood",
@@ -79,9 +85,10 @@
     "overlayInk": "charcoal",
     "caseColor": "#D07452",
     "caseLuminance": 0.2651,
-    "coverUrl": "/covers/07-junkfood.png",
+    "coverUrl": "/responsive/covers/07-junkfood-1024.webp",
     "href": "/en/books/junkfood",
-    "meta": "Belief Changer \u00b7 free to read"
+    "meta": "Belief Changer · free to read",
+    "ringCoverUrl": "/responsive/covers/07-junkfood-640.webp"
   },
   {
     "slug": "vaping",
@@ -91,9 +98,10 @@
     "overlayInk": "charcoal",
     "caseColor": "#A7B0A4",
     "caseLuminance": 0.4195,
-    "coverUrl": "/covers/08-vaping.png",
+    "coverUrl": "/responsive/covers/08-vaping-1024.webp",
     "href": "/en/books/vaping",
-    "meta": "Belief Changer \u00b7 free to read"
+    "meta": "Belief Changer · free to read",
+    "ringCoverUrl": "/responsive/covers/08-vaping-640.webp"
   },
   {
     "slug": "overthinking",
@@ -103,9 +111,10 @@
     "overlayInk": "charcoal",
     "caseColor": "#C0A09A",
     "caseLuminance": 0.3868,
-    "coverUrl": "/covers/09-overthinking.png",
+    "coverUrl": "/responsive/covers/09-overthinking-1024.webp",
     "href": "/en/books/overthinking",
-    "meta": "Belief Changer \u00b7 free to read"
+    "meta": "Belief Changer · free to read",
+    "ringCoverUrl": "/responsive/covers/09-overthinking-640.webp"
   },
   {
     "slug": "complaining",
@@ -115,8 +124,9 @@
     "overlayInk": "charcoal",
     "caseColor": "#E1C5A0",
     "caseLuminance": 0.5848,
-    "coverUrl": "/covers/10-complaining.png",
+    "coverUrl": "/responsive/covers/10-complaining-1024.webp",
     "href": "/en/books/complaining",
-    "meta": "Belief Changer \u00b7 free to read"
+    "meta": "Belief Changer · free to read",
+    "ringCoverUrl": "/responsive/covers/10-complaining-640.webp"
   }
 ]

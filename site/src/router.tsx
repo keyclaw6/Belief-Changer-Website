@@ -12,6 +12,7 @@ import { DefaultCatchBoundary } from './components/DefaultCatchBoundary'
 export function getRouter() {
   const router = createTanStackRouter({
     routeTree,
+    basepath: import.meta.env.BASE_URL.replace(/\/$/, "") || "/",
     // SSR-friendly defaults; keep intent-based preloading light for a calm site.
     defaultPreload: 'intent',
     defaultPreloadStaleTime: 0,
