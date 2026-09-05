@@ -109,7 +109,6 @@ const heroCopy = {
 }[LOCALE] || ['A little clarity.', 'A different life.', 'Free books for the beliefs that hold you back.'];
 document.querySelector('#hero-heading .first').textContent = heroCopy[0];
 document.querySelector('#hero-heading .second').textContent = heroCopy[1];
-document.getElementById('hero-subtitle').textContent = heroCopy[2];
 document.documentElement.lang = LOCALE;
 
 /* Embed wheel-trap fix: the parent (ShelfStage) reports how much of the hero
@@ -148,6 +147,15 @@ const openButton = document.getElementById('open-book');
 const readerTools = document.getElementById('reader-tools');
 const previewEnd = document.createElement('a'); previewEnd.id='preview-end'; previewEnd.hidden=true; readerTools.append(previewEnd);
 let previewContent={}; let linkPress=null;
+let destinationReady=false;
+previewEnd.addEventListener('click',event=>{
+  if(EMBED && destinationReady){event.preventDefault();parent.postMessage({type:'orbit-destination-enter',href:previewEnd.href},location.origin);}
+});
+window.addEventListener('message',event=>{
+  if(event.origin!==location.origin || event.source!==parent || event.data?.type!=='orbit-destination-ready')return;
+  if(event.data.href!==previewEnd.href)return;
+  destinationReady=!!event.data.ready;reader?.setDestinationReady(destinationReady);invalidate();
+});
 const coverButton = document.getElementById('toggle-cover');
 const autoButton = document.getElementById('auto-browse');
 
@@ -526,17 +534,18 @@ function applyTheme() {
   }
   // Dark = night gallery: the lamp is the only key. The studio rig drops to a
   // whisper (rim/hemi just enough that the ring reads as faint silhouettes).
-  studio.sun.intensity = dark ? .95 : 2.15;
-  studio.fill.intensity = dark ? .7 : .85;
-  studio.rim.intensity = dark ? .8 : .65;
-  studio.hemi.intensity = dark ? 1.0 : 1.15;
+  studio.sun.intensity = dark ? 0 : 2.15;
+  studio.fill.intensity = dark ? 0 : .85;
+  studio.rim.intensity = dark ? 0 : .65;
+  studio.hemi.intensity = dark ? 0 : 1.15;
   studio.hemi.groundColor.set(dark ? 0x8d887f : 0xa09b90);
-  scene.environmentIntensity = dark ? .30 : .36;
-  readingFill.intensity=dark ? .85 : .65;
-  lamp.intensity = dark ? 7000 : 0;
+  scene.environmentIntensity = dark ? 0 : .36;
+  readingFill.intensity=dark ? 0 : .65;
+  lamp.intensity = dark ? 23000 : 0;
   contactShadow.visible = !dark;
   grounding.setDark(dark);
-  glowPool.visible = dark;
+  glowPool.visible = false;
+  if(dark) updateLamp();
   document.documentElement.classList.toggle('scene-dark', dark);
 }
 
@@ -544,29 +553,15 @@ function applyTheme() {
    browsing, the held volume while inspecting. Called from the frame loop so
    it tracks spins, pulls and returns. While a book is held the light pool on
    the ring behind goes out — the lamp follows the held volume alone. */
-const _lampAim = new THREE.Vector3();
+const _lampAim=new THREE.Vector3(), _browseLampAim=new THREE.Vector3(0,PRESENT_LIFT,RING_R+PRESENT_OUT)
+  .applyMatrix4(new THREE.Matrix4().compose(new THREE.Vector3(0,RING_Y_ORBIT,0),new THREE.Quaternion().setFromEuler(new THREE.Euler(RING_TILT,0,0)),new THREE.Vector3(1,1,1)));
 function updateLamp() {
-  const held =
-    (state === 'inspecting' || state === 'reading' || state === 'pullingOut' || state === 'returning') &&
-    reader && reader.group.visible;
-  if (held) {
-    _lampAim.copy(detailRoot.position);
-    glowPool.visible = false;
-  } else if (slots[frontIndex]) {
-    _lampAim.copy(slotWorldPose(frontIndex, 1).pos);
-    glowPool.visible = true;
-    const phi = phiOf(frontIndex);
-    const radial = RING_R + PRESENT_OUT;
-    glowPool.position.set(
-      radial * Math.sin(phi),
-      -BOOK_SCALE * 11.34,
-      radial * Math.cos(phi),
-    );
-  } else {
-    return;
-  }
+  // Browse slot movement never moves the light: the arriving volume enters it.
+  _lampAim.copy(reader?.group.visible ? detailRoot.position : _browseLampAim);
   lamp.target.position.copy(_lampAim);
-  lamp.position.set(_lampAim.x * 0.3, _lampAim.y + 95, _lampAim.z + 50);
+  // Above AND in front like a real reading lamp, so an upright spread catches it.
+  lamp.position.set(_lampAim.x-12,_lampAim.y+62,_lampAim.z+98);
+  glowPool.visible=false;
 }
 
 window.addEventListener('message', (event) => {
@@ -609,6 +604,7 @@ function currentMeta() {
 
 function setState(next) {
   state = next;
+  if(bootReady)syncFeatured();
   invalidate();
   syncChrome();
   document.documentElement.classList.toggle('is-inspecting', next !== 'orbit' && next !== 'presenting');
@@ -749,7 +745,25 @@ function applySlotPose(slot, i, angle, present, lift = 0) {
   }
 }
 
+const featuredBooks=new Map();
+let activeFeatured=null;
+function syncFeatured(){
+  const slot=slots[frontIndex];if(!slot||!shared)return;
+  const key=slot.meta.slug;
+  if(!featuredBooks.has(key)){
+    featuredBooks.set(key,null);
+    createClosedBook(THREE,shared,{...slot.meta,coverUrl:slot.meta.coverUrl,author:'Belief Changer',liveTitle:true}).then(book=>{
+      book.group.visible=false;featuredBooks.set(key,book);syncFeatured();invalidate();
+    }).catch(()=>featuredBooks.delete(key));
+  }
+  const book=featuredBooks.get(key);
+  const show=book && slot.visible && frontPresent>.98 && ['orbit','presenting'].includes(state);
+  if(activeFeatured){activeFeatured.group.visible=false;}
+  for(const s of slots)if(s)s.featuredBook=false;
+  if(show){slot.host.add(book.group);book.group.visible=true;slot.featuredBook=true;activeFeatured=book;}
+}
 function syncTitles() {
+  syncFeatured();
   for (let i = 0; i < N; i++) {
     const s = slots[i];
     if (!s) continue;
@@ -975,7 +989,7 @@ function showPanel(meta) {
   // Prefer site book page: /{locale}/books/{slug}
   const href = `/Belief-Changer-Website/${LOCALE}/books/${meta.slug}`;
   const preview=previewContent[meta.slug]?.[LOCALE] || previewContent[meta.slug]?.en;
-  previewEnd.href=href;previewEnd.textContent=preview?.cta || labels.read;
+  previewEnd.href=href;destinationReady=false;reader?.setDestinationReady(false);previewEnd.textContent=preview?.cta || labels.read;
   previewEnd.setAttribute('aria-label',preview?.cta || labels.read);
   previewEnd.target=EMBED?'_top':'_self';
   panelRead.href = href;
@@ -1732,7 +1746,8 @@ async function boot() {
     } else window.__orbitPerf.prewarm = 'skipped';
   }, 1500);
   window.__ORBIT = {
-    repairVersion: 'orbit-repair-20260905-1',
+    repairVersion: 'orbit-refinement-20260905-2',
+    lamp, readingFill, studio,
     get motionDebug() { return {hoverIndex,hoverAmounts:Array.from(hoverAmounts),hoverTilt:hoverTilt.toArray(),pageDragging,coverDragging,activePointerId,inspectZoom,inspectPan:inspectPan.toArray(),state, sceneDirty, frameScheduled:!!frameHandle, readBias, hoverLift, hoverFront, anim:anim?.kind, velocity:detailSpinVel.toArray(), frame:window.__orbitPerf.renders}; },
     get state() { return state; },
     get frontIndex() { return frontIndex; },
@@ -1962,6 +1977,12 @@ function frame(now) {
 
   if (active || sceneDirty) {
     closedBatch?.update();
+    if(EMBED){
+      const rect=canvas.getBoundingClientRect();
+      const portal=reader?.group.visible && ['inspecting','reading'].includes(state) ? reader.destinationQuad(camera,rect.width,rect.height,parent.innerWidth/parent.innerHeight) : null;
+      if(portal)parent.postMessage({type:'orbit-destination-pose',href:previewEnd.href,...portal},location.origin);
+      else parent.postMessage({type:'orbit-destination-hide'},location.origin);
+    }
     if (reader?.group.visible) focusPoint.copy(detailRoot.position);
     else { focusPoint.set(0,PRESENT_LIFT,RING_R+PRESENT_OUT); ringGroup.localToWorld(focusPoint); }
     window.__orbitPerf.scene = atmosphere.render(focusPoint, true);

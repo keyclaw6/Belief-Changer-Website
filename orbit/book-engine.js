@@ -345,66 +345,32 @@ export function fitCover(tex, planeAspect) {
   return tex;
 }
 
+const COVER_PRINT = Object.freeze({width:768,height:Math.round(768*(BOOK_DIMS.boardH-ART_BORDER_FRONT*2)/(BOOK_DIMS.boardW-ART_BORDER_FRONT*2)),font:'Orbit Cover Serif',titleSize:119,lineHeight:1.06,top:.2,markSize:26,markY:.92,markTracking:.24});
+function coverTitleLayout(title){
+  const ctx=document.createElement('canvas').getContext('2d');let size=COVER_PRINT.titleSize,lines=[];
+  do{ctx.font=`400 ${size}px "${COVER_PRINT.font}"`;lines=wrapLines(ctx,title,COVER_PRINT.width*.84);if(lines.length<=3)break;size-=2;}while(size>68);
+  return {lines,size};
+}
+function spacedLine(ctx,text,x,y,tracking){
+  const width=ctx.measureText(text).width+Math.max(0,text.length-1)*tracking;let left=x-width/2;ctx.textAlign='left';
+  for(const char of text){ctx.fillText(char,left,y);left+=ctx.measureText(char).width+tracking;}
+}
 function bakeFrontTitle(THREE, { title, subtitle, author, ink, caseLum }) {
-  const W = 768;
-  const H = 1152;
-  const c = document.createElement('canvas');
-  c.width = W;
-  c.height = H;
-  const ctx = c.getContext('2d');
-  ctx.clearRect(0, 0, W, H);
-  const color = ink || inkForLuminance(caseLum ?? 0.5);
-  ctx.fillStyle = color;
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'alphabetic';
-
-  // Upper negative space — site cover layout (title ~20% from top)
-  ctx.font = '500 108px "DM Sans", system-ui, sans-serif';
-  const lines = wrapLines(ctx, title || '', W * 0.82);
-  let y = H * 0.2;
-  for (const line of lines.slice(0, 3)) {
-    ctx.fillText(line, W / 2, y);
-    y += 112;
-  }
-  if (subtitle) {
-    ctx.font = '400 30px "DM Sans", system-ui, sans-serif';
-    ctx.globalAlpha = 0.88;
-    y += 12;
-    for (const line of wrapLines(ctx, subtitle, W * 0.72).slice(0, 2)) {
-      ctx.fillText(line, W / 2, y);
-      y += 38;
-    }
-    ctx.globalAlpha = 1;
-  }
-  if (author && String(author).toUpperCase() !== 'BELIEF CHANGER') {
-    ctx.font = '500 22px "DM Sans", system-ui, sans-serif';
-    ctx.globalAlpha = 0.8;
-    ctx.fillText(String(author).toUpperCase(), W / 2, H * 0.86);
-    ctx.globalAlpha = 1;
-  }
-  // Series mark at foot — letterspace manually
-  ctx.font = '500 18px "DM Sans", system-ui, sans-serif';
-  ctx.globalAlpha = 0.78;
-  const mark = 'BELIEF CHANGER';
-  const spaced = mark.split('').join(' ');
-  ctx.fillText(spaced, W / 2, H * 0.93);
-  ctx.globalAlpha = 1;
-
-  const tex = new THREE.CanvasTexture(c);
-  tex.colorSpace = THREE.SRGBColorSpace;
-  tex.wrapS = tex.wrapT = THREE.ClampToEdgeWrapping;
-  tex.minFilter = THREE.LinearMipmapLinearFilter;
-  tex.magFilter = THREE.LinearFilter;
-  tex.generateMipmaps = true;
-  tex.anisotropy = 8;
-  tex.needsUpdate = true;
-  return tex;
+  const {width:W,height:H}=COVER_PRINT,c=document.createElement('canvas');c.width=W;c.height=H;
+  const ctx=c.getContext('2d');ctx.fillStyle=ink||inkForLuminance(caseLum??.5);ctx.textAlign='center';
+  const layout=coverTitleLayout(title);ctx.font=`400 ${layout.size}px "${COVER_PRINT.font}"`;ctx.textBaseline='top';
+  layout.lines.forEach((line,i)=>ctx.fillText(line,W/2,H*COVER_PRINT.top+i*layout.size*COVER_PRINT.lineHeight));
+  if(subtitle){ctx.font='500 30px "Orbit Cover Sans"';ctx.fillText(subtitle,W/2,H*.315+60,W*.84);}
+  ctx.textBaseline='middle';ctx.font='500 24px "Orbit Cover Sans"';
+  if(author&&String(author).toUpperCase()!=='BELIEF CHANGER')ctx.fillText(String(author).toUpperCase(),W/2,H*.862);
+  ctx.font=`500 ${COVER_PRINT.markSize}px "Orbit Cover Sans"`;spacedLine(ctx,'BELIEF CHANGER',W/2,H*COVER_PRINT.markY,COVER_PRINT.markSize*COVER_PRINT.markTracking);
+  const tex=new THREE.CanvasTexture(c);tex.colorSpace=THREE.SRGBColorSpace;tex.anisotropy=8;return tex;
 }
 
 const ringPrintCache=new Map();
 function bakeRingPrint(THREE, art, meta, back=false){
   const key=JSON.stringify([art?.uuid,meta,back]);if(ringPrintCache.has(key))return ringPrintCache.get(key);
-  const c=document.createElement('canvas');c.width=768;c.height=1152;const g=c.getContext('2d');
+  const c=document.createElement('canvas');c.width=COVER_PRINT.width;c.height=COVER_PRINT.height;const g=c.getContext('2d');
   g.fillStyle=meta.caseColor;g.fillRect(0,0,c.width,c.height);
   if(art)g.drawImage(art.image,0,0,c.width,c.height);
   if(!back){const title=bakeFrontTitle(THREE,meta);g.drawImage(title.image,0,0);title.dispose();}
@@ -795,6 +761,7 @@ function coverArtworkMesh(THREE, material, isFront, D) {
   const g = new THREE.PlaneGeometry(pw, ph, 1, 1);
   // Cover photo on UV0 — default UVs read upright/unmirrored after Rx(+π/2) rest.
   const src = g.attributes.uv;
+  if(!isFront){for(let i=0;i<src.count;i++)src.setXY(i,1-src.getX(i),1-src.getY(i));src.needsUpdate=true;}
   // Cloth weave for normals uses uv1 at board scale.
   const cloth = src.clone();
   const uv = cloth.array;
@@ -854,14 +821,17 @@ async function buildCoverTitleGroup(THREE, shared, { title, subtitle, author, in
   const D = BOOK_DIMS;
   const pw = D.boardW - ART_BORDER_FRONT * 2;
   const ph = D.boardH - ART_BORDER_FRONT * 2;
-  const s = pw / 768; // legacy bakeFrontTitle canvas was 768×1152
+  const s = pw / COVER_PRINT.width;
+  const layout = coverTitleLayout(title);
   const g = new THREE.Group();
   g.name = 'troikaTitle';
+  const layoutsReady=[];
   const mk = (str, pxSize, yCanvas, opts = {}) => {
     if (!str) return null;
     const t = new Text();
     t.text = opts.upper ? String(str).toUpperCase() : String(str);
     t.font = opts.serif ? shared.serifFontUrl : shared.titleFontUrl;
+    t.material = new THREE.MeshStandardMaterial({color:ink,roughness:BOOK_LOOK.cover.roughness,metalness:0,envMapIntensity:.46,transparent:true,depthWrite:false});
     t.textAlign = 'center';
     t.fontSize = Math.max(0.14, pxSize * s);
     t.color = ink;
@@ -869,7 +839,7 @@ async function buildCoverTitleGroup(THREE, shared, { title, subtitle, author, in
     t.anchorY = opts.top ? 'top' : 'middle';
     t.maxWidth = pw * 0.84;
     t.lineHeight = opts.lineHeight || 1.08;
-    t.letterSpacing = opts.tracking != null ? opts.tracking : 0.01;
+    t.letterSpacing = opts.tracking != null ? opts.tracking : 0;
     t.sdfGlyphSize = 64;
     t.renderOrder = 6;
     t.userData.isSDFText = true;
@@ -880,14 +850,16 @@ async function buildCoverTitleGroup(THREE, shared, { title, subtitle, author, in
     t.position.z = 0.012;
     t.position.y = ph / 2 - yCanvas * s;
     g.add(t);
-    t.sync(() => window.dispatchEvent(new Event('orbit-invalidate')));
+    layoutsReady.push(new Promise(resolve=>t.sync(()=>{window.dispatchEvent(new Event('orbit-invalidate'));resolve();})));
     return t;
   };
-  mk(title, 119, 1152 * 0.2, { top: true, lineHeight: 1.06, serif: true });
-  if (subtitle) mk(subtitle, 30, 1152 * (0.2 + 0.115) + 60, { lineHeight: 1.3 });
-  if (author && String(author).toUpperCase() !== 'BELIEF CHANGER') mk(String(author).toUpperCase(), 24, 1152 * 0.862);
-  mk('BELIEF CHANGER', 26, 1152 * 0.92, { tracking: 0.24 });
+  mk(layout.lines.join('\n'), layout.size, COVER_PRINT.height*COVER_PRINT.top, { top: true, lineHeight:COVER_PRINT.lineHeight, serif:true });
+  if (subtitle) mk(subtitle, 30, COVER_PRINT.height * .315 + 60, { lineHeight: 1.3 });
+  if (author && String(author).toUpperCase() !== 'BELIEF CHANGER') mk(String(author).toUpperCase(), 24, COVER_PRINT.height * .862);
+  mk('BELIEF CHANGER', COVER_PRINT.markSize, COVER_PRINT.height*COVER_PRINT.markY, { tracking:COVER_PRINT.markTracking });
+  g.userData.printLayout={font:COVER_PRINT.font,lines:layout.lines,size:layout.size};
   g.userData.isTroikaTitle = true;
+  await Promise.all(layoutsReady);
   return g;
 }
 
@@ -896,6 +868,13 @@ export async function createSharedResources(THREE, opts = {}) {
   const D = BOOK_DIMS;
   const loader = new THREE.TextureLoader();
   const aniso = 4;
+  // The canvas cache and live SDF title use the exact same two font files.
+  const serifUrl=new URL('./vendor/fonts/newsreader-latin-400-normal.woff',import.meta.url).href;
+  const sansUrl=new URL('./vendor/fonts/dm-sans-latin-500-normal.woff',import.meta.url).href;
+  if(![...document.fonts].some(font=>font.family==='Orbit Cover Serif')){
+    const fonts=[new FontFace('Orbit Cover Serif',`url(${serifUrl})`),new FontFace('Orbit Cover Sans',`url(${sansUrl})`,{weight:'500'})];
+    await Promise.all(fonts.map(async font=>{await font.load();document.fonts.add(font)}));
+  }
 
   const [coverNormal, paperColor, endColor, bandColor, pageEdgeScan] = await Promise.all([
     loadMap(THREE, loader, `${MAT_BASE}cover_normal.webp`, false, ...BOOK_LOOK.cover.normalRepeat, aniso),
@@ -1210,13 +1189,15 @@ export async function createClosedBook(THREE, shared, opts) {
   root.add(book);
 
   const { matCase, matCaseSpine } = makeCaseMaterials(THREE, shared, caseColor);
-  const coverTex = await loadCoverTexture(THREE, coverUrl, 4, 512);
+  const coverTex = await loadCoverTexture(THREE, coverUrl, 4, opts.liveTitle ? 0 : 512);
   const matFrontArt = makeFrontArtMaterial(THREE, shared, coverTex);
 
   const ink = inkForLuminance(caseLuminance, overlayInk);
-  const titleGroup=null, matTitle=null, titleTex=null;
-  const titleOverlay=new THREE.Group(); titleOverlay.name='baked-ring-print';
-  matFrontArt.map=bakeRingPrint(THREE,coverTex,{title,subtitle,author,ink,caseColor,promise},false);
+  const titleGroup=opts.liveTitle ? await buildCoverTitleGroup(THREE,shared,{title,subtitle,author,ink}) : null;
+  const matTitle=null, titleTex=null;
+  const titleOverlay=titleGroup || new THREE.Group();
+  if(titleGroup){titleGroup.rotation.x=Math.PI/2;titleGroup.position.set(D.boardW/2,-.028,0);}
+  else {titleOverlay.name='baked-ring-print';matFrontArt.map=bakeRingPrint(THREE,coverTex,{title,subtitle,author,ink,caseColor,promise},false);}
   const spineTitleTex = bakeSpineTitle(THREE, { title, ink, caseLum: caseLuminance });
   const matSpineArt = makeSpineArtMaterial(THREE, spineTitleTex, shared);
   matSpineArt.transparent=false; matSpineArt.alphaTest=.05; matSpineArt.depthWrite=true;
@@ -2447,7 +2428,10 @@ export async function createReaderBook(THREE, shared, options = {}) {
     const ink2 = inkForLuminance(meta.caseLuminance, meta.overlayInk);
     if (troikaTitleTexts) {
       // Troika titles are live polygon meshes — just re-set their strings.
-      const seq = [[meta.title, false]];
+      const nextLayout=coverTitleLayout(meta.title);
+      const seq = [[nextLayout.lines.join('\n'), false]];
+      if(troikaTitleTexts[0])troikaTitleTexts[0].fontSize=nextLayout.size*(D.boardW-ART_BORDER_FRONT*2)/COVER_PRINT.width;
+      titleOverlay.userData.printLayout={font:COVER_PRINT.font,lines:nextLayout.lines,size:nextLayout.size};
       if (meta.subtitle) seq.push([meta.subtitle, false]);
       if (meta.author && String(meta.author).toUpperCase() !== 'BELIEF CHANGER') seq.push([String(meta.author).toUpperCase(), false]);
       seq.push(['BELIEF CHANGER', false]);
@@ -2605,6 +2589,20 @@ export async function createReaderBook(THREE, shared, options = {}) {
     const hit = raycaster.intersectObjects(hitMeshes, false)[0];
     return hit && (hit.object === frontBoard || hit.object === frontArt);
   }
+  function destinationQuad(camera,width,height,aspect=width/height){
+    if(S.cover<.99 || S.turned<4) return null;
+    book.updateWorldMatrix(true,false);
+    const pW=Math.min(D.pageW*.86,D.pageH*.78*aspect), pH=pW/aspect,x0=(D.pageW-pW)/2;
+    const corners=[[x0,-pH/2],[x0+pW,-pH/2],[x0+pW,pH/2],[x0,pH/2]].map(([x,z])=>{
+      const d=stackDeformAt(1,x/D.pageW,KIN?.relax||0,0);
+      const p=new THREE.Vector3(x+d.dx,D.yTop+d.dy+.02,z).applyMatrix4(book.matrixWorld).project(camera);
+      return {x:(p.x+1)*width/2,y:(1-p.y)*height/2};
+    });
+    const normal=new THREE.Vector3(0,1,0).transformDirection(book.matrixWorld);
+    const center=new THREE.Vector3(D.pageW/2,D.yTop,0).applyMatrix4(book.matrixWorld);
+    return {corners,visible:S.turned===5 && S.turning<0 && normal.dot(camera.position.clone().sub(center))>0};
+  }
+  function setDestinationReady(ready){if(capPrint)capPrint.group.visible=!ready;}
   function previewLinkHit(raycaster) {
     if(S.turned!==NLEAF || S.turning>=0 || S.cover<.99 || anim) return false;
     page11.updateWorldMatrix(true,false);
@@ -2633,6 +2631,8 @@ export async function createReaderBook(THREE, shared, options = {}) {
     hitMeshes,
     dragProjection,
     previewLinkHit,
+    destinationQuad,
+    setDestinationReady,
     pickCover,
     isBusy: () => !!anim || S.turning >= 0,
     openCover,
