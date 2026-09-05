@@ -6,7 +6,7 @@ export function createAtmosphere(THREE, renderer, scene, camera) {
   const target = new THREE.WebGLRenderTarget(1, 1, {
     type: renderer.extensions.has('EXT_color_buffer_float') ? THREE.HalfFloatType : THREE.UnsignedByteType,
     depthBuffer: true,
-    samples: renderer.getPixelRatio() > 1.2 ? 0 : Math.min(2, renderer.capabilities.maxSamples),
+    samples: Math.min(matchMedia('(max-width:720px)').matches ? 2 : 4, renderer.capabilities.maxSamples),
   });
   target.depthTexture = new THREE.DepthTexture(1, 1, THREE.UnsignedIntType);
   target.texture.colorSpace = THREE.LinearSRGBColorSpace;

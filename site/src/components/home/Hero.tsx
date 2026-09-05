@@ -41,9 +41,7 @@ export function Hero({
       {/* Full-viewport-width Orbit stage: real space for the ring. */}
       <div className="atmospheric-hero" data-inspecting={inspecting}>
         <div className="atmospheric-hero__heading" aria-hidden={inspecting}>
-          <p className="atmospheric-hero__eyebrow">{copy[3]}</p>
           <h1><span>{copy[0]}</span>{' '}<span>{copy[1]}</span></h1>
-          <p className="atmospheric-hero__subtitle">{copy[2]}</p>
         </div>
         <ShelfStage books={shelfBooks} locale={locale} onInspectChange={setInspecting} />
       </div>

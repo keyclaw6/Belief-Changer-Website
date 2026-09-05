@@ -38,7 +38,7 @@ export function instanceRing(THREE, ring, slots) {
     for (const batch of batches.values()) {
       batch.instances.forEach(({ slot, local }, index) => {
         slot.host.updateMatrix();
-        batch.mesh.setMatrixAt(index, slot.visible ? pose.multiplyMatrices(slot.host.matrix, local) : hidden);
+        batch.mesh.setMatrixAt(index, slot.visible && !slot.featuredBook ? pose.multiplyMatrices(slot.host.matrix, local) : hidden);
       });
       batch.mesh.instanceMatrix.needsUpdate = true;
     }

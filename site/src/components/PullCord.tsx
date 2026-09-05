@@ -26,10 +26,9 @@ import {
   useRef,
   useState,
   type AnimationEvent,
-  type KeyboardEvent,
-  type MouseEvent,
+  type PointerEvent as ReactPointerEvent,
 } from 'react'
-import { motion, useReducedMotion, type PanInfo } from 'motion/react'
+import { useReducedMotion } from 'motion/react'
 
 interface PullCordConfig {
   gravity: number
@@ -61,9 +60,9 @@ const KNOB_R = 6.5
 /* Grab area: a tall strip covering the rope around the bead, not just the
    bead itself — the cord must be grabbable anywhere near the knob (the old
    46px square felt dead whenever the pointer landed on the rope). */
-const HIT_W = W
-const HIT_TOP = REST_Y - 84
-const HIT_H = 168
+const HIT_W = 52
+const HIT_TOP = REST_Y - 38
+const HIT_H = 76
 
 interface Node {
   x: number
@@ -114,6 +113,8 @@ export function PullCord({
   const dragging = useRef(false)
   const didDrag = useRef(false)
   const clicked = useRef(false)
+  const buttonRef = useRef<HTMLButtonElement>(null)
+  const press = useRef<{id:number;x:number;y:number;endX:number;endY:number} | null>(null)
   const target = useRef({ x: ANCHOR_X, y: REST_Y })
   const wake = useRef(() => {})
   const onPullRef = useRef(onPull)
@@ -134,6 +135,7 @@ export function PullCord({
 
     const render = () => {
       cordRef.current?.setAttribute('d', buildPath(points))
+      if(buttonRef.current) buttonRef.current.style.transform=`translate(${end.x-ANCHOR_X}px,${end.y-REST_Y}px)`
       groupRef.current?.setAttribute(
         'transform',
         `translate(${(end.x - ANCHOR_X).toFixed(2)} ${(end.y - REST_Y).toFixed(2)})`,
@@ -142,13 +144,14 @@ export function PullCord({
 
     const step = (now: number) => {
       const { gravity, damping, iterations, sleepVelocity } = DEFAULT_CONFIG
-      const dt = previousTime
-        ? Math.min(0.04, Math.max(0.004, (now - previousTime) / 1000))
-        : 1 / 60
-      previousTime = now
-      const timeCorrection = previousDelta > 0 ? dt / previousDelta : 1
-      const velocity = timeCorrection * Math.pow(damping, dt * 60)
-      const acceleration = dt * dt
+      const elapsed=previousTime ? Math.min(.064,Math.max(.001,(now-previousTime)/1000)) : 1/60
+      previousTime=now
+      const steps=Math.max(1,Math.ceil(elapsed/(1/120)))
+      const dt=elapsed/steps
+      for(let substep=0;substep<steps;substep++) {
+      const timeCorrection=previousDelta>0 ? dt/previousDelta : 1
+      const velocity=timeCorrection*Math.pow(damping,dt*60)
+      const acceleration=dt*dt
       end.fixed = dragging.current
 
       for (let i = 1; i < points.length; i++) {
@@ -193,6 +196,7 @@ export function PullCord({
       }
 
       previousDelta = dt
+      }
       render()
       let speed = 0
       for (let i = 1; i < points.length; i++) {
@@ -200,7 +204,8 @@ export function PullCord({
         speed +=
           Math.abs(point.x - point.ox) + Math.abs(point.y - point.oy)
       }
-      if (!dragging.current && speed < sleepVelocity * dt * 60) {
+      if (!dragging.current && speed < sleepVelocity * elapsed * 60) {
+        for(const point of points){point.ox=point.x;point.oy=point.y}
         running = false
         return
       }
@@ -215,7 +220,7 @@ export function PullCord({
       raf = requestAnimationFrame(step)
     }
     render()
-    return () => cancelAnimationFrame(raf)
+    return () => { cancelAnimationFrame(raf); wake.current=()=>{} }
   }, [])
 
   const toggle = () => onPullRef.current?.()
@@ -227,61 +232,54 @@ export function PullCord({
     wake.current()
   }
 
-  const onPanStart = () => {
-    dragging.current = true
-    didDrag.current = true
-    clicked.current = false
-    wake.current()
-  }
-
-  const onPan = (_event: PointerEvent, info: PanInfo) => {
-    const offsetX = info.offset.x
-    const offsetY = REST_Y + info.offset.y
-    const distance = Math.hypot(offsetX, offsetY) || 0.0001
-    const maxDistance = REST_Y + DEFAULT_CONFIG.stretchMax
-    const scale = distance > maxDistance ? maxDistance / distance : 1
-    target.current = {
-      x: ANCHOR_X + offsetX * scale,
-      y: offsetY * scale,
-    }
-    const toggleAt = Math.min(
-      DEFAULT_CONFIG.stretchToggle,
-      DEFAULT_CONFIG.stretchMax - 1,
-    )
-    if (!clicked.current && distance - REST_Y >= toggleAt) {
-      clicked.current = true
-      toggle()
-    }
-  }
-
-  const onPanEnd = () => {
+  const finishPointer = useCallback((cancelled = false) => {
+    const start = press.current
+    if (!start) return
+    press.current = null
     dragging.current = false
-    const points = nodesRef.current!
-    const point = points[points.length - 1]!
-    const vx = point.x - point.ox
-    const vy = point.y - point.oy
-    const velocity = Math.hypot(vx, vy)
-    if (velocity > DEFAULT_CONFIG.maxVelocity) {
-      const scale = DEFAULT_CONFIG.maxVelocity / velocity
-      point.ox = point.x - vx * scale
-      point.oy = point.y - vy * scale
-    }
+    if (buttonRef.current?.hasPointerCapture(start.id)) buttonRef.current.releasePointerCapture(start.id)
+    const points = nodesRef.current!, point = points[points.length - 1]!
+    // Zero stale drag acceleration; the rope's own tension provides the return.
+    point.ox = point.x; point.oy = point.y
+    buttonRef.current?.removeAttribute('data-dragging')
+    if (!cancelled && !didDrag.current && !clicked.current) onPullRef.current?.()
+    didDrag.current = false; clicked.current = false
     wake.current()
-    requestAnimationFrame(() => {
-      didDrag.current = false
-    })
-  }
+  }, [])
 
-  const onClick = (event: MouseEvent<HTMLButtonElement>) => {
-    if (didDrag.current || event.detail === 0) return
-    scriptedPull()
-  }
+  useEffect(() => {
+    const cancel = () => finishPointer(true)
+    const hidden = () => { if (document.hidden) cancel() }
+    window.addEventListener('blur', cancel)
+    document.addEventListener('visibilitychange', hidden)
+    return () => { cancel(); window.removeEventListener('blur', cancel); document.removeEventListener('visibilitychange', hidden) }
+  }, [finishPointer])
 
-  const onKeyDown = (event: KeyboardEvent<HTMLButtonElement>) => {
-    if ((event.key === 'Enter' || event.key === ' ') && !event.repeat) {
-      event.preventDefault()
-      scriptedPull()
-    }
+  const onPointerDown = (event: ReactPointerEvent<HTMLButtonElement>) => {
+    if (event.button !== 0 || press.current) return
+    event.preventDefault()
+    const point = nodesRef.current!.at(-1)!
+    press.current = {id:event.pointerId,x:event.clientX,y:event.clientY,endX:point.x,endY:point.y}
+    target.current = {x:point.x,y:point.y}
+    didDrag.current=false; clicked.current=false; dragging.current=!reduce
+    event.currentTarget.setPointerCapture(event.pointerId)
+    event.currentTarget.setAttribute('data-dragging','true')
+    wake.current()
+  }
+  const onPointerMove = (event: ReactPointerEvent<HTMLButtonElement>) => {
+    const start=press.current
+    if(!start || start.id!==event.pointerId) return
+    if(event.pointerType==='mouse' && event.buttons===0) {finishPointer(true);return}
+    event.preventDefault()
+    const dx=event.clientX-start.x, dy=event.clientY-start.y
+    if(Math.hypot(dx,dy)>4) didDrag.current=true
+    if(reduce) return
+    const offsetX=start.endX-ANCHOR_X+dx, offsetY=start.endY+dy
+    const distance=Math.hypot(offsetX,offsetY)||1
+    const scale=Math.min(1,(REST_Y+DEFAULT_CONFIG.stretchMax)/distance)
+    target.current={x:ANCHOR_X+offsetX*scale,y:offsetY*scale}
+    if(!clicked.current && offsetY-REST_Y>=DEFAULT_CONFIG.stretchToggle){clicked.current=true;toggle()}
+    wake.current()
   }
 
   const endDrop = useCallback(() => {
@@ -367,20 +365,23 @@ export function PullCord({
             </g>
           </g>
         </svg>
-        <motion.button
+        <button
           type="button"
           className="pullcord-knob"
           aria-label={ariaLabel}
           aria-pressed={pulled}
           title={ariaLabel}
-          onPanStart={reduce ? undefined : onPanStart}
-          onPan={reduce ? undefined : onPan}
-          onPanEnd={reduce ? undefined : onPanEnd}
-          onClick={onClick}
-          onKeyDown={onKeyDown}
+          ref={buttonRef}
+          onPointerDown={onPointerDown}
+          onPointerMove={onPointerMove}
+          onPointerUp={event => {if(press.current?.id===event.pointerId)finishPointer(false)}}
+          onPointerCancel={event => {if(press.current?.id===event.pointerId)finishPointer(true)}}
+          onLostPointerCapture={event => {if(press.current?.id===event.pointerId)finishPointer(true)}}
+          onClick={(event) => { if(event.detail===0) scriptedPull() }}
+
           style={{
             position: 'absolute',
-            left: 0,
+            left: (W-HIT_W)/2,
             top: HIT_TOP,
             width: HIT_W,
             height: HIT_H,

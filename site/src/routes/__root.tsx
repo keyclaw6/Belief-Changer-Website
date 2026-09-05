@@ -12,6 +12,7 @@ import globalCss from '~/styles/globals.css?url'
 import { themeInitScript } from '~/lib/theme'
 import { ThemeProvider, useTheme } from '~/lib/theme-context'
 import { DEFAULT_LOCALE, LOCALE_DIR, isLocale, type Locale } from '~/i18n/config'
+import { DestinationPortal } from '~/components/DestinationPortal'
 import { NotFound } from '~/components/NotFound'
 
 /**
@@ -101,6 +102,7 @@ function HtmlShell({
       </head>
       <body>
         {children}
+        <DestinationPortal />
         <Scripts />
       </body>
     </html>

@@ -122,6 +122,7 @@ export function ShelfStage({ books, locale, onInspectChange }: { books: Book[]; 
         <iframe
           key={locale}
           ref={iframeRef}
+          data-orbit-frame="true"
           title={locale === 'ar' ? 'مكتبة الكتب التفاعلية' : locale === 'da' ? 'Det interaktive bibliotek' : 'The Orbit — interactive book library'}
           src={assetPath(`/orbit/index.html?embed=1&locale=${encodeURIComponent(locale)}`)}
           className="absolute inset-0 h-full w-full border-0 bg-canvas"
