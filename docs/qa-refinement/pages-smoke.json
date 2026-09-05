@@ -1,0 +1,9 @@
+{
+  "errors": [],
+  "checks": [
+    "Mounted homepage/iframe ready with repair identity",
+    "Projected destination portal -> client navigation preserves Pages base",
+    "Real sample chapter and deep reload",
+    "Arabic mounted SSR route and RTL"
+  ]
+}
