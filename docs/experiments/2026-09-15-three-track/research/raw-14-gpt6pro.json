@@ -1,0 +1,360 @@
+ok: true
+schema_version: '1'
+data:
+- id: '2098436252861395369'
+  text: 'Build with GPT-6 Astra. Launch on Product Hunt on September 18.
+
+
+    We''ve teamed up with @OpenAIDevs for the GPT-6 Astra Challenge. The top five
+    launches each win $10K in OpenAI API credits and a year of ChatGPT Pro for up
+    to two team members.
+
+
+    If you’re already building with Astra, this is a chance to share what you’ve made
+    and put it in front of a wider audience. You can schedule your launch for Friday,
+    September 18.'
+  author:
+    id: '2208027565'
+    name: Product Hunt 😸
+    screenName: ProductHunt
+    profileImageUrl: https://pbs.twimg.com/profile_images/1772624223195873280/pqadeFo8_normal.jpg
+    verified: false
+  metrics:
+    likes: 725
+    retweets: 74
+    replies: 91
+    quotes: 48
+    views: 431655
+    bookmarks: 886
+  createdAt: Fri Sep 11 15:39:24 +0000 2026
+  createdAtLocal: 2026-09-11 17:39
+  createdAtISO: '2026-09-11T15:39:24+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2098436034925301760/vid/avc1/1920x1080/EKs6kYqj0LkVnRO2.mp4?tag=29
+    width: 1920
+    height: 1080
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098773631249854478'
+  text: Everything I learned building a full game with GPT 5.6 Astra, start to finish.
+    Long read. https://t.co/7xvp5NxN7X
+  author:
+    id: '2007945971788021760'
+    name: Emm Tee
+    screenName: builtbysketch
+    profileImageUrl: https://pbs.twimg.com/profile_images/2009345223491563520/MrtDLqX-_normal.jpg
+    verified: true
+  metrics:
+    likes: 1179
+    retweets: 173
+    replies: 50
+    quotes: 27
+    views: 1535002
+    bookmarks: 3134
+  createdAt: Sat Sep 12 14:00:01 +0000 2026
+  createdAtLocal: 2026-09-12 16:00
+  createdAtISO: '2026-09-12T14:00:01+00:00'
+  media: []
+  urls:
+  - https://x.com/i/article/2097705267689562112
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+  articleTitle: How to build a full game with Blender and GPT 5.6 Astra (not just
+    a demo)
+- id: '2097650734494019760'
+  text: '❤️‍🔥 GPT Astra + GPT Image 2.5 = Insane $50,000 Websites
+
+
+    Just recorded 16-minute tutorial on how to build $50,000 cinematic websites (step
+    by step) with GPT Image 2.5 https://t.co/QyrhlvlRUD'
+  author:
+    id: '893369654768529408'
+    name: Viktor Oddy
+    screenName: viktoroddy
+    profileImageUrl: https://pbs.twimg.com/profile_images/2095368366693466112/1vPxOkT8_normal.jpg
+    verified: true
+  metrics:
+    likes: 341
+    retweets: 32
+    replies: 12
+    quotes: 1
+    views: 24392
+    bookmarks: 430
+  createdAt: Wed Sep 09 11:38:02 +0000 2026
+  createdAtLocal: 2026-09-09 13:38
+  createdAtISO: '2026-09-09T11:38:02+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2097646830855299072/vid/avc1/3324x2160/-jXJohukQXbDMa8M.mp4?tag=29
+    width: 3324
+    height: 2160
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2097052533961248887'
+  text: 'GPT-6 Astra Pro is the first model we''ve tested that seems to be able to
+    handle basically any prompt we''ve thrown at it.
+
+
+    So we tried something a little ridiculous: we increased MineBench''s gridSize
+    from 256³ to 8,192³ and gave Astra this prompt: “A full rendition of New York
+    City, fully accurate, dense, and to scale”
+
+
+    Astra wrote a ~61 KB program that produced 100.1 million blocks. Expanded into
+    JSON, the build weighed 1.65 GB.
+
+
+    That''s a 32x increase on every axis, or 32,768x more possible voxel positions.
+    At ~1 meter per block, the canvas spans 8.2 km edge-to-edge.
+
+
+    Here''s a preview of Astra''s build. Note that, at this scale, our renderer struggles
+    to show the entire build.'
+  author:
+    id: '2048272983693598720'
+    name: MineBench
+    screenName: minebench_ai
+    profileImageUrl: https://pbs.twimg.com/profile_images/2048274830089424896/RR9f3O5O_normal.jpg
+    verified: true
+  metrics:
+    likes: 524
+    retweets: 29
+    replies: 17
+    quotes: 6
+    views: 54526
+    bookmarks: 144
+  createdAt: Mon Sep 07 20:01:00 +0000 2026
+  createdAtLocal: 2026-09-07 22:01
+  createdAtISO: '2026-09-07T20:01:00+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2097052124643532800/vid/avc1/2398x1128/HFtDcd5nWC99elVo.mp4?tag=29
+    width: 2398
+    height: 1128
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+  quotedTweet:
+    id: '2096294038357913797'
+    text: 'More GPT-6 Astra Pro generations from community prompts in the gallery!
+      Astra is the first model on MineBench to accurately represent all continents
+      on a globe.
+
+
+      View more, or add your own prompts and generations: https://t.co/Pc1pT5CKbh
+      https://t.co/44nhJhAtTq'
+    author:
+      screenName: minebench_ai
+      name: MineBench
+- id: '2098366976418554111'
+  text: Even on $200 Pro plan there are limits to Astra Pro now. https://t.co/8HVCzNlWV4
+  author:
+    id: '719105586722402304'
+    name: Przemek Chojecki | PC
+    screenName: prz_chojecki
+    profileImageUrl: https://pbs.twimg.com/profile_images/1595909528045977601/g_y0_WO7_normal.jpg
+    verified: true
+  metrics:
+    likes: 483
+    retweets: 6
+    replies: 82
+    quotes: 1
+    views: 182662
+    bookmarks: 37
+  createdAt: Fri Sep 11 11:04:07 +0000 2026
+  createdAtLocal: 2026-09-11 13:04
+  createdAtISO: '2026-09-11T11:04:07+00:00'
+  media:
+  - type: photo
+    url: https://pbs.twimg.com/media/HR7lgDpaUAAC3su.png
+    width: 1288
+    height: 462
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+  quotedTweet:
+    id: '2098113585683808624'
+    text: 'To make sure our current users have an incredible experience and continued
+      access to Astra, we are going to pause subscriptions to our $200 Pro plan. These
+      put the most strain on our systems and we wanted to take the smallest step that
+      allows us to continue giving the broadest access possible. All other plans and
+      the api remain available.
+
+
+      There is no impact to existing accounts and we are working on adding more capacity
+      as fast as we can. Thanks!'
+    author:
+      screenName: thsottiaux
+      name: Tibo
+- id: '2098726034841719165'
+  text: '@prz_chojecki I also curious before so I found that they have rate limit
+    defined on the website. Turns out Pro is not unlimit https://t.co/LOYxsV72vO'
+  author:
+    id: '2043642583671300096'
+    name: k
+    screenName: K7335807334520K
+    profileImageUrl: https://pbs.twimg.com/profile_images/2043643034664054784/MNMia2IX_normal.jpg
+    verified: false
+  metrics:
+    likes: 0
+    retweets: 0
+    replies: 0
+    quotes: 0
+    views: 96
+    bookmarks: 0
+  createdAt: Sat Sep 12 10:50:53 +0000 2026
+  createdAtLocal: 2026-09-12 12:50
+  createdAtISO: '2026-09-12T10:50:53+00:00'
+  media: []
+  urls:
+  - https://help.openai.com/en/articles/20001354-gpt-56-and-gpt-6-pro-in-chatgpt
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2099073832921309298'
+  text: Graph data structures, algorithms, and a reusable HTML viewer for JavaScript.
+    QuikGraphWeb adapts QuikGraph to browsers, workers, and Node, retaining its PascalCase
+    class and member names and event-driven algorithm model. https://t.co/k5LSwfj4Ba
+    https://t.co/5Mgh7kssWI
+  author:
+    id: '454115072'
+    name: Wiesław Šoltés
+    screenName: wieslawsoltes
+    profileImageUrl: https://pbs.twimg.com/profile_images/2050244991/0BA2F8F0-2498-4CD0-AE94-B04ACF1D5675_normal
+    verified: false
+  metrics:
+    likes: 24
+    retweets: 1
+    replies: 2
+    quotes: 0
+    views: 1650
+    bookmarks: 20
+  createdAt: Sun Sep 13 09:52:55 +0000 2026
+  createdAtLocal: 2026-09-13 11:52
+  createdAtISO: '2026-09-13T09:52:55+00:00'
+  media:
+  - type: photo
+    url: https://pbs.twimg.com/media/HSFoeUuXcAIQ6si.jpg
+    width: 3600
+    height: 1918
+  urls:
+  - https://github.com/wieslawsoltes/QuikGraphWeb
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2099075100733481278'
+  text: '@oliverbytes https://t.co/14srCtQl3A'
+  author:
+    id: '454115072'
+    name: Wiesław Šoltés
+    screenName: wieslawsoltes
+    profileImageUrl: https://pbs.twimg.com/profile_images/2050244991/0BA2F8F0-2498-4CD0-AE94-B04ACF1D5675_normal
+    verified: false
+  metrics:
+    likes: 1
+    retweets: 0
+    replies: 2
+    quotes: 0
+    views: 54
+    bookmarks: 0
+  createdAt: Sun Sep 13 09:57:57 +0000 2026
+  createdAtLocal: 2026-09-13 11:57
+  createdAtISO: '2026-09-13T09:57:57+00:00'
+  media:
+  - type: photo
+    url: https://pbs.twimg.com/media/HSFprPibEAAQLN7.jpg
+    width: 1490
+    height: 1266
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: qme
+  score: null
+- id: '2099076097854099674'
+  text: '@wieslawsoltes It now appears, I have to select GPT 5.6 Sol then set effort
+    to Max then it become 6 Pro. by the way, do you make Projects in ChatGPT first
+    before you build?'
+  author:
+    id: '2750107268'
+    name: Oliver Martinez
+    screenName: oliverbytes
+    profileImageUrl: https://pbs.twimg.com/profile_images/1511766962065625096/1b3sdW1U_normal.jpg
+    verified: true
+  metrics:
+    likes: 0
+    retweets: 0
+    replies: 1
+    quotes: 0
+    views: 47
+    bookmarks: 0
+  createdAt: Sun Sep 13 10:01:55 +0000 2026
+  createdAtLocal: 2026-09-13 12:01
+  createdAtISO: '2026-09-13T10:01:55+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098312882177892431'
+  text: '🚨 GPT-6 ASTRA JUST LEFT $50,000 DESIGN AGENCIES JOBLESS
+
+
+    This guy shows you in 10 minutes how to build $50k websites with GPT Astra.
+
+
+    no team and no designer needed.
+
+
+    Step-by-step full tutorial.
+
+
+    save it. https://t.co/CNMHvnnr4U'
+  author:
+    id: '1788243647885987840'
+    name: MIKE
+    screenName: mikenevermiss
+    profileImageUrl: https://pbs.twimg.com/profile_images/2004815313108389888/uzJndIfx_normal.jpg
+    verified: true
+  metrics:
+    likes: 146
+    retweets: 9
+    replies: 11
+    quotes: 1
+    views: 14491
+    bookmarks: 170
+  createdAt: Fri Sep 11 07:29:10 +0000 2026
+  createdAtLocal: 2026-09-11 09:29
+  createdAtISO: '2026-09-11T07:29:10+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2098306559407263751/vid/avc1/3324x2160/T3LxpF89PB6BE92b.mp4?tag=29
+    width: 3324
+    height: 2160
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+  quotedTweet:
+    id: '2098270564016091458'
+    text: https://t.co/RCCiVvDnix
+    author:
+      screenName: mikenevermiss
+      name: MIKE
+

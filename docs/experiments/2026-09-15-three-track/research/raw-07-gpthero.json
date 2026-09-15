@@ -1,0 +1,721 @@
+ok: true
+schema_version: '1'
+data:
+- id: '2097396081638457479'
+  text: 'I largely considered using GPT image-2 in the design process to be a slept-on
+    advantage.
+
+
+    Not just for generating hero images, but to help you refine your thinking during
+    the scaffolding part of ideation.
+
+
+    If you haven''t played with this yet, I''m debating hosting a hackathon day to
+    show how I''m using Image 2.5 to help me refine ideas before getting manual in
+    the details.
+
+
+    Would this be interesting?'
+  author:
+    id: '547417813'
+    name: Tommy Geoco 🇺🇸
+    screenName: designertom
+    profileImageUrl: https://pbs.twimg.com/profile_images/2071392083882176512/Gb789pDP_normal.jpg
+    verified: true
+  metrics:
+    likes: 109
+    retweets: 3
+    replies: 24
+    quotes: 1
+    views: 12650
+    bookmarks: 37
+  createdAt: Tue Sep 08 18:46:08 +0000 2026
+  createdAtLocal: 2026-09-08 20:46
+  createdAtISO: '2026-09-08T18:46:08+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+  quotedTweet:
+    id: '2097394956457623964'
+    text: 'ChatGPT Images 2.5—faster, sharper, smarter, with better tools for creating
+      whatever you can dream of.
+
+
+      - Faster image generation to keep your ideas flowing
+
+
+      - Improved fidelity for more natural, recognizable images
+
+
+      - Consistent details across multiple edits
+
+
+      - Comment-based edits to change only what you want'
+    author:
+      screenName: OpenAI
+      name: OpenAI
+- id: '2097600028416381178'
+  text: "❤️‍\U0001F525 Stop hunting for \"website inspo\" \n\nOne site for each \U0001F447\
+    \n\nSome ship with prompts.\n\n• https://t.co/P5sl8UvtAs\n• https://t.co/pnA20R4U1l\n\
+    • https://t.co/lXRv5Flwmd\n• https://t.co/AytIlx9Xtz\n• https://t.co/cGcaahXquz\n\
+    • https://t.co/MUrln3krEE\n• https://t.co/9EbLkEVU9e https://t.co/1K6YpU26ji"
+  author:
+    id: '1546857683072032771'
+    name: Dzianis Kravchu
+    screenName: thedzianis
+    profileImageUrl: https://pbs.twimg.com/profile_images/2083432892924145664/xFHwbe0C_normal.jpg
+    verified: true
+  metrics:
+    likes: 246
+    retweets: 37
+    replies: 3
+    quotes: 0
+    views: 8878
+    bookmarks: 316
+  createdAt: Wed Sep 09 08:16:32 +0000 2026
+  createdAtLocal: 2026-09-09 10:16
+  createdAtISO: '2026-09-09T08:16:32+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2097599942739238912/vid/avc1/3840x2142/FEUGhjNLpf6BObNi.mp4?tag=29
+    width: 3840
+    height: 2142
+  urls:
+  - https://getlayers.ai
+  - https://navbar.gallery
+  - https://supahero.io
+  - https://404s.design
+  - https://footer.design
+  - https://cta.gallery
+  - https://unsection.com
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2099465128466903532'
+  text: 'Image and Design. BTW image generate with Chat GPT.
+
+
+    Thoughts? https://t.co/TDccWXIZj9'
+  author:
+    id: '1952016156640034816'
+    name: Mazhar ali
+    screenName: Mazharali93045
+    profileImageUrl: https://pbs.twimg.com/profile_images/2067298687395749888/p6hq4s_C_normal.jpg
+    verified: false
+  metrics:
+    likes: 9
+    retweets: 1
+    replies: 7
+    quotes: 0
+    views: 780
+    bookmarks: 4
+  createdAt: Mon Sep 14 11:47:47 +0000 2026
+  createdAtLocal: 2026-09-14 13:47
+  createdAtISO: '2026-09-14T11:47:47+00:00'
+  media:
+  - type: photo
+    url: https://pbs.twimg.com/media/HSK069NaIAA4zkU.jpg
+    width: 4096
+    height: 2645
+  - type: photo
+    url: https://pbs.twimg.com/media/HSK1EJjbgAAxF2C.jpg
+    width: 4096
+    height: 2645
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2096760779802550665'
+  text: "Gpt image 2 via chat gpt\n\nPrompt \n\nCreate a premium 10-second vertical\
+    \ 9:16 FMCG yogurt commercial for “CIMOR YOGURT – Strawberry”.\n\nVISUAL STYLE:\n\
+    Photorealistic premium food commercial, fresh natural cinematic aesthetic, high-end\
+    \ product photography, realistic food physics, crisp details, vibrant but elegant\
+    \ colors, cool alpine mountain background, clean luxury advertising look. Use\
+    \ the exact Cimory Yogurt Strawberry bottle design, label, cap, proportions and\
+    \ branding consistently throughout the entire video. Do not redesign or alter\
+    \ the product packaging.\n\nSHOT 1 — 0.0–1.5s | FREEZE:\nOpen with a hero close-up\
+    \ of a chilled Cimory Strawberry Yogurt bottle standing among crystal-clear ice\
+    \ cubes, fresh strawberries and tiny water droplets. Beautiful mountain landscape\
+    \ in the background under bright natural daylight. The bottle slowly begins to\
+    \ vibrate with anticipation.\nCamera: low-angle close-up, very slow cinematic\
+    \ push-in, then a subtle snap push.\nMotion: bottle gently shakes, ice cubes slightly\
+    \ move.\nSFX: low cinematic hum → deep rumble → bass hit.\nOn-screen text:\n“DON’T\
+    \ LOOK AWAY.”\nTypography: bold hand-painted editorial style, dark navy with red\
+    \ accent.\n\nSHOT 2 — 1.5–3.0s | SHAKE:\nThe yogurt bottle performs a dynamic\
+    \ 360-degree spin while floating above a splash of creamy yogurt. Fresh strawberries\
+    \ fly dramatically around it in slow motion, with strawberry slices, milk droplets\
+    \ and tiny yogurt particles suspended in the air.\nCamera: dynamic orbit, fast\
+    \ 360° rotation.\nMotion: bottle spins rapidly while strawberries and liquid swirl\
+    \ around it.\nSFX: energetic whoosh, fruit swirl, soft impact.\nOn-screen text:\n\
+    “SHAKE THE FRESH.”\n\nSHOT 3 — 3.0–5.0s | POUR:\nExtreme close-up. The Cimory\
+    \ yogurt bottle opens and thick, smooth strawberry yogurt pours into a crystal-clear\
+    \ transparent glass. The yogurt has a rich creamy texture and naturally falls\
+    \ with realistic viscosity. Fresh strawberry pieces appear inside and around the\
+    \ glass.\nCamera: extreme macro close-up, push-in and follow-down movement.\n\
+    Motion: thick yogurt stream, soft splash, realistic liquid physics.\nSFX: cap\
+    \ click → pouring sound → soft creamy splash.\nOn-screen text:\n“CREAMY.”\n\n\
+    SHOT 4 — 5.0–7.0s | FRESH CREAMY:\nTransition seamlessly inside the yogurt. Enter\
+    \ a mesmerizing macro world of creamy strawberry yogurt swirling like a luxurious\
+    \ vortex. Strawberry pieces rotate through the creamy liquid while tiny droplets\
+    \ float in the air. Hyper-realistic texture, glossy highlights, rich creamy surface.\n\
+    Camera: extreme macro, smooth push-through into the yogurt vortex, then slow motion.\n\
+    Motion: elegant creamy swirl, rotating strawberry pieces, suspended droplets.\n\
+    SFX: deep liquid swirl → crisp chime.\nOn-screen text:\n“FRESH. CREAMY.”\n\nSHOT\
+    \ 5 — 7.0–8.5s | TASTE THE FRESH:\nReveal a finished glass of strawberry yogurt\
+    \ in the foreground, filled with creamy pink yogurt and fresh strawberry pieces.\
+    \ The Cimory bottle stands clearly behind the glass. A single fresh water droplet\
+    \ slides down the bottle and falls onto the table.\nCamera: product close-up,\
+    \ smooth lateral pull-back.\nMotion: strawberry pieces settle naturally, water\
+    \ droplet falls.\nSFX: water drop → soft impact → uplifting music rise.\nOn-screen\
+    \ text:\n“TASTE THE FRESH.”\n\nSHOT 6 — 8.5–10.0s | HERO:\nFinal premium hero\
+    \ shot. The Cimory Strawberry Yogurt bottle stands prominently in the center on\
+    \ a clean surface surrounded by fresh strawberries, mint leaves and crystal ice.\
+    \ Beautiful green alpine mountains fill the background. Subtle sunlight sweeps\
+    \ across the bottle, creating realistic highlights and condensation. Additional\
+    \ Cimory yogurt bottles are softly blurred in the background.\nCamera: hero close-up,\
+    \ slow cinematic push-in, ending in a perfectly composed product frame.\nMotion:\
+    \ subtle light sweep, gentle environmental movement.\nSFX: ice clink → music peak\
+    \ → clean satisfying end.\n\nFINAL ON-SCREEN TEXT:\n“CIMORYYOGURT”\n“FRESHNESS\
+    \ IN EVERY SIP.”\n\nOverall mood: fresh, cheerful, energetic, refreshing, premium\
+    \ and appetizing.\nMusic: uplifting cinematic commercial music with a clean modern\
+    \ rhythm.\nSound design: crisp, natural, satisfying, dynamic but not overpowering.\n\
+    Lighting: bright natural daylight, cool fresh highlights, realistic reflections\
+    \ and condensation.\nFood physics: highly realistic, thick creamy yogurt viscosity,\
+    \ natural strawberry movement, believable liquid splashes.\nMaintain perfect product\
+    \ consistency, realistic label readability, accurate bottle shape and branding\
+    \ across every shot.\n\nNEGATIVE PROMPT:\nNo cartoon, no CGI-looking plastic,\
+    \ no distorted bottle, no warped label, no changing brand name, no incorrect packaging,\
+    \ no extra text, no misspelled text, no deformed strawberries, no unrealistic\
+    \ liquid physics, no duplicate bottles in foreground, no people, no hands, no\
+    \ camera glitches, no flickering, no morphing, no low resolution, no oversaturated\
+    \ colors"
+  author:
+    id: '2009261034830483456'
+    name: Dua Fatima
+    screenName: DuaFatimaAi
+    profileImageUrl: https://pbs.twimg.com/profile_images/2085266884497448960/5b2fwBj7_normal.jpg
+    verified: true
+  metrics:
+    likes: 112
+    retweets: 22
+    replies: 21
+    quotes: 0
+    views: 2889
+    bookmarks: 56
+  createdAt: Mon Sep 07 00:41:40 +0000 2026
+  createdAtLocal: 2026-09-07 02:41
+  createdAtISO: '2026-09-07T00:41:40+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2096760630611255296/vid/avc1/720x1280/K09EyDMf8X3CMbHk.mp4?tag=29
+    width: 720
+    height: 1280
+  - type: photo
+    url: https://pbs.twimg.com/media/HRkwrzWbIAAgjbU.jpg
+    width: 1024
+    height: 1536
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098816156702576928'
+  text: "Stop building boring, static hero sections. \U0001F6D1\n\nUpgrade to premium\
+    \ interactive 3D UI right now at https://t.co/RlChWqggj8 ✨\n\nI engineered this\
+    \ pointer-tracking 3D mascot using AI. Zero heavy agency fees. Zero lag.\n\nYou\
+    \ can grab the exact AI build prompts and raw source code at link in bio\n\nThe\
+    \ exact frontend tech stack: \n✅ React & Vite (Core component architecture) \n\
+    ✅ Three.js & WebGL (3D character rigging & rendering) ✅ Vanilla JS (Optimized\
+    \ cursor-tracking physics) \n✅ Tailwind CSS (Clean typography & floating UI)\n\
+    \nCopy my Prompt \U0001F447"
+  author:
+    id: '2308686523'
+    name: Himanshu Hingorani
+    screenName: himanshubuildss
+    profileImageUrl: https://pbs.twimg.com/profile_images/2040486128294436864/JziGJtod_normal.jpg
+    verified: true
+  metrics:
+    likes: 16
+    retweets: 2
+    replies: 2
+    quotes: 0
+    views: 1418
+    bookmarks: 10
+  createdAt: Sat Sep 12 16:49:00 +0000 2026
+  createdAtLocal: 2026-09-12 18:49
+  createdAtISO: '2026-09-12T16:49:00+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2098815955921195008/vid/avc1/1704x988/_6EYn5ajYTqgFKOJ.mp4?tag=29
+    width: 1704
+    height: 988
+  urls:
+  - https://scrolltide.co
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2094277998145094001'
+  text: "The common mistake is opening a coding agent and asking:\n\n\"Build a modern\
+    \ landing page for my product\"\n\nThat usually produces the same gradients, rounded\
+    \ cards, oversized headings, and random animations.\n\nHere is the workflow I\
+    \ use instead.\n\n1 - Check the architecture first\n\nBefore touching the UI,\
+    \ understand the product:\n\n- Who is it for?\n- What action should users take?\n\
+    - What pages and routes exist?\n- What content and data are available?\n-Which\
+    \ components already exist?\n- Which components already exist? design respect?\n\
+    \nA beautiful interface built around the wrong product structure is still a bad\
+    \ interface.\n\n2 - Collect visual references\n\nFind 5 to 10 references from\
+    \ websites, pictures, any kind of visuals/content you like\n\nFor each reference,\
+    \ write down what you actually like:\n\n- Information hierarchy\n- Typography\n\
+    - Color treatment\n- Image composition\n- Spacing\n- Navigation\n- Motion\n- Overall\
+    \ mood\n\n\"Make a minimalistic website like Apple\" is too vague. \n\n\"Use large\
+    \ editorial typography, restrained navigation, wide product photography, and hard\
+    \ section transitions\" gives the agent something it can apply.\n\nIt can be a\
+    \ bit boring to do at the beginning, but once everything is setup you'll thank\
+    \ me.\n\n3 - Write DESIGN.md\n\nTurn your decisions into a file the coding agent\
+    \ can read.\n\nMy DESIGN.md usually contains:\n\n- Product context and audience\n\
+    - Main user action\n- Brand personality\n- Core visual idea\n- Design principles\n\
+    - Color and typography tokens\n- Spacing rules\n- Page structure\n- Component\
+    \ rules\n- Responsive behavior\n- Motion rules\n- Accessibility requirements\n\
+    - Explicit anti-patterns\n\nThe anti-patterns matter.\nFor example:\n\n- No purple\
+    \ AI gradients\n- No glassmorphism\n- No unnecessary cards\n- No pill-shaped container\
+    \ around every label\n- No transition: all\n- No essential information hidden\
+    \ behind hover\n\nThis prevents the model from falling back to its usual design\
+    \ habits.\n\n4 - Use GPT-Image to explore directions\n\nBefore coding, generate\
+    \ several visual concepts.\n\nI use a prompt like:\n\nCreate four distinct visual\
+    \ directions for a landing page for [product]. Keep the same content hierarchy:\
+    \ navigation, hero, social proof, features, process, and CTA. Explore editorial,\n\
+    cinematic, minimal, and technical directions. Show a 1440px desktop layout. Focus\
+    \ on typography, composition, color, and image treatment. Avoid generic SaaS cards,\
+    \ purple gradients, glass effects, and decorative dashboards.\n\nKeep the product\
+    \ and content consistent between generations. Change the art direction, not the\
+    \ business.\n\nGPT-Image is useful here because comparing four images is faster\
+    \ than building four React implementations.\n\n5 - Pick one direction and extract\
+    \ its rules\n\nDo not send the image to the coding agent with \"build this.\"\n\
+    \nExplain what should be copied:\n\n- Header height\n- Type scale\n- Content width\n\
+    - Section rhythm\n- Image crop\n- Color balance\n- Divider treatment\n- Interaction\
+    \ behavior\n\nUpdate DESIGN.md with those decisions.\n\nThe image is a reference.\
+    \ DESIGN.md is the specification.\n\n6 - Build in passes\n\nI ask the agent to\
+    \ work in this order:\n\n1. Page structure and semantic HTML\n2. Typography, colors,\
+    \ and spacing\n3. Images and responsive crops\n4. Interactions and motion\n5.\
+    \ Mobile behavior\n6. Accessibility and performance\n\nTrying to solve everything\
+    \ in one prompt makes visual mistakes harder to diagnose.\n\n7 -Compare the rendered\
+    \ page with the reference\n\nOpen the real page at desktop and mobile sizes.\n\
+    \nThen check:\n\n- Is the hierarchy equally clear?\n- Are the proportions correct?\n\
+    - Is the hero too empty or too busy?\n- Does the typography carry the design?\n\
+    - Are sections visually connected?\n- Does mobile feel designed or merely stacked?\n\
+    - Did the agent add components that were never requested?\n\nTake a screenshot\
+    \ and give the agent a concrete correction list.\n\n8 - Iterate until the implementation\
+    \ follows the system\n\nGood AI-assisted design comes from a clear feedback loop:\n\
+    \nArchitecture → references → image concepts → DESIGN.md → implementation → screenshot\
+    \ review → corrections.\n\nThe coding model can write the components quickly.\n\
+    \nYour job is to give it a visual system, clear constraints, and specific feedback\
+    \ before it starts inventing one for you.\n\n9 - Create a Skill inside Hermes\
+    \ Agent to do this\n\nThis process can take a lot of time when repeated manually.\n\
+    \nThe solution is to package each step into a focused skill:\n\n- architecture-review\
+    \ reads the codebase, routes, components, and constraints.\n- reference-research\
+    \ collects and analyzes visual references.\n- design-direction defines the visual\
+    \ concept and anti-patterns.\n- image-ideation uses GPT-Image to generate several\
+    \ directions.\n- design-md creates and maintains the design specification.\n-\
+    \ frontend-build implements the selected direction.\n- visual-review compares\
+    \ screenshots with the references.\n- accessibility-review checks contrast, keyboard\
+    \ use, motion, and responsive behavior.\n\nEach skill should define:\n\n- Required\
+    \ inputs\n- Steps to follow\n- Expected output\n- Constraints\n- Verification\
+    \ method\n\nThen connect the skills into one workflow.\n\nInstead of explaining\
+    \ the entire process for every project, you can tell the agent:\n\n\"Analyze this\
+    \ product, propose four visual directions, create DESIGN.md, implement the selected\
+    \ direction, review the rendered page, and fix the differences.\"\n\nThe agent\
+    \ handles the repeated work. You keep control over the decisions that require\
+    \ taste, especially the final visual direction."
+  author:
+    id: '2093547700918886400'
+    name: Predella Studio
+    screenName: predellastudio
+    profileImageUrl: https://pbs.twimg.com/profile_images/2093549668525588480/YzZmoGXA_normal.jpg
+    verified: true
+  metrics:
+    likes: 6
+    retweets: 2
+    replies: 0
+    quotes: 0
+    views: 455
+    bookmarks: 6
+  createdAt: Mon Aug 31 04:15:59 +0000 2026
+  createdAtLocal: 2026-08-31 06:15
+  createdAtISO: '2026-08-31T04:15:59+00:00'
+  media:
+  - type: photo
+    url: https://pbs.twimg.com/media/HRBerrlbUAELsh-.jpg
+    width: 3568
+    height: 1822
+  - type: photo
+    url: https://pbs.twimg.com/media/HRBet6EbIAAr1OD.jpg
+    width: 1672
+    height: 941
+  - type: photo
+    url: https://pbs.twimg.com/media/HRBevAAakAAR2FH.jpg
+    width: 1672
+    height: 941
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2095136943889895926'
+  text: 'The collage works only if everything behaves like an orbit around the bottle.
+
+    🧊 large centered frosted vodka bottle as the absolute foreground hero
+
+    This keeps the poster from turning into a lifestyle moodboard. You see the product
+    first, and every city, car, glass, splash, and figure becomes supporting gravity
+    around it.
+
+    🍊 supporting elements arranged in a sculpted circular flow back toward the center
+
+    This is the control point for abundance. The composition can feel rich and cinematic,
+    but the curved water splash, skyline edges, flowers, and typography all keep redirecting
+    the eye back to the bottle.
+
+
+    GPT- image 2 prompt👇
+
+    Create a Cannes-level flagship advertising poster for an original imported vodka
+    brand named AURELIA RESERVE, designed with a strict Orbit x Port visual logic:
+    one monumental frosted vodka bottle placed in the exact center as the absolute
+    hero, surrounded by a premium narrative collage that forms a controlled circular
+    visual loop around the product, while preserving a reusable master-template structure
+    for a global campaign series. The final image must feel like a fusion of ultra-real
+    product photography, cultural storytelling, editorial layout design, and collectible
+    print sophistication. The bottle must remain visually dominant at all times.
+
+
+    Core poster structure:
+
+    Use a tall vertical layout on a warm ivory textured background with subtle premium
+    paper grain. Keep a highly disciplined master composition: a large centered bottle
+    in the foreground, a bold editorial headline block in the upper left, a refined
+    logo and quality seal block in the upper right, and a premium campaign statement
+    plus call-to-action zone at the bottom. Around the bottle, arrange all supporting
+    elements in a sculpted radial composition that curves inward and visually returns
+    to the product, creating a strong Orbit loop. The structure must feel abundant
+    yet controlled, luxurious yet readable, dramatic yet systemized.
+
+
+    Product hero:
+
+    Design an original ultra-premium vodka bottle for AURELIA RESERVE. The bottle
+    is tall, elegant, and collectible, with frosted silver-white glass, a deep sculpted
+    dark neck, metallic cap detailing, embossed glass ornament, a refined central
+    crest, and a luxurious serif label system featuring AURELIA RESERVE and VODKA.
+    Add believable glass thickness, soft internal diffusion, subtle cold condensation
+    haze, micro embossing, delicate foil touches, and precise reflections. The bottle
+    must feel physically real, expensive, and globally marketable.
+
+
+    Orbit narrative collage:
+
+    Build a premium cultural-lifestyle montage around the bottle, but arrange every
+    element so it contributes to a circular flow back toward the center. Include fictional
+    heritage-inspired domes and towers rising behind the bottle, a grand classical
+    cultural building on one side, a modern skyline on the other, a vintage black
+    luxury coupe, a crystal cocktail tumbler with ice and citrus, a dynamic sculptural
+    water splash, ornamental flowers in rust-red and amber tones, a fan motif, a distant
+    aircraft, and a few elegant editorial characters integrated into the collage.
+    Position and angle all elements so their motion, silhouette direction, highlights,
+    and implied gaze subtly curve toward the bottle, reinforcing the hero product
+    as the gravitational center.
+
+
+    Port master-template logic:
+
+    The image must feel like a standardized flagship brand poster system that can
+    be extended into a series. Keep the layout architecture clean and repeatable:
+    central hero bottle, left-side dramatic headline, right-side official brand block,
+    circular quality seal, lower campaign line, and a footer with discreet brand information.
+    Typography and supporting graphics must feel modular, premium, and consistent,
+    as if this is part of an international master campaign toolkit.
+
+
+    Typography system:
+
+    Use fully original English-only copy. Upper-left headline suggestion:
+
+    TASTE
+
+    THE
+
+    GRANDEUR
+
+    OF
+
+    THE NIGHT
+
+    Set it in a refined high-contrast serif with elegant spacing, using oxblood red
+    and muted gold accents, with small ornamental dividers. In the upper right, place
+    a minimal crest logo and a circular premium seal using wording such as RESERVE
+    QUALITY MARK 1908 or ESTATE CRAFT EDITION. In the lower section, add an elegant
+    statement such as EVERY POUR DEFINES THE MOMENT, followed by a stronger line such
+    as MAKE IT REMARKABLE. Add a tasteful footer with the brand mark, legal-style
+    micro text, and a fictional website. Typography must be beautiful, premium, and
+    editorial, never crude, heavy, or generic.
+
+
+    Human depiction:
+
+    If human figures are included, they must remain secondary to the bottle and function
+    as narrative accents only. Keep anatomy natural, elegant, and believable. For
+    any realistic female figure, preserve mature natural body logic, realistic skin
+    texture, correct limb proportion, clean shoulders and neck, accurate hands, and
+    five clearly formed fingers. No distorted anatomy, no fused fingers, no broken
+    limbs, no artificial plastic skin.
+
+
+    Lighting and realism:
+
+    Use premium commercial lighting with crisp frontal readability on the bottle,
+    gentle contour highlights, subtle top reflections, and coherent shadow logic throughout
+    the collage. The bottle should feel cool, luminous, and sharply defined against
+    the warmer surrounding environment. The water splash must be physically believable
+    and high-speed sharp, the crystal glass must show accurate cut-glass refraction,
+    the car must carry realistic metallic reflections, and the architecture must feel
+    tactile and detailed. Every element must belong to the same premium campaign world.
+
+
+    Color direction:
+
+    Use a rich but controlled palette of ivory, parchment beige, frosted silver, oxblood
+    red, copper gold, muted amber, charcoal black, floral rust, and soft stone neutrals.
+    Keep the bottle cooler and brighter than the surrounding collage so it remains
+    dominant. Use red-gold accents to unify the poster and support the Orbit circulation
+    path.
+
+
+    Graphic integration:
+
+    All supporting objects must feel intentionally sculpted around the bottle, not
+    pasted randomly. Maintain clean silhouettes, elegant overlaps, precise spacing,
+    and strong readability. The final artwork should feel like an award-winning luxury
+    liquor poster with both emotional abundance and system-level brand discipline.
+
+
+    Mood:
+
+    luxurious, celebratory, worldly, editorial, collectible, refined, cinematic, culturally
+    rich, high-impact, globally premium, elegantly dramatic
+
+
+    Rendering style:
+
+    ultra-realistic flagship liquor poster, centered hero bottle, Orbit narrative
+    collage, Port campaign master-template layout, luxury editorial typography, frosted
+    glass realism, cinematic cultural montage, premium paper texture, world-class
+    advertising design, 8k, master-level commercial rendering
+
+
+    Negative prompt:
+
+    real brand names, copied foreign slogan, ugly bold fonts, cheap collage look,
+    cluttered composition, weak product dominance, plastic-looking bottle, distorted
+    hands, extra fingers, fused fingers, broken anatomy, muddy colors, dead black
+    patches, low-detail splash, flat lighting, random props, low-resolution print
+    finish'
+  author:
+    id: '1798370710341177344'
+    name: Loriel.AI
+    screenName: ou_zhen599
+    profileImageUrl: https://pbs.twimg.com/profile_images/1949039904824115201/n5k1iRiy_normal.jpg
+    verified: true
+  metrics:
+    likes: 10
+    retweets: 1
+    replies: 0
+    quotes: 0
+    views: 587
+    bookmarks: 5
+  createdAt: Wed Sep 02 13:09:07 +0000 2026
+  createdAtLocal: 2026-09-02 15:09
+  createdAtISO: '2026-09-02T13:09:07+00:00'
+  media:
+  - type: photo
+    url: https://pbs.twimg.com/media/HRNr7bGa4AAjrsO.jpg
+    width: 3066
+    height: 4096
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2097567795403985362'
+  text: Crimson flowers, cold steel, golden haze. GPT Image 2.5 sets the palette for
+    a scene straight out of a fantasy epic🌹🎬 https://t.co/Wh2Qk3ZDdO
+  author:
+    id: '1919052587875405824'
+    name: TopviewAI
+    screenName: TopviewAIhq
+    profileImageUrl: https://pbs.twimg.com/profile_images/2057044804694093824/JXimMGGK_normal.jpg
+    verified: true
+  metrics:
+    likes: 28
+    retweets: 5
+    replies: 8
+    quotes: 0
+    views: 1166
+    bookmarks: 2
+  createdAt: Wed Sep 09 06:08:28 +0000 2026
+  createdAtLocal: 2026-09-09 08:08
+  createdAtISO: '2026-09-09T06:08:28+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2097567618022707200/vid/avc1/1920x1080/Dg3etn5CgprleAEs.mp4?tag=29
+    width: 1920
+    height: 1080
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2094659521776140460'
+  text: 'GPT Image 2 on ChatGPT
+
+
+    Prompt:
+
+
+    Create a premium creative-agency brand identity showcase poster for McDonald’s.
+    Transform the brand’s unmistakable visual identity into a complete, polished brand
+    system that feels vibrant, recognizable, energetic, playful, and globally iconic.
+
+
+    Every visual decision in the poster — including colors, typography, shapes, lighting,
+    textures, layouts, photography, packaging, and UI components — should clearly
+    originate from McDonald’s visual language, especially its signature red and golden
+    yellow palette, Golden Arches, playful fast-food culture, and appetite-driven
+    aesthetic. Avoid generic corporate branding. The final composition should instantly
+    feel like McDonald’s.
+
+
+    Use a vertical 4:5 format with a dense editorial multi-grid composition. Make
+    the poster feel layered, sophisticated, high-energy, and professionally art-directed,
+    similar to a premium creative agency case-study presentation.
+
+
+    Start with a strong brand introduction section featuring the McDonald’s logo and
+    Golden Arches prominently. Include the recognizable “I’m Lovin’ It” slogan and
+    communicate three core brand traits: Fun, Fast, and Iconic.
+
+
+    Create a detailed color identity section showing the McDonald’s red, golden yellow,
+    and white as the primary palette, supported by warm brown, fry-gold, soft cream,
+    ketchup-inspired red, and food-highlight tones. Display large, modern color swatches
+    with clear HEX codes and small labels identifying each color’s role, such as Primary,
+    Accent, UI, or Food Highlight. Include visual explorations such as ketchup-to-mustard
+    gradients, high-contrast food pairings, and conceptual day-mode and night-mode
+    packaging treatments.
+
+
+    Develop a typography section that demonstrates a bold, rounded commercial display
+    style for headlines, a clean modern sans-serif for subheadings, and a friendly,
+    highly readable typeface for body and UI text. The hierarchy should feel youthful,
+    approachable, global, and instantly commercial.
+
+
+    Create a visual-language mood board built around premium fast-food photography.
+    Feature crispy golden fries, juicy burgers, melted cheese, toasted buns, grill
+    marks, ketchup drips, and other crave-inducing food details. Use warm cinematic
+    lighting, glossy highlights, subtle food textures, and rich close-up photography.
+    Include approximately 4–6 visual tiles that feel like premium McDonald’s campaign
+    imagery.
+
+
+    Show how the identity translates across real-world brand touchpoints. Include
+    realistic McDonald’s burger-box packaging with playful graphics, a desktop website
+    hero featuring a large appetizing burger, a modern mobile ordering interface with
+    combo meals, social-media campaign posts featuring promotions and limited-time
+    offers, a minimal red-and-yellow business card, and a large outdoor billboard
+    with an oversized burger and bold commercial typography.
+
+
+    Finish with a UI design-system section demonstrating branded digital components
+    such as “Order Now” and “View Deals” CTA buttons, meal cards, combo-meal layouts,
+    promotional badges, pricing elements, navigation components, and food-ordering
+    interface elements. Keep the UI bold, simple, friendly, and unmistakably connected
+    to McDonald’s.
+
+
+    Use strong grid alignment, clear visual hierarchy, layered panels, subtle shadows,
+    realistic mockup presentation, premium editorial spacing, and polished art direction
+    throughout. The final poster should look like a professionally designed creative-agency
+    brand identity case study, energetic and contemporary while remaining unmistakably
+    McDonald’s.'
+  author:
+    id: '1833763198211960832'
+    name: Johnn
+    screenName: john_my07
+    profileImageUrl: https://pbs.twimg.com/profile_images/1967102770500300803/ylHD6oXM_normal.jpg
+    verified: true
+  metrics:
+    likes: 83
+    retweets: 7
+    replies: 42
+    quotes: 0
+    views: 3348
+    bookmarks: 54
+  createdAt: Tue Sep 01 05:32:01 +0000 2026
+  createdAtLocal: 2026-09-01 07:32
+  createdAtISO: '2026-09-01T05:32:01+00:00'
+  media:
+  - type: photo
+    url: https://pbs.twimg.com/media/HRG5tiabwAA07Cj.jpg
+    width: 1003
+    height: 1568
+  - type: photo
+    url: https://pbs.twimg.com/media/HRG5uDla4AAHzdi.jpg
+    width: 1024
+    height: 1536
+  - type: photo
+    url: https://pbs.twimg.com/media/HRG5um6bIAA-nCJ.jpg
+    width: 1024
+    height: 1536
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098127051030937734'
+  text: 'Another Hero section designed!
+
+
+    Built with Custom Skills + my video tool + Cursor + the client''s design.md file
+    + a little creativity. https://t.co/IForucHFqM'
+  author:
+    id: '1886403101198020608'
+    name: Moein
+    screenName: DesignByMoein
+    profileImageUrl: https://pbs.twimg.com/profile_images/2091884447427915776/hDdsBQ25_normal.jpg
+    verified: true
+  metrics:
+    likes: 97
+    retweets: 3
+    replies: 4
+    quotes: 1
+    views: 6589
+    bookmarks: 98
+  createdAt: Thu Sep 10 19:10:44 +0000 2026
+  createdAtLocal: 2026-09-10 21:10
+  createdAtISO: '2026-09-10T19:10:44+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2098126835875975168/vid/avc1/1920x1080/6pxzs8ikdcMlbmTO.mp4?tag=29
+    width: 1920
+    height: 1080
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+

@@ -1,0 +1,1529 @@
+ok: true
+schema_version: '1'
+data:
+- id: '2098055179761525165'
+  text: https://t.co/ADXxWNbnN1
+  author:
+    id: '1713062826175299584'
+    name: Avid
+    screenName: Av1dlive
+    profileImageUrl: https://pbs.twimg.com/profile_images/2010392290590912512/x7vtAe5W_normal.jpg
+    verified: true
+  metrics:
+    likes: 1020
+    retweets: 125
+    replies: 39
+    quotes: 12
+    views: 194903
+    bookmarks: 2299
+  createdAt: Thu Sep 10 14:25:09 +0000 2026
+  createdAtLocal: 2026-09-10 16:25
+  createdAtISO: '2026-09-10T14:25:09+00:00'
+  media: []
+  urls:
+  - https://x.com/i/article/2098012383679819776
+  isRetweet: false
+  retweetedBy: null
+  lang: zxx
+  score: null
+  articleTitle: How to Master ChatGPT Images 2.5 (Full Course)
+  articleText: "i'm going to show you exactly how to master OpenAI's Images 2.5 to\
+    \ create app designs, websites, product shots.....14 tricks. 44 curated examples.\
+    \ \n\nthe prompts, the results, and how to fix what goes wrong.\n\nsteal the workflow.\
+    \ bring your own ideas to life.\n\n\ni’ve always struggled with image prompting.\
+    \ the prompts people share often feel made up: a pile of impressive words, followed\
+    \ by a beautiful result, with no explanation of which decisions mattered.\n\n\
+    when my result looks wrong, that gives me very little to work with.Thank you.\n\
+    \nso we built a workflow around making the visual decisions visible. decide what\
+    \ belongs in the image, describe how the parts relate, generate it, then check\
+    \ what survived\n\n## start by deciding what the image must do\n\n“make it premium”\
+    \ expresses a preference. you still have to decide what someone will see.\n\n\
+    for a fashion app, that might mean generous spacing, consistent product photography,\
+    \ quiet typography, and a bag that looks identical across screens. \n\nfor a perfume\
+    \ campaign, it might mean garnet glass, a walnut cap, believable reflections,\
+    \ and enough contrast to read the label.\n\nwrite the brief in this order:\n\n\
+    1. purpose: what should someone understand, feel, or do?\n\n2. canvas: where will\
+    \ it appear, and what shape must it have?\n\n3. contents: which subjects, objects,\
+    \ and exact words belong in it?\n\n4. relationships: where are they, what touches\
+    \ what, and what comes first?\n\n5. appearance: what should the materials, light,\
+    \ color, and typography look like?\n\n6. checks: what would make the result unusable,\
+    \ even if it looks beautiful?\n\nevery sentence should make a visible decision\
+    \ or protect one.\n\n> a useful prompt names objects, gives the right attributes\
+    \ to each object, and explains their relationships. \n\n“an oxblood bag beside\
+    \ a cream cardholder” binds color to a particular object. “the bag sits above\
+    \ its name and price” adds a relationship you can inspect. \n\ncompositional benchmarks\
+    \ treat attribute binding and object relationships as distinct challenges.\n\n\
+    worked example: a thumbnail with one clear promise\n\nthe job was to communicate\
+    \ a compelling small-space interior at phone size. the brief assigns a separate\
+    \ zone to the headline, makes the rust sofa the visual anchor, and reserves space\
+    \ for the platform’s duration badge.\n\nthe prompt we used · full submitted text\n\
+    \nwhat survived: the four words, the clear split between text and image, the rust\
+    \ sofa, and the circular window. what missed: the left margin is tighter than\
+    \ requested. the image reads clearly, but that specific layout constraint still\
+    \ needs attention. we did not measure click-through performance.\n\nuse the technique:\
+    \ describe the viewing situation before choosing visual detail. a thumbnail, a\
+    \ product page, and a print poster demand different kinds of clarity.\n\n## give\
+    \ complex images an organisation\n\ncomplexity becomes useful when you can explain\
+    \ how its parts fit together.\n\nour Coast House interior begins with the room:\
+    \ left joinery, back fireplace, right glazing, and a seating group between them.\
+    \ only then does the prompt describe linen, wool, stone, timber, and bronze.\n\
+    \nfor a busy composition, organize the inventory by depth, by panel, or around\
+    \ a dominant subject. choose the structure that makes the image easiest to describe.\
+    \ every added part should have a location and a reason to be there.\n\nworked\
+    \ example: an entire coastal living pavilion\n\nthe prompt we used- full submitted\
+    \ text\n\nwhat survived: the connected room, material distinctions, window seat,\
+    \ fireplace, and coherent coastal light. what shifted: the sofa faces the seating\
+    \ group more than the fireplace; small decorative additions also appeared.\n\n\
+    the image gives us a believable design reference. we can now ask for a different\
+    \ view of that same design.\n\nworked example: turn the interior into an architectural\
+    \ section\n\ninput: attach the Coast House photograph above. it supplies the visible\
+    \ room design. the roof construction, wall thicknesses, and foundation must be\
+    \ newly imagined because a photograph cannot reveal them.\n\nthe prompt we used.\n\
+    \nwhat survived: the recognizable interior, the cut edges, and five readable labels\
+    \ connected to the intended parts. what this does not establish: construction\
+    \ feasibility. this is a conceptual spatial illustration.\n\nthe method transfers\
+    \ to cross-sections, product explainers, and infographics: define the main structure,\
+    \ the parts, their connections, the labels, and the space around them. adding\
+    \ detail works best when the reader still knows where to look.\n\n## create a\
+    \ new image by building its hierarchy\n\n\nreview what the design means, as well\
+    \ as how it looks.\n\nfor your own app, write the screen roles first. for a poster,\
+    \ write the reading order. for a product image, decide the product’s size, placement,\
+    \ and relationship to the light.\n\nthe accompanying examples let you practice\
+    \ that translation across formats:\n\n- book covers and posters: specify the title,\
+    \ visual metaphor, reading order, and clear margins;\n\n- flyers and advertisements:\
+    \ separate the message, product, supporting information, and action;\n\n- icons\
+    \ and logos: define silhouette, stroke consistency, small-size readability, and\
+    \ background requirements;\n\n- headshots: preserve identity while changing wardrobe,\
+    \ framing, or light;\n\n- interiors and cross-sections: distinguish visible design\
+    \ from hidden construction you are asking the model to invent.\n\nour SABLE app\
+    \ started with three screen roles: discovery, collection, and product detail.\n\
+    \nthen we specified the product inventory, prices, selected controls, materials,\
+    \ and recurring bag design. those decisions give the model an interface to compose.\n\
+    \nworked example: a luxury fashion app\n\nthe important relationship is the same\
+    \ oxblood bag appearing in both the collection and product detail. “four beautiful\
+    \ product photos” would leave that continuity unspecified.\n\nworked example:\
+    \ an architecture-studio website\n\nFORMAE  uses the same principle at a different\
+    \ scale:\n\n1. The headline establishes the studio's promise.\n\n2. The large\
+    \ photograph makes it tangible.\n\n3. The two smaller projects add range.\n\n\
+    The main action always gets a single, contrasting colour.\n\nthe prompt we used\n\
+    \nwhat survived: the exact headline and navigation, readable project captions,\
+    \ one clear primary action, and a strong photographic hierarchy. what shifted:\
+    \ the two lower project images became almost equal in width instead of slightly\
+    \ unequal.\n\nthese are raster design concepts. turning them into working apps\
+    \ or websites requires implementation and interaction checks.\n\nuse the technique:\
+    \ write the reading order before the decoration. for an app, define screen roles.\
+    \ for a website, define the route from headline to evidence to action. then decide\
+    \ what can repeat and what must stay distinct.\n\n## make premium quality observable\
+    \ \n\n“luxury” becomes useful when you translate it into visible choices.\n\n\
+    our VELLUM photograph uses a garnet bottle, walnut cap, quiet label, and dark\
+    \ architectural setting. the glass must transmit and reflect light. the paper\
+    \ needs a grain. the cap needs a different surface from the metal collar.\n\n\
+    worked example: a luxury perfume photograph\n\nthe prompt we used\n\nwhat survived:\
+    \ readable label copy, one coherent product, and distinct wood, metal, paper,\
+    \ glass, and stone. \n\nwhat shifted: the cap is taller and the supporting stone\
+    \ is more veined than requested.\n\nthose are concrete observations. “looks expensive”\
+    \ would have missed them.\n\nthese choices express one kind of luxury. another\
+    \ brief might call for ornament, saturated color, or a dense fashion editorial.\
+    \ choose a coherent visual direction before using words such as “minimal” or “premium.”\
+    \ the test is whether the materials, composition, and finish support that direction.\n\
+    \nworked example: skincare UGC with a blonde bob\n\nfor this version, we generated\
+    \ a fictional adult Asian woman with a blonde bob. the brief keeps the product\
+    \ visible, the bathroom quiet, the light natural, and the skin textured. the intended\
+    \ finish is a carefully made creator photograph.\n\nthe prompt we used · full\
+    \ submitted text\n\nwhat survived: the blonde bob, relaxed eye contact, sage bottle,\
+    \ three readable label lines, and soft daylight. the hand contact is visually\
+    \ plausible and the background stays simple. provenance: this is a generated person\
+    \ demonstrating a fictional brand, not a customer testimonial.\n\nthe two photographs\
+    \ need different finishes. an immaculate perfume still benefits from controlled\
+    \ reflections. UGC benefits from human texture and everyday framing.\n\nbefore\
+    \ generating, name the materials, light direction, composition, and finish that\
+    \ make sense for the actual use. avoid instructions that fight one another, such\
+    \ as “casual phone photo” paired with “flawless studio beauty lighting.”\n\n##\
+    \ reconstruct a reference with a visual map\n\nwhen you already have an image,\
+    \ start by inventorying it.\n\nwe mapped the VELLUM photograph into separately\
+    \ named controls. this lets you identify the walnut cap, paper label, glass highlights,\
+    \ and reflection without describing the entire scene again.\n\nturn your reference\
+    \ into a set of choices.\n\n- name the parts. canvas → groups → objects → editable\
+    \ parts → properties. group tiny details until you need individual control.\n\n\
+    - start big. shapes and empty spaces first. relationships next. materials and\
+    \ exact text last.\n\n- flag uncertainty. separate visible facts, inferred details,\
+    \ and unknowns. bounds are approximate; crops may include neighboring pixels.\n\
+    \n- choose the changes. keep, restyle, replace, remove, or move. tell the agent\
+    \ what must stay unchanged.\n\n- hand off the plan. export a prompt and reconstruction\
+    \ JSON. the source image stays untouched.\n\nname the parts. make the decisions\
+    \ reusable.\n\n\nkeep the original image as your source of truth.\n\nour map adds\
+    \ bounding boxes and crop previews without changing it. asking AI to redraw the\
+    \ image with numbered labels can change the subject and make the map misleading.\n\
+    \n- prepare: have your agent inspect the image and create reconstruction JSON.\n\
+    \n- import: load the JSON and attach the matching clean image.\n\n- verify: check\
+    \ every name and box before exporting.\n\nthe page doesn’t automatically detect\
+    \ or segment objects. section 8 explains when to use comments, maps, or sketches.\n\
+    \n## save the visual decisions as reconstruction JSON\n\n> the JSON separates\
+    \ what is visible, what someone wants to change, and how the result will be checked.\n\
+    \nthe full document includes the other elements, relationships, source file, unknowns,\
+    \ and checks. it does not recover the original prompt, source layers, exact font,\
+    \ or hidden geometry.\n\nfor a close recreation, prioritize silhouette, proportions,\
+    \ spacing, and relationships. then refine surface detail. for a new composition\
+    \ using selected ingredients, make that goal explicit before compiling.\n\nkeep\
+    \ observations separate from requests. the original cap remains walnut in the\
+    \ source inventory even if someone later asks for black metal. that request belongs\
+    \ in a selection record, with its own preservation rules and updated checks\n\n\
+    think of three connected records:\n\nkeep the full record. send only what the\
+    \ edit needs.\n\n- resolve conflicts. preserve source observations. when requesting\
+    \ a black cap, remove the old brown-cap instruction.\n\n- review the compiler’s\
+    \ flags. it creates instructions, not masks or recovered layers. coordinates remain\
+    \ approximate.\n\n- attach the image. a file path alone supplies no pixels.\n\n\
+    - keep edits focused. save the inventory for reconstruction and handoff. compile\
+    \ a shorter request for local changes.\n\nour 82,283-character JSON exceeded a\
+    \ 32,000-character limit before generation. that was an input-size failure, not\
+    \ an image-quality result.\n\n\nworked example: reconstruct the luxury photograph\
+    \ from the inventory\n\ninput: the clean VELLUM photograph, attached as the target.\
+    \ the JSON was validated and compiled into the exact rendering prompt below. the\
+    \ source image was supplied to the generator as an actual attachment.\n\nthe prompt\
+    \ we used · full submitted text\n\nwhat survived: the bottle silhouette, cap and\
+    \ collar, label placement, all three text lines, warm light, and dark composition.\
+    \ the output keeps the source dimensions, 1122 × 1402. what changed: wood grain,\
+    \ paper texture, stone veins, and glass reflections were redrawn. the result is\
+    \ visually close, without pixel identity.\n\nthis demonstrates an image-assisted\
+    \ reconstruction workflow. one result cannot establish that JSON improves fidelity,\
+    \ and a reconstruction need not improve the source aesthetically. the value of\
+    \ the JSON is that the decisions can be inspected, changed, and carried into the\
+    \ next attempt.\n\n## give every reference a specific job\n\nreferences can define\
+    \ a person, a product, a layout, a material, or a palette. name those roles so\
+    \ the model has less to guess.\n\nour OFFDAY packaging supplied the brand identity\
+    \ for a related advertisement and merchandise. the new output changes; the recognizable\
+    \ wordmark and emblem should carry through.\n\ngive every reference a job.\n\n\
+    - assign roles. list each image in a table: identity, layout, or finish. specify\
+    \ what to borrow and ignore.\n\n- resolve conflicts. choose the crop and light\
+    \ direction. say whether a texture reference can contribute objects or lettering.\n\
+    \n- supply evidence. a palette cannot establish someone’s identity. a front view\
+    \ cannot reveal the back of a package.\n\n- handle missing details. request another\
+    \ view when hidden information matters. otherwise, label new details as design\
+    \ choices.\n\nthe input we used\n\nour saved OFFDAY packaging asset. the following\
+    \ two generation records include this image as their attachment. the initial packaging\
+    \ record does not verify the design reference mentioned in its own prompt; here,\
+    \ the shown can image is the verified input.\n\nworked example: packaging into\
+    \ an advertisement\n\nthe prompt selects only the coral can, keeps its product\
+    \ identity, and reserves a separate zone for the headline.\n\nthe prompt we used\
+    \ · full submitted text\n\nwhat survived: the headline, coral can, wordmark, emblem,\
+    \ flavor, and volume. what to check closely: the product was redrawn from the\
+    \ reference. exact label geometry is not guaranteed.\n\nworked example: the same\
+    \ identity on merchandise\n\nhere the attachment supplies the wordmark and emblem.\
+    \ the cans themselves should disappear. the new brief specifies cotton, canvas,\
+    \ print, garment count, handles, and spacing.\n\nthe prompt we used · full submitted\
+    \ text\n\nwhat survived: one white tee, one blue tote, a coral tag, and a coherent\
+    \ shared identity. remaining limit: logo proportions vary slightly across the\
+    \ fabric surfaces. these are photographic mockups, with no production artwork\
+    \ implied.\n\nuse the technique: say which reference controls each decision and\
+    \ what should be ignored. “use the label identity, change the setting” is easier\
+    \ to inspect than “make something inspired by this.”\n\n## choose comments, the\
+    \ visual map, or a sketch\n\nuse the interface that communicates the difficult\
+    \ decision most directly.\n\npoint at the change. sketch the arrangement.\n\n\
+    - use a comment when the target is obvious. select the cap and describe the edit.\
+    \ this is a reusable example, not another generation we ran:\n\n> change this\
+    \ cap to charcoal black. preserve its wood grain, silhouette, height, position,\
+    \ and connection to the collar. keep the bottle, label, framing, and lighting\
+    \ direction unchanged. allow the cap’s highlights and reflection to adjust to\
+    \ the darker color.\n\nthe selection identifies the target. your words define\
+    \ change → preserve → allow.\n\n- use the map when choices need to carry forward.\
+    \ record that comment against A-05 so another agent knows which part you meant.\
+    \ the map keeps multiple choices and preservation rules together.\n\ninspect the\
+    \ result after either approach. unselected areas can still change.\n\n- use a\
+    \ sketch when placement is hard to explain. draw rectangles, silhouettes, a horizon,\
+    \ and arrows. show where things belong, their relative sizes, what overlaps, and\
+    \ the viewpoint.\n\nthe drawing only needs to make the arrangement clear.\n\n\
+    for our Coast House example, we attached the interior from section 2 and asked\
+    \ for the same room as an architectural sketch. the reference supplied the room\
+    \ design; the prompt changed how it was represented.\n\ndraw the placement. describe\
+    \ the finish.\n\nour Coast House result kept the viewpoint, joinery, fireplace,\
+    \ artwork, sofa, chair, table, window seat, and coast. the shading was denser\
+    \ than the selective wash we requested.\n\nthis tested photograph → sketch. it\
+    \ doesn’t show that reversing the process would reproduce the photograph.\n\n\
+    when starting with your own sketch:\n\n- set the frame. match its shape to the\
+    \ final image. block in the largest silhouettes and useful empty spaces.\n\n-\
+    \ show the structure. mark the viewpoint, horizon or floor, and overlaps. distinguish\
+    \ guide lines from object outlines. for actions, show torso direction, the planted\
+    \ foot, gaze, and where the hand touches an object.\n\n- label what matters. add\
+    \ a short legend identifying the objects and arrows. specify which construction\
+    \ lines, labels, arrows, and guide colors must disappear.\n\n- give the sketch\
+    \ the layout role. describe materials, lighting, texture, and finish separately.\
+    \ say whether the model may add objects.\n\n- check placement before realism.\
+    \ if the window lands on the wrong wall, fix the drawing or spatial instruction\
+    \ first.\n\nOpenAI’s @Sketch workflow combines drawing with a written request.\
+    \ use it where available, or upload a drawing or photograph of paper. our drawing-input\
+    \ experiments used uploads; we didn’t separately test the native drawing toolbar\
+    \ or authenticated image comments. \n\nkeep the sketch simple enough that the\
+    \ intended structure stays obvious.\n\n## use words you can explain\n\nsimple\
+    \ language can still describe a sophisticated result.\n\nour SOFT STRUCTURE poster\
+    \ asks for a continuous aluminum sheet, a clear gap below the title, one grounded\
+    \ shadow, and three exact footer lines. each instruction has something visible\
+    \ to check\n\nworked example: an exhibition poster\n\nthe prompt we used · full\
+    \ submitted text\n\nwhat survived: the exact title and footer, a convincing continuous\
+    \ ribbon, brushed-metal detail, and a clear hierarchy. the background has subtle\
+    \ lighting variation. the sculpture’s physical feasibility was not simulated.\n\
+    \nthe useful distinction is between informative and uninformative detail. “brushed\
+    \ aluminum” describes a surface. “one continuous sheet” constrains construction.\
+    \ repeating “masterpiece” gives you little to diagnose.\n\nwe tested this in the\
+    \ earlier experimental set. those results remain useful even though this article\
+    \ now uses the premium assets to demonstrate the workflow.\n\n## make the next\
+    \ edit small enough to judge\n\nthe first SABLE image looked polished, but the\
+    \ mixed collection needed an “All” category. its navigation also needed to show\
+    \ “Shop” as active.\n\nthose were two clear, compatible corrections to the same\
+    \ screen. the repair named both and protected the photography, product detail,\
+    \ typography, and other screens.\n\nthe repair prompt · full submitted text\n\n\
+    one change at a time helps you learn.\n\nthe middle screen selects “All” with\
+    \ “Shop” active; discovery keeps “Discover” active. \n\nour room comparison showed\
+    \ no preservation advantage from two calls. both routes changed the ceiling canopy\
+    \ and fine details.\n\n- isolate to diagnose. change one variable to understand\
+    \ its effect.\n\n- combine compatible edits you can check together. sequence changes\
+    \ that depend on earlier results.\n\n- write change → preserve → allow. protect\
+    \ unrelated content; allow necessary shadows and reflections.\n\n- return to the\
+    \ best accepted source. don’t carry accidental damage forward.\n\n## check the\
+    \ thing that can actually fail\n\nbeautiful images can contain quiet errors.\n\
+    \nour infographic has the right numbers, clean typography, and a clear hierarchy.\
+    \ its bar lengths still need a measurement check.\n\nworked example: a designed\
+    \ infographic\n\nthe prompt we used · full submitted text\n\nwhat passed: the\
+    \ labels and values are correct; 18 + 10 + 8 + 4 adds up to 40. \n\nwhat missed:\
+    \ on the requested 0–20 scale, the bars should occupy 90%, 50%, 40%, and 20% of\
+    \ the plotting width. the saved pixel measurements were approximately 87.1%, 49.8%,\
+    \ 39.2%, and 20.9%.\n\nthe proposed production step is to render the chart from\
+    \ its data in a charting tool, using this image for visual direction. that correction\
+    \ has not been generated here.\n\nwhen the result fails, match the repair to the\
+    \ failure:\n\n## use agents to explore controlled alternatives\n\nsub-agents can\
+    \ prepare reference combinations, write candidate briefs, or review results independently.\n\
+    \ngive each branch the same intended output and checklist. \n\nvary one meaningful\
+    \ input, such as the reference set, composition, or amount of lighting detail.\
+    \ fix the budget before generation. \n\na larger search budget can improve the\
+    \ chance of finding an attractive candidate without proving the underlying prompt\
+    \ is better.\n\nfor a future VELLUM reference experiment, use three clearly assigned\
+    \ branches:\n\ngive agents different tests and the same checks.\n\nthese proposed\
+    \ branches haven’t been rendered. section 6 used the full source with the compiled\
+    \ inventory.\n\n- coordinator: lock the source, label text, output shape, and\
+    \ checks.\n\n- generators: record exact prompts, ordered attachments, settings,\
+    \ outputs, and changed visual evidence. generate sequentially if needed.\n\n-\
+    \ reviewer: inspect actual images under neutral filenames. keep failures and disagreements.\n\
+    \n- budget: cap candidates. separate initial results from repair costs.\n\n- acceptance:\
+    \ check improvements and new damage against the prior best.\n\nour wider project\
+    \ used agents; it didn’t establish novelty or better quality.\n\n## separate model\
+    \ capabilities from prompting claims\n\nbetter detail still needs a careful eye.\n\
+    \n- what OpenAI describes: stronger editing and detail handling, Flare and Sunburst\
+    \ variants, and drawing and image comments.\n\n- our limits: the tool didn’t expose\
+    \ the executing model, variant, seed, or quality setting. these studies cannot\
+    \ compare GPT Image 2.5 with earlier versions.\n\n- what you can reuse: the actual\
+    \ prompts, references, results, and repairs.\n\ndescribe the relationships that\
+    \ matter. then check whether the image follows them.\n\n## give your agent the\
+    \ whole loop\n\nthis is the reusable instruction for future work. the image prompts\
+    \ above are the execution records; this instruction tells your agent how to build\
+    \ and review the next one.\n\nyou do not have to memorize someone else’s paragraph.\
+    \ you need to know what you want to see, how you will recognize it, and what to\
+    \ change when the image misses.\n\n## Conclusion\n\nI spent along approximately\
+    \ 6 hours to test these new methods.\n\nWritten using Typeless. Edited using Deepseek\
+    \ V4-Flash"
+- id: '2098391262336623096'
+  text: https://t.co/m1oEFo3LGe
+  author:
+    id: '1713062826175299584'
+    name: Avid
+    screenName: Av1dlive
+    profileImageUrl: https://pbs.twimg.com/profile_images/2010392290590912512/x7vtAe5W_normal.jpg
+    verified: true
+  metrics:
+    likes: 0
+    retweets: 0
+    replies: 0
+    quotes: 0
+    views: 1120
+    bookmarks: 0
+  createdAt: Fri Sep 11 12:40:37 +0000 2026
+  createdAtLocal: 2026-09-11 14:40
+  createdAtISO: '2026-09-11T12:40:37+00:00'
+  media: []
+  urls:
+  - https://x.com/Av1dlive/status/2098390097842569547?s=20
+  isRetweet: false
+  retweetedBy: null
+  lang: zxx
+  score: null
+- id: '2098342906083905911'
+  text: '@Av1dlive I created agent which generates brandbooks via gpt image 2. After
+    creation I need to turn them to figma editable. But I can''t find vectorizer tool.
+    Do you have any opinions about it?'
+  author:
+    id: '2066816563412336640'
+    name: Alirizo
+    screenName: Alirizo_
+    profileImageUrl: https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png
+    verified: false
+  metrics:
+    likes: 1
+    retweets: 0
+    replies: 1
+    quotes: 0
+    views: 305
+    bookmarks: 0
+  createdAt: Fri Sep 11 09:28:28 +0000 2026
+  createdAtLocal: 2026-09-11 11:28
+  createdAtISO: '2026-09-11T09:28:28+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098474959299637376'
+  text: '@Alirizo_ I can actually work something around it, for sure.'
+  author:
+    id: '1713062826175299584'
+    name: Avid
+    screenName: Av1dlive
+    profileImageUrl: https://pbs.twimg.com/profile_images/2010392290590912512/x7vtAe5W_normal.jpg
+    verified: true
+  metrics:
+    likes: 0
+    retweets: 0
+    replies: 0
+    quotes: 0
+    views: 169
+    bookmarks: 0
+  createdAt: Fri Sep 11 18:13:12 +0000 2026
+  createdAtLocal: 2026-09-11 20:13
+  createdAtISO: '2026-09-11T18:13:12+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098328747762200707'
+  text: '@Av1dlive so, if i have image creation skill already for nano banana or any
+    image. it will work same right? or u suggest to use yours and update my skills?'
+  author:
+    id: '1882412327183503360'
+    name: Khauf
+    screenName: khauf0007
+    profileImageUrl: https://pbs.twimg.com/profile_images/2031699626487951361/yrgDehoy_normal.jpg
+    verified: false
+  metrics:
+    likes: 1
+    retweets: 0
+    replies: 1
+    quotes: 0
+    views: 728
+    bookmarks: 0
+  createdAt: Fri Sep 11 08:32:13 +0000 2026
+  createdAtLocal: 2026-09-11 10:32
+  createdAtISO: '2026-09-11T08:32:13+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098340212724421082'
+  text: '@khauf0007 yes it can'
+  author:
+    id: '1713062826175299584'
+    name: Avid
+    screenName: Av1dlive
+    profileImageUrl: https://pbs.twimg.com/profile_images/2010392290590912512/x7vtAe5W_normal.jpg
+    verified: true
+  metrics:
+    likes: 0
+    retweets: 0
+    replies: 0
+    quotes: 0
+    views: 575
+    bookmarks: 0
+  createdAt: Fri Sep 11 09:17:46 +0000 2026
+  createdAtLocal: 2026-09-11 11:17
+  createdAtISO: '2026-09-11T09:17:46+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2095963893302468768'
+  text: 'Beyond the firelight, a story is waiting.
+
+
+    Eldmyr is a storytelling role-playing game set in a handcrafted Nordic world of
+    folklore, strange creatures and choices that reshape the tale.
+
+
+    The closed beta is open. Will you take a seat by the fire?'
+  author:
+    id: '2023847934434177024'
+    name: Eldmyr
+    screenName: Eldmyr_World
+    profileImageUrl: https://pbs.twimg.com/profile_images/2023848146577584129/3BtXyE2-_normal.jpg
+    verified: true
+  metrics:
+    likes: 79
+    retweets: 10
+    replies: 6
+    quotes: 0
+    views: 169318
+    bookmarks: 50
+  createdAt: Fri Sep 04 19:55:07 +0000 2026
+  createdAtLocal: 2026-09-04 21:55
+  createdAtISO: '2026-09-04T19:55:07+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098061384768479562'
+  text: '@Av1dlive saved!'
+  author:
+    id: '1662197418941636612'
+    name: wandermist
+    screenName: wandermist
+    profileImageUrl: https://pbs.twimg.com/profile_images/2095528090139250690/5_SGepEL_normal.jpg
+    verified: true
+  metrics:
+    likes: 1
+    retweets: 0
+    replies: 1
+    quotes: 0
+    views: 725
+    bookmarks: 0
+  createdAt: Thu Sep 10 14:49:48 +0000 2026
+  createdAtLocal: 2026-09-10 16:49
+  createdAtISO: '2026-09-10T14:49:48+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098068077216956830'
+  text: "@wandermist Let’s go wandermist \n\nMake sure you use it"
+  author:
+    id: '1713062826175299584'
+    name: Avid
+    screenName: Av1dlive
+    profileImageUrl: https://pbs.twimg.com/profile_images/2010392290590912512/x7vtAe5W_normal.jpg
+    verified: true
+  metrics:
+    likes: 0
+    retweets: 0
+    replies: 0
+    quotes: 0
+    views: 623
+    bookmarks: 0
+  createdAt: Thu Sep 10 15:16:24 +0000 2026
+  createdAtLocal: 2026-09-10 17:16
+  createdAtISO: '2026-09-10T15:16:24+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098055646004609142'
+  text: "@Av1dlive bro dropped another mega guide \n\nlet me read fully"
+  author:
+    id: '2091995542662365184'
+    name: Israfil
+    screenName: Israfilv2
+    profileImageUrl: https://pbs.twimg.com/profile_images/2096461964830720000/nqziq6a3_normal.jpg
+    verified: true
+  metrics:
+    likes: 1
+    retweets: 0
+    replies: 1
+    quotes: 0
+    views: 745
+    bookmarks: 0
+  createdAt: Thu Sep 10 14:27:00 +0000 2026
+  createdAtLocal: 2026-09-10 16:27
+  createdAtISO: '2026-09-10T14:27:00+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098068251746185475'
+  text: '@Israfilv2 Let’s goooo imma drop more alpha next few hours'
+  author:
+    id: '1713062826175299584'
+    name: Avid
+    screenName: Av1dlive
+    profileImageUrl: https://pbs.twimg.com/profile_images/2010392290590912512/x7vtAe5W_normal.jpg
+    verified: true
+  metrics:
+    likes: 1
+    retweets: 0
+    replies: 0
+    quotes: 0
+    views: 608
+    bookmarks: 0
+  createdAt: Thu Sep 10 15:17:06 +0000 2026
+  createdAtLocal: 2026-09-10 17:17
+  createdAtISO: '2026-09-10T15:17:06+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098058580326846701'
+  text: '@Av1dlive damn bro, i really enjoy your title'
+  author:
+    id: '1523268434586480642'
+    name: Morty
+    screenName: 0xMortyx
+    profileImageUrl: https://pbs.twimg.com/profile_images/2057514634119188480/KQg1xNWg_normal.jpg
+    verified: true
+  metrics:
+    likes: 1
+    retweets: 0
+    replies: 1
+    quotes: 0
+    views: 626
+    bookmarks: 1
+  createdAt: Thu Sep 10 14:38:40 +0000 2026
+  createdAtLocal: 2026-09-10 16:38
+  createdAtISO: '2026-09-10T14:38:40+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098068017154572669'
+  text: '@0xMortyx Your welcome Morty'
+  author:
+    id: '1713062826175299584'
+    name: Avid
+    screenName: Av1dlive
+    profileImageUrl: https://pbs.twimg.com/profile_images/2010392290590912512/x7vtAe5W_normal.jpg
+    verified: true
+  metrics:
+    likes: 0
+    retweets: 0
+    replies: 0
+    quotes: 0
+    views: 550
+    bookmarks: 0
+  createdAt: Thu Sep 10 15:16:10 +0000 2026
+  createdAtLocal: 2026-09-10 17:16
+  createdAtISO: '2026-09-10T15:16:10+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098063119931339048'
+  text: '@Av1dlive Good guide avid, love it'
+  author:
+    id: '2025864092498702336'
+    name: Ruuj
+    screenName: RuujSs
+    profileImageUrl: https://pbs.twimg.com/profile_images/2026168413178253312/10LsXiYF_normal.jpg
+    verified: true
+  metrics:
+    likes: 2
+    retweets: 0
+    replies: 1
+    quotes: 0
+    views: 633
+    bookmarks: 0
+  createdAt: Thu Sep 10 14:56:42 +0000 2026
+  createdAtLocal: 2026-09-10 16:56
+  createdAtISO: '2026-09-10T14:56:42+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098068194875588746'
+  text: '@RuujSs Oh my god
+
+
+    Thanks so much Ruuj'
+  author:
+    id: '1713062826175299584'
+    name: Avid
+    screenName: Av1dlive
+    profileImageUrl: https://pbs.twimg.com/profile_images/2010392290590912512/x7vtAe5W_normal.jpg
+    verified: true
+  metrics:
+    likes: 1
+    retweets: 0
+    replies: 0
+    quotes: 0
+    views: 564
+    bookmarks: 0
+  createdAt: Thu Sep 10 15:16:52 +0000 2026
+  createdAtLocal: 2026-09-10 17:16
+  createdAtISO: '2026-09-10T15:16:52+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098071883505639726'
+  text: '@Av1dlive product shots live or die on exact brand color and logo placement,
+    the one thing diffusion models still fumble even when everything else looks perfect.'
+  author:
+    id: '1840788730249961476'
+    name: AdiiX
+    screenName: adiix_official
+    profileImageUrl: https://pbs.twimg.com/profile_images/2046762681714008064/6me8SrkX_normal.jpg
+    verified: true
+  metrics:
+    likes: 2
+    retweets: 0
+    replies: 1
+    quotes: 0
+    views: 648
+    bookmarks: 0
+  createdAt: Thu Sep 10 15:31:31 +0000 2026
+  createdAtLocal: 2026-09-10 17:31
+  createdAtISO: '2026-09-10T15:31:31+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098072138452455593'
+  text: '@adiix_official Yea and that’s why the reconstruction json exists'
+  author:
+    id: '1713062826175299584'
+    name: Avid
+    screenName: Av1dlive
+    profileImageUrl: https://pbs.twimg.com/profile_images/2010392290590912512/x7vtAe5W_normal.jpg
+    verified: true
+  metrics:
+    likes: 0
+    retweets: 0
+    replies: 0
+    quotes: 0
+    views: 552
+    bookmarks: 0
+  createdAt: Thu Sep 10 15:32:32 +0000 2026
+  createdAtLocal: 2026-09-10 17:32
+  createdAtISO: '2026-09-10T15:32:32+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2085844569309221234'
+  text: 'home designers, this one is for you.
+
+
+    A rough sketch can now become a complete home design. Draw the footprint, list
+    the rooms you need, and get detailed floor plans, a 3D model, and an exterior
+    rendering.'
+  author:
+    id: '1993058627255672832'
+    name: Drafted
+    screenName: DraftedAI
+    profileImageUrl: https://pbs.twimg.com/profile_images/1993061535078551552/sKQ3Bp4u_normal.jpg
+    verified: true
+  metrics:
+    likes: 559
+    retweets: 66
+    replies: 9
+    quotes: 4
+    views: 2790577
+    bookmarks: 495
+  createdAt: Fri Aug 07 21:44:33 +0000 2026
+  createdAtLocal: 2026-08-07 23:44
+  createdAtISO: '2026-08-07T21:44:33+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098060737948041472'
+  text: '@Av1dlive great article habibi'
+  author:
+    id: '1224538644247203844'
+    name: Khairallah AL-Awady
+    screenName: eng_khairallah1
+    profileImageUrl: https://pbs.twimg.com/profile_images/1888357542004162560/5D-YlH5e_normal.jpg
+    verified: true
+  metrics:
+    likes: 1
+    retweets: 0
+    replies: 1
+    quotes: 0
+    views: 382
+    bookmarks: 0
+  createdAt: Thu Sep 10 14:47:14 +0000 2026
+  createdAtLocal: 2026-09-10 16:47
+  createdAtISO: '2026-09-10T14:47:14+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098068305450037625'
+  text: '@eng_khairallah1 Thanks habibi I appreciate you showing up'
+  author:
+    id: '1713062826175299584'
+    name: Avid
+    screenName: Av1dlive
+    profileImageUrl: https://pbs.twimg.com/profile_images/2010392290590912512/x7vtAe5W_normal.jpg
+    verified: true
+  metrics:
+    likes: 0
+    retweets: 0
+    replies: 0
+    quotes: 0
+    views: 306
+    bookmarks: 0
+  createdAt: Thu Sep 10 15:17:18 +0000 2026
+  createdAtLocal: 2026-09-10 17:17
+  createdAtISO: '2026-09-10T15:17:18+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098060862514725155'
+  text: '@Av1dlive sick post avid'
+  author:
+    id: '1373665408193036293'
+    name: CyrilXBT
+    screenName: cyrilXBT
+    profileImageUrl: https://pbs.twimg.com/profile_images/2035229727414534145/aWap3Jbq_normal.jpg
+    verified: true
+  metrics:
+    likes: 1
+    retweets: 0
+    replies: 1
+    quotes: 0
+    views: 678
+    bookmarks: 0
+  createdAt: Thu Sep 10 14:47:44 +0000 2026
+  createdAtLocal: 2026-09-10 16:47
+  createdAtISO: '2026-09-10T14:47:44+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098068154568307168'
+  text: "@cyrilXBT Yo thanks big man Cyril \n\nI appreciate you"
+  author:
+    id: '1713062826175299584'
+    name: Avid
+    screenName: Av1dlive
+    profileImageUrl: https://pbs.twimg.com/profile_images/2010392290590912512/x7vtAe5W_normal.jpg
+    verified: true
+  metrics:
+    likes: 0
+    retweets: 0
+    replies: 0
+    quotes: 0
+    views: 420
+    bookmarks: 0
+  createdAt: Thu Sep 10 15:16:42 +0000 2026
+  createdAtLocal: 2026-09-10 17:16
+  createdAtISO: '2026-09-10T15:16:42+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098056922717208951'
+  text: '@Av1dlive wow bro, did you create the banner with chatgpt?'
+  author:
+    id: '1970191005510180866'
+    name: Roan
+    screenName: RohOnChain
+    profileImageUrl: https://pbs.twimg.com/profile_images/2015696704448704512/IqwOwcRn_normal.jpg
+    verified: true
+  metrics:
+    likes: 2
+    retweets: 0
+    replies: 1
+    quotes: 0
+    views: 458
+    bookmarks: 0
+  createdAt: Thu Sep 10 14:32:05 +0000 2026
+  createdAtLocal: 2026-09-10 16:32
+  createdAtISO: '2026-09-10T14:32:05+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098066797312508108'
+  text: '@RohOnChain Yes'
+  author:
+    id: '1713062826175299584'
+    name: Avid
+    screenName: Av1dlive
+    profileImageUrl: https://pbs.twimg.com/profile_images/2010392290590912512/x7vtAe5W_normal.jpg
+    verified: true
+  metrics:
+    likes: 0
+    retweets: 0
+    replies: 0
+    quotes: 0
+    views: 358
+    bookmarks: 0
+  createdAt: Thu Sep 10 15:11:19 +0000 2026
+  createdAtLocal: 2026-09-10 17:11
+  createdAtISO: '2026-09-10T15:11:19+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: und
+  score: null
+- id: '2098870062467666240'
+  text: '@Av1dlive man, looks super good
+
+    the photo for article is also generated with gpt?? XD'
+  author:
+    id: '3430298277'
+    name: codila
+    screenName: 0xCodila
+    profileImageUrl: https://pbs.twimg.com/profile_images/2064453666661441536/nj8n8Mei_normal.jpg
+    verified: true
+  metrics:
+    likes: 0
+    retweets: 0
+    replies: 1
+    quotes: 0
+    views: 69
+    bookmarks: 0
+  createdAt: Sat Sep 12 20:23:12 +0000 2026
+  createdAtLocal: 2026-09-12 22:23
+  createdAtISO: '2026-09-12T20:23:12+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098870771544469599'
+  text: '@0xCodila yes'
+  author:
+    id: '1713062826175299584'
+    name: Avid
+    screenName: Av1dlive
+    profileImageUrl: https://pbs.twimg.com/profile_images/2010392290590912512/x7vtAe5W_normal.jpg
+    verified: true
+  metrics:
+    likes: 1
+    retweets: 0
+    replies: 0
+    quotes: 0
+    views: 76
+    bookmarks: 0
+  createdAt: Sat Sep 12 20:26:01 +0000 2026
+  createdAtLocal: 2026-09-12 22:26
+  createdAtISO: '2026-09-12T20:26:01+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: und
+  score: null
+- id: '2098055607962255619'
+  text: '@Av1dlive Alpha share'
+  author:
+    id: '1605975892677001218'
+    name: Rohit
+    screenName: rohit4verse
+    profileImageUrl: https://pbs.twimg.com/profile_images/2005314466255360000/XtVoqVdV_normal.jpg
+    verified: true
+  metrics:
+    likes: 3
+    retweets: 0
+    replies: 1
+    quotes: 0
+    views: 493
+    bookmarks: 0
+  createdAt: Thu Sep 10 14:26:51 +0000 2026
+  createdAtLocal: 2026-09-10 16:26
+  createdAtISO: '2026-09-10T14:26:51+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098068109035000102'
+  text: '@rohit4verse Thanks my GOAT'
+  author:
+    id: '1713062826175299584'
+    name: Avid
+    screenName: Av1dlive
+    profileImageUrl: https://pbs.twimg.com/profile_images/2010392290590912512/x7vtAe5W_normal.jpg
+    verified: true
+  metrics:
+    likes: 1
+    retweets: 0
+    replies: 0
+    quotes: 0
+    views: 390
+    bookmarks: 0
+  createdAt: Thu Sep 10 15:16:32 +0000 2026
+  createdAtLocal: 2026-09-10 17:16
+  createdAtISO: '2026-09-10T15:16:32+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2099509607232368758'
+  text: 'AI-generated code is changing how software teams review code.
+
+
+    Compare the best AI code review tools for GitLab in 2026 and see how they help
+    teams review changes at scale - read @QodoAI''s breakdown:'
+  author:
+    id: '716348353915686912'
+    name: HackerNoon | Learn Any Technology
+    screenName: hackernoon
+    profileImageUrl: https://pbs.twimg.com/profile_images/1539323764160139272/6kD7o16d_normal.jpg
+    verified: true
+  metrics:
+    likes: 14
+    retweets: 1
+    replies: 1
+    quotes: 0
+    views: 176054
+    bookmarks: 1
+  createdAt: Mon Sep 14 14:44:32 +0000 2026
+  createdAtLocal: 2026-09-14 16:44
+  createdAtISO: '2026-09-14T14:44:32+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098059443925590077'
+  text: '@Av1dlive the hack &gt;&gt;&gt;'
+  author:
+    id: '1168877404598808577'
+    name: m0h
+    screenName: exploraX_
+    profileImageUrl: https://pbs.twimg.com/profile_images/2098086248992931840/5KYpNM8S_normal.jpg
+    verified: true
+  metrics:
+    likes: 1
+    retweets: 0
+    replies: 1
+    quotes: 0
+    views: 315
+    bookmarks: 0
+  createdAt: Thu Sep 10 14:42:06 +0000 2026
+  createdAtLocal: 2026-09-10 16:42
+  createdAtISO: '2026-09-10T14:42:06+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098067944844730662'
+  text: '@exploraX_ Moh read this its worth it'
+  author:
+    id: '1713062826175299584'
+    name: Avid
+    screenName: Av1dlive
+    profileImageUrl: https://pbs.twimg.com/profile_images/2010392290590912512/x7vtAe5W_normal.jpg
+    verified: true
+  metrics:
+    likes: 1
+    retweets: 0
+    replies: 0
+    quotes: 0
+    views: 244
+    bookmarks: 0
+  createdAt: Thu Sep 10 15:15:52 +0000 2026
+  createdAtLocal: 2026-09-10 17:15
+  createdAtISO: '2026-09-10T15:15:52+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098343820622459307'
+  text: '@Av1dlive clear visual decisions beat decorative prompt soup'
+  author:
+    id: '930170538055684097'
+    name: Harry Tandy
+    screenName: HarryTandy
+    profileImageUrl: https://pbs.twimg.com/profile_images/1809539460503146496/zAklQbnV_normal.jpg
+    verified: true
+  metrics:
+    likes: 1
+    retweets: 0
+    replies: 1
+    quotes: 0
+    views: 161
+    bookmarks: 0
+  createdAt: Fri Sep 11 09:32:06 +0000 2026
+  createdAtLocal: 2026-09-11 11:32
+  createdAtISO: '2026-09-11T09:32:06+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098344431091098019'
+  text: '@HarryTandy imma drop more sauce upcoming hours'
+  author:
+    id: '1713062826175299584'
+    name: Avid
+    screenName: Av1dlive
+    profileImageUrl: https://pbs.twimg.com/profile_images/2010392290590912512/x7vtAe5W_normal.jpg
+    verified: true
+  metrics:
+    likes: 0
+    retweets: 0
+    replies: 0
+    quotes: 0
+    views: 143
+    bookmarks: 0
+  createdAt: Fri Sep 11 09:34:32 +0000 2026
+  createdAtLocal: 2026-09-11 11:34
+  createdAtISO: '2026-09-11T09:34:32+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098055497874108524'
+  text: '@Av1dlive i’m not even done with your last article yet'
+  author:
+    id: '1074810577065832448'
+    name: painn
+    screenName: painn_x
+    profileImageUrl: https://pbs.twimg.com/profile_images/2092990665332248576/k2gtKRhN_normal.jpg
+    verified: true
+  metrics:
+    likes: 1
+    retweets: 0
+    replies: 1
+    quotes: 0
+    views: 291
+    bookmarks: 0
+  createdAt: Thu Sep 10 14:26:25 +0000 2026
+  createdAtLocal: 2026-09-10 16:26
+  createdAtISO: '2026-09-10T14:26:25+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098067889727443037'
+  text: '@painn_x Read this then or givw it to your agent it will be worth it'
+  author:
+    id: '1713062826175299584'
+    name: Avid
+    screenName: Av1dlive
+    profileImageUrl: https://pbs.twimg.com/profile_images/2010392290590912512/x7vtAe5W_normal.jpg
+    verified: true
+  metrics:
+    likes: 0
+    retweets: 0
+    replies: 0
+    quotes: 0
+    views: 265
+    bookmarks: 0
+  createdAt: Thu Sep 10 15:15:39 +0000 2026
+  createdAtLocal: 2026-09-10 17:15
+  createdAtISO: '2026-09-10T15:15:39+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098456234110460317'
+  text: '@Av1dlive Why is it giving me such bad outputs? It has platic all over and
+    no realism for me at all. Is there something i need to be doing?'
+  author:
+    id: '1989218511688986625'
+    name: Sameer Bhat
+    screenName: sameerbhat101
+    profileImageUrl: https://pbs.twimg.com/profile_images/2087325172672118784/daz3PREX_normal.jpg
+    verified: false
+  metrics:
+    likes: 1
+    retweets: 0
+    replies: 0
+    quotes: 0
+    views: 45
+    bookmarks: 0
+  createdAt: Fri Sep 11 16:58:48 +0000 2026
+  createdAtLocal: 2026-09-11 18:58
+  createdAtISO: '2026-09-11T16:58:48+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098056425142407263'
+  text: '@Av1dlive avid released an alpha version again thanks'
+  author:
+    id: '1918346924463202304'
+    name: Gipp 🦅
+    screenName: gippp69
+    profileImageUrl: https://pbs.twimg.com/profile_images/2086516032408104960/2Io2TYZc_normal.jpg
+    verified: true
+  metrics:
+    likes: 4
+    retweets: 0
+    replies: 0
+    quotes: 0
+    views: 255
+    bookmarks: 0
+  createdAt: Thu Sep 10 14:30:06 +0000 2026
+  createdAtLocal: 2026-09-10 16:30
+  createdAtISO: '2026-09-10T14:30:06+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098403168610660813'
+  text: '@Av1dlive this crazy how it was before doing this job without ai'
+  author:
+    id: '601868658'
+    name: Spikez 99.9%
+    screenName: 0xSpikez
+    profileImageUrl: https://pbs.twimg.com/profile_images/2096992378959826944/rCY0UFsk_normal.jpg
+    verified: true
+  metrics:
+    likes: 1
+    retweets: 0
+    replies: 0
+    quotes: 0
+    views: 68
+    bookmarks: 0
+  createdAt: Fri Sep 11 13:27:56 +0000 2026
+  createdAtLocal: 2026-09-11 15:27
+  createdAtISO: '2026-09-11T13:27:56+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098066845383241954'
+  text: '@Av1dlive new alpha, thanks avid!'
+  author:
+    id: '1616768355255336963'
+    name: starmex
+    screenName: starmexxx
+    profileImageUrl: https://pbs.twimg.com/profile_images/2043953478955843584/RUNx2CWA_normal.jpg
+    verified: true
+  metrics:
+    likes: 0
+    retweets: 0
+    replies: 0
+    quotes: 0
+    views: 173
+    bookmarks: 0
+  createdAt: Thu Sep 10 15:11:30 +0000 2026
+  createdAtLocal: 2026-09-10 17:11
+  createdAtISO: '2026-09-10T15:11:30+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2074483998999584988'
+  text: Defend darkness. Wishlist Sin &amp; Siege now! 🦇
+  author:
+    id: '1250036995314900992'
+    name: HeroCraft PC
+    screenName: HeroCraftPC
+    profileImageUrl: https://pbs.twimg.com/profile_images/1250037387482279937/BiDg-KIx_normal.jpg
+    verified: true
+  metrics:
+    likes: 1392
+    retweets: 54
+    replies: 14
+    quotes: 1
+    views: 6382266
+    bookmarks: 340
+  createdAt: Tue Jul 07 13:21:42 +0000 2026
+  createdAtLocal: 2026-07-07 15:21
+  createdAtISO: '2026-07-07T13:21:42+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098056665253724669'
+  text: '@Av1dlive thanks for this guide!'
+  author:
+    id: '1298572884001148928'
+    name: leopardracer
+    screenName: leopardracer
+    profileImageUrl: https://pbs.twimg.com/profile_images/2033124141205692417/q3k-wGks_normal.jpg
+    verified: true
+  metrics:
+    likes: 3
+    retweets: 0
+    replies: 0
+    quotes: 0
+    views: 214
+    bookmarks: 0
+  createdAt: Thu Sep 10 14:31:03 +0000 2026
+  createdAtLocal: 2026-09-10 16:31
+  createdAtISO: '2026-09-10T14:31:03+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098055517814096228'
+  text: '@Av1dlive Thanks for sharing this guide'
+  author:
+    id: '1859503562574921728'
+    name: Arde
+    screenName: ardent0X
+    profileImageUrl: https://pbs.twimg.com/profile_images/1993784128320491522/_TC_S1gv_normal.jpg
+    verified: true
+  metrics:
+    likes: 3
+    retweets: 0
+    replies: 0
+    quotes: 0
+    views: 199
+    bookmarks: 0
+  createdAt: Thu Sep 10 14:26:30 +0000 2026
+  createdAtLocal: 2026-09-10 16:26
+  createdAtISO: '2026-09-10T14:26:30+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098120877963423808'
+  text: '@Av1dlive good guide about gpt images 2.5 bro
+
+
+    bookmarked.'
+  author:
+    id: '1407691079533608972'
+    name: kepo
+    screenName: kepochnik
+    profileImageUrl: https://pbs.twimg.com/profile_images/1591923358270193665/lFbvKbQK_normal.jpg
+    verified: true
+  metrics:
+    likes: 1
+    retweets: 0
+    replies: 0
+    quotes: 0
+    views: 200
+    bookmarks: 0
+  createdAt: Thu Sep 10 18:46:13 +0000 2026
+  createdAtLocal: 2026-09-10 20:46
+  createdAtISO: '2026-09-10T18:46:13+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098271806398378029'
+  text: '@Av1dlive Unlocked full god tier with this post.'
+  author:
+    id: '1032339176858050560'
+    name: Santiago Velez ☀️ 💧🏴‍☠️🪝🌊⚒️
+    screenName: Santiag78758327
+    profileImageUrl: https://pbs.twimg.com/profile_images/1844357927173246979/gkRWoOEk_normal.jpg
+    verified: true
+  metrics:
+    likes: 1
+    retweets: 0
+    replies: 0
+    quotes: 0
+    views: 265
+    bookmarks: 1
+  createdAt: Fri Sep 11 04:45:57 +0000 2026
+  createdAtLocal: 2026-09-11 06:45
+  createdAtISO: '2026-09-11T04:45:57+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098103723402952824'
+  text: '@Av1dlive needed this, thanks'
+  author:
+    id: '1623565093048061952'
+    name: Siddharth
+    screenName: Pseudo_Sid26
+    profileImageUrl: https://pbs.twimg.com/profile_images/1970828147244617729/_95lvjPI_normal.jpg
+    verified: true
+  metrics:
+    likes: 0
+    retweets: 0
+    replies: 0
+    quotes: 0
+    views: 146
+    bookmarks: 0
+  createdAt: Thu Sep 10 17:38:03 +0000 2026
+  createdAtLocal: 2026-09-10 19:38
+  createdAtISO: '2026-09-10T17:38:03+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2099299030048337952'
+  text: '@Av1dlive The long-term impact of digital privacy will depend on governance,
+    regulation, and responsible innovation.'
+  author:
+    id: '1958054809535410178'
+    name: mounir bouriachi
+    screenName: BouriachiM45430
+    profileImageUrl: https://pbs.twimg.com/profile_images/1964391005333098496/ClPdELbM_normal.jpg
+    verified: false
+  metrics:
+    likes: 0
+    retweets: 0
+    replies: 0
+    quotes: 0
+    views: 0
+    bookmarks: 0
+  createdAt: Mon Sep 14 00:47:46 +0000 2026
+  createdAtLocal: 2026-09-14 02:47
+  createdAtISO: '2026-09-14T00:47:46+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098496994402877609'
+  text: '@Av1dlive the fly has better risk management than me'
+  author:
+    id: '2087967329577803776'
+    name: EnzoXbt
+    screenName: Enzoxbt01
+    profileImageUrl: https://pbs.twimg.com/profile_images/2087968219802013696/rNy7fqvr_normal.jpg
+    verified: true
+  metrics:
+    likes: 0
+    retweets: 0
+    replies: 0
+    quotes: 0
+    views: 17
+    bookmarks: 0
+  createdAt: Fri Sep 11 19:40:46 +0000 2026
+  createdAtLocal: 2026-09-11 21:40
+  createdAtISO: '2026-09-11T19:40:46+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098108441088733278'
+  text: '@Av1dlive @readwise save thread'
+  author:
+    id: '1879598152422141953'
+    name: Justin
+    screenName: yunggpcrypto
+    profileImageUrl: https://pbs.twimg.com/profile_images/1879598210647277568/AtsajtD-_normal.png
+    verified: false
+  metrics:
+    likes: 0
+    retweets: 0
+    replies: 1
+    quotes: 0
+    views: 102
+    bookmarks: 0
+  createdAt: Thu Sep 10 17:56:47 +0000 2026
+  createdAtLocal: 2026-09-10 19:56
+  createdAtISO: '2026-09-10T17:56:47+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098177184540262691'
+  text: '@Av1dlive 14 tricks huh sure'
+  author:
+    id: '1858703675864334336'
+    name: AI Mastery Guide
+    screenName: aiseomastery
+    profileImageUrl: https://pbs.twimg.com/profile_images/1863473441715752960/dxHu3jMV_normal.jpg
+    verified: true
+  metrics:
+    likes: 1
+    retweets: 0
+    replies: 0
+    quotes: 0
+    views: 103
+    bookmarks: 0
+  createdAt: Thu Sep 10 22:29:57 +0000 2026
+  createdAtLocal: 2026-09-11 00:29
+  createdAtISO: '2026-09-10T22:29:57+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098369503310529004'
+  text: '@Av1dlive Nice'
+  author:
+    id: '2025544246724292609'
+    name: Guthix
+    screenName: GuthixMoney
+    profileImageUrl: https://pbs.twimg.com/profile_images/2029215124695994368/30_ryfLF_normal.jpg
+    verified: false
+  metrics:
+    likes: 1
+    retweets: 0
+    replies: 0
+    quotes: 0
+    views: 30
+    bookmarks: 0
+  createdAt: Fri Sep 11 11:14:10 +0000 2026
+  createdAtLocal: 2026-09-11 13:14
+  createdAtISO: '2026-09-11T11:14:10+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+

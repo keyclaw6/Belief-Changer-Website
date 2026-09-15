@@ -1,0 +1,476 @@
+ok: true
+schema_version: '1'
+data:
+- id: '2098749518015541258'
+  text: A perfect example of what modern computers are really capable of if you optimize
+    your code properly. All your 2.5 million code lines visible at once. 120Hz smooth
+    scrolling. MSVC, Word or Chrome would choke super hard on a workload like this.
+  author:
+    id: '3436615413'
+    name: Sebastian Aaltonen
+    screenName: SebAaltonen
+    profileImageUrl: https://pbs.twimg.com/profile_images/635475210972581888/M-EvpMrZ_normal.png
+    verified: true
+  metrics:
+    likes: 7663
+    retweets: 329
+    replies: 53
+    quotes: 8
+    views: 280980
+    bookmarks: 2281
+  createdAt: Sat Sep 12 12:24:12 +0000 2026
+  createdAtLocal: 2026-09-12 14:24
+  createdAtISO: '2026-09-12T12:24:12+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+  quotedTweet:
+    id: '2098710248164868534'
+    text: Ironed out the last performance issues with my full 2.5m line codebase explorer.
+      120hz awesomeness. Can only upload 60fps video tho. Much nicer uncompressed
+      https://t.co/LUsrmVaI6L
+    author:
+      screenName: rikarends
+      name: Rik Arends
+- id: '2087957477966954794'
+  text: 'A SCROLL-DRIVEN 3D SITE LIKE THIS QUOTES AT $8,000 WITH A 6-WEEK TIMELINE
+    AND 3 PEOPLE ON IT.
+
+
+    A designer, a WebGL dev, a frontend engineer. 6 weeks because the 3D and the scroll
+    logic get built twice, once in the mockup and once for real.
+
+
+    The stack underneath is not exotic. Three.js or React Three Fiber for the scene,
+    GSAP ScrollTrigger to bind camera position to scroll offset, Lenis for the smooth
+    scroll, custom shader materials for the glow and the volumetrics. Every piece
+    is public and documented.
+
+
+    What made it expensive was the seam. The designer hands over static frames, the
+    WebGL dev rebuilds them in code, and the 2 versions never quite match. Weeks disappear
+    in that gap.
+
+
+    That seam is gone. Shader, scroll timeline and live browser output come out of
+    the same pass, so there''s no version to reconcile and nothing to hand across.
+
+
+    So one person now delivers in a week what took 3 people 6. The $8,000 doesn''t
+    get split anymore.
+
+
+    What still decides whether the site is worth $8,000 is the feel. Camera travel
+    per 100px of scroll. Where a section snaps and where it drifts. Whether the glow
+    reads expensive or reads like a bought template.'
+  author:
+    id: '2083604781277270016'
+    name: Smoooothly
+    screenName: Smoooothly_
+    profileImageUrl: https://pbs.twimg.com/profile_images/2083608560215134208/aPRD2-qf_normal.jpg
+    verified: true
+  metrics:
+    likes: 5
+    retweets: 0
+    replies: 1
+    quotes: 0
+    views: 121
+    bookmarks: 2
+  createdAt: Thu Aug 13 17:40:29 +0000 2026
+  createdAtLocal: 2026-08-13 19:40
+  createdAtISO: '2026-08-13T17:40:29+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2087957420844740608/vid/avc1/576x1024/UvpbOARPG4lq4c5k.mp4?tag=29
+    width: 576
+    height: 1024
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+  quotedTweet:
+    id: '2079218516150862086'
+    text: https://t.co/FCMzr9satN
+    author:
+      screenName: bateshkaaa
+      name: Romario
+- id: '2097553581020971142'
+  text: "Building custom 3D WebGL experiences used to require a massive agency budget\
+    \ and months of coding. Not anymore. \U0001F6D1\n\nHere is how to engineer a premium,\
+    \ immersive scrollytelling website featuring an interactive 3D character, dynamic\
+    \ cursor tracking, and parallax depth. \U0001F332\n\nI used Claude Code to build\
+    \ this frontend UI/UX architecture from scratch. Zero manual CSS fighting.\n\n\
+    The exact frontend tech stack: \n✅ React & Next.js (Core framework) \n✅ Three.js\
+    \ / WebGL (3D creature rendering & environment depth) \n✅ Tailwind CSS (Clean\
+    \ typography & modern layout) \n✅ Framer Motion (Custom cursor physics & scroll\
+    \ choreography)\n\nStop building flat web templates. Start building premium interactive\
+    \ frontend web design.\n\nCopy my exact AI build prompt below \U0001F9F5\U0001F447"
+  author:
+    id: '2308686523'
+    name: Himanshu Hingorani
+    screenName: himanshubuildss
+    profileImageUrl: https://pbs.twimg.com/profile_images/2040486128294436864/JziGJtod_normal.jpg
+    verified: true
+  metrics:
+    likes: 81
+    retweets: 7
+    replies: 8
+    quotes: 0
+    views: 6470
+    bookmarks: 75
+  createdAt: Wed Sep 09 05:11:59 +0000 2026
+  createdAtLocal: 2026-09-09 07:11
+  createdAtISO: '2026-09-09T05:11:59+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2097553411827019776/vid/avc1/1704x988/CQMgFF1AYW48Q4NL.mp4?tag=29
+    width: 1704
+    height: 988
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2097241869868552578'
+  text: 'Powering projects from Microsoft, Google, Netflix, Shopify and much more.
+
+
+    Smoothing the web since 2022.
+
+
+    → https://t.co/ar3PdL86Xx'
+  author:
+    id: '1999259405678948352'
+    name: Lenis
+    screenName: LenisSmooth
+    profileImageUrl: https://pbs.twimg.com/profile_images/1999260557657149440/PCfa3lDH_normal.jpg
+    verified: true
+  metrics:
+    likes: 3
+    retweets: 1
+    replies: 0
+    quotes: 0
+    views: 387
+    bookmarks: 0
+  createdAt: Tue Sep 08 08:33:21 +0000 2026
+  createdAtLocal: 2026-09-08 10:33
+  createdAtISO: '2026-09-08T08:33:21+00:00'
+  media: []
+  urls:
+  - https://lenis.dev/showcase
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+  quotedTweet:
+    id: '2097119390210707670'
+    text: The fact that @LenisSmooth only have the amount of backers it has just makes
+      me lose faith completely in OSS. Especially with all those companies including
+      the code on their landing pages, designers glazing smooth scroll but never giving
+      back to the guys from @DarkroomDevs.
+    author:
+      screenName: LuisBizarro
+      name: Luis Bizarro
+- id: '2098974448791523754'
+  text: '50代からWeb制作を始めたおっちゃんです。
+
+
+    おっちゃん、正直いうと派手なアニメーションはなくてもええ派です。
+
+    でも今回、ブランドの世界観として動きも大事とのことで実装しました（デザイナーもオーナーも喜）。
+
+
+    で、今回学んだことをちょい共有です。
+
+    まずLenis(レニス)。そう、あのラケットでボールを打つやつです🎾
+
+
+    さて、これの役割はページ全体のスクロールを
+
+    「カクッ」から「ヌルッ」にしてくれるやつです。
+
+
+    ただ動かすんやなくて、
+
+    止まるときにスーッと余韻が残る。
+
+
+    これだけで、サイトの触り心地がかなり変わります。
+
+    その重さを決めるのがlerp(ラープ)。そう、あの手を洗うときのやつです🤭
+
+
+    これね、Lenisのなかのパラメータがlerp。
+
+    要はヌルっとするかしないかは、
+
+    Lenisのオン、オフ。
+
+    でオンにした場合の慣性の強さを示すのがlerpです。
+
+
+    今回は lerp: 0.1。
+
+
+    言うてもわからんやろから、見てもらった方が早い。
+
+    中ことでwebアプリ作りました。
+
+
+    違いがわかりますかね？'
+  author:
+    id: '185175289'
+    name: みくのすけ＠50代未経験からの副業Web制作
+    screenName: miku_nosuke
+    profileImageUrl: https://pbs.twimg.com/profile_images/1961629596157358080/0ern67Go_normal.jpg
+    verified: true
+  metrics:
+    likes: 9
+    retweets: 0
+    replies: 1
+    quotes: 1
+    views: 1537
+    bookmarks: 2
+  createdAt: Sun Sep 13 03:18:00 +0000 2026
+  createdAtLocal: 2026-09-13 05:18
+  createdAtISO: '2026-09-13T03:18:00+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2098959972570968064/vid/avc1/1524x1114/rMIpcGEpSE9ymH4I.mp4?tag=29
+    width: 1524
+    height: 1114
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: ja
+  score: null
+- id: '2098048853459312667'
+  text: 'FORMAT by @obys_agency
+
+
+    Format guides the eye. Lenis guides the scroll.
+
+
+    → https://t.co/iZ6W1C9jvP https://t.co/ujDvcZu3x6'
+  author:
+    id: '1999259405678948352'
+    name: Lenis
+    screenName: LenisSmooth
+    profileImageUrl: https://pbs.twimg.com/profile_images/1999260557657149440/PCfa3lDH_normal.jpg
+    verified: true
+  metrics:
+    likes: 14
+    retweets: 4
+    replies: 0
+    quotes: 0
+    views: 567
+    bookmarks: 6
+  createdAt: Thu Sep 10 14:00:01 +0000 2026
+  createdAtLocal: 2026-09-10 16:00
+  createdAtISO: '2026-09-10T14:00:01+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2096689058693128192/vid/avc1/1600x1000/jv9bNoM_k6FLJF4M.mp4?tag=29
+    width: 1600
+    height: 1000
+  urls:
+  - https://lenis.dev/showcase/format
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098461042779345254'
+  text: "Stop building flat, generic course landing pages. \U0001F6D1\n\nUpgrade to\
+    \ premium 3D interactive UI right now at https://t.co/RlChWqggj8 ✨\n\nHere is\
+    \ how to engineer a $10,000 cinematic orbital scrollytelling experience featuring\
+    \ a dynamic 3D Earth and real-time solar lighting. \n\nYou can grab the exact\
+    \ AI prompts and templates for high-end builds exactly like this at https://t.co/RlChWqggj8.\n\
+    \nThe exact frontend tech stack: \n- React 19 & Vite (Core component architecture)\
+    \ \n- Three.js & WebGL (3D globe rendering & custom atmospheric shaders) \n- Lenis\
+    \ (Buttery-smooth scroll physics) \n- Pure CSS & Native rAF (Zero GSAP or Framer\
+    \ Motion bloat)\n\nStop relying on boring templates. Start engineering immersive\
+    \ frontend experiences.\n\nCopy my Prompt \U0001F447"
+  author:
+    id: '2308686523'
+    name: Himanshu Hingorani
+    screenName: himanshubuildss
+    profileImageUrl: https://pbs.twimg.com/profile_images/2040486128294436864/JziGJtod_normal.jpg
+    verified: true
+  metrics:
+    likes: 15
+    retweets: 2
+    replies: 1
+    quotes: 0
+    views: 955
+    bookmarks: 13
+  createdAt: Fri Sep 11 17:17:54 +0000 2026
+  createdAtLocal: 2026-09-11 19:17
+  createdAtISO: '2026-09-11T17:17:54+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2098460327826624512/vid/avc1/1680x996/LgzQuTgDVJuXl26S.mp4?tag=29
+    width: 1680
+    height: 996
+  urls:
+  - https://scrolltide.co
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2059436091665424875'
+  text: '🏆 Site of the Week - Lucas Aufrere portfolio
+
+
+    Editorial portfolio of a creative front-end freelancer. GSAP drives the entire
+    motion layer — ScrollTrigger for section reveals and project transitions, SplitText
+    for typographic reveals, with Lenis synced to the GSAP ticker for smooth scroll.
+    Built with Next.js, no UI kit, every line written for the project. Restraint over
+    decoration: motion serves the reading rhythm, never the opposite.
+
+
+    credit: Lucas Aufrere (https://t.co/TmqO2lfZLo)
+
+
+    ⚙️ ScrollTrigger SplitText
+
+    🛠️ Three.js WebGL React
+
+
+    site → https://t.co/dpiYj5646u
+
+    showcase → https://t.co/V1TZUeSMqn'
+  author:
+    id: '24910558'
+    name: GSAP
+    screenName: greensock
+    profileImageUrl: https://pbs.twimg.com/profile_images/1713633504431394816/h28jJ1qM_normal.jpg
+    verified: true
+  metrics:
+    likes: 31
+    retweets: 2
+    replies: 0
+    quotes: 0
+    views: 2901
+    bookmarks: 23
+  createdAt: Wed May 27 00:46:41 +0000 2026
+  createdAtLocal: 2026-05-27 02:46
+  createdAtISO: '2026-05-27T00:46:41+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2059435998996525056/vid/avc1/1280x720/tD_TZx4WiY_BXupb.mp4?tag=27
+    width: 1280
+    height: 720
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2094874812506317062'
+  text: 'THIS YOUNG GUY REPLACED A $15K DESIGN AGENCY WITH ONE CLAUDE PROMPT
+
+
+    or you can watch this young guy build a floating 3D product site with Claude while
+    they still open Photoshop
+
+
+    he asks Claude for a Three.js scene and gets a product that floats in real time
+    and reacts as you scroll
+
+
+    WebGL ambient occlusion gives the white on white objects real depth with soft
+    shadows
+
+
+    GSAP ScrollTrigger ties the camera to the scroll so the whole scene moves as you
+    drag down
+
+
+    the palette stays pure white so the 3D forms and the typography carry the entire
+    page
+
+
+    backdrop blur on the feature cards gives that frosted premium look with zero images
+
+
+    requestAnimationFrame floats each element a little so the scene breathes even
+    when nobody touches it
+
+
+    Lenis smooth scroll makes the reveal feel like a film shot instead of a jump
+
+
+    agencies charge 5k to 15k for a landing page that feels like this and he types
+    it out in an afternoon
+
+
+    tomorrow I break down the exact Claude prompts that spin up this whole scene from
+    an empty file'
+  author:
+    id: '2065577325219966976'
+    name: Akira
+    screenName: awp_Akira
+    profileImageUrl: https://pbs.twimg.com/profile_images/2066672641985945600/JS1QwbF2_normal.jpg
+    verified: true
+  metrics:
+    likes: 99
+    retweets: 21
+    replies: 20
+    quotes: 0
+    views: 22377
+    bookmarks: 24
+  createdAt: Tue Sep 01 19:47:30 +0000 2026
+  createdAtLocal: 2026-09-01 21:47
+  createdAtISO: '2026-09-01T19:47:30+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2094874658180829185/vid/avc1/1080x1920/rzZedhNWb1bCBzks.mp4?tag=29
+    width: 1080
+    height: 1920
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+  quotedTweet:
+    id: '2083515342698016969'
+    text: https://t.co/KMmLhPHUHm
+    author:
+      screenName: awp_Akira
+      name: Akira
+- id: '2098136766587007023'
+  text: "Experimenting with @nextjs View transitions, with @greensock\n&amp; @LenisSmooth,\
+    \ in Renaissance style.\n\nhttps://t.co/l21k7LEKTM\n\n@Netlify \n\nGitHub repo\
+    \ at : https://t.co/YXJZBslyYC https://t.co/FP7NVrpbym"
+  author:
+    id: '1643840488502620160'
+    name: Anish 🔮
+    screenName: xevenbiswas
+    profileImageUrl: https://pbs.twimg.com/profile_images/2045981308355248128/PIWGbO9k_normal.jpg
+    verified: false
+  metrics:
+    likes: 31
+    retweets: 0
+    replies: 1
+    quotes: 0
+    views: 1357
+    bookmarks: 19
+  createdAt: Thu Sep 10 19:49:21 +0000 2026
+  createdAtLocal: 2026-09-10 21:49
+  createdAtISO: '2026-09-10T19:49:21+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2098136730625081344/vid/avc1/1280x720/AZqLtDTgS9RvFuSi.mp4?tag=29
+    width: 1280
+    height: 720
+  urls:
+  - https://aesthetic-renaissance.netlify.app
+  - https://git.new/anish
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+

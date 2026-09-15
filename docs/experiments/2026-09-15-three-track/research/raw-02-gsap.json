@@ -1,0 +1,502 @@
+ok: true
+schema_version: '1'
+data:
+- id: '2098420395477266653'
+  text: "A creative agency would quote you $20,000 and a 6-week timeline to build\
+    \ this cinematic scrollytelling portal. \U0001F6D1\n\nI engineered it in a single\
+    \ afternoon using AI.\n\nUpgrade your web UI right now at https://t.co/RlChWqggj8\
+    \ ✨\n\nHere is how to build an immersive experience that physically pulls users\
+    \ into your product. Zero bloated code.\n\nThe exact frontend tech stack: \n✅\
+    \ React & Next.js (Core component architecture) \n✅ HTML5 Canvas (High-performance\
+    \ image sequence rendering) \n✅ GSAP ScrollTrigger (Z-axis camera fly-through\
+    \ physics) \n✅ Tailwind CSS (Clean typography & dynamic progress UI)\n\nCopy my\
+    \ prompt \U0001F447"
+  author:
+    id: '2308686523'
+    name: Himanshu Hingorani
+    screenName: himanshubuildss
+    profileImageUrl: https://pbs.twimg.com/profile_images/2040486128294436864/JziGJtod_normal.jpg
+    verified: true
+  metrics:
+    likes: 8
+    retweets: 1
+    replies: 3
+    quotes: 0
+    views: 582
+    bookmarks: 6
+  createdAt: Fri Sep 11 14:36:23 +0000 2026
+  createdAtLocal: 2026-09-11 16:36
+  createdAtISO: '2026-09-11T14:36:23+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2098418652802592768/vid/avc1/1672x992/Ge-mKrgb0TSHIEhR.mp4?tag=29
+    width: 1672
+    height: 992
+  urls:
+  - https://scrolltide.co
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2097947861958766843'
+  text: "Stop building flat e-commerce sites. \U0001F6D1\n\nHere is a 3D scrollytelling\
+    \ experience built entirely with AI. ☕️\n\nThe frontend tech stack: \n✅ React\
+    \ & Next.js\n✅ Tailwind CSS\n✅ GSAP (Scroll parallax) \n✅ Framer Motion (Micro-interactions)\n\
+    \nTo Get my prompts Library  \U0001F449  Head Over to Link in Bio"
+  author:
+    id: '2308686523'
+    name: Himanshu Hingorani
+    screenName: himanshubuildss
+    profileImageUrl: https://pbs.twimg.com/profile_images/2040486128294436864/JziGJtod_normal.jpg
+    verified: true
+  metrics:
+    likes: 78
+    retweets: 11
+    replies: 1
+    quotes: 1
+    views: 4583
+    bookmarks: 91
+  createdAt: Thu Sep 10 07:18:42 +0000 2026
+  createdAtLocal: 2026-09-10 09:18
+  createdAtISO: '2026-09-10T07:18:42+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2097947802206937088/vid/avc1/1642x978/L40pcddylGmhdMvf.mp4?tag=29
+    width: 1642
+    height: 978
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2067213248517017884'
+  text: "THESE 5 REPOS BUILD THE $35K-STUDIO MOTION SITE - ON HIGGSFIELD + CLAUDE\
+    \ CODE.\n\nCLAUDEDESIGNSKILLS (152★) by freshtechbro · MIT\n\nthe most-adopted\
+    \ web-dev skill pack for Claude Code.\n\nwhat it adds:\n\n→ skills for Three.js,\
+    \ GSAP, React Three Fiber, Motion, Babylon\n→ scroll-animation + interactive-experience\
+    \ patterns baked in\n→ turns Claude Code into a design-grade front-end builder\n\
+    → drop into ~/.claude/skills/ and go\nthe workhorse of the list - start here.\n\
+    \nGSAP-SKILLS (8★) by greensock - official · MIT\n\nlow stars, highest trust:\
+    \ it's from the makers of GSAP.\n\nwhat it adds:\n\n→ gsap-scrolltrigger: scroll-linked\
+    \ animation, pinning, scrub\n→ timeline, plugins, react, performance skills\n\
+    → teaches the agent correct GSAP instead of hallucinated APIs\n→ install: npx\
+    \ skills add https://t.co/BFjCkptsos\n\nstop letting the model guess spring values.\n\
+    \nMOTION-DEV-ANIMATIONS-SKILL (20★) by 199-biotechnologies · MIT\n\nthe polish\
+    \ layer - https://t.co/SDjzA1cu3C (Framer Motion's successor).\n\nwhat it adds:\n\
+    \n→ hero fade-up, scroll reveal, parallax, magnetic-button patterns\n→ 120fps\
+    \ GPU-accelerated, transform/opacity only - zero layout shift\n→ prefers-reduced-motion\
+    \ + keyboard support baked in\n→ progressive loading: ~2K-token core, examples\
+    \ load on demand\n\nthis is what makes a site feel premium.\n\nHIGGSFIELD-SKILL\
+    \ (3★) by robonuggets · CC BY 4.0\n\nthe connector that wires Higgsfield's models\
+    \ into Claude Code.\n\nwhat it adds:\n\n→ one auth, 30+ models - Seedance 2.0,\
+    \ Sora 2, Veo, Kling, Soul, Cinema\n→ surfaces credit cost + a cost-approval gate\
+    \ before paid runs\n→ install: claude mcp add --transport http --scope user higgsfield\
+    \ https://t.co/ccj3bJ8Bcy\n\nthe cleanest way to plug in the assets.\n\nCLAUDE-SEEDANCE-SKILL\
+    \ (2★) by liamrjohnston30\ndrives Higgsfield Seedance 2.0 to render your hero/background\
+    \ video.\n\nwhat it adds:\n\n→ Playwright automation in a real Chrome window -\
+    \ image → video, on-camera\n→ five-slot prompt architecture (subject, action,\
+    \ camera, lighting, style)\n→ persistent login, step screenshots, output URLs\n\
+    → built as the pipeline for the Higgsfield × Claude video\n\nfeed its output straight\
+    \ into the scroll site.\n\nBONUS - the official one:\n\nMOTION WEBSITE GENERATOR\
+    \ skill by Higgsfield. \n\nBrand kit in → scroll-driven motion site out; chains\
+    \ the MCP + Vibe Motion and auto-applies 6 cinematic effects (film grain, particles,\
+    \ vignette, glass cards, color tints, scroll pacing). \n\nIf you install nothing\
+    \ else, install this.\n\nthe stack in one line:\n\nhiggsfield-skill + claude-seedance-skill\
+    \ pull the assets → claudedesignskills + GSAP + https://t.co/SDjzA1cu3C assemble\
+    \ the scroll site → you ship the $35K-studio look in a weekend.\n\nwhich of these\
+    \ are you running?\n\nFULL $35K MOTION-WEBSITE PLAYBOOK \U0001F447"
+  author:
+    id: '1558054593241776128'
+    name: ZEUS⚡️
+    screenName: zeuuss_01
+    profileImageUrl: https://pbs.twimg.com/profile_images/2059046904944611328/gjHlGwaU_normal.jpg
+    verified: true
+  metrics:
+    likes: 430
+    retweets: 43
+    replies: 22
+    quotes: 0
+    views: 79161
+    bookmarks: 773
+  createdAt: Wed Jun 17 11:50:20 +0000 2026
+  createdAtLocal: 2026-06-17 13:50
+  createdAtISO: '2026-06-17T11:50:20+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2067210870942273536/vid/avc1/1080x1920/lQL5-gsd3c38H2OU.mp4?tag=28
+    width: 1080
+    height: 1920
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+  quotedTweet:
+    id: '2067204840342630789'
+    text: https://t.co/NTMiEkacQP
+    author:
+      screenName: zeuuss_01
+      name: ZEUS⚡️
+- id: '2098748928485130737'
+  text: 'rolling gallery 🖼️
+
+
+    the paintings sit on the inside of a cylinder, so they curl away as you scroll
+    instead of just sliding off.
+
+
+    react native + shaders. inspired by Interface Craft.
+
+
+    https://t.co/SLLan3AlyO https://t.co/uMZm7QRZIy'
+  author:
+    id: '1867999101184585728'
+    name: Mehdi · Motionary
+    screenName: mehdi_made
+    profileImageUrl: https://pbs.twimg.com/profile_images/2084193569104109569/WovZKgPp_normal.jpg
+    verified: true
+  metrics:
+    likes: 164
+    retweets: 10
+    replies: 1
+    quotes: 0
+    views: 4417
+    bookmarks: 87
+  createdAt: Sat Sep 12 12:21:52 +0000 2026
+  createdAtLocal: 2026-09-12 14:21
+  createdAtISO: '2026-09-12T12:21:52+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2098748458832158721/vid/avc1/1860x1860/kq5zrRLnOySo7nVF.mp4?tag=29
+    width: 1860
+    height: 1860
+  urls:
+  - https://motionary.dev/animations/rolling-scroll-gallery
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2077081302440800664'
+  text: "THE $35K MOTION WEBSITE STACK IS NOT A STUDIO ANYMORE. IT IS HIGGSFIELD PLUS\
+    \ CLAUDE CODE SKILLS.\n\nMost people still think premium motion sites require\
+    \ a design team, an animation specialist, and a long handoff between Figma, video,\
+    \ and front-end code. This stack turns that into a repo-level workflow.\n\nclaudedesignskills\
+    \ gives Claude Code the front-end brain: Three.js, GSAP, React Three Fiber, Motion,\
+    \ Babylon, scroll patterns, and interactive experience logic.  \nhttps://t.co/0RViGWnA11\n\
+    \ngsap-skills keeps the animation layer from hallucinating. ScrollTrigger, timelines,\
+    \ React patterns, plugins, and performance rules become part of the agent’s working\
+    \ memory.  \nhttps://t.co/guuRC4pGi5\n\nThe polish comes from motion-dev-animations-skill:\
+    \ hero fade-ups, scroll reveals, parallax, magnetic buttons, reduced-motion support,\
+    \ and GPU-safe animation defaults.  \nhttps://t.co/hujGQwR7up\n\nThe detail most\
+    \ people miss: Higgsfield is the asset layer. higgsfield-skill plugs Claude Code\
+    \ into models like Seedance, Sora, Veo, Kling, Soul, and Cinema.  \nhttps://t.co/lmiUEAoMrV\n\
+    \nclaude-seedance-skill turns prompts into hero and background video assets, then\
+    \ feeds them straight into the scroll site pipeline.  \nhttps://t.co/o7g5upMe3V\n\
+    \nThat is the full pipeline. Higgsfield generates the cinematic raw material,\
+    \ Seedance renders the motion, and Claude Code assembles the site with GSAP, https://t.co/NMEYeU8oNO,\
+    \ and design-grade front-end skills.\n\nMost people are still asking Claude to\
+    \ write components. A few are giving it the skills, assets, animation rules, and\
+    \ visual pipeline to ship something that looks like an agency billed five figures\
+    \ for it."
+  author:
+    id: '1480177338793009155'
+    name: karti
+    screenName: Abobsterina
+    profileImageUrl: https://pbs.twimg.com/profile_images/1990356919354073088/pWnFWrqH_normal.jpg
+    verified: true
+  metrics:
+    likes: 38
+    retweets: 2
+    replies: 8
+    quotes: 0
+    views: 3482
+    bookmarks: 37
+  createdAt: Tue Jul 14 17:22:27 +0000 2026
+  createdAtLocal: 2026-07-14 19:22
+  createdAtISO: '2026-07-14T17:22:27+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2077081233394184192/vid/avc1/360x640/t9r-LqOyPmAQXHm4.mp4?tag=28
+    width: 360
+    height: 640
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+  quotedTweet:
+    id: '2076638189897355585'
+    text: https://t.co/k9JsGIpS3J
+    author:
+      screenName: Abobsterina
+      name: karti
+- id: '2098796616945959015'
+  text: 'I probably shouldn''t be posting this 🫢
+
+
+    Everything you need to build $10k cinematic websites — just copy-paste into Claude
+    Code:
+
+
+    1. https://t.co/Az5gEG8sRa — 5-figure site prompts. 300+ 3D scenes, 1000+ interactive
+    gradients, 100+ backgrounds, motion sections. Everything is a prompt.
+
+
+    2. https://t.co/vCod1w4XeI — the tiny motion & interaction details that make sites
+    feel expensive.
+
+
+    3. https://t.co/kFP6W9CSTL — navigation design done right, every pattern worth
+    stealing.
+
+
+    Save it before you need it 🔖'
+  author:
+    id: '1546857683072032771'
+    name: Dzianis Kravchu
+    screenName: thedzianis
+    profileImageUrl: https://pbs.twimg.com/profile_images/2083432892924145664/xFHwbe0C_normal.jpg
+    verified: true
+  metrics:
+    likes: 2
+    retweets: 0
+    replies: 0
+    quotes: 0
+    views: 106
+    bookmarks: 2
+  createdAt: Sat Sep 12 15:31:21 +0000 2026
+  createdAtLocal: 2026-09-12 17:31
+  createdAtISO: '2026-09-12T15:31:21+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2098796364838920193/vid/avc1/3276x2160/QixArZEqaKnoivsm.mp4?tag=29
+    width: 3276
+    height: 2160
+  urls:
+  - https://getlayers.ai
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2097275664701211042'
+  text: 'this guy just recorded a 10 minute tutorial on using GPT 6 Astra + Three.js
+    WebGPU to create award winning 3D animated websites.
+
+
+    save this for later ;) 🔖 https://t.co/gUkyI72V1v'
+  author:
+    id: '1414699328527126530'
+    name: carpe
+    screenName: ftcarpe
+    profileImageUrl: https://pbs.twimg.com/profile_images/2053834177628311555/G8rtW1mP_normal.jpg
+    verified: true
+  metrics:
+    likes: 24
+    retweets: 5
+    replies: 5
+    quotes: 0
+    views: 2604
+    bookmarks: 16
+  createdAt: Tue Sep 08 10:47:38 +0000 2026
+  createdAtLocal: 2026-09-08 12:47
+  createdAtISO: '2026-09-08T10:47:38+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2097275381451481088/vid/avc1/1662x1080/ABJTTF_F6LqVhfCB.mp4?tag=29
+    width: 1662
+    height: 1080
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2080380845395698155'
+  text: 'I''ve used Claude Fable 5 to rebuild this site.
+
+
+    Prompt below ↓ https://t.co/io4gYdIwHD'
+  author:
+    id: '1558054593241776128'
+    name: ZEUS⚡️
+    screenName: zeuuss_01
+    profileImageUrl: https://pbs.twimg.com/profile_images/2059046904944611328/gjHlGwaU_normal.jpg
+    verified: true
+  metrics:
+    likes: 49
+    retweets: 3
+    replies: 5
+    quotes: 0
+    views: 5660
+    bookmarks: 37
+  createdAt: Thu Jul 23 19:53:39 +0000 2026
+  createdAtLocal: 2026-07-23 21:53
+  createdAtISO: '2026-07-23T19:53:39+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2080378168465031168/vid/avc1/1132x720/x5zAVWWv3Oe_QhPh.mp4?tag=29
+    width: 1132
+    height: 720
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+  quotedTweet:
+    id: '2067204840342630789'
+    text: https://t.co/NTMiEkacQP
+    author:
+      screenName: zeuuss_01
+      name: ZEUS⚡️
+- id: '2080382123169464577'
+  text: 'Rebuild the website shown in the attached video, as closely as possible.
+    It''s a dark, cinematic, scroll-driven product-reveal page for a high-tech aircraft
+    ("GEODE CORE"), with a real-time interactive 3D model. Recreate the look, layout,
+    motion, and interactions faithfully.
+
+
+    MATCH THIS EXACTLY:
+
+    - Aesthetic: near-black background (#0A0A0B), off-white text, ONE accent — hot
+    orange engine glow (#FF6A00). Hairline grey UI lines, heavy black negative space.
+
+    - Type: technical MONOSPACE for labels/stats + heavy CONDENSED display sans for
+    the giant headlines. UPPERCASE, wide tracking. Micro-labels in "// " format (e.g.
+    "AIRFRAME // DUAL SYSTEM", "PROPULSION // CLASSIFIED", "EXPLORE // INTERACTIVE").
+
+    - Nav: left "◈ GEODE CORE", center links (AIRFRAME · PROPULSION · DEPLOYMENT),
+    right icons + ghost "BRIEFING" and solid white "ACQUIRE" buttons.
+
+    - Sections (one persistent 3D model transforms between them): HERO "DUAL SYSTEM
+    AIRFRAME" + stats (18.4m wingspan, 72,000ft ceiling) → PROPULSION "ZERO THERMAL
+    SIGNATURE" + stats (Mach 3.2, 0.0% signature, Level 5) → INTERACTIVE "DRAG TO
+    EXPLORE" → ACQUIRE CTA.
+
+    - 3D model: a quad-rotor drone stacked above a delta-wing stealth jet with a glowing
+    orange engine core.
+
+    - Bottom: section-progress rail + live scroll percentage. Small hints "↻ DRAG
+    TO ROTATE / ⌕ SCROLL TO ZOOM / RESET VIEW".
+
+
+    BEHAVIOR TO REPRODUCE:
+
+    - Scroll drives the camera and the model — it rotates, the drone/jet separate
+    and converge (exploded view), reframing per section, scrubbed to scroll progress.
+
+    - In the INTERACTIVE section, hand control to the user: drag to rotate 360°, scroll
+    to zoom, RESET VIEW button. Elsewhere the camera is scripted.
+
+    - Headlines glitch/scramble in on section enter; stat numbers count up; engine
+    ring glows with bloom and pulses; smooth eased camera, no snapping.
+
+
+    STACK: Next.js + TypeScript + Tailwind, React Three Fiber (Three.js) + drei (OrbitControls,
+    GLTF Draco), GSAP ScrollTrigger + Lenis, light postprocessing (bloom on the orange
+    glow, vignette, faint grain). 60fps, responsive, prefers-reduced-motion fallback.
+
+
+    I''ll supply the 3D model as a GLTF — scaffold everything around a placeholder
+    /public/model.glb (a stacked drone+jet) and make it easy to swap in. Build the
+    full working site: nav → hero → propulsion → interactive → acquire, with the persistent
+    scroll-driven + draggable model and the spec-sheet HUD.'
+  author:
+    id: '1558054593241776128'
+    name: ZEUS⚡️
+    screenName: zeuuss_01
+    profileImageUrl: https://pbs.twimg.com/profile_images/2059046904944611328/gjHlGwaU_normal.jpg
+    verified: true
+  metrics:
+    likes: 3
+    retweets: 0
+    replies: 0
+    quotes: 0
+    views: 486
+    bookmarks: 7
+  createdAt: Thu Jul 23 19:58:44 +0000 2026
+  createdAtLocal: 2026-07-23 21:58
+  createdAtISO: '2026-07-23T19:58:44+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2083310529821466880'
+  text: 'ONE CLAUDE WORKFLOW BUILT $200K AGENCY WEBSITES
+
+
+    NOW NOBODY WANTS TO PAY FOR IT
+
+
+    you describe the site you want and Claude writes the entire premium build for
+    you
+
+
+    start with a prompt for a storytelling layout where every scroll section reveals
+    a new chapter with fluid color transitions
+
+
+    it wires in Three.js for a painted texture background that reacts to your cursor
+
+
+    then GSAP ScrollTrigger makes each section animate in like a cinematic scene
+
+
+    Lenis handles that buttery smooth scroll the expensive studios charge a fortune
+    for
+
+
+    Splitting.js animates each word letter by letter as you scroll past it
+
+
+    you mix a Playfair Display serif with Inter sans for that editorial tension
+
+
+    the whole thing looks like a six figure agency project and it came out of a few
+    prompts
+
+
+    this is the same idea behind how I run my company with one person and Claude doing
+    the heavy build
+
+
+    start now while clients still think this needs a full design team
+
+
+    i am releasing a full guide on how i built websites with claude tomorrow
+
+
+    hope u see it'
+  author:
+    id: '2065577325219966976'
+    name: Akira
+    screenName: awp_Akira
+    profileImageUrl: https://pbs.twimg.com/profile_images/2066672641985945600/JS1QwbF2_normal.jpg
+    verified: true
+  metrics:
+    likes: 71
+    retweets: 5
+    replies: 4
+    quotes: 0
+    views: 11358
+    bookmarks: 82
+  createdAt: Fri Jul 31 21:55:11 +0000 2026
+  createdAtLocal: 2026-07-31 23:55
+  createdAtISO: '2026-07-31T21:55:11+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2083310129953329152/vid/avc1/1080x1920/bUwalKH6Iv1dPOjC.mp4?tag=29
+    width: 1080
+    height: 1920
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+  quotedTweet:
+    id: '2071246711222055363'
+    text: https://t.co/qxOGBVt0UC
+    author:
+      screenName: monokern
+      name: monokern
+

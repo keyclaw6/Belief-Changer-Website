@@ -1,0 +1,427 @@
+ok: true
+schema_version: '1'
+data:
+- id: '2098423377094697399'
+  text: 'GPT Image 2.5 is getting seriously impressive.
+
+
+    Found this open-source GitHub project collecting trending GPT Image 2.5 use cases,
+    prompt examples, and creative references.
+
+
+    A useful resource for AI creators looking for new ideas.
+
+
+    https://t.co/A2A1oVivCQ'
+  author:
+    id: '2071133840106778624'
+    name: Air AI
+    screenName: AirAi_Creator
+    profileImageUrl: https://pbs.twimg.com/profile_images/2093398503133462528/MdC3Vltu_normal.jpg
+    verified: true
+  metrics:
+    likes: 256
+    retweets: 2
+    replies: 129
+    quotes: 0
+    views: 32817
+    bookmarks: 2
+  createdAt: Fri Sep 11 14:48:14 +0000 2026
+  createdAtLocal: 2026-09-11 16:48
+  createdAtISO: '2026-09-11T14:48:14+00:00'
+  media: []
+  urls:
+  - https://github.com/youart-open-source/awesome-gpt-image-2-5-prompts
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098425212308197446'
+  text: 'One more useful resource for anyone exploring GPT Image 2.5.
+
+
+    This open-source GitHub project collects different prompt cases and trending applications
+    of the model, making it easier to discover new creative possibilities.
+
+
+    Check it out:
+
+
+    https://t.co/VFIDrqlepb'
+  author:
+    id: '1314593472557572096'
+    name: Nancy Diazz
+    screenName: Nancy__Diazz
+    profileImageUrl: https://pbs.twimg.com/profile_images/2069834679000182784/eqU_i8i0_normal.jpg
+    verified: true
+  metrics:
+    likes: 161
+    retweets: 6
+    replies: 85
+    quotes: 0
+    views: 12135
+    bookmarks: 2
+  createdAt: Fri Sep 11 14:55:32 +0000 2026
+  createdAtLocal: 2026-09-11 16:55
+  createdAtISO: '2026-09-11T14:55:32+00:00'
+  media: []
+  urls:
+  - https://github.com/youart-open-source/awesome-gpt-image-2-5-prompts
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098703746436153568'
+  text: "i can’t believe this is free...\n\ni spent 15+ hours and $478 in API credits\
+    \ figuring out \n\nhow to make GPT Image 2.5 produce agency-quality product shots,\
+    \ app ,webmockups... \n\n[now you can steal the entire workflow: ↓]\n\n→ 5 agent\
+    \ skills for reconstruction, editing, reverse-engineering, mixing references,\
+    \ and checking + fixing results\n\n→ a 50-page visual guide, the full illustrated\
+    \ article, and 12 visual explainers\n\n→ 95 saved prompts, a searchable library,\
+    \ and 44 illustrated studies\n\n→ interactive image maps, reusable JSON, Python\
+    \ tools, source images, before/afters, experiment records, and repair logs\n\n\
+    product shots. ads. app and website mockups. posters. infographics.\n\nthe source\
+    \ code and downloadable skill packs are included. \n\ninstall them in Codex or\
+    \ Claude Code, add your references, and let your agent build the prompts."
+  author:
+    id: '1713062826175299584'
+    name: Avid
+    screenName: Av1dlive
+    profileImageUrl: https://pbs.twimg.com/profile_images/2010392290590912512/x7vtAe5W_normal.jpg
+    verified: true
+  metrics:
+    likes: 136
+    retweets: 17
+    replies: 26
+    quotes: 0
+    views: 16205
+    bookmarks: 172
+  createdAt: Sat Sep 12 09:22:19 +0000 2026
+  createdAtLocal: 2026-09-12 11:22
+  createdAtISO: '2026-09-12T09:22:19+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2098703603250974720/vid/avc1/1920x1080/tu-9iB068rRuQYtO.mp4?tag=29
+    width: 1920
+    height: 1080
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+  quotedTweet:
+    id: '2098055179761525165'
+    text: https://t.co/ADXxWNbnN1
+    author:
+      screenName: Av1dlive
+      name: Avid
+- id: '2097675295063248899'
+  text: 'Updated my portfolio with the new GPT Image.
+
+
+    Looks cool. Try it ↓
+
+
+    https://t.co/tWRmYEI93A https://t.co/AbnV3nothv'
+  author:
+    id: '1730523055657799680'
+    name: Muhammad Dani Asyrofi
+    screenName: dani_asyrofi
+    profileImageUrl: https://pbs.twimg.com/profile_images/2087491779813949440/yRt1QP9A_normal.jpg
+    verified: true
+  metrics:
+    likes: 579
+    retweets: 23
+    replies: 23
+    quotes: 2
+    views: 50669
+    bookmarks: 622
+  createdAt: Wed Sep 09 13:15:37 +0000 2026
+  createdAtLocal: 2026-09-09 15:15
+  createdAtISO: '2026-09-09T13:15:37+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2097675212187959296/vid/avc1/2940x1846/TiUR7X1XDNTUbcyk.mp4?tag=29
+    width: 2940
+    height: 1846
+  urls:
+  - https://daniasyrofi.com
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+  quotedTweet:
+    id: '2097127780056195346'
+    text: 'Just add small detail, try it ↓
+
+      https://t.co/tWRmYEI93A https://t.co/EgimcnGYLj'
+    author:
+      screenName: dani_asyrofi
+      name: Muhammad Dani Asyrofi
+- id: '2098425142586089519'
+  text: 'Want to explore what GPT Image 2.5 can actually do?
+
+
+    This open-source GitHub collection brings together trending examples and prompt
+    ideas from different creative use cases.
+
+
+    A solid resource for experimenting.
+
+
+    https://t.co/48oh5LgFwK'
+  author:
+    id: '1042654983815090176'
+    name: Zyra AI
+    screenName: Zyra_AI1
+    profileImageUrl: https://pbs.twimg.com/profile_images/2060154934470045696/ddKDsmRN_normal.jpg
+    verified: true
+  metrics:
+    likes: 192
+    retweets: 0
+    replies: 136
+    quotes: 0
+    views: 6799
+    bookmarks: 2
+  createdAt: Fri Sep 11 14:55:15 +0000 2026
+  createdAtLocal: 2026-09-11 16:55
+  createdAtISO: '2026-09-11T14:55:15+00:00'
+  media: []
+  urls:
+  - https://github.com/youart-open-source/awesome-gpt-image-2-5-prompts
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098731637378867500'
+  text: 'GPT IMAGE 2.5 TURNED IMAGE GENERATION INTO VISUAL ENGINEERING.
+
+
+    the prompt is no longer just a description of what to create.
+
+
+    it is also a contract for what cannot change.
+
+
+    i turned that system into a 50-page guide with 44 tested examples.
+
+
+    for creation:
+
+
+    → 24 adaptations of OpenAI’s prompting guide
+
+    → 20 applications for app mockups, websites, product shots and thumbnails
+
+    → one fictional brand carried across packaging, advertising, merchandise and a
+    logo
+
+    → reusable prompts for preserving its visual identity
+
+
+    for control:
+
+
+    → 6 text-heavy formats with exact copy + placement
+
+    → a 50-element image map
+
+    → one-arrow edits that protect 6 text strings, 5 tiers and 4 surrounding arrows
+
+    → real failures: opaque cutouts, incorrect chart lengths and textures that changed
+    when they shouldn’t
+
+
+    the guide ends with one repeatable loop:
+
+
+    inspect → specify → generate → review and repair → deliver
+
+
+    plus a master prompt and portable skill for carrying the workflow into your next
+    project.
+
+
+    the breakthrough isn’t getting one beautiful image.
+
+
+    it’s turning the picture in your head into instructions the model can execute,
+    revise and preserve.
+
+
+    save the system.'
+  author:
+    id: '2088568970987077632'
+    name: Kontentsu kurieta
+    screenName: Kontentsukpi
+    profileImageUrl: https://pbs.twimg.com/profile_images/2088572017255624704/ZWeaoeKn_normal.jpg
+    verified: true
+  metrics:
+    likes: 28
+    retweets: 2
+    replies: 5
+    quotes: 0
+    views: 701
+    bookmarks: 17
+  createdAt: Sat Sep 12 11:13:09 +0000 2026
+  createdAtLocal: 2026-09-12 13:13
+  createdAtISO: '2026-09-12T11:13:09+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2098731565471961088/vid/avc1/1280x720/n5y-_WNmA89IBjcw.mp4?tag=29
+    width: 1280
+    height: 720
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098425435499692529'
+  text: 'GPT Image 2.5 creators, you might want to save this one.
+
+
+    This GitHub project is building a collection of useful prompt examples and trending
+    use cases around the model.
+
+
+    Great source of inspiration for new AI image projects.
+
+
+    https://t.co/M2b1AuOGWf'
+  author:
+    id: '2074183627982651393'
+    name: Nova Ai
+    screenName: nova_a_i
+    profileImageUrl: https://pbs.twimg.com/profile_images/2097357626501898240/0aD-3jLJ_normal.jpg
+    verified: true
+  metrics:
+    likes: 129
+    retweets: 0
+    replies: 82
+    quotes: 0
+    views: 9890
+    bookmarks: 1
+  createdAt: Fri Sep 11 14:56:25 +0000 2026
+  createdAtLocal: 2026-09-11 16:56
+  createdAtISO: '2026-09-11T14:56:25+00:00'
+  media: []
+  urls:
+  - https://github.com/youart-open-source/awesome-gpt-image-2-5-prompts
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098424992178593950'
+  text: 'If AI image generation is part of your workflow, this is worth adding to
+    your resources.
+
+
+    An open-source collection focused on GPT Image 2.5, featuring trending use cases,
+    prompt examples, and creative experiments.
+
+
+    https://t.co/mW7jeB1Q2R'
+  author:
+    id: '1744199061115179008'
+    name: Lisa Rodin
+    screenName: Lisa__Rodin
+    profileImageUrl: https://pbs.twimg.com/profile_images/2074552236513144832/JcPdtfG0_normal.jpg
+    verified: true
+  metrics:
+    likes: 182
+    retweets: 6
+    replies: 116
+    quotes: 0
+    views: 10907
+    bookmarks: 5
+  createdAt: Fri Sep 11 14:54:39 +0000 2026
+  createdAtLocal: 2026-09-11 16:54
+  createdAtISO: '2026-09-11T14:54:39+00:00'
+  media: []
+  urls:
+  - https://github.com/youart-open-source/awesome-gpt-image-2-5-prompts
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098430647257993335'
+  text: 'AI image generation is getting more powerful — but great prompts still matter.
+
+    That’s why this open-source GPT Image 2.5 prompt collection is worth exploring.
+
+    150 prompts. 9 use cases. Community-driven.
+
+    https://t.co/zMBZTSYT1e'
+  author:
+    id: '1684756649536266241'
+    name: Queen Isabell
+    screenName: Queen_1o1
+    profileImageUrl: https://pbs.twimg.com/profile_images/1977196850865115136/CH60xgUv_normal.jpg
+    verified: true
+  metrics:
+    likes: 238
+    retweets: 30
+    replies: 2
+    quotes: 1
+    views: 26866
+    bookmarks: 345
+  createdAt: Fri Sep 11 15:17:07 +0000 2026
+  createdAtLocal: 2026-09-11 17:17
+  createdAtISO: '2026-09-11T15:17:07+00:00'
+  media: []
+  urls:
+  - https://github.com/youart-open-source/awesome-gpt-image-2-5-prompts
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2079946571622326363'
+  text: 'A reference sheet can now become a complete 3D asset and an interactive website.
+
+
+    I generated the multi-view temple concept with GPT Image 2.0, then gave it to
+    Codex + GPT-5.6 Ultra through Blender MCP.
+
+
+    Blender was controlled entirely from the terminal. The model, materials, cameras,
+    renders and exports were all generated through Python scripts. Codex then created
+    a Three.js viewer where I can rotate the temple, switch between every angle and
+    hide each architectural layer.
+
+
+    The result still needs refinement, especially around the roofs and ornaments,
+    but the complete image → Blender → web workflow is working.
+
+
+    All from one prompt 👇'
+  author:
+    id: '428437083'
+    name: Givros
+    screenName: givros
+    profileImageUrl: https://pbs.twimg.com/profile_images/2058488850125586434/hqfZ8XHV_normal.jpg
+    verified: true
+  metrics:
+    likes: 212
+    retweets: 24
+    replies: 6
+    quotes: 1
+    views: 25774
+    bookmarks: 261
+  createdAt: Wed Jul 22 15:08:00 +0000 2026
+  createdAtLocal: 2026-07-22 17:08
+  createdAtISO: '2026-07-22T15:08:00+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2079945700205350912/vid/avc1/1920x1000/Swf-8KTtH6S6_1WW.mp4?tag=29
+    width: 1920
+    height: 1000
+  - type: photo
+    url: https://pbs.twimg.com/media/HN1zrLlXAAEzbVX.jpg
+    width: 1491
+    height: 1055
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+

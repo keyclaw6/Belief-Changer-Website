@@ -1,0 +1,411 @@
+ok: true
+schema_version: '1'
+data:
+- id: '2096938021622845571'
+  text: 'GPT-6 Astra just made these motion graphics with 1 prompt
+
+
+    we might be cooked....
+
+
+    https://t.co/N6aT7m8FiA https://t.co/h1muWhSyxK'
+  author:
+    id: '1814656219044585473'
+    name: ZAK
+    screenName: ZAKEditing
+    profileImageUrl: https://pbs.twimg.com/profile_images/1912262059279925248/IqpFDR7F_normal.jpg
+    verified: true
+  metrics:
+    likes: 469
+    retweets: 27
+    replies: 20
+    quotes: 7
+    views: 63831
+    bookmarks: 406
+  createdAt: Mon Sep 07 12:25:58 +0000 2026
+  createdAtLocal: 2026-09-07 14:25
+  createdAtISO: '2026-09-07T12:25:58+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2096937369022967808/vid/avc1/1080x1080/Zbmmr6enXz2hV1qP.mp4?tag=29
+    width: 1080
+    height: 1080
+  urls:
+  - https://x.com/OpenAI/status/2095595741528125780?s=20
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+  quotedTweet:
+    id: '2095595741528125780'
+    text: 'This is GPT-6 Astra.
+
+
+      Anything you can do on a computer, Astra can do for you. Fast. https://t.co/gDd0IsewJw'
+    author:
+      screenName: OpenAI
+      name: OpenAI
+- id: '2097801944119349455'
+  text: 'I didn''t get what GPT-6 meant for robotics until I actually tried it.
+
+
+    GPT-6 Astra just does physical ICL out of the box.
+
+
+    we drop a recording of a human doing a novel task into 𝗰𝗼𝗱𝗲𝘅 app. Prompt it to
+    drive a robot arm the same way.
+
+
+    It just works on the first pass! https://t.co/n6ydG9Qw49'
+  author:
+    id: '1160530286297305093'
+    name: Wenli Xiao
+    screenName: _wenlixiao
+    profileImageUrl: https://pbs.twimg.com/profile_images/1935026078462132224/MTe2btEp_normal.jpg
+    verified: true
+  metrics:
+    likes: 1454
+    retweets: 137
+    replies: 50
+    quotes: 26
+    views: 230106
+    bookmarks: 532
+  createdAt: Wed Sep 09 21:38:53 +0000 2026
+  createdAtLocal: 2026-09-09 23:38
+  createdAtISO: '2026-09-09T21:38:53+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2097801926503243776/vid/avc1/1280x720/ub5N-7mSkBw9C_d-.mp4?tag=16
+    width: 1280
+    height: 720
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2097622879072583728'
+  text: '❤️‍🔥 GPT-6 Astra is getting dangerously good at web design
+
+
+    Prompt ↓ https://t.co/jqSs0k2MMP'
+  author:
+    id: '1501206211752239109'
+    name: Ahmed
+    screenName: ahmedscen
+    profileImageUrl: https://pbs.twimg.com/profile_images/2047889036032020480/9l3ChOla_normal.jpg
+    verified: true
+  metrics:
+    likes: 1004
+    retweets: 63
+    replies: 31
+    quotes: 1
+    views: 81972
+    bookmarks: 797
+  createdAt: Wed Sep 09 09:47:20 +0000 2026
+  createdAtLocal: 2026-09-09 11:47
+  createdAtISO: '2026-09-09T09:47:20+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2097621517999992832/vid/avc1/2996x2160/9PGp8HQP-BodOPuI.mp4?tag=29
+    width: 2996
+    height: 2160
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2096964706099700065'
+  text: 'OPENAI JUST DROPPED THE OFFICIAL GUIDE TO PROMPTING GPT-6 ASTRA
+
+
+    This is the most important prompting update for anyone using Astra.
+
+
+    Bookmark this before your next build.
+
+
+    Most people are still prompting Astra like GPT-5. That''s the mistake.
+
+
+    → audit your AGENTS.md — old instructions now fight the model
+
+    → define autonomy explicitly — Astra pauses when you expect it to continue
+
+    → cut skill descriptions to one line — too many skills and Astra sees none of
+    them clearly
+
+    → stop telling it to run tests — it does this automatically, repeating it causes
+    overtesting
+
+    → define stop conditions — Astra needs to know what "done" means
+
+
+    Astra is at its best when you stop micromanaging and let it own the work.
+
+
+    Read the full guide before writing your next prompt.
+
+
+    GPT-6 Astra → Clean System Prompt → Autonomous Execution → Production-Ready Output
+    → Ship faster'
+  author:
+    id: '299656190'
+    name: Rahul
+    screenName: sairahul1
+    profileImageUrl: https://pbs.twimg.com/profile_images/1999441729800536065/6-3Y5xyR_normal.jpg
+    verified: true
+  metrics:
+    likes: 2120
+    retweets: 313
+    replies: 37
+    quotes: 10
+    views: 356877
+    bookmarks: 3996
+  createdAt: Mon Sep 07 14:12:00 +0000 2026
+  createdAtLocal: 2026-09-07 16:12
+  createdAtISO: '2026-09-07T14:12:00+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2096904420571414528/vid/avc1/480x832/1qzadMqqx-ktxTYs.mp4?tag=29
+    width: 480
+    height: 832
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+  quotedTweet:
+    id: '2096902575035683147'
+    text: 'GPT-6 Astra is insanely powerful.
+
+
+      But most people will barely use 10% of it.
+
+
+      The difference is knowing how to prompt it properly.
+
+
+      I put together the complete GPT-6 Astra Prompting Masterclass so you can get
+      dramatically better results from day one. https://t.co/54IBpo9Ya8'
+    author:
+      screenName: sairahul1
+      name: Rahul
+- id: '2098897542197239865'
+  text: 'wtf.. gpt-6 astra has automated AI filmmaking
+
+
+    it can connect to filmera mcp, turns idea into full workflow with prompt automatically..
+    character sheet, props, settings are all customisable
+
+
+    open-sourced workflow + full prompt below 👇 https://t.co/07Qkt96BH4'
+  author:
+    id: '1130161200191303681'
+    name: el.cine
+    screenName: EHuanglu
+    profileImageUrl: https://pbs.twimg.com/profile_images/1793460098867838976/hoeoWt9M_normal.jpg
+    verified: true
+  metrics:
+    likes: 1191
+    retweets: 100
+    replies: 71
+    quotes: 10
+    views: 118760
+    bookmarks: 1444
+  createdAt: Sat Sep 12 22:12:24 +0000 2026
+  createdAtLocal: 2026-09-13 00:12
+  createdAtISO: '2026-09-12T22:12:24+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2098897494906400768/vid/avc1/1920x1080/XCMMgTKHlVBHU7fE.mp4?tag=16
+    width: 1920
+    height: 1080
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098464881498370090'
+  text: 'GPT-6 Astra is a design beast
+
+
+    No 3D models used in this demo website
+
+    I connected LTX API to my coding agent -&gt; generated video transitions + used
+    GPT Images 2.5 to select car colors &amp; wheels
+
+
+    GitHub repo + website prompt + ZIP proj. 👇 https://t.co/VNSp43NadT'
+  author:
+    id: '249795230'
+    name: AmirMušić
+    screenName: AmirMushich
+    profileImageUrl: https://pbs.twimg.com/profile_images/1872350781686321152/P-st4llY_normal.jpg
+    verified: true
+  metrics:
+    likes: 607
+    retweets: 67
+    replies: 72
+    quotes: 22
+    views: 232761
+    bookmarks: 574
+  createdAt: Fri Sep 11 17:33:09 +0000 2026
+  createdAtLocal: 2026-09-11 19:33
+  createdAtISO: '2026-09-11T17:33:09+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2098459847088103424/vid/avc1/1440x1080/Fgbj3y7Hjf1FIKlb.mp4?tag=29
+    width: 1440
+    height: 1080
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2096206721429430315'
+  text: 'GPT 6 Astra + 1 Prompt
+
+
+    Prompt👇 https://t.co/yoGjY2G1sy'
+  author:
+    id: '3932648176'
+    name: Tanzil Chowdhury
+    screenName: iamtanzil_
+    profileImageUrl: https://pbs.twimg.com/profile_images/2001670144414842880/NsKQYX62_normal.jpg
+    verified: true
+  metrics:
+    likes: 10
+    retweets: 0
+    replies: 2
+    quotes: 0
+    views: 591
+    bookmarks: 5
+  createdAt: Sat Sep 05 12:00:02 +0000 2026
+  createdAtLocal: 2026-09-05 14:00
+  createdAtISO: '2026-09-05T12:00:02+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2096070874353008640/vid/avc1/3158x2160/k7p_IchWGRZkto9b.mp4?tag=29
+    width: 3158
+    height: 2160
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: in
+  score: null
+- id: '2095962962808746380'
+  text: 'GPT-6 Astra on my NYC test. Astra high in Codex. Opus 5 underneath.
+
+
+    Its fast. Under 20 minutes to finish.
+
+
+    Not as eager as Opus or Fable to go outside the scope. I had to send a follow
+    up prompt just to add camera movement.
+
+
+    Generally good, probably more detail than Opus on the initial pass, but it forgets
+    things. With Opus I could physically zoom into the bridges and see cars.
+
+
+    This is a massive leap from GPT-5.6 Sol though, which was rough on this prompt.
+
+
+    I use time as an effort measure. If it finishes in 20 minutes I dont feel it put
+    enough into iterating and improving. The faster the model gets, the longer I want
+    to force it into a 50 minute loop.
+
+
+    Overall good. I just feel a lot more detail and effort could have gone in than
+    one shot.'
+  author:
+    id: '2021249463017226240'
+    name: aipulsedaily
+    screenName: aipulseda1ly
+    profileImageUrl: https://pbs.twimg.com/profile_images/2021250630581358592/C_JXJJix_normal.jpg
+    verified: true
+  metrics:
+    likes: 20
+    retweets: 1
+    replies: 1
+    quotes: 1
+    views: 12031
+    bookmarks: 7
+  createdAt: Fri Sep 04 19:51:26 +0000 2026
+  createdAtLocal: 2026-09-04 21:51
+  createdAtISO: '2026-09-04T19:51:26+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2095962544972447744/vid/avc1/1280x1264/WRSRZEkY8AsjVR_G.mp4?tag=29
+    width: 1280
+    height: 1264
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2096898563586593055'
+  text: '❤️‍🔥 GPT-6 Astra is getting dangerously good
+
+
+    I genuinely wasn’t ready for this level of AI
+
+
+    Prompt below ↓ https://t.co/bzpCt4i6q7'
+  author:
+    id: '1501206211752239109'
+    name: Ahmed
+    screenName: ahmedscen
+    profileImageUrl: https://pbs.twimg.com/profile_images/2047889036032020480/9l3ChOla_normal.jpg
+    verified: true
+  metrics:
+    likes: 425
+    retweets: 26
+    replies: 11
+    quotes: 2
+    views: 34583
+    bookmarks: 541
+  createdAt: Mon Sep 07 09:49:10 +0000 2026
+  createdAtLocal: 2026-09-07 11:49
+  createdAtISO: '2026-09-07T09:49:10+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2096896974800945152/vid/avc1/3004x2160/7hOUwThIVA0ZplEg.mp4?tag=29
+    width: 3004
+    height: 2160
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2097033408345944487'
+  text: "GPT-6 Astra Pro made an airplane landing simulator in 30 minutes - accurate\
+    \ dimensions, real physics, landing gear based on actual specs.\n\nOne prompt.\
+    \ No engineers. Microsoft Flight Simulator took years.\n\n https://t.co/6cu37Pbd4O"
+  author:
+    id: '1536693901230321666'
+    name: 0xMarioNawfal
+    screenName: RoundtableSpace
+    profileImageUrl: https://pbs.twimg.com/profile_images/2012162102283407360/U-fPj6wg_normal.jpg
+    verified: true
+  metrics:
+    likes: 149
+    retweets: 9
+    replies: 19
+    quotes: 2
+    views: 62479
+    bookmarks: 36
+  createdAt: Mon Sep 07 18:45:00 +0000 2026
+  createdAtLocal: 2026-09-07 20:45
+  createdAtISO: '2026-09-07T18:45:00+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2096943524281286656/vid/avc1/1802x1278/cR5fZZxsKuTKQr8J.mp4?tag=29
+    width: 1802
+    height: 1278
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+

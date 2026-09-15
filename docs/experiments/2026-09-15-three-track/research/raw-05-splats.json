@@ -1,0 +1,479 @@
+ok: true
+schema_version: '1'
+data:
+- id: '2098800030635171890'
+  text: 'Gaussian Splats used to ignore the light. The scan stayed flat, even when
+    a character or prop should have thrown a shadow across the floor.
+
+    Get Splatbox here:
+
+    https://t.co/luZuiIseRr
+
+
+    Now the splat receives the shadow with near plane and bias. The tiles darken.
+    The contact line sits on the reconstructed surface, not on a hidden plane in front
+    of it.
+
+
+    Near-plane control is the useful bit: you can push where that shadow begins, so
+    it lifts off the object and lands on the splat like a real umbra — soft edge,
+    right length, no black hole punched through the scan.
+
+
+    #GaussianSplatting #3DGS #Unity3D #URP #RealtimeShadows #Relighting #SplatBox
+    #ComputerGraphics #NovelViewSynthesis #GameDev'
+  author:
+    id: '1119683019785285633'
+    name: Daniel Skaale
+    screenName: DSkaale
+    profileImageUrl: https://pbs.twimg.com/profile_images/2029164279648145408/9hE3r3xS_normal.jpg
+    verified: true
+  metrics:
+    likes: 231
+    retweets: 17
+    replies: 4
+    quotes: 1
+    views: 13179
+    bookmarks: 203
+  createdAt: Sat Sep 12 15:44:55 +0000 2026
+  createdAtLocal: 2026-09-12 17:44
+  createdAtISO: '2026-09-12T15:44:55+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2098799250813394945/vid/avc1/1886x988/2C_TGKN9rusUdFNR.mp4?tag=29
+    width: 1886
+    height: 988
+  urls:
+  - https://www.simulacrum.dk/Shop#unity-gsplat-editor
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2097307578690584721'
+  text: 'SuperSplat Editor 3.0 is here 🚀
+
+
+    The free and open source Gaussian splat editor has been rebuilt from the ground
+    up on WebGPU. Far larger scenes, a fraction of the memory, smooth on tens of millions
+    of Gaussians.
+
+
+    Try it now → https://t.co/HVpAcUp1Sa
+
+
+    🧵 What''s new... https://t.co/3iDZyD7u7D'
+  author:
+    id: '242762045'
+    name: PlayCanvas
+    screenName: playcanvas
+    profileImageUrl: https://pbs.twimg.com/profile_images/1765058071477596160/PH9IzHbO_normal.jpg
+    verified: true
+  metrics:
+    likes: 500
+    retweets: 85
+    replies: 5
+    quotes: 6
+    views: 33209
+    bookmarks: 378
+  createdAt: Tue Sep 08 12:54:27 +0000 2026
+  createdAtLocal: 2026-09-08 14:54
+  createdAtISO: '2026-09-08T12:54:27+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2097305964156456960/vid/avc1/1920x1080/6qt5kdLpItIAccUs.mp4?tag=29
+    width: 1920
+    height: 1080
+  urls:
+  - https://superspl.at/editor
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2099528129857441908'
+  text: '🎉 A new Plinth release is here—capture, preview and share more of your world
+    in 3D!
+
+
+    🌍 Publish to SuperSplat
+
+    Share completed Gaussian splats with a title, description and tags. A big thank-you
+    to the @playcanvas team for SuperSplat!
+
+
+    📸 Gaussian Quick Scan
+
+    Automatically capture stationary objects and scenes as you move around them.
+
+
+    ✨ On-device Gaussian previews
+
+    Train and review a Gaussian preview on your device before uploading your project.
+
+
+    📷 Camera improvements
+
+    Improved camera startup and capture reliability, with ProRAW JPEG XL for supported
+    photogrammetry and Gaussian capture workflows.
+
+
+    🛠️ Photo review & dataset export
+
+    See blur and exposure warnings more clearly, then export captured photos and metadata
+    for use in other 3D tools.
+
+
+    🔍 Improved Gaussian viewing
+
+    Inspect splat counts and navigate results with improved loading and framing, plus
+    fixes for the AR camera feed and iPad orientation.
+
+
+    🗣️ Siri project search
+
+    Open matching Plinth project results through Siri’s in-app search on iOS/iPadOS
+    27.
+
+
+    ♿ Accessibility
+
+    Improved VoiceOver controls for photo review and Gaussian previews, with layouts
+    that adapt to larger text.
+
+
+    🔄 More reliable workflows
+
+    Improvements to sign-in, file imports, upload recovery, project deletion and Live
+    Activities.
+
+
+    Quick Scan and on-device Gaussian previews require iOS/iPadOS 27 and Professional
+    access. Quick Scan also requires LiDAR.
+
+
+    Thank you to everyone capturing, testing and sharing with Plinth. What will you
+    scan—and share—next? 💛
+
+
+    #Plinth #SuperSplat #GaussianSplatting #3DScanning #Photogrammetry'
+  author:
+    id: '1248420507885563906'
+    name: Plinth
+    screenName: Plinth_it
+    profileImageUrl: https://pbs.twimg.com/profile_images/1582755663125663746/Ky2zteUJ_normal.jpg
+    verified: true
+  metrics:
+    likes: 0
+    retweets: 0
+    replies: 0
+    quotes: 0
+    views: 3
+    bookmarks: 0
+  createdAt: Mon Sep 14 15:58:08 +0000 2026
+  createdAtLocal: 2026-09-14 17:58
+  createdAtISO: '2026-09-14T15:58:08+00:00'
+  media:
+  - type: photo
+    url: https://pbs.twimg.com/media/HSMFtA-WsAA0Rbz.jpg
+    width: 1080
+    height: 1350
+  - type: photo
+    url: https://pbs.twimg.com/media/HSMFs_KXwAA13ia.jpg
+    width: 1080
+    height: 1350
+  - type: photo
+    url: https://pbs.twimg.com/media/HSMFtLcWUAAPbAJ.jpg
+    width: 1080
+    height: 1350
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2099183093521539155'
+  text: 'This method turns photos into 3D scenes you can view in real time.
+
+
+    - See scenes from any angle.
+
+    - Smooth playback at 1080p.
+
+    - Free to use and study.
+
+
+    Explore it here:
+
+    https://t.co/nsejzXLFBS https://t.co/8xODn3cQqX'
+  author:
+    id: '1315639147248246785'
+    name: GitHub Projects Community
+    screenName: GithubProjects
+    profileImageUrl: https://pbs.twimg.com/profile_images/1679831765744259073/hoVtsOZ9_normal.jpg
+    verified: true
+  metrics:
+    likes: 127
+    retweets: 7
+    replies: 1
+    quotes: 0
+    views: 12885
+    bookmarks: 146
+  createdAt: Sun Sep 13 17:07:05 +0000 2026
+  createdAtLocal: 2026-09-13 19:07
+  createdAtISO: '2026-09-13T17:07:05+00:00'
+  media:
+  - type: animated_gif
+    url: https://video.twimg.com/tweet_video/HSHL5GLa0AAco4e.mp4
+    width: 1280
+    height: 918
+  urls:
+  - https://osp.fyi/gaussian-splatting
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098073765502501263'
+  text: 'Free tool: SuperSplat Editor 3.0 is a big update
+
+
+    The #opensource tool for editing 3D Gaussian Splats in a web browser has been
+    rewritten on WebGPU, making it possible to visualize tens of millions of Gaussians
+    smoothly
+
+
+    https://t.co/KH9cx704MK
+
+
+    #SuperSplat #3DGS @playcanvas https://t.co/qi1jVhU3LU'
+  author:
+    id: '74654261'
+    name: CG Channel
+    screenName: theCGchannel
+    profileImageUrl: https://pbs.twimg.com/profile_images/1679404815183499264/8-2qsI_T_normal.png
+    verified: false
+  metrics:
+    likes: 31
+    retweets: 7
+    replies: 1
+    quotes: 0
+    views: 2831
+    bookmarks: 20
+  createdAt: Thu Sep 10 15:39:00 +0000 2026
+  createdAtLocal: 2026-09-10 17:39
+  createdAtISO: '2026-09-10T15:39:00+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/ext_tw_video/2098073736956043264/pu/vid/avc1/1280x720/tvRmKvAfKNO0BrEu.mp4?tag=12
+    width: 1920
+    height: 1080
+  urls:
+  - https://www.cgchannel.com/2026/09/playcanvas-releases-supersplat-editor-3-0/
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2097014127965487151'
+  text: 'Not one and done.
+
+
+    The first pass rushed into a full build before the proportions worked. More detail
+    wasn''t the answer.
+
+
+    Lessons from the first exercise (VANTA) became a reusable skill: compare orthographic
+    views, fix the weak part, preserve what works. But it wasn''t innate - a lot of
+    coaching was still required to get Astra to focus on doing things correctly.
+
+
+    A process, not a magic prompt.
+
+
+    3/7'
+  author:
+    id: '849397020'
+    name: Spenser Dickerson
+    screenName: SpenserFX
+    profileImageUrl: https://pbs.twimg.com/profile_images/1937205613232070656/SEwBDaz6_normal.jpg
+    verified: true
+  metrics:
+    likes: 2
+    retweets: 0
+    replies: 1
+    quotes: 0
+    views: 622
+    bookmarks: 1
+  createdAt: Mon Sep 07 17:28:23 +0000 2026
+  createdAtLocal: 2026-09-07 19:28
+  createdAtISO: '2026-09-07T17:28:23+00:00'
+  media:
+  - type: photo
+    url: https://pbs.twimg.com/media/HRoWtwAWwAAFRge.jpg
+    width: 1120
+    height: 800
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2097015389842493826'
+  text: '@lichtfeldstudio @SplatPaintApp The finish had to survive beyond a beauty
+    render.
+
+
+    UVs + four texture sets. 16 green plates, 20 EMBER plates. Native Cycles materials
+    for lookdev; separate bakes for portable GLBs.
+
+
+    Honest limit: these are dense concept assets, not game-ready retopology.
+
+
+    6/7 https://t.co/CeWPKbra83'
+  author:
+    id: '849397020'
+    name: Spenser Dickerson
+    screenName: SpenserFX
+    profileImageUrl: https://pbs.twimg.com/profile_images/1937205613232070656/SEwBDaz6_normal.jpg
+    verified: true
+  metrics:
+    likes: 3
+    retweets: 0
+    replies: 2
+    quotes: 0
+    views: 442
+    bookmarks: 0
+  createdAt: Mon Sep 07 17:33:24 +0000 2026
+  createdAtLocal: 2026-09-07 19:33
+  createdAtISO: '2026-09-07T17:33:24+00:00'
+  media:
+  - type: photo
+    url: https://pbs.twimg.com/media/HRoYHZXaQAAbzcw.jpg
+    width: 1120
+    height: 800
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2097015673280926083'
+  text: '@lichtfeldstudio @SplatPaintApp The experiment doesn''t stop at the render.
+
+
+    200 Cycles views per colorway + COLMAP exports became trained Gaussian splats.
+
+
+    Then into my @SplatPaintApp  v1.0 for exploration + FX.
+
+
+    Case study, Blender files, GLBs + PLYs:
+
+    https://t.co/8S1tyQL5KZ
+
+
+    7/7 https://t.co/PskffSt2lN'
+  author:
+    id: '849397020'
+    name: Spenser Dickerson
+    screenName: SpenserFX
+    profileImageUrl: https://pbs.twimg.com/profile_images/1937205613232070656/SEwBDaz6_normal.jpg
+    verified: true
+  metrics:
+    likes: 6
+    retweets: 0
+    replies: 0
+    quotes: 0
+    views: 413
+    bookmarks: 3
+  createdAt: Mon Sep 07 17:34:31 +0000 2026
+  createdAtLocal: 2026-09-07 19:34
+  createdAtISO: '2026-09-07T17:34:31+00:00'
+  media:
+  - type: photo
+    url: https://pbs.twimg.com/media/HRoYc7bWEAANDCJ.jpg
+    width: 1120
+    height: 800
+  urls:
+  - https://github.com/sdimaging/exploratory-3d
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098155617001382230'
+  text: "Up to 8K textures. On Gaussian splats with no training. That looks like a\
+    \ 4D character.\n https://t.co/luZuiIsMGZ\nThat’s because Gaussian splats normally\
+    \ bake appearance. Each splat stores a single color.\n\nEach splat now keeps the\
+    \ original mesh UVs. While it renders, it reads the 8K map live across its surface\
+    \ — pores, fabric weave, stitching, leather grain.\n \nThe high-res texture stays\
+    \ a real texture, not a smeared average. Then the skeleton takes over. Bones skin\
+    \ the splats in real time, so the character can walk, turn, and perform — with\
+    \ the 8K detail still on the body.\n\nWhat you actually get:\n\n- Close-ups that\
+    \ still look like a real 4D character\n- 8K albedo that survives conversion\n\
+    - A splat figure that animates, not a frozen scan\n\nRigged 8K splat characters,\
+    \ coming for Splat Rigger on SplatBox.\n#GaussianSplatting #SplatBox #SplatRigger\
+    \ #3DGS #SOTA #Unity #VolumetricRendering"
+  author:
+    id: '1119683019785285633'
+    name: Daniel Skaale
+    screenName: DSkaale
+    profileImageUrl: https://pbs.twimg.com/profile_images/2029164279648145408/9hE3r3xS_normal.jpg
+    verified: true
+  metrics:
+    likes: 37
+    retweets: 1
+    replies: 1
+    quotes: 1
+    views: 2500
+    bookmarks: 36
+  createdAt: Thu Sep 10 21:04:15 +0000 2026
+  createdAtLocal: 2026-09-10 23:04
+  createdAtISO: '2026-09-10T21:04:15+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2098155276889165840/vid/avc1/1814x1150/7i-R1b2dmTxWtNCN.mp4?tag=29
+    width: 1814
+    height: 1150
+  urls:
+  - https://www.simulacrum.dk/Shop#unity-gsplat-editor
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2099502867480510845'
+  text: 'ブラウザで動作する3D Gaussian Splattingデータ編集ツール #SuperSplat 3.0が公開。
+
+
+    ・投影／カリング／圧縮／深度ソート／描画をGPU上で処理
+
+    ・440万Gaussian読込時のJSヒープを1,557MB→105MBに削減
+
+    ・3D表面を直接なぞって選択できるSphere Brushを追加
+
+
+    ブラウザだけで3DGSを編集・最適化・公開できる、MITライセンスのOSSです。
+
+
+    リンクはコメント欄から↓'
+  author:
+    id: '1268318609262039041'
+    name: Naren Bao 包娜仁 | Physical AI Agents
+    screenName: NarenBao
+    profileImageUrl: https://pbs.twimg.com/profile_images/2089515798452903937/R3OAC7iS_normal.jpg
+    verified: true
+  metrics:
+    likes: 3
+    retweets: 0
+    replies: 1
+    quotes: 0
+    views: 206
+    bookmarks: 0
+  createdAt: Mon Sep 14 14:17:45 +0000 2026
+  createdAtLocal: 2026-09-14 16:17
+  createdAtISO: '2026-09-14T14:17:45+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2099502695447158785/vid/avc1/994x554/nU5iB3HDnl2BOn1I.mp4?tag=29
+    width: 994
+    height: 554
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: ja
+  score: null
+

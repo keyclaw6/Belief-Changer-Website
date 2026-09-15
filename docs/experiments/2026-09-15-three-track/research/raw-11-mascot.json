@@ -1,0 +1,343 @@
+ok: true
+schema_version: '1'
+data:
+- id: '2099450737684029539'
+  text: 'Made a skill for interactive mascots
+
+
+    /𝚙𝚊𝚐𝚎-𝚖𝚊𝚜𝚌𝚘𝚝 [𝚢𝚘𝚞𝚛 𝚌𝚑𝚊𝚛𝚊𝚌𝚝𝚎𝚛]
+
+
+    It generates a mascot that follows your cursor and reacts when you poke it
+
+
+    https://t.co/exU2rTVh0M https://t.co/pnpsE8pqbd'
+  author:
+    id: '764678044405686272'
+    name: Kamran Ahmed
+    screenName: nilbuild
+    profileImageUrl: https://pbs.twimg.com/profile_images/1947016350825684993/-oE8du75_normal.jpg
+    verified: true
+  metrics:
+    likes: 946
+    retweets: 61
+    replies: 27
+    quotes: 4
+    views: 61155
+    bookmarks: 1073
+  createdAt: Mon Sep 14 10:50:36 +0000 2026
+  createdAtLocal: 2026-09-14 12:50
+  createdAtISO: '2026-09-14T10:50:36+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2099449822746968065/vid/avc1/3840x2160/Akb7deRnpinDH4Oj.mp4?tag=29
+    width: 3840
+    height: 2160
+  urls:
+  - https://koboyo.com/page-mascot
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2099505896753922272'
+  text: "Brooo... This AI skill got me hooked FR \U0001F602❤️\n\nNow you can add those\
+    \ cursor-following mascot characters to your website that look around, react when\
+    \ you click them, and add a whole new layer of personality to your UI. \n\nThere\
+    \ are 52 premade characters, or you can ask your AI agent to draw a completely\
+    \ custom one, even one that looks like you. \n\nAnd I forgot to show you how it\
+    \ reacts to a click event... you gotta check this out :)\n\nShout-out to @nilbuild\
+    \ for cooking this \U0001F525\n\nFollow me for more amazing AI, Coding & Web Dev\
+    \ insights \U0001F48E"
+  author:
+    id: '801818450914111488'
+    name: Ram Maheshwari
+    screenName: rammcodes
+    profileImageUrl: https://pbs.twimg.com/profile_images/1670741259030495232/mYClo23G_normal.jpg
+    verified: true
+  metrics:
+    likes: 11
+    retweets: 0
+    replies: 2
+    quotes: 0
+    views: 653
+    bookmarks: 10
+  createdAt: Mon Sep 14 14:29:47 +0000 2026
+  createdAtLocal: 2026-09-14 16:29
+  createdAtISO: '2026-09-14T14:29:47+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2099505619074232320/vid/avc1/2892x2160/t-f-sJqm6QOgvU7Z.mp4?tag=29
+    width: 2892
+    height: 2160
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2099480006686659031'
+  text: 'nice way to build an interactive mascot ↓
+
+
+    - gen character expression sheet
+
+    - gen video of them looking 360
+
+    - use llm to extract frames
+
+    - create sprite
+
+    - hook up to pointer (js + css)
+
+
+    this let''s you raise fidelity 🤙
+
+    sometimes 9 frames isn''t enough
+
+
+    https://t.co/4NSnseypxa'
+  author:
+    id: '2396811776'
+    name: jhey ʕ•ᴥ•ʔ
+    screenName: jh3yy
+    profileImageUrl: https://pbs.twimg.com/profile_images/1534700564810018816/anAuSfkp_normal.jpg
+    verified: true
+  metrics:
+    likes: 372
+    retweets: 19
+    replies: 13
+    quotes: 0
+    views: 19780
+    bookmarks: 379
+  createdAt: Mon Sep 14 12:46:54 +0000 2026
+  createdAtLocal: 2026-09-14 14:46
+  createdAtISO: '2026-09-14T12:46:54+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2085006949632913410/vid/avc1/2160x2160/LhHRwZCv4cb3Rzv7.mp4?tag=29
+    width: 2160
+    height: 2160
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+  quotedTweet:
+    id: '2099450737684029539'
+    text: 'Made a skill for interactive mascots
+
+
+      /𝚙𝚊𝚐𝚎-𝚖𝚊𝚜𝚌𝚘𝚝 [𝚢𝚘𝚞𝚛 𝚌𝚑𝚊𝚛𝚊𝚌𝚝𝚎𝚛]
+
+
+      It generates a mascot that follows your cursor and reacts when you poke it
+
+
+      https://t.co/exU2rTVh0M https://t.co/pnpsE8pqbd'
+    author:
+      screenName: nilbuild
+      name: Kamran Ahmed
+- id: '2099493162570137690'
+  text: 'キャラクターがさらに活きる。
+
+
+    「/page-mascot」は、指定したキャラクターから、カーソルを追いかけ、クリックすると反応するマスコットを生成できるエージェントスキル。
+
+
+    Reactコンポーネントとしてサイトに組み込める。
+
+    https://t.co/cO8sFibzWF'
+  author:
+    id: '35437139'
+    name: 田中義弘 | taziku CEO / AI × Creative
+    screenName: taziku_co
+    profileImageUrl: https://pbs.twimg.com/profile_images/1401679891737628673/PDBoRG09_normal.jpg
+    verified: true
+  metrics:
+    likes: 9
+    retweets: 1
+    replies: 1
+    quotes: 1
+    views: 1292
+    bookmarks: 9
+  createdAt: Mon Sep 14 13:39:11 +0000 2026
+  createdAtLocal: 2026-09-14 15:39
+  createdAtISO: '2026-09-14T13:39:11+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2099449822746968065/vid/avc1/3840x2160/Akb7deRnpinDH4Oj.mp4?tag=29
+    width: 3840
+    height: 2160
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: ja
+  score: null
+- id: '2099482796498829413'
+  text: "[前端交互 Skills] /page-mascot  @nilbuild \n\n这个 Skills 也太萌了！在网页角落放一只会盯着你光标转头的\
+    \ Q 版小动物，点它会眨眼、冒红心，连点四次还会晕 \U0001F601\U0001F601\U0001F601\n\n预置 52 个角色（20 动物 +\
+    \ 19 人物 + 13 机器人/物品），开箱即用。另有六种渲染风格：colour（故事书贴纸，默认）、ink（钢笔排线）、sketch（铅笔）、riso（双色孔版印刷）、paper（剪纸拼贴）、pixel（16\
+    \ 位像素）。因为风格只改渲染不改形状和构图，所以不会破坏对齐。\n\nSkills 使用方法：/page-mascot 你想要的角色\n\n它的工作方式是两张\
+    \ 3×3 精灵图（sprite sheet）+ background-position 换格：\n· 方向表：九个头部朝向（上/下/左/右/四个斜角/正面），身体完全不变，只有头在转；\n\
+    · 表情表：九格全部正面，分别是眨眼、红心、星星、眩晕、睡觉等表情。\n\nbackground-size: 300% 300% 让每个格子恰好落在 0%\
+    \ / 50% / 100% 三个档位上，切帧就是改一个 CSS 属性，浏览器合成器直接处理，不存在逐帧 JS。\n\n开源地址：https://t.co/2Tf88YZONN"
+  author:
+    id: '1727548535816724480'
+    name: meng shao
+    screenName: shao__meng
+    profileImageUrl: https://pbs.twimg.com/profile_images/2009826888072736772/faZAxCvC_normal.jpg
+    verified: true
+  metrics:
+    likes: 6
+    retweets: 2
+    replies: 1
+    quotes: 0
+    views: 1328
+    bookmarks: 6
+  createdAt: Mon Sep 14 12:57:59 +0000 2026
+  createdAtLocal: 2026-09-14 14:57
+  createdAtISO: '2026-09-14T12:57:59+00:00'
+  media:
+  - type: photo
+    url: https://pbs.twimg.com/media/HSLcdvKaEAEDCDU.jpg
+    width: 2400
+    height: 2400
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: zh
+  score: null
+  quotedTweet:
+    id: '2099450737684029539'
+    text: 'Made a skill for interactive mascots
+
+
+      /𝚙𝚊𝚐𝚎-𝚖𝚊𝚜𝚌𝚘𝚝 [𝚢𝚘𝚞𝚛 𝚌𝚑𝚊𝚛𝚊𝚌𝚝𝚎𝚛]
+
+
+      It generates a mascot that follows your cursor and reacts when you poke it
+
+
+      https://t.co/exU2rTVh0M https://t.co/pnpsE8pqbd'
+    author:
+      screenName: nilbuild
+      name: Kamran Ahmed
+- id: '2098816156702576928'
+  text: "Stop building boring, static hero sections. \U0001F6D1\n\nUpgrade to premium\
+    \ interactive 3D UI right now at https://t.co/RlChWqggj8 ✨\n\nI engineered this\
+    \ pointer-tracking 3D mascot using AI. Zero heavy agency fees. Zero lag.\n\nYou\
+    \ can grab the exact AI build prompts and raw source code at link in bio\n\nThe\
+    \ exact frontend tech stack: \n✅ React & Vite (Core component architecture) \n\
+    ✅ Three.js & WebGL (3D character rigging & rendering) ✅ Vanilla JS (Optimized\
+    \ cursor-tracking physics) \n✅ Tailwind CSS (Clean typography & floating UI)\n\
+    \nCopy my Prompt \U0001F447"
+  author:
+    id: '2308686523'
+    name: Himanshu Hingorani
+    screenName: himanshubuildss
+    profileImageUrl: https://pbs.twimg.com/profile_images/2040486128294436864/JziGJtod_normal.jpg
+    verified: true
+  metrics:
+    likes: 16
+    retweets: 2
+    replies: 2
+    quotes: 0
+    views: 1419
+    bookmarks: 10
+  createdAt: Sat Sep 12 16:49:00 +0000 2026
+  createdAtLocal: 2026-09-12 18:49
+  createdAtISO: '2026-09-12T16:49:00+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2098815955921195008/vid/avc1/1704x988/_6EYn5ajYTqgFKOJ.mp4?tag=29
+    width: 1704
+    height: 988
+  urls:
+  - https://scrolltide.co
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2099052296458076391'
+  text: "Finally launching Mascot Design \U0001F389\n\nhttps://t.co/7fCtJMtnaF can\
+    \ now design cute mascots for your app in minutes, just by chatting with AI \n\
+    \nyou’ve got personality, your app should too. https://t.co/BJjxKgNqRr"
+  author:
+    id: '1862933516633391104'
+    name: Aditya
+    screenName: AdityaShips
+    profileImageUrl: https://pbs.twimg.com/profile_images/2082860126848114688/4eRyyKxj_normal.jpg
+    verified: true
+  metrics:
+    likes: 637
+    retweets: 32
+    replies: 33
+    quotes: 2
+    views: 129804
+    bookmarks: 854
+  createdAt: Sun Sep 13 08:27:20 +0000 2026
+  createdAtLocal: 2026-09-13 10:27
+  createdAtISO: '2026-09-13T08:27:20+00:00'
+  media:
+  - type: photo
+    url: https://pbs.twimg.com/media/HSFS0kLaYAAHC2G.jpg
+    width: 2940
+    height: 1674
+  urls:
+  - https://appthetics.com
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2099083894633181306'
+  text: 'MCP is here 🎉🎉
+
+
+    @mascoFast now supports MCP - generate and animate mascots without leaving your
+    agent.
+
+
+    Prices have been updated as well. DM me for a discount coupon 👀 https://t.co/Y2HBW6bsZf'
+  author:
+    id: '815597857705033728'
+    name: Dikshit Jain
+    screenName: mahanot_dikshit
+    profileImageUrl: https://pbs.twimg.com/profile_images/2071507227786289152/G0W7dUog_normal.jpg
+    verified: true
+  metrics:
+    likes: 72
+    retweets: 5
+    replies: 16
+    quotes: 3
+    views: 10071
+    bookmarks: 14
+  createdAt: Sun Sep 13 10:32:54 +0000 2026
+  createdAtLocal: 2026-09-13 12:32
+  createdAtISO: '2026-09-13T10:32:54+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2099083386233270273/vid/avc1/1920x1080/O2QXoXyjaxYDO6Mw.mp4?tag=29
+    width: 1920
+    height: 1080
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+  quotedTweet:
+    id: '2097679686088146977'
+    text: 'https://t.co/aS7NfXw29B
+
+
+      By the next update, we’ll have MCP and an API live, so you can simply ask your
+      agent to create a mascot that suits your product best.
+
+
+      It’ll figure out where the mascot should appear, set everything up, and decide
+      what animations it should perform.
+
+
+      *Prices will be increasing as well.'
+    author:
+      screenName: mahanot_dikshit
+      name: Dikshit Jain
+

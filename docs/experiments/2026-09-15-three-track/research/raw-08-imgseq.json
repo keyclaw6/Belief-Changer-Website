@@ -1,0 +1,402 @@
+ok: true
+schema_version: '1'
+data:
+- id: '2098748928485130737'
+  text: 'rolling gallery 🖼️
+
+
+    the paintings sit on the inside of a cylinder, so they curl away as you scroll
+    instead of just sliding off.
+
+
+    react native + shaders. inspired by Interface Craft.
+
+
+    https://t.co/SLLan3AlyO https://t.co/uMZm7QRZIy'
+  author:
+    id: '1867999101184585728'
+    name: Mehdi · Motionary
+    screenName: mehdi_made
+    profileImageUrl: https://pbs.twimg.com/profile_images/2084193569104109569/WovZKgPp_normal.jpg
+    verified: true
+  metrics:
+    likes: 164
+    retweets: 10
+    replies: 1
+    quotes: 0
+    views: 4417
+    bookmarks: 87
+  createdAt: Sat Sep 12 12:21:52 +0000 2026
+  createdAtLocal: 2026-09-12 14:21
+  createdAtISO: '2026-09-12T12:21:52+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2098748458832158721/vid/avc1/1860x1860/kq5zrRLnOySo7nVF.mp4?tag=29
+    width: 1860
+    height: 1860
+  urls:
+  - https://motionary.dev/animations/rolling-scroll-gallery
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2099480796872806423'
+  text: 'Just listed Website Scroll Video on @Peerlist! 🚀
+
+
+    A tool for designers, builders, and template creators to turn any website into
+    a smooth, polished scrolling video, without the tedious manual screen recording.
+
+
+    Paste your URL, tweak the settings, and export.
+
+
+    Would love your support and feedback! ❤️
+
+
+    Link in the comments 👇'
+  author:
+    id: '3260994692'
+    name: Aviral Lakhanpaul
+    screenName: aviraldsgn
+    profileImageUrl: https://pbs.twimg.com/profile_images/1965461318137155584/sAb9Q6SD_normal.jpg
+    verified: true
+  metrics:
+    likes: 4
+    retweets: 0
+    replies: 4
+    quotes: 0
+    views: 55
+    bookmarks: 0
+  createdAt: Mon Sep 14 12:50:03 +0000 2026
+  createdAtLocal: 2026-09-14 14:50
+  createdAtISO: '2026-09-14T12:50:03+00:00'
+  media:
+  - type: photo
+    url: https://pbs.twimg.com/media/HSLaDdwbgAA44kA.jpg
+    width: 1200
+    height: 630
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098420395477266653'
+  text: "A creative agency would quote you $20,000 and a 6-week timeline to build\
+    \ this cinematic scrollytelling portal. \U0001F6D1\n\nI engineered it in a single\
+    \ afternoon using AI.\n\nUpgrade your web UI right now at https://t.co/RlChWqggj8\
+    \ ✨\n\nHere is how to build an immersive experience that physically pulls users\
+    \ into your product. Zero bloated code.\n\nThe exact frontend tech stack: \n✅\
+    \ React & Next.js (Core component architecture) \n✅ HTML5 Canvas (High-performance\
+    \ image sequence rendering) \n✅ GSAP ScrollTrigger (Z-axis camera fly-through\
+    \ physics) \n✅ Tailwind CSS (Clean typography & dynamic progress UI)\n\nCopy my\
+    \ prompt \U0001F447"
+  author:
+    id: '2308686523'
+    name: Himanshu Hingorani
+    screenName: himanshubuildss
+    profileImageUrl: https://pbs.twimg.com/profile_images/2040486128294436864/JziGJtod_normal.jpg
+    verified: true
+  metrics:
+    likes: 8
+    retweets: 1
+    replies: 3
+    quotes: 0
+    views: 582
+    bookmarks: 6
+  createdAt: Fri Sep 11 14:36:23 +0000 2026
+  createdAtLocal: 2026-09-11 16:36
+  createdAtISO: '2026-09-11T14:36:23+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2098418652802592768/vid/avc1/1672x992/Ge-mKrgb0TSHIEhR.mp4?tag=29
+    width: 1672
+    height: 992
+  urls:
+  - https://scrolltide.co
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2082819614233477447'
+  text: "THIS GUY BUILT A $7,000 PORTFOLIO WEBSITE USING CODEX  WITHOUT WRITING A\
+    \ SINGLE LINE OF CODE\n\nworkflow →\n\n→ picks one reference image from Pinterest\
+    \ as the visual direction \n→ turns it into a cinematic AI video using Flow with\
+    \ camera-controlled prompts \n→ converts that video into a JPG image sequence\
+    \ at 30fps for scroll animation frames \n→ grabs a matching color palette and\
+    \ feeds it to ChatGPT for a full design implementation plan \n→ structures everything\
+    \ into assets + instructions folders \n→ loads the project into Codex, lets it\
+    \ read the plan, inspect assets, and build in stages: timeline config, app shell,\
+    \ canvas render + scroll engine, nav controller, testing \n→ refines with plain-text\
+    \ prompts to fix gradients, font color, and card hover interactions\n\nend result:\
+    \ sticky scroll timeline, smooth animations, interactive cards agency-level design,\
+    \ free version of Codex"
+  author:
+    id: '1863571201060392960'
+    name: Vaishnavi
+    screenName: _vmlops
+    profileImageUrl: https://pbs.twimg.com/profile_images/2017673694068543493/h06eTOL0_normal.jpg
+    verified: true
+  metrics:
+    likes: 9
+    retweets: 0
+    replies: 0
+    quotes: 0
+    views: 1011
+    bookmarks: 5
+  createdAt: Thu Jul 30 13:24:27 +0000 2026
+  createdAtLocal: 2026-07-30 15:24
+  createdAtISO: '2026-07-30T13:24:27+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2082819344451641344/vid/avc1/1280x720/7MyHlHcefEkVhmO2.mp4?tag=29
+    width: 1280
+    height: 720
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2099454223016742965'
+  text: 'Stop screen-recording every website you build.
+
+
+    Website Scroll Video turns your URL into a polished, customizable showcase video,
+    with 60 FPS, up to 4K resolution, hover interactions, custom pauses, scroll-back,
+    browser frames & more.
+
+
+    Built for designers, builders & template creators.
+
+
+    → https://t.co/bzRVyTeFtE'
+  author:
+    id: '3260994692'
+    name: Aviral Lakhanpaul
+    screenName: aviraldsgn
+    profileImageUrl: https://pbs.twimg.com/profile_images/1965461318137155584/sAb9Q6SD_normal.jpg
+    verified: true
+  metrics:
+    likes: 11
+    retweets: 0
+    replies: 5
+    quotes: 0
+    views: 966
+    bookmarks: 3
+  createdAt: Mon Sep 14 11:04:27 +0000 2026
+  createdAtLocal: 2026-09-14 13:04
+  createdAtISO: '2026-09-14T11:04:27+00:00'
+  media:
+  - type: photo
+    url: https://pbs.twimg.com/media/HSLCYdYakAAegu_.jpg
+    width: 634
+    height: 1078
+  - type: photo
+    url: https://pbs.twimg.com/media/HSLCZzobcAAIEYZ.jpg
+    width: 634
+    height: 1078
+  - type: photo
+    url: https://pbs.twimg.com/media/HSLCa2CboAAS5eT.jpg
+    width: 634
+    height: 1078
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2097600028416381178'
+  text: "❤️‍\U0001F525 Stop hunting for \"website inspo\" \n\nOne site for each \U0001F447\
+    \n\nSome ship with prompts.\n\n• https://t.co/P5sl8UvtAs\n• https://t.co/pnA20R4U1l\n\
+    • https://t.co/lXRv5Flwmd\n• https://t.co/AytIlx9Xtz\n• https://t.co/cGcaahXquz\n\
+    • https://t.co/MUrln3krEE\n• https://t.co/9EbLkEVU9e https://t.co/1K6YpU26ji"
+  author:
+    id: '1546857683072032771'
+    name: Dzianis Kravchu
+    screenName: thedzianis
+    profileImageUrl: https://pbs.twimg.com/profile_images/2083432892924145664/xFHwbe0C_normal.jpg
+    verified: true
+  metrics:
+    likes: 246
+    retweets: 37
+    replies: 3
+    quotes: 0
+    views: 8878
+    bookmarks: 316
+  createdAt: Wed Sep 09 08:16:32 +0000 2026
+  createdAtLocal: 2026-09-09 10:16
+  createdAtISO: '2026-09-09T08:16:32+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2097599942739238912/vid/avc1/3840x2142/FEUGhjNLpf6BObNi.mp4?tag=29
+    width: 3840
+    height: 2142
+  urls:
+  - https://getlayers.ai
+  - https://navbar.gallery
+  - https://supahero.io
+  - https://404s.design
+  - https://footer.design
+  - https://cta.gallery
+  - https://unsection.com
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2099474448692977851'
+  text: 'I’ve had this idea for a very long time, and today I finally brought it to
+    life. Using ChatGPT Images and Claude.
+
+
+    I wanted to create a website where every element feels interactive. Just like
+    a small version of my desk.
+
+
+    The lamp changes the mood from evening to night.
+
+    The poster opens an About Me pop-up.
+
+    The screen showcases a few of my artworks.
+
+    The camera actually works like a camera.
+
+
+    If you want to explore it yourself, the link is below 👇'
+  author:
+    id: '1367430408627912705'
+    name: Sanndy
+    screenName: SanndyCreationz
+    profileImageUrl: https://pbs.twimg.com/profile_images/1954932902208446464/OZUWaCPk_normal.jpg
+    verified: true
+  metrics:
+    likes: 21
+    retweets: 0
+    replies: 10
+    quotes: 0
+    views: 385
+    bookmarks: 2
+  createdAt: Mon Sep 14 12:24:49 +0000 2026
+  createdAtLocal: 2026-09-14 14:24
+  createdAtISO: '2026-09-14T12:24:49+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2099474306367680512/vid/avc1/2880x1636/uDMRF18Kk-v7bEia.mp4?tag=29
+    width: 2880
+    height: 1636
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098301999838278111'
+  text: "Stop building flat, generic landing pages. \U0001F6D1\n\nUpgrade to premium\
+    \ interactive scrollytelling UI right now at https://t.co/0QEdrNJuNz ✨\n\nHere\
+    \ is a complete masterclass on engineering a $5,000 scroll-animated website from\
+    \ a single image using AI. \U0001F9E0\n\nI recorded my entire workflow chaining\
+    \ ChatGPT, Google Gemini, and Claude Code to build this 300-frame scroll sequence\
+    \ from scratch.\n\nThe exact frontend tech stack: \n- ChatGPT (UI/UX Layout Generation)\
+    \ \n- Google Gemini (Image-to-Video Character Animation) \n- Claude Code (React\
+    \ Component Architecture & Scroll Physics) \n- Tailwind CSS (Premium typography\
+    \ & UI styling)\n\nStop relying on boring templates. Start engineering premium\
+    \ interactive web design.\n\nWatch the full workflow breakdown below \U0001F9F5\
+    \U0001F447"
+  author:
+    id: '1249973664264544257'
+    name: Aman Singh
+    screenName: amananimates
+    profileImageUrl: https://pbs.twimg.com/profile_images/2097892612330127360/2AzTFKeJ_normal.jpg
+    verified: true
+  metrics:
+    likes: 3
+    retweets: 1
+    replies: 1
+    quotes: 0
+    views: 38
+    bookmarks: 2
+  createdAt: Fri Sep 11 06:45:55 +0000 2026
+  createdAtLocal: 2026-09-11 08:45
+  createdAtISO: '2026-09-11T06:45:55+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2098300513037258753/vid/avc1/1920x1080/cEbf4vNnSDHvn1bi.mp4?tag=29
+    width: 1920
+    height: 1080
+  urls:
+  - https://scrolltide.co
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2097704383475581091'
+  text: 'A little motion goes a long way. ✨
+
+
+    Scroll Loop Showcase is a playful @framer  component with looping cards, scroll-reactive
+    motion, animated headlines, hover interactions and soft blur transitions.
+
+
+    https://t.co/mvHN4WjjLP https://t.co/nHchStqRQn'
+  author:
+    id: '1559609359646220288'
+    name: Hayriye
+    screenName: hayriyeakguller
+    profileImageUrl: https://pbs.twimg.com/profile_images/2053126984490737664/_aRMwXXb_normal.jpg
+    verified: true
+  metrics:
+    likes: 28
+    retweets: 0
+    replies: 4
+    quotes: 0
+    views: 592
+    bookmarks: 4
+  createdAt: Wed Sep 09 15:11:13 +0000 2026
+  createdAtLocal: 2026-09-09 17:11
+  createdAtISO: '2026-09-09T15:11:13+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2097703760722034689/vid/avc1/2916x2160/aU5NqwnLNEH5src5.mp4?tag=29
+    width: 2916
+    height: 2160
+  urls:
+  - https://www.framer.com/marketplace/components/scroll-loop-showcase/
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2097553581020971142'
+  text: "Building custom 3D WebGL experiences used to require a massive agency budget\
+    \ and months of coding. Not anymore. \U0001F6D1\n\nHere is how to engineer a premium,\
+    \ immersive scrollytelling website featuring an interactive 3D character, dynamic\
+    \ cursor tracking, and parallax depth. \U0001F332\n\nI used Claude Code to build\
+    \ this frontend UI/UX architecture from scratch. Zero manual CSS fighting.\n\n\
+    The exact frontend tech stack: \n✅ React & Next.js (Core framework) \n✅ Three.js\
+    \ / WebGL (3D creature rendering & environment depth) \n✅ Tailwind CSS (Clean\
+    \ typography & modern layout) \n✅ Framer Motion (Custom cursor physics & scroll\
+    \ choreography)\n\nStop building flat web templates. Start building premium interactive\
+    \ frontend web design.\n\nCopy my exact AI build prompt below \U0001F9F5\U0001F447"
+  author:
+    id: '2308686523'
+    name: Himanshu Hingorani
+    screenName: himanshubuildss
+    profileImageUrl: https://pbs.twimg.com/profile_images/2040486128294436864/JziGJtod_normal.jpg
+    verified: true
+  metrics:
+    likes: 81
+    retweets: 7
+    replies: 8
+    quotes: 0
+    views: 6470
+    bookmarks: 75
+  createdAt: Wed Sep 09 05:11:59 +0000 2026
+  createdAtLocal: 2026-09-09 07:11
+  createdAtISO: '2026-09-09T05:11:59+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2097553411827019776/vid/avc1/1704x988/CQMgFF1AYW48Q4NL.mp4?tag=29
+    width: 1704
+    height: 988
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+

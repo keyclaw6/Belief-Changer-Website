@@ -1,0 +1,1733 @@
+ok: true
+schema_version: '1'
+data:
+- id: '2099339727946256735'
+  text: 3D parallax from a single image using depth map. https://t.co/84QYJbLSaD
+  author:
+    id: '1333718880812998658'
+    name: Tanmay M
+    screenName: mtanmaym
+    profileImageUrl: https://pbs.twimg.com/profile_images/2026893686412554243/TA0gKT-s_normal.jpg
+    verified: false
+  metrics:
+    likes: 0
+    retweets: 0
+    replies: 1
+    quotes: 0
+    views: 88
+    bookmarks: 0
+  createdAt: Mon Sep 14 03:29:29 +0000 2026
+  createdAtLocal: 2026-09-14 05:29
+  createdAtISO: '2026-09-14T03:29:29+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2099339531187269632/vid/avc1/1156x720/2gdWNgxFaFCuToWP.mp4?tag=14
+    width: 2896
+    height: 1802
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098474722681892974'
+  text: 'I’m putting together a quick tutorial:
+
+
+    From how I made the image, to what I edited with, my prompts, the depth map model,
+    and how I animated this and a few other examples. https://t.co/jDI5lobTiY'
+  author:
+    id: '1261661536474615811'
+    name: Kabarza
+    screenName: kabarza_
+    profileImageUrl: https://pbs.twimg.com/profile_images/1561868205005721601/dKdHIdm7_normal.jpg
+    verified: true
+  metrics:
+    likes: 231
+    retweets: 9
+    replies: 16
+    quotes: 0
+    views: 7974
+    bookmarks: 224
+  createdAt: Fri Sep 11 18:12:16 +0000 2026
+  createdAtLocal: 2026-09-11 20:12
+  createdAtISO: '2026-09-11T18:12:16+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2098474644282159104/vid/avc1/1440x2560/G3GZZAFJ4XwTUvpm.mp4?tag=29
+    width: 1440
+    height: 2560
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2097633476489224629'
+  text: 'Ever since GPT Image 2.5 dropped, I''ve been seeing so many people use it
+    to make sprite sheets.
+
+
+    It instantly reminded me of a pixel game I built about six months ago with Image
+    2 + GPT 5.5.
+
+
+    So I had to try it again. I rebuilt the idea on @happycapyai with Image 2.5 +
+    Astra, and the jump in quality is kind of insane. It’s wild how much has changed
+    in just six months.
+
+
+    I dropped the game link and prompt in the comments 👇'
+  author:
+    id: '1045122140935053312'
+    name: Min Zhou
+    screenName: fMinZhou
+    profileImageUrl: https://pbs.twimg.com/profile_images/2001938622401183744/vEPFQZe0_normal.jpg
+    verified: true
+  metrics:
+    likes: 15
+    retweets: 7
+    replies: 3
+    quotes: 2
+    views: 1671
+    bookmarks: 6
+  createdAt: Wed Sep 09 10:29:27 +0000 2026
+  createdAtLocal: 2026-09-09 12:29
+  createdAtISO: '2026-09-09T10:29:27+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2097632365053202432/vid/avc1/3596x2160/QSclBareDCr5eS8O.mp4?tag=29
+    width: 3600
+    height: 2162
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+  quotedTweet:
+    id: '2048714504692023735'
+    text: 'i made a pixel game with just a few prompts using GPT Image 2 + GPT-5.5
+      + Happycapy 🤯
+
+
+      it couldn’t be easier. i just asked GPT Image to create a capybara pixel game
+      UI and used that as a reference. then it generated all the props and elements,
+      and Happycapy + GPT-5.5 built the game'
+    author:
+      screenName: fMinZhou
+      name: Min Zhou
+- id: '2097633480549257666'
+  text: 🔗 https://t.co/STcoXpgM1a https://t.co/yqQqcxtotj
+  author:
+    id: '1045122140935053312'
+    name: Min Zhou
+    screenName: fMinZhou
+    profileImageUrl: https://pbs.twimg.com/profile_images/2001938622401183744/vEPFQZe0_normal.jpg
+    verified: true
+  metrics:
+    likes: 8
+    retweets: 1
+    replies: 1
+    quotes: 0
+    views: 491
+    bookmarks: 2
+  createdAt: Wed Sep 09 10:29:28 +0000 2026
+  createdAtLocal: 2026-09-09 12:29
+  createdAtISO: '2026-09-09T10:29:28+00:00'
+  media:
+  - type: photo
+    url: https://pbs.twimg.com/media/HRxKAQWawAAj3hu.jpg
+    width: 3600
+    height: 1976
+  urls:
+  - https://happycapy.ai/share/files/4b47149a-03e3-4b37-828a-cf7ec2fd5687
+  isRetweet: false
+  retweetedBy: null
+  lang: qme
+  score: null
+- id: '2097633487016874023'
+  text: '[prompt]
+
+    Create a complete 2D side-scrolling narrative action pixel-art game starring a
+    chibi, miniature magical girl hero inspired by classic moon-themed magical girl
+    anime.
+
+
+    The character should retain the iconic visual language of a moon-themed magical
+    heroine: golden twin-bun hairstyle with long twin tails, a red-blue-white sailor-inspired
+    outfit, red boots, a golden crescent moon symbol on her forehead, a cute miniature
+    body proportion, and a gentle but courageous expression.
+
+
+    Do not use realistic human proportions.
+
+
+    Design the player as a polished 2.5 to 3-head-tall chibi pixel-art character,
+    cute and expressive, with highly stylized magical combat effects.
+
+
+    Before implementing the game, use GPT-image-2.5 in multiple visual production
+    stages.
+
+
+    Stage 1: Generate the Final Game Screenshot / UI Concept
+
+
+    First, use GPT-image-2.5 to generate one complete, polished, near-final-quality
+    16:9 side-scrolling game screenshot / UI concept image.
+
+
+    This image will become the primary visual reference for the entire project.
+
+
+    It must establish:
+
+
+    final art direction
+
+    character proportions
+
+    side-scrolling camera angle
+
+    environmental composition
+
+    lighting
+
+    HUD layout
+
+    color palette
+
+    magical attack effects
+
+    environmental effects
+
+    gameplay prop design
+
+    overall atmosphere
+
+    All later sprites, UI assets, gameplay props, and effects must visually match
+    this approved concept image.
+
+    Game World Theme
+
+    Set the game in a:
+
+    Moon Crystal Palace · Celestial Night Festival
+
+    The world should feel like a luxurious magical fantasy realm.
+
+    Do not use an ordinary city street.
+
+    Do not use a simple forest environment.
+
+    The entire world should feel:
+
+    ornate, dreamy, romantic, sparkling, mysterious, elegant, and heavily inspired
+    by classic magical-girl fantasy imagery.
+
+    The side-scrolling route should flow continuously through:
+
+
+    Moonlight Garden → Crystal Corridor → Galaxy Terrace → Moon Shrine
+
+
+    These environments should connect naturally instead of feeling like completely
+    separate levels.
+
+
+    Area 1: Moonlight Garden
+
+
+    The game begins inside an enormous moonlit palace garden.
+
+
+    The background should include:
+
+
+    gigantic full moon
+
+    deep blue and violet night sky
+
+    dense star field
+
+    aurora-like clouds
+
+    distant floating crystal palace
+
+    oversized white and pink roses
+
+    crescent-shaped flower gardens
+
+    golden railings
+
+    sparkling fountains
+
+    crystal statues
+
+    glowing butterflies
+
+    floating star particles
+
+
+    The walkable platform should be made from:
+
+
+    white marble + gold ornamentation + glowing crystal edges
+
+
+    Some platforms may appear suspended above a magical night sky.
+
+
+    Area 2: Crystal Corridor
+
+
+    As the player moves right, the environment transitions into an extremely ornate
+    palace corridor.
+
+
+    Include:
+
+
+    enormous crystal columns
+
+    golden arches
+
+    moon emblems
+
+    stained-glass windows
+
+    colored moonlight beams passing through glass
+
+    crystal chandeliers
+
+    hanging star ornaments
+
+    long royal carpets
+
+    floating candlelights
+
+    golden mirrored decorations
+
+
+    The environment should not feel completely static.
+
+
+    Add subtle animated elements such as:
+
+
+    sparkling crystals
+
+    drifting stardust
+
+    falling rose petals
+
+    floating light particles
+
+    slowly moving clouds outside the windows
+
+    The environment should feel alive even in pixel-art form.
+
+    Area 3: Galaxy Terrace
+
+    The player eventually reaches a giant palace terrace floating in space.
+
+    The background should show:
+
+    Milky Way
+
+    colorful nebulae
+
+    enormous moon
+
+    distant Earth
+
+    shooting stars
+
+    floating crystals
+
+    constellation lines
+
+    distant palace towers
+
+    The ground should combine:
+
+    white stone
+
+    golden ornamental patterns
+
+    translucent crystal
+
+    embedded starlight
+
+    Some platforms should contain small gaps requiring jumps.
+
+    Some platforms may gently float vertically.
+
+    Area 4: Moon Shrine
+
+    The final section is a monumental Moon Shrine.
+
+
+    This should be the most visually impressive location in the game.
+
+
+    At the center is:
+
+
+    a gigantic Moon Crystal altar.
+
+
+    The altar should contain:
+
+
+    golden crescent structures
+
+    enormous transparent crystal
+
+    moon emblems
+
+    white ceremonial stairs
+
+    pink roses
+
+    floating crystal fragments
+
+    orbiting starlight
+
+
+    When the final objective is completed, the entire shrine should erupt with moonlight.
+
+
+    Main Character Design
+
+    The protagonist is a chibi moon-themed magical girl warrior.
+
+    Use approximately:
+
+    2.5 to 3-head body proportions.
+
+    Visual characteristics:
+
+    large golden twin buns
+
+    long golden twin tails
+
+    red hair accessories
+
+    blue-and-white sailor-inspired outfit
+
+    red bow
+
+    red boots
+
+    white gloves
+
+    golden crescent moon forehead symbol
+
+    large expressive eyes
+
+    tiny body
+
+    cute but brave expression
+
+    While running:
+
+    twin tails should visibly swing
+
+    bow should bounce slightly
+
+    skirt should have exaggerated pixel animation
+
+    boots may create subtle sparkling particles
+
+    Magical Combat System
+
+    Unlike a pure exploration game, this version must include a simple but visually
+    spectacular magical combat system.
+
+
+    The player can press:
+
+
+    J or K
+
+
+    to cast magical attacks.
+
+    Do not use conventional swords or realistic weapons.
+
+    The character fights primarily using:
+
+    moonlight magic.
+
+    Basic Attack: Moon Spark
+
+
+    Press:
+
+
+    J
+
+
+    The character performs a quick casting gesture or swings a magical wand.
+
+
+    A glowing:
+
+
+    golden crescent-shaped energy projectile
+
+    launches forward.
+
+    Visual effects should include:
+
+    golden crescent energy
+
+    pink star particles
+
+    white spark flashes
+
+    tiny rainbow refractions
+
+    sparkle trails
+
+    star-shaped glowing particles
+
+    When the projectile hits an enemy, trigger a:
+
+    Pixel Star Burst
+
+    impact effect.
+
+    Powerful Skill: Moon Crystal Burst
+
+
+    Press:
+
+
+    K
+
+    This attack consumes Magic / Stamina.
+
+    The character briefly raises her wand.
+
+    A large glowing:
+
+
+    crescent-shaped magical sigil
+
+
+    appears above her.
+
+
+    She then releases an expanding wave of moonlight energy.
+
+
+    The effect should feel luxurious and spectacular.
+
+
+    Include:
+
+
+    pink energy rings
+
+    golden crescent shapes
+
+    bright white flashes
+
+    layered star explosions
+
+    dense pixel sparkles
+
+    flying crystal fragments
+
+    rainbow highlights
+
+    circular magical sigils
+
+    brief screen illumination
+
+
+    Keep the visual effect intense but relatively short so it does not obstruct gameplay.
+
+
+    Jump Effects
+
+
+    When the character jumps, create a:
+
+    small moon-and-star sparkle burst underneath her feet.
+
+    Include:
+
+    stars
+
+    tiny crescent shapes
+
+    pink sparkles
+
+    When landing, create:
+
+    a small circular stardust shockwave.
+
+    Dash Effects
+
+
+    Add a short-distance Dash ability.
+
+
+    Press:
+
+
+    Shift
+
+
+    The character rapidly dashes forward.
+
+
+    During the dash:
+
+
+    leave a golden moonlight trail
+
+    create star particles behind the player
+
+    generate 2 to 3 semi-transparent character afterimages
+
+    exaggerate the movement of the twin tails
+
+
+    Damage Effects
+
+    When the character receives damage:
+
+    briefly knock her backward
+
+    make the sprite flicker
+
+    release several pink broken-star particles
+
+    briefly display a transparent protective bubble
+
+    Do not use blood.
+
+    Keep the tone cute, magical, and suitable for all ages.
+
+    Enemy Design
+
+    Enemies should not look terrifying.
+
+    Design them as charming:
+
+    Dark Star Creatures
+
+    Possible enemies include:
+
+    small black-purple star monsters
+
+    round shadow spirits
+
+    tiny eclipse bats
+
+    black floating cloud creatures with eyes
+
+
+    Use primarily:
+
+
+    black + purple + deep blue
+
+    for enemy colors.
+
+    Add:
+
+    subtle glowing purple outlines.
+
+
+    This should create a strong contrast against the player''s gold and pink magical
+    effects.
+
+
+    Enemy Defeat Effect
+
+
+    Defeated enemies must not leave corpses.
+
+
+    Instead:
+
+
+    they instantly dissolve into a puff of dark smoke.
+
+
+    The smoke then bursts into purple star particles.
+
+
+    Finally:
+
+
+    a tiny white star floats upward and disappears.
+
+
+    Main Quest
+
+
+    The main objective is:
+
+
+    Recover the 5 Lost Moon Crystal Fragments
+
+
+    The player must explore the full side-scrolling world and collect:
+
+
+    5 Moon Crystal Fragments.
+
+
+    Place them across:
+
+
+    Moonlight Garden
+
+    Crystal Corridor
+
+    Galaxy Terrace
+
+    hidden platforms
+
+    enemy-protected areas
+
+
+    Moon Crystal Fragment Design
+
+
+    Each fragment should look like:
+
+    a translucent pink-and-white magical crystal.
+
+    Inside the crystal include:
+
+    crescent motif
+
+    small star
+
+    pixel glow
+
+    sparkle animation
+
+    When idle, the collectible should:
+
+    slowly float up and down.
+
+
+    When collected, trigger a small:
+
+
+    Moonlight Burst
+
+
+    effect.
+
+
+    Final Objective
+
+
+    After the player collects:
+
+
+    5 / 5 Moon Crystal Fragments
+
+
+    the Moon Shrine becomes available.
+
+
+    The player approaches the giant Moon Crystal altar.
+
+
+    Press:
+
+
+    E
+
+
+    to interact.
+
+
+    The character raises the recovered crystals.
+
+
+    All 5 fragments begin orbiting around her.
+
+
+    They then fly toward the altar.
+
+
+    Trigger a large final magical sequence containing:
+
+    gigantic moon magical sigil
+
+    star explosions
+
+    golden vertical light beam
+
+    pink particles
+
+    crystal refraction effects
+
+    falling rose petals
+
+    intense moonlight illuminating the entire environment
+
+    After the sequence finishes:
+
+    enter the game completion state.
+
+    HUD / UI Design
+
+    The HUD must feel highly polished and ornamental.
+
+    Reference the visual language of:
+
+    1990s Japanese magical-girl anime + premium pixel-art JRPG interfaces
+
+    while keeping all information readable during gameplay.
+
+
+    Top-left HUD
+
+
+    Display a chibi character portrait.
+
+
+    Beside it show:
+
+
+    Heart Health
+
+    Magic / Stamina Bar
+
+
+    Top-right HUD
+
+
+    Display:
+
+    Crystal Fragment counter
+
+    Coin counter
+
+    Timer
+
+    Icons should primarily use:
+
+
+    moon / star / crystal
+
+
+    motifs.
+
+
+    Mini-map
+
+
+    Place a slim horizontal Mini Map in the upper-right or lower-right area.
+
+
+    It should indicate:
+
+
+    current player position
+
+    crystal locations
+
+    final shrine
+
+    checkpoints
+
+
+    Dialogue System
+
+
+    When approaching an NPC, display a polished pixel-art Dialogue Box.
+
+
+    Design elements should include:
+
+    thin gold border
+
+    crescent ornaments
+
+    star decorations
+
+    translucent dark-blue background
+
+    small character portrait
+
+    Do not generate readable text inside any GPT-image-2.5 UI asset.
+
+    Actual dialogue text must be rendered dynamically through HTML Canvas.
+
+
+    Friendly NPCs
+
+
+    Add several friendly magical creatures.
+
+
+    For example:
+
+    Moon Rabbit
+
+    A small white moon rabbit.
+
+    Features:
+
+
+    red eyes
+
+    golden crescent symbol on forehead
+
+    small blue bow
+
+
+    The Moon Rabbit can provide quest hints.
+
+
+    Star Sprite
+
+
+    A tiny floating star spirit.
+
+
+    Its body emits:
+
+
+    a soft warm yellow glow.
+
+
+    It may hint when a hidden crystal is nearby.
+
+
+    Checkpoint Design
+
+    Create checkpoints as:
+
+    large magical Moon Lamp structures.
+
+    The object should look like:
+
+
+    a golden crescent supporting a glowing pink crystal.
+
+
+    When activated:
+
+
+    crystal lights up
+
+    stars begin orbiting it
+
+    circular magical sigil appears on the ground
+
+
+    The checkpoint should feel immediately recognizable.
+
+
+    Stage 1 Concept Screenshot Requirements
+
+
+    The first GPT-image-2.5 Concept Screenshot must include:
+
+
+    chibi magical girl protagonist
+
+    complete side-scrolling composition
+
+    luxurious palace environment
+
+    moonlit nighttime atmosphere
+
+    crystal platforms
+
+    enormous full moon
+
+    stars
+
+    roses
+
+    at least one enemy
+
+    one active crescent magical attack
+
+    collectible crystal
+
+    checkpoint
+
+    polished HUD
+
+    Mini Map
+
+    Dialogue / Quest UI
+
+
+    The image should immediately communicate:
+
+
+    a nearly finished, high-quality pixel-art magical-girl side-scrolling action game.
+
+
+    Do not make it look like rough concept art.
+
+
+    It should resemble a real gameplay screenshot.
+
+
+    Aspect ratio:
+
+
+    16:9
+
+
+    Stage 2: Generate Production Assets
+
+
+    Once the Concept Screenshot is established, use GPT-image-2.5 again to create
+    all production-ready visual assets while strictly matching the same art direction.
+
+
+    Panoramic Side-scrolling Background
+
+
+    Generate a wide side-scrolling environment covering:
+
+
+    Moonlight Garden → Crystal Corridor → Galaxy Terrace → Moon Shrine
+
+
+    Do not include:
+
+
+    HUD
+
+    player
+
+    enemies
+
+    The background must be suitable for horizontal scrolling.
+
+    Create clear environmental depth with:
+
+    Foreground
+
+    Midground
+
+    Background
+
+    layers for Parallax Scrolling.
+
+
+    Player Sprite Sheet
+
+
+    Generate a complete sprite sheet for the chibi magical girl.
+
+
+    Animations must include at minimum:
+
+
+    Idle
+
+
+    6 frames
+
+    Run
+
+    8 frames
+
+    Jump
+
+
+    4 frames
+
+
+    Fall
+
+
+    2 frames
+
+
+    Attack
+
+
+    6 frames
+
+
+    Magic Skill
+
+
+    8 frames
+
+
+    Dash
+
+
+    4 frames
+
+
+    Interact
+
+
+    4 frames
+
+
+    Hurt
+
+
+    3 frames
+
+
+    Victory
+
+
+    6 frames
+
+
+    Across every frame:
+
+
+    maintain identical frame dimensions
+
+    keep the character consistently centered
+
+    preserve identical pixel scale
+
+    do not alter outfit design
+
+    do not alter facial design
+
+    do not alter hairstyle
+
+    do not alter body proportions
+
+
+    Magic FX Sprite Sheet
+
+    Generate a dedicated:
+
+    Magic Effects Sprite Sheet
+
+    containing:
+
+    Moon Spark projectile
+
+    Moon Crescent Slash
+
+    Star Burst
+
+    Crystal Explosion
+
+    Sparkle Trail
+
+    Jump Spark
+
+    Dash Trail
+
+    Magic Circle
+
+    Moon Crystal Burst
+
+    Hit Spark
+
+    Enemy Disappear Smoke
+
+    Checkpoint Activation
+
+    Crystal Collect Effect
+
+    Use:
+
+    transparent backgrounds
+
+
+    or:
+
+
+    high-contrast Chroma Key backgrounds
+
+
+    so the assets can later be converted into transparent PNGs.
+
+
+    HUD / UI Atlas
+
+
+    Generate:
+
+
+    Character Portrait Frame
+
+    Hearts
+
+    Magic Bar
+
+    Coin Icon
+
+    Crystal Fragment Icon
+
+    Timer Icon
+
+    Mini Map Frame
+
+    Dialogue Box
+
+    Quest Marker
+
+    Button Prompt
+
+    Shrine / objective progress element
+
+    Checkpoint Icon
+
+
+    Do not include readable text.
+
+
+    Gameplay Props Atlas
+
+
+    Generate:
+
+
+    Moon Crystal Fragment
+
+    Coins
+
+    Moon Lamp Checkpoint
+
+    Rose Bush
+
+    Crystal Pillar
+
+    Palace Platform Tiles
+
+    Floating Platform
+
+    Golden Fence
+
+    Fountain
+
+    Crystal Statue
+
+    Moon Shrine Objects
+
+    Flower Props
+
+    Star Decorations
+
+    Moon Rabbit NPC
+
+    Star Sprite NPC
+
+    Dark Star Creature enemy
+
+    Shadow Spirit enemy
+
+    Eclipse Bat enemy
+
+
+    Stage 3: Asset Processing
+
+    For any assets generated using Chroma Key backgrounds:
+
+
+    automatically:
+
+
+    remove the background
+
+
+    convert assets to Transparent PNG
+
+    slice sprite sheets into individual animation frames
+
+    detect frame boundaries
+
+
+    preserve sharp pixel-art edges
+
+
+    disable blurred anti-aliasing
+
+
+    All player sprites and visual effects must use:
+
+
+    Nearest Neighbor Scaling.
+
+
+    Do not use:
+
+
+    Bilinear Filtering.
+
+
+    Stage 4: Implement the Complete Browser Game
+
+    Build the complete playable game using:
+
+    HTML
+
+    CSS
+
+    JavaScript
+
+    HTML5 Canvas
+
+    Do not create a Landing Page.
+
+
+    When the project opens:
+
+
+    the playable game must immediately appear.
+
+
+    Controls
+
+
+    Movement
+
+    A / D
+
+    or:
+
+    Left / Right Arrow
+
+    Jump
+
+
+    Space
+
+
+    W
+
+
+    or:
+
+
+    Up Arrow
+
+
+    Basic Magical Attack
+
+
+    J
+
+
+    Powerful Magic
+
+
+    K
+
+
+    Dash
+
+    Shift
+
+    Interact
+
+
+    E
+
+
+    Required Game Systems
+
+
+    Fully implement:
+
+
+    Side-scrolling camera
+
+    Collision detection
+
+    Platform physics
+
+    Gravity
+
+    Jumping
+
+    Moving platforms
+
+    Health
+
+    Magic / Stamina
+
+    Damage system
+
+    Invincibility Frames
+
+    Enemy AI
+
+    Projectile attacks
+
+    Magical attacks
+
+    Collectibles
+
+    Coin counter
+
+    5 Crystal Fragment quest
+
+    Dialogue progression
+
+    Checkpoints
+
+    Mini-map player indicator
+
+    Quest indicator
+
+    Particle effects
+
+    Attack effects
+
+    Parallax backgrounds
+
+    Screen shake for powerful attacks
+
+    Camera flash during large magical bursts
+
+    Completion state
+
+
+    Pixel Art Direction
+
+
+    Use:
+
+
+    high-quality handcrafted 16-bit / 32-bit Japanese-style pixel art.
+
+
+    Atmospheric references:
+
+
+    classic 1990s magical-girl anime
+
+    ornate shoujo fantasy
+
+    dreamy JRPG environments
+
+    moon palace imagery
+
+    magical crystal worlds
+
+
+    Prioritize:
+
+
+    Crisp Square Pixels
+
+    High-detail Sprite Art
+
+    Strong Silhouettes
+
+    Layered Pixel Lighting
+
+    Sparkling Magic Effects
+
+    Rich Color Palette
+
+    Polished Game UI
+
+    Cozy + Magical + Mysterious atmosphere
+
+
+    Primary palette:
+
+
+    Midnight Blue
+
+    Royal Blue
+
+    Lavender
+
+    Pink
+
+    White
+
+    Gold
+
+    Highlight colors:
+
+    Cyan
+
+    Pale Yellow
+
+    Crystal Pink
+
+
+    Strictly Avoid
+
+
+    Do not use:
+
+
+    Photorealism
+
+    3D Render
+
+    Isometric View
+
+    Top-down View
+
+    Blurry Pixel Art
+
+    Smooth Vector Graphics
+
+    Modern Flat UI
+
+    Logos
+
+    Watermarks
+
+    AI-generated readable text
+
+    Random inconsistent character designs
+
+
+    Inside every GPT-image-2.5 generated image:
+
+    do not include readable text.
+
+    All text must be implemented through game code.
+
+    Most Important Final Requirement
+
+    The first screen must immediately show:
+
+    the actual playable side-scrolling game.
+
+    Do not show:
+
+    Landing Page
+
+    Start Website
+
+    Product Introduction
+
+    Marketing Page
+
+    Fake Game Screenshot
+
+    When the project opens, the player should immediately see:
+
+    the chibi magical girl standing inside a luxurious moonlit palace environment,
+    ready to move, jump, attack, dash, and explore.
+
+    The final result should feel like a genuinely polished:
+
+    luxurious Japanese magical-girl pixel-art side-scrolling action adventure game.'
+  author:
+    id: '1045122140935053312'
+    name: Min Zhou
+    screenName: fMinZhou
+    profileImageUrl: https://pbs.twimg.com/profile_images/2001938622401183744/vEPFQZe0_normal.jpg
+    verified: true
+  metrics:
+    likes: 6
+    retweets: 0
+    replies: 0
+    quotes: 0
+    views: 1119
+    bookmarks: 4
+  createdAt: Wed Sep 09 10:29:30 +0000 2026
+  createdAtLocal: 2026-09-09 12:29
+  createdAtISO: '2026-09-09T10:29:30+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098438919729893736'
+  text: 'Deevid AI’s new Video Depth Map is now live. 🎬
+
+
+    It gives AI a better understanding of depth, motion, and spatial structure — making
+    video recreation more accurate and controllable.
+
+
+    Top: the depth map.
+
+    Bottom: the recreated result.
+
+
+    Try it on Deevid AI👇 https://t.co/EsIu2B95N8'
+  author:
+    id: '2045055480699961344'
+    name: Deevid AI
+    screenName: Deevid_AI
+    profileImageUrl: https://pbs.twimg.com/profile_images/2081662480724770816/LXO8zghF_normal.jpg
+    verified: true
+  metrics:
+    likes: 9
+    retweets: 3
+    replies: 2
+    quotes: 0
+    views: 1586
+    bookmarks: 7
+  createdAt: Fri Sep 11 15:50:00 +0000 2026
+  createdAtLocal: 2026-09-11 17:50
+  createdAtISO: '2026-09-11T15:50:00+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2098356186919964673/vid/avc1/1280x1440/gEkuAs_4QTldb_vC.mp4?tag=29
+    width: 1280
+    height: 1440
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2099499530785857604'
+  text: "Upgrade your flat landing pages to interactive 3D web experiences right now\
+    \ at https://t.co/RlChWqfItA \U0001F30D✨\n\nMost space and tech websites rely\
+    \ on static graphics or heavy pre-rendered videos. \U0001F6D1\n\nThis entire Earth\
+    \ hero isn't a video, and it isn't an image sequence. It’s an actual, real-time\
+    \ 3D model running live in the browser, reacting directly to the scrollbar with\
+    \ zero lag.\n\nI built this complete interactive website using AI agents without\
+    \ manually writing boilerplate from scratch.\n\nThe exact tech stack shown in\
+    \ the build: \n- Claude Code + Opus 5 (Terminal agentic coding & component architecture)\n\
+    - Sketchfab (Real-time GLB 3D Earth model)\n- Three.js & React Three Fiber (Browser\
+    \ WebGL rendering pipeline)\n- Vite & React (Zero-bloat build server)\n- Smooth\
+    \ Scroll Engine (Tying camera rotation & orbital zoom to scroll progress)\n\n\
+    Stop copying static SaaS templates. Start building spatial 3D web design.\n\n\
+    Full workflow breakdown below \U0001F9F5\U0001F447"
+  author:
+    id: '2308686523'
+    name: Himanshu Hingorani
+    screenName: himanshubuildss
+    profileImageUrl: https://pbs.twimg.com/profile_images/2040486128294436864/JziGJtod_normal.jpg
+    verified: true
+  metrics:
+    likes: 5
+    retweets: 0
+    replies: 4
+    quotes: 0
+    views: 318
+    bookmarks: 1
+  createdAt: Mon Sep 14 14:04:29 +0000 2026
+  createdAtLocal: 2026-09-14 16:04
+  createdAtISO: '2026-09-14T14:04:29+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2099498038553382912/vid/avc1/1920x1080/yWLNuEOEtOhYp_Va.mp4?tag=29
+    width: 1920
+    height: 1080
+  urls:
+  - https://scrolltide.co
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2097354828053614798'
+  text: 'I wish the creative people around me would increase their output through
+    prompting, but I also know they won''t because it feels morally wrong and goes
+    against their identity and craft.
+
+
+    I''d like to see more couch co-op video games, fewer anime adaptations not missing
+    out on quality because of absurd demands (*cough* one punch man/AOT), and a more
+    colorful world by bringing life to spaces (e.g., your home studio) with art you
+    thought only someone else could do...
+
+
+    But emotionally, and against all logic, I, too, have been convinced that some
+    of the greatest creative work has stemmed from a detachment from concepts like
+    output, efficiency, and money, money, money.'
+  author:
+    id: '1242893271468302338'
+    name: Nicolás Forero
+    screenName: MrNicolasForero
+    profileImageUrl: https://pbs.twimg.com/profile_images/2032629236310147072/I47xfF9t_normal.png
+    verified: true
+  metrics:
+    likes: 2
+    retweets: 0
+    replies: 1
+    quotes: 0
+    views: 235
+    bookmarks: 0
+  createdAt: Tue Sep 08 16:02:12 +0000 2026
+  createdAtLocal: 2026-09-08 18:02
+  createdAtISO: '2026-09-08T16:02:12+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+  quotedTweet:
+    id: '2097032513684418620'
+    text: now starts a short period of time when creative people who are extremely
+      good at prompting are so much more productive at making games, shorts, movies,
+      and other content, that they can compete starting from zero and make new empires.
+      maybe a year until people catch up
+    author:
+      screenName: gabriel1
+      name: gabriel
+- id: '2097393428392784318'
+  text: "tool stack. chat gpt, most of it on sol, and then some on astra. \n\nthats\
+    \ it. only that. connected to some other platforms so i can support multiplayer,\
+    \ and thats it.\n\nhow hard? few rounds of prompting and giving some cues, i often\
+    \ find it easier to correct than fully imagine from the start, so ill give it\
+    \ a general idea and some images for inspiration, then choose and iterate on it\
+    \ (i think the board still needs some more work, but not much more)"
+  author:
+    id: '1485978825787858946'
+    name: Shadow Rebbe
+    screenName: Shadow_Rebbe
+    profileImageUrl: https://pbs.twimg.com/profile_images/2029627950413348864/rvW0VTCu_normal.jpg
+    verified: true
+  metrics:
+    likes: 1
+    retweets: 0
+    replies: 1
+    quotes: 0
+    views: 34
+    bookmarks: 1
+  createdAt: Tue Sep 08 18:35:35 +0000 2026
+  createdAtLocal: 2026-09-08 20:35
+  createdAtISO: '2026-09-08T18:35:35+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2097395064632676598'
+  text: Wooow. That's incredible. I keep saying I'll set aside time to play with it,
+    but I don't. I'm interested in somehow getting this level of detail into more
+    commercial platforms that tend to spin off pages that LOOK AWFUL. Will report
+    back with something that hopefully doesn't look like a spam site.
+  author:
+    id: '1242893271468302338'
+    name: Nicolás Forero
+    screenName: MrNicolasForero
+    profileImageUrl: https://pbs.twimg.com/profile_images/2032629236310147072/I47xfF9t_normal.png
+    verified: true
+  metrics:
+    likes: 1
+    retweets: 0
+    replies: 1
+    quotes: 0
+    views: 9
+    bookmarks: 0
+  createdAt: Tue Sep 08 18:42:05 +0000 2026
+  createdAtLocal: 2026-09-08 20:42
+  createdAtISO: '2026-09-08T18:42:05+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+

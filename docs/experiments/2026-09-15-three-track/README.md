@@ -77,3 +77,6 @@ Keep the existing Orbit and the R1 A/B/parity harness. Author a new environment 
 - Track C R1: 9/9 unit tests, clean typecheck/build, 13/13 relevant e2e checks per preserved result report.
 
 These are checkpoint claims from the preserved result artifacts; rerun the relevant suite before promoting any future revision.
+## Preserved research and reasoning
+
+The external visual/X research package is committed under `research/`. Durable A/B ChatGPT Web reviewer conversation IDs and the continuation rule for Track C are recorded in `REASONING-THREADS.md`. This removes the dependency on the machine's temporary `/tmp` research directory.

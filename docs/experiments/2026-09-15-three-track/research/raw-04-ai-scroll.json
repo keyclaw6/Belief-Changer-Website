@@ -1,0 +1,403 @@
+ok: true
+schema_version: '1'
+data:
+- id: '2097947861958766843'
+  text: "Stop building flat e-commerce sites. \U0001F6D1\n\nHere is a 3D scrollytelling\
+    \ experience built entirely with AI. ☕️\n\nThe frontend tech stack: \n✅ React\
+    \ & Next.js\n✅ Tailwind CSS\n✅ GSAP (Scroll parallax) \n✅ Framer Motion (Micro-interactions)\n\
+    \nTo Get my prompts Library  \U0001F449  Head Over to Link in Bio"
+  author:
+    id: '2308686523'
+    name: Himanshu Hingorani
+    screenName: himanshubuildss
+    profileImageUrl: https://pbs.twimg.com/profile_images/2040486128294436864/JziGJtod_normal.jpg
+    verified: true
+  metrics:
+    likes: 78
+    retweets: 11
+    replies: 1
+    quotes: 1
+    views: 4583
+    bookmarks: 91
+  createdAt: Thu Sep 10 07:18:42 +0000 2026
+  createdAtLocal: 2026-09-10 09:18
+  createdAtISO: '2026-09-10T07:18:42+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2097947802206937088/vid/avc1/1642x978/L40pcddylGmhdMvf.mp4?tag=29
+    width: 1642
+    height: 978
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2099499530785857604'
+  text: "Upgrade your flat landing pages to interactive 3D web experiences right now\
+    \ at https://t.co/RlChWqfItA \U0001F30D✨\n\nMost space and tech websites rely\
+    \ on static graphics or heavy pre-rendered videos. \U0001F6D1\n\nThis entire Earth\
+    \ hero isn't a video, and it isn't an image sequence. It’s an actual, real-time\
+    \ 3D model running live in the browser, reacting directly to the scrollbar with\
+    \ zero lag.\n\nI built this complete interactive website using AI agents without\
+    \ manually writing boilerplate from scratch.\n\nThe exact tech stack shown in\
+    \ the build: \n- Claude Code + Opus 5 (Terminal agentic coding & component architecture)\n\
+    - Sketchfab (Real-time GLB 3D Earth model)\n- Three.js & React Three Fiber (Browser\
+    \ WebGL rendering pipeline)\n- Vite & React (Zero-bloat build server)\n- Smooth\
+    \ Scroll Engine (Tying camera rotation & orbital zoom to scroll progress)\n\n\
+    Stop copying static SaaS templates. Start building spatial 3D web design.\n\n\
+    Full workflow breakdown below \U0001F9F5\U0001F447"
+  author:
+    id: '2308686523'
+    name: Himanshu Hingorani
+    screenName: himanshubuildss
+    profileImageUrl: https://pbs.twimg.com/profile_images/2040486128294436864/JziGJtod_normal.jpg
+    verified: true
+  metrics:
+    likes: 5
+    retweets: 0
+    replies: 4
+    quotes: 0
+    views: 318
+    bookmarks: 1
+  createdAt: Mon Sep 14 14:04:29 +0000 2026
+  createdAtLocal: 2026-09-14 16:04
+  createdAtISO: '2026-09-14T14:04:29+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2099498038553382912/vid/avc1/1920x1080/yWLNuEOEtOhYp_Va.mp4?tag=29
+    width: 1920
+    height: 1080
+  urls:
+  - https://scrolltide.co
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2097553581020971142'
+  text: "Building custom 3D WebGL experiences used to require a massive agency budget\
+    \ and months of coding. Not anymore. \U0001F6D1\n\nHere is how to engineer a premium,\
+    \ immersive scrollytelling website featuring an interactive 3D character, dynamic\
+    \ cursor tracking, and parallax depth. \U0001F332\n\nI used Claude Code to build\
+    \ this frontend UI/UX architecture from scratch. Zero manual CSS fighting.\n\n\
+    The exact frontend tech stack: \n✅ React & Next.js (Core framework) \n✅ Three.js\
+    \ / WebGL (3D creature rendering & environment depth) \n✅ Tailwind CSS (Clean\
+    \ typography & modern layout) \n✅ Framer Motion (Custom cursor physics & scroll\
+    \ choreography)\n\nStop building flat web templates. Start building premium interactive\
+    \ frontend web design.\n\nCopy my exact AI build prompt below \U0001F9F5\U0001F447"
+  author:
+    id: '2308686523'
+    name: Himanshu Hingorani
+    screenName: himanshubuildss
+    profileImageUrl: https://pbs.twimg.com/profile_images/2040486128294436864/JziGJtod_normal.jpg
+    verified: true
+  metrics:
+    likes: 81
+    retweets: 7
+    replies: 8
+    quotes: 0
+    views: 6470
+    bookmarks: 75
+  createdAt: Wed Sep 09 05:11:59 +0000 2026
+  createdAtLocal: 2026-09-09 07:11
+  createdAtISO: '2026-09-09T05:11:59+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2097553411827019776/vid/avc1/1704x988/CQMgFF1AYW48Q4NL.mp4?tag=29
+    width: 1704
+    height: 988
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2099222353813135643'
+  text: 'Claude Opus 5 reportedly built a $5K-$10K agency-style Three.js site in two
+    hours
+
+
+    The result had mouse-tracked parallax, cursor particles, a wireframe intro and
+    small interactive details like a butterfly flying away on hover
+
+
+    Everything fit inside one HTML file under 1MB
+
+
+    No dev team and no weeks of revisions. Just one person working back and forth
+    with the model until the details looked right
+
+
+    That is the part that matters
+
+
+    A client can give you a rough idea, and AI can now handle a huge amount of the
+    implementation work that used to require a small studio
+
+
+    The bottleneck is shifting away from writing every line yourself
+
+
+    It is becoming much more about taste, direction and knowing exactly what to ask
+    the model to build'
+  author:
+    id: '1178462452947836928'
+    name: Egor
+    screenName: EgorJioo
+    profileImageUrl: https://pbs.twimg.com/profile_images/2087613613691248641/HL_Eb8aX_normal.jpg
+    verified: true
+  metrics:
+    likes: 42
+    retweets: 3
+    replies: 12
+    quotes: 0
+    views: 3894
+    bookmarks: 31
+  createdAt: Sun Sep 13 19:43:05 +0000 2026
+  createdAtLocal: 2026-09-13 21:43
+  createdAtISO: '2026-09-13T19:43:05+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2099221936509263873/vid/avc1/1440x1080/cCdHEpvsO6pdmX7U.mp4?tag=29
+    width: 1440
+    height: 1080
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+  quotedTweet:
+    id: '2098788428678627698'
+    text: 'A new open-source Skill can look at your app and tell you how to monetize
+      it
+
+
+      HaimingDev just released haiming-app-monetization, and it reached 168 stars
+      in two days
+
+
+      The Skill reads your project, researches how similar products are priced, then
+      builds a monetization plan around onboarding, paywalls and subscription tiers
+
+
+      The output is structured so Claude Code, Codex or Cursor can actually implement
+      it
+
+
+      The best part is how conservative it is
+
+
+      By default, it only evaluates the project and does not touch the code. If pricing
+      cannot be verified, it marks it as unverified instead of inventing numbers
+
+
+      For AI apps with ongoing inference costs, it also avoids blindly recommending
+      unlimited lifetime plans
+
+
+      And the acceptance docs explicitly say it cannot promise conversion rates
+
+
+      That restraint makes it more useful than another AI tool promising perfect monetization
+
+
+      Install it with:
+
+
+      npx skills add HammingDev/haiming-app-monetization'
+    author:
+      screenName: EgorJioo
+      name: Egor
+- id: '2099154345426370637'
+  text: https://t.co/HSrJccfF5A
+  author:
+    id: '1373003521390305282'
+    name: Abedin | Kawsar (𝔽rAI)
+    screenName: MostSaki
+    profileImageUrl: https://pbs.twimg.com/profile_images/2066955079073267712/F7j1tIJA_normal.jpg
+    verified: true
+  metrics:
+    likes: 22
+    retweets: 0
+    replies: 21
+    quotes: 1
+    views: 1443
+    bookmarks: 1
+  createdAt: Sun Sep 13 15:12:51 +0000 2026
+  createdAtLocal: 2026-09-13 17:12
+  createdAtISO: '2026-09-13T15:12:51+00:00'
+  media: []
+  urls:
+  - https://x.com/i/article/2099154064600887296
+  isRetweet: false
+  retweetedBy: null
+  lang: zxx
+  score: null
+  articleTitle: 'NewSight: Turning Every Headline Into a Market'
+- id: '2098000648084324790'
+  text: 'every CS textbook animation looks like it was made in 2008
+
+
+    so I built Algorithm Zoo: an interactive 3D museum where classic algorithms run
+    live: quicksort, dijkstra, BFS, BSTs, hash tables, gossip protocols, leader election
+
+
+    every exhibit is one JSON file. add yours in an afternoon'
+  author:
+    id: '2435094816'
+    name: Dhanush N
+    screenName: Dhanush_Nehru
+    profileImageUrl: https://pbs.twimg.com/profile_images/1991049855557644292/xla4ZpuH_normal.jpg
+    verified: true
+  metrics:
+    likes: 11
+    retweets: 0
+    replies: 4
+    quotes: 0
+    views: 345
+    bookmarks: 3
+  createdAt: Thu Sep 10 10:48:28 +0000 2026
+  createdAtLocal: 2026-09-10 12:48
+  createdAtISO: '2026-09-10T10:48:28+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2097999712121217024/vid/avc1/1920x980/l-HmuvpnNxUjzKsz.mp4?tag=29
+    width: 1920
+    height: 980
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098000653553652043'
+  text: 'the trick: the renderer is fully schema-driven and knows nothing about any
+    algorithm
+
+
+    adding a new one is literally writing a JSON file: nodes, edges, and a sequence
+    of steps like "visit A", "relax A→B", "mark B"
+
+
+    that''s the whole contribution bar'
+  author:
+    id: '2435094816'
+    name: Dhanush N
+    screenName: Dhanush_Nehru
+    profileImageUrl: https://pbs.twimg.com/profile_images/1991049855557644292/xla4ZpuH_normal.jpg
+    verified: true
+  metrics:
+    likes: 1
+    retweets: 0
+    replies: 1
+    quotes: 0
+    views: 44
+    bookmarks: 0
+  createdAt: Thu Sep 10 10:48:29 +0000 2026
+  createdAtLocal: 2026-09-10 12:48
+  createdAtISO: '2026-09-10T10:48:29+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098000655978029463'
+  text: "3D web app showing algorithms as museum exhibits: quicksort sorting animated\
+    \ blocks, dijkstra's algorithm lighting up a weighted graph, a binary search tree\
+    \ growing insert by insert. \n\nbuilt with three.js."
+  author:
+    id: '2435094816'
+    name: Dhanush N
+    screenName: Dhanush_Nehru
+    profileImageUrl: https://pbs.twimg.com/profile_images/1991049855557644292/xla4ZpuH_normal.jpg
+    verified: true
+  metrics:
+    likes: 1
+    retweets: 0
+    replies: 0
+    quotes: 0
+    views: 34
+    bookmarks: 0
+  createdAt: Thu Sep 10 10:48:30 +0000 2026
+  createdAtLocal: 2026-09-10 12:48
+  createdAtISO: '2026-09-10T10:48:30+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2097205829141205220'
+  text: '[OpenSource - AI Agent Skills & Generative 3D]
+
+
+    Prompting an AI to build a 3D game usually results in basic, unpolished graphics
+    that look nothing like modern AAA titles. 🛑
+
+
+    dream-loop by @anshuc is an open-source agent skill that fixes this by giving
+    your AI the ability to "dream" up high-quality visuals and autonomously iterate
+    on its code until the game matches that vision.
+
+
+    Here is how this closed-loop visual critic system works. 🧵👇
+
+
+    1/4'
+  author:
+    id: '2079488679953711104'
+    name: AI Tech Diggest
+    screenName: TheTechDiggest
+    profileImageUrl: https://pbs.twimg.com/profile_images/2079492437773369345/l-r1u-nc_normal.jpg
+    verified: true
+  metrics:
+    likes: 7
+    retweets: 2
+    replies: 1
+    quotes: 0
+    views: 508
+    bookmarks: 2
+  createdAt: Tue Sep 08 06:10:08 +0000 2026
+  createdAtLocal: 2026-09-08 08:10
+  createdAtISO: '2026-09-08T06:10:08+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2097205737877372928/vid/avc1/1848x1080/paWkgIdGjidlrvd0.mp4?tag=29
+    width: 1848
+    height: 1080
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2097205957889556486'
+  text: "Stop accepting unpolished prototype graphics from your coding agents:\n\n\
+    • Target Image Generation: The agent first \"dreams\" up a high-fidelity target\
+    \ screenshot of what the scene should look like using its internal image generation\
+    \ capabilities. \n• Iterative Building: The primary agent then writes the rendering\
+    \ code (e.g., using Three.js) trying to replicate that exact visual target. \n\
+    • Sub-Agent Critic: A secondary vision-enabled AI critic continuously compares\
+    \ the live, compiled screenshot to the original \"dreamed\" target, providing\
+    \ feedback and forcing the agent to loop until the scene reaches AAA quality.\
+    \ \U0001F916\U0001F3A8\n\n2/4"
+  author:
+    id: '2079488679953711104'
+    name: AI Tech Diggest
+    screenName: TheTechDiggest
+    profileImageUrl: https://pbs.twimg.com/profile_images/2079492437773369345/l-r1u-nc_normal.jpg
+    verified: true
+  metrics:
+    likes: 3
+    retweets: 0
+    replies: 1
+    quotes: 0
+    views: 119
+    bookmarks: 0
+  createdAt: Tue Sep 08 06:10:39 +0000 2026
+  createdAtLocal: 2026-09-08 08:10
+  createdAtISO: '2026-09-08T06:10:39+00:00'
+  media: []
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+

@@ -1,0 +1,397 @@
+ok: true
+schema_version: '1'
+data:
+- id: '2099485977853231443'
+  text: "Introducing Shaders: a creative tools for anyone making things on the web.\n\
+    \n14 interactive experiments to explore: \n- make pixel heat map graphs\n- turn\
+    \ words into particles\n- bend images through glass\n- or give an artwork a different\
+    \ texture\n\nTune the effects live and use your own images, videos, or SVGs where\
+    \ supported. \n\nMake something for a portfolio, a brand campaign, an identity,\
+    \ or an idea that doesn’t fit a category yet.\n\nOpen source, with shadcn installation\
+    \ and editable code when you’re ready to build."
+  author:
+    id: '1619601641183006720'
+    name: Harshit
+    screenName: harshitlog
+    profileImageUrl: https://pbs.twimg.com/profile_images/2050993146683883520/3vBMd85C_normal.jpg
+    verified: true
+  metrics:
+    likes: 9
+    retweets: 0
+    replies: 4
+    quotes: 0
+    views: 424
+    bookmarks: 1
+  createdAt: Mon Sep 14 13:10:38 +0000 2026
+  createdAtLocal: 2026-09-14 15:10
+  createdAtISO: '2026-09-14T13:10:38+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2099485865647230976/vid/avc1/1920x1080/lwdSQQyh0U1YZXqC.mp4?tag=29
+    width: 1920
+    height: 1080
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2097609187526062436'
+  text: 'Introducing OpenShaders.
+
+
+    I’m building the home shaders deserve.
+
+
+    Discover, build, publish, and install shaders made to ship.
+
+
+    Open source. WebGL/WebGPU. One click away.
+
+
+    Claim your username and reveal your unique shader.
+
+
+    https://t.co/cXWSKRd5Ik 🧵 https://t.co/UldNsEH9OO'
+  author:
+    id: '1587038338397118464'
+    name: David Haz
+    screenName: davidhaz
+    profileImageUrl: https://pbs.twimg.com/profile_images/2077672716639862784/KpSO9Y3A_normal.jpg
+    verified: true
+  metrics:
+    likes: 304
+    retweets: 17
+    replies: 80
+    quotes: 35
+    views: 46622
+    bookmarks: 181
+  createdAt: Wed Sep 09 08:52:56 +0000 2026
+  createdAtLocal: 2026-09-09 10:52
+  createdAtISO: '2026-09-09T08:52:56+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2097607342334656512/vid/avc1/3840x2160/8rt7V5moIatczHy7.mp4?tag=29
+    width: 3840
+    height: 2160
+  urls:
+  - https://openshaders.com
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2097744080725774568'
+  text: 'Gaussian Splats are quickly becoming one of my favorite ways to move complex
+    3D assets between workflows.
+
+
+    For this test I started with Panthera Spelaea, the Blender 5.2 splash artwork
+    by Joanna Kobierska, available from https://t.co/LyZ2iSuWrs under CC-BY.
+
+
+    Using GPT-6 Astra, I had it build a 200-frame camera rig and send the renders
+    directly to @rendernetwork through the API and export a COLMAP data set.
+
+
+    NEXT: COLMAP → Postshot → Gaussian Splat.
+
+
+    The result is a real-time, high-fidelity version of an insanely dense asset -
+    millions of hairs and all - that I can now bring back into @OTOY Octane, relight,
+    reframe, drop into other scenes, or even publish straight to the web.
+
+
+    Capture the visual complexity once, then carry it anywhere.
+
+
+    Check out the splat:
+
+    https://t.co/FIFQo7dSI2'
+  author:
+    id: '849397020'
+    name: Spenser Dickerson
+    screenName: SpenserFX
+    profileImageUrl: https://pbs.twimg.com/profile_images/1937205613232070656/SEwBDaz6_normal.jpg
+    verified: true
+  metrics:
+    likes: 127
+    retweets: 17
+    replies: 9
+    quotes: 4
+    views: 10024
+    bookmarks: 64
+  createdAt: Wed Sep 09 17:48:57 +0000 2026
+  createdAtLocal: 2026-09-09 19:48
+  createdAtISO: '2026-09-09T17:48:57+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2097742247358005249/vid/avc1/1920x1080/412h13ZyxP4rvN6v.mp4?tag=29
+    width: 1920
+    height: 1080
+  urls:
+  - https://Blender.org
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2099499530785857604'
+  text: "Upgrade your flat landing pages to interactive 3D web experiences right now\
+    \ at https://t.co/RlChWqfItA \U0001F30D✨\n\nMost space and tech websites rely\
+    \ on static graphics or heavy pre-rendered videos. \U0001F6D1\n\nThis entire Earth\
+    \ hero isn't a video, and it isn't an image sequence. It’s an actual, real-time\
+    \ 3D model running live in the browser, reacting directly to the scrollbar with\
+    \ zero lag.\n\nI built this complete interactive website using AI agents without\
+    \ manually writing boilerplate from scratch.\n\nThe exact tech stack shown in\
+    \ the build: \n- Claude Code + Opus 5 (Terminal agentic coding & component architecture)\n\
+    - Sketchfab (Real-time GLB 3D Earth model)\n- Three.js & React Three Fiber (Browser\
+    \ WebGL rendering pipeline)\n- Vite & React (Zero-bloat build server)\n- Smooth\
+    \ Scroll Engine (Tying camera rotation & orbital zoom to scroll progress)\n\n\
+    Stop copying static SaaS templates. Start building spatial 3D web design.\n\n\
+    Full workflow breakdown below \U0001F9F5\U0001F447"
+  author:
+    id: '2308686523'
+    name: Himanshu Hingorani
+    screenName: himanshubuildss
+    profileImageUrl: https://pbs.twimg.com/profile_images/2040486128294436864/JziGJtod_normal.jpg
+    verified: true
+  metrics:
+    likes: 5
+    retweets: 0
+    replies: 4
+    quotes: 0
+    views: 318
+    bookmarks: 1
+  createdAt: Mon Sep 14 14:04:29 +0000 2026
+  createdAtLocal: 2026-09-14 16:04
+  createdAtISO: '2026-09-14T14:04:29+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2099498038553382912/vid/avc1/1920x1080/yWLNuEOEtOhYp_Va.mp4?tag=29
+    width: 1920
+    height: 1080
+  urls:
+  - https://scrolltide.co
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098127684249256353'
+  text: 'https://t.co/vrIKQSs1Ly is now a world of 2000+ unique shader variations
+    you can explore and use.
+
+
+    This is all thanks to you, in just one day.
+
+
+    I can only imagine what the full launch will look like. https://t.co/2SBxvtojWs'
+  author:
+    id: '1587038338397118464'
+    name: David Haz
+    screenName: davidhaz
+    profileImageUrl: https://pbs.twimg.com/profile_images/2077672716639862784/KpSO9Y3A_normal.jpg
+    verified: true
+  metrics:
+    likes: 69
+    retweets: 1
+    replies: 4
+    quotes: 0
+    views: 2817
+    bookmarks: 48
+  createdAt: Thu Sep 10 19:13:15 +0000 2026
+  createdAtLocal: 2026-09-10 21:13
+  createdAtISO: '2026-09-10T19:13:15+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2098126726085693449/vid/avc1/3840x2160/tG7-rCR559r8FuZo.mp4?tag=29
+    width: 3840
+    height: 2160
+  urls:
+  - https://openshaders.com/explore
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2099497691784859869'
+  text: i have been working on a library of shaders called schiller (the shimmer effect
+    that comes from interference) https://t.co/bLIQbXXsGq
+  author:
+    id: '1294311347275145218'
+    name: dwija
+    screenName: dwijaxo
+    profileImageUrl: https://pbs.twimg.com/profile_images/2026333540699521024/Y-iXNxXY_normal.jpg
+    verified: true
+  metrics:
+    likes: 156
+    retweets: 3
+    replies: 4
+    quotes: 0
+    views: 3634
+    bookmarks: 95
+  createdAt: Mon Sep 14 13:57:11 +0000 2026
+  createdAtLocal: 2026-09-14 15:57
+  createdAtISO: '2026-09-14T13:57:11+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2099495242227662848/vid/avc1/3840x1968/nq0FOFO39okht4NF.mp4?tag=29
+    width: 3840
+    height: 1968
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2097155985756598402'
+  text: "Rendering 90,000 interactive particles in the browser used to melt GPUs.\
+    \ Now, it is the standard for high-end web design. ✨\n\nHere is how to engineer\
+    \ a premium, real-time WebGL rendering layer that morphs seamlessly and reacts\
+    \ instantly to scroll and mouse movement.\n\nI used Claude Code to build this\
+    \ fluid scrollytelling architecture from scratch. Zero heavy video files, zero\
+    \ bloated libraries.\n\nThe exact frontend tech stack: \n✅ React & Next.js (Core\
+    \ component architecture) \n✅ Three.js / WebGL (Single draw call rendering) \n\
+    ✅ Custom GLSL Shaders (Particle physics & geometry morphing) \n✅ Tailwind CSS\
+    \ (Pixel-perfect typography overlay)\n\nStop relying on static templates and heavy\
+    \ MP4 backgrounds. Start building immersive frontend UI/UX experiences that perform\
+    \ flawlessly.\n\nCopy my exact AI build prompt below \U0001F9F5\U0001F447"
+  author:
+    id: '2308686523'
+    name: Himanshu Hingorani
+    screenName: himanshubuildss
+    profileImageUrl: https://pbs.twimg.com/profile_images/2040486128294436864/JziGJtod_normal.jpg
+    verified: true
+  metrics:
+    likes: 23
+    retweets: 1
+    replies: 2
+    quotes: 0
+    views: 1204
+    bookmarks: 10
+  createdAt: Tue Sep 08 02:52:04 +0000 2026
+  createdAtLocal: 2026-09-08 04:52
+  createdAtISO: '2026-09-08T02:52:04+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2097155343851859968/vid/avc1/1678x1058/dc70UDYsaHaCsKDh.mp4?tag=29
+    width: 1678
+    height: 1058
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2097751874162069664'
+  text: 'First shader experiments in @rive_app .
+
+
+    Real-time magnification &amp; distortion driven by an interactive slider.
+
+
+    Sharing my experiments and breakdowns here:
+
+
+    🔗 https://t.co/IfXRovFZJy
+
+
+    #Rive #MotionDesign #InteractiveUI #Shader https://t.co/5wnmDWAM1r'
+  author:
+    id: '2593752752'
+    name: reza rayeji
+    screenName: rezarayeji
+    profileImageUrl: https://pbs.twimg.com/profile_images/2089682724420206592/yjHwCP3f_normal.jpg
+    verified: true
+  metrics:
+    likes: 69
+    retweets: 5
+    replies: 0
+    quotes: 0
+    views: 4153
+    bookmarks: 35
+  createdAt: Wed Sep 09 18:19:55 +0000 2026
+  createdAtLocal: 2026-09-09 20:19
+  createdAtISO: '2026-09-09T18:19:55+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2097751709263290368/vid/avc1/1280x720/zMoh90G5c3s8rsP7.mp4?tag=14
+    width: 1280
+    height: 720
+  urls:
+  - https://t.me/PersianRive
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2097553581020971142'
+  text: "Building custom 3D WebGL experiences used to require a massive agency budget\
+    \ and months of coding. Not anymore. \U0001F6D1\n\nHere is how to engineer a premium,\
+    \ immersive scrollytelling website featuring an interactive 3D character, dynamic\
+    \ cursor tracking, and parallax depth. \U0001F332\n\nI used Claude Code to build\
+    \ this frontend UI/UX architecture from scratch. Zero manual CSS fighting.\n\n\
+    The exact frontend tech stack: \n✅ React & Next.js (Core framework) \n✅ Three.js\
+    \ / WebGL (3D creature rendering & environment depth) \n✅ Tailwind CSS (Clean\
+    \ typography & modern layout) \n✅ Framer Motion (Custom cursor physics & scroll\
+    \ choreography)\n\nStop building flat web templates. Start building premium interactive\
+    \ frontend web design.\n\nCopy my exact AI build prompt below \U0001F9F5\U0001F447"
+  author:
+    id: '2308686523'
+    name: Himanshu Hingorani
+    screenName: himanshubuildss
+    profileImageUrl: https://pbs.twimg.com/profile_images/2040486128294436864/JziGJtod_normal.jpg
+    verified: true
+  metrics:
+    likes: 81
+    retweets: 7
+    replies: 8
+    quotes: 0
+    views: 6470
+    bookmarks: 75
+  createdAt: Wed Sep 09 05:11:59 +0000 2026
+  createdAtLocal: 2026-09-09 07:11
+  createdAtISO: '2026-09-09T05:11:59+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2097553411827019776/vid/avc1/1704x988/CQMgFF1AYW48Q4NL.mp4?tag=29
+    width: 1704
+    height: 988
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098748928485130737'
+  text: 'rolling gallery 🖼️
+
+
+    the paintings sit on the inside of a cylinder, so they curl away as you scroll
+    instead of just sliding off.
+
+
+    react native + shaders. inspired by Interface Craft.
+
+
+    https://t.co/SLLan3AlyO https://t.co/uMZm7QRZIy'
+  author:
+    id: '1867999101184585728'
+    name: Mehdi · Motionary
+    screenName: mehdi_made
+    profileImageUrl: https://pbs.twimg.com/profile_images/2084193569104109569/WovZKgPp_normal.jpg
+    verified: true
+  metrics:
+    likes: 164
+    retweets: 10
+    replies: 1
+    quotes: 0
+    views: 4417
+    bookmarks: 87
+  createdAt: Sat Sep 12 12:21:52 +0000 2026
+  createdAtLocal: 2026-09-12 14:21
+  createdAtISO: '2026-09-12T12:21:52+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2098748458832158721/vid/avc1/1860x1860/kq5zrRLnOySo7nVF.mp4?tag=29
+    width: 1860
+    height: 1860
+  urls:
+  - https://motionary.dev/animations/rolling-scroll-gallery
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+

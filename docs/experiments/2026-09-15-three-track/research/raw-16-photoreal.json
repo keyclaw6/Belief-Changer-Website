@@ -1,0 +1,484 @@
+ok: true
+schema_version: '1'
+data:
+- id: '2097650734494019760'
+  text: '❤️‍🔥 GPT Astra + GPT Image 2.5 = Insane $50,000 Websites
+
+
+    Just recorded 16-minute tutorial on how to build $50,000 cinematic websites (step
+    by step) with GPT Image 2.5 https://t.co/QyrhlvlRUD'
+  author:
+    id: '893369654768529408'
+    name: Viktor Oddy
+    screenName: viktoroddy
+    profileImageUrl: https://pbs.twimg.com/profile_images/2095368366693466112/1vPxOkT8_normal.jpg
+    verified: true
+  metrics:
+    likes: 341
+    retweets: 32
+    replies: 12
+    quotes: 1
+    views: 24393
+    bookmarks: 430
+  createdAt: Wed Sep 09 11:38:02 +0000 2026
+  createdAtLocal: 2026-09-09 13:38
+  createdAtISO: '2026-09-09T11:38:02+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2097646830855299072/vid/avc1/3324x2160/-jXJohukQXbDMa8M.mp4?tag=29
+    width: 3324
+    height: 2160
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2097675295063248899'
+  text: 'Updated my portfolio with the new GPT Image.
+
+
+    Looks cool. Try it ↓
+
+
+    https://t.co/tWRmYEI93A https://t.co/AbnV3nothv'
+  author:
+    id: '1730523055657799680'
+    name: Muhammad Dani Asyrofi
+    screenName: dani_asyrofi
+    profileImageUrl: https://pbs.twimg.com/profile_images/2087491779813949440/yRt1QP9A_normal.jpg
+    verified: true
+  metrics:
+    likes: 579
+    retweets: 23
+    replies: 23
+    quotes: 2
+    views: 50669
+    bookmarks: 622
+  createdAt: Wed Sep 09 13:15:37 +0000 2026
+  createdAtLocal: 2026-09-09 15:15
+  createdAtISO: '2026-09-09T13:15:37+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2097675212187959296/vid/avc1/2940x1846/TiUR7X1XDNTUbcyk.mp4?tag=29
+    width: 2940
+    height: 1846
+  urls:
+  - https://daniasyrofi.com
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+  quotedTweet:
+    id: '2097127780056195346'
+    text: 'Just add small detail, try it ↓
+
+      https://t.co/tWRmYEI93A https://t.co/EgimcnGYLj'
+    author:
+      screenName: dani_asyrofi
+      name: Muhammad Dani Asyrofi
+- id: '2099534377428689251'
+  text: 'The best AI-generated shot in the world doesn’t matter much if it doesn’t
+    belong in the story.
+
+
+    That’s why I like starting with a storyboard.
+
+
+    GPT Image 2.5 is coming to CapCut PC through Design Studio and AI Image, giving
+    you a way to establish the visual progression before generating the film.
+
+
+    Then bring the storyboard into Video Studio and use Seedance 2.5 to create the
+    video.
+
+
+    After generation, use CapCut’s AI editing tools to work on how everything comes
+    together.
+
+
+    Because filmmaking isn’t just about making individual moments look good.
+
+
+    It’s about making those moments work together.
+
+
+    #GPTImage25 #CapCutPC #AIVideo #Seedance25'
+  author:
+    id: '2910033014'
+    name: Katherine
+    screenName: supressedvoic
+    profileImageUrl: https://pbs.twimg.com/profile_images/2082712625163669505/yFMXT8ei_normal.jpg
+    verified: true
+  metrics:
+    likes: 6
+    retweets: 2
+    replies: 3
+    quotes: 0
+    views: 418
+    bookmarks: 4
+  createdAt: Mon Sep 14 16:22:57 +0000 2026
+  createdAtLocal: 2026-09-14 18:22
+  createdAtISO: '2026-09-14T16:22:57+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2099534223682293760/vid/avc1/1440x2560/E2LacPtULaxNlkgJ.mp4?tag=29
+    width: 1440
+    height: 2560
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2096888719043137743'
+  text: '🚨 GPT-6 Astra is a beast!
+
+
+    I gave it a simple prompt + a JPEG, and it built this beautiful animated brand
+    website from scratch.
+
+
+    it generated all the product images using GPT Image 2 and created the hero motion
+    animation by itself.
+
+
+    the whole thing took less than an hour to build.
+
+
+    I’ve dropped the prompt, resources used, and the live website link in the comments.
+    👇'
+  author:
+    id: '1168877404598808577'
+    name: m0h
+    screenName: exploraX_
+    profileImageUrl: https://pbs.twimg.com/profile_images/2098086248992931840/5KYpNM8S_normal.jpg
+    verified: true
+  metrics:
+    likes: 26
+    retweets: 1
+    replies: 11
+    quotes: 0
+    views: 3985
+    bookmarks: 14
+  createdAt: Mon Sep 07 09:10:03 +0000 2026
+  createdAtLocal: 2026-09-07 11:10
+  createdAtISO: '2026-09-07T09:10:03+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2096881354323685376/vid/avc1/1728x1080/DttkTyPLjBezV-Mx.mp4?tag=29
+    width: 1728
+    height: 1080
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+  quotedTweet:
+    id: '2089275192845418566'
+    text: 'GLM 5.3 is a beast.🔥
+
+
+      it built this 3D interactive neuro-map of the human brain from a single prompt.
+
+
+      it took a few hours to complete, using Three.js for the 3D hero animation.
+
+
+      i’ve linked the exact prompt + skills + live neuro-map below.'
+    author:
+      screenName: exploraX_
+      name: m0h
+- id: '2099474448692977851'
+  text: 'I’ve had this idea for a very long time, and today I finally brought it to
+    life. Using ChatGPT Images and Claude.
+
+
+    I wanted to create a website where every element feels interactive. Just like
+    a small version of my desk.
+
+
+    The lamp changes the mood from evening to night.
+
+    The poster opens an About Me pop-up.
+
+    The screen showcases a few of my artworks.
+
+    The camera actually works like a camera.
+
+
+    If you want to explore it yourself, the link is below 👇'
+  author:
+    id: '1367430408627912705'
+    name: Sanndy
+    screenName: SanndyCreationz
+    profileImageUrl: https://pbs.twimg.com/profile_images/1954932902208446464/OZUWaCPk_normal.jpg
+    verified: true
+  metrics:
+    likes: 21
+    retweets: 0
+    replies: 10
+    quotes: 0
+    views: 416
+    bookmarks: 2
+  createdAt: Mon Sep 14 12:24:49 +0000 2026
+  createdAtLocal: 2026-09-14 14:24
+  createdAtISO: '2026-09-14T12:24:49+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2099474306367680512/vid/avc1/2880x1636/uDMRF18Kk-v7bEia.mp4?tag=29
+    width: 2880
+    height: 1636
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2099530613791604816'
+  text: 'Turned a prompt into this in under 60 seconds.....no design skills needed.
+
+
+    PhotoGenerator AI''s Prompt Gallery + AI Image tool let me go from idea to a polished,
+    high-quality image in one flow. Pick a prompt, generate, done.
+
+    All-in-one AI creative platform: images, video, characters, audio.
+
+
+    Try it....link in bio 👇
+
+    #AIArt #ImageGeneration #PromptEngineering #photogenerator'
+  author:
+    id: '1014697526648242176'
+    name: Ace
+    screenName: nijokestu
+    profileImageUrl: https://pbs.twimg.com/profile_images/2013104987421712384/CQVDwtMR_normal.jpg
+    verified: true
+  metrics:
+    likes: 130
+    retweets: 91
+    replies: 12
+    quotes: 0
+    views: 13147
+    bookmarks: 0
+  createdAt: Mon Sep 14 16:08:00 +0000 2026
+  createdAtLocal: 2026-09-14 18:08
+  createdAtISO: '2026-09-14T16:08:00+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2099530586151104512/vid/avc1/1566x720/QFkE8bMCW-Ev9yuC.mp4?tag=16
+    width: 1906
+    height: 876
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2097686216934408609'
+  text: 'GPT Astra + GPT Image 2.5 is getting ridiculous. 💀🤡
+
+
+    Built a website that looks like a $50K agency project.
+
+
+    Recorded the whole process in 16 minutes.
+
+
+    Promt 👀 https://t.co/jjmG2MnQKC'
+  author:
+    id: '2097020038066876416'
+    name: Dustin Ng
+    screenName: dustinng_gs
+    profileImageUrl: https://pbs.twimg.com/profile_images/2097021981132791808/PZWQGx1Q_normal.jpg
+    verified: true
+  metrics:
+    likes: 9
+    retweets: 3
+    replies: 2
+    quotes: 1
+    views: 831
+    bookmarks: 7
+  createdAt: Wed Sep 09 13:59:01 +0000 2026
+  createdAtLocal: 2026-09-09 15:59
+  createdAtISO: '2026-09-09T13:59:01+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2097685929020493824/vid/avc1/1080x1920/3h1ZrzA-5QfCRkD0.mp4?tag=29
+    width: 1080
+    height: 1920
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2097977165274923015'
+  text: 'Japanese shrine. Realistic materials. Cinematic motion—all generated with
+    GPT-6 Astra. 🌿⛩️
+
+
+    Made by @PixVerse. Available on PixVerse and in ChatGPT via the PixVerse Plugin.
+
+
+    Prompt ↓
+
+    Create an original Japanese torii shrine scene using PixVerse and Blender. Complete
+    these steps: Create the concept: Use PixVerse to generate a photoreal reference
+    image. Lock the torii design, materials, lighting, and environment for consistency.
+    Build the 3D scene: Create an editable textured model in Blender. Clean the topology,
+    unwrap the UVs, and add suitable animation controls. Add movement: Include foreground
+    leaves that partially obscure the wide shots, gently moving foliage, and birds
+    flying visibly across the scene. Animate the cameras: Create a 12-second sequence
+    with three shots: an arcing approach, a lateral detail shot, and a rising pullback.
+    Keep movement smooth and framing clear. Render in Blender: Export a native camera
+    video and a separate neutral gray clay reference video using the same animation.
+    Save them beside the Blender project. Generate the photoreal film: Use PixVerse
+    Seedance with the gray video for camera and action reference and the unchanged
+    photoreal image for appearance. Generate a 1080p, 16:9 video with only natural
+    environmental sounds—wind, rustling leaves, and bird wings. No music or voices.
+    Check and deliver: Review every shot for consistent design, photoreal textures,
+    visible birds, smooth motion, and correct audio. Fix issues within the approved
+    budget and document remaining limitations. Save the editable Blender project,
+    videos, reference image, and a brief production assessment in the same folder.
+    Key points: Never use the colored low-poly video as the Seedance reference. Check
+    the entire film, especially the final wide shot.'
+  author:
+    id: '1629021789949943810'
+    name: Tiago | IA
+    screenName: IATiago
+    profileImageUrl: https://pbs.twimg.com/profile_images/1657865570686050307/C43UOl4o_normal.jpg
+    verified: true
+  metrics:
+    likes: 36
+    retweets: 4
+    replies: 5
+    quotes: 0
+    views: 15823
+    bookmarks: 22
+  createdAt: Thu Sep 10 09:15:09 +0000 2026
+  createdAtLocal: 2026-09-10 11:15
+  createdAtISO: '2026-09-10T09:15:09+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2097977118453907462/vid/avc1/1920x1080/xmnkEGojTJ3n1JCl.mp4?tag=29
+    width: 1920
+    height: 1080
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2098103823877148906'
+  text: 'I asked GPT-6 to find me the best free-to-use scripts on the Internet.
+
+
+    A few hours later, it built the most comprehensive database.
+
+
+    Here''s the story:
+
+
+    Last night, I asked GPT-6 to find me ~100 scripts that are in the public domain,
+    free to use, or under a Creative Commons license.
+
+
+    This morning, I woke up to a fully built website with filters, search, rankings,
+    cost estimates, scripts, etc., for 111 scripts.
+
+
+    It generates a comprehensive PDF for each script explaining how to build the entire
+    film using AI, or just a short trailer if you wish.
+
+
+    You can pick any of them. It will connect via the Higgsfield plugin and then start
+    generating characters, locations, props, visual style, mood boards, etc.
+
+
+    Then it automatically starts generating the movie, clip by clip, editing it, finding
+    appropriate music, adding sound effects, and putting it all together. It also
+    corrects itself if something is off.
+
+
+    Every image or video generation uses my prompting style and knowledge, which I
+    previously trained, and it uses specific models for each task. For example, the
+    characters are generated with Higgsfield''s Soul 2.0. I just love how random-looking
+    they are in this AI landscape where everything starts to look the same.
+
+
+    This whole process left me a bit speechless, considering it all started with just
+    ONE (massive) prompt last night.
+
+
+    As for costs, it accounted for ~50% of my weekly GPT-6 usage on the $200 sub.
+
+
+    So far, I did a 3-min and a 6-min short film, and a few trailers.
+
+
+    Check out one of the trailers below that I generated for the app''s highest-ranked
+    script.
+
+
+    The whole film was estimated to cost $14,176 for 40 minutes of runtime.
+
+
+    I just won''t pull the trigger on it yet, but it''s really fun to explore its
+    universe.
+
+
+    PS: It updates itself every night with new scripts.'
+  author:
+    id: '14215898'
+    name: Alex Patrascu
+    screenName: maxescu
+    profileImageUrl: https://pbs.twimg.com/profile_images/2097990924752306176/N_HepIM8_normal.jpg
+    verified: true
+  metrics:
+    likes: 73
+    retweets: 5
+    replies: 18
+    quotes: 2
+    views: 6811
+    bookmarks: 68
+  createdAt: Thu Sep 10 17:38:27 +0000 2026
+  createdAtLocal: 2026-09-10 19:38
+  createdAtISO: '2026-09-10T17:38:27+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2098097500989345792/vid/avc1/1920x1080/iH3aotLVtHAA3B9X.mp4?tag=29
+    width: 1920
+    height: 1080
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+- id: '2099232072980484262'
+  text: 'Your character. Your brand. A 30-second AI commercial. We created this GPT
+    Image 2.5 x PhotoGPT film using 2 custom reference images + Seedance 2.5.
+
+    Here’s our workflow, the models we used, and the full video prompt so you can
+    try it with your own assets. 🧵👇'
+  author:
+    id: '1711205391810609152'
+    name: PhotoGPT
+    screenName: itsphotogptai
+    profileImageUrl: https://pbs.twimg.com/profile_images/2008164967275708417/naFAlxsv_normal.jpg
+    verified: true
+  metrics:
+    likes: 78
+    retweets: 7
+    replies: 7
+    quotes: 1
+    views: 6248
+    bookmarks: 60
+  createdAt: Sun Sep 13 20:21:42 +0000 2026
+  createdAtLocal: 2026-09-13 22:21
+  createdAtISO: '2026-09-13T20:21:42+00:00'
+  media:
+  - type: video
+    url: https://video.twimg.com/amplify_video/2099227989309612032/vid/avc1/1920x1080/JVmiDzVT2IACPocC.mp4?tag=29
+    width: 1920
+    height: 1080
+  urls: []
+  isRetweet: false
+  retweetedBy: null
+  lang: en
+  score: null
+

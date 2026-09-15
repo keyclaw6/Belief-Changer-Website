@@ -1,0 +1,6 @@
+ok: false
+schema_version: '1'
+error:
+  code: not_found
+  message: 'Article not found: tweet_id=2098012383679819776'
+
