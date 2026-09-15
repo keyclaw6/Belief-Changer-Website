@@ -1,0 +1,56 @@
+{
+  "shots": {
+    "r1-mobile-env1-light": {
+      "state": "orbit",
+      "frontIndex": 0,
+      "env": true,
+      "dark": false,
+      "plateHidden": false,
+      "plateW": 1672,
+      "scene": {
+        "calls": 60,
+        "triangles": 315282,
+        "envDirect": true
+      }
+    },
+    "r1-desktop-env1-dark": {
+      "state": "orbit",
+      "frontIndex": 0,
+      "env": true,
+      "dark": true,
+      "plateHidden": false,
+      "plateW": 1672,
+      "scene": {
+        "calls": 58,
+        "triangles": 450240,
+        "envDirect": true
+      }
+    },
+    "r1-desktop-env1-ar": {
+      "state": "orbit",
+      "frontIndex": 0,
+      "env": true,
+      "dark": false,
+      "plateHidden": false,
+      "plateW": 1672,
+      "scene": {
+        "calls": 60,
+        "triangles": 450402,
+        "envDirect": true
+      }
+    },
+    "r1-desktop-env1-reducedmotion": {
+      "state": "orbit",
+      "frontIndex": 0,
+      "env": true,
+      "dark": false,
+      "plateHidden": false,
+      "plateW": 1672,
+      "scene": {
+        "calls": 60,
+        "triangles": 450402,
+        "envDirect": true
+      }
+    }
+  }
+}

@@ -83,6 +83,13 @@ export function ShelfStage({ books, locale, onInspectChange }: { books: Book[]; 
       const visible = visibleHeight / Math.max(1, Math.min(rect.height, innerHeight)) > 0.1
       frame.contentWindow?.postMessage({ type: 'orbit-theme', dark }, location.origin)
       frame.contentWindow?.postMessage({ type: 'orbit-hero-visibility', visible }, location.origin)
+      // Track C R1 spike (temporary, dev-only): forward ?env= from the page
+      // URL so `/{locale}?env=1` shows the proof environment for A/B shots.
+      try {
+        const env = new URLSearchParams(window.location.search).get('env')
+        if (env === '0' || env === '1')
+          frame.contentWindow?.postMessage({ type: 'orbit-env', enabled: env === '1' }, location.origin)
+      } catch { /* non-browser or blocked URL access: stay on baseline */ }
     }
     const receive = (event: MessageEvent) => {
       if (event.origin !== location.origin || event.source !== frame.contentWindow || !event.data) return

@@ -107,6 +107,35 @@ const params = new URLSearchParams(location.search);
 const EMBED = params.get('embed') === '1';
 const LOCALE = (params.get('locale') || 'en').replace(/[^a-z-]/gi, '') || 'en';
 if (EMBED) document.documentElement.classList.add('embed');
+
+/* Track C R1 spike (temporary, reversible): ?env=1 layers a clearly labeled
+   proof plate behind the transparent canvas and renders the scene direct
+   (no atmosphere background pass). ?env=0 forces baseline. Default baseline.
+   No lighting, geometry, or cover changes in either mode. */
+let envEnabled = params.get('env') === '1';
+const envPlate = document.getElementById('env-plate');
+let envSrcSet = false;
+envPlate?.addEventListener('error', () => {
+  if (envPlate) envPlate.hidden = true;
+});
+function setEnv(on) {
+  envEnabled = !!on;
+  if (envEnabled && !envSrcSet && envPlate) {
+    envSrcSet = true;
+    envPlate.src = './env/proof-room-day.png';
+  }
+  if (envPlate) envPlate.hidden = !envEnabled;
+  document.documentElement.classList.toggle('env-proof', envEnabled);
+  invalidate();
+}
+// Initial sync is DOM-only: invalidate()/sceneDirty do not exist yet this early
+// (sceneDirty starts true anyway, so the first frame still renders).
+if (envEnabled && envPlate) {
+  envSrcSet = true;
+  envPlate.src = './env/proof-room-day.png';
+  envPlate.hidden = false;
+  document.documentElement.classList.add('env-proof');
+}
 const labels = orbitLabels(LOCALE);
 const heroCopy = {
   en: [
@@ -699,6 +728,10 @@ window.addEventListener('message', (event) => {
     sceneDark = !!d.dark;
     applyTheme();
     invalidate();
+  }
+  /* Track C R1 spike: parent (ShelfStage) forwards ?env= from the page URL. */
+  if (d && typeof d === 'object' && d.type === 'orbit-env') {
+    setEnv(!!d.enabled);
   }
 });
 matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
@@ -2308,6 +2341,10 @@ async function boot() {
     get sceneDark() {
       return sceneDark;
     },
+    get env() {
+      return envEnabled;
+    },
+    setEnv,
     advance: (d = 1) => advance(d),
     openFront,
     returnHome,
@@ -2640,7 +2677,20 @@ function frame(now) {
       focusPoint.set(0, PRESENT_LIFT, RING_R + PRESENT_OUT);
       ringGroup.localToWorld(focusPoint);
     }
-    window.__orbitPerf.scene = atmosphere.render(focusPoint, true);
+    if (envEnabled) {
+      // Track C R1 spike: the proof plate is a DOM layer, so the scene goes
+      // direct with its already-transparent clear color. Same scene, lights,
+      // and materials; only the atmosphere background/blur pass is skipped.
+      // The plate adds zero WebGL draw calls.
+      renderer.render(scene, camera);
+      window.__orbitPerf.scene = {
+        calls: renderer.info.render.calls,
+        triangles: renderer.info.render.triangles,
+        envDirect: true,
+      };
+    } else {
+      window.__orbitPerf.scene = atmosphere.render(focusPoint, true);
+    }
     window.__orbitPerf.renders = (window.__orbitPerf.renders || 0) + 1;
     sceneDirty = false;
   }

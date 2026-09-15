@@ -1,0 +1,64 @@
+{
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "modes": {
+    "env0": {
+      "state": "orbit",
+      "frontIndex": 0,
+      "env": false,
+      "scene": {
+        "calls": 61,
+        "triangles": 450404
+      },
+      "renders": 2,
+      "bbox": {
+        "x": 635.1616121080373,
+        "y": 586.459616566652,
+        "w": 184.52462847457093,
+        "h": 273.5331142784421
+      },
+      "envBytes": null,
+      "shot": "parity-env0.png"
+    },
+    "env1": {
+      "state": "orbit",
+      "frontIndex": 0,
+      "env": true,
+      "scene": {
+        "calls": 60,
+        "triangles": 450402,
+        "envDirect": true
+      },
+      "renders": 4,
+      "bbox": {
+        "x": 635.1616121080373,
+        "y": 586.459616566652,
+        "w": 184.52462847457093,
+        "h": 273.5331142784421
+      },
+      "envBytes": 2292823,
+      "shot": "parity-env1.png"
+    }
+  },
+  "errors": [],
+  "coverInteriorDiff": {
+    "interior": {
+      "x": 668,
+      "y": 636,
+      "w": 118,
+      "h": 175
+    },
+    "pixels": 20650,
+    "meanAbs": 0.308,
+    "maxAbs": 2,
+    "fracOver2": 0
+  },
+  "bboxDrift": {
+    "dx": 0,
+    "dy": 0,
+    "dw": 0,
+    "dh": 0
+  }
+}
