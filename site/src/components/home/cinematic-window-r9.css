@@ -1,0 +1,293 @@
+/* Cinematic Window R9: shared-camera drift spike (Track A slice).
+ *
+ * R8 proved the still (approved plate + live DOM copy + immutable cover as a
+ * bound volume: fore-edge shell, one owned contact shadow, 2px sill lip). R9
+ * tests ONE thing: the cheapest honest shared-camera illusion.
+ *
+ * Mechanism: the whole stage interior rides ONE rigid .r9-rig. Fine-pointer X
+ * eases the entire rig ±14px (~1% of a 1440 stage, ceiling 3%) via a single
+ * rAF-lerped translate3d(x, 0, 0). Plate, copy, book, shell, contact, and
+ * sill move as one camera: no independently sliding layers, so registration
+ * (face->shell 0px gap), base contact, and cover pixels cannot break by
+ * construction. The stage overflow-clips; the rig overscans 18px per side
+ * (overscan > drift max), so no edge ever exposes. The frame-edge reveal
+ * reads as looking around inside a window.
+ *
+ * What is deliberately NOT built: depth-estimator cutouts, multi-plane
+ * parallax differentials, Canvas/WebGL, Three/GSAP/Lenis/motion, gyro or
+ * device-orientation, scroll coupling, video, pills, cards, chrome. The
+ * cover node is never transformed/filtered/cropped/tinted/re-lit (motion
+ * sits on the ancestor rig; .r9-face img keeps filter/transform none and
+ * its component shadow neutralized, as in R8).
+ *
+ * Static poster contract: touch/coarse pointers, no-hover, reduced motion,
+ * and SSR pre-hydration render the identical still (JS gates on
+ * (hover:hover)+(pointer:fine) and bails under prefers-reduced-motion; CSS
+ * pins animation/transition none under reduced motion). Dark theme changes
+ * only surrounding UI: plate, ink, cover, shell, contact, sill stay fixed
+ * daylight. Stage pinned ltr; shell stays physical-right; art never
+ * mirrors; only text re-asserts rtl.
+ */
+
+.r9-scene {
+  background: var(--color-canvas);
+  border-block: 1px solid var(--color-hairline, #e3ded2);
+}
+
+/* -- Stage: fixed window; clips the drifting rig -------------------------- */
+.r9-stage {
+  position: relative;
+  /* Physical camera: pinned ltr so LTR and RTL share one handedness. */
+  direction: ltr;
+  margin: 0;
+  width: 100%;
+  aspect-ratio: 1672 / 941;
+  min-height: 520px;
+  overflow: clip;
+  /* Fixed daylight ground behind the plate while it loads; never themed. */
+  background: #d8d3c4;
+}
+
+/* -- Rig: the single shared camera. Overscans the stage by 18px per side
+ * (see R9_OVERSCAN) so the ±14px drift (see R9_DRIFT_MAX) never exposes an
+ * edge. Transform-only motion, single X axis, set from JS. ------------- */
+.r9-rig {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -18px;
+  right: -18px;
+  will-change: transform;
+}
+
+.r9-plate,
+.r9-plate img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.r9-plate img {
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+/* -- Copy: live DOM in the safe plaster field, right of the corner shadow
+ * band. No card, no scrim. ----------------------------------------------- */
+.r9-copy {
+  position: absolute;
+  z-index: 3;
+  top: clamp(40px, 10%, 96px);
+  /* Plate shadow band stays dark until ~plate-x 230: 15vw tracks clear of it
+   * at 1024 (154px vs ~140px band edge), 1440 (216px vs ~198px), and 1920
+   * (288px vs ~264px). Measured against the rig box (overscanned by 18px). */
+  left: clamp(150px, 15vw, 300px);
+  max-width: 26ch;
+  /* Fixed ink: the plaster is a fixed daylight tone in both themes. */
+  color: #26241e;
+}
+
+html[dir="rtl"] .r9-copy,
+html[dir="rtl"] .r9-action {
+  direction: rtl;
+  text-align: right;
+}
+
+.r9-title {
+  margin: 0;
+  font-size: clamp(24px, 2.2vw, 32px);
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+  font-weight: 600;
+  text-wrap: balance;
+}
+
+.r9-factual {
+  margin: 10px 0 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #4c483d;
+  max-width: 26ch;
+}
+
+.r9-action {
+  margin: 0;
+}
+
+/* One ordinary link below the stage, on the canvas ground (themed ink):
+ * kept out of the plate column so on-plate copy never collides with the
+ * volume at any width. Never a button or pill. */
+.r9-action {
+  background: var(--color-canvas);
+  padding: 12px clamp(20px, 3vw, 40px) 48px;
+  max-width: 1600px;
+  margin-inline: auto;
+}
+
+.r9-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.r9-link:focus-visible {
+  outline: 2px solid var(--color-focus, #111);
+  outline-offset: 2px;
+}
+
+/* -- Book: the volume assembly (R8 geometry, r9 namespace) -----------------
+ * .r9-book keeps R8's placement (left 27%, base at the backstop/sill
+ * junction, true 2:3 face). The face is the immutable cover, untouched: no
+ * transform, no filter, no crop. The shell protrudes on the physical right
+ * only, starting 1px under the face so registration is 0px by construction.
+ */
+.r9-book {
+  /* Readable thickness: 8.6px at 1440 (6-10 target), 6.1px at 1024, 4px at
+   * 390 (3-6 target). Visible protrusion is edge minus the 1px face overlap:
+   * 7.6px desktop, 3px mobile. */
+  --r9-edge: clamp(4px, 0.6vw, 9px);
+  position: absolute;
+  z-index: 2;
+  left: 27%;
+  bottom: 33%;
+  height: 44%;
+  aspect-ratio: 2 / 3;
+}
+
+.r9-face {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  aspect-ratio: 2 / 3;
+  z-index: 2;
+}
+
+.r9-face > * {
+  height: 100%;
+  width: 100%;
+}
+
+/* Single shadow owner: neutralize the cover component's own drop shadow so
+ * the contact matte below is the only cast shadow in the slice. This touches
+ * no artwork pixel (no crop, tint, filter, or transform). */
+.r9-face img {
+  box-shadow: none !important;
+}
+
+/* Fore-edge shell: board lip + page block, pure CSS, fixed daylight tones. */
+.r9-shell {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(100% - 1px);
+  width: var(--r9-edge);
+  z-index: 1;
+  display: flex;
+  align-items: stretch;
+}
+
+.r9-board {
+  flex: none;
+  width: 2px;
+  background: linear-gradient(to bottom, #c9c3b5 0%, #b3ada0 60%, #9d9687 100%);
+}
+
+.r9-pages {
+  flex: 1 1 auto;
+  background:
+    linear-gradient(to right, rgba(58, 52, 42, 0.3) 0, rgba(58, 52, 42, 0) 35%, rgba(58, 52, 42, 0) 70%, rgba(58, 52, 42, 0.24) 100%),
+    repeating-linear-gradient(to bottom, #ede8d9 0 1px, #d9d3c1 1px 2px);
+}
+
+/* The one owned contact shadow: spans the whole assembly (face + shell). */
+.r9-contact {
+  position: absolute;
+  top: 100%;
+  left: 1%;
+  width: calc(98% + var(--r9-edge));
+  height: 6px;
+  margin-top: -3px;
+  border-radius: 9999px;
+  background: rgba(24, 22, 16, 0.4);
+  filter: blur(3px);
+  z-index: 1;
+}
+
+/* 2px foreground sill lip overlapping the base by 1px: seats the volume so
+ * no air gap can read. Sampled from the plate's sill at the book base
+ * (#b1aaa4 mid, #c1bcb8 lit): 1px catchlight over 1px sill tone. */
+.r9-sill {
+  position: absolute;
+  top: calc(100% - 1px);
+  left: -1px;
+  width: calc(100% + var(--r9-edge) + 2px);
+  height: 2px;
+  z-index: 3;
+  background: linear-gradient(to bottom, #c6c0b5 0 1px, #a9a398 1px 2px);
+}
+
+.r9-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* -- Portrait (<=900px): dedicated composition, not a shrunk desktop.
+ * Full-height crop holding plaster + backstop + joinery edge + sill; copy
+ * stays in the plaster, the volume stays registered to the backstop. ---- */
+@media (max-width: 900px) {
+  .r9-stage {
+    aspect-ratio: 3 / 4;
+    min-height: min(140vw, 560px);
+  }
+
+  .r9-plate img {
+    object-position: 30% 55%;
+  }
+
+  .r9-copy {
+    top: 28px;
+    left: 20px;
+    right: 20px;
+    max-width: 30ch;
+  }
+
+  .r9-title {
+    font-size: 22px;
+  }
+
+  .r9-factual {
+    font-size: 14px;
+  }
+
+  .r9-book {
+    left: 16%;
+    bottom: 24%;
+    height: 38%;
+  }
+}
+
+/* -- Reduced motion: zero movement. The JS drift also bails under
+ * prefers-reduced-motion, so the poster is pixel-stable. ------------------ */
+@media (prefers-reduced-motion: reduce) {
+  .r9-scene,
+  .r9-scene *,
+  .r9-scene *::before,
+  .r9-scene *::after {
+    animation: none;
+    transition: none;
+  }
+}

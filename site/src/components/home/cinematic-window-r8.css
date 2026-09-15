@@ -1,0 +1,288 @@
+/* Cinematic Window R8: material-belonging spike (Track A slice).
+ *
+ * R7 proved the atmosphere: the approved plate + live DOM copy + the immutable
+ * Sugar Trap cover as a still. Its remaining defect is material belonging: at
+ * close inspection the exact frontal cover is a zero-thickness plane against a
+ * perspectival sill. R8 tests ONE thing: can deterministic, textless
+ * physical-support layers around/behind the untouched cover make it read as
+ * the front face of a bound volume, without weakening the full-frame still.
+ *
+ * What is added around the immutable cover (cover pixels never transformed,
+ * cropped, tinted, filtered, or re-lit):
+ * - .r8-shell: a narrow fore-edge protruding on the physical right of the
+ *   face (board lip + page block, pure CSS, fixed daylight tones). It starts
+ *   1px UNDER the face (overlap, never a gap) and is parallel to the cover
+ *   edge, so front-face-to-shell registration is 0px by construction.
+ * - .r8-contact: the single owned contact shadow (tight blur only). The
+ *   BookCover component's own drop shadow is neutralized in this scope so
+ *   there is exactly one shadow owner and no duplicate book-shaped shadow.
+ * - .r8-sill: a 2px foreground sill lip overlapping the base by 1px, seating
+ *   the volume into the sill so no >1px air gap can read.
+ *
+ * Copy fix vs R7: the live copy moves right into the safe plaster field
+ * (the plate's left corner shadow band stays dark until ~plate-x 230, so the
+ * copy's physical left edge tracks 15vw). No scrim, no card.
+ *
+ * Reading action: one ordinary link, no <details> gate, no JS.
+ *
+ * Static approval first: no drift, parallax, transition, or animation. The
+ * stage is pinned to physical direction (ltr) so camera handedness is
+ * identical in LTR and RTL; shell stays on the physical right, art never
+ * mirrors; only text re-asserts rtl. Dark theme changes only the surrounding
+ * UI: plate, on-plate ink, cover, shell, contact, and sill lip are fixed
+ * daylight tones in both themes. Reduced motion is the identical still.
+ */
+
+.r8-scene {
+  background: var(--color-canvas);
+  border-block: 1px solid var(--color-hairline, #e3ded2);
+}
+
+/* -- Stage: the approved photographic world, unchanged from R7 ------------ */
+.r8-stage {
+  position: relative;
+  /* Physical camera: pinned ltr so LTR and RTL share one handedness. */
+  direction: ltr;
+  margin: 0;
+  width: 100%;
+  aspect-ratio: 1672 / 941;
+  min-height: 520px;
+  overflow: clip;
+  /* Fixed daylight ground behind the plate while it loads; never themed. */
+  background: #d8d3c4;
+}
+
+.r8-plate,
+.r8-plate img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.r8-plate img {
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+/* -- Copy: live DOM in the safe plaster field, right of the corner shadow
+ * band. No card, no scrim. ----------------------------------------------- */
+.r8-copy {
+  position: absolute;
+  z-index: 3;
+  top: clamp(40px, 10%, 96px);
+  /* Plate shadow band stays dark until ~plate-x 230: 15vw tracks clear of it
+   * at 1024 (154px vs ~140px band edge), 1440 (216px vs ~198px), and 1920
+   * (288px vs ~264px). */
+  left: clamp(150px, 15vw, 300px);
+  max-width: 26ch;
+  /* Fixed ink: the plaster is a fixed daylight tone in both themes. */
+  color: #26241e;
+}
+
+html[dir="rtl"] .r8-copy,
+html[dir="rtl"] .r8-action {
+  direction: rtl;
+  text-align: right;
+}
+
+.r8-title {
+  margin: 0;
+  font-size: clamp(24px, 2.2vw, 32px);
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+  font-weight: 600;
+  text-wrap: balance;
+}
+
+.r8-factual {
+  margin: 10px 0 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #4c483d;
+  max-width: 26ch;
+}
+
+.r8-action {
+  margin: 0;
+}
+
+/* One ordinary link below the stage, on the canvas ground (themed ink):
+ * kept out of the plate column so the on-plate copy (title + factual) can
+ * never collide with the volume at any width. Never a button or pill. */
+.r8-action {
+  background: var(--color-canvas);
+  padding: 12px clamp(20px, 3vw, 40px) 48px;
+  max-width: 1600px;
+  margin-inline: auto;
+}
+
+.r8-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.r8-link:focus-visible {
+  outline: 2px solid var(--color-focus, #111);
+  outline-offset: 2px;
+}
+
+/* -- Book: the volume assembly --------------------------------------------
+ * .r8-book keeps R7's placement (left 27%, base at the backstop/sill
+ * junction, true 2:3 face). The face is the immutable cover, untouched: no
+ * transform, no filter, no crop. The shell protrudes on the physical right
+ * only, starting 1px under the face so registration is 0px by construction.
+ */
+.r8-book {
+  /* Readable thickness: 8.6px at 1440 (6-10 target), 6.1px at 1024, 4px at
+   * 390 (3-6 target). Visible protrusion is edge minus the 1px face overlap:
+   * 7.6px desktop, 3px mobile. */
+  --r8-edge: clamp(4px, 0.6vw, 9px);
+  position: absolute;
+  z-index: 2;
+  left: 27%;
+  bottom: 33%;
+  height: 44%;
+  aspect-ratio: 2 / 3;
+}
+
+.r8-face {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  aspect-ratio: 2 / 3;
+  z-index: 2;
+}
+
+.r8-face > * {
+  height: 100%;
+  width: 100%;
+}
+
+/* Single shadow owner: neutralize the cover component's own drop shadow so
+ * the contact matte below is the only cast shadow in the slice. This touches
+ * no artwork pixel (no crop, tint, filter, or transform). */
+.r8-face img {
+  box-shadow: none !important;
+}
+
+/* Fore-edge shell: board lip + page block, pure CSS, fixed daylight tones. */
+.r8-shell {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(100% - 1px);
+  width: var(--r8-edge);
+  z-index: 1;
+  display: flex;
+  align-items: stretch;
+}
+
+.r8-board {
+  flex: none;
+  width: 2px;
+  background: linear-gradient(to bottom, #c9c3b5 0%, #b3ada0 60%, #9d9687 100%);
+}
+
+.r8-pages {
+  flex: 1 1 auto;
+  background:
+    linear-gradient(to right, rgba(58, 52, 42, 0.3) 0, rgba(58, 52, 42, 0) 35%, rgba(58, 52, 42, 0) 70%, rgba(58, 52, 42, 0.24) 100%),
+    repeating-linear-gradient(to bottom, #ede8d9 0 1px, #d9d3c1 1px 2px);
+}
+
+/* The one owned contact shadow: spans the whole assembly (face + shell). */
+.r8-contact {
+  position: absolute;
+  top: 100%;
+  left: 1%;
+  width: calc(98% + var(--r8-edge));
+  height: 6px;
+  margin-top: -3px;
+  border-radius: 9999px;
+  background: rgba(24, 22, 16, 0.4);
+  filter: blur(3px);
+  z-index: 1;
+}
+
+/* 2px foreground sill lip overlapping the base by 1px: seats the volume so
+ * no air gap can read. Sampled from the plate's sill at the book base
+ * (#b1aaa4 mid, #c1bcb8 lit): 1px catchlight over 1px sill tone. */
+.r8-sill {
+  position: absolute;
+  top: calc(100% - 1px);
+  left: -1px;
+  width: calc(100% + var(--r8-edge) + 2px);
+  height: 2px;
+  z-index: 3;
+  background: linear-gradient(to bottom, #c6c0b5 0 1px, #a9a398 1px 2px);
+}
+
+.r8-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* -- Portrait (<=900px): dedicated composition, not a shrunk desktop.
+ * Full-height crop holding plaster + backstop + joinery edge + sill; copy
+ * stays in the plaster, the volume stays registered to the backstop. The
+ * corner shadow band is outside this crop, so the copy keeps R7's top-left
+ * seat; the volume shifts slightly right/down so the on-plate link row
+ * clears its top edge. ----------------------------------------------------- */
+@media (max-width: 900px) {
+  .r8-stage {
+    aspect-ratio: 3 / 4;
+    min-height: min(140vw, 560px);
+  }
+
+  .r8-plate img {
+    object-position: 30% 55%;
+  }
+
+  .r8-copy {
+    top: 28px;
+    left: 20px;
+    right: 20px;
+    max-width: 30ch;
+  }
+
+  .r8-title {
+    font-size: 22px;
+  }
+
+  .r8-factual {
+    font-size: 14px;
+  }
+
+  .r8-book {
+    left: 16%;
+    bottom: 24%;
+    height: 38%;
+  }
+}
+
+/* -- Reduced motion: zero movement. There are no transitions, animations, or
+ * scroll effects anywhere in R8; this block pins that contract. ------------- */
+@media (prefers-reduced-motion: reduce) {
+  .r8-scene,
+  .r8-scene *,
+  .r8-scene *::before,
+  .r8-scene *::after {
+    animation: none;
+    transition: none;
+  }
+}
