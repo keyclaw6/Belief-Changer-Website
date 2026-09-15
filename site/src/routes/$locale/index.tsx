@@ -11,6 +11,7 @@ import { HomeBeats } from '~/components/home/HomeBeats'
 import { LibrarySection } from '~/components/home/LibrarySection'
 import { Marquee } from '~/components/home/Marquee'
 import { LivingLibrary } from '~/components/home/LivingLibrary'
+import { ReadingRoom } from '~/components/home/ReadingRoom'
 
 /**
  * Homepage (v2). The story in five beats, plainly told (proposal 01-home):
@@ -61,6 +62,7 @@ function HomePage() {
     <>
       <Hero locale={activeLocale} t={t} shelfBooks={shelfBooks} />
       <TrustStrip t={t} />
+      <ReadingRoom locale={activeLocale} books={shelfBooks} />
       <HomeBeats locale={activeLocale} t={t} />
       <LibrarySection locale={activeLocale} t={t} books={books} />
       <Marquee t={t} />

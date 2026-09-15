@@ -1,0 +1,381 @@
+/* ReadingRoomR11 — pickup / set-down on the R10 static baseline (Track B R11).
+   Bounded experiment, isolated to the reading-room-r11 route. R9 (homepage
+   slice) and R10 (static baseline + its route) are untouched.
+   Static geometry, plate, registration, copy placement and tokens below are
+   copied verbatim from R10 so the reduced-motion path renders
+   byte/pixel-equivalent to the R10 static state.
+   The ONE mechanism: the chosen shelf node itself (FLIP) travels shelf
+   origin -> desk while the outgoing desk copy yields. transform/opacity
+   only; shadow travels as opacity on a static ellipse (no filter or
+   box-shadow animation); hover/focus lift <= 2px on fine pointers;
+   total click transfer 600ms (120 lift + 320 carry + 160 settle). */
+
+.reading-room-r11 {
+  margin: 0;
+  padding: 0;
+  background: #dcd7c9;
+}
+
+.reading-room-r11__stage {
+  position: relative;
+  margin: 0;
+  aspect-ratio: 3 / 2;
+  overflow: clip;
+  border-radius: 0;
+  container-type: inline-size;
+  background: #dcd7c9;
+}
+
+.reading-room-r11__plate {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+.reading-room-r11__plate-img {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+.reading-room-r11__copy {
+  position: absolute;
+  left: 4.5%;
+  top: 8%;
+  inline-size: 29%;
+  z-index: 3;
+}
+
+.reading-room-r11__eyebrow {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #5f5a52;
+}
+
+.reading-room-r11__title {
+  margin: 10px 0 0;
+  font-family: var(--font-sans);
+  font-size: var(--text-headline-lg);
+  font-weight: var(--text-headline-lg--font-weight);
+  line-height: var(--text-headline-lg--line-height);
+  letter-spacing: var(--text-headline-lg--letter-spacing);
+  color: #16130f;
+  text-wrap: balance;
+}
+
+.reading-room-r11__body {
+  margin: 12px 0 0;
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.55;
+  color: #4a463f;
+  text-wrap: pretty;
+}
+
+.reading-room-r11__actions {
+  margin: 14px 0 0;
+}
+
+.reading-room-r11__read {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: #16130f;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+
+.reading-room-r11__read:hover {
+  opacity: 0.7;
+}
+
+.reading-room-r11__read:focus-visible {
+  outline: 3px solid #16130f;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.reading-room-r11__shelf {
+  position: absolute;
+  inset: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.reading-room-r11__slot {
+  position: absolute;
+  bottom: 69.8%;
+  inline-size: max(8.5cqw, 90px);
+  pointer-events: auto;
+}
+
+.reading-room-r11__slot--1 {
+  left: 41%;
+}
+
+.reading-room-r11__slot--2 {
+  left: 52.5%;
+}
+
+.reading-room-r11__slot--3 {
+  left: 64%;
+}
+
+.reading-room-r11__shelf-btn {
+  display: block;
+  position: relative;
+  inline-size: 100%;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.reading-room-r11__shelf-btn:focus-visible {
+  outline: 3px solid #16130f;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 5px rgba(245, 241, 232, 0.9);
+}
+
+.reading-room-r11__slot::after {
+  content: "";
+  position: absolute;
+  left: 6%;
+  right: -2%;
+  bottom: -3.5%;
+  block-size: 4%;
+  border-radius: 50%;
+  background: rgba(24, 19, 12, 0.5);
+  filter: blur(4px);
+  pointer-events: none;
+}
+
+.reading-room-r11__deskbook {
+  position: absolute;
+  left: 44%;
+  bottom: 24%;
+  inline-size: min(14cqw, 220px);
+  transform: perspective(900px) rotateY(-5deg);
+  z-index: 2;
+}
+
+.reading-room-r11__deskbook::after {
+  content: "";
+  position: absolute;
+  left: 8%;
+  right: -4%;
+  bottom: -4%;
+  block-size: 5%;
+  border-radius: 50%;
+  background: rgba(24, 19, 12, 0.55);
+  box-shadow:
+    6px 6px 6px rgba(24, 19, 12, 0.4),
+    16px 14px 22px rgba(24, 19, 12, 0.22);
+  filter: blur(7px);
+  pointer-events: none;
+}
+
+.reading-room-r11__book-face {
+  position: relative;
+  z-index: 2;
+}
+
+.reading-room-r11__edge {
+  position: absolute;
+  top: 1.5%;
+  bottom: 1.5%;
+  right: -4.5%;
+  width: 6%;
+  z-index: 1;
+  background: #f2eee3;
+  border: 1px solid rgba(24, 19, 12, 0.2);
+  border-block-start: 2px solid #fbf9f3;
+}
+
+.reading-room-r11__srstatus {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Carried shadow: static soft ellipse under the travelling node. Only its
+   opacity ramps (lift in, settle out); the shape itself never animates. */
+.reading-room-r11__fly-shadow {
+  position: absolute;
+  left: 4%;
+  right: -4%;
+  bottom: -5%;
+  block-size: 5%;
+  border-radius: 50%;
+  background: rgba(24, 19, 12, 0.45);
+  box-shadow: 10px 10px 18px rgba(24, 19, 12, 0.35);
+  opacity: 0;
+  pointer-events: none;
+}
+
+[dir="rtl"] .reading-room-r11__eyebrow {
+  line-height: 1.8;
+}
+
+[dir="rtl"] .reading-room-r11__title {
+  line-height: 1.6;
+}
+
+/* ---- Motion layer: the one mechanism. transform/opacity only, calm ease,
+   no bounce. Active only when the author has not requested reduced motion
+   (the JS also instant-cuts via matchMedia, so this layer never runs for
+   reduce users). ---- */
+@media (prefers-reduced-motion: no-preference) {
+  /* Idle hover/focus lift: 2px ceiling, fine pointers only, 180ms. */
+  @media (hover: hover) and (pointer: fine) {
+    .reading-room-r11__shelf-btn:not([data-flying]):hover {
+      transform: translateY(-2px);
+      transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+  }
+
+  .reading-room-r11__shelf-btn:not([data-flying]):focus-visible {
+    transform: translateY(-2px);
+    transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Flying node: the shelf button itself, travelling its own box from the
+     ash slot (lift: a 2px pickup breath in place) to the desk (carry:
+     centre-to-centre delta, growing to desk size) and dissolving into the
+     desk at settle. */
+  .reading-room-r11__shelf-btn[data-flying="lift"] {
+    z-index: 5;
+    transform: translateY(-2px) scale(1.02);
+    opacity: 1;
+    transition:
+      transform 120ms cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 120ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .reading-room-r11__shelf-btn[data-flying="carry"] {
+    z-index: 5;
+    transform: translate(calc(-1 * var(--r11-dx)), calc(-1 * var(--r11-dy))) scale(calc(1 / var(--r11-scale)));
+    opacity: 1;
+    transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .reading-room-r11__shelf-btn[data-flying="settle"] {
+    z-index: 5;
+    transform: translate(calc(-1 * var(--r11-dx)), calc(-1 * var(--r11-dy))) scale(calc(1 / var(--r11-scale)));
+    opacity: 1;
+  }
+
+  .reading-room-r11__shelf-btn[data-flying="lift"] .reading-room-r11__fly-shadow,
+  .reading-room-r11__shelf-btn[data-flying="carry"] .reading-room-r11__fly-shadow {
+    opacity: 1;
+    transition: opacity 120ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .reading-room-r11__shelf-btn[data-flying="settle"] .reading-room-r11__fly-shadow {
+    opacity: 1;
+  }
+
+  /* Outgoing desk copy yields: small sink + fade over lift+carry. */
+  .reading-room-r11__deskbook--yielding {
+    opacity: 0;
+    transform: perspective(900px) rotateY(-5deg) translateY(8px);
+    transition:
+      transform 440ms cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 440ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+}
+
+@media (max-width: 640px) {
+  .reading-room-r11__stage {
+    aspect-ratio: 4 / 5;
+    min-block-size: 0;
+  }
+
+  .reading-room-r11__plate-img {
+    object-position: 32% 50%;
+  }
+
+  .reading-room-r11__copy {
+    left: 6%;
+    top: 4.5%;
+    inline-size: 33%;
+  }
+
+  .reading-room-r11__title {
+    font-size: 24px;
+    line-height: 1.18;
+    letter-spacing: -0.01em;
+  }
+
+  .reading-room-r11__body {
+    font-size: 14.5px;
+    line-height: 1.5;
+  }
+
+  .reading-room-r11__slot {
+    inline-size: max(15cqw, 55px);
+  }
+
+  .reading-room-r11__slot--1 {
+    left: 50%;
+  }
+
+  .reading-room-r11__slot--2 {
+    left: 65.5%;
+  }
+
+  .reading-room-r11__slot--3 {
+    left: 81%;
+  }
+
+  .reading-room-r11__deskbook {
+    left: 50%;
+    bottom: 8%;
+    inline-size: min(30cqw, 140px);
+  }
+
+  [dir="rtl"] .reading-room-r11__title {
+    line-height: 1.5;
+  }
+}
+
+/* Reduced motion: instant-cut to the R10-equivalent static state. Every
+   transition/animation in the slice pins to none; the carried shadow never
+   appears; the flying phases render at rest (JS never creates them). */
+@media (prefers-reduced-motion: reduce) {
+  .reading-room-r11__shelf-btn,
+  .reading-room-r11__deskbook,
+  .reading-room-r11__fly-shadow {
+    transition: none;
+  }
+
+  .reading-room-r11__shelf-btn,
+  .reading-room-r11__deskbook {
+    animation: none;
+  }
+
+  .reading-room-r11__fly-shadow {
+    display: none;
+  }
+}

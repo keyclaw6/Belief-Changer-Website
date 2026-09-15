@@ -1,0 +1,147 @@
+/* ReadingRoomR13 — one physical-material pass over the R11 same-node machine
+   (Track B R13). Bounded experiment, isolated to the reading-room-r13 route.
+   R9 (homepage slice), R10 (static baseline + its route) and R11 (transfer
+   mechanism + its route) are untouched.
+
+   WHAT THIS FILE DOES (and nothing else):
+   1. Shelf pose: sub-degree leans + tiny fore-shortening on the INNER cover
+      box only (the button and the slot keep their R11 geometry, so the FLIP
+      travel, the hover lift and the feet registration are byte-identical).
+   2. Body thickness: a slim fore-edge page block (right, window side) and a
+      spine turn shade (left) as adjacent pseudo-elements. Never cover pixels.
+   3. Light-belonging shadows: the shelf contact and the desk landing ellipses
+      extend toward the room (left, away from the physical window at the
+      right of the plate) with a tight core under the feet. Static fills only.
+   4. Uneven occupancy: slot lefts nudged by <1% so gaps read 11.4 / 12.3
+      instead of 11.5 / 11.5. Bottoms, widths, desk geometry: R11-identical.
+
+   WHAT THIS FILE NEVER DOES: no keyframes, no transitions, no animations, no
+   gradients, no new images, no card/chrome/pill/progress/labels, no camera or
+   scroll tricks, no mirroring (physical left/right throughout, RTL-safe), no
+   cover-pixel edits. Reduced-motion inherits the R11 instant cut; this layer
+   adds no motion to pin. */
+
+.reading-room-r11__stage .reading-room-r11__shelf-btn {
+  perspective: 600px;
+}
+
+/* Pose lives on the cover box (first child div), feet-planted origin so the
+   contact line never moves. Each slot leans a slightly different way. */
+.reading-room-r11__stage .reading-room-r11__shelf-btn > div:first-child {
+  position: relative;
+  z-index: 1;
+  transform-origin: 50% 100%;
+}
+
+.reading-room-r11__stage .reading-room-r11__slot--1 .reading-room-r11__shelf-btn > div:first-child {
+  transform: perspective(600px) rotateY(2deg) rotate(-0.45deg) scale(0.982);
+}
+
+.reading-room-r11__stage .reading-room-r11__slot--2 .reading-room-r11__shelf-btn > div:first-child {
+  transform: perspective(600px) rotateY(1deg) rotate(0.35deg) scale(1.008);
+}
+
+.reading-room-r11__stage .reading-room-r11__slot--3 .reading-room-r11__shelf-btn > div:first-child {
+  transform: perspective(600px) rotateY(2.5deg) rotate(-0.3deg) scale(0.992);
+}
+
+/* Uneven occupancy: <1% nudges break the 11.5/11.5 retail rhythm. Bottoms
+   and widths are R11-identical, so every foot stays glued to the board. */
+.reading-room-r11__stage .reading-room-r11__slot--1 {
+  left: 40.5%;
+}
+
+.reading-room-r11__stage .reading-room-r11__slot--2 {
+  left: 51.9%;
+}
+
+.reading-room-r11__stage .reading-room-r11__slot--3 {
+  left: 64.2%;
+}
+
+/* Shelf body thickness, window side: fore-edge page block peeking past the
+   cover's right edge. A narrow, warm, slightly dim page stock tucked behind
+   the cover (top/bottom inset so the cover overlaps it), never a bright tab. */
+.reading-room-r11__stage .reading-room-r11__shelf-btn::before {
+  content: "";
+  position: absolute;
+  top: 2.5%;
+  bottom: 4%;
+  right: -2.4%;
+  width: 2.6%;
+  z-index: 0;
+  background: #e9e3d3;
+  border: 1px solid rgba(24, 19, 12, 0.25);
+  border-block-start: 1px solid #fbf9f3;
+  pointer-events: none;
+}
+
+/* Shelf spine turn: a thin shade over the cover's left edge. */
+.reading-room-r11__stage .reading-room-r11__shelf-btn::after {
+  content: "";
+  position: absolute;
+  top: 1%;
+  bottom: 2.5%;
+  left: -1.6%;
+  width: 2.2%;
+  z-index: 2;
+  background: rgba(24, 19, 12, 0.34);
+  pointer-events: none;
+}
+
+/* Shelf contact: the weight on the ash board, thrown toward the room (left,
+   away from the window). Tight core under the feet, soft falloff left. */
+.reading-room-r11__stage .reading-room-r11__slot::after {
+  left: 1%;
+  right: 7%;
+  bottom: -3.2%;
+  block-size: 3.4%;
+  background: rgba(24, 19, 12, 0.48);
+  filter: blur(3px);
+}
+
+/* Desk spine turn to match the shelf language. */
+.reading-room-r11__stage .reading-room-r11__deskbook::before {
+  content: "";
+  position: absolute;
+  top: 1%;
+  bottom: 2%;
+  left: -1.5%;
+  width: 1.9%;
+  z-index: 3;
+  background: rgba(24, 19, 12, 0.32);
+  pointer-events: none;
+}
+
+/* Desk landing: same leftward light logic, core touching the feet. */
+.reading-room-r11__stage .reading-room-r11__deskbook::after {
+  left: 1%;
+  right: 9%;
+  bottom: -3.4%;
+  block-size: 4.4%;
+  background: rgba(24, 19, 12, 0.52);
+  box-shadow:
+    -8px 7px 8px rgba(24, 19, 12, 0.35),
+    -20px 13px 22px rgba(24, 19, 12, 0.18);
+  filter: blur(7px);
+}
+
+/* Carried shadow keeps the same leftward bias while it travels. */
+.reading-room-r11__stage .reading-room-r11__fly-shadow {
+  left: 0%;
+  right: 6%;
+}
+
+@media (max-width: 640px) {
+  .reading-room-r11__stage .reading-room-r11__slot--1 {
+    left: 49.6%;
+  }
+
+  .reading-room-r11__stage .reading-room-r11__slot--2 {
+    left: 64.9%;
+  }
+
+  .reading-room-r11__stage .reading-room-r11__slot--3 {
+    left: 81.4%;
+  }
+}

@@ -1,0 +1,269 @@
+/* ReadingRoom R9 — one photographic reading alcove.
+   R8 was a synthetic CSS recess (asset gap flagged). R9 registers the
+   immutable books onto the approved photographic plate
+   (site/public/site/reading-room-r9-*, 1536x1024 master: chalk plaster,
+   charcoal felt, pale ash shelf, deep desk, narrow right daylight).
+   The room itself is the layout: not a card, not a panel.
+
+   Registration: desktop alcove aspect is 3/2 = plate aspect, so the plate
+   renders 1:1 and shelf/desk slots are physical % coordinates glued to
+   the ash surfaces (shelf board top ~30% height; desk landing ~76%).
+   The phone composition is a deliberate crop of the same master (tuned
+   object-position) with re-registered slot coordinates for the visible
+   window — never a stacked card version.
+
+   Plate and covers are photographic matter and are never touched: no
+   tint, relight, crop, overlay, filter, or distortion of plate or cover
+   pixels. Contact shadows and page geometry sit on the wood OUTSIDE the
+   art (BookCover owns the art). Dark mode alters the surrounding page
+   interface only; the plate and covers stay identical.
+
+   Camera-fixed: slot geometry uses physical (left/right) coordinates so
+   the room does NOT mirror in RTL. Text flow and DOM order stay logical.
+   Cover art is never mirrored.
+
+   STATIC approval baseline: no animation, no transitions. Selection
+   swaps the desk book with an instant cut. */
+
+.reading-room__wrap {
+  padding-block: 56px;
+}
+
+/* The single live reading action, adjacent to the editorial copy. */
+.reading-room__actions {
+  margin-block-start: 18px;
+}
+
+.reading-room__read {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* The room: sharp, borderless, unshadowed as a container. The plate
+   inside does the physical work. Aspect 3/2 renders the plate 1:1. */
+.reading-room__alcove {
+  position: relative;
+  margin-block-start: 28px;
+  aspect-ratio: 3 / 2;
+  min-block-size: max(50vh, 520px);
+  overflow: clip;
+  border-radius: 0;
+  container-type: inline-size;
+  /* Matte plaster fallback while the plate loads (decorative). */
+  background: #dcd7c9;
+}
+
+/* Photographic plate: decorative fill, never filtered or re-lit. */
+.reading-room__plate {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+.reading-room__plate-img {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+/* Ash shelf: three real upright titles, feet on the board. Covers are
+   the direct controls; no vacant slot is rendered. */
+.reading-room__shelf {
+  position: absolute;
+  inset: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  pointer-events: none;
+}
+
+/* camera-fixed: physical slot coordinates register each book onto the
+   ash shelf board. Never mirrored: the photograph does not flip. */
+.reading-room__slot {
+  position: absolute;
+  bottom: 69.8%;
+  inline-size: 8.5cqw;
+  pointer-events: auto;
+}
+
+.reading-room__slot--1 {
+  left: 41%;
+}
+
+.reading-room__slot--2 {
+  left: 52.5%;
+}
+
+.reading-room__slot--3 {
+  left: 64%;
+}
+
+.reading-room__shelf-btn {
+  display: block;
+  inline-size: 100%;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.reading-room__shelf-btn:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+/* Contact: the book's weight on the ash board. One soft ellipse on the
+   wood below the feet, outside the cover face. */
+.reading-room__slot::after {
+  content: "";
+  position: absolute;
+  left: 6%;
+  right: -2%;
+  bottom: -3.5%;
+  block-size: 4%;
+  border-radius: 50%;
+  background: rgba(24, 19, 12, 0.5);
+  filter: blur(4px);
+  pointer-events: none;
+}
+
+/* Desk landing area: the one bound book rests mid-desk. A small static
+   seat (perspective + tiny rotateY) settles it onto the plane; cover
+   text stays legible and art unmirrored. No animation. */
+.reading-room__deskbook {
+  position: absolute;
+  left: 44%;
+  bottom: 24%;
+  inline-size: 14cqw;
+  transform: perspective(900px) rotateY(-5deg);
+}
+
+/* Contact: tight dark core directly under the book plus a soft offset
+   falloff toward the trailing side. One ellipse, two blurs, solid
+   fills, on the desk wood outside the art. */
+.reading-room__deskbook::after {
+  content: "";
+  position: absolute;
+  left: 8%;
+  right: -4%;
+  bottom: -4%;
+  block-size: 5%;
+  border-radius: 50%;
+  background: rgba(24, 19, 12, 0.55);
+  box-shadow:
+    6px 6px 6px rgba(24, 19, 12, 0.4),
+    16px 14px 22px rgba(24, 19, 12, 0.22);
+  filter: blur(7px);
+  pointer-events: none;
+}
+
+.reading-room__book-face {
+  position: relative;
+  z-index: 2;
+}
+
+/* Fore-edge page block beside the cover: token-free paper matter, never
+   cover pixels. The top strip is the highlight catching the daylight. */
+.reading-room__edge {
+  position: absolute;
+  top: 1.5%;
+  bottom: 1.5%;
+  right: -4.5%;
+  width: 6%;
+  z-index: 1;
+  background: #f2eee3;
+  border: 1px solid rgba(24, 19, 12, 0.2);
+  border-block-start: 2px solid #fbf9f3;
+}
+
+/* Quiet marginal version info as live DOM below the room: unboxed, on
+   the page background. The facts line reserves two lines so selection
+   swaps never rewrap siblings (CLS guard). */
+.reading-room__marginalia {
+  display: grid;
+  gap: 6px;
+  justify-items: start;
+  margin: 14px 0 0;
+}
+
+.reading-room__marginalia-facts {
+  display: block;
+  min-block-size: 2lh;
+}
+
+.reading-room__marginalia bdi {
+  white-space: nowrap;
+}
+
+.reading-room__marginalia-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Phone: a deliberate portrait crop of the same master, not a stacked
+   card layout. object-position holds the shelf + desk + daylight in the
+   visible window; slots re-register to that window. */
+@media (max-width: 640px) {
+  .reading-room__wrap {
+    padding-block: 44px;
+  }
+
+  .reading-room__alcove {
+    aspect-ratio: 4 / 5;
+    /* Exact aspect (no min-height stretch): the plate maps 1:1
+       vertically so slot coordinates stay glued to the ash. */
+    min-block-size: 0;
+  }
+
+  .reading-room__plate-img {
+    object-position: 60% 50%;
+  }
+
+  .reading-room__slot {
+    inline-size: 13cqw;
+  }
+
+  .reading-room__slot--1 {
+    left: 25.4%;
+  }
+
+  .reading-room__slot--2 {
+    left: 47.9%;
+  }
+
+  .reading-room__slot--3 {
+    left: 70.4%;
+  }
+
+  .reading-room__deskbook {
+    left: 28.1%;
+    inline-size: 30cqw;
+  }
+
+  /* Narrow caption column: facts may run to four lines; the reserve
+     keeps every selection on the same rows (CLS guard). Titles wrap
+     here so the room never overflows the viewport. */
+  .reading-room__marginalia-facts {
+    min-block-size: 4lh;
+  }
+
+  .reading-room__marginalia bdi {
+    white-space: normal;
+  }
+}
+
+/* Reduced motion: already static. This guard pins the baseline if any
+   motion is ever reintroduced to the slice. */
+@media (prefers-reduced-motion: reduce) {
+  .reading-room__shelf-btn {
+    transition: none;
+  }
+
+  .reading-room__deskbook {
+    animation: none;
+  }
+}

@@ -87,7 +87,10 @@ export function LivingLibrary({
                     <span className="type-mono-meta shrink-0">
                       {format(
                         row.votes === 1 ? t.requests.voiceCountOne : t.requests.voiceCount,
-                        { count: row.votes.toLocaleString() },
+                        // Explicit route locale: the server and the client must
+                        // format identically regardless of browser locale, or
+                        // React hydration mismatches (e.g. ar-EG digit shapes).
+                        { count: row.votes.toLocaleString(locale) },
                       )}
                     </span>
                   </li>
