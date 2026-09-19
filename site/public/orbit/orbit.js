@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { createAtmosphere } from './atmosphere.js';
+import { selectEnvAsset, envDefaultEnabled } from './env-select.js';
 import { orbitLabels } from './locale.js';
 import { instanceRing } from './instance-ring.js';
 import { createBookShadows } from './shadows.js';
@@ -108,34 +109,57 @@ const EMBED = params.get('embed') === '1';
 const LOCALE = (params.get('locale') || 'en').replace(/[^a-z-]/gi, '') || 'en';
 if (EMBED) document.documentElement.classList.add('embed');
 
-/* Track C R1 spike (temporary, reversible): ?env=1 layers a clearly labeled
-   proof plate behind the transparent canvas and renders the scene direct
-   (no atmosphere background pass). ?env=0 forces baseline. Default baseline.
-   No lighting, geometry, or cover changes in either mode. */
-let envEnabled = params.get('env') === '1';
+/* Track C R2 (authored world, default on): genuine generated plates behind
+   the transparent canvas; the scene renders direct (no atmosphere background
+   pass). ?env=0 forces the baseline/diagnostic: zero env bytes, atmosphere
+   pass, neutral studio lighting. Camera, geometry, and cover textures are
+   identical in both modes; only key/fill temperatures shift (light + env). */
+const DARK_BG = 0x151816;
+let sceneDark = matchMedia('(prefers-color-scheme: dark)').matches;
+let envEnabled = envDefaultEnabled(location.search);
 const envPlate = document.getElementById('env-plate');
-let envSrcSet = false;
-envPlate?.addEventListener('error', () => {
-  if (envPlate) envPlate.hidden = true;
-});
-function setEnv(on) {
-  envEnabled = !!on;
-  if (envEnabled && !envSrcSet && envPlate) {
-    envSrcSet = true;
-    envPlate.src = './env/proof-room-day.png';
+const envForeground = document.getElementById('env-foreground');
+let envCurrentSrc = '';
+function envTargetSrc() {
+  return selectEnvAsset({
+    mobile: matchMedia('(max-width: 720px)').matches,
+    dark: sceneDark,
+  });
+}
+/* DOM-only: safe before the renderer exists (initial sync), idempotent after. */
+function paintEnvDom() {
+  if (envEnabled) {
+    const src = envTargetSrc();
+    if (envCurrentSrc !== src) {
+      envCurrentSrc = src;
+      const mobile = matchMedia('(max-width: 720px)').matches;
+      for (const img of [envPlate, envForeground]) {
+        if (!img) continue;
+        img.src = src;
+        img.width = mobile ? 941 : 1536;
+        img.height = mobile ? 1672 : 1024;
+      }
+    }
   }
   if (envPlate) envPlate.hidden = !envEnabled;
-  document.documentElement.classList.toggle('env-proof', envEnabled);
+  if (envForeground) envForeground.hidden = !envEnabled;
+  document.documentElement.classList.toggle('env-r2', envEnabled);
+}
+for (const img of [envPlate, envForeground]) {
+  img?.addEventListener('error', () => {
+    if (img) img.hidden = true;
+  });
+}
+function setEnv(on) {
+  envEnabled = !!on;
+  paintEnvDom();
+  applyEnvLighting();
+  daisAnchor.visible = envEnabled && !sceneDark;
   invalidate();
 }
-// Initial sync is DOM-only: invalidate()/sceneDirty do not exist yet this early
-// (sceneDirty starts true anyway, so the first frame still renders).
-if (envEnabled && envPlate) {
-  envSrcSet = true;
-  envPlate.src = './env/proof-room-day.png';
-  envPlate.hidden = false;
-  document.documentElement.classList.add('env-proof');
-}
+// Initial sync is DOM-only: invalidate()/studio/daisAnchor do not exist yet
+// this early (sceneDirty starts true anyway, so the first frame renders).
+paintEnvDom();
 const labels = orbitLabels(LOCALE);
 const heroCopy = {
   en: [
@@ -403,6 +427,38 @@ const contactShadow = (() => {
 ringGroup.add(contactShadow);
 const grounding = createBookShadows(THREE, scene, ringGroup, N);
 
+/* Track C R2 grounding (+1 draw call, env only): one warm soft contact
+   ellipse sized to the ring's ground ellipse so the ring reads as standing
+   on the authored dais. Analytic gradient, no shadow maps, no per-frame cost
+   beyond the single quad. Hidden unless the environment is enabled. */
+const daisAnchor = (() => {
+  const c = document.createElement('canvas');
+  c.width = 256;
+  c.height = 128;
+  const g = c.getContext('2d');
+  const grad = g.createRadialGradient(128, 64, 8, 128, 64, 126);
+  grad.addColorStop(0, 'rgba(74,64,50,0.34)');
+  grad.addColorStop(0.55, 'rgba(74,64,50,0.16)');
+  grad.addColorStop(1, 'rgba(74,64,50,0)');
+  g.fillStyle = grad;
+  g.fillRect(0, 0, 256, 128);
+  const mesh = new THREE.Mesh(
+    new THREE.PlaneGeometry(RING_R * 2.9, RING_R * 1.5),
+    new THREE.MeshBasicMaterial({
+      map: new THREE.CanvasTexture(c),
+      transparent: true,
+      depthWrite: false,
+      opacity: 0.55,
+    }),
+  );
+  mesh.rotation.x = -Math.PI / 2;
+  mesh.position.y = -BOOK_SCALE * 11.22;
+  mesh.renderOrder = 0;
+  mesh.visible = envEnabled && !sceneDark;
+  return mesh;
+})();
+ringGroup.add(daisAnchor);
+
 const detailRoot = new THREE.Group();
 scene.add(detailRoot);
 const detailSpin = new THREE.Group();
@@ -562,6 +618,7 @@ function resize() {
   camera.updateProjectionMatrix();
   fitOrbitCamera();
   applyInspectShift();
+  paintEnvDom(); // re-select the day/mobile/night asset across the breakpoint
   invalidate();
 }
 
@@ -621,9 +678,9 @@ addEventListener('resize', () => {
 
 /* Dark mode = gallery night: a warm lamp above the ring is the only key, the
    void goes near-black, and a faint warm pool grounds the books. The parent
-   (ShelfStage) posts `orbit-theme`; standalone follows prefers-color-scheme. */
-const DARK_BG = 0x151816;
-let sceneDark = matchMedia('(prefers-color-scheme: dark)').matches;
+   (ShelfStage) posts `orbit-theme`; standalone follows prefers-color-scheme.
+   (sceneDark/DARK_BG live above, next to the env block, so plate selection
+   can read the theme during initial sync.) */
 
 // Warm museum spotlight. Kept in the scene from boot at intensity 0 so the
 // shader compiles once and toggling never hitches. In dark mode it hangs
@@ -694,6 +751,27 @@ function applyTheme() {
   glowPool.visible = false;
   if (dark) updateLamp();
   document.documentElement.classList.toggle('scene-dark', dark);
+  // Track C R2: genuine night plate replaces any dim stand-in; env-matched
+  // key/fill temperatures apply in light+env only (dark keeps the lamp path).
+  paintEnvDom();
+  applyEnvLighting();
+  daisAnchor.visible = envEnabled && !dark;
+}
+
+/* Track C R2 lighting match: the day plate's key is a warm afternoon sun from
+   the left (the studio key already sits left-up-front, so its direction is
+   kept) with cool sky bounce from the right. Only color temperatures shift,
+   and only in light+env mode; intensities are untouched, and dark keeps the
+   single-lamp path exactly (see the stationary-lamp e2e contract). */
+const ENV_SUN_COLOR = new THREE.Color(0xfff1de);
+const ENV_FILL_COLOR = new THREE.Color(0xdfe9f4);
+const STUDIO_SUN_COLOR = new THREE.Color(0xffffff);
+function applyEnvLighting() {
+  if (typeof studio === 'undefined') return;
+  const matched = envEnabled && !sceneDark;
+  studio.sun.color.copy(matched ? ENV_SUN_COLOR : STUDIO_SUN_COLOR);
+  studio.fill.color.copy(matched ? ENV_FILL_COLOR : STUDIO_SUN_COLOR);
+  invalidate();
 }
 
 /* The dark-mode lamp hangs above the selected book: the presented slot while
@@ -729,7 +807,8 @@ window.addEventListener('message', (event) => {
     applyTheme();
     invalidate();
   }
-  /* Track C R1 spike: parent (ShelfStage) forwards ?env= from the page URL. */
+  /* Track C R2: parent (ShelfStage) forwards the homepage default (on unless
+     the page URL carries ?env=0). */
   if (d && typeof d === 'object' && d.type === 'orbit-env') {
     setEnv(!!d.enabled);
   }
@@ -2344,6 +2423,9 @@ async function boot() {
     get env() {
       return envEnabled;
     },
+    get envSrc() {
+      return envCurrentSrc;
+    },
     setEnv,
     advance: (d = 1) => advance(d),
     openFront,
@@ -2678,15 +2760,17 @@ function frame(now) {
       ringGroup.localToWorld(focusPoint);
     }
     if (envEnabled) {
-      // Track C R1 spike: the proof plate is a DOM layer, so the scene goes
-      // direct with its already-transparent clear color. Same scene, lights,
-      // and materials; only the atmosphere background/blur pass is skipped.
-      // The plate adds zero WebGL draw calls.
+      // Track C R2: the authored plate is a DOM layer, so the scene goes
+      // direct with its already-transparent clear color. Same camera,
+      // geometry, and cover textures; only key/fill temperatures shift.
+      // The plate adds zero WebGL draw calls; daisAnchor adds exactly one.
       renderer.render(scene, camera);
       window.__orbitPerf.scene = {
         calls: renderer.info.render.calls,
         triangles: renderer.info.render.triangles,
         envDirect: true,
+        env: 'r2',
+        asset: envCurrentSrc,
       };
     } else {
       window.__orbitPerf.scene = atmosphere.render(focusPoint, true);

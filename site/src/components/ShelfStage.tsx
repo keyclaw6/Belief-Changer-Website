@@ -61,6 +61,15 @@ export function ShelfStage({ books, locale, onInspectChange }: { books: Book[]; 
   const [useOrbit, setUseOrbit] = useState(false)
   const [ready, setReady] = useState(false)
   const iframeRef = useRef<HTMLIFrameElement>(null)
+  // Track C R2 diagnostic: ?env=0 must reach the iframe URL itself so the
+  // baseline transfers zero env bytes (postMessage alone arrives after the
+  // module's initial paint and would download the plate anyway).
+  const [envQuery, setEnvQuery] = useState('')
+  useEffect(() => {
+    try {
+      setEnvQuery(new URLSearchParams(window.location.search).get('env') === '0' ? '&env=0' : '')
+    } catch { /* SSR or blocked URL access: stay on default */ }
+  }, [])
 
   useEffect(() => {
     const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection
@@ -83,13 +92,12 @@ export function ShelfStage({ books, locale, onInspectChange }: { books: Book[]; 
       const visible = visibleHeight / Math.max(1, Math.min(rect.height, innerHeight)) > 0.1
       frame.contentWindow?.postMessage({ type: 'orbit-theme', dark }, location.origin)
       frame.contentWindow?.postMessage({ type: 'orbit-hero-visibility', visible }, location.origin)
-      // Track C R1 spike (temporary, dev-only): forward ?env= from the page
-      // URL so `/{locale}?env=1` shows the proof environment for A/B shots.
+      // Track C R2: the homepage defaults to the authored environment.
+      // ?env=0 keeps an explicit baseline/diagnostic with zero env bytes.
       try {
         const env = new URLSearchParams(window.location.search).get('env')
-        if (env === '0' || env === '1')
-          frame.contentWindow?.postMessage({ type: 'orbit-env', enabled: env === '1' }, location.origin)
-      } catch { /* non-browser or blocked URL access: stay on baseline */ }
+        frame.contentWindow?.postMessage({ type: 'orbit-env', enabled: env !== '0' }, location.origin)
+      } catch { /* non-browser or blocked URL access: stay on default */ }
     }
     const receive = (event: MessageEvent) => {
       if (event.origin !== location.origin || event.source !== frame.contentWindow || !event.data) return
@@ -127,11 +135,11 @@ export function ShelfStage({ books, locale, onInspectChange }: { books: Book[]; 
       {!ready ? <div className="absolute inset-0 flex items-center justify-center px-6 py-24"><div className="h-[min(55vh,360px)] w-full"><StaticShelf books={books} locale={locale} /></div></div> : null}
       {useOrbit ? (
         <iframe
-          key={locale}
+          key={`${locale}${envQuery}`}
           ref={iframeRef}
           data-orbit-frame="true"
           title={locale === 'ar' ? 'مكتبة الكتب التفاعلية' : locale === 'da' ? 'Det interaktive bibliotek' : 'The Orbit — interactive book library'}
-          src={assetPath(`/orbit/index.html?embed=1&locale=${encodeURIComponent(locale)}`)}
+          src={assetPath(`/orbit/index.html?embed=1&locale=${encodeURIComponent(locale)}${envQuery}`)}
           className="absolute inset-0 h-full w-full border-0 bg-canvas"
           style={{ opacity: ready ? 1 : 0, pointerEvents: ready ? 'auto' : 'none' }}
           aria-hidden={!ready}

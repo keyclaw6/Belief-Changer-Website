@@ -96,9 +96,12 @@
     z-index: 1;
   }
 
-  /* Track C R1 spike (temporary, reversible): authored environment proof
-     plate behind the transparent WebGL canvas. Hidden unless orbit.js
-     enables it via ?env=1 (or an orbit-env message). No scroll parallax. */
+  /* Track C R2 (authored world): genuine generated environment plates behind
+     the transparent WebGL canvas. Desktop day/night and mobile day/night
+     are separately authored genuine plates (no dimmed stand-ins anywhere).
+     Hidden unless orbit.js enables the env layer (default on; ?env=0
+     forces the baseline). No scroll parallax. Cover pixels are never filtered:
+     these rules touch the plate <img> elements only. */
   #env-plate {
     position: absolute;
     inset: 0;
@@ -106,17 +109,33 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: 50% 62%;
+    object-position: 50% 45%;
     pointer-events: none;
     user-select: none;
     -webkit-user-drag: none;
   }
   #env-plate[hidden] { display: none !important; }
-  /* Dark: CSS-only dim of the plate alone. The canvas (books) is untouched,
-     so cover pixels cannot be altered by this rule. */
-  html.scene-dark #env-plate { filter: brightness(0.42) saturate(0.88); }
+  /* Foreground occlusion leaf: the SAME plate file, clipped to its bottom
+     strip, layered above the canvas (z2) so the plate's genuine blurred
+     foreground parapet truthfully passes in front of the nearest book bases.
+     Identical geometry/alignment to #env-plate keeps pixels registered. */
+  #env-foreground {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 45%;
+    clip-path: inset(88% 0 0 0);
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+  #env-foreground[hidden] { display: none !important; }
   @media (max-width: 720px) {
-    #env-plate { object-position: 50% 42%; }
+    #env-plate, #env-foreground { object-position: 50% 38%; }
+    #env-foreground { clip-path: inset(90% 0 0 0); }
   }
 
   #live {
@@ -415,9 +434,10 @@ html.scene-dark #wordmark {color:#c4c9bd;}
   <p id="wordmark">Belief Changer</p>
 
   <section id="stage" aria-label="The Orbit book ring">
-    <!-- Track C R1 spike (temporary proof plate, not shippable): no src until
-         orbit.js enables the env layer, so baseline transfers zero env bytes. -->
-    <img id="env-plate" width="1672" height="941" alt="" aria-hidden="true" draggable="false" decoding="async" fetchpriority="low" hidden>
+    <!-- Track C R2 (authored world, default on): no src until orbit.js
+         enables the env layer, so env=0 baseline transfers zero env bytes. -->
+    <img id="env-plate" width="1536" height="1024" alt="" aria-hidden="true" draggable="false" decoding="async" fetchpriority="high" hidden>
+    <img id="env-foreground" width="1536" height="1024" alt="" aria-hidden="true" draggable="false" decoding="async" fetchpriority="low" hidden>
     <div id="boot">Composing the library…</div>
     <header id="hero-heading">
 

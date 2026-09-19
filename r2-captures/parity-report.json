@@ -1,0 +1,97 @@
+{
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "modes": {
+    "env0": {
+      "state": "orbit",
+      "frontIndex": 0,
+      "env": false,
+      "envSrc": "",
+      "scene": {
+        "calls": 61,
+        "triangles": 450404
+      },
+      "renders": 2,
+      "sunColor": "#ffffff",
+      "fillColor": "#ffffff",
+      "daisVisible": false,
+      "bbox": {
+        "x": 635.1616121080373,
+        "y": 586.459616566652,
+        "w": 184.52462847457093,
+        "h": 273.5331142784421
+      },
+      "envBytes": 0,
+      "fgHiddenForGate": false,
+      "shot": "parity-env0.png"
+    },
+    "env1": {
+      "state": "orbit",
+      "frontIndex": 0,
+      "env": true,
+      "envSrc": "./env/c-r2-day-candidate-1.png",
+      "scene": {
+        "calls": 61,
+        "triangles": 450404,
+        "envDirect": true,
+        "env": "r2",
+        "asset": "./env/c-r2-day-candidate-1.png"
+      },
+      "renders": 4,
+      "sunColor": "#fff1de",
+      "fillColor": "#dfe9f4",
+      "daisVisible": true,
+      "bbox": {
+        "x": 635.1616121080373,
+        "y": 586.459616566652,
+        "w": 184.52462847457093,
+        "h": 273.5331142784421
+      },
+      "envBytes": 2461037,
+      "fgHiddenForGate": true,
+      "shot": "parity-env1.png"
+    }
+  },
+  "errors": [],
+  "gates": {
+    "bboxDriftMax": 1,
+    "meanAbsMax": 6,
+    "maxAbsMax": 16,
+    "fracOver2Max": 0.75,
+    "drawDeltaMax": 1,
+    "env0Bytes": 0
+  },
+  "coverInteriorDiff": {
+    "interior": {
+      "x": 668,
+      "y": 636,
+      "w": 118,
+      "h": 175
+    },
+    "pixels": 20650,
+    "meanAbs": 2.956,
+    "maxAbs": 9,
+    "fracOver2": 0.59398,
+    "meanLumEnv0": 214.29,
+    "meanLumEnv1": 211.58
+  },
+  "bboxDrift": {
+    "dx": 0,
+    "dy": 0,
+    "dw": 0,
+    "dh": 0
+  },
+  "drawDelta": 0,
+  "triDelta": 0,
+  "gate_bboxDrift": "PASS",
+  "gate_meanAbs": "PASS",
+  "gate_maxAbs": "PASS",
+  "gate_fracOver2": "PASS",
+  "gate_drawDelta": "PASS",
+  "gate_env0Bytes": "PASS",
+  "gate_noErrors": "PASS",
+  "gate_readability": "PASS",
+  "verdict": "PASS"
+}

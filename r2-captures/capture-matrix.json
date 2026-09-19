@@ -1,0 +1,126 @@
+{
+  "shots": {
+    "r2-home-1440-light": {
+      "iframePresent": true,
+      "iframeReady": "false",
+      "staticShelfLinks": 10,
+      "dir": "ltr",
+      "lcpMs": -1,
+      "cls": 0,
+      "frameInfo": {
+        "state": "orbit",
+        "env": true,
+        "envSrc": "./env/c-r2-day-candidate-1.png",
+        "dark": false,
+        "scene": {
+          "calls": 61,
+          "triangles": 450404,
+          "envDirect": true,
+          "env": "r2",
+          "asset": "./env/c-r2-day-candidate-1.png"
+        }
+      },
+      "envBytes": 2461037,
+      "errors": []
+    },
+    "r2-home-1440-light-env0": {
+      "iframePresent": true,
+      "iframeReady": "false",
+      "staticShelfLinks": 10,
+      "dir": "ltr",
+      "lcpMs": -1,
+      "cls": 0,
+      "frameInfo": {
+        "state": "orbit",
+        "env": false,
+        "envSrc": "",
+        "dark": false,
+        "scene": {
+          "calls": 61,
+          "triangles": 450404
+        }
+      },
+      "envBytes": 0,
+      "errors": []
+    },
+    "r2-home-390-light": {
+      "iframePresent": true,
+      "iframeReady": "false",
+      "staticShelfLinks": 10,
+      "dir": "ltr",
+      "lcpMs": -1,
+      "cls": 0,
+      "frameInfo": {
+        "state": "orbit",
+        "env": true,
+        "envSrc": "./env/c-r2-day-mobile.png",
+        "dark": false,
+        "scene": {
+          "calls": 61,
+          "triangles": 315284,
+          "envDirect": true,
+          "env": "r2",
+          "asset": "./env/c-r2-day-mobile.png"
+        }
+      },
+      "envBytes": 2157486,
+      "errors": []
+    },
+    "r2-home-1440-night": {
+      "iframePresent": true,
+      "iframeReady": "false",
+      "staticShelfLinks": 10,
+      "dir": "ltr",
+      "lcpMs": -1,
+      "cls": 0,
+      "frameInfo": {
+        "state": "orbit",
+        "env": true,
+        "envSrc": "./env/c-r2-night-desktop.png",
+        "dark": true,
+        "scene": {
+          "calls": 58,
+          "triangles": 450240,
+          "envDirect": true,
+          "env": "r2",
+          "asset": "./env/c-r2-night-desktop.png"
+        }
+      },
+      "envBytes": 2213935,
+      "errors": []
+    },
+    "r2-home-1440-ar": {
+      "iframePresent": true,
+      "iframeReady": "false",
+      "staticShelfLinks": 10,
+      "dir": "rtl",
+      "lcpMs": -1,
+      "cls": 0,
+      "frameInfo": {
+        "state": "orbit",
+        "env": true,
+        "envSrc": "./env/c-r2-day-candidate-1.png",
+        "dark": false,
+        "scene": {
+          "calls": 61,
+          "triangles": 450404,
+          "envDirect": true,
+          "env": "r2",
+          "asset": "./env/c-r2-day-candidate-1.png"
+        }
+      },
+      "envBytes": 2461037,
+      "errors": []
+    },
+    "r2-home-1440-fallback": {
+      "iframePresent": false,
+      "staticShelfLinks": 14,
+      "dir": "ltr",
+      "lcpMs": -1,
+      "cls": 0,
+      "frameInfo": null,
+      "envBytes": 0,
+      "errors": []
+    }
+  }
+}
