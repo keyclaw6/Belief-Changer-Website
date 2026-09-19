@@ -1,6 +1,7 @@
 /* ReadingRoomR11 — pickup / set-down on the R10 static baseline (Track B R11).
-   Bounded experiment, isolated to the reading-room-r11 route. R9 (homepage
-   slice) and R10 (static baseline + its route) are untouched.
+   Owns the transfer mechanism used by ReadingRoomR13 on the homepage and on
+   the reading-room-r11 review route. R9 (earlier homepage slice) and R10
+   (static baseline + its route) are untouched as files.
    Static geometry, plate, registration, copy placement and tokens below are
    copied verbatim from R10 so the reduced-motion path renders
    byte/pixel-equivalent to the R10 static state.
@@ -240,6 +241,8 @@
 
 [dir="rtl"] .reading-room-r11__title {
   line-height: 1.6;
+  /* Arabic eyebrow glyphs overhang their 12px line box; clear them. */
+  margin-top: 18px;
 }
 
 /* ---- Motion layer: the one mechanism. transform/opacity only, calm ease,
@@ -357,6 +360,7 @@
 
   [dir="rtl"] .reading-room-r11__title {
     line-height: 1.5;
+    margin-top: 14px;
   }
 }
 

@@ -8,10 +8,11 @@ import { ReadingRoomR13 } from '~/components/home/ReadingRoomR13'
  * Reading-room R13 spike route (Track B, bounded experiment).
  *
  * Isolation: this page renders NOTHING but the R13 room stage (the R11
- * same-node machine + the R13 material CSS layer). No hero, no trust strip,
+ * transfer machine + the R13 material CSS layer). No hero, no trust strip,
  * no beats, no library grid, no marquee, no banded sections of any kind, so
- * the room plate starts immediately below the site header. The homepage R9
- * slice, the R10 route and the R11 route are untouched by this route.
+ * the room plate starts immediately below the site header. This is the same
+ * component the homepage mounts after its trust strip; the R9/R10/R11 files
+ * are untouched by this route.
  */
 export const Route = createFileRoute('/$locale/reading-room-r13')({
   head: () => ({

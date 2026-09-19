@@ -47,7 +47,7 @@ test('R11: exactly one mechanism — deterministic lift/carry/settle phase machi
   assert.ok(!/bounce|spring/i.test(cssCode), 'no bounce/spring easing in css')
 })
 
-test('R11: one physical selected node — the shelf node itself travels, no clone/duplicate/placeholder', () => {
+test('R11: one mounted node per title — the incoming shelf button flies, single-cut handoff, no clone/duplicate/placeholder', () => {
   for (const banned of ['vacant', 'Vacant', 'placeholder', 'dashed', 'empty-recess', 'skeleton', 'clone', 'Clone', 'duplicate']) {
     assert.ok(!tsxCode.includes(banned), `tsx must not contain ${banned}`)
     assert.ok(!cssCode.includes(banned), `css must not contain ${banned}`)
@@ -55,8 +55,11 @@ test('R11: one physical selected node — the shelf node itself travels, no clon
   assert.ok(!/border:\s*1px dashed/i.test(cssCode), 'no dashed recess anywhere in the slice')
   assert.match(tsx, /books\.filter\(\(b\) => b\.slug !== selected\.slug\)\.slice\(0, 3\)/)
   assert.match(tsx, /reading-room-r11__shelf-btn/)
-  // The travelling node is the shelf button itself (FLIP via data-flying),
-  // so focus never leaves its control and no second cover is ever mounted.
+  // The travelling node is the incoming shelf button itself (FLIP via
+  // data-flying), so focus never leaves its control and no second copy of
+  // any title is ever mounted. Honest scope: at commit the flying button
+  // unmounts and the desk node (keyed by slug) mounts the same title in one
+  // cut — per-title single-mount continuity, not DOM-node migration.
   assert.match(tsx, /data-flying/)
   assert.match(tsx, /btnRefs/)
   const shelfBlock = tsx.slice(tsx.indexOf('<ul className="reading-room-r11__shelf"'), tsx.indexOf('</ul>'))
@@ -198,12 +201,13 @@ test('R11 route is isolated: room only, no hero band, no other sections', () => 
   assert.match(route, /hreflangAlternates\('\/reading-room-r11'\)/)
 })
 
-test('R9 homepage slice and R10 slice are preserved untouched', () => {
+test('R9/R10/R11 slices are preserved as files; homepage mounts R13 only', () => {
   assert.match(r9tsx, /export function ReadingRoom/)
   assert.match(r10tsx, /export function ReadingRoomR10/)
-  assert.match(home, /ReadingRoom/)
+  assert.match(home, /ReadingRoomR13/)
   assert.ok(!home.includes('ReadingRoomR10'), 'R10 stays off the homepage')
-  assert.ok(!home.includes('ReadingRoomR11'), 'R11 stays off the homepage')
+  assert.ok(!home.includes('ReadingRoomR11 ') && !home.includes('ReadingRoomR11/'), 'R11 wrapper stays off the homepage (R13 owns the machine)')
+  assert.ok(!home.includes('<ReadingRoom ') && !home.includes('<ReadingRoom/'), 'generic R9 insertion replaced by R13, not duplicated')
 })
 
 test('R11 incremental JS stays lean, no new runtime dependency', () => {

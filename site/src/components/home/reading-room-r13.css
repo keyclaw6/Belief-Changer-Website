@@ -1,7 +1,8 @@
-/* ReadingRoomR13 — one physical-material pass over the R11 same-node machine
-   (Track B R13). Bounded experiment, isolated to the reading-room-r13 route.
-   R9 (homepage slice), R10 (static baseline + its route) and R11 (transfer
-   mechanism + its route) are untouched.
+/* ReadingRoomR13 — one physical-material pass over the R11 transfer machine
+   (Track B final room). Applies wherever ReadingRoomR13 mounts: the homepage
+   (after the trust strip) and the isolated reading-room-r13 review route.
+   R9 (earlier homepage slice), R10 (static baseline + its route) and R11
+   (transfer mechanism + its route) are untouched as files.
 
    WHAT THIS FILE DOES (and nothing else):
    1. Shelf pose: sub-degree leans + tiny fore-shortening on the INNER cover

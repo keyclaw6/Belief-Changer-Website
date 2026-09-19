@@ -215,10 +215,15 @@ test('reduced motion stays static', () => {
   assert.match(css, /transition:\s*none/)
 })
 
-test('homepage still mounts the slice after the trust strip', () => {
-  assert.match(home, /ReadingRoom/)
+test('homepage mounts the Track B room (ReadingRoomR13) after the trust strip', () => {
+  // Final Track B wiring: the homepage room IS the banked R13 experience
+  // (R11 transfer machine + R13 material layer), replacing the earlier
+  // generic R9 static insertion. Exactly one room on the homepage.
+  assert.match(home, /ReadingRoomR13/)
+  assert.ok(!home.includes('<ReadingRoom ') && !home.includes('<ReadingRoom/'), 'no generic R9 insertion alongside R13')
+  assert.ok(!home.includes('ReadingRoomR10') && !home.includes('ReadingRoomR11'), 'no lab-route slice duplicated on the homepage')
   const trustAt = home.indexOf('<TrustStrip')
-  const roomAt = home.indexOf('<ReadingRoom')
+  const roomAt = home.indexOf('<ReadingRoomR13')
   const beatsAt = home.indexOf('<HomeBeats')
-  assert.ok(trustAt !== -1 && roomAt > trustAt && beatsAt > roomAt, 'order: Hero, TrustStrip, ReadingRoom, HomeBeats')
+  assert.ok(trustAt !== -1 && roomAt > trustAt && beatsAt > roomAt, 'order: Hero, TrustStrip, ReadingRoomR13, HomeBeats')
 })

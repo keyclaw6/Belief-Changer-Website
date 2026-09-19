@@ -13,7 +13,7 @@ const strip = (s) => s.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\{\/\*[\s\S]*?\
 const cssCode = strip(css)
 const tsxCode = strip(tsx)
 
-test('R13 reuses the R11 same-node machine: wrapper only, no second state machine', () => {
+test('R13 reuses the R11 transfer machine: wrapper only, no second state machine', () => {
   assert.match(tsx, /export function ReadingRoomR13/)
   assert.match(tsx, /import \{ ReadingRoomR11 \} from '\.\/ReadingRoomR11'/)
   assert.match(tsx, /<ReadingRoomR11 locale=\{locale\} books=\{books\} \/>/)
@@ -82,13 +82,19 @@ test('R13 thickness is adjacent paper matter, never cover pixels; handedness phy
   assert.ok(/deskbook::before/.test(cssCode), 'desk spine shade present')
 })
 
-test('R13 route is isolated: room only, R13 stays off the homepage', () => {
+test('R13 route is isolated (room only); homepage mounts R13 as the defining room', () => {
   assert.match(route, /createFileRoute\('\/\$locale\/reading-room-r13'\)/)
   assert.match(route, /ReadingRoomR13/)
   assert.match(route, /hreflangAlternates\('\/reading-room-r13'\)/)
   for (const banned of ['<Hero', '<TrustStrip', '<HomeBeats', '<LibrarySection', '<Marquee', '<LivingLibrary', 'bg-band', 'bg-canvas']) {
     assert.ok(!route.includes(banned), `route must not contain ${banned}`)
   }
-  assert.ok(!home.includes('ReadingRoomR13'), 'R13 stays off the homepage')
-  assert.ok(!home.includes('ReadingRoomR11'), 'R11 stays off the homepage')
+  // Final Track B wiring: the isolated lab route is preserved for review,
+  // and the homepage mounts this same R13 room right after the trust strip.
+  assert.match(home, /ReadingRoomR13/)
+  const trustAt = home.indexOf('<TrustStrip')
+  const roomAt = home.indexOf('<ReadingRoomR13')
+  const beatsAt = home.indexOf('<HomeBeats')
+  assert.ok(trustAt !== -1 && roomAt > trustAt && beatsAt > roomAt, 'order: Hero, TrustStrip, ReadingRoomR13, HomeBeats')
+  assert.ok(!home.includes('ReadingRoomR11 ') && !home.includes('ReadingRoomR11/'), 'R11 wrapper not mounted directly on the homepage')
 })

@@ -13,16 +13,26 @@ import { cn } from '~/lib/utils'
  * ReadingRoomR11 (Track B slice R11): one bounded mechanism on top of the R10
  * static baseline — shelf book pickup / desk set-down.
  *
- * Isolated to the /{locale}/reading-room-r11 route. R9 (homepage slice) and
- * R10 (static baseline + its route) are untouched; the static geometry, copy,
- * plate, registration and tokens below are copied verbatim from R10 so the
- * reduced-motion path renders byte/pixel-equivalent to R10.
+ * Rendered by ReadingRoomR13 on the homepage and on the isolated
+ * /{locale}/reading-room-r11 review route. R9 (earlier homepage slice) and
+ * R10 (static baseline + its route) are untouched as files; the static
+ * geometry, copy, plate, registration and tokens below are copied verbatim
+ * from R10 so the reduced-motion path renders byte/pixel-equivalent to R10.
  *
- * Mechanism: choosing a shelf book flies THAT shelf node (FLIP) from its ash
- * slot to the desk. The outgoing desk copy yields (fades down) while the
- * incoming travels; at commit the desk shows the incoming and the shelf shows
- * the outgoing. Exactly one physical node per title at every instant: no
- * clone, no duplicate cover, no vacancy placeholder, no dashed recess.
+ * Mechanism: choosing a shelf book flies THAT shelf button (FLIP) from its
+ * ash slot toward the desk. The outgoing desk copy yields (fades down) while
+ * the incoming travels; at commit the desk shows the incoming and the shelf
+ * shows the outgoing. Exactly one mounted node per title at every instant:
+ * no clone, no duplicate cover, no vacancy placeholder, no dashed recess.
+ *
+ * Identity, honestly scoped (final Track B wording): what is guaranteed is
+ * per-title single-mount continuity, NOT React DOM-node migration. The
+ * travelling shelf <button> animates to desk geometry, then unmounts at
+ * commit when the desk node (keyed by slug, `key={selected.slug}`) mounts
+ * the same title in one calm cut. Measurable and measured: every title
+ * mounted exactly once mid-transfer and at rest (see the capture harness
+ * singleNode/noDup probes), focus never drops to <body>, reduced-motion
+ * never creates a transfer object.
  *
  * Deterministic phase machine: idle -> lift -> carry -> settle -> idle.
  * LIFT 120ms (incoming breathes up 2px, carried shadow fades in, outgoing
