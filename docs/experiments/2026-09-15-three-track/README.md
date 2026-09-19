@@ -1,5 +1,9 @@
 # Belief Changer website — three-track experiment checkpoint
 
+> **Finalized 2026-09-19.** All three experiment branches reached their final branch-level gates and were pushed independently. See [`FINAL-STATUS.md`](FINAL-STATUS.md) for final SHAs, comparison screenshots, validation, visual critique, and provenance disclosures. Nothing was merged to `main` or deployed.
+>
+> The material below is retained as the original 2026-09-15 pause checkpoint and restart context; where it says a direction was still unresolved, `FINAL-STATUS.md` is authoritative.
+
 This is the navigation/checkpoint branch for the website experiment paused on 2026-09-15. It intentionally contains documentation and a compact screenshot gallery, not the experimental source implementations themselves.
 
 The complete source, tests, generated assets and raw capture history are preserved on three separate remote branches:
