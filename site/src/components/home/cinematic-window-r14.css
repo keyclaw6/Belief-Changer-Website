@@ -1,0 +1,284 @@
+/* CinematicWindowR14: Track A final ("Cinematic Life Outside").
+ *
+ * One authored physical scene, still composition, zero client JS. The
+ * immutable Sugar Trap cover stands as a bound volume on the plate's own
+ * limestone sill (face 2:3 at left 27%, top 31%, height 44% on BOTH plates:
+ * desktop 1536x1024 mapped 1:1 by the 3/2 stage, mobile 941x1672 mapped 1:1
+ * by the 941/1672 stage). The sill's own rounded nosing overlaps the book
+ * base (verbatim plate RGB, alpha cut along the traced crown: desktop
+ * y=0.032x+743 over base 768, mobile y=0.031x+1227 over base 1254). The tuck
+ * is ~12px tapering to a kiss. No other architecture is invented.
+ *
+ * Deterministic shell only: fore-edge boards + page block on the physical
+ * right, one owned contact shadow peeking past the volume, no sill-lip line
+ * (the real nosing is the lip). No filter/tint/relight/transform on the
+ * cover node, no parallax, no animation of any kind: SSR HTML is final.
+ *
+ * Copy is live DOM in the plates' calm plaster field (no card, no scrim).
+ * Dark theme keeps the authored daylight photograph (dimming it would fake
+ * a night scene); only surrounding chrome darkens. Stage pinned ltr: RTL
+ * never mirrors the scene or cover, only copy alignment follows direction.
+ */
+
+.r14-scene {
+  background: var(--color-canvas);
+}
+
+/* -- Stage: fixed window ------------------------------------------------- */
+.r14-stage {
+  position: relative;
+  /* Physical camera: pinned ltr so LTR and RTL share one handedness. */
+  direction: ltr;
+  margin: 0;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  min-height: 520px;
+  overflow: clip;
+  /* Fixed daylight ground behind the plate while it loads; never themed. */
+  background: #d8d3c4;
+}
+
+.r14-plate,
+.r14-plate img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.r14-plate img {
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+/* -- Copy: live DOM in the calm plaster field. No card, no scrim. --------- */
+.r14-copy {
+  position: absolute;
+  z-index: 4;
+  top: 8%;
+  left: 10%;
+  max-width: 32ch;
+  /* Fixed ink: the plaster is a fixed daylight tone in both themes. */
+  color: #26241e;
+}
+
+html[dir="rtl"] .r14-copy,
+html[dir="rtl"] .r14-action {
+  direction: rtl;
+  text-align: right;
+}
+
+.r14-title {
+  margin: 0;
+  font-size: clamp(24px, 2.2vw, 34px);
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+  font-weight: 600;
+  text-wrap: balance;
+}
+
+.r14-factual {
+  margin: 10px 0 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #4c483d;
+  max-width: 30ch;
+}
+
+/* One ordinary link below the stage, on the canvas ground (themed ink).
+ * Never a button or pill. */
+.r14-action {
+  background: var(--color-canvas);
+  margin: 0 auto;
+  padding: 12px clamp(20px, 3vw, 40px) 48px;
+  max-width: 1600px;
+}
+
+.r14-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.r14-link:focus-visible {
+  outline: 2px solid var(--color-focus, #111);
+  outline-offset: 2px;
+}
+
+/* -- Book: the volume assembly --------------------------------------------
+ * Face is the immutable cover, untouched: no transform, no filter, no crop.
+ * Shell protrudes on the physical right only, starting 1px under the face
+ * (0px registration gap). One contact shadow, wider than the volume so its
+ * soft ends peek onto the seat past the nosing band.
+ */
+.r14-book {
+  /* Readable thickness: ~8.6px at 1440, ~6px at 1024, ~4px at 390. */
+  --r14-edge: clamp(4px, 0.6vw, 9px);
+  position: absolute;
+  z-index: 2;
+  left: 27%;
+  top: 31%;
+  height: 44%;
+  aspect-ratio: 2 / 3;
+}
+
+.r14-face {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  aspect-ratio: 2 / 3;
+  z-index: 2;
+}
+
+.r14-face > * {
+  height: 100%;
+  width: 100%;
+}
+
+/* Single shadow owner: neutralize the cover component's own drop shadow so
+ * the contact matte below is the only cast shadow in the slice. This touches
+ * no artwork pixel (no crop, tint, filter, or transform). */
+.r14-face img {
+  box-shadow: none !important;
+}
+
+/* Fore-edge shell: board lip + page block, pure CSS, fixed daylight tones. */
+.r14-shell {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(100% - 1px);
+  width: var(--r14-edge);
+  z-index: 1;
+  display: flex;
+  align-items: stretch;
+}
+
+.r14-board {
+  flex: none;
+  width: 2px;
+  background: linear-gradient(to bottom, #c9c3b5 0%, #b3ada0 60%, #9d9687 100%);
+}
+
+.r14-pages {
+  flex: 1 1 auto;
+  background:
+    linear-gradient(to right, rgba(58, 52, 42, 0.3) 0, rgba(58, 52, 42, 0) 35%, rgba(58, 52, 42, 0) 70%, rgba(58, 52, 42, 0.24) 100%),
+    repeating-linear-gradient(to bottom, #ede8d9 0 1px, #d9d3c1 1px 2px);
+}
+
+/* The one owned contact shadow: thrown toward the shaded side, away from
+ * the window light (soft sun arrives from the upper right with the street
+ * glass; the wall's shadow band sits left). Wider past the volume on the
+ * left, fading right, so its soft ends read on the seat beside the nosing
+ * overlap instead of lining the base as a dark gap. */
+.r14-contact {
+  position: absolute;
+  top: 100%;
+  left: -8%;
+  width: calc(108% + var(--r14-edge));
+  height: 8px;
+  margin-top: -4px;
+  border-radius: 9999px;
+  background: linear-gradient(to right, rgba(24, 22, 16, 0.42), rgba(24, 22, 16, 0.3) 55%, rgba(24, 22, 16, 0.12));
+  filter: blur(4px);
+  z-index: 1;
+}
+
+/* -- The one occluder: the sill's own nosing, verbatim plate pixels --------
+ * Cropped band positioned in plate fractions over the same stage box as the
+ * plate, so it registers against the plate at every width. Band RGB
+ * continues the plate scene, so band edges are invisible; only the crown
+ * alpha matters. Decorative: never intercepts pointer events, never shifts
+ * layout, never moves.
+ */
+.r14-fore {
+  position: absolute;
+  z-index: 3;
+  pointer-events: none;
+  left: 24.7396%;
+  top: 70.3125%;
+  width: 24.7396%;
+}
+
+.r14-fore-img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.r14-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* -- Portrait (<=900px): the separately composed mobile photograph, not a
+ * crop. Stage aspect matches the mobile master 1:1, so plate fractions
+ * (book seat, band box) map exactly.
+ *
+ * The mobile plate's dark jamb stands at plate-x ~68%, while the reserved
+ * 27% seat would run the 2:3 face into it (the delivered canvas is 9:16,
+ * not the prompted 2:3, so the face spans 52% of the width). The book
+ * therefore stands at left 8% (top/height unchanged: base stays 75% on the
+ * seat, back against clear plaster); the nosing band follows the same
+ * contour to the new span. ----------------------------------------------- */
+@media (max-width: 900px) {
+  .r14-stage {
+    aspect-ratio: 941 / 1672;
+    min-height: min(160vw, 640px);
+  }
+
+  .r14-copy {
+    top: 6%;
+    left: 6%;
+    right: 6%;
+    max-width: 26ch;
+  }
+
+  .r14-title {
+    font-size: 24px;
+  }
+
+  .r14-factual {
+    font-size: 14px;
+  }
+
+  .r14-book {
+    left: 8%;
+  }
+
+  .r14-fore {
+    left: 4.7821%;
+    top: 72.3684%;
+    width: 58.4485%;
+  }
+}
+
+/* -- Reduced motion: nothing moves here by construction. This block pins
+ * the contract: no animation, no transition, transforms none. ------------- */
+@media (prefers-reduced-motion: reduce) {
+  .r14-scene,
+  .r14-scene *,
+  .r14-scene *::before,
+  .r14-scene *::after {
+    animation: none;
+    transition: none;
+  }
+
+  .r14-fore {
+    transform: none;
+  }
+}

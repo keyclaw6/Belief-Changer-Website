@@ -42,7 +42,8 @@ test('R13 spike is isolated and preserves R7/R8/R9 unchanged', () => {
     assert.ok(existsSync(path.join(root, rel)), `preserved: ${rel}`)
   }
   const home = readFileSync(path.join(root, '../src/routes/$locale/index.tsx'), 'utf8')
-  assert.doesNotMatch(home, /cinematic-window/)
+  // R14 promoted the pattern to the homepage hero; lab slices stay off it.
+  assert.doesNotMatch(home, /cinematic-window-r(7|8|9|13)/)
   // R13 reuses its own r13- namespace; no r7-/r8-/r9- class may leak into the
   // spike (the shared a-r7-plate asset name and the a-r13-fore cutout name
   // are the two sanctioned exceptions).

@@ -16,7 +16,8 @@ test('cinematic-window R7 slice exists and stays isolated (not in production nav
   assert.ok(existsSync(compPath), 'component file exists')
   assert.ok(existsSync(cssPath), 'scoped css exists')
   const home = readFileSync(path.join(root, '../src/routes/$locale/index.tsx'), 'utf8')
-  assert.doesNotMatch(home, /cinematic-window/)
+  // R14 promoted the pattern to the homepage hero; lab slices stay off it.
+  assert.doesNotMatch(home, /cinematic-window-r(7|8|9|13)/)
 })
 
 test('R7 stage is the approved photographic plate, decorative, optimized', () => {

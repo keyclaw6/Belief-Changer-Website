@@ -1,0 +1,18 @@
+Purpose
+Create one textless photoreal architectural background plate for Belief Changer Track A R14. The architecture must receive a real live book added later. Generate only the empty place, with believable support and foreground depth. Use case: photorealistic-natural. Voice: The Quiet Fact.
+
+Canvas
+One landscape image, 16:9, target 2048 x 1152 pixels. Full-bleed photograph, no border. Candidate 2: a gently oblique, low view along an ordinary contemporary limestone windowsill, with a shallow diagonal front edge and restrained perspective. No diagram or layout markers.
+
+Contents
+Warm bone limewashed plaster fills the left half and upper-left field. A deep muted green window jamb stands just right of center; matching low green backstop joinery runs behind the empty receiving area. Clear glass on the right reveals a quiet present-day tree-lined residential street with restrained modern facades, soft deep-green leaves, and cool dove-gray sky. A continuous honed limestone sill occupies the lower third, with fine natural pores, a flat usable top and an honestly rounded foreground nosing.
+
+Relationships
+All positions refer to the entire image. Reserve the future book footprint with its LEFT edge at x=27%, height=44% of image height, top y=31%, base y=75%. Its future face is a 2:3 upright rectangle, so at this landscape aspect ratio its right edge is approximately x=43.5%. This footprint is EMPTY: show ordinary wall, rear joinery and support through it; do not draw a rectangle, book, placeholder, recess, outline or object shadow. The stone's flat seat must physically reach the future base. Bring the real rounded front nosing close to this seat: its shallow visible crown gently recedes from about y=74% at x=27% to y=75% at x=43.5%, so its actual foreground stone pixels could later hide only the lowest 9-11 display pixels near one book corner and taper to a kiss across the base at a 1440px-wide presentation. This is a tiny honest overlap, not a high rail. Show the rounded roll and stone front face distinctly below; do not merely imply an edge with a dark stripe. Keep all green joinery BEHIND the future book plane. Leave x=10-46%, y=7-26% as uninterrupted softly lit plaster for live copy, without mullions, hard shadows or busy texture. Exterior life is visible on the right, secondary to the receiving architecture.
+
+Appearance
+A muted museum-restraint photograph of real modern life, calm and precise like a prestige still-life photographer's work: an empty contemporary limestone windowsill beside a green-framed window onto a fresh, open tree-lined street on an ordinary clear morning, one soft light, long quiet shadows, broad soft cool morning daylight arriving from off-frame upper-left with a first gentle warmth in the bone plaster. Real, contemporary, immaculate, hopeful: the feeling of fresh air finally let in, an ordinary morning that feels free. Muted harmonious palette: warm bone, dove-gray limestone, deep muted green joinery and foliage, cool clear daylight. No people anywhere, no text anywhere.
+
+Checks
+Keep the photograph restrained and materially credible, with soft recoverable highlights, gentle contrast and clear stone-edge detail. The support is domestic architecture, not a pedestal or luxury shrine. The empty book footprint must be supportable, the top-left copy field calm, and the front roll traceable.
+Avoid: clutter, props, people, lens flare, HDR drama, heavy warm yellow haze, gloom, books or covers, lettering or fake text, mugs, indoor plants, lamps, decorative objects, UI, luxury styling, theatrical curtains, traffic, readable signage, high-contrast mullions crossing the copy area, any text or lettering, borders or frames.
